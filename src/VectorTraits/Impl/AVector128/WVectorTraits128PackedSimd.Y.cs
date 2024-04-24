@@ -386,7 +386,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
                 return PackedSimd.ExtractNarrowingSaturateUnsignedUpper(PackedSimd.ExtractNarrowingSaturateUnsignedLower(lower), upper);
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits128.YOrNot_AcceleratedTypes"/>
             public static TypeCodeFlags YOrNot_AcceleratedTypes {
@@ -408,7 +408,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
                     return rt;
                 }
             }
@@ -422,17 +422,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YRoundToEven(Vector128<double> value) {
-                Vector64<double> lower = PackedSimd.RoundToNearestScalar(Vector128.GetLower(value));
-                Vector64<double> upper = PackedSimd.RoundToNearestScalar(Vector128.GetUpper(value));
-                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
-                return rt;
+                return PackedSimd.RoundToNearest(value);
             }
 
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
                     return rt;
                 }
             }
@@ -440,18 +437,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YRoundToZero(Vector128<float> value) {
-                return PackedSimd.RoundToZero(value);
+                return PackedSimd.Truncate(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YRoundToZero(Vector128<double> value) {
-                Vector64<double> lower = PackedSimd.RoundToZeroScalar(Vector128.GetLower(value));
-                Vector64<double> upper = PackedSimd.RoundToZeroScalar(Vector128.GetUpper(value));
-                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
-                return rt;
+                return PackedSimd.Truncate(value);
             }
-*/
+
 
 #endif // NET8_0_OR_GREATER
         }

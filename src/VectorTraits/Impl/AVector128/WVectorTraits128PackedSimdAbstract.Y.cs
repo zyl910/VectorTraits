@@ -966,7 +966,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits128.YOrNot_AcceleratedTypes"/>
         public override TypeCodeFlags YOrNot_AcceleratedTypes {
@@ -1021,7 +1021,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.YRoundToZero(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_AcceleratedTypes"/>
         public override TypeCodeFlags YShuffleG2_AcceleratedTypes {
             get {
