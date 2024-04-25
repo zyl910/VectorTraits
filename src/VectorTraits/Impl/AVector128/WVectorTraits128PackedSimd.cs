@@ -508,7 +508,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return SuperStatics.Narrow(lower, upper);
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftLeft_AcceleratedTypes {
                 get {
@@ -520,60 +520,52 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftLeft(Vector128<sbyte> value, int shiftAmount) {
-                shiftAmount &= 7;
-                return ShiftLeft_Fast(value, shiftAmount);
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftAmount) {
-                shiftAmount &= 7;
-                return ShiftLeft_Fast(value, shiftAmount);
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftAmount) {
-                shiftAmount &= 0x0F;
-                return ShiftLeft_Fast(value, shiftAmount);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftLeft(Vector128<ushort> value, int shiftAmount) {
-                shiftAmount &= 0x0F;
-                return ShiftLeft_Fast(value, shiftAmount);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft(Vector128<int> value, int shiftAmount) {
-                shiftAmount &= 0x1F;
-                return ShiftLeft_Fast(value, shiftAmount);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftLeft(Vector128<uint> value, int shiftAmount) {
-                shiftAmount &= 0x1F;
-                return ShiftLeft_Fast(value, shiftAmount);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftLeft(Vector128<long> value, int shiftAmount) {
-                shiftAmount &= 0x3F;
-                return ShiftLeft_Fast(value, shiftAmount);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftLeft(Vector128<ulong> value, int shiftAmount) {
-                shiftAmount &= 0x3F;
-                return ShiftLeft_Fast(value, shiftAmount);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
@@ -582,9 +574,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<sbyte> ShiftLeft_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
                 _ = dummy;
                 _ = shiftAmount;
-                var args0 = Vector128.Create((sbyte)(shiftAmount & 7));
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{byte}, int, out Vector128{byte})"/>
@@ -592,9 +583,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> ShiftLeft_Args(Vector128<byte> dummy, int shiftAmount, out Vector128<byte> args1) {
                 _ = dummy;
                 _ = shiftAmount;
-                var args0 = Vector128.Create((byte)(shiftAmount & 7));
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{short}, int, out Vector128{short})"/>
@@ -602,9 +592,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<short> ShiftLeft_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
                 _ = dummy;
                 _ = shiftAmount;
-                var args0 = Vector128.Create((short)(shiftAmount & 0x0F));
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{ushort}, int, out Vector128{ushort})"/>
@@ -613,9 +602,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ushort> ShiftLeft_Args(Vector128<ushort> dummy, int shiftAmount, out Vector128<ushort> args1) {
                 _ = dummy;
                 _ = shiftAmount;
-                var args0 = Vector128.Create((ushort)(shiftAmount & 0x0F));
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{int}, int, out Vector128{int})"/>
@@ -623,9 +611,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<int> ShiftLeft_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
                 _ = dummy;
                 _ = shiftAmount;
-                var args0 = Vector128.Create((int)(shiftAmount & 0x1F));
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{uint}, int, out Vector128{uint})"/>
@@ -634,9 +621,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<uint> ShiftLeft_Args(Vector128<uint> dummy, int shiftAmount, out Vector128<uint> args1) {
                 _ = dummy;
                 _ = shiftAmount;
-                var args0 = Vector128.Create((uint)(shiftAmount & 0x1F));
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{long}, int, out Vector128{long})"/>
@@ -644,9 +630,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> ShiftLeft_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
                 _ = dummy;
                 _ = shiftAmount;
-                var args0 = Vector128.Create((long)(shiftAmount & 0x3F));
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{ulong}, int, out Vector128{ulong})"/>
@@ -655,281 +640,248 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> ShiftLeft_Args(Vector128<ulong> dummy, int shiftAmount, out Vector128<ulong> args1) {
                 _ = dummy;
                 _ = shiftAmount;
-                var args0 = Vector128.Create((ulong)(shiftAmount & 0x3F));
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftLeft_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft_Core(Vector128<byte> value, int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0.AsSByte());
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{ushort}, int, Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftLeft_Core(Vector128<ushort> value, int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0.AsInt16());
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{uint}, int, Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftLeft_Core(Vector128<uint> value, int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0.AsInt32());
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftLeft_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0);
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{ulong}, int, Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftLeft_Core(Vector128<ulong> value, int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0.AsInt64());
+                return Vector128.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftLeft_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft_Const(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftLeft_Const(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-                return PackedSimd.ShiftLeftLogical(value.AsUInt32(), (byte)shiftAmount).AsInt32();
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftLeft_Const(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftLeft_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftLeft_Const(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftLeft_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft_ConstCore(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{ushort}, int, Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftLeft_ConstCore(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLeftLogical(value.AsUInt32(), (byte)shiftAmount).AsInt32();
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{uint}, int, Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftLeft_ConstCore(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftLeft_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{ulong}, int, Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftLeft_ConstCore(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLeftLogical(value, (byte)shiftAmount);
-#else
-                return ShiftLeft_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftLeft_Fast(Vector128<sbyte> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((sbyte)(shiftAmount)));
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftLeft_Fast(Vector128<byte> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((sbyte)(shiftAmount)));
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftLeft_Fast(Vector128<short> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((short)(shiftAmount)));
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftLeft_Fast(Vector128<ushort> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((short)(shiftAmount)));
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftLeft_Fast(Vector128<int> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((int)(shiftAmount)));
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftLeft_Fast(Vector128<uint> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((int)(shiftAmount)));
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftLeft_Fast(Vector128<long> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((long)(shiftAmount)));
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftLeft_Fast(Vector128<ulong> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((long)(shiftAmount)));
+                return PackedSimd.ShiftLeft(value, shiftAmount);
             }
 
 
@@ -944,45 +896,25 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic(Vector128<sbyte> value, int shiftAmount) {
-                shiftAmount &= 7;
-                if (0 == shiftAmount) {
-                    // PackedSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic(Vector128<short> value, int shiftAmount) {
-                shiftAmount &= 0x0F;
-                if (0 == shiftAmount) {
-                    // PackedSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftAmount) {
-                shiftAmount &= 0x1F;
-                if (0 == shiftAmount) {
-                    // PackedSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic(Vector128<long> value, int shiftAmount) {
-                shiftAmount &= 0x3F;
-                if (0 == shiftAmount) {
-                    // PackedSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                    return value;
-                }
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
@@ -990,188 +922,152 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((sbyte)-(shiftAmount & 7));
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{short}, int, out Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
                 _ = dummy;
-#if NET6_0_OR_GREATER
-#else
-                shiftAmount = Volatile.Read(ref shiftAmount); // Fixed a bug when it runs on net5 arm. If shiftAmount is constant byte 1, the element of args0 should be -1(0xFFFF), but it is -256(0xFF00) .
-#endif
-                var args0 = Vector128.Create((short)-(shiftAmount & 0x0F));
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{int}, int, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((int)-(shiftAmount & 0x1F));
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{long}, int, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((long)-(shiftAmount & 0x3F));
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftArithmetic(value, args0);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftArithmetic(value, args0);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftArithmetic(value, args0);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftArithmetic(value, args0);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
-#if NET6_0_OR_GREATER
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
-#if NET6_0_OR_GREATER
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
-#if NET6_0_OR_GREATER
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
-#if NET6_0_OR_GREATER
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightArithmetic(value, (byte)shiftAmount);
-#else
-                return ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Fast(Vector128<sbyte> value, int shiftAmount) {
-                return PackedSimd.ShiftArithmetic(value, Vector128.Create((sbyte)(-shiftAmount)));
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Fast(Vector128<short> value, int shiftAmount) {
-                return PackedSimd.ShiftArithmetic(value, Vector128.Create((short)(-shiftAmount)));
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Fast(Vector128<int> value, int shiftAmount) {
-                return PackedSimd.ShiftArithmetic(value, Vector128.Create((int)(-shiftAmount)));
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic_Fast(Vector128<long> value, int shiftAmount) {
-                return PackedSimd.ShiftArithmetic(value, Vector128.Create((long)(-shiftAmount)));
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
 
@@ -1186,60 +1082,52 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightLogical(Vector128<sbyte> value, int shiftAmount) {
-                shiftAmount &= 7;
-                return ShiftRightLogical_Fast(value, shiftAmount);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical(Vector128<byte> value, int shiftAmount) {
-                shiftAmount &= 7;
-                return ShiftRightLogical_Fast(value, shiftAmount);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical(Vector128<short> value, int shiftAmount) {
-                shiftAmount &= 0x0F;
-                return ShiftRightLogical_Fast(value, shiftAmount);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical(Vector128<ushort> value, int shiftAmount) {
-                shiftAmount &= 0x0F;
-                return ShiftRightLogical_Fast(value, shiftAmount);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightLogical(Vector128<int> value, int shiftAmount) {
-                shiftAmount &= 0x1F;
-                return ShiftRightLogical_Fast(value, shiftAmount);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical(Vector128<uint> value, int shiftAmount) {
-                shiftAmount &= 0x1F;
-                return ShiftRightLogical_Fast(value, shiftAmount);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightLogical(Vector128<long> value, int shiftAmount) {
-                shiftAmount &= 0x3F;
-                return ShiftRightLogical_Fast(value, shiftAmount);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical(Vector128<ulong> value, int shiftAmount) {
-                shiftAmount &= 0x3F;
-                return ShiftRightLogical_Fast(value, shiftAmount);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
@@ -1247,397 +1135,318 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightLogical_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((sbyte)-(shiftAmount & 7));
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{byte}, int, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical_Args(Vector128<byte> dummy, int shiftAmount, out Vector128<byte> args1) {
-                var a0 = ShiftRightLogical_Args(dummy.AsSByte(), shiftAmount, out var a1);
-                args1 = a1.AsByte();
-                return a0.AsByte();
+                _ = dummy;
+                _ = shiftAmount;
+                args1 = default;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{short}, int, out Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
                 _ = dummy;
-#if NET6_0_OR_GREATER
-#else
-                shiftAmount = Volatile.Read(ref shiftAmount); // Fixed a bug when it runs on net5 arm. If shiftAmount is constant byte 1, the element of args0 should be -1(0xFFFF), but it is -256(0xFF00) .
-#endif
-                var args0 = Vector128.Create((short)-(shiftAmount & 0x0F));
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{ushort}, int, out Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical_Args(Vector128<ushort> dummy, int shiftAmount, out Vector128<ushort> args1) {
-                var a0 = ShiftRightLogical_Args(dummy.AsInt16(), shiftAmount, out var a1);
-                args1 = a1.AsUInt16();
-                return a0.AsUInt16();
+                _ = dummy;
+                _ = shiftAmount;
+                args1 = default;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{int}, int, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightLogical_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((int)-(shiftAmount & 0x1F));
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{uint}, int, out Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical_Args(Vector128<uint> dummy, int shiftAmount, out Vector128<uint> args1) {
-                var a0 = ShiftRightLogical_Args(dummy.AsInt32(), shiftAmount, out var a1);
-                args1 = a1.AsUInt32();
-                return a0.AsUInt32();
+                _ = dummy;
+                _ = shiftAmount;
+                args1 = default;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{long}, int, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightLogical_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
                 _ = dummy;
-                var args0 = Vector128.Create((long)-(shiftAmount & 0x3F));
+                _ = shiftAmount;
                 args1 = default;
-                return args0;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{ulong}, int, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical_Args(Vector128<ulong> dummy, int shiftAmount, out Vector128<ulong> args1) {
-                var a0 = ShiftRightLogical_Args(dummy.AsInt64(), shiftAmount, out var a1);
-                args1 = a1.AsUInt64();
-                return a0.AsUInt64();
+                _ = dummy;
+                _ = shiftAmount;
+                args1 = default;
+                return default;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightLogical_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical_Core(Vector128<byte> value, int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0.AsSByte());
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{ushort}, int, Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical_Core(Vector128<ushort> value, int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0.AsInt16());
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightLogical_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{uint}, int, Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical_Core(Vector128<uint> value, int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0.AsInt32());
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightLogical_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0);
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{ulong}, int, Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical_Core(Vector128<ulong> value, int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
-                _ = shiftAmount;
+                _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftLogical(value, args0.AsInt64());
+                return Vector128.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightLogical_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical_Const(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                shiftAmount = Volatile.Read(ref shiftAmount); // Fixed a bug when it runs on net5 arm. If shiftAmount is constant byte 1, the element of args0 should be -1(0xFFFF), but it is -256(0xFF00) .
-                return ShiftRightLogical_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical_Const(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return ShiftRightLogical_Const(value.AsInt16(), shiftAmount).AsUInt16();
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightLogical_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical_Const(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightLogical_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical_Const(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
-#if NET6_0_OR_GREATER
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Fast(value, shiftAmount);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{sbyte}, int, Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightLogical_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical_ConstCore(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{ushort}, int, Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical_ConstCore(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightLogical_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{uint}, int, Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical_ConstCore(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightLogical_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{ulong}, int, Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical_ConstCore(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
-#if NET6_0_OR_GREATER
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-#else
-                return ShiftRightLogical_Core(value, shiftAmount, args0, args1);
-#endif
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightLogical_Fast(Vector128<sbyte> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((sbyte)(-shiftAmount)));
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{byte}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> ShiftRightLogical_Fast(Vector128<byte> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((sbyte)(-shiftAmount)));
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightLogical_Fast(Vector128<short> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((short)(-shiftAmount)));
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{ushort}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> ShiftRightLogical_Fast(Vector128<ushort> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((short)(-shiftAmount)));
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightLogical_Fast(Vector128<int> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((int)(-shiftAmount)));
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{uint}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ShiftRightLogical_Fast(Vector128<uint> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((int)(-shiftAmount)));
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightLogical_Fast(Vector128<long> value, int shiftAmount) {
-                return PackedSimd.ShiftLogical(value, Vector128.Create((long)(-shiftAmount)));
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{ulong}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ShiftRightLogical_Fast(Vector128<ulong> value, int shiftAmount) {
-                return ShiftRightLogical_Fast_HwVar(value, shiftAmount);
+                return PackedSimd.ShiftRightLogical(value, shiftAmount);
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{ulong}, int)"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> ShiftRightLogical_Fast_HwVar(Vector128<ulong> value, int shiftAmount) {
-                Vector128<long> vshift = Vector128.Create((long)(-shiftAmount));
-                // NEON intrinsics for shifts by signed variable
-                // uint64x2_t vshlq_u64(uint64x2_t a, int64x2_t b);  // VSHL.U64 q0,q0,q0
-                return PackedSimd.ShiftLogical(value, vshift);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{ulong}, int)"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> ShiftRightLogical_Fast_HwImm(Vector128<ulong> value, int shiftAmount) {
-                Debug.Assert(1 <= shiftAmount && shiftAmount <= 63, "The shiftAmount parameter must be in the range [1,63]."); // PackedSimd throws an exception when shiftAmount is 0! 	System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                return PackedSimd.ShiftRightLogical(value, (byte)shiftAmount);
-            }
-
-
+/*
             /// <inheritdoc cref="IWVectorTraits128.Shuffle_AcceleratedTypes"/>
             public static TypeCodeFlags Shuffle_AcceleratedTypes {
                 get {

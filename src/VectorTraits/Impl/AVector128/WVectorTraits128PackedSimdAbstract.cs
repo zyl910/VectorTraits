@@ -364,7 +364,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.Narrow(lower, upper);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_AcceleratedTypes"/>
         public override TypeCodeFlags ShiftLeft_AcceleratedTypes {
             get {
@@ -1163,7 +1163,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.ShiftRightLogical_Fast(value, shiftAmount);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_AcceleratedTypes"/>
         public override TypeCodeFlags Shuffle_AcceleratedTypes {
             get {
