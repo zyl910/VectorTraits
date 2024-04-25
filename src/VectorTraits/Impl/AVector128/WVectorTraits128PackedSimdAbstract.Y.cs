@@ -1392,7 +1392,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<ulong> YShuffleG4X2_Const(Vector128<ulong> source0, Vector128<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector128<ulong> result1) {
             return Statics.YShuffleG4X2_Const(source0, source1, control, out result1);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_AcceleratedTypes"/>
         public override TypeCodeFlags YShuffleInsert_AcceleratedTypes {
@@ -1837,7 +1837,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<double> YSignFloat(Vector128<double> value) {
             return Statics.YSignFloat(value);
         }
-*/
+
 #endif
     }
 }

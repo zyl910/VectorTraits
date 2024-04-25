@@ -11,6 +11,7 @@ using System.Runtime.Intrinsics;
 #endif
 #if NET8_0_OR_GREATER
 using System.Runtime.Intrinsics.Wasm;
+using System.Threading.Tasks;
 #endif // NET8_0_OR_GREATER
 
 namespace Zyl.VectorTraits.Impl.AVector128 {
@@ -444,7 +445,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> YShuffleG4X2_Const(Vector128<ulong> source0, Vector128<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector128<ulong> result1) {
                 return YShuffleG4X2(source0, source1, control, out result1);
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleInsert_AcceleratedTypes {
@@ -476,9 +477,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleInsert(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> indices) {
-                var lower = PackedSimd.VectorTableLookupExtension(back.GetLower(), vector, indices.GetLower());
-                var upper = PackedSimd.VectorTableLookupExtension(back.GetUpper(), vector, indices.GetUpper());
-                var rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
+                Vector128<byte> mask = PackedSimd.CompareGreaterThan(Vector128.Create((byte)16), indices); // (0<=i && i<16)
+                Vector128<byte> rt = PackedSimd.Swizzle(vector, indices);
+                rt = ConditionalSelect(mask, rt, back);
                 return rt;
             }
 
@@ -493,8 +494,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleInsert(Vector128<ushort> back, Vector128<ushort> vector, Vector128<ushort> indices) {
                 Vector128<ushort> mask = PackedSimd.CompareGreaterThan(Vector128.Create((ushort)8), indices); // (0<=i && i<8)
-                Vector128<byte> indices2 = PackedSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt16_ByteOffset.AsUInt16(), indices, Vector128Constants.Shuffle_UInt16_Multiplier).AsByte();
-                indices2 = PackedSimd.OrNot(indices2, mask.AsByte());
+                Vector128<byte> indices2 = PackedSimd.Add(PackedSimd.Multiply(indices, Vector128Constants.Shuffle_UInt16_Multiplier).AsByte(), Vector128Constants.Shuffle_UInt16_ByteOffset);
+                indices2 = YOrNot(indices2, mask.AsByte());
                 return YShuffleInsert(back.AsByte(), vector.AsByte(), indices2).AsUInt16();
             }
 
@@ -509,8 +510,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleInsert(Vector128<uint> back, Vector128<uint> vector, Vector128<uint> indices) {
                 Vector128<uint> mask = PackedSimd.CompareGreaterThan(Vector128.Create((uint)4), indices); // (0<=i && i<4)
-                Vector128<byte> indices2 = PackedSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt32_ByteOffset.AsUInt32(), indices, Vector128Constants.Shuffle_UInt32_Multiplier).AsByte();
-                indices2 = PackedSimd.OrNot(indices2, mask.AsByte());
+                Vector128<byte> indices2 = PackedSimd.Add(PackedSimd.Multiply(indices, Vector128Constants.Shuffle_UInt32_Multiplier).AsByte(), Vector128Constants.Shuffle_UInt32_ByteOffset);
+                indices2 = YOrNot(indices2, mask.AsByte());
                 return YShuffleInsert(back.AsByte(), vector.AsByte(), indices2).AsUInt32();
             }
 
@@ -525,9 +526,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleInsert(Vector128<ulong> back, Vector128<ulong> vector, Vector128<ulong> indices) {
                 Vector128<ulong> mask = GreaterThan(Vector128.Create((ulong)2), indices); // (0<=i && i<2)
-                Vector128<uint> indices1 = PackedSimd.Or(PackedSimd.ShiftLeftLogical(indices, 32), indices).AsUInt32();
-                Vector128<byte> indices2 = PackedSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt64_ByteOffset.AsUInt32(), indices1, Vector128Constants.Shuffle_UInt64_Multiplier.AsUInt32()).AsByte();
-                indices2 = PackedSimd.OrNot(indices2, mask.AsByte());
+                Vector128<uint> indices1 = PackedSimd.Or(PackedSimd.ShiftLeft(indices, 32), indices).AsUInt32();
+                Vector128<byte> indices2 = PackedSimd.Add(PackedSimd.Multiply(indices1, Vector128Constants.Shuffle_UInt64_Multiplier.AsUInt32()).AsByte(), Vector128Constants.Shuffle_UInt64_ByteOffset);
+                indices2 = YOrNot(indices2, mask.AsByte());
                 return YShuffleInsert(back.AsByte(), vector.AsByte(), indices2).AsUInt64();
             }
 
@@ -565,7 +566,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2) {
                 Vector128<ushort> mask = PackedSimd.CompareGreaterThan(Vector128.Create((ushort)8), indices); // (0<=i && i<8)
                 YShuffleKernel_Args(indices, out args0, out args1);
-                args0 = PackedSimd.OrNot(args0, mask);
+                args0 = YOrNot(args0, mask);
                 args2 = mask;
             }
 
@@ -584,7 +585,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2) {
                 Vector128<uint> mask = PackedSimd.CompareGreaterThan(Vector128.Create((uint)4), indices); // (0<=i && i<4)
                 YShuffleKernel_Args(indices, out args0, out args1);
-                args0 = PackedSimd.OrNot(args0, mask);
+                args0 = YOrNot(args0, mask);
                 args2 = mask;
             }
 
@@ -603,7 +604,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleInsert_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2) {
                 Vector128<ulong> mask = GreaterThan(Vector128.Create((ulong)2), indices); // (0<=i && i<2)
                 YShuffleKernel_Args(indices, out args0, out args1);
-                args0 = PackedSimd.OrNot(args0, mask);
+                args0 = YOrNot(args0, mask);
                 args2 = mask;
             }
 
@@ -632,9 +633,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> YShuffleInsert_Core(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2) {
                 _ = args1;
                 _ = args2;
-                var lower = PackedSimd.VectorTableLookupExtension(back.GetLower(), vector, args0.GetLower());
-                var upper = PackedSimd.VectorTableLookupExtension(back.GetUpper(), vector, args0.GetUpper());
-                var rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
+                Vector128<byte> rt = PackedSimd.Swizzle(vector, args0);
                 return rt;
             }
 
@@ -708,10 +707,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleKernel(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleKernel(Vector128<byte> vector, Vector128<byte> indices) {
-                var lower = PackedSimd.VectorTableLookup(vector, indices.GetLower());
-                var upper = PackedSimd.VectorTableLookup(vector, indices.GetUpper());
-                var rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
-                return rt;
+                return PackedSimd.Swizzle(vector, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleKernel(Vector128{short}, Vector128{short})"/>
@@ -724,7 +720,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleKernel(Vector128<ushort> vector, Vector128<ushort> indices) {
-                Vector128<byte> indices2 = PackedSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt16_ByteOffset.AsUInt16(), indices, Vector128Constants.Shuffle_UInt16_Multiplier).AsByte();
+                Vector128<byte> indices2 = PackedSimd.Add(PackedSimd.Multiply(indices, Vector128Constants.Shuffle_UInt16_Multiplier).AsByte(), Vector128Constants.Shuffle_UInt16_ByteOffset);
                 return YShuffleKernel(vector.AsByte(), indices2).AsUInt16();
             }
 
@@ -738,7 +734,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleKernel(Vector128<uint> vector, Vector128<uint> indices) {
-                Vector128<byte> indices2 = PackedSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt32_ByteOffset.AsUInt32(), indices, Vector128Constants.Shuffle_UInt32_Multiplier).AsByte();
+                Vector128<byte> indices2 = PackedSimd.Add(PackedSimd.Multiply(indices, Vector128Constants.Shuffle_UInt32_Multiplier).AsByte(), Vector128Constants.Shuffle_UInt32_ByteOffset);
                 return YShuffleKernel(vector.AsByte(), indices2).AsUInt32();
             }
 
@@ -767,8 +763,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleKernel_Shift(Vector128<ulong> vector, Vector128<ulong> indices) {
-                Vector128<uint> indices1 = PackedSimd.Or(PackedSimd.ShiftLeftLogical(indices, 32), indices).AsUInt32();
-                Vector128<byte> indices2 = PackedSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt64_ByteOffset.AsUInt32(), indices1, Vector128Constants.Shuffle_UInt64_Multiplier.AsUInt32()).AsByte();
+                Vector128<uint> indices1 = PackedSimd.Or(PackedSimd.ShiftLeft(indices, 32), indices).AsUInt32();
+                Vector128<byte> indices2 = PackedSimd.Add(PackedSimd.Multiply(indices1, Vector128Constants.Shuffle_UInt64_Multiplier.AsUInt32()).AsByte(), Vector128Constants.Shuffle_UInt64_ByteOffset);
                 return YShuffleKernel(vector.AsByte(), indices2).AsUInt64();
             }
 
@@ -801,7 +797,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleKernel_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1) {
-                Vector128<byte> indices2 = PackedSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt16_ByteOffset.AsUInt16(), indices, Vector128Constants.Shuffle_UInt16_Multiplier).AsByte();
+                Vector128<byte> indices2 = PackedSimd.Add(PackedSimd.Multiply(indices, Vector128Constants.Shuffle_UInt16_Multiplier).AsByte(), Vector128Constants.Shuffle_UInt16_ByteOffset);
                 args0 = indices2.AsUInt16();
                 args1 = default;
             }
@@ -818,7 +814,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleKernel_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1) {
-                Vector128<byte> indices2 = PackedSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt32_ByteOffset.AsUInt32(), indices, Vector128Constants.Shuffle_UInt32_Multiplier).AsByte();
+                Vector128<byte> indices2 = PackedSimd.Add(PackedSimd.Multiply(indices, Vector128Constants.Shuffle_UInt32_Multiplier).AsByte(), Vector128Constants.Shuffle_UInt32_ByteOffset);
                 args0 = indices2.AsUInt32();
                 args1 = default;
             }
@@ -835,8 +831,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleKernel_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1) {
-                Vector128<uint> indices1 = PackedSimd.Or(PackedSimd.ShiftLeftLogical(indices, 32), indices).AsUInt32();
-                Vector128<byte> indices2 = PackedSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt64_ByteOffset.AsUInt32(), indices1, Vector128Constants.Shuffle_UInt64_Multiplier.AsUInt32()).AsByte();
+                Vector128<uint> indices1 = PackedSimd.Or(PackedSimd.ShiftLeft(indices, 32), indices).AsUInt32();
+                Vector128<byte> indices2 = PackedSimd.Add(PackedSimd.Multiply(indices1, Vector128Constants.Shuffle_UInt64_Multiplier.AsUInt32()).AsByte(), Vector128Constants.Shuffle_UInt64_ByteOffset);
                 args0 = indices2.AsUInt64();
                 args1 = default;
             }
@@ -865,10 +861,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleKernel_Core(Vector128<byte> vector, Vector128<byte> args0, Vector128<byte> args1) {
                 _ = args1;
-                var lower = PackedSimd.VectorTableLookup(vector, args0.GetLower());
-                var upper = PackedSimd.VectorTableLookup(vector, args0.GetUpper());
-                var rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
-                return rt;
+                return PackedSimd.Swizzle(vector, args0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleKernel_Core(Vector128{short}, Vector128{short}, Vector128{short})"/>
@@ -1028,7 +1021,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 rt = BitwiseOr(rt, BitwiseAnd(nanMask, value)); // ConditionalSelect(nanMask, value, rt);
                 return rt;
             }
-*/
+
 
 #endif // NET8_0_OR_GREATER
         }
