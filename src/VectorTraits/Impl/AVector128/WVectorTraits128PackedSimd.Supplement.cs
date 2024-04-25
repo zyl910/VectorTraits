@@ -251,7 +251,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits128.Dot_AcceleratedTypes"/>
             public static TypeCodeFlags Dot_AcceleratedTypes {
                 get {
@@ -270,22 +270,32 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static double Dot(Vector128<double> left, Vector128<double> right) {
-                return SuperStatics.Dot(left, right);
+                //return SuperStatics.Dot(left, right);
+                Vector128<double> temp = PackedSimd.Multiply(left, right);
+                return Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static sbyte Dot(Vector128<sbyte> left, Vector128<sbyte> right) {
-                Vector128<sbyte> temp = PackedSimd.Multiply(left, right);
-                return Sum(temp);
+                Widen(left, out Vector128<short> u0, out Vector128<short> u1);
+                Widen(right, out Vector128<short> v0, out Vector128<short> v1);
+                Vector128<short> w0 = PackedSimd.Multiply(u0, v0);
+                Vector128<short> w1 = PackedSimd.Multiply(u1, v1);
+                w0 = PackedSimd.Add(w0, w1);
+                return (sbyte)Sum(w0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static byte Dot(Vector128<byte> left, Vector128<byte> right) {
-                Vector128<byte> temp = PackedSimd.Multiply(left, right);
-                return Sum(temp);
+                Widen(left, out Vector128<ushort> u0, out Vector128<ushort> u1);
+                Widen(right, out Vector128<ushort> v0, out Vector128<ushort> v1);
+                Vector128<ushort> w0 = PackedSimd.Multiply(u0, v0);
+                Vector128<ushort> w1 = PackedSimd.Multiply(u1, v1);
+                w0 = PackedSimd.Add(w0, w1);
+                return (byte)Sum(w0);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{short}, Vector128{short})"/>
@@ -321,20 +331,20 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static long Dot(Vector128<long> left, Vector128<long> right) {
-                return SuperStatics.Dot(left, right);
-                //Vector128<long> temp = Multiply(left, right);
-                //return Sum(temp);
+                //return SuperStatics.Dot(left, right);
+                Vector128<long> temp = Multiply(left, right);
+                return Sum(temp);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ulong Dot(Vector128<ulong> left, Vector128<ulong> right) {
-                return SuperStatics.Dot(left, right);
-                //Vector128<ulong> temp = Multiply(left, right);
-                //return Sum(temp);
+                //return SuperStatics.Dot(left, right);
+                Vector128<ulong> temp = Multiply(left, right);
+                return Sum(temp);
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits128.Equals_AcceleratedTypes"/>
             public static TypeCodeFlags Equals_AcceleratedTypes {
@@ -1875,7 +1885,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 //return PackedSimd.Not(vector.AsUInt64()).As<ulong, T>();
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits128.Sqrt_AcceleratedTypes"/>
             public static TypeCodeFlags Sqrt_AcceleratedTypes {
                 get {
@@ -1887,26 +1897,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> Sqrt(Vector128<float> value) {
-                Vector128<float> a0 = PackedSimd.ShiftRightLogical(PackedSimd.ShiftLeftLogical(value.AsUInt64(), 32), 32).AsSingle(); // 0, 2
-                Vector128<float> a1 = PackedSimd.ShiftRightLogical(value.AsUInt64(), 32).AsSingle(); // 1, 3
-                Vector64<float> b0 = PackedSimd.SqrtScalar(a0.GetLower());
-                Vector64<float> b2 = PackedSimd.SqrtScalar(a0.GetUpper());
-                Vector64<float> b1 = PackedSimd.SqrtScalar(a1.GetLower());
-                Vector64<float> b3 = PackedSimd.SqrtScalar(a1.GetUpper());
-                Vector128<float> c0 = b0.ToVector128Unsafe().WithUpper(b2); //Vector128.Create(b0, b2);
-                Vector128<float> c1 = b1.ToVector128Unsafe().WithUpper(b3); //Vector128.Create(b1, b3);
-                c1 = PackedSimd.ShiftLeftLogical(c1.AsUInt64(), 32).AsSingle();
-                Vector128<float> rt = PackedSimd.Or(c0, c1);
-                return rt;
+                return PackedSimd.Sqrt(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Sqrt(Vector128<double> value) {
-                Vector64<double> dst0 = PackedSimd.SqrtScalar(value.GetLower());
-                Vector64<double> dst1 = PackedSimd.SqrtScalar(value.GetUpper());
-                Vector128<double> rt = dst0.ToVector128Unsafe().WithUpper(dst1); //Vector128.Create(dst0, dst1);
-                return rt;
+                return PackedSimd.Sqrt(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sqrt(Vector128{sbyte})"/>
@@ -1931,10 +1928,10 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<float> src2 = ConvertToSingle(w2.AsInt32());
                 Vector128<float> src3 = ConvertToSingle(w3.AsInt32());
                 // Body
-                Vector128<float> dst0 = Sqrt(src0);
-                Vector128<float> dst1 = Sqrt(src1);
-                Vector128<float> dst2 = Sqrt(src2);
-                Vector128<float> dst3 = Sqrt(src3);
+                Vector128<float> dst0 = PackedSimd.Sqrt(src0);
+                Vector128<float> dst1 = PackedSimd.Sqrt(src1);
+                Vector128<float> dst2 = PackedSimd.Sqrt(src2);
+                Vector128<float> dst3 = PackedSimd.Sqrt(src3);
                 // To int
                 w0 = ConvertToInt32(dst0).AsUInt32();
                 w1 = ConvertToInt32(dst1).AsUInt32();
@@ -1964,8 +1961,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<float> src0 = ConvertToSingle(w0.AsInt32());
                 Vector128<float> src1 = ConvertToSingle(w1.AsInt32());
                 // Body
-                Vector128<float> dst0 = Sqrt(src0);
-                Vector128<float> dst1 = Sqrt(src1);
+                Vector128<float> dst0 = PackedSimd.Sqrt(src0);
+                Vector128<float> dst1 = PackedSimd.Sqrt(src1);
                 // To int
                 w0 = ConvertToInt32(dst0).AsUInt32();
                 w1 = ConvertToInt32(dst1).AsUInt32();
@@ -1991,8 +1988,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<double> src0 = ConvertToDouble_Range52(w0);
                 Vector128<double> src1 = ConvertToDouble_Range52(w1);
                 // Body
-                Vector128<double> dst0 = Sqrt(src0);
-                Vector128<double> dst1 = Sqrt(src1);
+                Vector128<double> dst0 = PackedSimd.Sqrt(src0);
+                Vector128<double> dst1 = PackedSimd.Sqrt(src1);
                 // To int
                 w0 = ConvertToUInt64_Range52(dst0);
                 w1 = ConvertToUInt64_Range52(dst1);
@@ -2016,12 +2013,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // To float
                 Vector128<double> src0 = ConvertToDouble(value);
                 // Body
-                Vector128<double> dst0 = Sqrt(src0);
+                Vector128<double> dst0 = PackedSimd.Sqrt(src0);
                 // To int
                 Vector128<ulong> rt = ConvertToUInt64_Range52(dst0);
                 return rt;
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
             public static TypeCodeFlags Subtract_AcceleratedTypes {

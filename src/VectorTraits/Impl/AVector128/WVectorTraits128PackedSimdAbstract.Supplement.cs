@@ -208,7 +208,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits128.Dot_AcceleratedTypes"/>
         public override TypeCodeFlags Dot_AcceleratedTypes {
             get {
@@ -279,7 +279,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override ulong Dot(Vector128<ulong> left, Vector128<ulong> right) {
             return Statics.Dot(left, right);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits128.Equals_AcceleratedTypes"/>
         public override TypeCodeFlags Equals_AcceleratedTypes {
@@ -1642,7 +1642,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.OnesComplement(vector);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits128.Sqrt_AcceleratedTypes"/>
         public override TypeCodeFlags Sqrt_AcceleratedTypes {
             get {
@@ -1713,7 +1713,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<ulong> Sqrt(Vector128<ulong> value) {
             return Statics.Sqrt(value);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits128.Subtract_AcceleratedTypes"/>
         public override TypeCodeFlags Subtract_AcceleratedTypes {
