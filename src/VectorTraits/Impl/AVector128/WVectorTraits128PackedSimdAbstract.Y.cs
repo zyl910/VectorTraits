@@ -14,7 +14,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
     partial class WVectorTraits128PackedSimdAbstract {
 #if NET8_0_OR_GREATER
-/*
+
         /// <inheritdoc cref="IWVectorTraits128.YBitToByte_IsAccelerated"/>
         public override bool YBitToByte_IsAccelerated {
             get {
@@ -191,7 +191,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.YCopySign(value, sign);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue_AcceleratedTypes"/>
         public override TypeCodeFlags YIsAllTrue_AcceleratedTypes {
             get {
@@ -836,7 +836,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<long> YIsZeroOrSubnormal(Vector128<double> value) {
             return Statics.YIsZeroOrSubnormal(value);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits128.YMaxNumber_AcceleratedTypes"/>
         public override TypeCodeFlags YMaxNumber_AcceleratedTypes {
@@ -966,7 +966,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
             return Statics.YNarrowSaturateUnsigned(lower, upper);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits128.YOrNot_AcceleratedTypes"/>
         public override TypeCodeFlags YOrNot_AcceleratedTypes {

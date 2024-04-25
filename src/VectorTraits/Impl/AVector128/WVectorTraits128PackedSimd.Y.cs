@@ -18,7 +18,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         partial class Statics {
 
 #if NET8_0_OR_GREATER
-/*
+
             /// <inheritdoc cref="IWVectorTraits128.YBitToByte_IsAccelerated"/>
             public static bool YBitToByte_IsAccelerated {
                 get {
@@ -35,7 +35,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<byte> indices = Vector128Constants.YBitToByte_Shuffle_Indices;
                 Vector128<byte> bitPosMask = Vector128Constants.MaskBitPosSerialRotate8;
                 // Duplicate 8bit value to 64bit
-                Vector128<byte> f = YShuffleKernel(a, indices);
+                Vector128<byte> f = PackedSimd.Swizzle(a, indices);
                 // Check bit.
                 Vector128<byte> hit = BitwiseAnd(f, bitPosMask);
                 Vector128<byte> rt = Equals(hit, bitPosMask);
@@ -243,7 +243,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YMaxNumber_AcceleratedTypes"/>
             public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = YIsNaN_AcceleratedTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
                     return rt;
                 }
             }
@@ -251,26 +251,20 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YMaxNumber(Vector128<float> left, Vector128<float> right) {
-                Vector128<float> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsSingle());
-                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsSingle()));
-                Vector128<float> rt = ConditionalSelect(mask, left, right);
-                return rt;
+                return PackedSimd.Max(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YMaxNumber(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YMaxNumber(Vector128<double> left, Vector128<double> right) {
-                Vector128<double> mask = BitwiseOr(GreaterThan(left, right), YIsNaN(right).AsDouble());
-                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(right).AsDouble()));
-                Vector128<double> rt = ConditionalSelect(mask, left, right);
-                return rt;
+                return PackedSimd.Max(left, right);
             }
 
 
             /// <inheritdoc cref="IWVectorTraits128.YMinNumber_AcceleratedTypes"/>
             public static TypeCodeFlags YMinNumber_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = YIsNaN_AcceleratedTypes;
+                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
                     return rt;
                 }
             }
@@ -278,19 +272,13 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YMinNumber(Vector128<float> left, Vector128<float> right) {
-                Vector128<float> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsSingle());
-                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsSingle()));
-                Vector128<float> rt = ConditionalSelect(mask, left, right);
-                return rt;
+                return PackedSimd.Min(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YMinNumber(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YMinNumber(Vector128<double> left, Vector128<double> right) {
-                Vector128<double> mask = BitwiseOr(LessThan(left, right), YIsNaN(right).AsDouble());
-                mask = BitwiseOr(mask, BitwiseAnd(Equals(left, right), YIsNegative(left).AsDouble()));
-                Vector128<double> rt = ConditionalSelect(mask, left, right);
-                return rt;
+                return PackedSimd.Min(left, right);
             }
 
 
@@ -305,7 +293,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate_FullAcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_FullAcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
+                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     return rt;
                 }
             }
@@ -314,40 +302,55 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YNarrowSaturate(Vector128<short> lower, Vector128<short> upper) {
-                return PackedSimd.ExtractNarrowingSaturateUpper(PackedSimd.ExtractNarrowingSaturateLower(lower), upper);
+                return PackedSimd.ConvertNarrowingSaturateSigned(lower, upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{ushort}, Vector128{ushort})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YNarrowSaturate(Vector128<ushort> lower, Vector128<ushort> upper) {
-                return PackedSimd.ExtractNarrowingSaturateUpper(PackedSimd.ExtractNarrowingSaturateLower(lower), upper);
+                Vector128<ushort> amax = Vector128.Create((ushort)byte.MaxValue);
+                Vector128<ushort> l = Min(lower, amax);
+                Vector128<ushort> u = Min(upper, amax);
+                Vector128<byte> rt = PackedSimd.ConvertNarrowingSaturateUnsigned(l.AsInt16(), u.AsInt16());
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{int}, Vector128{int})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YNarrowSaturate(Vector128<int> lower, Vector128<int> upper) {
-                return PackedSimd.ExtractNarrowingSaturateUpper(PackedSimd.ExtractNarrowingSaturateLower(lower), upper);
+                return PackedSimd.ConvertNarrowingSaturateSigned(lower, upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{uint}, Vector128{uint})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YNarrowSaturate(Vector128<uint> lower, Vector128<uint> upper) {
-                return PackedSimd.ExtractNarrowingSaturateUpper(PackedSimd.ExtractNarrowingSaturateLower(lower), upper);
+                Vector128<uint> amax = Vector128.Create((uint)ushort.MaxValue);
+                Vector128<uint> l = Min(lower, amax);
+                Vector128<uint> u = Min(upper, amax);
+                Vector128<ushort> rt = PackedSimd.ConvertNarrowingSaturateUnsigned(l.AsInt32(), u.AsInt32());
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{long}, Vector128{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YNarrowSaturate(Vector128<long> lower, Vector128<long> upper) {
-                return PackedSimd.ExtractNarrowingSaturateUpper(PackedSimd.ExtractNarrowingSaturateLower(lower), upper);
+                Vector128<long> amin = Vector128Constants.Int64_VMinInt32;
+                Vector128<long> amax = Vector128Constants.Int64_VMaxInt32;
+                Vector128<long> l = YClamp(lower, amin, amax);
+                Vector128<long> u = YClamp(upper, amin, amax);
+                return Narrow(l, u);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturate(Vector128{ulong}, Vector128{ulong})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YNarrowSaturate(Vector128<ulong> lower, Vector128<ulong> upper) {
-                return PackedSimd.ExtractNarrowingSaturateUpper(PackedSimd.ExtractNarrowingSaturateLower(lower), upper);
+                Vector128<ulong> amax = Vector128Constants.Int64_VMaxUInt32.AsUInt64();
+                Vector128<ulong> l = Min(lower, amax);
+                Vector128<ulong> u = Min(upper, amax);
+                return Narrow(l, u);
             }
 
 
@@ -362,7 +365,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned_FullAcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturateUnsigned_FullAcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64;
+                    TypeCodeFlags rt = TypeCodeFlags.Int16 | TypeCodeFlags.Int32;
                     return rt;
                 }
             }
@@ -370,23 +373,27 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{short}, Vector128{short})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YNarrowSaturateUnsigned(Vector128<short> lower, Vector128<short> upper) {
-                return PackedSimd.ExtractNarrowingSaturateUnsignedUpper(PackedSimd.ExtractNarrowingSaturateUnsignedLower(lower), upper);
+                return PackedSimd.ConvertNarrowingSaturateUnsigned(lower, upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{int}, Vector128{int})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YNarrowSaturateUnsigned(Vector128<int> lower, Vector128<int> upper) {
-                return PackedSimd.ExtractNarrowingSaturateUnsignedUpper(PackedSimd.ExtractNarrowingSaturateUnsignedLower(lower), upper);
+                return PackedSimd.ConvertNarrowingSaturateUnsigned(lower, upper);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YNarrowSaturateUnsigned(Vector128{long}, Vector128{long})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YNarrowSaturateUnsigned(Vector128<long> lower, Vector128<long> upper) {
-                return PackedSimd.ExtractNarrowingSaturateUnsignedUpper(PackedSimd.ExtractNarrowingSaturateUnsignedLower(lower), upper);
+                Vector128<long> amin = Vector128<long>.Zero;
+                Vector128<long> amax = Vector128Constants.Int64_VMaxUInt32;
+                Vector128<ulong> l = YClamp(lower, amin, amax).AsUInt64();
+                Vector128<ulong> u = YClamp(upper, amin, amax).AsUInt64();
+                return Narrow(l, u);
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits128.YOrNot_AcceleratedTypes"/>
             public static TypeCodeFlags YOrNot_AcceleratedTypes {
