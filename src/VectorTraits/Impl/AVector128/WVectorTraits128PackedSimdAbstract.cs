@@ -53,7 +53,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 #if NET8_0_OR_GREATER
-/*
+
         /// <inheritdoc cref="IWVectorTraits128.Ceiling_AcceleratedTypes"/>
         public override TypeCodeFlags Ceiling_AcceleratedTypes {
             get {
@@ -212,7 +212,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.ConvertToUInt64_Range52RoundToEven(value);
         }
 
-
+/*
         /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits_AcceleratedTypes"/>
         public override TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
             get {

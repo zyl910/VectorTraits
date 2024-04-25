@@ -106,7 +106,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 #if NET8_0_OR_GREATER
-/*
+
             /// <summary>
             /// Debug test.
             /// </summary>
@@ -133,10 +133,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
                 // Output:
                 // ShiftLeftLogical:	OK. <-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1>
-                // Exception thrown: 'System.ArgumentOutOfRangeException' in System.Private.CoreLib.dll
-                // ShiftRightArithmetic:	Fail!. System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
-                // Exception thrown: 'System.ArgumentOutOfRangeException' in System.Private.CoreLib.dll
-                // ShiftRightLogical:	Fail!. System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.
             }
 
 
@@ -157,10 +153,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> Ceiling(Vector128<double> value) {
-                Vector64<double> lower = PackedSimd.CeilingScalar(Vector128.GetLower(value));
-                Vector64<double> upper = PackedSimd.CeilingScalar(Vector128.GetUpper(value));
-                Vector128<double> rt = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
-                return rt;
+                return PackedSimd.Ceiling(value);
             }
 
 
@@ -190,30 +183,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (VectorEnvironment.Is64BitProcess) {
-                    return Vector128.ConvertToDouble(value);
-                } else {
-                    return ConvertToDouble_Range52_Impl(value);
-                }
-#else
                 return ConvertToDouble_Range52_Impl(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (VectorEnvironment.Is64BitProcess) {
-                    return Vector128.ConvertToDouble(value);
-                } else {
-                    return ConvertToDouble_Range52_Impl(value);
-                }
-#else
                 return ConvertToDouble_Range52_Impl(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
@@ -248,7 +225,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ConvertToInt32(Vector128<float> value) {
-                return PackedSimd.ConvertToInt32RoundToZero(value);
+                return PackedSimd.ConvertToInt32Saturate(value);
             }
 
 
@@ -268,30 +245,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52(Vector128<double> value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (VectorEnvironment.Is64BitProcess) {
-                    return Vector128.ConvertToInt64(value);
-                } else {
-                    return ConvertToInt64_Range52_Impl(value);
-                }
-#else
                 return ConvertToInt64_Range52_Impl(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ConvertToInt64_Range52_Impl(Vector128<double> value) {
-                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52_Impl
-                Vector128<long> magicNumber = Vector128.Create(ScalarConstants.DoubleVal_2Pow52_2Pow51).AsInt64(); // Double value: 1.5*pow(2, 52) = pow(2, 52) + pow(2, 51)
-                // value = YRoundToZero(value); // Truncate.
-                // Vector128<double> x = Add(value, magicNumber.AsDouble());
-                Vector64<double> right = magicNumber.AsDouble().GetLower();
-                Vector64<double> lower = PackedSimd.AddScalar(PackedSimd.RoundToZeroScalar(value.GetLower()), right);
-                Vector64<double> upper = PackedSimd.AddScalar(PackedSimd.RoundToZeroScalar(value.GetUpper()), right);
-                Vector128<double> x = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
-                Vector128<long> result = PackedSimd.Subtract(x.AsInt64(), magicNumber);
-                return result;
+                value = YRoundToZero(value); // Truncate.
+                return ConvertToInt64_Range52RoundToEven(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52RoundToEven(Vector128{double})"/>
@@ -337,7 +298,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> ConvertToUInt32(Vector128<float> value) {
-                return PackedSimd.ConvertToUInt32RoundToZero(value);
+                return PackedSimd.ConvertToUInt32Saturate(value);
             }
 
 
@@ -359,31 +320,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64_Range52(Vector128<double> value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
-                if (VectorEnvironment.Is64BitProcess) {
-                    return Vector128.ConvertToUInt64(value);
-                } else {
-                    return ConvertToUInt64_Range52_Impl(value);
-                }
-#else
                 return ConvertToUInt64_Range52_Impl(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52(Vector128{double})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> ConvertToUInt64_Range52_Impl(Vector128<double> value) {
-                // See more: WVectorTraits256Avx2.ConvertToInt64_Range52RoundToEven
-                Vector128<ulong> magicNumber = Vector128.Create((ulong)ScalarConstants.DoubleVal_2Pow52); // Double value: pow(2, 52)
-                // value = YRoundToZero(value); // Truncate.
-                // Vector128<double> x = Add(value, magicNumber.AsDouble());
-                Vector64<double> right = magicNumber.AsDouble().GetLower();
-                Vector64<double> lower = PackedSimd.AddScalar(PackedSimd.RoundToZeroScalar(value.GetLower()), right);
-                Vector64<double> upper = PackedSimd.AddScalar(PackedSimd.RoundToZeroScalar(value.GetUpper()), right);
-                Vector128<double> x = lower.ToVector128Unsafe().WithUpper(upper); //Vector128.Create(lower, upper);
-                Vector128<ulong> result = PackedSimd.Xor(x.AsUInt64(), magicNumber);
-                return result;
+                value = YRoundToZero(value); // Truncate.
+                return ConvertToUInt64_Range52RoundToEven(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToUInt64_Range52RoundToEven(Vector128{double})"/>
@@ -397,7 +342,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return result;
             }
 
-
+/*
             /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits_AcceleratedTypes"/>
             public static TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
                 get {
