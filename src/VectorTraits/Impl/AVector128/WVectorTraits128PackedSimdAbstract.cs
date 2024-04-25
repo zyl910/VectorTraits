@@ -1352,7 +1352,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<ulong> Shuffle_Core(Vector128<ulong> vector, Vector128<ulong> args0, Vector128<ulong> args1) {
             return Statics.Shuffle_Core(vector, args0, args1);
         }
-
+*/
 
         /// <inheritdoc cref="IWVectorTraits128.Sum_AcceleratedTypes"/>
         public override TypeCodeFlags Sum_AcceleratedTypes {
@@ -1424,7 +1424,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override ulong Sum(Vector128<ulong> value) {
             return Statics.Sum(value);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
         public override TypeCodeFlags Widen_AcceleratedTypes {

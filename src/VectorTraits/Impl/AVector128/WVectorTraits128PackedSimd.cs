@@ -1659,12 +1659,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> Shuffle_Core(Vector128<ulong> vector, Vector128<ulong> args0, Vector128<ulong> args1) {
                 return Shuffle_Core(vector.AsByte(), args0.AsByte(), args1.AsByte()).AsUInt64();
             }
-
+*/
 
             /// <inheritdoc cref="IWVectorTraits128.Sum_AcceleratedTypes"/>
             public static TypeCodeFlags Sum_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    TypeCodeFlags rt = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16;
                     return rt;
                 }
             }
@@ -1672,90 +1672,77 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static float Sum(Vector128<float> value) {
-                Vector64<float> m = PackedSimd.Add(value.GetLower(), value.GetUpper()); // 4 -> 2
-                m = PackedSimd.AddPairwise(m, m); // 2 -> 1
-                return PackedSimd.Extract(m, 0);
+                return Vector128.Sum(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static double Sum(Vector128<double> value) {
-                double rt = PackedSimd.Extract(value, 0) + PackedSimd.Extract(value, 1);
-                return rt;
+                return Vector128.Sum(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static sbyte Sum(Vector128<sbyte> value) {
-                Vector64<sbyte> m = PackedSimd.Add(value.GetLower(), value.GetUpper()); // 16 -> 8
-                m = PackedSimd.AddPairwise(m, m); // 8 -> 4
-                m = PackedSimd.AddPairwise(m, m); // 4 -> 2
-                m = PackedSimd.AddPairwise(m, m); // 2 -> 1
-                return PackedSimd.Extract(m, 0);
+                var m = PackedSimd.AddPairwiseWidening(value);
+                var n = PackedSimd.AddPairwiseWidening(m);
+                var rt = Sum(n);
+                return (sbyte)rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static byte Sum(Vector128<byte> value) {
-                Vector64<byte> m = PackedSimd.Add(value.GetLower(), value.GetUpper()); // 16 -> 8
-                m = PackedSimd.AddPairwise(m, m); // 8 -> 4
-                m = PackedSimd.AddPairwise(m, m); // 4 -> 2
-                m = PackedSimd.AddPairwise(m, m); // 2 -> 1
-                return PackedSimd.Extract(m, 0);
+                var m = PackedSimd.AddPairwiseWidening(value);
+                var n = PackedSimd.AddPairwiseWidening(m);
+                var rt = Sum(n);
+                return (byte)rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static short Sum(Vector128<short> value) {
-                Vector64<short> m = PackedSimd.Add(value.GetLower(), value.GetUpper()); // 8 -> 4
-                m = PackedSimd.AddPairwise(m, m); // 4 -> 2
-                m = PackedSimd.AddPairwise(m, m); // 2 -> 1
-                return PackedSimd.Extract(m, 0);
+                var m = PackedSimd.AddPairwiseWidening(value);
+                var rt = Sum(m);
+                return (short)rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ushort Sum(Vector128<ushort> value) {
-                Vector64<ushort> m = PackedSimd.Add(value.GetLower(), value.GetUpper()); // 8 -> 4
-                m = PackedSimd.AddPairwise(m, m); // 4 -> 2
-                m = PackedSimd.AddPairwise(m, m); // 2 -> 1
-                return PackedSimd.Extract(m, 0);
+                var m = PackedSimd.AddPairwiseWidening(value);
+                var rt = Sum(m);
+                return (ushort)rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static int Sum(Vector128<int> value) {
-                Vector64<int> m = PackedSimd.Add(value.GetLower(), value.GetUpper()); // 4 -> 2
-                m = PackedSimd.AddPairwise(m, m); // 2 -> 1
-                return PackedSimd.Extract(m, 0);
+                return Vector128.Sum(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static uint Sum(Vector128<uint> value) {
-                Vector64<uint> m = PackedSimd.Add(value.GetLower(), value.GetUpper()); // 4 -> 2
-                m = PackedSimd.AddPairwise(m, m); // 2 -> 1
-                return PackedSimd.Extract(m, 0);
+                return Vector128.Sum(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static long Sum(Vector128<long> value) {
-                long rt = PackedSimd.Extract(value, 0) + PackedSimd.Extract(value, 1);
-                return rt;
+                return Vector128.Sum(value);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static ulong Sum(Vector128<ulong> value) {
-                ulong rt = PackedSimd.Extract(value, 0) + PackedSimd.Extract(value, 1);
-                return rt;
+                return Vector128.Sum(value);
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits128.Widen_AcceleratedTypes"/>
             public static TypeCodeFlags Widen_AcceleratedTypes {
