@@ -21,7 +21,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         partial class Statics {
 
 #if NET8_0_OR_GREATER
-/*
+
             /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue_AcceleratedTypes"/>
             public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
                 get {
@@ -32,15 +32,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue{T}(Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAllTrue<T>(Vector128<T> value) where T : struct {
-                // From Danila Kutenin, "Bit twiddling with Arm Neon: beating SSE movemasks, counting bits and more"
-                // https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/porting-x86-vector-bitmask-optimizations-to-arm-neon
-                // const uint16x8_t equalMask = vreinterpretq_u16_u8(vceqq_u8(chunk, vdupq_n_u8(tag)));
-                // const uint8x8_t res = vshrn_n_u16(equalMask, 4);
-                // const uint64_t matches = vget_lane_u64(vreinterpret_u64_u8(res), 0);
-                // return matches;
-                Vector64<ulong> res = PackedSimd.ShiftRightLogicalNarrowingLower(value.AsUInt16(), 4).AsUInt64();
-                ulong matches = res.ToScalar();
-                return ulong.MaxValue == matches;
+                return PackedSimd.AllTrue(value.AsByte());
             }
 
 
@@ -54,9 +46,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsAnyTrue{T}(Vector128{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool YIsAnyTrue<T>(Vector128<T> value) where T : struct {
-                Vector64<long> res = PackedSimd.ShiftRightLogicalNarrowingLower(value.AsUInt16(), 4).AsInt64();
-                long matches = res.ToScalar();
-                return 0 != matches;
+                return PackedSimd.AnyTrue(value.AsInt64());
             }
 
 
@@ -317,8 +307,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsNegative(Vector128<sbyte> value) {
-                //Vector128<sbyte> rt = LessThan(value, Vector128<sbyte>.Zero);
-                Vector128<sbyte> rt = PackedSimd.ShiftRightArithmetic(value, 7);
+                Vector128<sbyte> rt = LessThan(value, Vector128<sbyte>.Zero);
                 return rt;
             }
 
@@ -341,8 +330,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegative(Vector128<long> value) {
-                //Vector128<long> rt = LessThan(value, Vector128<long>.Zero);
-                Vector128<long> rt = PackedSimd.ShiftRightArithmetic(value, 63);
+                Vector128<long> rt = LessThan(value, Vector128<long>.Zero);
                 return rt;
             }
 
@@ -438,65 +426,65 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YIsNotEquals(Vector128<float> left, Vector128<float> right) {
-                return OnesComplement(Equals(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YIsNotEquals(Vector128<double> left, Vector128<double> right) {
-                return OnesComplement(Equals(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsNotEquals(Vector128<sbyte> left, Vector128<sbyte> right) {
-                return OnesComplement(PackedSimd.CompareEqual(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YIsNotEquals(Vector128<byte> left, Vector128<byte> right) {
-                return OnesComplement(PackedSimd.CompareEqual(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsNotEquals(Vector128<short> left, Vector128<short> right) {
-                return OnesComplement(PackedSimd.CompareEqual(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YIsNotEquals(Vector128<ushort> left, Vector128<ushort> right) {
-                return OnesComplement(PackedSimd.CompareEqual(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNotEquals(Vector128<int> left, Vector128<int> right) {
-                return OnesComplement(PackedSimd.CompareEqual(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YIsNotEquals(Vector128<uint> left, Vector128<uint> right) {
-                return OnesComplement(PackedSimd.CompareEqual(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNotEquals(Vector128<long> left, Vector128<long> right) {
-                return OnesComplement(Equals(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YIsNotEquals(Vector128<ulong> left, Vector128<ulong> right) {
-                return OnesComplement(Equals(left, right));
+                return PackedSimd.CompareNotEqual(left, right);
             }
 
 
@@ -822,7 +810,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<long> rt = Equals(exponent, Vector128<long>.Zero);
                 return rt;
             }
-*/
+
 #endif // NET8_0_OR_GREATER
         }
     }

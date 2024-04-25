@@ -191,7 +191,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.YCopySign(value, sign);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue_AcceleratedTypes"/>
         public override TypeCodeFlags YIsAllTrue_AcceleratedTypes {
             get {
@@ -836,7 +836,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<long> YIsZeroOrSubnormal(Vector128<double> value) {
             return Statics.YIsZeroOrSubnormal(value);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits128.YMaxNumber_AcceleratedTypes"/>
         public override TypeCodeFlags YMaxNumber_AcceleratedTypes {
