@@ -1774,15 +1774,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> Multiply(Vector128<sbyte> left, Vector128<sbyte> right) {
-                return Vector128.Multiply(left, right);
-                //return PackedSimd.Multiply(left, right);
+                return Multiply(left.AsByte(), right.AsByte()).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Multiply(Vector128<byte> left, Vector128<byte> right) {
-                return Vector128.Multiply(left, right);
-                //return PackedSimd.Multiply(left, right);
+                //return Vector128.Multiply(left, right);
+                Widen(left, out Vector128<ushort> u0, out Vector128<ushort> u1);
+                Widen(right, out Vector128<ushort> v0, out Vector128<ushort> v1);
+                Vector128<ushort> w0 = PackedSimd.Multiply(u0, v0);
+                Vector128<ushort> w1 = PackedSimd.Multiply(u1, v1);
+                Vector128<byte> rt = Narrow(w0, w1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{short}, Vector128{short})"/>
