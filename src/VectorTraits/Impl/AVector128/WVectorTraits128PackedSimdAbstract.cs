@@ -212,7 +212,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             return Statics.ConvertToUInt64_Range52RoundToEven(value);
         }
 
-/*
+
         /// <inheritdoc cref="IWVectorTraits128.ExtractMostSignificantBits_AcceleratedTypes"/>
         public override TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
             get {
@@ -309,7 +309,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         public override Vector128<double> Floor(Vector128<double> value) {
             return Statics.Floor(value);
         }
-*/
+
 
         /// <inheritdoc cref="IWVectorTraits128.Narrow_AcceleratedTypes"/>
         public override TypeCodeFlags Narrow_AcceleratedTypes {
