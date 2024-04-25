@@ -156,7 +156,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<int> YIsFinite(Vector128<float> value) {
                 Vector128<int> exponentMask = Vector128Constants.Single_ExponentMask.AsInt32();
                 Vector128<int> exponent = PackedSimd.And(value.AsInt32(), exponentMask);
-                Vector128<int> rt = OnesComplement(Equals(exponent, exponentMask));
+                Vector128<int> rt = YIsNotEquals(exponent, exponentMask);
                 return rt;
             }
 
@@ -165,7 +165,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> YIsFinite(Vector128<double> value) {
                 Vector128<long> exponentMask = Vector128Constants.Double_ExponentMask.AsInt64();
                 Vector128<long> exponent = PackedSimd.And(value.AsInt64(), exponentMask);
-                Vector128<long> rt = OnesComplement(Equals(exponent, exponentMask));
+                Vector128<long> rt = YIsNotEquals(exponent, exponentMask);
                 return rt;
             }
 
@@ -269,14 +269,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNaN(Vector128<float> value) {
-                Vector128<int> rt = OnesComplement(Equals(value, value).AsInt32());
+                Vector128<int> rt = YIsNotEquals(value, value).AsInt32();
                 return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNaN(Vector128<double> value) {
-                Vector128<long> rt = OnesComplement(Equals(value, value).AsInt64());
+                Vector128<long> rt = YIsNotEquals(value, value).AsInt64();
                 return rt;
             }
 
