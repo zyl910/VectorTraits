@@ -22,7 +22,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         partial class Statics {
 
 #if NET8_0_OR_GREATER
-/*
+
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleG2_AcceleratedTypes {
                 get {
@@ -445,7 +445,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> YShuffleG4X2_Const(Vector128<ulong> source0, Vector128<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector128<ulong> result1) {
                 return YShuffleG4X2(source0, source1, control, out result1);
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleInsert_AcceleratedTypes {
