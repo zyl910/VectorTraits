@@ -200,6 +200,49 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
 #if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
+        /// Sum Multiply - Vector128 - BCL static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMy StaticSum128Bcl(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> t;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                t = Vector128s.Multiply(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector128s.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            //ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            //for (i = 0; i < cntRem; ++i) {
+            //    rt += (TMy)Unsafe.Add(ref p, i);
+            //}
+            // Reduce.
+            for (i = 0; i < Vector128<TMy>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128Bcl() {
+            Vector128s.ThrowForUnsupported(true);
+            dstTMy = StaticSum128Bcl(srcArray, srcArray.Length);
+            CheckResult("Sum128Bcl");
+        }
+
+        /// <summary>
         /// Sum Multiply - Vector128 - Traits static.
         /// </summary>
         /// <param name="src">Source array.</param>
