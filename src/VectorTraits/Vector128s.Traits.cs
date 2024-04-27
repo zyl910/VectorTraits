@@ -18,6 +18,7 @@ using System.Runtime.Intrinsics.Wasm;
 #endif // NET8_0_OR_GREATER
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector128;
+using System.Numerics;
 
 namespace Zyl.VectorTraits {
     using BaseStatics = WVectorTraits128Base.Statics;
@@ -1951,6 +1952,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{float}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Shuffle(Vector128<float> vector, Vector128<int> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -1961,6 +1967,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{double}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Shuffle(Vector128<double> vector, Vector128<long> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -1972,6 +1983,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Shuffle(Vector128<sbyte> vector, Vector128<sbyte> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -1982,6 +1998,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> Shuffle(Vector128<byte> vector, Vector128<byte> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -1994,8 +2015,7 @@ namespace Zyl.VectorTraits {
         public static Vector128<short> Shuffle(Vector128<short> vector, Vector128<short> indices) {
 #if SHORT_CIRCUIT_WASM
             if (PackedSimd.IsSupported) {
-                return BaseStatics.Shuffle(vector, indices);
-                //return WasmStatics.Shuffle(vector, indices);
+                return WasmStatics.Shuffle(vector, indices);
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
@@ -2009,6 +2029,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> Shuffle(Vector128<ushort> vector, Vector128<ushort> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2019,6 +2044,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Shuffle(Vector128<int> vector, Vector128<int> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2030,6 +2060,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> Shuffle(Vector128<uint> vector, Vector128<uint> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2040,6 +2075,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> Shuffle(Vector128<long> vector, Vector128<long> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2051,6 +2091,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> Shuffle(Vector128<ulong> vector, Vector128<ulong> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2063,6 +2108,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2073,6 +2123,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2083,6 +2138,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Args(Vector128{short}, out Vector128{short}, out Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2094,6 +2154,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2104,6 +2169,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Args(Vector128{int}, out Vector128{int}, out Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2115,6 +2185,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2125,6 +2200,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Args(Vector128{long}, out Vector128{long}, out Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2136,6 +2216,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2147,6 +2232,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Core(Vector128{float}, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Shuffle_Core(Vector128<float> vector, Vector128<int> args0, Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2157,6 +2247,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Core(Vector128{double}, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Shuffle_Core(Vector128<double> vector, Vector128<long> args0, Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2168,6 +2263,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Shuffle_Core(Vector128<sbyte> vector, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2178,6 +2278,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Core(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> Shuffle_Core(Vector128<byte> vector, Vector128<byte> args0, Vector128<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2188,6 +2293,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Core(Vector128{short}, Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Shuffle_Core(Vector128<short> vector, Vector128<short> args0, Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2199,6 +2309,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> Shuffle_Core(Vector128<ushort> vector, Vector128<ushort> args0, Vector128<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2209,6 +2324,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Core(Vector128{int}, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Shuffle_Core(Vector128<int> vector, Vector128<int> args0, Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2220,6 +2340,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> Shuffle_Core(Vector128<uint> vector, Vector128<uint> args0, Vector128<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2230,6 +2355,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Shuffle_Core(Vector128{long}, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> Shuffle_Core(Vector128<long> vector, Vector128<long> args0, Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2241,6 +2371,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> Shuffle_Core(Vector128<ulong> vector, Vector128<ulong> args0, Vector128<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
