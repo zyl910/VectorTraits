@@ -110,6 +110,10 @@ namespace Zyl.VectorTraits {
             if (System.Runtime.Intrinsics.Arm.Sha1.IsSupported) rt += separator + "Sha1";
             if (System.Runtime.Intrinsics.Arm.Sha256.IsSupported) rt += separator + "Sha256";
 #endif // NET5_0_OR_GREATER
+            // -- Wasm --
+#if NET8_0_OR_GREATER
+            if (System.Runtime.Intrinsics.Wasm.PackedSimd.IsSupported) rt += separator + "PackedSimd";
+#endif // NET8_0_OR_GREATER
             // -- X86 --
             if (System.Runtime.Intrinsics.X86.Aes.IsSupported) rt += separator + "Aes";
             if (System.Runtime.Intrinsics.X86.Avx.IsSupported) rt += separator + "Avx";
