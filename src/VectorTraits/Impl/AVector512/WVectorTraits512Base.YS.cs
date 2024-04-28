@@ -543,7 +543,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{float}, Vector512{float}, ShuffleControlG4, out Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<float> YShuffleG4X2(Vector512<float> source0, Vector512<float> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<float> result1) {
+            public static Vector512<float> YShuffleG4X2(Vector512<float> source0, Vector512<float> source1, ShuffleControlG4 control, out Vector512<float> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
@@ -551,7 +551,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{double}, Vector512{double}, ShuffleControlG4, out Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<double> YShuffleG4X2(Vector512<double> source0, Vector512<double> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<double> result1) {
+            public static Vector512<double> YShuffleG4X2(Vector512<double> source0, Vector512<double> source1, ShuffleControlG4 control, out Vector512<double> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
@@ -560,7 +560,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{sbyte}, Vector512{sbyte}, ShuffleControlG4, out Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<sbyte> YShuffleG4X2(Vector512<sbyte> source0, Vector512<sbyte> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<sbyte> result1) {
+            public static Vector512<sbyte> YShuffleG4X2(Vector512<sbyte> source0, Vector512<sbyte> source1, ShuffleControlG4 control, out Vector512<sbyte> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
@@ -568,7 +568,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{byte}, Vector512{byte}, ShuffleControlG4, out Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> YShuffleG4X2(Vector512<byte> source0, Vector512<byte> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<byte> result1) {
+            public static Vector512<byte> YShuffleG4X2(Vector512<byte> source0, Vector512<byte> source1, ShuffleControlG4 control, out Vector512<byte> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
@@ -576,7 +576,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{short}, Vector512{short}, ShuffleControlG4, out Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<short> YShuffleG4X2(Vector512<short> source0, Vector512<short> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<short> result1) {
+            public static Vector512<short> YShuffleG4X2(Vector512<short> source0, Vector512<short> source1, ShuffleControlG4 control, out Vector512<short> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
@@ -585,7 +585,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{ushort}, Vector512{ushort}, ShuffleControlG4, out Vector512{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ushort> YShuffleG4X2(Vector512<ushort> source0, Vector512<ushort> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<ushort> result1) {
+            public static Vector512<ushort> YShuffleG4X2(Vector512<ushort> source0, Vector512<ushort> source1, ShuffleControlG4 control, out Vector512<ushort> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
@@ -593,7 +593,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{int}, Vector512{int}, ShuffleControlG4, out Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<int> YShuffleG4X2(Vector512<int> source0, Vector512<int> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<int> result1) {
+            public static Vector512<int> YShuffleG4X2(Vector512<int> source0, Vector512<int> source1, ShuffleControlG4 control, out Vector512<int> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
@@ -602,7 +602,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{uint}, Vector512{uint}, ShuffleControlG4, out Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<uint> YShuffleG4X2(Vector512<uint> source0, Vector512<uint> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<uint> result1) {
+            public static Vector512<uint> YShuffleG4X2(Vector512<uint> source0, Vector512<uint> source1, ShuffleControlG4 control, out Vector512<uint> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
@@ -610,7 +610,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{long}, Vector512{long}, ShuffleControlG4, out Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<long> YShuffleG4X2(Vector512<long> source0, Vector512<long> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<long> result1) {
+            public static Vector512<long> YShuffleG4X2(Vector512<long> source0, Vector512<long> source1, ShuffleControlG4 control, out Vector512<long> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
@@ -619,12 +619,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2(Vector512{ulong}, Vector512{ulong}, ShuffleControlG4, out Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<ulong> YShuffleG4X2(Vector512<ulong> source0, Vector512<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector512<ulong> result1) {
+            public static Vector512<ulong> YShuffleG4X2(Vector512<ulong> source0, Vector512<ulong> source1, ShuffleControlG4 control, out Vector512<ulong> result1) {
                 var rt0 = YShuffleG4(source0, control);
                 result1 = YShuffleG4(source1, control);
                 return rt0;
             }
-
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4X2_Const(Vector512{float}, Vector512{float}, ShuffleControlG4, out Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
