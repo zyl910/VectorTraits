@@ -18,7 +18,6 @@ using System.Runtime.Intrinsics.Wasm;
 #endif // NET8_0_OR_GREATER
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector128;
-using System.Numerics;
 
 namespace Zyl.VectorTraits {
     using BaseStatics = WVectorTraits128Base.Statics;
@@ -171,6 +170,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Ceiling(Vector128<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Ceiling(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Ceiling(value);
 #else
@@ -181,6 +185,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Ceiling(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Ceiling(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Ceiling(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Ceiling(value);
 #else
@@ -203,6 +212,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> ConvertToDouble(Vector128<long> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToDouble(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToDouble(value);
 #else
@@ -214,6 +228,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> ConvertToDouble(Vector128<ulong> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToDouble(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToDouble(value);
 #else
@@ -224,6 +243,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> ConvertToDouble_Range52(Vector128<long> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToDouble_Range52(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToDouble_Range52(value);
 #else
@@ -235,6 +259,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> ConvertToDouble_Range52(Vector128<ulong> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToDouble_Range52(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToDouble_Range52(value);
 #else
@@ -257,6 +286,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ConvertToInt32(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ConvertToInt32(Vector128<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToInt32(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ConvertToInt32(value);
 #else
@@ -279,6 +313,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ConvertToInt64(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToInt64(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToInt64(value);
 #else
@@ -289,6 +328,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ConvertToInt64_Range52(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToInt64_Range52(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToInt64_Range52(value);
 #else
@@ -299,6 +343,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ConvertToInt64_Range52RoundToEven(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ConvertToInt64_Range52RoundToEven(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToInt64_Range52RoundToEven(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToInt64_Range52RoundToEven(value);
 #else
@@ -321,6 +370,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ConvertToSingle(Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> ConvertToSingle(Vector128<int> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToSingle(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ConvertToSingle(value);
 #else
@@ -332,6 +386,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> ConvertToSingle(Vector128<uint> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToSingle(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToSingle(value);
 #else
@@ -355,6 +414,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ConvertToUInt32(Vector128<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToUInt32(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToUInt32(value);
 #else
@@ -378,6 +442,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ConvertToUInt64(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToUInt64(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToUInt64(value);
 #else
@@ -389,6 +458,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ConvertToUInt64_Range52(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToUInt64_Range52(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToUInt64_Range52(value);
 #else
@@ -400,6 +474,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ConvertToUInt64_Range52RoundToEven(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToUInt64_Range52RoundToEven(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToUInt64_Range52RoundToEven(value);
 #else
@@ -423,6 +502,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -434,6 +518,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -445,6 +534,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<sbyte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -456,6 +550,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<byte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -467,6 +566,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<short> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -478,6 +582,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<ushort> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -489,6 +598,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<int> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -500,6 +614,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<uint> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -511,6 +630,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<long> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -522,6 +646,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ExtractMostSignificantBits(Vector128<ulong> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(value);
 #else
@@ -544,6 +673,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Floor(Vector128<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Floor(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Floor(value);
 #else
@@ -554,6 +688,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Floor(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> Floor(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Floor(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Floor(value);
 #else
@@ -576,6 +715,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{double}, Vector128{double})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> Narrow(Vector128<double> lower, Vector128<double> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -587,6 +731,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> Narrow(Vector128<short> lower, Vector128<short> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -598,6 +747,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> Narrow(Vector128<ushort> lower, Vector128<ushort> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -608,6 +762,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{int}, Vector128{int})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> Narrow(Vector128<int> lower, Vector128<int> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -619,6 +778,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> Narrow(Vector128<uint> lower, Vector128<uint> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -629,6 +793,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> Narrow(Vector128<long> lower, Vector128<long> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -640,6 +809,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> Narrow(Vector128<ulong> lower, Vector128<ulong> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -663,6 +837,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftLeft(Vector128<sbyte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
@@ -673,6 +852,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
@@ -683,6 +867,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftLeft(Vector128<short> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
@@ -694,6 +883,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftLeft(Vector128<ushort> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
@@ -704,6 +898,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftLeft(Vector128<int> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
@@ -715,6 +914,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftLeft(Vector128<uint> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
@@ -725,6 +929,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftLeft(Vector128<long> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
@@ -736,6 +945,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftLeft(Vector128<ulong> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft(value, shiftAmount);
 #else
@@ -747,6 +961,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftLeft_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
 #else
@@ -757,6 +976,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{byte}, int, out Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftLeft_Args(Vector128<byte> dummy, int shiftAmount, out Vector128<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
 #else
@@ -767,6 +991,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{short}, int, out Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftLeft_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
 #else
@@ -778,6 +1007,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftLeft_Args(Vector128<ushort> dummy, int shiftAmount, out Vector128<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
 #else
@@ -788,6 +1022,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{int}, int, out Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftLeft_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
 #else
@@ -799,6 +1038,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftLeft_Args(Vector128<uint> dummy, int shiftAmount, out Vector128<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
 #else
@@ -809,6 +1053,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Args(Vector128{long}, int, out Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftLeft_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
 #else
@@ -820,6 +1069,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftLeft_Args(Vector128<ulong> dummy, int shiftAmount, out Vector128<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Args(dummy, shiftAmount, out args1);
 #else
@@ -831,6 +1085,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftLeft_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
 #else
@@ -841,6 +1100,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftLeft_Core(Vector128<byte> value, int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
 #else
@@ -851,6 +1115,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftLeft_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
 #else
@@ -862,6 +1131,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftLeft_Core(Vector128<ushort> value, int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
 #else
@@ -872,6 +1146,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftLeft_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
 #else
@@ -883,6 +1162,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftLeft_Core(Vector128<uint> value, int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
 #else
@@ -893,6 +1177,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftLeft_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
 #else
@@ -904,6 +1193,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftLeft_Core(Vector128<ulong> value, int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Core(value, shiftAmount, args0, args1);
 #else
@@ -915,6 +1209,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftLeft_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Const(value, shiftAmount);
 #else
@@ -925,6 +1224,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftLeft_Const(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Const(value, shiftAmount);
 #else
@@ -935,6 +1239,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftLeft_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft_Const(value, shiftAmount);
 #else
@@ -946,6 +1255,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftLeft_Const(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft_Const(value, shiftAmount);
 #else
@@ -956,6 +1270,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftLeft_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft_Const(value, shiftAmount);
 #else
@@ -967,6 +1286,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftLeft_Const(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft_Const(value, shiftAmount);
 #else
@@ -977,6 +1301,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Const(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftLeft_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Const(value, shiftAmount);
 #else
@@ -988,6 +1317,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftLeft_Const(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Const(value, shiftAmount);
 #else
@@ -999,6 +1333,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftLeft_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1009,6 +1348,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftLeft_ConstCore(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1019,6 +1363,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftLeft_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1030,6 +1379,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftLeft_ConstCore(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1040,6 +1394,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftLeft_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1051,6 +1410,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftLeft_ConstCore(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1061,6 +1425,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftLeft_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1072,6 +1441,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftLeft_ConstCore(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1083,6 +1457,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftLeft_Fast(Vector128<sbyte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
@@ -1093,6 +1472,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftLeft_Fast(Vector128<byte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
@@ -1103,6 +1487,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftLeft_Fast(Vector128<short> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
@@ -1114,6 +1503,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftLeft_Fast(Vector128<ushort> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
@@ -1124,6 +1518,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftLeft_Fast(Vector128<int> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
@@ -1135,6 +1534,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftLeft_Fast(Vector128<uint> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
@@ -1145,6 +1549,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftLeft_Fast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftLeft_Fast(Vector128<long> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
@@ -1156,6 +1565,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftLeft_Fast(Vector128<ulong> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftLeft_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftLeft_Fast(value, shiftAmount);
 #else
@@ -1179,6 +1593,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightArithmetic(Vector128<sbyte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic(value, shiftAmount);
 #else
@@ -1189,6 +1608,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightArithmetic(Vector128<short> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightArithmetic(value, shiftAmount);
 #else
@@ -1199,6 +1623,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightArithmetic(Vector128<int> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightArithmetic(value, shiftAmount);
 #else
@@ -1209,6 +1638,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightArithmetic(Vector128<long> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic(value, shiftAmount);
 #else
@@ -1220,6 +1654,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightArithmetic_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
 #else
@@ -1230,6 +1669,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{short}, int, out Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightArithmetic_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
 #else
@@ -1240,6 +1684,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{int}, int, out Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightArithmetic_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
 #else
@@ -1250,6 +1699,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{long}, int, out Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightArithmetic_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Args(dummy, shiftAmount, out args1);
 #else
@@ -1261,6 +1715,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightArithmetic_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
 #else
@@ -1271,6 +1730,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightArithmetic_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
 #else
@@ -1281,6 +1745,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightArithmetic_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
 #else
@@ -1291,6 +1760,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightArithmetic_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Core(value, shiftAmount, args0, args1);
 #else
@@ -1302,6 +1776,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightArithmetic_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Const(value, shiftAmount);
 #else
@@ -1312,6 +1791,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightArithmetic_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightArithmetic_Const(value, shiftAmount);
 #else
@@ -1322,6 +1806,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightArithmetic_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightArithmetic_Const(value, shiftAmount);
 #else
@@ -1332,6 +1821,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightArithmetic_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Const(value, shiftAmount);
 #else
@@ -1343,6 +1837,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightArithmetic_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1353,6 +1852,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightArithmetic_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1363,6 +1867,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightArithmetic_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1373,6 +1882,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightArithmetic_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1384,6 +1898,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightArithmetic_Fast(Vector128<sbyte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
 #else
@@ -1394,6 +1913,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightArithmetic_Fast(Vector128<short> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
 #else
@@ -1404,6 +1928,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightArithmetic_Fast(Vector128<int> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
 #else
@@ -1414,6 +1943,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightArithmetic_Fast(Vector128<long> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightArithmetic_Fast(value, shiftAmount);
 #else
@@ -1437,6 +1971,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightLogical(Vector128<sbyte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
@@ -1447,6 +1986,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftRightLogical(Vector128<byte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
@@ -1457,6 +2001,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightLogical(Vector128<short> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
@@ -1468,6 +2017,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftRightLogical(Vector128<ushort> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
@@ -1478,6 +2032,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightLogical(Vector128<int> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
@@ -1489,6 +2048,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftRightLogical(Vector128<uint> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
@@ -1499,6 +2063,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightLogical(Vector128<long> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
@@ -1510,6 +2079,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftRightLogical(Vector128<ulong> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical(value, shiftAmount);
 #else
@@ -1521,6 +2095,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightLogical_Args(Vector128<sbyte> dummy, int shiftAmount, out Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
 #else
@@ -1531,6 +2110,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{byte}, int, out Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftRightLogical_Args(Vector128<byte> dummy, int shiftAmount, out Vector128<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
 #else
@@ -1541,6 +2125,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{short}, int, out Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightLogical_Args(Vector128<short> dummy, int shiftAmount, out Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
 #else
@@ -1552,6 +2141,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftRightLogical_Args(Vector128<ushort> dummy, int shiftAmount, out Vector128<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
 #else
@@ -1562,6 +2156,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{int}, int, out Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightLogical_Args(Vector128<int> dummy, int shiftAmount, out Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
 #else
@@ -1573,6 +2172,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftRightLogical_Args(Vector128<uint> dummy, int shiftAmount, out Vector128<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
 #else
@@ -1583,6 +2187,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Args(Vector128{long}, int, out Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightLogical_Args(Vector128<long> dummy, int shiftAmount, out Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
 #else
@@ -1594,6 +2203,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftRightLogical_Args(Vector128<ulong> dummy, int shiftAmount, out Vector128<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Args(dummy, shiftAmount, out args1);
 #else
@@ -1605,6 +2219,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightLogical_Core(Vector128<sbyte> value, int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
 #else
@@ -1615,6 +2234,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftRightLogical_Core(Vector128<byte> value, int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
 #else
@@ -1625,6 +2249,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightLogical_Core(Vector128<short> value, int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
 #else
@@ -1636,6 +2265,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftRightLogical_Core(Vector128<ushort> value, int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
 #else
@@ -1646,6 +2280,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightLogical_Core(Vector128<int> value, int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
 #else
@@ -1657,6 +2296,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftRightLogical_Core(Vector128<uint> value, int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
 #else
@@ -1667,6 +2311,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Core(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightLogical_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
 #else
@@ -1678,6 +2327,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftRightLogical_Core(Vector128<ulong> value, int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Core(value, shiftAmount, args0, args1);
 #else
@@ -1689,6 +2343,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightLogical_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Const(value, shiftAmount);
 #else
@@ -1699,6 +2358,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftRightLogical_Const(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Const(value, shiftAmount);
 #else
@@ -1709,6 +2373,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightLogical_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical_Const(value, shiftAmount);
 #else
@@ -1720,6 +2389,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftRightLogical_Const(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical_Const(value, shiftAmount);
 #else
@@ -1730,6 +2404,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightLogical_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical_Const(value, shiftAmount);
 #else
@@ -1741,6 +2420,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftRightLogical_Const(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical_Const(value, shiftAmount);
 #else
@@ -1751,6 +2435,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Const(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightLogical_Const(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Const(value, shiftAmount);
 #else
@@ -1762,6 +2451,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftRightLogical_Const(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Const(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Const(value, shiftAmount);
 #else
@@ -1773,6 +2467,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightLogical_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1783,6 +2482,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{byte}, int, Vector128{byte}, Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftRightLogical_ConstCore(Vector128<byte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<byte> args0, Vector128<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1793,6 +2497,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightLogical_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1804,6 +2513,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftRightLogical_ConstCore(Vector128<ushort> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<ushort> args0, Vector128<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1814,6 +2528,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightLogical_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1825,6 +2544,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftRightLogical_ConstCore(Vector128<uint> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<uint> args0, Vector128<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1835,6 +2559,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightLogical_ConstCore(Vector128<long> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1846,6 +2575,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftRightLogical_ConstCore(Vector128<ulong> value, [ConstantExpected(Min = 1, Max = 63)] int shiftAmount, Vector128<ulong> args0, Vector128<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_ConstCore(value, shiftAmount, args0, args1);
 #else
@@ -1857,6 +2591,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> ShiftRightLogical_Fast(Vector128<sbyte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
@@ -1867,6 +2606,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{byte}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> ShiftRightLogical_Fast(Vector128<byte> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
@@ -1877,6 +2621,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{short}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> ShiftRightLogical_Fast(Vector128<short> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
@@ -1888,6 +2637,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> ShiftRightLogical_Fast(Vector128<ushort> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
@@ -1898,6 +2652,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{int}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> ShiftRightLogical_Fast(Vector128<int> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
@@ -1909,6 +2668,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> ShiftRightLogical_Fast(Vector128<uint> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
@@ -1919,6 +2683,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.ShiftRightLogical_Fast(Vector128{long}, int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> ShiftRightLogical_Fast(Vector128<long> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
@@ -1930,6 +2699,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> ShiftRightLogical_Fast(Vector128<ulong> value, int shiftAmount) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ShiftRightLogical_Fast(value, shiftAmount);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ShiftRightLogical_Fast(value, shiftAmount);
 #else
@@ -2398,6 +3172,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Sum(Vector128<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2408,6 +3187,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Sum(Vector128<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -2419,6 +3203,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static sbyte Sum(Vector128<sbyte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -2429,6 +3218,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte Sum(Vector128<byte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -2439,6 +3233,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short Sum(Vector128<short> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2450,6 +3249,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort Sum(Vector128<ushort> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2460,6 +3264,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Sum(Vector128<int> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2471,6 +3280,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint Sum(Vector128<uint> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2481,6 +3295,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Sum(Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Sum(Vector128<long> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -2492,6 +3311,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Sum(Vector128<ulong> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -2514,6 +3338,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{float}, out Vector128{double}, out Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<float> source, out Vector128<double> lower, out Vector128<double> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -2525,6 +3354,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<sbyte> source, out Vector128<short> lower, out Vector128<short> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -2536,6 +3370,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<byte> source, out Vector128<ushort> lower, out Vector128<ushort> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -2546,6 +3385,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<short> source, out Vector128<int> lower, out Vector128<int> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -2557,6 +3401,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<ushort> source, out Vector128<uint> lower, out Vector128<uint> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET7_0_OR_GREATER)
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -2567,6 +3416,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<int> source, out Vector128<long> lower, out Vector128<long> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -2578,6 +3432,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector128<uint> source, out Vector128<ulong> lower, out Vector128<ulong> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -2600,6 +3459,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> WidenLower(Vector128<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -2611,6 +3475,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> WidenLower(Vector128<sbyte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -2622,6 +3491,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> WidenLower(Vector128<byte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -2632,6 +3506,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> WidenLower(Vector128<short> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -2643,6 +3522,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> WidenLower(Vector128<ushort> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -2653,6 +3537,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.WidenLower(Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> WidenLower(Vector128<int> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -2664,6 +3553,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> WidenLower(Vector128<uint> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -2686,6 +3580,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> WidenUpper(Vector128<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -2697,6 +3596,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> WidenUpper(Vector128<sbyte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -2708,6 +3612,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> WidenUpper(Vector128<byte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -2718,6 +3627,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> WidenUpper(Vector128<short> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -2729,6 +3643,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> WidenUpper(Vector128<ushort> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -2739,6 +3658,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.WidenUpper(Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<long> WidenUpper(Vector128<int> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -2750,6 +3674,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> WidenUpper(Vector128<uint> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
