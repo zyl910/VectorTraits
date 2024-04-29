@@ -13,6 +13,78 @@ namespace Zyl.VectorTraits.Impl.AVector {
 
     partial class VectorTraitsAbstract {
 
+        /// <inheritdoc cref="IVectorTraits.Add_AcceleratedTypes"/>
+        public virtual TypeCodeFlags Add_AcceleratedTypes {
+            get {
+                return Statics.Add_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<float> Add(Vector<float> left, Vector<float> right) {
+            return Statics.Add(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<double> Add(Vector<double> left, Vector<double> right) {
+            return Statics.Add(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<sbyte> Add(Vector<sbyte> left, Vector<sbyte> right) {
+            return Statics.Add(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<byte> Add(Vector<byte> left, Vector<byte> right) {
+            return Statics.Add(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<short> Add(Vector<short> left, Vector<short> right) {
+            return Statics.Add(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ushort> Add(Vector<ushort> left, Vector<ushort> right) {
+            return Statics.Add(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<int> Add(Vector<int> left, Vector<int> right) {
+            return Statics.Add(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<uint> Add(Vector<uint> left, Vector<uint> right) {
+            return Statics.Add(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<long> Add(Vector<long> left, Vector<long> right) {
+            return Statics.Add(left, right);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector<ulong> Add(Vector<ulong> left, Vector<ulong> right) {
+            return Statics.Add(left, right);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Dot_AcceleratedTypes"/>
         public virtual TypeCodeFlags Dot_AcceleratedTypes {
             get {

@@ -11,6 +11,122 @@ namespace Zyl.VectorTraits {
 
     partial class Vectors {
 
+        /// <inheritdoc cref="IVectorTraits.Add_AcceleratedTypes"/>
+        public static TypeCodeFlags Add_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.Add_AcceleratedTypes;
+#else
+                return _instance.Add_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> Add(Vector<float> left, Vector<float> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{double}, Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> Add(Vector<double> left, Vector<double> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> Add(Vector<sbyte> left, Vector<sbyte> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> Add(Vector<byte> left, Vector<byte> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> Add(Vector<short> left, Vector<short> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> Add(Vector<ushort> left, Vector<ushort> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> Add(Vector<int> left, Vector<int> right) {
+#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> Add(Vector<uint> left, Vector<uint> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> Add(Vector<long> left, Vector<long> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Add(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> Add(Vector<ulong> left, Vector<ulong> right) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.Add(left, right);
+#else
+            return _instance.Add(left, right);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Dot_AcceleratedTypes"/>
         public static TypeCodeFlags Dot_AcceleratedTypes {
             get {

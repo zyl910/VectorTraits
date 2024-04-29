@@ -7,6 +7,123 @@ namespace Zyl.VectorTraits.Impl {
     partial interface IVectorTraits {
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>Add</c> (运行 <c>Add</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="Add(Vector{byte}, Vector{byte})"/>
+        TypeCodeFlags Add_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<float> Add(Vector<float> left, Vector<float> right);
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<double> Add(Vector<double> left, Vector<double> right);
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<sbyte> Add(Vector<sbyte> left, Vector<sbyte> right);
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<byte> Add(Vector<byte> left, Vector<byte> right);
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<short> Add(Vector<short> left, Vector<short> right);
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<ushort> Add(Vector<ushort> left, Vector<ushort> right);
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<int> Add(Vector<int> left, Vector<int> right);
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<uint> Add(Vector<uint> left, Vector<uint> right);
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<long> Add(Vector<long> left, Vector<long> right);
+
+        /// <summary>
+        /// Adds two vectors to compute their sum (将两个向量相加来计算它们的和).
+        /// Mnemonic: <c>rt[i] := left[i] + right[i]</c>.
+        /// </summary>
+        /// <param name="left">The vector to add with <paramref name="right" /> (将会与<paramref name="right" />进行相加的向量).</param>
+        /// <param name="right">The vector to add with <paramref name="left" /> (将会与<paramref name="left" />进行相加的向量).</param>
+        /// <returns>The sum of  <paramref name="left" /> and <paramref name="right" /> (<paramref name="left" /> 与 <paramref name="right" />的和).</returns>
+        /// <seealso cref="Add_AcceleratedTypes"/>
+        /// <seealso cref="Vector.Add{T}(Vector{T}, Vector{T})"/> // Since: .NET 7
+        Vector<ulong> Add(Vector<ulong> left, Vector<ulong> right);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>Dot</c> (运行 <c>Dot</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="Dot(Vector{byte}, Vector{byte})"/>

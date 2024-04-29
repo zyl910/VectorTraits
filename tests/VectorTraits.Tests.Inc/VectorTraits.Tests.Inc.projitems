@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BitMathTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitMathTests_IRootFunctions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)impl\ivectortraitstest\VectorTests_A.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_C.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_E.cs" />

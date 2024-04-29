@@ -14,6 +14,77 @@ namespace Zyl.VectorTraits.Impl.AVector {
 
         partial class Statics {
 
+            /// <inheritdoc cref="IVectorTraits.Add_AcceleratedTypes"/>
+            public static TypeCodeFlags Add_AcceleratedTypes {
+                get {
+                    return TypeCodeFlagsUtil.AllTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Add(Vector<float> left, Vector<float> right) {
+                return Vector.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Add(Vector<double> left, Vector<double> right) {
+                return Vector.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> Add(Vector<sbyte> left, Vector<sbyte> right) {
+                return Vector.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> Add(Vector<byte> left, Vector<byte> right) {
+                return Vector.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> Add(Vector<short> left, Vector<short> right) {
+                return Vector.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> Add(Vector<ushort> left, Vector<ushort> right) {
+                return Vector.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> Add(Vector<int> left, Vector<int> right) {
+                return Vector.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> Add(Vector<uint> left, Vector<uint> right) {
+                return Vector.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> Add(Vector<long> left, Vector<long> right) {
+                return Vector.Add(left, right);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Add(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> Add(Vector<ulong> left, Vector<ulong> right) {
+                return Vector.Add(left, right);
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.Dot_AcceleratedTypes"/>
             public static TypeCodeFlags Dot_AcceleratedTypes {
@@ -88,7 +159,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
-            /// <inheritdoc cref="IWVectorTraits256.Equals_AcceleratedTypes"/>
+            /// <inheritdoc cref="IVectorTraits256.Equals_AcceleratedTypes"/>
             private static TypeCodeFlags Equals_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
@@ -97,7 +168,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
-            /// <inheritdoc cref="IWVectorTraits256.GreaterThan_AcceleratedTypes"/>
+            /// <inheritdoc cref="IVectorTraits256.GreaterThan_AcceleratedTypes"/>
             private static TypeCodeFlags GreaterThan_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
@@ -106,7 +177,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
-            /// <inheritdoc cref="IWVectorTraits256.LessThan_AcceleratedTypes"/>
+            /// <inheritdoc cref="IVectorTraits256.LessThan_AcceleratedTypes"/>
             private static TypeCodeFlags LessThan_AcceleratedTypes {
                 get {
                     return GreaterThan_AcceleratedTypes;
