@@ -1,13 +1,21 @@
-﻿using System;
+﻿#if NET8_0_OR_GREATER
+#define SHORT_CIRCUIT_WASM
+#endif // NET8_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+#if NET8_0_OR_GREATER
+using System.Runtime.Intrinsics.Wasm;
+#endif // NET8_0_OR_GREATER
 using System.Text;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 
 namespace Zyl.VectorTraits {
     using BaseStatics = VectorTraitsBase.Statics;
+    using WasmStatics = VectorTraits128PackedSimd.Statics;
 
     partial class Vectors {
 
@@ -23,107 +31,93 @@ namespace Zyl.VectorTraits {
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{float}, Vector{float})"/>
+        [Obsolete("Please use `Vector.Add` instead. It's much more performant.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> Add(Vector<float> left, Vector<float> right) {
-#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+            return Vector.Add(left, right);
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{double}, Vector{double})"/>
+        [Obsolete("Please use `Vector.Add` instead. It's much more performant.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> Add(Vector<double> left, Vector<double> right) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+            return Vector.Add(left, right);
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{sbyte}, Vector{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<sbyte> Add(Vector<sbyte> left, Vector<sbyte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+//#if SHORT_CIRCUIT_WASM
+//            if (PackedSimd.IsSupported) {
+//                return WasmStatics.Add(left, right);
+//            }
+//#endif // SHORT_CIRCUIT_WASM
+            return Vector.Add(left, right);
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{byte}, Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> Add(Vector<byte> left, Vector<byte> right) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+//#if SHORT_CIRCUIT_WASM
+//            if (PackedSimd.IsSupported) {
+//                return WasmStatics.Add(left, right);
+//            }
+//#endif // SHORT_CIRCUIT_WASM
+            return Vector.Add(left, right);
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{short}, Vector{short})"/>
+        [Obsolete("Please use `Vector.Add` instead. It's much more performant.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> Add(Vector<short> left, Vector<short> right) {
-#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+            return Vector.Add(left, right);
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{ushort}, Vector{ushort})"/>
+        [Obsolete("Please use `Vector.Add` instead. It's much more performant.")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> Add(Vector<ushort> left, Vector<ushort> right) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+            return Vector.Add(left, right);
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{int}, Vector{int})"/>
+        [Obsolete("Please use `Vector.Add` instead. It's much more performant.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> Add(Vector<int> left, Vector<int> right) {
-#if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+            return Vector.Add(left, right);
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{uint}, Vector{uint})"/>
+        [Obsolete("Please use `Vector.Add` instead. It's much more performant.")]
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> Add(Vector<uint> left, Vector<uint> right) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+            return Vector.Add(left, right);
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{long}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> Add(Vector<long> left, Vector<long> right) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Add(left, right);
+            }
+#endif // SHORT_CIRCUIT_WASM
+            return Vector.Add(left, right);
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{ulong}, Vector{ulong})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> Add(Vector<ulong> left, Vector<ulong> right) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.Add(left, right);
-#else
-            return _instance.Add(left, right);
-#endif // BCL_BASE_OVERRIDE_STATIC
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Add(left, right);
+            }
+#endif // SHORT_CIRCUIT_WASM
+            return Vector.Add(left, right);
         }
 
 

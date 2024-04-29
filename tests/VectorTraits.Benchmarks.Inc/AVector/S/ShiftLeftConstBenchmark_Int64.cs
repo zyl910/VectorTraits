@@ -358,7 +358,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.ShiftLeft(p0, shiftAmount);
-                vrt += vtemp; // Add.
+                //vrt += vtemp; // Add.
+                vrt = Vectors.Add(vrt, vtemp); // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // Remainder processs.
@@ -403,7 +404,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.ShiftLeft_Core(p0, shiftAmount, args0, args1);
-                vrt += vtemp; // Add.
+                //vrt += vtemp; // Add.
+                vrt = Vectors.Add(vrt, vtemp); // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // Remainder processs.
@@ -446,7 +448,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.ShiftLeft_Const(p0, shiftAmount);
-                vrt += vtemp; // Add.
+                //vrt += vtemp; // Add.
+                vrt = Vectors.Add(vrt, vtemp); // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // Remainder processs.
@@ -490,7 +493,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.ShiftLeft_ConstCore(p0, shiftAmount, args0, args1);
-                vrt += vtemp; // Add.
+                //vrt += vtemp; // Add.
+                vrt = Vectors.Add(vrt, vtemp); // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // Remainder processs.
