@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 #if !NET7_0_OR_GREATER
 using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
@@ -10,46 +9,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl.AVector {
-    using Statics = VectorTraits128Base.Statics;
+    using Statics = VectorTraits128PackedSimd.Statics;
 
     /// <summary>
-    /// <see cref="Vector{T}"/> traits 128 - abstract.
+    /// <see cref="Vector{T}"/> traits 128 - Sse abstract.
     /// </summary>
-    public abstract class VectorTraits128Abstract : VectorTraitsAbstract {
-
-        /// <summary>
-        /// Get best instance.
-        /// </summary>
-        /// <returns>Returns best instance.</returns>
-        [CLSCompliant(false)]
-        public new static IVectorTraits GetBestInstance() {
-            if (VectorTraits128Avx2.Instance.IsSupported) return VectorTraits128Avx2.Instance;
-            if (VectorTraits128Sse.Instance.IsSupported) return VectorTraits128Sse.Instance;
-            if (VectorTraits128AdvSimdB64.Instance.IsSupported) return VectorTraits128AdvSimdB64.Instance;
-            if (VectorTraits128AdvSimd.Instance.IsSupported) return VectorTraits128AdvSimd.Instance;
-            if (VectorTraits128PackedSimd.Instance.IsSupported) return VectorTraits128PackedSimd.Instance;
-            return VectorTraits128Base.Instance;
-        }
-
-        /// <summary>ByteCount value</summary>
-        public const int ByteCountValue = 16;
-
-        /// <summary>
-        /// <see cref="GetUnsupportedMessage"/> - Fill by <see cref="Vector{T}.Count"/> .
-        /// </summary>
-        /// <param name="rt">The in/out string.</param>
-        public static void GetUnsupportedMessage_VectorCount(ref string rt) {
-            if (Vector<byte>.Count != ByteCountValue) {
-                rt += string.Format(" Vector byte size mismatch({0}!={1}) !", Vector<byte>.Count, ByteCountValue);
-            }
-        }
-
-        /// <inheritdoc cref="IBaseTraits.ByteCount"/>
-        public override int ByteCount {
-            get {
-                return Statics.ByteCount;
-            }
-        }
+    public abstract partial class VectorTraits128PackedSimdAbstract : VectorTraits128Abstract {
 
         /// <inheritdoc cref="IBaseTraits.IsHardwareAccelerated"/>
         public override bool IsHardwareAccelerated {
@@ -78,6 +43,271 @@ namespace Zyl.VectorTraits.Impl.AVector {
         /// <inheritdoc cref="IBaseTraits.ThrowForUnsupported"/>
         public override void ThrowForUnsupported(bool noStrict = false) {
             Statics.ThrowForUnsupported(noStrict);
+        }
+
+        /// <inheritdoc cref="IBaseTraits.UsedInstructionSets"/>
+        public override string UsedInstructionSets {
+            get {
+                return Statics.UsedInstructionSets;
+            }
+        }
+
+#if NET8_0_OR_GREATER
+
+        /// <inheritdoc cref="IVectorTraits.Ceiling_AcceleratedTypes"/>
+        public override TypeCodeFlags Ceiling_AcceleratedTypes {
+            get {
+                return Statics.Ceiling_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> Ceiling(Vector<float> value) {
+            return Statics.Ceiling(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> Ceiling(Vector<double> value) {
+            return Statics.Ceiling(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToDouble_AcceleratedTypes {
+            get {
+                return Statics.ConvertToDouble_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble(Vector<long> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble(Vector<ulong> value) {
+            return Statics.ConvertToDouble(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble_Range52(Vector<long> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
+            return Statics.ConvertToDouble_Range52(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt32_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToInt32_AcceleratedTypes {
+            get {
+                return Statics.ConvertToInt32_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt32(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> ConvertToInt32(Vector<float> value) {
+            return Statics.ConvertToInt32(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt64_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToInt64_AcceleratedTypes {
+            get {
+                return Statics.ConvertToInt64_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt64(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> ConvertToInt64(Vector<double> value) {
+            return Statics.ConvertToInt64(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> ConvertToInt64_Range52(Vector<double> value) {
+            return Statics.ConvertToInt64_Range52(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52RoundToEven(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> ConvertToInt64_Range52RoundToEven(Vector<double> value) {
+            return Statics.ConvertToInt64_Range52RoundToEven(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToSingle_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToSingle_AcceleratedTypes {
+            get {
+                return Statics.ConvertToSingle_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> ConvertToSingle(Vector<int> value) {
+            return Statics.ConvertToSingle(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> ConvertToSingle(Vector<uint> value) {
+            return Statics.ConvertToSingle(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt32_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToUInt32_AcceleratedTypes {
+            get {
+                return Statics.ConvertToUInt32_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt32(Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<uint> ConvertToUInt32(Vector<float> value) {
+            return Statics.ConvertToUInt32(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_AcceleratedTypes"/>
+        public override TypeCodeFlags ConvertToUInt64_AcceleratedTypes {
+            get {
+                return Statics.ConvertToUInt64_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> ConvertToUInt64(Vector<double> value) {
+            return Statics.ConvertToUInt64(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> ConvertToUInt64_Range52(Vector<double> value) {
+            return Statics.ConvertToUInt64_Range52(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ConvertToUInt64_Range52RoundToEven(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> ConvertToUInt64_Range52RoundToEven(Vector<double> value) {
+            return Statics.ConvertToUInt64_Range52RoundToEven(value);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits_AcceleratedTypes"/>
+        public override TypeCodeFlags ExtractMostSignificantBits_AcceleratedTypes {
+            get {
+                return Statics.ExtractMostSignificantBits_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<float> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<double> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<sbyte> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<byte> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<short> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<ushort> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<int> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<uint> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<long> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.ExtractMostSignificantBits(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong ExtractMostSignificantBits(Vector<ulong> vector) {
+            return Statics.ExtractMostSignificantBits(vector);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.Floor_AcceleratedTypes"/>
+        public override TypeCodeFlags Floor_AcceleratedTypes {
+            get {
+                return Statics.Floor_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Floor(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> Floor(Vector<float> value) {
+            return Statics.Floor(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Floor(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> Floor(Vector<double> value) {
+            return Statics.Floor(value);
         }
 
 
@@ -257,12 +487,6 @@ namespace Zyl.VectorTraits.Impl.AVector {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector<byte> ShiftLeft_Core(Vector<byte> value, int shiftAmount, Vector<byte> args0, Vector<byte> args1) {
             return Statics.ShiftLeft_Core(value, shiftAmount, args0, args1);
-        }
-
-        /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, Vector{short}, Vector{short})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override Vector<short> ShiftLeft_Core(Vector<short> value, Vector<short> args0, Vector<short> args1) {
-            return Statics.ShiftLeft_Core(value, args0, args1);
         }
 
         /// <inheritdoc cref="IVectorTraits.ShiftLeft_Core(Vector{short}, int, Vector{short}, Vector{short})"/>
@@ -580,7 +804,6 @@ namespace Zyl.VectorTraits.Impl.AVector {
         public override Vector<short> ShiftRightArithmetic_ConstCore(Vector<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector<short> args0, Vector<short> args1) {
             return Statics.ShiftRightArithmetic_ConstCore(value, shiftAmount, args0, args1);
         }
-
 
         /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_ConstCore(Vector{int}, int, Vector{int}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -940,6 +1163,268 @@ namespace Zyl.VectorTraits.Impl.AVector {
         }
 
 
+        /// <inheritdoc cref="IVectorTraits.Shuffle_AcceleratedTypes"/>
+        public override TypeCodeFlags Shuffle_AcceleratedTypes {
+            get {
+                return Statics.Shuffle_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{float}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> Shuffle(Vector<float> vector, Vector<int> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{double}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> Shuffle(Vector<double> vector, Vector<long> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<sbyte> Shuffle(Vector<sbyte> vector, Vector<sbyte> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<byte> Shuffle(Vector<byte> vector, Vector<byte> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> Shuffle(Vector<short> vector, Vector<short> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ushort> Shuffle(Vector<ushort> vector, Vector<ushort> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> Shuffle(Vector<int> vector, Vector<int> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<uint> Shuffle(Vector<uint> vector, Vector<uint> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> Shuffle(Vector<long> vector, Vector<long> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> Shuffle(Vector<ulong> vector, Vector<ulong> indices) {
+            return Statics.Shuffle(vector, indices);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Shuffle_Args(Vector<sbyte> indices, out Vector<sbyte> args0, out Vector<sbyte> args1) {
+            Statics.Shuffle_Args(indices, out args0, out args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Shuffle_Args(Vector<byte> indices, out Vector<byte> args0, out Vector<byte> args1) {
+            Statics.Shuffle_Args(indices, out args0, out args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Shuffle_Args(Vector<short> indices, out Vector<short> args0, out Vector<short> args1) {
+            Statics.Shuffle_Args(indices, out args0, out args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Shuffle_Args(Vector<ushort> indices, out Vector<ushort> args0, out Vector<ushort> args1) {
+            Statics.Shuffle_Args(indices, out args0, out args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Shuffle_Args(Vector<int> indices, out Vector<int> args0, out Vector<int> args1) {
+            Statics.Shuffle_Args(indices, out args0, out args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Shuffle_Args(Vector<uint> indices, out Vector<uint> args0, out Vector<uint> args1) {
+            Statics.Shuffle_Args(indices, out args0, out args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Shuffle_Args(Vector<long> indices, out Vector<long> args0, out Vector<long> args1) {
+            Statics.Shuffle_Args(indices, out args0, out args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override void Shuffle_Args(Vector<ulong> indices, out Vector<ulong> args0, out Vector<ulong> args1) {
+            Statics.Shuffle_Args(indices, out args0, out args1);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{float}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<float> Shuffle_Core(Vector<float> vector, Vector<int> args0, Vector<int> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{double}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> Shuffle_Core(Vector<double> vector, Vector<long> args0, Vector<long> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<sbyte> Shuffle_Core(Vector<sbyte> vector, Vector<sbyte> args0, Vector<sbyte> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<byte> Shuffle_Core(Vector<byte> vector, Vector<byte> args0, Vector<byte> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> Shuffle_Core(Vector<short> vector, Vector<short> args0, Vector<short> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ushort> Shuffle_Core(Vector<ushort> vector, Vector<ushort> args0, Vector<ushort> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> Shuffle_Core(Vector<int> vector, Vector<int> args0, Vector<int> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<uint> Shuffle_Core(Vector<uint> vector, Vector<uint> args0, Vector<uint> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> Shuffle_Core(Vector<long> vector, Vector<long> args0, Vector<long> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> Shuffle_Core(Vector<ulong> vector, Vector<ulong> args0, Vector<ulong> args1) {
+            return Statics.Shuffle_Core(vector, args0, args1);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.Sum_AcceleratedTypes"/>
+        public override TypeCodeFlags Sum_AcceleratedTypes {
+            get {
+                return Statics.Sum_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override float Sum(Vector<float> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override double Sum(Vector<double> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override sbyte Sum(Vector<sbyte> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override byte Sum(Vector<byte> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override short Sum(Vector<short> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ushort Sum(Vector<ushort> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override int Sum(Vector<int> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override uint Sum(Vector<uint> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override long Sum(Vector<long> value) {
+            return Statics.Sum(value);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.Sum(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override ulong Sum(Vector<ulong> value) {
+            return Statics.Sum(value);
+        }
+
+
         /// <inheritdoc cref="IVectorTraits.Widen_AcceleratedTypes"/>
         public override TypeCodeFlags Widen_AcceleratedTypes {
             get {
@@ -993,5 +1478,114 @@ namespace Zyl.VectorTraits.Impl.AVector {
             Statics.Widen(source, out lower, out upper);
         }
 
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower_AcceleratedTypes"/>
+        public override TypeCodeFlags WidenLower_AcceleratedTypes {
+            get {
+                return Statics.WidenLower_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> WidenLower(Vector<float> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> WidenLower(Vector<sbyte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ushort> WidenLower(Vector<byte> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> WidenLower(Vector<short> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<uint> WidenLower(Vector<ushort> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> WidenLower(Vector<int> source) {
+            return Statics.WidenLower(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> WidenLower(Vector<uint> source) {
+            return Statics.WidenLower(source);
+        }
+
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper_AcceleratedTypes"/>
+        public override TypeCodeFlags WidenUpper_AcceleratedTypes {
+            get {
+                return Statics.WidenUpper_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<double> WidenUpper(Vector<float> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<short> WidenUpper(Vector<sbyte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ushort> WidenUpper(Vector<byte> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<int> WidenUpper(Vector<short> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<uint> WidenUpper(Vector<ushort> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<long> WidenUpper(Vector<int> source) {
+            return Statics.WidenUpper(source);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector<ulong> WidenUpper(Vector<uint> source) {
+            return Statics.WidenUpper(source);
+        }
+
+#endif // NET8_0_OR_GREATER
     }
 }
