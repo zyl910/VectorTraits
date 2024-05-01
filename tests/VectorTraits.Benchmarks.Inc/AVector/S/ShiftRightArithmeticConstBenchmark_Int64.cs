@@ -498,7 +498,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.ShiftRightArithmetic(p0, shiftAmount);
-                vrt += vtemp; // Add.
+                //vrt += vtemp; // Add.
+                vrt = Vectors.Add(vrt, vtemp); // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // Remainder processs.
@@ -543,7 +544,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.ShiftRightArithmetic_Core(p0, shiftAmount, args0, args1);
-                vrt += vtemp; // Add.
+                //vrt += vtemp; // Add.
+                vrt = Vectors.Add(vrt, vtemp); // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // Remainder processs.
@@ -586,7 +588,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.ShiftRightArithmetic_Const(p0, shiftAmount);
-                vrt += vtemp; // Add.
+                //vrt += vtemp; // Add.
+                vrt = Vectors.Add(vrt, vtemp); // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // Remainder processs.
@@ -630,7 +633,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.ShiftRightArithmetic_ConstCore(p0, shiftAmount, args0, args1);
-                vrt += vtemp; // Add.
+                //vrt += vtemp; // Add.
+                vrt = Vectors.Add(vrt, vtemp); // Add.
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // Remainder processs.
@@ -654,6 +658,53 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
 #if NETCOREAPP3_0_OR_GREATER
+
+#if NET7_0_OR_GREATER
+        /// <summary>
+        /// Sum ShiftRightArithmetic - BCL static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="shiftAmount">Shift amount.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumSRA128Bcl(TMy[] src, int srcCount, int shiftAmount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = Vector128.ShiftRightArithmetic(p0, shiftAmount);
+                vrt = Vector128.Add(vrt, vtemp); // Add.
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMy)(Unsafe.Add(ref p, i) >> shiftAmount);
+            }
+            // Reduce.
+            rt += Vector128.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumSRA128Bcl() {
+            Vector128s.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+                //Debugger.Break();
+            }
+            dstTMy = StaticSumSRA128Bcl(srcArray, srcArray.Length, shiftAmount);
+            CheckResult("SumSRA128Bcl");
+        }
+#endif // NET7_0_OR_GREATER
 
         /// <summary>
         /// Sum ShiftRightArithmetic - Traits static.

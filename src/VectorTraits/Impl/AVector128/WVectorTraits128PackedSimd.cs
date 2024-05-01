@@ -920,7 +920,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic(Vector128{long}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> ShiftRightArithmetic(Vector128<long> value, int shiftAmount) {
-                return Vector128.ShiftRightArithmetic(value, shiftAmount);
+                //shiftAmount &= 0x3F;
+                //return ShiftRightArithmetic_Fast(value, shiftAmount);
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Args(Vector128{sbyte}, int, out Vector128{sbyte})"/>
@@ -990,26 +992,26 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<long> ShiftRightArithmetic_Core(Vector128<long> value, int shiftAmount, Vector128<long> args0, Vector128<long> args1) {
                 _ = args0;
                 _ = args1;
-                return Vector128.ShiftRightArithmetic(value, shiftAmount);
+                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{sbyte}, int)"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Const(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount) {
-                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Const(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount) {
-                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Const(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount) {
-                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Const(Vector128{long}, int)"/>
@@ -1024,7 +1026,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<sbyte> ShiftRightArithmetic_ConstCore(Vector128<sbyte> value, [ConstantExpected(Min = 1, Max = 7)] int shiftAmount, Vector128<sbyte> args0, Vector128<sbyte> args1) {
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{short}, int, Vector128{short}, Vector128{short})"/>
@@ -1032,7 +1034,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<short> ShiftRightArithmetic_ConstCore(Vector128<short> value, [ConstantExpected(Min = 1, Max = 15)] int shiftAmount, Vector128<short> args0, Vector128<short> args1) {
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{int}, int, Vector128{int}, Vector128{int})"/>
@@ -1040,7 +1042,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<int> ShiftRightArithmetic_ConstCore(Vector128<int> value, [ConstantExpected(Min = 1, Max = 31)] int shiftAmount, Vector128<int> args0, Vector128<int> args1) {
                 _ = args0;
                 _ = args1;
-                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_ConstCore(Vector128{long}, int, Vector128{long}, Vector128{long})"/>
@@ -1055,19 +1057,19 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> ShiftRightArithmetic_Fast(Vector128<sbyte> value, int shiftAmount) {
-                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{short}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> ShiftRightArithmetic_Fast(Vector128<short> value, int shiftAmount) {
-                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{int}, int)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> ShiftRightArithmetic_Fast(Vector128<int> value, int shiftAmount) {
-                return PackedSimd.ShiftRightArithmetic(value, shiftAmount);
+                return Vector128.ShiftRightArithmetic(value, shiftAmount);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftRightArithmetic_Fast(Vector128{long}, int)"/>
