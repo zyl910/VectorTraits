@@ -181,6 +181,18 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return Min(Max(amin, value), amax);
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{float}, Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YClamp_NoPseudo(Vector128<float> value, Vector128<float> amin, Vector128<float> amax) {
+                return PackedSimd.Min(PackedSimd.Max(amin, value), amax);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{float}, Vector128{float}, Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YClamp_Pseudo(Vector128<float> value, Vector128<float> amin, Vector128<float> amax) {
+                return PackedSimd.PseudoMin(PackedSimd.PseudoMax(amin, value), amax);
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.YClamp(Vector128{double}, Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YClamp(Vector128<double> value, Vector128<double> amin, Vector128<double> amax) {
