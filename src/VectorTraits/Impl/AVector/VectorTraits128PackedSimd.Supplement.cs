@@ -38,7 +38,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.Add(Vector{double}, Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> Add(Vector<double> left, Vector<double> right) {
-                return Vector.Add(left, right);
+                return WStatics.Add(left.AsVector128(), right.AsVector128()).AsVector();
             }
 
             /// <inheritdoc cref="IVectorTraits.Add(Vector{sbyte}, Vector{sbyte})"/>

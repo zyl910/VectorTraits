@@ -38,9 +38,13 @@ namespace Zyl.VectorTraits {
         }
 
         /// <inheritdoc cref="IVectorTraits.Add(Vector{double}, Vector{double})"/>
-        [Obsolete("Please use `Vector.Add` instead. It's much more performant.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> Add(Vector<double> left, Vector<double> right) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Add(left, right);
+            }
+#endif // SHORT_CIRCUIT_WASM
             return Vector.Add(left, right);
         }
 

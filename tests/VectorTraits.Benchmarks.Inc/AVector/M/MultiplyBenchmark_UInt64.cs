@@ -132,7 +132,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                vrt += Vectors.Multiply(p0, Unsafe.Add(ref p0, 1));
+                //vrt += Vectors.Multiply(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vectors.Add(vrt, Vectors.Multiply(p0, Unsafe.Add(ref p0, 1)));
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -161,6 +162,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         #region BENCHMARKS_128
 #if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
 
+#if NET7_0_OR_GREATER
         /// <summary>
         /// Sum Multiply - Vector128 - BCL static.
         /// </summary>
@@ -181,8 +183,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                t = Vector128s.Multiply(p0, Unsafe.Add(ref p0, 1));
-                vrt = Vector128s.Add(vrt, t);
+                t = Vector128.Multiply(p0, Unsafe.Add(ref p0, 1));
+                vrt = Vector128.Add(vrt, t);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -203,6 +205,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
             dstTMy = StaticSum128Bcl(srcArray, srcArray.Length);
             CheckResult("Sum128Bcl");
         }
+#endif // NET7_0_OR_GREATER
 
         /// <summary>
         /// Sum Multiply - Vector128 - Traits static.
