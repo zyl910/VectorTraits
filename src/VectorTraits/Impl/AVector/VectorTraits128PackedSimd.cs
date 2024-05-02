@@ -19,7 +19,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
     using BaseStatics = VectorTraitsBase.Statics;
 
     /// <summary>
-    /// <see cref="Vector{T}"/> traits 128 - Sse .
+    /// <see cref="Vector{T}"/> traits 128 - PackedSimd on Wasm architecture.
     /// </summary>
     public sealed partial class VectorTraits128PackedSimd : VectorTraits128PackedSimdAbstract {
         private static readonly VectorTraits128PackedSimd _instance = new VectorTraits128PackedSimd(); // Default instance.

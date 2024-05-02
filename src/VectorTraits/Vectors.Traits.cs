@@ -194,6 +194,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> Ceiling(Vector<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Ceiling(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET5_0_OR_GREATER)
             return BaseStatics.Ceiling(value);
 #else
@@ -204,6 +209,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Ceiling(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> Ceiling(Vector<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Ceiling(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Ceiling(value);
 #else
@@ -226,6 +236,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ConvertToDouble(Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> ConvertToDouble(Vector<long> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToDouble(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToDouble(value);
 #else
@@ -237,6 +252,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> ConvertToDouble(Vector<ulong> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToDouble(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToDouble(value);
 #else
@@ -247,6 +267,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ConvertToDouble_Range52(Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> ConvertToDouble_Range52(Vector<long> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToDouble_Range52(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToDouble_Range52(value);
 #else
@@ -258,6 +283,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> ConvertToDouble_Range52(Vector<ulong> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToDouble_Range52(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToDouble_Range52(value);
 #else
@@ -280,6 +310,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ConvertToInt32(Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> ConvertToInt32(Vector<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToInt32(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.ConvertToInt32(value);
 #else
@@ -302,6 +337,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ConvertToInt64(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> ConvertToInt64(Vector<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToInt64(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToInt64(value);
 #else
@@ -312,6 +352,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> ConvertToInt64_Range52(Vector<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToInt64_Range52(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToInt64_Range52(value);
 #else
@@ -322,6 +367,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ConvertToInt64_Range52RoundToEven(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> ConvertToInt64_Range52RoundToEven(Vector<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToInt64_Range52RoundToEven(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToInt64_Range52RoundToEven(value);
 #else
@@ -344,6 +394,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.ConvertToSingle(Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> ConvertToSingle(Vector<int> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToSingle(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.ConvertToSingle(value);
 #else
@@ -355,6 +410,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> ConvertToSingle(Vector<uint> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToSingle(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToSingle(value);
 #else
@@ -378,6 +438,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> ConvertToUInt32(Vector<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToUInt32(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToUInt32(value);
 #else
@@ -401,6 +466,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> ConvertToUInt64(Vector<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToUInt64(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToUInt64(value);
 #else
@@ -412,6 +482,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> ConvertToUInt64_Range52(Vector<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToUInt64_Range52(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToUInt64_Range52(value);
 #else
@@ -423,6 +498,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> ConvertToUInt64_Range52RoundToEven(Vector<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ConvertToUInt64_Range52RoundToEven(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ConvertToUInt64_Range52RoundToEven(value);
 #else
@@ -446,6 +526,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<float> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -457,6 +542,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<double> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -468,6 +558,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<sbyte> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -479,6 +574,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<byte> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -490,6 +590,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<short> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -501,6 +606,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<ushort> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -512,6 +622,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<int> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -523,6 +638,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<uint> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -534,6 +654,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<long> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -545,6 +670,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ExtractMostSignificantBits(Vector<ulong> vector) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.ExtractMostSignificantBits(vector);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.ExtractMostSignificantBits(vector);
 #else
@@ -567,6 +697,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Floor(Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> Floor(Vector<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Floor(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET5_0_OR_GREATER)
             return BaseStatics.Floor(value);
 #else
@@ -577,6 +712,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Floor(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> Floor(Vector<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Floor(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Floor(value);
 #else
@@ -599,6 +739,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Narrow(Vector{double}, Vector{double})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> Narrow(Vector<double> lower, Vector<double> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -610,6 +755,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<sbyte> Narrow(Vector<short> lower, Vector<short> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -621,6 +771,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> Narrow(Vector<ushort> lower, Vector<ushort> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -631,6 +786,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Narrow(Vector{int}, Vector{int})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> Narrow(Vector<int> lower, Vector<int> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -642,6 +802,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> Narrow(Vector<uint> lower, Vector<uint> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -652,6 +817,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Narrow(Vector{long}, Vector{long})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> Narrow(Vector<long> lower, Vector<long> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -663,6 +833,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> Narrow(Vector<ulong> lower, Vector<ulong> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Narrow(lower, upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Narrow(lower, upper);
 #else
@@ -2587,6 +2762,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{float}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> Shuffle(Vector<float> vector, Vector<int> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2597,6 +2777,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{double}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> Shuffle(Vector<double> vector, Vector<long> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2608,6 +2793,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<sbyte> Shuffle(Vector<sbyte> vector, Vector<sbyte> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2618,6 +2808,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{byte}, Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> Shuffle(Vector<byte> vector, Vector<byte> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2628,6 +2823,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{short}, Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> Shuffle(Vector<short> vector, Vector<short> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2639,6 +2839,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> Shuffle(Vector<ushort> vector, Vector<ushort> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2649,6 +2854,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{int}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> Shuffle(Vector<int> vector, Vector<int> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2660,6 +2870,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> Shuffle(Vector<uint> vector, Vector<uint> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2670,6 +2885,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle(Vector{long}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> Shuffle(Vector<long> vector, Vector<long> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2681,6 +2901,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> Shuffle(Vector<ulong> vector, Vector<ulong> indices) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle(vector, indices);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle(vector, indices);
 #else
@@ -2693,6 +2918,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector<sbyte> indices, out Vector<sbyte> args0, out Vector<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2703,6 +2933,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector<byte> indices, out Vector<byte> args0, out Vector<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2713,6 +2948,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{short}, out Vector{short}, out Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector<short> indices, out Vector<short> args0, out Vector<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2724,6 +2964,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector<ushort> indices, out Vector<ushort> args0, out Vector<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2734,6 +2979,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{int}, out Vector{int}, out Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector<int> indices, out Vector<int> args0, out Vector<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2745,6 +2995,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector<uint> indices, out Vector<uint> args0, out Vector<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2755,6 +3010,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Args(Vector{long}, out Vector{long}, out Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector<long> indices, out Vector<long> args0, out Vector<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2766,6 +3026,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Shuffle_Args(Vector<ulong> indices, out Vector<ulong> args0, out Vector<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Shuffle_Args(indices, out args0, out args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Shuffle_Args(indices, out args0, out args1);
 #else
@@ -2777,6 +3042,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{float}, Vector{int}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<float> Shuffle_Core(Vector<float> vector, Vector<int> args0, Vector<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2787,6 +3057,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{double}, Vector{long}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> Shuffle_Core(Vector<double> vector, Vector<long> args0, Vector<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2798,6 +3073,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<sbyte> Shuffle_Core(Vector<sbyte> vector, Vector<sbyte> args0, Vector<sbyte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2808,6 +3088,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{byte}, Vector{byte}, Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<byte> Shuffle_Core(Vector<byte> vector, Vector<byte> args0, Vector<byte> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2818,6 +3103,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{short}, Vector{short}, Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> Shuffle_Core(Vector<short> vector, Vector<short> args0, Vector<short> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2829,6 +3119,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> Shuffle_Core(Vector<ushort> vector, Vector<ushort> args0, Vector<ushort> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2839,6 +3134,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{int}, Vector{int}, Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> Shuffle_Core(Vector<int> vector, Vector<int> args0, Vector<int> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2850,6 +3150,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> Shuffle_Core(Vector<uint> vector, Vector<uint> args0, Vector<uint> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2860,6 +3165,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Shuffle_Core(Vector{long}, Vector{long}, Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> Shuffle_Core(Vector<long> vector, Vector<long> args0, Vector<long> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2871,6 +3181,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> Shuffle_Core(Vector<ulong> vector, Vector<ulong> args0, Vector<ulong> args1) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Shuffle_Core(vector, args0, args1);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Shuffle_Core(vector, args0, args1);
 #else
@@ -2893,6 +3208,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Sum(Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Sum(Vector<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET6_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2903,6 +3223,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Sum(Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double Sum(Vector<double> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -2914,6 +3239,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static sbyte Sum(Vector<sbyte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -2924,6 +3254,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Sum(Vector{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte Sum(Vector<byte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -2934,6 +3269,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Sum(Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short Sum(Vector<short> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET6_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2945,6 +3285,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort Sum(Vector<ushort> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET6_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2955,6 +3300,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Sum(Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Sum(Vector<int> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET6_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2966,6 +3316,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint Sum(Vector<uint> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC && NET6_0_OR_GREATER)
             return BaseStatics.Sum(value);
 #else
@@ -2976,6 +3331,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Sum(Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long Sum(Vector<long> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -2987,6 +3347,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Sum(Vector<ulong> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.Sum(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.Sum(value);
 #else
@@ -3009,6 +3374,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector<float> source, out Vector<double> lower, out Vector<double> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -3020,6 +3390,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector<sbyte> source, out Vector<short> lower, out Vector<short> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -3031,6 +3406,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector<byte> source, out Vector<ushort> lower, out Vector<ushort> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -3041,6 +3421,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Widen(Vector{short}, out Vector{int}, out Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector<short> source, out Vector<int> lower, out Vector<int> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -3052,6 +3437,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector<ushort> source, out Vector<uint> lower, out Vector<uint> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC || (BCL_VER_OVERRIDE_STATIC)
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -3062,6 +3452,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector<int> source, out Vector<long> lower, out Vector<long> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -3073,6 +3468,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Widen(Vector<uint> source, out Vector<ulong> lower, out Vector<ulong> upper) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.Widen(source, out lower, out upper);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             BaseStatics.Widen(source, out lower, out upper);
 #else
@@ -3095,6 +3495,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> WidenLower(Vector<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -3106,6 +3511,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> WidenLower(Vector<sbyte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -3117,6 +3527,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> WidenLower(Vector<byte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -3127,6 +3542,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> WidenLower(Vector<short> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -3138,6 +3558,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> WidenLower(Vector<ushort> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -3148,6 +3573,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.WidenLower(Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> WidenLower(Vector<int> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -3159,6 +3589,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> WidenLower(Vector<uint> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenLower(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenLower(value);
 #else
@@ -3181,6 +3616,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<double> WidenUpper(Vector<float> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenUpper(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -3192,6 +3632,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<short> WidenUpper(Vector<sbyte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenUpper(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -3203,6 +3648,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ushort> WidenUpper(Vector<byte> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenUpper(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -3213,6 +3663,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<int> WidenUpper(Vector<short> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenUpper(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -3224,6 +3679,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<uint> WidenUpper(Vector<ushort> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenUpper(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -3234,6 +3694,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.WidenUpper(Vector{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<long> WidenUpper(Vector<int> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenUpper(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else
@@ -3245,6 +3710,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> WidenUpper(Vector<uint> value) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                WasmStatics.WidenUpper(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.WidenUpper(value);
 #else

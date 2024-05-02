@@ -12,7 +12,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
     using Statics = VectorTraits128PackedSimd.Statics;
 
     /// <summary>
-    /// <see cref="Vector{T}"/> traits 128 - Sse abstract.
+    /// <see cref="Vector{T}"/> traits 128 - PackedSimd on Wasm architecture abstract.
     /// </summary>
     public abstract partial class VectorTraits128PackedSimdAbstract : VectorTraits128Abstract {
 
