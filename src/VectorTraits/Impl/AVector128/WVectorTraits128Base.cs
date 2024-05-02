@@ -282,7 +282,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                    if (Vector256.IsHardwareAccelerated) {
+                    if (Vector128.IsHardwareAccelerated) {
                         rt |= TypeCodeFlags.Single;
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -319,7 +319,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                    if (Vector256.IsHardwareAccelerated) {
+                    if (Vector128.IsHardwareAccelerated) {
                         //rt |= TypeCodeFlags.Double;
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -396,7 +396,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                    if (Vector256.IsHardwareAccelerated) {
+                    if (Vector128.IsHardwareAccelerated) {
                         rt |= TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD

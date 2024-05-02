@@ -9,11 +9,8 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
 #endif
+using System.Text;
 #if NET8_0_OR_GREATER
 using System.Runtime.Intrinsics.Wasm;
 #endif // NET8_0_OR_GREATER
@@ -173,6 +170,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble(Vector128<long> value) {
                 return SuperStatics.ConvertToDouble(value);
+                //return ConvertToDouble_Bcl(value);
+                // .NET8 on Wasm: Vector128 > ConvertToDouble_Bcl
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
@@ -180,6 +179,39 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> ConvertToDouble(Vector128<ulong> value) {
                 return SuperStatics.ConvertToDouble(value);
+                //return ConvertToDouble_Bcl(value);
+                // .NET8 on Wasm: Vector128 > ConvertToDouble_Bcl
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Bcl(Vector128<long> value) {
+                // From: src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector128.cs
+                // Based on __m256d int64_to_double_fast_precise(const __m256i v)
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                Vector128<int> lowerBits;
+                lowerBits = PackedSimd.And(value, Vector128.Create(ScalarConstants.DoubleVal_MaskLow32).AsInt64()).AsInt32();
+                lowerBits = PackedSimd.Or(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32());
+                Vector128<long> upperBits = PackedSimd.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
+                upperBits = PackedSimd.Xor(upperBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63).AsInt64());        // Flip the msb of upperBits and blend with the bit representation of double(2^84 + 2^63)
+                Vector128<double> result = PackedSimd.Subtract(upperBits.AsDouble(), Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow63_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^63 + 2^52)) + lower
+                return PackedSimd.Add(result, lowerBits.AsDouble());
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble(Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> ConvertToDouble_Bcl(Vector128<ulong> value) {
+                // From: src/libraries/System.Private.CoreLib/src/System/Runtime/Intrinsics/Vector128.cs
+                // Based on __m256d int64_to_double_fast_precise(const __m256i v)
+                // from https://stackoverflow.com/a/41223013/12860347. CC BY-SA 4.0
+                Vector128<int> lowerBits;
+                lowerBits = PackedSimd.And(value, Vector128.Create(ScalarConstants.DoubleVal_MaskLow32).AsUInt64()).AsInt32();
+                lowerBits = PackedSimd.Or(lowerBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow52).AsInt32());
+                Vector128<ulong> upperBits = PackedSimd.ShiftRightLogical(value, 32);                                               // Extract the 32 most significant bits of vector
+                upperBits = PackedSimd.Xor(upperBits, Vector128.Create(ScalarConstants.DoubleVal_2Pow84).AsUInt64());               // Blend upperBits with the bit representation of double(2^84)
+                Vector128<double> result = PackedSimd.Subtract(upperBits.AsDouble(), Vector128.Create(ScalarConstants.DoubleVal_2Pow84_2Pow52)); // Compute in double precision: (upper - (2^84 + 2^52)) + lower
+                return PackedSimd.Add(result, lowerBits.AsDouble());
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ConvertToDouble_Range52(Vector128{long})"/>
@@ -524,7 +556,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<sbyte> ShiftLeft(Vector128<sbyte> value, int shiftAmount) {
                 return Vector128.ShiftLeft(value, shiftAmount);
                 //return PackedSimd.ShiftLeft(value, shiftAmount);
-                // .NET8 on X86: Vector128.ShiftLeft > PackedSimd.ShiftLeft
+                // .NET8 on Wasm: Vector128.ShiftLeft > PackedSimd.ShiftLeft
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{byte}, int)"/>
@@ -532,7 +564,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> ShiftLeft(Vector128<byte> value, int shiftAmount) {
                 return Vector128.ShiftLeft(value, shiftAmount);
                 //return PackedSimd.ShiftLeft(value, shiftAmount);
-                // .NET8 on X86: Vector128.ShiftLeft > PackedSimd.ShiftLeft
+                // .NET8 on Wasm: Vector128.ShiftLeft > PackedSimd.ShiftLeft
             }
 
             /// <inheritdoc cref="IWVectorTraits128.ShiftLeft(Vector128{short}, int)"/>
@@ -1498,7 +1530,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Shuffle(Vector128<ushort> vector, Vector128<ushort> indices) {
                 return Shuffle_CompareGreater(vector, indices);
-                // .NET8 on X86: Shuffle_CompareGreater > Vector128 > Shuffle_EqualsShift
+                // .NET8 on Wasm: Shuffle_CompareGreater > Vector128 > Shuffle_EqualsShift
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{ushort}, Vector128{ushort})"/>
@@ -1535,7 +1567,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<uint> Shuffle(Vector128<uint> vector, Vector128<uint> indices) {
                 //return Shuffle_CompareGreater(vector, indices);
                 return Vector128.Shuffle(vector, indices);
-                // .NET8 on X86: Vector128 > Shuffle_CompareGreater > Shuffle_EqualsShift
+                // .NET8 on Wasm: Vector128 > Shuffle_CompareGreater > Shuffle_EqualsShift
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Shuffle(Vector128{int}, Vector128{int})"/>

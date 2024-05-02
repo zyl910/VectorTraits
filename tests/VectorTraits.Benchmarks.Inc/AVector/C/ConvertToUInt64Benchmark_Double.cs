@@ -273,7 +273,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 vtemp = Vectors.ConvertToUInt64(p0);
-                vrt += vtemp;
+                //vrt += vtemp;
+                vrt = Vectors.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
@@ -316,7 +317,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.C {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 vtemp = Vectors.ConvertToUInt64_Range52(p0);
-                vrt += vtemp;
+                //vrt += vtemp;
+                vrt = Vectors.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
