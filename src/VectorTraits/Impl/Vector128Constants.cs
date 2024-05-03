@@ -821,6 +821,52 @@ namespace Zyl.VectorTraits.Impl {
         } = Vector128.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
 #endif // USE_VECTOR_CREATE
 
+
+        /// <summary>Narrow - Int64 - The indices of BigEndian - 0.</summary>
+        public static Vector128<byte> Narrow_Int64_Indices_BE0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)4, 5, 6, 7, 12, 13, 14, 15, 255, 255, 255, 255, 255, 255, 255, 255);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)4, 5, 6, 7, 12, 13, 14, 15, 255, 255, 255, 255, 255, 255, 255, 255);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>Narrow - Int64 - The indices of BigEndian - 1.</summary>
+        public static Vector128<byte> Narrow_Int64_Indices_BE1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)255, 255, 255, 255, 255, 255, 255, 255, 4, 5, 6, 7, 12, 13, 14, 15);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)255, 255, 255, 255, 255, 255, 255, 255, 4, 5, 6, 7, 12, 13, 14, 15);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>Narrow - Int64 - The indices of LittleEndian - 0.</summary>
+        public static Vector128<byte> Narrow_Int64_Indices_LE0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)0, 1, 2, 3, 8, 9, 10, 11, 255, 255, 255, 255, 255, 255, 255, 255);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)0, 1, 2, 3, 8, 9, 10, 11, 255, 255, 255, 255, 255, 255, 255, 255);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>Narrow - Int64 - The indices of LittleEndian - 1.</summary>
+        public static Vector128<byte> Narrow_Int64_Indices_LE1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)255, 255, 255, 255, 255, 255, 255, 255, 0, 1, 2, 3, 8, 9, 10, 11);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)255, 255, 255, 255, 255, 255, 255, 255, 0, 1, 2, 3, 8, 9, 10, 11);
+#endif // USE_VECTOR_CREATE
+
+
         /// <summary>Shuffle - UInt16 - The multiplier.</summary>
         [CLSCompliant(false)]
         public static Vector128<ushort> Shuffle_UInt16_Multiplier {

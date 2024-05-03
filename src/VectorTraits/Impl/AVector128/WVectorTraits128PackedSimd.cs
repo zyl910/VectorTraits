@@ -480,7 +480,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Narrow_AcceleratedTypes"/>
             public static TypeCodeFlags Narrow_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32;
+                    TypeCodeFlags rt = TypeCodeFlags.Double | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
                     return rt;
                 }
             }
@@ -532,14 +532,30 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{long}, Vector128{long})" />
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> Narrow(Vector128<long> lower, Vector128<long> upper) {
-                return SuperStatics.Narrow(lower, upper);
+                return Narrow(lower.AsUInt64(), upper.AsUInt64()).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ulong}, Vector128{ulong})" />
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Narrow(Vector128<ulong> lower, Vector128<ulong> upper) {
-                return SuperStatics.Narrow(lower, upper);
+                return Narrow_Shuffle(lower, upper);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Narrow(Vector128{ulong}, Vector128{ulong})" />
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> Narrow_Shuffle(Vector128<ulong> lower, Vector128<ulong> upper) {
+                Vector128<uint> l, u, rt;
+                if (BitConverter.IsLittleEndian) {
+                    l = PackedSimd.Swizzle(lower.AsByte(), Vector128Constants.Narrow_Int64_Indices_LE0).AsUInt32();
+                    u = PackedSimd.Swizzle(upper.AsByte(), Vector128Constants.Narrow_Int64_Indices_LE1).AsUInt32();
+                } else {
+                    l = PackedSimd.Swizzle(lower.AsByte(), Vector128Constants.Narrow_Int64_Indices_BE0).AsUInt32();
+                    u = PackedSimd.Swizzle(upper.AsByte(), Vector128Constants.Narrow_Int64_Indices_BE1).AsUInt32();
+                }
+                rt = PackedSimd.Or(l, u);
+                return rt;
             }
 
 
