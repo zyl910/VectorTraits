@@ -1,7 +1,17 @@
-﻿using System;
+﻿#if NET8_0_OR_GREATER
+#define SHORT_CIRCUIT_WASM
+#endif // NET8_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+#endif
+#if NET8_0_OR_GREATER
+using System.Runtime.Intrinsics.Wasm;
+#endif // NET8_0_OR_GREATER
 using System.Text;
 using Zyl.VectorTraits.Impl;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
@@ -67,6 +77,12 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="IVectorTraits.Widen(Vector{float}, out Vector{double}, out Vector{double})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<double> Lower, Vector<double> Upper) Widen(Vector<float> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                (var a1, var b1) = Vector128.Widen(source.AsVector128());
+                return (a1.AsVector(), b1.AsVector());
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -82,6 +98,12 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<short> Lower, Vector<short> Upper) Widen(Vector<sbyte> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                (var a1, var b1) = Vector128.Widen(source.AsVector128());
+                return (a1.AsVector(), b1.AsVector());
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -97,6 +119,12 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ushort> Lower, Vector<ushort> Upper) Widen(Vector<byte> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                (var a1, var b1) = Vector128.Widen(source.AsVector128());
+                return (a1.AsVector(), b1.AsVector());
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -111,6 +139,12 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="IVectorTraits.Widen(Vector{short}, out Vector{int}, out Vector{int})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<int> Lower, Vector<int> Upper) Widen(Vector<short> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                (var a1, var b1) = Vector128.Widen(source.AsVector128());
+                return (a1.AsVector(), b1.AsVector());
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -126,6 +160,12 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<uint> Lower, Vector<uint> Upper) Widen(Vector<ushort> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                (var a1, var b1) = Vector128.Widen(source.AsVector128());
+                return (a1.AsVector(), b1.AsVector());
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -140,6 +180,12 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="IVectorTraits.Widen(Vector{int}, out Vector{long}, out Vector{long})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<long> Lower, Vector<long> Upper) Widen(Vector<int> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                (var a1, var b1) = Vector128.Widen(source.AsVector128());
+                return (a1.AsVector(), b1.AsVector());
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -155,6 +201,12 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ulong> Lower, Vector<ulong> Upper) Widen(Vector<uint> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                (var a1, var b1) = Vector128.Widen(source.AsVector128());
+                return (a1.AsVector(), b1.AsVector());
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }

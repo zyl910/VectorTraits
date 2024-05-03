@@ -246,11 +246,104 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             CheckResult("SumWidenVectorTraits_Ptr");
         }
 
+        /// <summary>
+        /// Sum Widen - Vector - Traits static use ValueTuple.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumWidenVectorTraits_Tuple(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMyOut> vrt = Vector<TMyOut>.Zero; // Vector result.
+            Vector<TMyOut> vrt1 = Vector<TMyOut>.Zero;
+            Vector<TMyOut> lower, upper;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                (lower, upper) = Vectors.Widen(p0);
+                vrt = Vectors.Add(vrt, lower);
+                vrt1 = Vectors.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            vrt = Vectors.Add(vrt, vrt1);
+            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVectorTraits_Tuple() {
+            dstTMy = StaticSumWidenVectorTraits_Tuple(srcArray, srcArray.Length);
+            CheckResult("SumWidenVectorTraits_Tuple");
+        }
+
 
 #if NETCOREAPP3_0_OR_GREATER
 
         #region BENCHMARKS_128ALGORITHM
 #if BENCHMARKS_128ALGORITHM
+
+#if NET7_0_OR_GREATER
+
+        /// <summary>
+        /// Sum Widen - Vector128 - BCL static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumWidenVector128Bcl(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
+            Vector128<TMyOut> vrt1 = Vector128<TMyOut>.Zero;
+            Vector128<TMyOut> lower, upper;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                (lower, upper) = Vector128.Widen(p0);
+                vrt = Vector128s.Add(vrt, lower);
+                vrt1 = Vector128s.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            vrt = Vector128s.Add(vrt, vrt1);
+            for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVector128Bcl() {
+            dstTMy = StaticSumWidenVector128Bcl(srcArray, srcArray.Length);
+            CheckResult("SumWidenVector128Bcl");
+        }
+#endif // NET7_0_OR_GREATER
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
@@ -396,6 +489,51 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
         public void SumWidenVector128Traits() {
             dstTMy = StaticSumWidenVector128Traits(srcArray, srcArray.Length);
             CheckResult("SumWidenVector128Traits");
+        }
+
+        /// <summary>
+        /// Sum Widen - Vector128 - Traits static use ValueTuple.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static TMyOut StaticSumWidenVector128Traits_Tuple(TMy[] src, int srcCount) {
+            TMyOut rt = 0; // Result.
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMyOut> vrt = Vector128<TMyOut>.Zero; // Vector result.
+            Vector128<TMyOut> vrt1 = Vector128<TMyOut>.Zero;
+            Vector128<TMyOut> lower, upper;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                (lower, upper) = Vector128s.Widen(p0);
+                vrt = Vector128s.Add(vrt, lower);
+                vrt1 = Vector128s.Add(vrt1, upper);
+                p0 = ref Unsafe.Add(ref p0, 1);
+            }
+            // b) Remainder processs.
+            ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            for (i = 0; i < cntRem; ++i) {
+                rt += (TMyOut)Unsafe.Add(ref p, i);
+            }
+            // Reduce.
+            vrt = Vector128s.Add(vrt, vrt1);
+            for (i = 0; i < Vector128<TMyOut>.Count; ++i) {
+                rt += vrt.GetElement(i);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumWidenVector128Traits_Tuple() {
+            dstTMy = StaticSumWidenVector128Traits_Tuple(srcArray, srcArray.Length);
+            CheckResult("SumWidenVector128Traits_Tuple");
         }
 
 #endif // BENCHMARKS_128ALGORITHM

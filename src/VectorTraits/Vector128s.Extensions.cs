@@ -1,10 +1,17 @@
-﻿using System;
+﻿#if NET8_0_OR_GREATER
+#define SHORT_CIRCUIT_WASM
+#endif // NET8_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+#if NET8_0_OR_GREATER
+using System.Runtime.Intrinsics.Wasm;
+#endif // NET8_0_OR_GREATER
 using Zyl.VectorTraits.Impl;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
@@ -71,6 +78,11 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="IWVectorTraits128.Widen(Vector128{float}, out Vector128{double}, out Vector128{double})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<double> Lower, Vector128<double> Upper) Widen(Vector128<float> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return Vector128.Widen(source);
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -86,6 +98,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<short> Lower, Vector128<short> Upper) Widen(Vector128<sbyte> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return Vector128.Widen(source);
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -101,6 +118,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<ushort> Lower, Vector128<ushort> Upper) Widen(Vector128<byte> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return Vector128.Widen(source);
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -115,6 +137,11 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="IWVectorTraits128.Widen(Vector128{short}, out Vector128{int}, out Vector128{int})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<int> Lower, Vector128<int> Upper) Widen(Vector128<short> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return Vector128.Widen(source);
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -130,6 +157,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<uint> Lower, Vector128<uint> Upper) Widen(Vector128<ushort> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return Vector128.Widen(source);
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -144,6 +176,11 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="IWVectorTraits128.Widen(Vector128{int}, out Vector128{long}, out Vector128{long})" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<long> Lower, Vector128<long> Upper) Widen(Vector128<int> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return Vector128.Widen(source);
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
@@ -159,6 +196,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<ulong> Lower, Vector128<ulong> Upper) Widen(Vector128<uint> source) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return Vector128.Widen(source);
+            }
+#endif // SHORT_CIRCUIT_WASM
             Widen(source, out var a, out var b);
             return (a, b);
         }
