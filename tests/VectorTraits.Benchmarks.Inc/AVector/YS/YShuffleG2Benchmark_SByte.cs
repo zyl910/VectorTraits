@@ -200,6 +200,54 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         #region BENCHMARKS_128
 #if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
 
+#if NET7_0_OR_GREATER
+        /// <summary>
+        /// Sum YShuffleG2 - Vector128 - Base static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="control">The control.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128Base(TMy[] src, int srcCount, ShuffleControlG2 control) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YShuffleG2(p0, control);
+                vrt = WVectorTraits128Base.Statics.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            if (UseReduce) {
+                rt = Vector128.Sum(vrt);
+            } else {
+                rt = vrt.GetElement(0);
+            }
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128Base() {
+            if (BenchmarkUtil.IsLastRun) {
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSum128Base(srcArray, srcArray.Length, control);
+        }
+#endif // NET7_0_OR_GREATER
+
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 

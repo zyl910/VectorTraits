@@ -1343,9 +1343,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             }
             // Reduce.
             vrt = Vectors.Add(vrt, vrt1);
-            for (i = 0; i < Vector<TMyOut>.Count; ++i) {
-                rt += vrt.GetElement(i);
-            }
+            rt = Vectors.Sum(vrt);
             return rt;
         }
 
