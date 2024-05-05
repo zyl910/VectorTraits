@@ -255,8 +255,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YMaxNumber_AcceleratedTypes"/>
             public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
-                    return rt;
+                    return Max_AcceleratedTypes;
                 }
             }
 
@@ -282,8 +281,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YMinNumber_AcceleratedTypes"/>
             public static TypeCodeFlags YMinNumber_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
-                    return rt;
+                    return Min_AcceleratedTypes;
                 }
             }
 
@@ -439,7 +437,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToEven_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    TypeCodeFlags rt = TypeCodeFlags.Single;
                     return rt;
                 }
             }
@@ -460,7 +458,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YRoundToZero_AcceleratedTypes"/>
             public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlags.Single | TypeCodeFlags.Double;
+                    TypeCodeFlags rt = TypeCodeFlags.Single;
                     return rt;
                 }
             }
