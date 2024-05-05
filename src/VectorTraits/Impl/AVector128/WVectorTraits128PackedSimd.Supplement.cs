@@ -279,8 +279,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static sbyte Dot(Vector128<sbyte> left, Vector128<sbyte> right) {
-                Widen(left, out Vector128<short> u0, out Vector128<short> u1);
-                Widen(right, out Vector128<short> v0, out Vector128<short> v1);
+                Vector128<short> u0, u1, v0, v1;
+                (u0, u1) = Vector128.Widen(left);
+                (v0, v1) = Vector128.Widen(right);
                 Vector128<short> w0 = PackedSimd.Multiply(u0, v0);
                 Vector128<short> w1 = PackedSimd.Multiply(u1, v1);
                 w0 = PackedSimd.Add(w0, w1);
@@ -290,8 +291,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.Dot(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static byte Dot(Vector128<byte> left, Vector128<byte> right) {
-                Widen(left, out Vector128<ushort> u0, out Vector128<ushort> u1);
-                Widen(right, out Vector128<ushort> v0, out Vector128<ushort> v1);
+                Vector128<ushort> u0, u1, v0, v1;
+                (u0, u1) = Vector128.Widen(left);
+                (v0, v1) = Vector128.Widen(right);
                 Vector128<ushort> w0 = PackedSimd.Multiply(u0, v0);
                 Vector128<ushort> w1 = PackedSimd.Multiply(u1, v1);
                 w0 = PackedSimd.Add(w0, w1);
@@ -1777,9 +1779,29 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return Multiply(left.AsByte(), right.AsByte()).AsSByte();
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> Multiply_SelfWiden(Vector128<sbyte> left, Vector128<sbyte> right) {
+                return Multiply_SelfWiden(left.AsByte(), right.AsByte()).AsSByte();
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Multiply(Vector128<byte> left, Vector128<byte> right) {
+                //return Vector128.Multiply(left, right);
+                Vector128<ushort> u0, u1, v0, v1;
+                (u0, u1) = Vector128.Widen(left);
+                (v0, v1) = Vector128.Widen(right);
+                Vector128<ushort> w0 = PackedSimd.Multiply(u0, v0);
+                Vector128<ushort> w1 = PackedSimd.Multiply(u1, v1);
+                Vector128<byte> rt = Narrow(w0, w1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.Multiply(Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> Multiply_SelfWiden(Vector128<byte> left, Vector128<byte> right) {
                 //return Vector128.Multiply(left, right);
                 Widen(left, out Vector128<ushort> u0, out Vector128<ushort> u1);
                 Widen(right, out Vector128<ushort> v0, out Vector128<ushort> v1);
@@ -1924,9 +1946,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> Sqrt(Vector128<byte> value) {
                 // To float
-                Widen(value, out Vector128<ushort> t0, out Vector128<ushort> t1);
-                Widen(t0, out Vector128<uint> w0, out Vector128<uint> w1);
-                Widen(t1, out Vector128<uint> w2, out Vector128<uint> w3);
+                Vector128<ushort> t0, t1;
+                Vector128<uint> w0, w1, w2, w3;
+                (t0, t1) = Vector128.Widen(value);
+                (w0, w1) = Vector128.Widen(t0);
+                (w2, w3) = Vector128.Widen(t1);
                 Vector128<float> src0 = ConvertToSingle(w0.AsInt32()); // On x86 platforms, Int32 typically has special instructions to speed up, which is faster than UInt32.
                 Vector128<float> src1 = ConvertToSingle(w1.AsInt32());
                 Vector128<float> src2 = ConvertToSingle(w2.AsInt32());
@@ -1961,7 +1985,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> Sqrt(Vector128<ushort> value) {
                 // To float
-                Widen(value, out Vector128<uint> w0, out Vector128<uint> w1);
+                (Vector128<uint> w0, Vector128<uint> w1) = Vector128.Widen(value);
                 Vector128<float> src0 = ConvertToSingle(w0.AsInt32());
                 Vector128<float> src1 = ConvertToSingle(w1.AsInt32());
                 // Body
@@ -1988,7 +2012,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> Sqrt(Vector128<uint> value) {
                 // To float
-                Widen(value, out Vector128<ulong> w0, out Vector128<ulong> w1);
+                (Vector128<ulong> w0, Vector128<ulong> w1) = Vector128.Widen(value);
                 Vector128<double> src0 = ConvertToDouble_Range52(w0);
                 Vector128<double> src1 = ConvertToDouble_Range52(w1);
                 // Body

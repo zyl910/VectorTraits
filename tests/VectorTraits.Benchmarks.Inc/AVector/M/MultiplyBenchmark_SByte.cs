@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics;
 using System.Threading;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
+using Zyl.VectorTraits.Impl.AVector128;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.M {
 #if BENCHMARKS_OFF
@@ -244,6 +245,97 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
         }
 #endif // NET7_0_OR_GREATER
 
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
+#if NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Sum Multiply - Vector128 - Wasm static.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMy StaticSum128_Wasm(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> t;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                t = WVectorTraits128PackedSimd.Statics.Multiply(p0, Unsafe.Add(ref p0, 1));
+                vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            //ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            //for (i = 0; i < cntRem; ++i) {
+            //    rt += (TMy)Unsafe.Add(ref p, i);
+            //}
+            // Reduce.
+            rt = WVectorTraits128PackedSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128_Wasm() {
+            WVectorTraits128PackedSimd.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSum128_Wasm(srcArray, srcArray.Length);
+            CheckResult("Sum128_Wasm");
+        }
+
+        /// <summary>
+        /// Sum Multiply - Vector128 - Wasm static - SelfWiden.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        public static TMy StaticSum128_Wasm_SelfWiden(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 2;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            //int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> t;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                t = WVectorTraits128PackedSimd.Statics.Multiply_SelfWiden(p0, Unsafe.Add(ref p0, 1));
+                vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, t);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            //ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            //for (i = 0; i < cntRem; ++i) {
+            //    rt += (TMy)Unsafe.Add(ref p, i);
+            //}
+            // Reduce.
+            rt = WVectorTraits128PackedSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128_Wasm_SelfWiden() {
+            WVectorTraits128PackedSimd.Statics.ThrowForUnsupported(true);
+            dstTMy = StaticSum128_Wasm_SelfWiden(srcArray, srcArray.Length);
+            CheckResult("Sum128_Wasm_SelfWiden");
+        }
+
+#endif // NET8_0_OR_GREATER
+
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
+
         /// <summary>
         /// Sum Multiply - Vector128 - Traits static.
         /// </summary>
@@ -286,15 +378,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.M {
             dstTMy = StaticSum128Traits(srcArray, srcArray.Length);
             CheckResult("Sum128Traits");
         }
-
-        #region BENCHMARKS_ALGORITHM
-#if BENCHMARKS_ALGORITHM
-#if NET5_0_OR_GREATER
-
-#endif // NET5_0_OR_GREATER
-
-#endif // BENCHMARKS_ALGORITHM
-        #endregion // BENCHMARKS_ALGORITHM
 
 
 #endif // BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
