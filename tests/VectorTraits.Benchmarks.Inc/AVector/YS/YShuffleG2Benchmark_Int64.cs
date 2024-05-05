@@ -200,7 +200,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         #region BENCHMARKS_128
 #if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
 
-#if NET7_0_OR_GREATER
         /// <summary>
         /// Sum YShuffleG2 - Vector128 - Base static.
         /// </summary>
@@ -232,7 +231,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // }
             // Reduce.
             if (UseReduce) {
-                rt = Vector128.Sum(vrt);
+                rt = Vector128s.Sum(vrt);
             } else {
                 rt = vrt.GetElement(0);
             }
@@ -246,7 +245,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             }
             dstTMy = StaticSum128Base(srcArray, srcArray.Length, control);
         }
-#endif // NET7_0_OR_GREATER
 
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM

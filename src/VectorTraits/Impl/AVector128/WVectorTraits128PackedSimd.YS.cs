@@ -382,6 +382,98 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt0.AsInt64();
             }
 
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{float}, Vector128{float}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<float> Result0, Vector128<float> Result1) YShuffleG4X2(Vector128<float> source0, Vector128<float> source1, ShuffleControlG4 control) {
+                (var result0, var result1) = YShuffleG4X2(source0.AsUInt32(), source1.AsUInt32(), control);
+                return (result0.AsSingle(), result1.AsSingle());
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{double}, Vector128{double}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<double> Result0, Vector128<double> Result1) YShuffleG4X2(Vector128<double> source0, Vector128<double> source1, ShuffleControlG4 control) {
+                (var result0, var result1) = YShuffleG4X2(source0.AsUInt64(), source1.AsUInt64(), control);
+                return (result0.AsDouble(), result1.AsDouble());
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{sbyte}, Vector128{sbyte}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<sbyte> Result0, Vector128<sbyte> Result1) YShuffleG4X2(Vector128<sbyte> source0, Vector128<sbyte> source1, ShuffleControlG4 control) {
+                (var result0, var result1) = YShuffleG4X2(source0.AsByte(), source1.AsByte(), control);
+                return (result0.AsSByte(), result1.AsSByte());
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{byte}, Vector128{byte}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<byte> Result0, Vector128<byte> Result1) YShuffleG4X2(Vector128<byte> source0, Vector128<byte> source1, ShuffleControlG4 control) {
+                var indices = Vector128Constants.GetYShuffleG4_Byte_Indices(control);
+                var rt0 = YShuffleKernel(source0, indices);
+                var rt1 = YShuffleKernel(source1, indices);
+                return (rt0, rt1);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{short}, Vector128{short}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<short> Result0, Vector128<short> Result1) YShuffleG4X2(Vector128<short> source0, Vector128<short> source1, ShuffleControlG4 control) {
+                //(var result0, var result1) = YShuffleG4X2(source0.AsUInt16(), source1.AsUInt16(), control);
+                //return (result0.AsInt16(), result1.AsInt16());
+                var indices = Vector128Constants.GetYShuffleG4_UInt16_ByteIndices(control);
+                var rt0 = PackedSimd.Swizzle(source0.AsByte(), indices).AsInt16();
+                var rt1 = PackedSimd.Swizzle(source1.AsByte(), indices).AsInt16();
+                return (rt0, rt1);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{ushort}, Vector128{ushort}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [CLSCompliant(false)]
+            public static (Vector128<ushort> Result0, Vector128<ushort> Result1) YShuffleG4X2(Vector128<ushort> source0, Vector128<ushort> source1, ShuffleControlG4 control) {
+                var indices = Vector128Constants.GetYShuffleG4_UInt16_ByteIndices(control);
+                var rt0 = YShuffleKernel(source0.AsByte(), indices).AsUInt16();
+                var rt1 = YShuffleKernel(source1.AsByte(), indices).AsUInt16();
+                return (rt0, rt1);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{int}, Vector128{int}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<int> Result0, Vector128<int> Result1) YShuffleG4X2(Vector128<int> source0, Vector128<int> source1, ShuffleControlG4 control) {
+                (var result0, var result1) = YShuffleG4X2(source0.AsUInt32(), source1.AsUInt32(), control);
+                return (result0.AsInt32(), result1.AsInt32());
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{uint}, Vector128{uint}, ShuffleControlG4)"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<uint> Result0, Vector128<uint> Result1) YShuffleG4X2(Vector128<uint> source0, Vector128<uint> source1, ShuffleControlG4 control) {
+                var indices = Vector128Constants.GetYShuffleG4_UInt32_ByteIndices(control);
+                var rt0 = YShuffleKernel(source0.AsByte(), indices).AsUInt32();
+                var rt1 = YShuffleKernel(source1.AsByte(), indices).AsUInt32();
+                return (rt0, rt1);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{long}, Vector128{long}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<long> Result0, Vector128<long> Result1) YShuffleG4X2(Vector128<long> source0, Vector128<long> source1, ShuffleControlG4 control) {
+                (var result0, var result1) = YShuffleG4X2(source0.AsUInt64(), source1.AsUInt64(), control);
+                return (result0.AsInt64(), result1.AsInt64());
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2(Vector128{ulong}, Vector128{ulong}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [CLSCompliant(false)]
+            public static (Vector128<ulong> Result0, Vector128<ulong> Result1) YShuffleG4X2(Vector128<ulong> source0, Vector128<ulong> source1, ShuffleControlG4 control) {
+                ref Vector128<byte> indices = ref Vector128Constants.GetYShuffleG4X2_UInt64_ByteIndices(control);
+                var result0 = PackedSimd.Or(
+                    YShuffleKernel(source0.AsByte(), indices),
+                    YShuffleKernel(source1.AsByte(), Unsafe.Add(ref indices, 1))
+                ).AsUInt64();
+                var result1 = PackedSimd.Or(
+                    YShuffleKernel(source0.AsByte(), Unsafe.Add(ref indices, 2)),
+                    YShuffleKernel(source1.AsByte(), Unsafe.Add(ref indices, 3))
+                ).AsUInt64();
+                return (result0, result1);
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4X2_Const(Vector128{float}, Vector128{float}, ShuffleControlG4, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleG4X2_Const(Vector128<float> source0, Vector128<float> source1, [ConstantExpected] ShuffleControlG4 control, out Vector128<float> result1) {
@@ -444,6 +536,70 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleG4X2_Const(Vector128<ulong> source0, Vector128<ulong> source1, [ConstantExpected] ShuffleControlG4 control, out Vector128<ulong> result1) {
                 return YShuffleG4X2(source0, source1, control, out result1);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{float}, Vector128{float}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<float> Result0, Vector128<float> Result1) YShuffleG4X2_Const(Vector128<float> source0, Vector128<float> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{double}, Vector128{double}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<double> Result0, Vector128<double> Result1) YShuffleG4X2_Const(Vector128<double> source0, Vector128<double> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{sbyte}, Vector128{sbyte}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [CLSCompliant(false)]
+            public static (Vector128<sbyte> Result0, Vector128<sbyte> Result1) YShuffleG4X2_Const(Vector128<sbyte> source0, Vector128<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{byte}, Vector128{byte}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<byte> Result0, Vector128<byte> Result1) YShuffleG4X2_Const(Vector128<byte> source0, Vector128<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{short}, Vector128{short}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<short> Result0, Vector128<short> Result1) YShuffleG4X2_Const(Vector128<short> source0, Vector128<short> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{ushort}, Vector128{ushort}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [CLSCompliant(false)]
+            public static (Vector128<ushort> Result0, Vector128<ushort> Result1) YShuffleG4X2_Const(Vector128<ushort> source0, Vector128<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{int}, Vector128{int}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<int> Result0, Vector128<int> Result1) YShuffleG4X2_Const(Vector128<int> source0, Vector128<int> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{uint}, Vector128{uint}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [CLSCompliant(false)]
+            public static (Vector128<uint> Result0, Vector128<uint> Result1) YShuffleG4X2_Const(Vector128<uint> source0, Vector128<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{long}, Vector128{long}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static (Vector128<long> Result0, Vector128<long> Result1) YShuffleG4X2_Const(Vector128<long> source0, Vector128<long> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
+            }
+
+            /// <inheritdoc cref="Vector128s.YShuffleG4X2_Const(Vector128{ulong}, Vector128{ulong}, ShuffleControlG4)"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            [CLSCompliant(false)]
+            public static (Vector128<ulong> Result0, Vector128<ulong> Result1) YShuffleG4X2_Const(Vector128<ulong> source0, Vector128<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
+                return YShuffleG4X2(source0, source1, control);
             }
 
 

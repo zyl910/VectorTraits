@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if NET8_0_OR_GREATER
+#define SHORT_CIRCUIT_WASM
+#endif // NET8_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 #if !NET7_0_OR_GREATER
@@ -9,10 +13,16 @@ using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+#if NET8_0_OR_GREATER
+using System.Runtime.Intrinsics.Wasm;
+#endif // NET8_0_OR_GREATER
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector128;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits {
+    using WasmStatics = WVectorTraits128PackedSimd.Statics;
+
     static partial class Vector128s {
 
 #if NETCOREAPP3_0_OR_GREATER
@@ -74,7 +84,13 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<float> Result0, Vector128<float> Result1) YShuffleG4X2(Vector128<float> source0, Vector128<float> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -88,7 +104,13 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<double> Result0, Vector128<double> Result1) YShuffleG4X2(Vector128<double> source0, Vector128<double> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -103,7 +125,13 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<sbyte> Result0, Vector128<sbyte> Result1) YShuffleG4X2(Vector128<sbyte> source0, Vector128<sbyte> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -117,7 +145,13 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<byte> Result0, Vector128<byte> Result1) YShuffleG4X2(Vector128<byte> source0, Vector128<byte> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -131,7 +165,13 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<short> Result0, Vector128<short> Result1) YShuffleG4X2(Vector128<short> source0, Vector128<short> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -145,8 +185,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static (Vector128<ushort> Result0, Vector128<ushort> Result1) YShuffleG4X2(Vector128<ushort> source0, Vector128<ushort> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -160,7 +206,13 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<int> Result0, Vector128<int> Result1) YShuffleG4X2(Vector128<int> source0, Vector128<int> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -175,7 +227,13 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<uint> Result0, Vector128<uint> Result1) YShuffleG4X2(Vector128<uint> source0, Vector128<uint> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -189,7 +247,13 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<long> Result0, Vector128<long> Result1) YShuffleG4X2(Vector128<long> source0, Vector128<long> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -203,8 +267,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static (Vector128<ulong> Result0, Vector128<ulong> Result1) YShuffleG4X2(Vector128<ulong> source0, Vector128<ulong> source1, ShuffleControlG4 control) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YShuffleG4X2(source0, source1, control);
+            }
+#endif // SHORT_CIRCUIT_WASM
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
@@ -267,6 +337,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<float> Result0, Vector128<float> Result1) YShuffleG4X2_Const(Vector128<float> source0, Vector128<float> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -281,6 +352,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<double> Result0, Vector128<double> Result1) YShuffleG4X2_Const(Vector128<double> source0, Vector128<double> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -295,6 +367,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static (Vector128<sbyte> Result0, Vector128<sbyte> Result1) YShuffleG4X2_Const(Vector128<sbyte> source0, Vector128<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
@@ -310,6 +383,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<byte> Result0, Vector128<byte> Result1) YShuffleG4X2_Const(Vector128<byte> source0, Vector128<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -324,6 +398,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<short> Result0, Vector128<short> Result1) YShuffleG4X2_Const(Vector128<short> source0, Vector128<short> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -338,6 +413,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static (Vector128<ushort> Result0, Vector128<ushort> Result1) YShuffleG4X2_Const(Vector128<ushort> source0, Vector128<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
@@ -353,6 +429,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<int> Result0, Vector128<int> Result1) YShuffleG4X2_Const(Vector128<int> source0, Vector128<int> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -367,6 +444,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static (Vector128<uint> Result0, Vector128<uint> Result1) YShuffleG4X2_Const(Vector128<uint> source0, Vector128<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
@@ -382,6 +460,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector128<long> Result0, Vector128<long> Result1) YShuffleG4X2_Const(Vector128<long> source0, Vector128<long> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -396,6 +475,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static (Vector128<ulong> Result0, Vector128<ulong> Result1) YShuffleG4X2_Const(Vector128<ulong> source0, Vector128<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);

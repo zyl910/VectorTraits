@@ -269,8 +269,8 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 (lower, upper) = Vectors.Widen(p0);
-                vrt = Vectors.Add(vrt, lower);
-                vrt1 = Vectors.Add(vrt1, upper);
+                vrt = Vector.Add(vrt, lower);
+                vrt1 = Vector.Add(vrt1, upper);
                 p0 = ref Unsafe.Add(ref p0, 1);
             }
             // b) Remainder processs.
@@ -279,7 +279,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
                 rt += (TMyOut)Unsafe.Add(ref p, i);
             }
             // Reduce.
-            vrt = Vectors.Add(vrt, vrt1);
+            vrt = Vector.Add(vrt, vrt1);
             rt = Vectors.Sum(vrt);
             return rt;
         }
