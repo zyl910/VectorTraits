@@ -39,7 +39,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         private static readonly Vector<TMy> indices = Vectors.CreateByDoubleLoop<TMy>(0, 2);
         private static readonly Vector<TMy> vector1 = Vectors<TMy>.SerialNegative;
 
-
         #region BENCHMARKS_256
 #if BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
 
@@ -147,6 +146,53 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             }
             dstOn256 = StaticSum256Base(srcArray, srcArray.Length, indices);
             CheckResult256("Sum256Base");
+        }
+
+        /// <summary>
+        /// Sum YShuffleX2Kernel - Vector256 - Avx2 - Combine.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum256Avx2_Combine(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> indicesUsed = indices.AsVector256();
+            Vector256<TMy> vector1Used = vector1.AsVector256();
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector256 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleX2Kernel_Combine(p0, vector1Used, indicesUsed);
+                vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            rt = WVectorTraits256Avx2.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum256Avx2_Combine() {
+            WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn256 = StaticSum256Avx2_Combine(srcArray, srcArray.Length, indices);
+            CheckResult256("Sum256Avx2_Combine");
         }
 
 #endif // BENCHMARKS_ALGORITHM
