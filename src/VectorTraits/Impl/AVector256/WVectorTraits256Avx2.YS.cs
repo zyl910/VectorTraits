@@ -1416,7 +1416,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return Avx512Vbmi.VL.PermuteVar32x8x2(vector0, indices, vector1);
                 }
 #endif // NET8_0_OR_GREATER
-                return YShuffleX2Kernel_Combine(vector0, vector1, indices);
+                return YShuffleX2Kernel_Combine2(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX2Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
@@ -1427,6 +1427,28 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<byte> rt0 = YShuffleKernel(vector0, indices);
                 Vector256<byte> mask = Avx2.CompareGreaterThan(vCount.AsSByte(), indices.AsSByte()).AsByte(); // vCount[i]>indices[i] ==> indices[i]<vCount[i].
                 Vector256<byte> rt1 = YShuffleKernel(vector1, indices1);
+                Vector256<byte> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX2Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YShuffleX2Kernel_Combine2(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> indices) {
+                Vector256<byte> vCount = Vector256.Create((byte)Vector256<byte>.Count);
+                Vector256<byte> K0 = Vector256Constants.Shuffle_Byte_LaneAdd_K0;
+                Vector256<byte> K1 = Vector256Constants.Shuffle_Byte_LaneAdd_K1;
+                Vector256<byte> indices1 = Avx2.Subtract(indices, vCount);
+                //Vector256<byte> rt0 = YShuffleKernel(vector0, indices);
+                Vector256<byte> rt0 = Avx2.Or(
+                    Avx2.Shuffle(Avx2.Permute4x64(vector0.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(), Avx2.Add(indices, K1))
+                    , Avx2.Shuffle(vector0, Avx2.Add(indices, K0))
+                );
+                Vector256<byte> mask = Avx2.CompareGreaterThan(vCount.AsSByte(), indices.AsSByte()).AsByte(); // vCount[i]>indices[i] ==> indices[i]<vCount[i].
+                //Vector256<byte> rt1 = YShuffleKernel(vector1, indices1);
+                Vector256<byte> rt1 = Avx2.Or(
+                    Avx2.Shuffle(Avx2.Permute4x64(vector1.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(), Avx2.Add(indices1, K1))
+                    , Avx2.Shuffle(vector1, Avx2.Add(indices1, K0))
+                );
                 Vector256<byte> rt = ConditionalSelect(mask, rt0, rt1);
                 return rt;
             }
@@ -1454,7 +1476,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX2Kernel_Combine(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> indices) {
                 Vector256<byte> indices2 = Avx2.Add(Multiply(indices, Vector256Constants.Shuffle_UInt16_Multiplier).AsByte(), Vector256Constants.Shuffle_UInt16_ByteOffset);
-                return YShuffleX2Kernel_Combine(vector0.AsByte(), vector1.AsByte(), indices2).AsUInt16();
+                return YShuffleX2Kernel_Combine2(vector0.AsByte(), vector1.AsByte(), indices2).AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX2Kernel(Vector256{int}, Vector256{int}, Vector256{int})"/>
