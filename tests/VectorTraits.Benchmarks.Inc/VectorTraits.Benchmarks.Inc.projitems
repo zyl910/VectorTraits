@@ -96,6 +96,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG4X2Benchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG4X2Benchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleG4X2Benchmark_SByte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)avector\ys\YShuffleX2KernelBenchmark_Byte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)avector\ys\YShuffleX2KernelBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)avector\ys\YShuffleX2KernelBenchmark_Int32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)avector\ys\YShuffleX2KernelBenchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkMain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IntroDisassemblyDry.cs" />
   </ItemGroup>
