@@ -1986,7 +1986,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YShuffleX2Kernel_Combine(Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> indices) {
-                return YShuffleX2Kernel_Combine(vector0.AsByte(), vector1.AsByte(), indices.AsByte()).AsSByte();
+                return YShuffleX2Kernel_Combine3(vector0.AsByte(), vector1.AsByte(), indices.AsByte()).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX2Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
