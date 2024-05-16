@@ -3538,7 +3538,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
-                return YShuffleX4Kernel_Core_Combine2(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
+                return YShuffleX4Kernel_Core_Combine2B(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
