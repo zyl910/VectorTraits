@@ -3377,10 +3377,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<byte> mask3 = OnesComplement(mask2); // indices[i]>=Count*3.
                 mask2 = AndNot(mask2, mask1);
                 mask1 = AndNot(mask1, mask0);
-                args0 = ConditionalSelect_Relaxed(mask0, indices, Vector256Constants.Shuffle_Byte_Clear);
-                args1 = ConditionalSelect_Relaxed(mask1, indices1, Vector256Constants.Shuffle_Byte_Clear);
-                args2 = ConditionalSelect_Relaxed(mask2, indices2, Vector256Constants.Shuffle_Byte_Clear);
-                args3 = ConditionalSelect_Relaxed(mask3, indices3, Vector256Constants.Shuffle_Byte_Clear);
+                args0 = ConditionalSelect_Relaxed(mask0, indices, Vector256Constants.Byte_VMinSByte);
+                args1 = ConditionalSelect_Relaxed(mask1, indices1, Vector256Constants.Byte_VMinSByte);
+                args2 = ConditionalSelect_Relaxed(mask2, indices2, Vector256Constants.Byte_VMinSByte);
+                args3 = ConditionalSelect_Relaxed(mask3, indices3, Vector256Constants.Byte_VMinSByte);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel_Args(Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
@@ -3553,6 +3553,45 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX4Kernel_Core_Combine2(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3) {
+                Vector256<sbyte> vzero = Vector256<sbyte>.Zero;
+                // Format: Code; //Latency, Throughput(references IceLake)
+                // -- vector0, vector1.
+                Vector256<byte> vector0B = Avx2.Permute4x64(vector0.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(); // 3,1
+                Vector256<byte> vector1B = Avx2.Permute4x64(vector1.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(); // 3,1
+                Vector256<byte> flag0 = Avx2.CompareGreaterThan(vzero, args0.AsSByte()).AsByte(); // 1,0.33
+                Vector256<byte> flag1 = Avx2.CompareGreaterThan(vzero, args1.AsSByte()).AsByte(); // 1,0.33
+                Vector256<byte> rt0A = Avx2.Shuffle(vector0, Avx2.Add(args0, Vector256Constants.Shuffle_Byte_LaneAdd_K0));  // (1,0.5)+(1,0.33) = (2,0.83)
+                Vector256<byte> rt0B = Avx2.Shuffle(vector0B, Avx2.Add(args0, Vector256Constants.Shuffle_Byte_LaneAdd_K1)); // (1,0.5)+(1,0.33) = (2,0.83)
+                Vector256<byte> rt1A = Avx2.Shuffle(vector1, Avx2.Add(args1, Vector256Constants.Shuffle_Byte_LaneAdd_K0));  // (1,0.5)+(1,0.33) = (2,0.83)
+                Vector256<byte> rt1B = Avx2.Shuffle(vector1B, Avx2.Add(args1, Vector256Constants.Shuffle_Byte_LaneAdd_K1)); // (1,0.5)+(1,0.33) = (2,0.83)
+                Vector256<byte> rt0 = Avx2.Or(rt0A, rt0B); // 1,0.33
+                Vector256<byte> rt1 = Avx2.Or(rt1A, rt1B); // 1,0.33
+                rt0 = AndNot(rt0, flag0); // 1,0.33
+                rt1 = AndNot(rt1, flag1); // 1,0.33
+                Vector256<byte> rt = Avx2.Or(rt0, rt1); // 1,0.33
+                // -- vector2, vector3.
+                vector0B = Avx2.Permute4x64(vector2.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(); // 3,1
+                vector1B = Avx2.Permute4x64(vector3.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(); // 3,1
+                flag0 = Avx2.CompareGreaterThan(vzero, args2.AsSByte()).AsByte(); // 1,0.33
+                flag1 = Avx2.CompareGreaterThan(vzero, args3.AsSByte()).AsByte(); // 1,0.33
+                rt0A = Avx2.Shuffle(vector2, Avx2.Add(args2, Vector256Constants.Shuffle_Byte_LaneAdd_K0));  // (1,0.5)+(1,0.33) = (2,0.83)
+                rt0B = Avx2.Shuffle(vector0B, Avx2.Add(args2, Vector256Constants.Shuffle_Byte_LaneAdd_K1)); // (1,0.5)+(1,0.33) = (2,0.83)
+                rt1A = Avx2.Shuffle(vector3, Avx2.Add(args3, Vector256Constants.Shuffle_Byte_LaneAdd_K0));  // (1,0.5)+(1,0.33) = (2,0.83)
+                rt1B = Avx2.Shuffle(vector1B, Avx2.Add(args3, Vector256Constants.Shuffle_Byte_LaneAdd_K1)); // (1,0.5)+(1,0.33) = (2,0.83)
+                rt0 = Avx2.Or(rt0A, rt0B); // 1,0.33
+                rt1 = Avx2.Or(rt1A, rt1B); // 1,0.33
+                rt0 = AndNot(rt0, flag0); // 1,0.33
+                rt1 = AndNot(rt1, flag1); // 1,0.33
+                rt0 = Avx2.Or(rt0, rt1); // 1,0.33
+                // done.
+                rt = Avx2.Or(rt, rt0); // 1,0.33
+                return rt; //total latency: 43, total throughput CPI: 15.66
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YShuffleX4Kernel_Core_Combine2B(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3) {
+                Vector256<byte> vzero = Vector256<byte>.Zero;
                 // Format: Code; //Latency, Throughput(references IceLake)
                 // -- vector0, vector1.
                 Vector256<byte> vector0B = Avx2.Permute4x64(vector0.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(); // 3,1
@@ -3563,20 +3602,24 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<byte> rt1B = Avx2.Shuffle(vector1B, Avx2.Add(args1, Vector256Constants.Shuffle_Byte_LaneAdd_K1)); // (1,0.5)+(1,0.33) = (2,0.83)
                 Vector256<byte> rt0 = Avx2.Or(rt0A, rt0B); // 1,0.33
                 Vector256<byte> rt1 = Avx2.Or(rt1A, rt1B); // 1,0.33
+                rt0 = Avx2.BlendVariable(rt0, vzero, args0); // 3,1
+                rt1 = Avx2.BlendVariable(rt1, vzero, args1); // 3,1
                 Vector256<byte> rt = Avx2.Or(rt0, rt1); // 1,0.33
                 // -- vector2, vector3.
                 vector0B = Avx2.Permute4x64(vector2.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(); // 3,1
                 vector1B = Avx2.Permute4x64(vector3.AsInt64(), (byte)ShuffleControlG4.ZWXY).AsByte(); // 3,1
-                rt0A = Avx2.Shuffle(vector0, Avx2.Add(args2, Vector256Constants.Shuffle_Byte_LaneAdd_K0));  // (1,0.5)+(1,0.33) = (2,0.83)
+                rt0A = Avx2.Shuffle(vector2, Avx2.Add(args2, Vector256Constants.Shuffle_Byte_LaneAdd_K0));  // (1,0.5)+(1,0.33) = (2,0.83)
                 rt0B = Avx2.Shuffle(vector0B, Avx2.Add(args2, Vector256Constants.Shuffle_Byte_LaneAdd_K1)); // (1,0.5)+(1,0.33) = (2,0.83)
-                rt1A = Avx2.Shuffle(vector1, Avx2.Add(args3, Vector256Constants.Shuffle_Byte_LaneAdd_K0));  // (1,0.5)+(1,0.33) = (2,0.83)
+                rt1A = Avx2.Shuffle(vector3, Avx2.Add(args3, Vector256Constants.Shuffle_Byte_LaneAdd_K0));  // (1,0.5)+(1,0.33) = (2,0.83)
                 rt1B = Avx2.Shuffle(vector1B, Avx2.Add(args3, Vector256Constants.Shuffle_Byte_LaneAdd_K1)); // (1,0.5)+(1,0.33) = (2,0.83)
                 rt0 = Avx2.Or(rt0A, rt0B); // 1,0.33
                 rt1 = Avx2.Or(rt1A, rt1B); // 1,0.33
+                rt0 = Avx2.BlendVariable(rt0, vzero, args2); // 3,1
+                rt1 = Avx2.BlendVariable(rt1, vzero, args3); // 3,1
                 rt0 = Avx2.Or(rt0, rt1); // 1,0.33
                 // done.
                 rt = Avx2.Or(rt, rt0); // 1,0.33
-                return rt; //total latency: 35, total throughput CPI: 13
+                return rt; //total latency: 47, total throughput CPI: 17
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel_Core(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>

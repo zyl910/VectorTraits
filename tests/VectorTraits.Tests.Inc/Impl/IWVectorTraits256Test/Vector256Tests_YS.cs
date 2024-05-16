@@ -1053,7 +1053,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<TIdx>(0, 4),
                 Vector256s.CreateByDoubleLoop<TIdx>(1, 4),
                 Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src), 4),
-            };
+                Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src) + Vector256<TIdx>.Count, 4),
+                Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src) + Vector256<TIdx>.Count*2, 4),
+                Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src) + Vector256<TIdx>.Count*3, 4),
+            ｝;
             foreach (Vector256<T> vector in samples) {
                 Vector256<T> vector1 = Vector256s<T>.SerialNegative;
                 Vector256<T> vector2 = Vector256s.CreateByDoubleLoop<T>(-Vector256<T>.Count, -1);

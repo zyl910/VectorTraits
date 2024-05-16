@@ -178,6 +178,20 @@ namespace Zyl.VectorTraits.Impl {
             }
         }
 
+        /// <inheritdoc cref="Vector256s{T}.VMinSByte"/>
+        /// <remarks>For SByte.</remarks>
+        [CLSCompliant(false)]
+        public static Vector256<byte> Byte_VMinSByte {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+#if USE_VECTOR_CREATE
+                return Vector256.Create(sbyte.MinValue).AsByte();
+#else
+                return Vector256s<byte>.VMinSByte;
+#endif // USE_VECTOR_CREATE
+            }
+        }
+
         // -- Vectors_T: Vector256s<Int16> --
 
         /// <inheritdoc cref="Vector256s{T}.V1"/>
@@ -789,17 +803,6 @@ namespace Zyl.VectorTraits.Impl {
         } = Vector256.Create((byte)1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 1, 3, 5, 7, 9, 11, 13, 15, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80);
 #endif // USE_VECTOR_CREATE
 
-
-        /// <summary>Shuffle - Byte - Clear to zero.</summary>
-        public static Vector256<byte> Shuffle_Byte_Clear {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if USE_VECTOR_CREATE
-            get => Vector256.Create((uint)0xC0C0C0C0U).AsByte();
-        }
-#else
-            get;
-        } = Vector256.Create((uint)0xC0C0C0C0U).AsByte();
-#endif // USE_VECTOR_CREATE
 
         /// <summary>Shuffle - Byte - LaneAdd - K0 .</summary>
         public static Vector256<byte> Shuffle_Byte_LaneAdd_K0 {
