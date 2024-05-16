@@ -790,6 +790,17 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE
 
 
+        /// <summary>Shuffle - Byte - Clear to zero.</summary>
+        public static Vector256<byte> Shuffle_Byte_Clear {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector256.Create((uint)0xC0C0C0C0U).AsByte();
+        }
+#else
+            get;
+        } = Vector256.Create((uint)0xC0C0C0C0U).AsByte();
+#endif // USE_VECTOR_CREATE
+
         /// <summary>Shuffle - Byte - LaneAdd - K0 .</summary>
         public static Vector256<byte> Shuffle_Byte_LaneAdd_K0 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
