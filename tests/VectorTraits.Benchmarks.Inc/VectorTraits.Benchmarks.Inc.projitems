@@ -100,10 +100,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleX2KernelBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleX2KernelBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleX2KernelBenchmark_Int64.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)avector\ys\YShuffleX4KernelBenchmark_Byte.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)avector\ys\YShuffleX4KernelBenchmark_Int16.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)avector\ys\YShuffleX4KernelBenchmark_Int32.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)avector\ys\YShuffleX4KernelBenchmark_Int64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleX4KernelBenchmark_Byte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleX4KernelBenchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleX4KernelBenchmark_Int32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YS\YShuffleX4KernelBenchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkMain.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IntroDisassemblyDry.cs" />
   </ItemGroup>
