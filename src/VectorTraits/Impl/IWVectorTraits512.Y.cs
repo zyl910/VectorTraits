@@ -8,6 +8,9 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 #endif
+#if NET5_0_OR_GREATER
+using System.Runtime.Intrinsics.Arm;
+#endif // NET5_0_OR_GREATER
 using System.Text;
 using Zyl.VectorTraits.Numerics;
 
@@ -990,7 +993,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector512{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.PackSignedSaturate(Vector512{short}, Vector512{short})"/>
+        /// <seealso cref="Avx512BW.PackSignedSaturate(Vector512{short}, Vector512{short})"/>
         Vector512<sbyte> YNarrowSaturate(Vector512<short> lower, Vector512<short> upper);
 
         /// <summary>
@@ -1011,7 +1014,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector512{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturate_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.PackSignedSaturate(Vector512{int}, Vector512{int})"/>
+        /// <seealso cref="Avx512BW.PackSignedSaturate(Vector512{int}, Vector512{int})"/>
         Vector512<short> YNarrowSaturate(Vector512<int> lower, Vector512<int> upper);
 
         /// <summary>
@@ -1071,7 +1074,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector512{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.PackUnsignedSaturate(Vector512{short}, Vector512{short})"/>
+        /// <seealso cref="Avx512BW.PackUnsignedSaturate(Vector512{short}, Vector512{short})"/>
         Vector512<byte> YNarrowSaturateUnsigned(Vector512<short> lower, Vector512<short> upper);
 
         /// <summary>
@@ -1082,7 +1085,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="upper">The vector that will be narrowed to the upper half of the result vector (构成缩窄结果向量的高半部分向量).</param>
         /// <returns>A <seealso cref="Vector512{T}"/> containing elements narrowed from <paramref name="lower" /> and <paramref name="upper" /> (一个包含了来自 <paramref name="lower" /> 与 <paramref name="upper" /> 缩窄元素的向量).</returns>
         /// <seealso cref="YNarrowSaturateUnsigned_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.PackUnsignedSaturate(Vector512{int}, Vector512{int})"/>
+        /// <seealso cref="Avx512BW.PackUnsignedSaturate(Vector512{int}, Vector512{int})"/>
         Vector512<ushort> YNarrowSaturateUnsigned(Vector512<int> lower, Vector512<int> upper);
 
         /// <summary>
@@ -1523,8 +1526,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
-        /// <seealso cref="Avx.Permute(Vector512{float}, byte)"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{int}, byte)"/>
+        /// <seealso cref="Avx512F.Permute4x32(Vector512{float}, byte)"/>
         Vector512<float> YShuffleG4_Const(Vector512<float> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -1535,7 +1537,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.Permute4x64(Vector512{double}, byte)"/>
+        /// <seealso cref="Avx512F.Permute4x64(Vector512{double}, byte)"/>
         Vector512<double> YShuffleG4_Const(Vector512<double> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -1566,8 +1568,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.ShuffleHigh(Vector512{short}, byte)"/>
-        /// <seealso cref="Avx2.ShuffleLow(Vector512{short}, byte)"/>
+        /// <seealso cref="Avx512BW.ShuffleHigh(Vector512{short}, byte)"/>
+        /// <seealso cref="Avx512BW.ShuffleLow(Vector512{short}, byte)"/>
         Vector512<short> YShuffleG4_Const(Vector512<short> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -1578,8 +1580,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.ShuffleHigh(Vector512{ushort}, byte)"/>
-        /// <seealso cref="Avx2.ShuffleLow(Vector512{ushort}, byte)"/>
+        /// <seealso cref="Avx512BW.ShuffleHigh(Vector512{ushort}, byte)"/>
+        /// <seealso cref="Avx512BW.ShuffleLow(Vector512{ushort}, byte)"/>
         Vector512<ushort> YShuffleG4_Const(Vector512<ushort> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -1590,7 +1592,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{int}, byte)"/>
+        /// <seealso cref="Avx512F.Shuffle(Vector512{int}, byte)"/>
         Vector512<int> YShuffleG4_Const(Vector512<int> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -1601,7 +1603,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{uint}, byte)"/>
+        /// <seealso cref="Avx512F.Shuffle(Vector512{uint}, byte)"/>
         Vector512<uint> YShuffleG4_Const(Vector512<uint> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -1612,7 +1614,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.Permute4x64(Vector512{long}, byte)"/>
+        /// <seealso cref="Avx512F.Permute4x64(Vector512{long}, byte)"/>
         Vector512<long> YShuffleG4_Const(Vector512<long> source, [ConstantExpected] ShuffleControlG4 control);
 
         /// <summary>
@@ -1623,7 +1625,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>A new source containing the values from <paramref name="source" /> selected by the given <paramref name="control" /> (一个新向量，其中包含给定 <paramref name="control" /> 从 <paramref name="source" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleG4_AcceleratedTypes"/>
-        /// <seealso cref="Avx2.Permute4x64(Vector512{ulong}, byte)"/>
+        /// <seealso cref="Avx512F.Permute4x64(Vector512{ulong}, byte)"/>
         Vector512<ulong> YShuffleG4_Const(Vector512<ulong> source, [ConstantExpected] ShuffleControlG4 control);
 
 
@@ -1897,6 +1899,39 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- <see cref="Shuffle(Vector512{byte}, Vector512{byte})"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
         /// <para>- <see cref="YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
         /// <para>- <see cref="YShuffleKernel(Vector512{byte}, Vector512{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>Related hardware instructions (相关的硬件指令).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, Vector128{byte}, Vector128{byte})">TBX(vqvtbx1q_u8)</see></description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description>Combine by <see cref="Avx512Vbmi.PermuteVar64x8(Vector512{byte}, Vector512{byte})">VPERMB(_mm512_permutevar64x8_epi8)</see></description>
+        ///        <description>Combine by <see cref="Avx512BW.PermuteVar32x16(Vector512{ushort}, Vector512{ushort})">VPERMW(_mm512_permutevar32x16_epi16)</see></description>
+        ///        <description>Combine by <see cref="Avx512F.PermuteVar16x32(Vector512{uint}, Vector512{uint})">VPERMD(_mm512_permutevar16x32_epi32)</see>
+        ///        /<see cref="Avx512F.PermuteVar16x32(Vector512{float}, Vector512{int})">VPERMPS(_mm512_permutevar16x32_ps)</see></description>
+        ///        <description>Combine by <see cref="Avx512F.PermuteVar8x64(Vector512{ulong}, Vector512{ulong})">VPERMQ(_mm512_permute8x64_pd)</see>
+        ///        /<see cref="Avx512F.PermuteVar8x64(Vector512{double}, Vector512{long})">VPERMPD(_mm512_permute8x64_pd)</see></description>
+        ///    </item>
+        /// </list>
         /// </remarks>
         /// <seealso cref="YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
         TypeCodeFlags YShuffleInsert_AcceleratedTypes { get; }
@@ -2272,6 +2307,39 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- <see cref="Shuffle(Vector512{byte}, Vector512{byte})"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
         /// <para>- <see cref="YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
         /// <para>- <see cref="YShuffleKernel(Vector512{byte}, Vector512{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>Related hardware instructions (相关的硬件指令).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">TBL(vqvtbl1q_u8)</see></description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description><see cref="Avx512Vbmi.PermuteVar64x8(Vector512{byte}, Vector512{byte})">VPERMB(_mm512_permutevar64x8_epi8)</see></description>
+        ///        <description><see cref="Avx512BW.PermuteVar32x16(Vector512{ushort}, Vector512{ushort})">VPERMW(_mm512_permutevar32x16_epi16)</see></description>
+        ///        <description><see cref="Avx512F.PermuteVar16x32(Vector512{uint}, Vector512{uint})">VPERMD(_mm512_permutevar16x32_epi32)</see>
+        ///        /<see cref="Avx512F.PermuteVar16x32(Vector512{float}, Vector512{int})">VPERMPS(_mm512_permutevar16x32_ps)</see></description>
+        ///        <description><see cref="Avx512F.PermuteVar8x64(Vector512{ulong}, Vector512{ulong})">VPERMQ(_mm512_permute8x64_pd)</see>
+        ///        /<see cref="Avx512F.PermuteVar8x64(Vector512{double}, Vector512{long})">VPERMPD(_mm512_permute8x64_pd)</see></description>
+        ///    </item>
+        /// </list>
         /// </remarks>
         /// <seealso cref="YShuffleKernel(Vector512{byte}, Vector512{byte})"/>
         /// <seealso cref="YShuffleKernel_Args(Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
@@ -2287,7 +2355,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{float}, Vector512{int})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{float}, Vector512{int})"/>
         Vector512<float> YShuffleKernel(Vector512<float> vector, Vector512<int> indices);
 
         /// <summary>
@@ -2310,7 +2377,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{sbyte}, Vector512{sbyte})"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{sbyte}, Vector512{sbyte})"/>
         Vector512<sbyte> YShuffleKernel(Vector512<sbyte> vector, Vector512<sbyte> indices);
 
         /// <summary>
@@ -2322,7 +2388,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{byte}, Vector512{byte})"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{byte}, Vector512{byte})"/>
         Vector512<byte> YShuffleKernel(Vector512<byte> vector, Vector512<byte> indices);
 
         /// <summary>
@@ -2356,7 +2421,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{int}, Vector512{int})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{int}, Vector512{int})"/>
         Vector512<int> YShuffleKernel(Vector512<int> vector, Vector512<int> indices);
 
         /// <summary>
@@ -2368,7 +2432,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{uint}, Vector512{uint})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{uint}, Vector512{uint})"/>
         Vector512<uint> YShuffleKernel(Vector512<uint> vector, Vector512<uint> indices);
 
         /// <summary>
@@ -2493,7 +2556,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector512{int}, out Vector512{int}, out Vector512{int})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{float}, Vector512{int})"/>
         Vector512<float> YShuffleKernel_Core(Vector512<float> vector, Vector512<int> args0, Vector512<int> args1);
 
         /// <summary>
@@ -2518,7 +2580,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{sbyte}, Vector512{sbyte})"/>
         Vector512<sbyte> YShuffleKernel_Core(Vector512<sbyte> vector, Vector512<sbyte> args0, Vector512<sbyte> args1);
 
         /// <summary>
@@ -2531,7 +2592,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{byte}, Vector512{byte})"/>
         Vector512<byte> YShuffleKernel_Core(Vector512<byte> vector, Vector512<byte> args0, Vector512<byte> args1);
 
         /// <summary>
@@ -2568,7 +2628,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector512{int}, out Vector512{int}, out Vector512{int})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{int}, Vector512{int})"/>
         Vector512<int> YShuffleKernel_Core(Vector512<int> vector, Vector512<int> args0, Vector512<int> args1);
 
         /// <summary>
@@ -2581,7 +2640,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="YShuffleKernel_AcceleratedTypes"/>
         /// <seealso cref="YShuffleKernel_Args(Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{uint}, Vector512{uint})"/>
         Vector512<uint> YShuffleKernel_Core(Vector512<uint> vector, Vector512<uint> args0, Vector512<uint> args1);
 
         /// <summary>

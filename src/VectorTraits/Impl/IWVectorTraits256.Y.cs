@@ -1900,6 +1900,39 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- <see cref="Shuffle(Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
         /// <para>- <see cref="YShuffleInsert(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
         /// <para>- <see cref="YShuffleKernel(Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>Related hardware instructions (相关的硬件指令).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, Vector128{byte}, Vector128{byte})">TBX(vqvtbx1q_u8)</see></description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description>Combine by <see cref="Avx512Vbmi.VL.PermuteVar32x8(Vector256{byte}, Vector256{byte})">VPERMB(_mm256_permutevar32x8_epi8)</see></description>
+        ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar16x16(Vector256{ushort}, Vector256{ushort})">VPERMW(_mm256_permutevar16x16_epi16)</see></description>
+        ///        <description>Combine by <see cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})">VPERMD(_mm256_permutevar8x32_epi32)</see>
+        ///        /<see cref="Avx2.PermuteVar8x32(Vector256{float}, Vector256{int})">VPERMPS(_mm256_permutevar8x32_ps)</see></description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">VPERMQ(_mm256_permute4x64_pd)</see>
+        ///        /<see cref="Avx512F.VL.PermuteVar4x64(Vector256{double}, Vector256{long})">VPERMPD(_mm256_permute4x64_pd)</see></description>
+        ///    </item>
+        /// </list>
         /// </remarks>
         /// <seealso cref="YShuffleInsert(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
         TypeCodeFlags YShuffleInsert_AcceleratedTypes { get; }
@@ -2275,6 +2308,39 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- <see cref="Shuffle(Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).</para>
         /// <para>- <see cref="YShuffleInsert(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
         /// <para>- <see cref="YShuffleKernel(Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
+        /// <para>Related hardware instructions (相关的硬件指令).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">TBL(vqvtbl1q_u8)</see></description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description><see cref="Avx512Vbmi.VL.PermuteVar32x8(Vector256{byte}, Vector256{byte})">VPERMB(_mm256_permutevar32x8_epi8)</see></description>
+        ///        <description><see cref="Avx512BW.VL.PermuteVar16x16(Vector256{ushort}, Vector256{ushort})">VPERMW(_mm256_permutevar16x16_epi16)</see></description>
+        ///        <description><see cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})">VPERMD(_mm256_permutevar8x32_epi32)</see>
+        ///        /<see cref="Avx2.PermuteVar8x32(Vector256{float}, Vector256{int})">VPERMPS(_mm256_permutevar8x32_ps)</see></description>
+        ///        <description><see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">VPERMQ(_mm256_permute4x64_pd)</see>
+        ///        /<see cref="Avx512F.VL.PermuteVar4x64(Vector256{double}, Vector256{long})">VPERMPD(_mm256_permute4x64_pd)</see></description>
+        ///    </item>
+        /// </list>
         /// </remarks>
         /// <seealso cref="YShuffleKernel(Vector256{byte}, Vector256{byte})"/>
         /// <seealso cref="YShuffleKernel_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
@@ -2623,9 +2689,38 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- <see cref="YShuffleX2Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
         /// <para>- <see cref="YShuffleX2Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
         /// <para>Related hardware instructions (相关的硬件指令).</para>
-        /// <para>- Arm Architecture: The TBL instructions. e.g. <see cref="AdvSimd.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}}, Vector64{byte})"/>.</para>
-        /// <para>- Wasm Architecture: (None).</para>
-        /// <para>- X86 Architecture: (None). Use VPERMI2B/VPERMI2W/VPERMI2D/VPERMI2Q and other instructions to implement this methods.</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBL(vqtbl2q_u8)</see></description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description>Combine by <see cref="Avx512Vbmi.VL.PermuteVar32x8x2(Vector256{byte}, Vector256{byte}, Vector256{byte})">VPERMI2B(_mm256_permutex2var_epi8)</see></description>
+        ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar16x16x2(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})">VPERMI2W(_mm256_permutex2var_epi16)</see></description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar8x32x2(Vector256{uint}, Vector256{uint}, Vector256{uint})">VPERMI2D(_mm256_permutex2var_epi32)</see>
+        ///        /<see cref="Avx512F.VL.PermuteVar8x32x2(Vector256{float}, Vector256{int}, Vector256{float})">VPERMI2PS(_mm256_permutex2var_ps)</see></description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x64x2(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})">VPERMI2Q(_mm256_permutex2var_epi64)</see>
+        ///        /<see cref="Avx512F.VL.PermuteVar4x64x2(Vector256{double}, Vector256{long}, Vector256{double})">VPERMI2PD(_mm256_permutex2var_pd)</see></description>
+        ///    </item>
+        /// </list>
         /// </remarks>
         /// <seealso cref="YShuffleX2(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
         /// <seealso cref="YShuffleX2_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
@@ -2779,9 +2874,38 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- <see cref="YShuffleX2Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
         /// <para>- <see cref="YShuffleX2Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
         /// <para>Related hardware instructions (相关的硬件指令).</para>
-        /// <para>- Arm Architecture: The TBX instructions. e.g. <see cref="AdvSimd.VectorTableLookupExtension(Vector64{byte}, ValueTuple{Vector128{byte}, Vector128{byte}}, Vector64{byte})"/>.</para>
-        /// <para>- Wasm Architecture: (None).</para>
-        /// <para>- X86 Architecture: (None). Use VPERMI2B/VPERMI2W/VPERMI2D/VPERMI2Q and other instructions to implement this methods.</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, ValueTuple{Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBX(vqtbx2q_u8)</see></description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description>Combine by <see cref="Avx512Vbmi.VL.PermuteVar32x8x2(Vector256{byte}, Vector256{byte}, Vector256{byte})">VPERMI2B(_mm256_permutex2var_epi8)</see></description>
+        ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar16x16x2(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})">VPERMI2W(_mm256_permutex2var_epi16)</see></description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar8x32x2(Vector256{uint}, Vector256{uint}, Vector256{uint})">VPERMI2D(_mm256_permutex2var_epi32)</see>
+        ///        /<see cref="Avx512F.VL.PermuteVar8x32x2(Vector256{float}, Vector256{int}, Vector256{float})">VPERMI2PS(_mm256_permutex2var_ps)</see></description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x64x2(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})">VPERMI2Q(_mm256_permutex2var_epi64)</see>
+        ///        /<see cref="Avx512F.VL.PermuteVar4x64x2(Vector256{double}, Vector256{long}, Vector256{double})">VPERMI2PD(_mm256_permutex2var_pd)</see></description>
+        ///    </item>
+        /// </list>
         /// </remarks>
         /// <seealso cref="YShuffleX2Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
         /// <seealso cref="YShuffleX2Insert_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
@@ -2936,9 +3060,38 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- <see cref="YShuffleX2Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
         /// <para>- <see cref="YShuffleX2Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
         /// <para>Related hardware instructions (相关的硬件指令).</para>
-        /// <para>- Arm Architecture: The TBL instructions. e.g. <see cref="AdvSimd.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}}, Vector64{byte})"/>.</para>
-        /// <para>- Wasm Architecture: (None).</para>
-        /// <para>- X86 Architecture: The VPERMI2B/VPERMI2W/VPERMI2D/VPERMI2Q instructions. e.g. <see cref="Avx512Vbmi.VL.PermuteVar32x8x2(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>.</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBL(vqtbl2q_u8)</see></description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description><see cref="Avx512Vbmi.VL.PermuteVar32x8x2(Vector256{byte}, Vector256{byte}, Vector256{byte})">VPERMI2B(_mm256_permutex2var_epi8)</see></description>
+        ///        <description><see cref="Avx512BW.VL.PermuteVar16x16x2(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})">VPERMI2W(_mm256_permutex2var_epi16)</see></description>
+        ///        <description><see cref="Avx512F.VL.PermuteVar8x32x2(Vector256{uint}, Vector256{uint}, Vector256{uint})">VPERMI2D(_mm256_permutex2var_epi32)</see>
+        ///        /<see cref="Avx512F.VL.PermuteVar8x32x2(Vector256{float}, Vector256{int}, Vector256{float})">VPERMI2PS(_mm256_permutex2var_ps)</see></description>
+        ///        <description><see cref="Avx512F.VL.PermuteVar4x64x2(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})">VPERMI2Q(_mm256_permutex2var_epi64)</see>
+        ///        /<see cref="Avx512F.VL.PermuteVar4x64x2(Vector256{double}, Vector256{long}, Vector256{double})">VPERMI2PD(_mm256_permutex2var_pd)</see></description>
+        ///    </item>
+        /// </list>
         /// </remarks>
         /// <seealso cref="YShuffleX2Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
         /// <seealso cref="YShuffleX2Kernel_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
@@ -3090,9 +3243,36 @@ namespace Zyl.VectorTraits.Impl {
         /// <para>- <see cref="YShuffleX4Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).</para>
         /// <para>- <see cref="YShuffleX4Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>: If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). It has the best performance, and is used when you are sure that the index value is not out of range (它的性能最好, 用于确信索引值不会超出范围时).</para>
         /// <para>Related hardware instructions (相关的硬件指令).</para>
-        /// <para>- Arm Architecture: The TBL instructions. e.g. <see cref="AdvSimd.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector64{byte})"/>.</para>
-        /// <para>- Wasm Architecture: (None).</para>
-        /// <para>- X86 Architecture: (None).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBL(vqtbl4q_u8)</see></description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        /// </list>
         /// </remarks>
         /// <seealso cref="YShuffleX4Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
         /// <seealso cref="YShuffleX4Kernel_Args(Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
