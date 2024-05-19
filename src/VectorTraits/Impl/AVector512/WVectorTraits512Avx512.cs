@@ -1526,13 +1526,21 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Shuffle(Vector512{float}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Shuffle(Vector512<float> vector, Vector512<int> indices) {
-                return Shuffle(vector.AsUInt32(), indices.AsUInt32()).AsSingle();
+                //return Shuffle(vector.AsUInt32(), indices.AsUInt32()).AsSingle();
+                Vector512<float> mask = Avx512F.CompareEqual(Avx512F.ShiftRightLogical(indices, 4), Vector512<int>.Zero).AsSingle(); // Unsigned compare: (i < 16)
+                Vector512<float> raw = YShuffleKernel(vector, indices);
+                Vector512<float> rt = Avx512DQ.And(raw, mask);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle(Vector512{double}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Shuffle(Vector512<double> vector, Vector512<long> indices) {
-                return Shuffle(vector.AsUInt64(), indices.AsUInt64()).AsDouble();
+                //return Shuffle(vector.AsUInt64(), indices.AsUInt64()).AsDouble();
+                Vector512<double> mask = Avx512F.CompareEqual(Avx512F.ShiftRightLogical(indices, 3), Vector512<long>.Zero).AsDouble(); // Unsigned compare: (i < 8)
+                Vector512<double> raw = YShuffleKernel(vector, indices);
+                Vector512<double> rt = Avx512DQ.And(raw, mask);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle(Vector512{sbyte}, Vector512{sbyte})"/>
@@ -1656,13 +1664,19 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Shuffle_Core(Vector512{float}, Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Shuffle_Core(Vector512<float> vector, Vector512<int> args0, Vector512<int> args1) {
-                return Shuffle_Core(vector.AsUInt32(), args0.AsUInt32(), args1.AsUInt32()).AsSingle();
+                //return Shuffle_Core(vector.AsUInt32(), args0.AsUInt32(), args1.AsUInt32()).AsSingle();
+                var raw = YShuffleKernel_Core(vector, args0, args1);
+                var rt = Avx512DQ.And(raw, args1.AsSingle());
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle_Core(Vector512{double}, Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> Shuffle_Core(Vector512<double> vector, Vector512<long> args0, Vector512<long> args1) {
-                return Shuffle_Core(vector.AsUInt64(), args0.AsUInt64(), args1.AsUInt64()).AsDouble();
+                //return Shuffle_Core(vector.AsUInt64(), args0.AsUInt64(), args1.AsUInt64()).AsDouble();
+                var raw = YShuffleKernel_Core(vector, args0, args1);
+                var rt = Avx512DQ.And(raw, args1.AsDouble());
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.Shuffle_Core(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte})"/>
