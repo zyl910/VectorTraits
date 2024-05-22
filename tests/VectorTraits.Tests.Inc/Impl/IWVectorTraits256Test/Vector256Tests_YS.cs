@@ -1066,7 +1066,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 }
                 foreach (Vector256<TIdx> indicesFor in indicesList) {
                     //Vector256<TIdx> indices = indicesFor;
-                    Vector256<TIdx> indicesMask = Vector256.As<byte, TIdx>(Vector256.AsByte(Vector256s.GreaterThan(Vector256Extensions.AsUnsigned((dynamic)Vector256s.CreateByDouble<TIdx>(Vector256<TIdx>.Count * 3)), Vector256Extensions.AsUnsigned((dynamic)indicesFor))));
+                    Vector256<TIdx> indicesMask = Vector256s.GreaterThan_Unsigned((dynamic)Vector256s.CreateByDouble<TIdx>(Vector256<TIdx>.Count * 3), (dynamic)indicesFor);
                     Vector256<TIdx> indices = Vector256s.BitwiseAnd(indicesFor, indicesMask);
                     Vector256<T> expected = Vector256s.YShuffleX3Kernel((dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)indices);
                     if (allowLog) {
