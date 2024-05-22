@@ -28,6 +28,7 @@ namespace Zyl.VectorTraits.Impl {
         }
 
         /// <inheritdoc cref="Vector256s.GreaterThan_Unsigned(Vector256{byte}, Vector256{byte})"/>
+        [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<byte> GreaterThan_Unsigned(this IWVectorTraits256 athis, Vector256<byte> left, Vector256<byte> right) {
             return athis.GreaterThan(left, right);
