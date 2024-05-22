@@ -19,7 +19,6 @@ namespace Zyl.VectorTraits.Impl {
     public static partial class IWVectorTraits256_Extensions {
 #if NETCOREAPP3_0_OR_GREATER
 
-
         /// <inheritdoc cref="Vector256s.GreaterThan_Unsigned(Vector256{sbyte}, Vector256{sbyte})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -75,6 +74,7 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<ulong> GreaterThan_Unsigned(this IWVectorTraits256 athis, Vector256<ulong> left, Vector256<ulong> right) {
             return athis.GreaterThan(left, right);
         }
+
 
         /// <inheritdoc cref="Vector256s.Widen{T, TOut}(Vector256{T}, out Vector256{TOut}, out Vector256{TOut})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]

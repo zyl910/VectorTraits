@@ -4,6 +4,11 @@
 #define ALLOW_EXTENSION
 #endif // NET5_0_OR_GREATER
 
+#if NETX_0_OR_GREATER
+#else
+#define ALLOW_EXTENSION_SIGNED
+#endif // NETX_0_OR_GREATER
+
 #endif // NETCOREAPP3_0_OR_GREATER
 
 using System;

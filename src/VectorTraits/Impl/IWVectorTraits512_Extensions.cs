@@ -9,6 +9,7 @@ using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Extensions;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits.Impl {
@@ -17,6 +18,63 @@ namespace Zyl.VectorTraits.Impl {
     /// </summary>
     public static partial class IWVectorTraits512_Extensions {
 #if NET8_0_OR_GREATER
+
+        /// <inheritdoc cref="Vector512s.GreaterThan_Unsigned(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> GreaterThan_Unsigned(this IWVectorTraits512 athis, Vector512<sbyte> left, Vector512<sbyte> right) {
+            return athis.GreaterThan(left.AsUnsigned(), right.AsUnsigned()).AsSigned();
+        }
+
+        /// <inheritdoc cref="Vector512s.GreaterThan_Unsigned(Vector512{byte}, Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> GreaterThan_Unsigned(this IWVectorTraits512 athis, Vector512<byte> left, Vector512<byte> right) {
+            return athis.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="Vector512s.GreaterThan_Unsigned(Vector512{short}, Vector512{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> GreaterThan_Unsigned(this IWVectorTraits512 athis, Vector512<short> left, Vector512<short> right) {
+            return athis.GreaterThan(left.AsUnsigned(), right.AsUnsigned()).AsSigned();
+        }
+
+        /// <inheritdoc cref="Vector512s.GreaterThan_Unsigned(Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> GreaterThan_Unsigned(this IWVectorTraits512 athis, Vector512<ushort> left, Vector512<ushort> right) {
+            return athis.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="Vector512s.GreaterThan_Unsigned(Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> GreaterThan_Unsigned(this IWVectorTraits512 athis, Vector512<int> left, Vector512<int> right) {
+            return athis.GreaterThan(left.AsUnsigned(), right.AsUnsigned()).AsSigned();
+        }
+
+        /// <inheritdoc cref="Vector512s.GreaterThan_Unsigned(Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> GreaterThan_Unsigned(this IWVectorTraits512 athis, Vector512<uint> left, Vector512<uint> right) {
+            return athis.GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="Vector512s.GreaterThan_Unsigned(Vector512{long}, Vector512{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> GreaterThan_Unsigned(this IWVectorTraits512 athis, Vector512<long> left, Vector512<long> right) {
+            return athis.GreaterThan(left.AsUnsigned(), right.AsUnsigned()).AsSigned();
+        }
+
+        /// <inheritdoc cref="Vector512s.GreaterThan_Unsigned(Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> GreaterThan_Unsigned(this IWVectorTraits512 athis, Vector512<ulong> left, Vector512<ulong> right) {
+            return athis.GreaterThan(left, right);
+        }
+
 
         /// <inheritdoc cref="Vector512s.Widen{T, TOut}(Vector512{T}, out Vector512{TOut}, out Vector512{TOut})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]

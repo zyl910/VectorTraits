@@ -10,6 +10,7 @@ using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Extensions;
 using Zyl.VectorTraits.Impl;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 #if ALLOW_VECTOR_TUPLES
@@ -20,6 +21,60 @@ namespace Zyl.VectorTraits {
     static partial class Vector512s {
 
 #if NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Compares two vectors to determine which is unsigned greater on a per-element basis (比较两个向量，在每个元素的基础上确定哪个是无符号更大).
+        /// Mnemonic: <c>rt[i] := (T)to_mask(asUnsigned(left[i]) > asUnsigned(right[i]))</c>.
+        /// </summary>
+        /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
+        /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
+        /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
+        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        /// <seealso cref="Vector512.GreaterThan{T}(Vector512{T}, Vector512{T})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> GreaterThan_Unsigned(Vector512<sbyte> left, Vector512<sbyte> right) {
+            return GreaterThan(left.AsUnsigned(), right.AsUnsigned()).AsSigned();
+        }
+
+        /// <inheritdoc cref="GreaterThan_Unsigned(Vector512{sbyte}, Vector512{sbyte})"/>
+        public static Vector512<byte> GreaterThan_Unsigned(Vector512<byte> left, Vector512<byte> right) {
+            return GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="GreaterThan_Unsigned(Vector512{sbyte}, Vector512{sbyte})"/>
+        public static Vector512<short> GreaterThan_Unsigned(Vector512<short> left, Vector512<short> right) {
+            return GreaterThan(left.AsUnsigned(), right.AsUnsigned()).AsSigned();
+        }
+
+        /// <inheritdoc cref="GreaterThan_Unsigned(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> GreaterThan_Unsigned(Vector512<ushort> left, Vector512<ushort> right) {
+            return GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="GreaterThan_Unsigned(Vector512{sbyte}, Vector512{sbyte})"/>
+        public static Vector512<int> GreaterThan_Unsigned(Vector512<int> left, Vector512<int> right) {
+            return GreaterThan(left.AsUnsigned(), right.AsUnsigned()).AsSigned();
+        }
+
+        /// <inheritdoc cref="GreaterThan_Unsigned(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        public static Vector512<uint> GreaterThan_Unsigned(Vector512<uint> left, Vector512<uint> right) {
+            return GreaterThan(left, right);
+        }
+
+        /// <inheritdoc cref="GreaterThan_Unsigned(Vector512{sbyte}, Vector512{sbyte})"/>
+        public static Vector512<long> GreaterThan_Unsigned(Vector512<long> left, Vector512<long> right) {
+            return GreaterThan(left.AsUnsigned(), right.AsUnsigned()).AsSigned();
+        }
+
+        /// <inheritdoc cref="GreaterThan_Unsigned(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> GreaterThan_Unsigned(Vector512<ulong> left, Vector512<ulong> right) {
+            return GreaterThan(left, right);
+        }
+
 
         /// <summary>
         /// Widens a <seealso cref="Vector512{T}"/> into two <seealso cref="Vector512{T}"/> instances - Generic version (将一个 <seealso cref="Vector512{T}"/> 扩宽为两个 <seealso cref="Vector512{T}"/> 实例 - 泛型版).
