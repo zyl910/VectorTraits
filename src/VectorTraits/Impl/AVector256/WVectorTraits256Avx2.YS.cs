@@ -3262,6 +3262,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 #if NET8_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YShuffleX3Kernel_Permute(Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> indices) {
+                return YShuffleX3Kernel_Permute(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX3Kernel_Permute(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> indices) {
@@ -3275,6 +3282,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return rt;
                 }
                 return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YShuffleX3Kernel_PermuteLonger(Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> indices) {
+                return YShuffleX3Kernel_Permute(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
@@ -3327,6 +3341,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 #if NET8_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YShuffleX3Kernel_Permute(Vector256<short> vector0, Vector256<short> vector1, Vector256<short> vector2, Vector256<short> indices) {
+                return YShuffleX3Kernel_Permute(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -3341,6 +3362,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return rt;
                 }
                 return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YShuffleX3Kernel_PermuteLonger(Vector256<short> vector0, Vector256<short> vector1, Vector256<short> vector2, Vector256<short> indices) {
+                return YShuffleX3Kernel_PermuteLonger(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), indices.AsUInt16()).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
@@ -3404,6 +3432,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 #if NET8_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YShuffleX3Kernel_Permute(Vector256<int> vector0, Vector256<int> vector1, Vector256<int> vector2, Vector256<int> indices) {
+                return YShuffleX3Kernel_Permute(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -3418,6 +3453,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return rt;
                 }
                 return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YShuffleX3Kernel_PermuteLonger(Vector256<int> vector0, Vector256<int> vector1, Vector256<int> vector2, Vector256<int> indices) {
+                return YShuffleX3Kernel_PermuteLonger(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
@@ -3473,6 +3515,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 #if NET8_0_OR_GREATER
 
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YShuffleX3Kernel_Permute(Vector256<long> vector0, Vector256<long> vector1, Vector256<long> vector2, Vector256<long> indices) {
+                return YShuffleX3Kernel_Permute(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -3487,6 +3536,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return rt;
                 }
                 return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YShuffleX3Kernel_PermuteLonger(Vector256<long> vector0, Vector256<long> vector1, Vector256<long> vector2, Vector256<long> indices) {
+                return YShuffleX3Kernel_PermuteLonger(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>

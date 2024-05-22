@@ -1,4 +1,4 @@
-//#undef BENCHMARKS_OFF
+#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -28,18 +28,17 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
     using TMy = Int16;
 
     /// <summary>
-    /// YShuffleX4Kernel benchmark - Int16.
+    /// YShuffleX3Kernel benchmark - Int16.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class YShuffleX4KernelBenchmark_Int16 : AbstractSharedBenchmark_Int16 {
+    public partial class YShuffleX3KernelBenchmark_Int16 : AbstractSharedBenchmark_Int16 {
 
         // -- var --
         private static readonly Vector<TMy> indices = Vectors.CreateByDoubleLoop<TMy>(0, 2);
         private static readonly Vector<TMy> vector1 = Vectors<TMy>.SerialNegative;
         private static readonly Vector<TMy> vector2 = Vectors.CreateByDoubleLoop<TMy>(-Vector<TMy>.Count, -1);
-        private static readonly Vector<TMy> vector3 = Vectors.CreateByDoubleLoop<TMy>(-Vector<TMy>.Count * 2, -1);
 
         #region BENCHMARKS_256
 #if BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER
@@ -55,7 +54,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YShuffleX4Kernel - Vector256 - base - basic.
+        /// Sum YShuffleX3Kernel - Vector256 - base - basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -71,14 +70,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector256<TMy> indicesUsed = indices.AsVector256();
             Vector256<TMy> vector1Used = vector1.AsVector256();
             Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YShuffleX4Kernel_Basic(p0, vector1Used, vector2Used, vector3Used, indicesUsed);
+                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YShuffleX3Kernel_Basic(p0, vector1Used, vector2Used, indicesUsed);
                 vrt = WVectorTraits256Base.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -107,7 +105,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum YShuffleX4Kernel - Vector256 - base.
+        /// Sum YShuffleX3Kernel - Vector256 - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -123,14 +121,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector256<TMy> indicesUsed = indices.AsVector256();
             Vector256<TMy> vector1Used = vector1.AsVector256();
             Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YShuffleX4Kernel(p0, vector1Used, vector2Used, vector3Used, indicesUsed);
+                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YShuffleX3Kernel(p0, vector1Used, vector2Used, indicesUsed);
                 vrt = WVectorTraits256Base.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -155,7 +152,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum YShuffleX4Kernel - Vector256 - Avx2 - Combine.
+        /// Sum YShuffleX3Kernel - Vector256 - Avx2 - Combine.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -171,14 +168,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector256<TMy> indicesUsed = indices.AsVector256();
             Vector256<TMy> vector1Used = vector1.AsVector256();
             Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleX4Kernel_Combine(p0, vector1Used, vector2Used, vector3Used, indicesUsed);
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleX3Kernel_Combine(p0, vector1Used, vector2Used, indicesUsed);
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -206,7 +202,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 #if NET8_0_OR_GREATER
 
         /// <summary>
-        /// Sum YShuffleX4Kernel - Vector256 - Avx2 - Permute.
+        /// Sum YShuffleX3Kernel - Vector256 - Avx2 - Permute.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -222,14 +218,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector256<TMy> indicesUsed = indices.AsVector256();
             Vector256<TMy> vector1Used = vector1.AsVector256();
             Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleX4Kernel_Permute(p0, vector1Used, vector2Used, vector3Used, indicesUsed);
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleX3Kernel_Permute(p0, vector1Used, vector2Used, indicesUsed);
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -255,7 +250,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum YShuffleX4Kernel - Vector256 - Avx2 - PermuteLonger.
+        /// Sum YShuffleX3Kernel - Vector256 - Avx2 - PermuteLonger.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -271,14 +266,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector256<TMy> indicesUsed = indices.AsVector256();
             Vector256<TMy> vector1Used = vector1.AsVector256();
             Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleX4Kernel_PermuteLonger(p0, vector1Used, vector2Used, vector3Used, indicesUsed);
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YShuffleX3Kernel_PermuteLonger(p0, vector1Used, vector2Used, indicesUsed);
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -309,7 +303,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YShuffleX4Kernel - Vector256 - Traits.
+        /// Sum YShuffleX3Kernel - Vector256 - Traits.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -325,14 +319,13 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector256<TMy> indicesUsed = indices.AsVector256();
             Vector256<TMy> vector1Used = vector1.AsVector256();
             Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = Vector256s.YShuffleX4Kernel(p0, vector1Used, vector2Used, vector3Used, indicesUsed);
+                Vector256<TMy> vtemp = Vector256s.YShuffleX3Kernel(p0, vector1Used, vector2Used, indicesUsed);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
@@ -357,7 +350,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         /// <summary>
-        /// Sum YShuffleX4Kernel - Vector256 - Traits - Args with ValueTuple.
+        /// Sum YShuffleX3Kernel - Vector256 - Traits - Args with ValueTuple.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -373,15 +366,14 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             Vector256<TMy> indicesUsed = indices.AsVector256();
             Vector256<TMy> vector1Used = vector1.AsVector256();
             Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
-            var args = Vector256s.YShuffleX4Kernel_Args(indicesUsed);
+            var args = Vector256s.YShuffleX3Kernel_Args(indicesUsed);
             int i;
             // Body.
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = Vector256s.YShuffleX4Kernel_Core(p0, vector1Used, vector2Used, vector3Used, args);
+                Vector256<TMy> vtemp = Vector256s.YShuffleX3Kernel_Core(p0, vector1Used, vector2Used, args);
                 vrt = Vector256s.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
