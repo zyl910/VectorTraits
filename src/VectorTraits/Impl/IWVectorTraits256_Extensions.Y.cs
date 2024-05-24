@@ -1215,7 +1215,7 @@ namespace Zyl.VectorTraits.Impl {
             return athis.YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
         }
 
- 
+
         /// <inheritdoc cref="Vector256s.YShuffleX2Kernel_Args{TIdx}(Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]
@@ -1708,6 +1708,521 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<ulong> YShuffleX3Kernel_Core(this IWVectorTraits256 athis, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, (Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2, Vector256<ulong> args3) args) {
             return athis.YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args{TIdx}(Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        public static void YShuffleX4_Args<TIdx>(this IWVectorTraits256 athis, Vector256<TIdx> indices, out Vector256<TIdx> args0, out Vector256<TIdx> args1, out Vector256<TIdx> args2, out Vector256<TIdx> args3, out Vector256<TIdx> args4)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector256<sbyte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector256<byte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector256<short>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector256<ushort>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector256<int>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector256<uint>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector256<long>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector256<ulong>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args{TIdx}(Vector256{TIdx})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<TIdx> args0, Vector256<TIdx> args1, Vector256<TIdx> args2, Vector256<TIdx> args3, Vector256<TIdx> args4) YShuffleX4_Args<TIdx>(this IWVectorTraits256 athis, Vector256<TIdx> indices)
+                where TIdx : struct {
+            athis.YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2, Vector256<sbyte> args3, Vector256<sbyte> args4) YShuffleX4_Args(this IWVectorTraits256 athis, Vector256<sbyte> indices) {
+            athis.YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args(Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3, Vector256<byte> args4) YShuffleX4_Args(this IWVectorTraits256 athis, Vector256<byte> indices) {
+            athis.YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args(Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> args0, Vector256<short> args1, Vector256<short> args2, Vector256<short> args3, Vector256<short> args4) YShuffleX4_Args(this IWVectorTraits256 athis, Vector256<short> indices) {
+            athis.YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2, Vector256<ushort> args3, Vector256<ushort> args4) YShuffleX4_Args(this IWVectorTraits256 athis, Vector256<ushort> indices) {
+            athis.YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args(Vector256{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) YShuffleX4_Args(this IWVectorTraits256 athis, Vector256<int> indices) {
+            athis.YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2, Vector256<uint> args3, Vector256<uint> args4) YShuffleX4_Args(this IWVectorTraits256 athis, Vector256<uint> indices) {
+            athis.YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args(Vector256{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) YShuffleX4_Args(this IWVectorTraits256 athis, Vector256<long> indices) {
+            athis.YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Args(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2, Vector256<ulong> args3, Vector256<ulong> args4) YShuffleX4_Args(this IWVectorTraits256 athis, Vector256<ulong> indices) {
+            athis.YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and clear on 4 vectors (在4个向量上进行换位并清零的核心计算). Its arguments are derived from YShuffleX4_Args (其参数来源于 YShuffleX4_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):0</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="athis">This object.</param>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="vector2">The input vector 2 from which values are selected (从中选择值的输入向量2).</param>
+        /// <param name="vector3">The input vector 3 from which values are selected (从中选择值的输入向量3).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleX4_Core(Vector256{float}, Vector256{float}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<T> YShuffleX4_Core<T, TIdx>(this IWVectorTraits256 athis, Vector256<T> vector0, Vector256<T> vector1, Vector256<T> vector2, Vector256<T> vector3, (Vector256<TIdx> args0, Vector256<TIdx> args1, Vector256<TIdx> args2, Vector256<TIdx> args3, Vector256<TIdx> args4) args)
+                 where T : struct where TIdx : struct {
+            if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<float>)(object)vector0, (Vector256<float>)(object)vector1, (Vector256<float>)(object)vector2, (Vector256<float>)(object)vector3, (ValueTuple<Vector256<int>, Vector256<int>, Vector256<int>, Vector256<int>, Vector256<int>>)(object)args);
+            } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<double>)(object)vector0, (Vector256<double>)(object)vector1, (Vector256<double>)(object)vector2, (Vector256<double>)(object)vector3, (ValueTuple<Vector256<long>, Vector256<long>, Vector256<long>, Vector256<long>, Vector256<long>>)(object)args);
+            } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<sbyte>)(object)vector0, (Vector256<sbyte>)(object)vector1, (Vector256<sbyte>)(object)vector2, (Vector256<sbyte>)(object)vector3, (ValueTuple<Vector256<sbyte>, Vector256<sbyte>, Vector256<sbyte>, Vector256<sbyte>, Vector256<sbyte>>)(object)args);
+            } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<byte>)(object)vector0, (Vector256<byte>)(object)vector1, (Vector256<byte>)(object)vector2, (Vector256<byte>)(object)vector3, (ValueTuple<Vector256<byte>, Vector256<byte>, Vector256<byte>, Vector256<byte>, Vector256<byte>>)(object)args);
+            } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<short>)(object)vector0, (Vector256<short>)(object)vector1, (Vector256<short>)(object)vector2, (Vector256<short>)(object)vector3, (ValueTuple<Vector256<short>, Vector256<short>, Vector256<short>, Vector256<short>, Vector256<short>>)(object)args);
+            } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<ushort>)(object)vector0, (Vector256<ushort>)(object)vector1, (Vector256<ushort>)(object)vector2, (Vector256<ushort>)(object)vector3, (ValueTuple<Vector256<ushort>, Vector256<ushort>, Vector256<ushort>, Vector256<ushort>, Vector256<ushort>>)(object)args);
+            } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<int>)(object)vector0, (Vector256<int>)(object)vector1, (Vector256<int>)(object)vector2, (Vector256<int>)(object)vector3, (ValueTuple<Vector256<int>, Vector256<int>, Vector256<int>, Vector256<int>, Vector256<int>>)(object)args);
+            } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<uint>)(object)vector0, (Vector256<uint>)(object)vector1, (Vector256<uint>)(object)vector2, (Vector256<uint>)(object)vector3, (ValueTuple<Vector256<uint>, Vector256<uint>, Vector256<uint>, Vector256<uint>, Vector256<uint>>)(object)args);
+            } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<long>)(object)vector0, (Vector256<long>)(object)vector1, (Vector256<long>)(object)vector2, (Vector256<long>)(object)vector3, (ValueTuple<Vector256<long>, Vector256<long>, Vector256<long>, Vector256<long>, Vector256<long>>)(object)args);
+            } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4_Core((Vector256<ulong>)(object)vector0, (Vector256<ulong>)(object)vector1, (Vector256<ulong>)(object)vector2, (Vector256<ulong>)(object)vector3, (ValueTuple<Vector256<ulong>, Vector256<ulong>, Vector256<ulong>, Vector256<ulong>, Vector256<ulong>>)(object)args);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, ValueTuple{Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<float> vector3, (Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, ValueTuple{Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<double> vector3, (Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, ValueTuple{Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> vector3, (Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2, Vector256<sbyte> args3, Vector256<sbyte> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, ValueTuple{Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, (Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3, Vector256<byte> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, ValueTuple{Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<short> vector0, Vector256<short> vector1, Vector256<short> vector2, Vector256<short> vector3, (Vector256<short> args0, Vector256<short> args1, Vector256<short> args2, Vector256<short> args3, Vector256<short> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, ValueTuple{Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, (Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2, Vector256<ushort> args3, Vector256<ushort> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, ValueTuple{Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<int> vector0, Vector256<int> vector1, Vector256<int> vector2, Vector256<int> vector3, (Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, ValueTuple{Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, (Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2, Vector256<uint> args3, Vector256<uint> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, ValueTuple{Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<long> vector0, Vector256<long> vector1, Vector256<long> vector2, Vector256<long> vector3, (Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, ValueTuple{Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YShuffleX4_Core(this IWVectorTraits256 athis, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, (Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2, Vector256<ulong> args3, Vector256<ulong> args4) args) {
+            return athis.YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args{TIdx}(Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx}, out Vector256{TIdx})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        public static void YShuffleX4Insert_Args<TIdx>(this IWVectorTraits256 athis, Vector256<TIdx> indices, out Vector256<TIdx> args0, out Vector256<TIdx> args1, out Vector256<TIdx> args2, out Vector256<TIdx> args3, out Vector256<TIdx> args4)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector256<sbyte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector256<byte>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector256<short>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector256<ushort>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector256<int>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector256<uint>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector256<long>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector256<ulong>)(object)indices);
+                args0 = (Vector256<TIdx>)(object)a;
+                args1 = (Vector256<TIdx>)(object)b;
+                args2 = (Vector256<TIdx>)(object)c;
+                args3 = (Vector256<TIdx>)(object)d;
+                args4 = (Vector256<TIdx>)(object)e;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args{TIdx}(Vector256{TIdx})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<TIdx> args0, Vector256<TIdx> args1, Vector256<TIdx> args2, Vector256<TIdx> args3, Vector256<TIdx> args4) YShuffleX4Insert_Args<TIdx>(this IWVectorTraits256 athis, Vector256<TIdx> indices)
+                where TIdx : struct {
+            athis.YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2, Vector256<sbyte> args3, Vector256<sbyte> args4) YShuffleX4Insert_Args(this IWVectorTraits256 athis, Vector256<sbyte> indices) {
+            athis.YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args(Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3, Vector256<byte> args4) YShuffleX4Insert_Args(this IWVectorTraits256 athis, Vector256<byte> indices) {
+            athis.YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args(Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> args0, Vector256<short> args1, Vector256<short> args2, Vector256<short> args3, Vector256<short> args4) YShuffleX4Insert_Args(this IWVectorTraits256 athis, Vector256<short> indices) {
+            athis.YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args(Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2, Vector256<ushort> args3, Vector256<ushort> args4) YShuffleX4Insert_Args(this IWVectorTraits256 athis, Vector256<ushort> indices) {
+            athis.YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args(Vector256{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) YShuffleX4Insert_Args(this IWVectorTraits256 athis, Vector256<int> indices) {
+            athis.YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args(Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2, Vector256<uint> args3, Vector256<uint> args4) YShuffleX4Insert_Args(this IWVectorTraits256 athis, Vector256<uint> indices) {
+            athis.YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args(Vector256{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) YShuffleX4Insert_Args(this IWVectorTraits256 athis, Vector256<long> indices) {
+            athis.YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Args(Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2, Vector256<ulong> args3, Vector256<ulong> args4) YShuffleX4Insert_Args(this IWVectorTraits256 athis, Vector256<ulong> indices) {
+            athis.YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <summary>
+        /// Core calculation for shuffle and insert on 4 vectors (在4个向量上进行换位并插入的核心计算). Its arguments are derived from YShuffleX4Insert_Args (其参数来源于 YShuffleX4Insert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="athis">This object.</param>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="vector2">The input vector 2 from which values are selected (从中选择值的输入向量2).</param>
+        /// <param name="vector3">The input vector 3 from which values are selected (从中选择值的输入向量3).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="T"/>, <typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IWVectorTraits256.YShuffleKernel_AcceleratedTypes"/>
+        /// <seealso cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<T> YShuffleX4Insert_Core<T, TIdx>(this IWVectorTraits256 athis, Vector256<T> back, Vector256<T> vector0, Vector256<T> vector1, Vector256<T> vector2, Vector256<T> vector3, (Vector256<TIdx> args0, Vector256<TIdx> args1, Vector256<TIdx> args2, Vector256<TIdx> args3, Vector256<TIdx> args4) args)
+                 where T : struct where TIdx : struct {
+            if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<float>)(object)back, (Vector256<float>)(object)vector0, (Vector256<float>)(object)vector1, (Vector256<float>)(object)vector2, (Vector256<float>)(object)vector3, (ValueTuple<Vector256<int>, Vector256<int>, Vector256<int>, Vector256<int>, Vector256<int>>)(object)args);
+            } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<double>)(object)back, (Vector256<double>)(object)vector0, (Vector256<double>)(object)vector1, (Vector256<double>)(object)vector2, (Vector256<double>)(object)vector3, (ValueTuple<Vector256<long>, Vector256<long>, Vector256<long>, Vector256<long>, Vector256<long>>)(object)args);
+            } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<sbyte>)(object)back, (Vector256<sbyte>)(object)vector0, (Vector256<sbyte>)(object)vector1, (Vector256<sbyte>)(object)vector2, (Vector256<sbyte>)(object)vector3, (ValueTuple<Vector256<sbyte>, Vector256<sbyte>, Vector256<sbyte>, Vector256<sbyte>, Vector256<sbyte>>)(object)args);
+            } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<byte>)(object)back, (Vector256<byte>)(object)vector0, (Vector256<byte>)(object)vector1, (Vector256<byte>)(object)vector2, (Vector256<byte>)(object)vector3, (ValueTuple<Vector256<byte>, Vector256<byte>, Vector256<byte>, Vector256<byte>, Vector256<byte>>)(object)args);
+            } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<short>)(object)back, (Vector256<short>)(object)vector0, (Vector256<short>)(object)vector1, (Vector256<short>)(object)vector2, (Vector256<short>)(object)vector3, (ValueTuple<Vector256<short>, Vector256<short>, Vector256<short>, Vector256<short>, Vector256<short>>)(object)args);
+            } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<ushort>)(object)back, (Vector256<ushort>)(object)vector0, (Vector256<ushort>)(object)vector1, (Vector256<ushort>)(object)vector2, (Vector256<ushort>)(object)vector3, (ValueTuple<Vector256<ushort>, Vector256<ushort>, Vector256<ushort>, Vector256<ushort>, Vector256<ushort>>)(object)args);
+            } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<int>)(object)back, (Vector256<int>)(object)vector0, (Vector256<int>)(object)vector1, (Vector256<int>)(object)vector2, (Vector256<int>)(object)vector3, (ValueTuple<Vector256<int>, Vector256<int>, Vector256<int>, Vector256<int>, Vector256<int>>)(object)args);
+            } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<uint>)(object)back, (Vector256<uint>)(object)vector0, (Vector256<uint>)(object)vector1, (Vector256<uint>)(object)vector2, (Vector256<uint>)(object)vector3, (ValueTuple<Vector256<uint>, Vector256<uint>, Vector256<uint>, Vector256<uint>, Vector256<uint>>)(object)args);
+            } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<long>)(object)back, (Vector256<long>)(object)vector0, (Vector256<long>)(object)vector1, (Vector256<long>)(object)vector2, (Vector256<long>)(object)vector3, (ValueTuple<Vector256<long>, Vector256<long>, Vector256<long>, Vector256<long>, Vector256<long>>)(object)args);
+            } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
+                return (Vector256<T>)(object)athis.YShuffleX4Insert_Core((Vector256<ulong>)(object)back, (Vector256<ulong>)(object)vector0, (Vector256<ulong>)(object)vector1, (Vector256<ulong>)(object)vector2, (Vector256<ulong>)(object)vector3, (ValueTuple<Vector256<ulong>, Vector256<ulong>, Vector256<ulong>, Vector256<ulong>, Vector256<ulong>>)(object)args);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, ValueTuple{Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<float> back, Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<float> vector3, (Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, ValueTuple{Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<double> back, Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<double> vector3, (Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, ValueTuple{Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<sbyte> back, Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> vector3, (Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2, Vector256<sbyte> args3, Vector256<sbyte> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, ValueTuple{Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, (Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3, Vector256<byte> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, ValueTuple{Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<short> back, Vector256<short> vector0, Vector256<short> vector1, Vector256<short> vector2, Vector256<short> vector3, (Vector256<short> args0, Vector256<short> args1, Vector256<short> args2, Vector256<short> args3, Vector256<short> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, ValueTuple{Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, (Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2, Vector256<ushort> args3, Vector256<ushort> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, ValueTuple{Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<int> back, Vector256<int> vector0, Vector256<int> vector1, Vector256<int> vector2, Vector256<int> vector3, (Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, ValueTuple{Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, (Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2, Vector256<uint> args3, Vector256<uint> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, ValueTuple{Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<long> back, Vector256<long> vector0, Vector256<long> vector1, Vector256<long> vector2, Vector256<long> vector3, (Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="Vector256s.YShuffleX4Insert_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, ValueTuple{Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YShuffleX4Insert_Core(this IWVectorTraits256 athis, Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, (Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2, Vector256<ulong> args3, Vector256<ulong> args4) args) {
+            return athis.YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
         }
 
 

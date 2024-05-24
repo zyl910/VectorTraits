@@ -3909,7 +3909,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return YShuffleX3Kernel_Core(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), args0.AsUInt32(), args1.AsUInt32(), args2.AsUInt32(), args3.AsUInt32()).AsUInt64();
             }
 
-/*
+
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleX4_AcceleratedTypes {
                 get {
@@ -3917,121 +3917,93 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{float}, Vector256{float}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> YShuffleX4(Vector256<float> vector0, Vector256<float> vector1, Vector256<int> indices) {
-                return YShuffleX4(vector0.AsInt32(), vector1.AsInt32(), indices).AsSingle();
+            public static Vector256<float> YShuffleX4(Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<float> vector3, Vector256<int> indices) {
+                Vector256<float> mask, raw, rt;
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 5), Vector256<int>.Zero).AsSingle(); // Unsigned compare: (i < 32)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
+                rt = Avx.And(raw, mask);
+                return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{double}, Vector256{double}, Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YShuffleX4(Vector256<double> vector0, Vector256<double> vector1, Vector256<long> indices) {
-                return YShuffleX4(vector0.AsInt64(), vector1.AsInt64(), indices).AsDouble();
+            public static Vector256<double> YShuffleX4(Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<double> vector3, Vector256<long> indices) {
+                Vector256<double> mask, raw, rt;
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 4), Vector256<long>.Zero).AsDouble(); // Unsigned compare: (i < 16)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
+                rt = Avx.And(raw, mask);
+                return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> YShuffleX4(Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> indices) {
-                return YShuffleX4(vector0.AsByte(), vector1.AsByte(), indices.AsByte()).AsSByte();
+            public static Vector256<sbyte> YShuffleX4(Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> vector3, Vector256<sbyte> indices) {
+                return YShuffleX4(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), vector3.AsByte(), indices.AsByte()).AsSByte();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> YShuffleX4(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> indices) {
+            public static Vector256<byte> YShuffleX4(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> indices) {
                 Vector256<byte> mask, raw, rt;
-#if NET8_0_OR_GREATER
-                if (Avx512Vbmi.VL.IsSupported) {
-                    if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
-                        mask = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)64), indices);
-                    } else {
-                        mask = Avx2.CompareGreaterThan(
-                            Vector256.Create((sbyte)(64 + sbyte.MinValue)),
-                            Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
-                        ).AsByte(); // Unsigned compare: (i < 64)
-                    }
-                    raw = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, indices, vector1);
-                    rt = Avx2.And(raw, mask);
-                    return rt;
-                }
-#endif // NET8_0_OR_GREATER
                 mask = Avx2.CompareGreaterThan(
-                    Vector256.Create((sbyte)(64 + sbyte.MinValue)),
+                    Vector256<sbyte>.Zero,
                     Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < 64)
-                raw = YShuffleX4Kernel(vector0, vector1, indices);
+                ).AsByte(); // Unsigned compare: (i < 128)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = Avx2.And(raw, mask);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{short}, Vector256{short}, Vector256{short})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> YShuffleX4(Vector256<short> vector0, Vector256<short> vector1, Vector256<short> indices) {
-                return YShuffleX4(vector0.AsUInt16(), vector1.AsUInt16(), indices.AsUInt16()).AsInt16();
+            public static Vector256<short> YShuffleX4(Vector256<short> vector0, Vector256<short> vector1, Vector256<short> vector2, Vector256<short> vector3, Vector256<short> indices) {
+                return YShuffleX4(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), vector3.AsUInt16(), indices.AsUInt16()).AsInt16();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> YShuffleX4(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> indices) {
+            public static Vector256<ushort> YShuffleX4(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> indices) {
                 Vector256<ushort> mask, raw, rt;
-                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 5), Vector256<ushort>.Zero); // Unsigned compare: (i < 32)
-#if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
-                    raw = Avx512BW.VL.PermuteVar16x16x2(vector0, indices, vector1);
-                    rt = Avx2.And(raw, mask);
-                    return rt;
-                }
-#endif // NET8_0_OR_GREATER
-                raw = YShuffleX4Kernel(vector0, vector1, indices);
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 6), Vector256<ushort>.Zero); // Unsigned compare: (i < 64)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = Avx2.And(raw, mask);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{int}, Vector256{int}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YShuffleX4(Vector256<int> vector0, Vector256<int> vector1, Vector256<int> indices) {
-                return YShuffleX4(vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsInt32();
+            public static Vector256<int> YShuffleX4(Vector256<int> vector0, Vector256<int> vector1, Vector256<int> vector2, Vector256<int> vector3, Vector256<int> indices) {
+                return YShuffleX4(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsInt32();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> YShuffleX4(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> indices) {
+            public static Vector256<uint> YShuffleX4(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> indices) {
                 Vector256<uint> mask, raw, rt;
-                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 4), Vector256<uint>.Zero); // Unsigned compare: (i < 16)
-#if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
-                    raw = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
-                    rt = Avx2.And(raw, mask);
-                    return rt;
-                }
-#endif // NET8_0_OR_GREATER
-                raw = YShuffleX4Kernel(vector0, vector1, indices);
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 5), Vector256<uint>.Zero); // Unsigned compare: (i < 32)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = Avx2.And(raw, mask);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{long}, Vector256{long}, Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YShuffleX4(Vector256<long> vector0, Vector256<long> vector1, Vector256<long> indices) {
-                return YShuffleX4(vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsInt64();
+            public static Vector256<long> YShuffleX4(Vector256<long> vector0, Vector256<long> vector1, Vector256<long> vector2, Vector256<long> vector3, Vector256<long> indices) {
+                return YShuffleX4(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsInt64();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> YShuffleX4(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> indices) {
+            public static Vector256<ulong> YShuffleX4(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> indices) {
                 Vector256<ulong> mask, raw, rt;
-                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 3), Vector256<ulong>.Zero); // Unsigned compare: (i < 8)
-#if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
-                    raw = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
-                    rt = Avx2.And(raw, mask);
-                    return rt;
-                }
-#endif // NET8_0_OR_GREATER
-                raw = YShuffleX4Kernel(vector0, vector1, indices);
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 4), Vector256<ulong>.Zero); // Unsigned compare: (i < 16)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = Avx2.And(raw, mask);
                 return rt;
             }
@@ -4052,23 +4024,15 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX4_Args(Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1, out Vector256<byte> args2, out Vector256<byte> args3, out Vector256<byte> args4) {
                 YShuffleX4Kernel_Args(indices, out args0, out args1, out args2, out args3);
+                args4 = Avx2.CompareGreaterThan(
+                    Vector256<sbyte>.Zero,
+                    Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
+                ).AsByte(); // Unsigned compare: (i < 128)
 #if NET8_0_OR_GREATER
-                if (Avx512Vbmi.VL.IsSupported) {
-                    if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
-                        args4 = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)64), indices);
-                    } else {
-                        args4 = Avx2.CompareGreaterThan(
-                            Vector256.Create((sbyte)(64 + sbyte.MinValue)),
-                            Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
-                        ).AsByte(); // Unsigned compare: (i < 64)
-                    }
+                if ((Shuffle_Use_Longer && Avx512Vbmi.IsSupported) || Avx512Vbmi.VL.IsSupported) {
                     return;
                 }
 #endif // NET8_0_OR_GREATER
-                args4 = Avx2.CompareGreaterThan(
-                    Vector256.Create((sbyte)(64 + sbyte.MinValue)),
-                    Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < 64)
                 Vector256<byte> mask = OnesComplement(args4); // Used for _mm256_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
                 args0 = Avx2.Or(args0, mask);
                 args1 = Avx2.Or(args1, mask);
@@ -4092,9 +4056,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX4_Args(Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1, out Vector256<ushort> args2, out Vector256<ushort> args3, out Vector256<ushort> args4) {
                 YShuffleX4Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 5), Vector256<ushort>.Zero); // Unsigned compare: (i < 32)
+                args4 = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 6), Vector256<ushort>.Zero); // Unsigned compare: (i < 64)
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if ((Shuffle_Use_Longer && Avx512BW.IsSupported) || Avx512BW.VL.IsSupported) {
                     return;
                 }
 #endif // NET8_0_OR_GREATER
@@ -4121,7 +4085,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX4_Args(Vector256<uint> indices, out Vector256<uint> args0, out Vector256<uint> args1, out Vector256<uint> args2, out Vector256<uint> args3, out Vector256<uint> args4) {
                 YShuffleX4Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 4), Vector256<uint>.Zero); // Unsigned compare: (i < 16)
+                args4 = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 5), Vector256<uint>.Zero); // Unsigned compare: (i < 32)
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Args(Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
@@ -4140,85 +4104,89 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX4_Args(Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1, out Vector256<ulong> args2, out Vector256<ulong> args3, out Vector256<ulong> args4) {
                 YShuffleX4Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 3), Vector256<ulong>.Zero); // Unsigned compare: (i < 8)
+                args4 = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 4), Vector256<ulong>.Zero); // Unsigned compare: (i < 16)
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{float}, Vector256{float}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> YShuffleX4_Core(Vector256<float> vector0, Vector256<float> vector1, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) {
-                return YShuffleX4_Core(vector0.AsUInt32(), vector1.AsUInt32(), args0.AsUInt32(), args1.AsUInt32(), args2.AsUInt32(), args3.AsUInt32(), args4.AsUInt32()).AsSingle();
+            public static Vector256<float> YShuffleX4_Core(Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<float> vector3, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) {
+                Vector256<float> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
+                rt = Avx.And(rt, args4.AsSingle());
+                return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{double}, Vector256{double}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YShuffleX4_Core(Vector256<double> vector0, Vector256<double> vector1, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) {
-                return YShuffleX4_Core(vector0.AsUInt64(), vector1.AsUInt64(), args0.AsUInt64(), args1.AsUInt64(), args2.AsUInt64(), args3.AsUInt64(), args4.AsUInt64()).AsDouble();
+            public static Vector256<double> YShuffleX4_Core(Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<double> vector3, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) {
+                Vector256<double> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
+                rt = Avx.And(rt, args4.AsDouble());
+                return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> YShuffleX4_Core(Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2, Vector256<sbyte> args3, Vector256<sbyte> args4) {
-                return YShuffleX4_Core(vector0.AsByte(), vector1.AsByte(), args0.AsByte(), args1.AsByte(), args2.AsByte(), args3.AsByte(), args4.AsByte()).AsSByte();
+            public static Vector256<sbyte> YShuffleX4_Core(Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> vector3, Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2, Vector256<sbyte> args3, Vector256<sbyte> args4) {
+                return YShuffleX4_Core(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), vector3.AsByte(), args0.AsByte(), args1.AsByte(), args2.AsByte(), args3.AsByte(), args4.AsByte()).AsSByte();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> YShuffleX4_Core(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3, Vector256<byte> args4) {
-                Vector256<byte> rt = YShuffleX4Kernel_Core(vector0, vector1, args0, args1, args2, args3);
+            public static Vector256<byte> YShuffleX4_Core(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3, Vector256<byte> args4) {
+                Vector256<byte> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
 #if NET8_0_OR_GREATER
-                if (Avx512Vbmi.VL.IsSupported) {
+                if ((Shuffle_Use_Longer && Avx512Vbmi.IsSupported) || Avx512Vbmi.VL.IsSupported) {
                     rt = Avx2.And(rt, args4);
                 }
 #endif // NET8_0_OR_GREATER
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> YShuffleX4_Core(Vector256<short> vector0, Vector256<short> vector1, Vector256<short> args0, Vector256<short> args1, Vector256<short> args2, Vector256<short> args3, Vector256<short> args4) {
-                return YShuffleX4_Core(vector0.AsUInt16(), vector1.AsUInt16(), args0.AsUInt16(), args1.AsUInt16(), args2.AsUInt16(), args3.AsUInt16(), args4.AsUInt16()).AsInt16();
+            public static Vector256<short> YShuffleX4_Core(Vector256<short> vector0, Vector256<short> vector1, Vector256<short> vector2, Vector256<short> vector3, Vector256<short> args0, Vector256<short> args1, Vector256<short> args2, Vector256<short> args3, Vector256<short> args4) {
+                return YShuffleX4_Core(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), vector3.AsUInt16(), args0.AsUInt16(), args1.AsUInt16(), args2.AsUInt16(), args3.AsUInt16(), args4.AsUInt16()).AsInt16();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> YShuffleX4_Core(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2, Vector256<ushort> args3, Vector256<ushort> args4) {
-                Vector256<ushort> rt = YShuffleX4Kernel_Core(vector0, vector1, args0, args1, args2, args3);
+            public static Vector256<ushort> YShuffleX4_Core(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2, Vector256<ushort> args3, Vector256<ushort> args4) {
+                Vector256<ushort> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if ((Shuffle_Use_Longer && Avx512BW.IsSupported) || Avx512BW.VL.IsSupported) {
                     rt = Avx2.And(rt, args4);
                 }
 #endif // NET8_0_OR_GREATER
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YShuffleX4_Core(Vector256<int> vector0, Vector256<int> vector1, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) {
-                return YShuffleX4_Core(vector0.AsUInt32(), vector1.AsUInt32(), args0.AsUInt32(), args1.AsUInt32(), args2.AsUInt32(), args3.AsUInt32(), args4.AsUInt32()).AsInt32();
+            public static Vector256<int> YShuffleX4_Core(Vector256<int> vector0, Vector256<int> vector1, Vector256<int> vector2, Vector256<int> vector3, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) {
+                return YShuffleX4_Core(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), args0.AsUInt32(), args1.AsUInt32(), args2.AsUInt32(), args3.AsUInt32(), args4.AsUInt32()).AsInt32();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> YShuffleX4_Core(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2, Vector256<uint> args3, Vector256<uint> args4) {
-                Vector256<uint> rt = YShuffleX4Kernel_Core(vector0, vector1, args0, args1, args2, args3);
+            public static Vector256<uint> YShuffleX4_Core(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2, Vector256<uint> args3, Vector256<uint> args4) {
+                Vector256<uint> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
                 rt = Avx2.And(rt, args4);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YShuffleX4_Core(Vector256<long> vector0, Vector256<long> vector1, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) {
-                return YShuffleX4_Core(vector0.AsUInt64(), vector1.AsUInt64(), args0.AsUInt64(), args1.AsUInt64(), args2.AsUInt64(), args3.AsUInt64(), args4.AsUInt64()).AsInt64();
+            public static Vector256<long> YShuffleX4_Core(Vector256<long> vector0, Vector256<long> vector1, Vector256<long> vector2, Vector256<long> vector3, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) {
+                return YShuffleX4_Core(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), args0.AsUInt64(), args1.AsUInt64(), args2.AsUInt64(), args3.AsUInt64(), args4.AsUInt64()).AsInt64();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> YShuffleX4_Core(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2, Vector256<ulong> args3, Vector256<ulong> args4) {
-                Vector256<ulong> rt = YShuffleX4Kernel_Core(vector0, vector1, args0, args1, args2, args3);
+            public static Vector256<ulong> YShuffleX4_Core(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2, Vector256<ulong> args3, Vector256<ulong> args4) {
+                Vector256<ulong> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
                 rt = Avx2.And(rt, args4);
                 return rt;
             }
@@ -4231,121 +4199,95 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> YShuffleX4Insert(Vector256<float> back, Vector256<float> vector0, Vector256<float> vector1, Vector256<int> indices) {
-                return YShuffleX4Insert(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsSingle();
+            public static Vector256<float> YShuffleX4Insert(Vector256<float> back, Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<float> vector3, Vector256<int> indices) {
+                //return YShuffleX4Insert(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsSingle();
+                Vector256<float> mask, raw, rt;
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 5), Vector256<int>.Zero).AsSingle(); // Unsigned compare: (i < 32)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
+                rt = ConditionalSelect_Relaxed(mask, raw, back);
+                return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YShuffleX4Insert(Vector256<double> back, Vector256<double> vector0, Vector256<double> vector1, Vector256<long> indices) {
-                return YShuffleX4Insert(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsDouble();
+            public static Vector256<double> YShuffleX4Insert(Vector256<double> back, Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<double> vector3, Vector256<long> indices) {
+                //return YShuffleX4Insert(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsDouble();
+                Vector256<double> mask, raw, rt;
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 4), Vector256<long>.Zero).AsDouble(); // Unsigned compare: (i < 16)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
+                rt = ConditionalSelect_Relaxed(mask, raw, back);
+                return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> YShuffleX4Insert(Vector256<sbyte> back, Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> indices) {
-                return YShuffleX4Insert(back.AsByte(), vector0.AsByte(), vector1.AsByte(), indices.AsByte()).AsSByte();
+            public static Vector256<sbyte> YShuffleX4Insert(Vector256<sbyte> back, Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> vector3, Vector256<sbyte> indices) {
+                return YShuffleX4Insert(back.AsByte(), vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), vector3.AsByte(), indices.AsByte()).AsSByte();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> YShuffleX4Insert(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> indices) {
+            public static Vector256<byte> YShuffleX4Insert(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> indices) {
                 Vector256<byte> mask, raw, rt;
-#if NET8_0_OR_GREATER
-                if (Avx512Vbmi.VL.IsSupported) {
-                    if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
-                        mask = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)64), indices);
-                    } else {
-                        mask = Avx2.CompareGreaterThan(
-                            Vector256.Create((sbyte)(64 + sbyte.MinValue)),
-                            Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
-                        ).AsByte(); // Unsigned compare: (i < 64)
-                    }
-                    raw = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, indices, vector1);
-                    rt = ConditionalSelect_Relaxed(mask, raw, back);
-                    return rt;
-                }
-#endif // NET8_0_OR_GREATER
                 mask = Avx2.CompareGreaterThan(
-                    Vector256.Create((sbyte)(64 + sbyte.MinValue)),
+                    Vector256<sbyte>.Zero,
                     Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < 64)
-                raw = YShuffleX4Kernel(vector0, vector1, indices);
+                ).AsByte(); // Unsigned compare: (i < 128)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = ConditionalSelect_Relaxed(mask, raw, back);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> YShuffleX4Insert(Vector256<short> back, Vector256<short> vector0, Vector256<short> vector1, Vector256<short> indices) {
-                return YShuffleX4Insert(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), indices.AsUInt16()).AsInt16();
+            public static Vector256<short> YShuffleX4Insert(Vector256<short> back, Vector256<short> vector0, Vector256<short> vector1, Vector256<short> vector2, Vector256<short> vector3, Vector256<short> indices) {
+                return YShuffleX4Insert(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), vector3.AsUInt16(), indices.AsUInt16()).AsInt16();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> YShuffleX4Insert(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> indices) {
+            public static Vector256<ushort> YShuffleX4Insert(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> indices) {
                 Vector256<ushort> mask, raw, rt;
-                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 5), Vector256<ushort>.Zero); // Unsigned compare: (i < 32)
-#if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
-                    raw = Avx512BW.VL.PermuteVar16x16x2(vector0, indices, vector1);
-                    rt = ConditionalSelect_Relaxed(mask, raw, back);
-                    return rt;
-                }
-#endif // NET8_0_OR_GREATER
-                raw = YShuffleX4Kernel(vector0, vector1, indices);
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 6), Vector256<ushort>.Zero); // Unsigned compare: (i < 64)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = ConditionalSelect_Relaxed(mask, raw, back);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YShuffleX4Insert(Vector256<int> back, Vector256<int> vector0, Vector256<int> vector1, Vector256<int> indices) {
-                return YShuffleX4Insert(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsInt32();
+            public static Vector256<int> YShuffleX4Insert(Vector256<int> back, Vector256<int> vector0, Vector256<int> vector1, Vector256<int> vector2, Vector256<int> vector3, Vector256<int> indices) {
+                return YShuffleX4Insert(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsInt32();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> YShuffleX4Insert(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> indices) {
+            public static Vector256<uint> YShuffleX4Insert(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> indices) {
                 Vector256<uint> mask, raw, rt;
-                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 4), Vector256<uint>.Zero); // Unsigned compare: (i < 16)
-#if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
-                    raw = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
-                    rt = ConditionalSelect_Relaxed(mask, raw, back);
-                    return rt;
-                }
-#endif // NET8_0_OR_GREATER
-                raw = YShuffleX4Kernel(vector0, vector1, indices);
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 5), Vector256<uint>.Zero); // Unsigned compare: (i < 32)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = ConditionalSelect_Relaxed(mask, raw, back);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YShuffleX4Insert(Vector256<long> back, Vector256<long> vector0, Vector256<long> vector1, Vector256<long> indices) {
-                return YShuffleX4Insert(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsInt64();
+            public static Vector256<long> YShuffleX4Insert(Vector256<long> back, Vector256<long> vector0, Vector256<long> vector1, Vector256<long> vector2, Vector256<long> vector3, Vector256<long> indices) {
+                return YShuffleX4Insert(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsInt64();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> YShuffleX4Insert(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> indices) {
+            public static Vector256<ulong> YShuffleX4Insert(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> indices) {
                 Vector256<ulong> mask, raw, rt;
-                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 3), Vector256<ulong>.Zero); // Unsigned compare: (i < 8)
-#if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
-                    raw = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
-                    rt = ConditionalSelect_Relaxed(mask, raw, back);
-                    return rt;
-                }
-#endif // NET8_0_OR_GREATER
-                raw = YShuffleX4Kernel(vector0, vector1, indices);
+                mask = Avx2.CompareEqual(Avx2.ShiftRightLogical(indices, 4), Vector256<ulong>.Zero); // Unsigned compare: (i < 16)
+                raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = ConditionalSelect_Relaxed(mask, raw, back);
                 return rt;
             }
@@ -4402,78 +4344,82 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 YShuffleX4_Args(indices, out args0, out args1, out args2, out args3, out args4);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<float> YShuffleX4Insert_Core(Vector256<float> back, Vector256<float> vector0, Vector256<float> vector1, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) {
-                return YShuffleX4Insert_Core(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), args0.AsUInt32(), args1.AsUInt32(), args2.AsUInt32(), args3.AsUInt32(), args4.AsUInt32()).AsSingle();
+            public static Vector256<float> YShuffleX4Insert_Core(Vector256<float> back, Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<float> vector3, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) {
+                Vector256<float> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
+                rt = ConditionalSelect_Relaxed(args4.AsSingle(), rt, back);
+                return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<double> YShuffleX4Insert_Core(Vector256<double> back, Vector256<double> vector0, Vector256<double> vector1, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) {
-                return YShuffleX4Insert_Core(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), args0.AsUInt64(), args1.AsUInt64(), args2.AsUInt64(), args3.AsUInt64(), args4.AsUInt64()).AsDouble();
+            public static Vector256<double> YShuffleX4Insert_Core(Vector256<double> back, Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<double> vector3, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) {
+                Vector256<double> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
+                rt = ConditionalSelect_Relaxed(args4.AsDouble(), rt, back);
+                return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<sbyte> YShuffleX4Insert_Core(Vector256<sbyte> back, Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2, Vector256<sbyte> args3, Vector256<sbyte> args4) {
-                return YShuffleX4Insert_Core(back.AsByte(), vector0.AsByte(), vector1.AsByte(), args0.AsByte(), args1.AsByte(), args2.AsByte(), args3.AsByte(), args4.AsByte()).AsSByte();
+            public static Vector256<sbyte> YShuffleX4Insert_Core(Vector256<sbyte> back, Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> vector3, Vector256<sbyte> args0, Vector256<sbyte> args1, Vector256<sbyte> args2, Vector256<sbyte> args3, Vector256<sbyte> args4) {
+                return YShuffleX4Insert_Core(back.AsByte(), vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), vector3.AsByte(), args0.AsByte(), args1.AsByte(), args2.AsByte(), args3.AsByte(), args4.AsByte()).AsSByte();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> YShuffleX4Insert_Core(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3, Vector256<byte> args4) {
-                Vector256<byte> rt = YShuffleX4Kernel_Core(vector0, vector1, args0, args1, args2, args3);
+            public static Vector256<byte> YShuffleX4Insert_Core(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3, Vector256<byte> args4) {
+                Vector256<byte> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
                 rt = ConditionalSelect_Relaxed(args4, rt, back);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<short> YShuffleX4Insert_Core(Vector256<short> back, Vector256<short> vector0, Vector256<short> vector1, Vector256<short> args0, Vector256<short> args1, Vector256<short> args2, Vector256<short> args3, Vector256<short> args4) {
-                return YShuffleX4Insert_Core(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), args0.AsUInt16(), args1.AsUInt16(), args2.AsUInt16(), args3.AsUInt16(), args4.AsUInt16()).AsInt16();
+            public static Vector256<short> YShuffleX4Insert_Core(Vector256<short> back, Vector256<short> vector0, Vector256<short> vector1, Vector256<short> vector2, Vector256<short> vector3, Vector256<short> args0, Vector256<short> args1, Vector256<short> args2, Vector256<short> args3, Vector256<short> args4) {
+                return YShuffleX4Insert_Core(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), vector3.AsUInt16(), args0.AsUInt16(), args1.AsUInt16(), args2.AsUInt16(), args3.AsUInt16(), args4.AsUInt16()).AsInt16();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ushort> YShuffleX4Insert_Core(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2, Vector256<ushort> args3, Vector256<ushort> args4) {
-                Vector256<ushort> rt = YShuffleX4Kernel_Core(vector0, vector1, args0, args1, args2, args3);
+            public static Vector256<ushort> YShuffleX4Insert_Core(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2, Vector256<ushort> args3, Vector256<ushort> args4) {
+                Vector256<ushort> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
                 rt = ConditionalSelect_Relaxed(args4, rt, back);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<int> YShuffleX4Insert_Core(Vector256<int> back, Vector256<int> vector0, Vector256<int> vector1, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) {
-                return YShuffleX4Insert_Core(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), args0.AsUInt32(), args1.AsUInt32(), args2.AsUInt32(), args3.AsUInt32(), args4.AsUInt32()).AsInt32();
+            public static Vector256<int> YShuffleX4Insert_Core(Vector256<int> back, Vector256<int> vector0, Vector256<int> vector1, Vector256<int> vector2, Vector256<int> vector3, Vector256<int> args0, Vector256<int> args1, Vector256<int> args2, Vector256<int> args3, Vector256<int> args4) {
+                return YShuffleX4Insert_Core(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), args0.AsUInt32(), args1.AsUInt32(), args2.AsUInt32(), args3.AsUInt32(), args4.AsUInt32()).AsInt32();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<uint> YShuffleX4Insert_Core(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2, Vector256<uint> args3, Vector256<uint> args4) {
-                Vector256<uint> rt = YShuffleX4Kernel_Core(vector0, vector1, args0, args1, args2, args3);
+            public static Vector256<uint> YShuffleX4Insert_Core(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> args0, Vector256<uint> args1, Vector256<uint> args2, Vector256<uint> args3, Vector256<uint> args4) {
+                Vector256<uint> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
                 rt = ConditionalSelect_Relaxed(args4, rt, back);
                 return rt;
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<long> YShuffleX4Insert_Core(Vector256<long> back, Vector256<long> vector0, Vector256<long> vector1, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) {
-                return YShuffleX4Insert_Core(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), args0.AsUInt64(), args1.AsUInt64(), args2.AsUInt64(), args3.AsUInt64(), args4.AsUInt64()).AsInt64();
+            public static Vector256<long> YShuffleX4Insert_Core(Vector256<long> back, Vector256<long> vector0, Vector256<long> vector1, Vector256<long> vector2, Vector256<long> vector3, Vector256<long> args0, Vector256<long> args1, Vector256<long> args2, Vector256<long> args3, Vector256<long> args4) {
+                return YShuffleX4Insert_Core(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), args0.AsUInt64(), args1.AsUInt64(), args2.AsUInt64(), args3.AsUInt64(), args4.AsUInt64()).AsInt64();
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert_Core(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<ulong> YShuffleX4Insert_Core(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2, Vector256<ulong> args3, Vector256<ulong> args4) {
-                Vector256<ulong> rt = YShuffleX4Kernel_Core(vector0, vector1, args0, args1, args2, args3);
+            public static Vector256<ulong> YShuffleX4Insert_Core(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> args0, Vector256<ulong> args1, Vector256<ulong> args2, Vector256<ulong> args3, Vector256<ulong> args4) {
+                Vector256<ulong> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
                 rt = ConditionalSelect_Relaxed(args4, rt, back);
                 return rt;
             }
-*/
+
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel_AcceleratedTypes"/>
             public static TypeCodeFlags YShuffleX4Kernel_AcceleratedTypes {
