@@ -11,6 +11,7 @@ using System.IO;
 using System.Text;
 using Zyl.VectorTraits.Extensions;
 using Zyl.VectorTraits.Impl;
+using System.Numerics;
 #if ALLOW_VECTOR_TUPLES
 using Zyl.VectorTraits.Tuples;
 #endif // ALLOW_VECTOR_TUPLES
@@ -1005,6 +1006,235 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         var argsI = instance.YShuffleX2Kernel_Args<TIdx>(indices);
                         // dst = instance.YShuffleX2Kernel_Core((dynamic)vector, (dynamic)argsI); // CS1973	'IWVectorTraits256' has no applicable method named 'YShuffleX2Kernel_Core' but appears to have an extension method by that name. Extension methods cannot be dynamically dispatched. Consider casting the dynamic arguments or calling the extension method without the extension method syntax.
                         dst = instance.YShuffleX2Kernel_Core<T, TIdx>(vector, vector1, argsI);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Core of " + instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            ClassicAssert.AreEqual(expected, dst, "_Core of {instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
+                    }
+                    if (allowLog) {
+                        Console.WriteLine();
+                    }
+                }
+            }
+        }
+
+        [TestCase((float)1, (int)7)]
+        [TestCase((double)2, (long)9)]
+        [TestCase((sbyte)3, (sbyte)3)]
+        [TestCase((byte)4, (byte)4)]
+        [TestCase((short)5, (short)5)]
+        [TestCase((ushort)6, (ushort)6)]
+        [TestCase((int)7, (int)7)]
+        [TestCase((uint)8, (uint)8)]
+        [TestCase((long)9, (long)9)]
+        [TestCase((ulong)10, (ulong)10)]
+        public void YShuffleX3Test<T, TIdx>(T src, TIdx srcIndex) where T : struct where TIdx : struct {
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.YShuffleX3_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            bool allowLog = true;
+            //bool allowLogItem = Scalars<T>.ExponentBits > 0;
+            bool allowLogItem = false;
+            Vector256<T>[] samples = {
+                //Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1),
+                //Vector256s<T>.Demo,
+                Vector256s<T>.Serial,
+                //Vector256s<T>.SerialNegative
+            };
+            Vector256<TIdx>[] indicesList = {
+                Vector256s<TIdx>.Serial,
+                Vector256s<TIdx>.SerialDesc,
+                Vector256s.CreateByDoubleLoop<TIdx>(0, 3),
+                Vector256s.CreateByDoubleLoop<TIdx>(1, 3),
+                Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src), 3),
+                Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src) + Vector256<TIdx>.Count, 3),
+                Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src) + Vector256<TIdx>.Count*2, 3),
+            };
+            foreach (Vector256<T> vector in samples) {
+                Vector256<T> vector1 = Vector256s<T>.SerialNegative;
+                Vector256<T> vector2 = Vector256s.CreateByDoubleLoop<T>(-Vector256<T>.Count, -1);
+                if (allowLog) {
+                    Console.WriteLine();
+                    Console.WriteLine(VectorTextUtil.Format("== Sample:\t{0}", vector));
+                }
+                foreach (Vector256<TIdx> indices in indicesList) {
+                    Vector256<T> expected = Vector256s.YShuffleX3((dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)indices);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("Indices:\t{0}", indices));
+                        Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                    }
+                    // Static: Args and Core
+                    Vector256<TIdx> args0, args1, args2, args3, args4;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector256s.YShuffleX3_Args<TIdx>(indices, out args0, out args1, out args2, out args3, out args4);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    Vector256<T> dst = Vector256s.YShuffleX3_Core((dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)args0, (dynamic)args1, (dynamic)args2, (dynamic)args3, (dynamic)args4);
+                    if (allowLogItem) {
+                        // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Core0", dst, vector, indices));
+                    } else {
+                        ClassicAssert.AreEqual(expected, dst, $"_Core0, vector={vector}, indices={indices}");
+                    }
+                    // Static: Args and Core with ValueTuple
+                    var args = Vector256s.YShuffleX3_Args((dynamic)indices);
+                    dst = Vector256s.YShuffleX3_Core((dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)args);
+                    if (allowLogItem) {
+                        // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Core", dst, vector, indices));
+                    } else {
+                        ClassicAssert.AreEqual(expected, dst, $"_Core, vector={vector}, indices={indices}");
+                    }
+                    // Instances
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        dst = instance.YShuffleX3((dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)indices);
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
+                        // Instances: Args and Core
+#pragma warning disable CS0618 // Type or member is obsolete
+                        instance.YShuffleX3_Args<TIdx>(indices, out args0, out args1, out args2, out args3, out args4);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        dst = instance.YShuffleX3_Core((dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)args0, (dynamic)args1, (dynamic)args2, (dynamic)args3, (dynamic)args4);
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Core0 of " + instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            ClassicAssert.AreEqual(expected, dst, "_Core0 of {instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
+                        // Instances: Args and Core with ValueTuple
+#pragma warning disable CS0618 // Type or member is obsolete
+                        var argsI = instance.YShuffleX3_Args<TIdx>(indices);
+                        dst = instance.YShuffleX3_Core<T, TIdx>(vector, vector1, vector2, argsI);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Core of " + instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            ClassicAssert.AreEqual(expected, dst, "_Core of {instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
+                    }
+                    if (allowLog) {
+                        Console.WriteLine();
+                    }
+                }
+            }
+        }
+
+        [TestCase((float)1, (int)7)]
+        [TestCase((double)2, (long)9)]
+        [TestCase((sbyte)3, (sbyte)3)]
+        [TestCase((byte)4, (byte)4)]
+        [TestCase((short)5, (short)5)]
+        [TestCase((ushort)6, (ushort)6)]
+        [TestCase((int)7, (int)7)]
+        [TestCase((uint)8, (uint)8)]
+        [TestCase((long)9, (long)9)]
+        [TestCase((ulong)10, (ulong)10)]
+        public void YShuffleX3InsertTest<T, TIdx>(T src, TIdx srcIndex) where T : struct where TIdx : struct {
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    Console.WriteLine(VectorTextUtil.Format("{0}: OK. Accelerated=({1})", instance.GetType().Name, instance.YShuffleX3Insert_AcceleratedTypes));
+                } else {
+                    Console.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            // run.
+            bool allowLog = true;
+            //bool allowLogItem = Scalars<T>.ExponentBits > 0;
+            bool allowLogItem = false;
+            Vector256<T> back = Vector256s.Create(src);
+            Vector256<T>[] samples = {
+                //Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1),
+                //Vector256s<T>.Demo,
+                Vector256s<T>.Serial,
+                //Vector256s<T>.SerialNegative
+            };
+            Vector256<TIdx>[] indicesList = {
+                Vector256s<TIdx>.Serial,
+                Vector256s<TIdx>.SerialDesc,
+                Vector256s.CreateByDoubleLoop<TIdx>(0, 3),
+                Vector256s.CreateByDoubleLoop<TIdx>(1, 3),
+                Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src), 3),
+                Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src) + Vector256<TIdx>.Count, 3),
+                Vector256s.CreateByDoubleLoop<TIdx>(Scalars.GetDoubleFrom(src) + Vector256<TIdx>.Count*2, 3),
+            };
+            if (allowLog) {
+                Console.WriteLine(VectorTextUtil.Format("Back:\t{0}", back));
+            }
+            foreach (Vector256<T> vector in samples) {
+                Vector256<T> vector1 = Vector256s<T>.SerialNegative;
+                Vector256<T> vector2 = Vector256s.CreateByDoubleLoop<T>(-Vector256<T>.Count, -1);
+                if (allowLog) {
+                    Console.WriteLine();
+                    Console.WriteLine(VectorTextUtil.Format("== Sample:\t{0}", vector));
+                }
+                foreach (Vector256<TIdx> indices in indicesList) {
+                    Vector256<T> expected = Vector256s.YShuffleX3Insert((dynamic)back, (dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)indices);
+                    if (allowLog) {
+                        Console.WriteLine(VectorTextUtil.Format("Indices:\t{0}", indices));
+                        Console.WriteLine(VectorTextUtil.Format("Expected:\t{0}", expected));
+                    }
+                    // Static: Args and Core
+                    Vector256<TIdx> args0, args1, args2, args3, args4;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector256s.YShuffleX3Insert_Args<TIdx>(indices, out args0, out args1, out args2, out args3, out args4);
+#pragma warning restore CS0618 // Type or member is obsolete
+                    Vector256<T> dst = Vector256s.YShuffleX3Insert_Core((dynamic)back, (dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)args0, (dynamic)args1, (dynamic)args2, (dynamic)args3, (dynamic)args4);
+                    if (allowLogItem) {
+                        // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Core0", dst, vector, indices));
+                    } else {
+                        ClassicAssert.AreEqual(expected, dst, $"_Core0, vector={vector}, indices={indices}");
+                    }
+                    // Static: Args and Core with ValueTuple
+                    var args = Vector256s.YShuffleX3Insert_Args((dynamic)indices);
+                    dst = Vector256s.YShuffleX3Insert_Core((dynamic)back, (dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)args);
+                    if (allowLogItem) {
+                        // Compatible floating-point NaN.
+                        Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Core", dst, vector, indices));
+                    } else {
+                        ClassicAssert.AreEqual(expected, dst, $"_Core, vector={vector}, indices={indices}");
+                    }
+                    // Instances
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        dst = instance.YShuffleX3Insert((dynamic)back, (dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)indices);
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
+                        // Instances: Args and Core
+#pragma warning disable CS0618 // Type or member is obsolete
+                        instance.YShuffleX3Insert_Args<TIdx>(indices, out args0, out args1, out args2, out args3, out args4);
+#pragma warning restore CS0618 // Type or member is obsolete
+                        dst = instance.YShuffleX3Insert_Core((dynamic)back, (dynamic)vector, (dynamic)vector1, (dynamic)vector2, (dynamic)args0, (dynamic)args1, (dynamic)args2, (dynamic)args3, (dynamic)args4);
+                        if (allowLogItem) {
+                            // Compatible floating-point NaN.
+                            Console.WriteLine(VectorTextUtil.Format("{0}:\t{1}, vector={2}, indices={3}", "_Core0 of " + instance.GetType().Name, dst, vector, indices));
+                        } else {
+                            ClassicAssert.AreEqual(expected, dst, "_Core0 of {instance.GetType().Name}, vector={vector}, indices={indices}");
+                        }
+                        // Instances: Args and Core with ValueTuple
+#pragma warning disable CS0618 // Type or member is obsolete
+                        var argsI = instance.YShuffleX3Insert_Args<TIdx>(indices);
+                        // dst = instance.YShuffleX3Insert_Core((dynamic)vector, (dynamic)argsI); // CS1973	'IWVectorTraits256' has no applicable method named 'YShuffleX3Insert_Core' but appears to have an extension method by that name. Extension methods cannot be dynamically dispatched. Consider casting the dynamic arguments or calling the extension method without the extension method syntax.
+                        dst = instance.YShuffleX3Insert_Core<T, TIdx>(back, vector, vector1, vector2, argsI);
 #pragma warning restore CS0618 // Type or member is obsolete
                         if (allowLogItem) {
                             // Compatible floating-point NaN.
