@@ -2699,22 +2699,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static void YShuffleX3_Args(Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1, out Vector256<byte> args2, out Vector256<byte> args3, out Vector256<byte> args4) {
                 YShuffleX3Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #if NET8_0_OR_GREATER
-                if (Avx512Vbmi.VL.IsSupported) {
+                if ((Shuffle_Use_Longer && Avx512Vbmi.IsSupported) || Avx512Vbmi.VL.IsSupported) {
                     if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
-                        args4 = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)48), indices);
+                        args4 = Avx512BW.VL.CompareGreaterThan(Vector256.Create((byte)96), indices);
                     } else {
                         args4 = Avx2.CompareGreaterThan(
-                            Vector256.Create((sbyte)(48 + sbyte.MinValue)),
+                            Vector256.Create((sbyte)(96 + sbyte.MinValue)),
                             Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
-                        ).AsByte(); // Unsigned compare: (i < 48)
+                        ).AsByte(); // Unsigned compare: (i < 96)
                     }
                     return;
                 }
 #endif // NET8_0_OR_GREATER
                 args4 = Avx2.CompareGreaterThan(
-                    Vector256.Create((sbyte)(48 + sbyte.MinValue)),
+                    Vector256.Create((sbyte)(96 + sbyte.MinValue)),
                     Avx2.Add(indices.AsSByte(), Vector256.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < 48)
+                ).AsByte(); // Unsigned compare: (i < 96)
                 Vector256<byte> mask = OnesComplement(args4); // Used for _mm256_shuffle_epi8. Change mask to `0 is keep; AllBitsSet is set zero`.
                 //args0 = Avx2.Or(args0, mask);
                 //args1 = Avx2.Or(args1, mask);
@@ -2741,7 +2741,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static void YShuffleX3_Args(Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1, out Vector256<ushort> args2, out Vector256<ushort> args3, out Vector256<ushort> args4) {
                 YShuffleX3Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if ((Shuffle_Use_Longer && Avx512BW.IsSupported) || Avx512BW.VL.IsSupported) {
                     if (Avx512_Compare_Used && Avx512BW.VL.IsSupported) {
                         args4 = Avx512BW.VL.CompareGreaterThan(Vector256.Create((ushort)48), indices);
                     } else {
@@ -2857,7 +2857,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<byte> YShuffleX3_Core(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> args0, Vector256<byte> args1, Vector256<byte> args2, Vector256<byte> args3, Vector256<byte> args4) {
                 Vector256<byte> rt = YShuffleX3Kernel_Core(vector0, vector1, vector2, args0, args1, args2, args3);
 #if NET8_0_OR_GREATER
-                if (Avx512Vbmi.VL.IsSupported) {
+                if ((Shuffle_Use_Longer && Avx512Vbmi.IsSupported) || Avx512Vbmi.VL.IsSupported) {
                     rt = Avx2.And(rt, args4);
                 }
 #endif // NET8_0_OR_GREATER
@@ -2876,7 +2876,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ushort> YShuffleX3_Core(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> args0, Vector256<ushort> args1, Vector256<ushort> args2, Vector256<ushort> args3, Vector256<ushort> args4) {
                 Vector256<ushort> rt = YShuffleX3Kernel_Core(vector0, vector1, vector2, args0, args1, args2, args3);
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
+                if ((Shuffle_Use_Longer && Avx512BW.IsSupported) || Avx512BW.VL.IsSupported) {
                     rt = Avx2.And(rt, args4);
                 }
 #endif // NET8_0_OR_GREATER
