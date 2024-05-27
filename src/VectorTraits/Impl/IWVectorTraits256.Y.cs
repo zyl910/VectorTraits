@@ -3700,7 +3700,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX3Kernel_Core .</param>
         /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX3Kernel_Core .</param>
         /// <seealso cref="YShuffleX3Kernel_AcceleratedTypes"/>
-        /// <seealso cref="YShuffleX3Kernel_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        /// <seealso cref="YShuffleX3Kernel_Core(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
         void YShuffleX3Kernel_Args(Vector256<sbyte> indices, out Vector256<sbyte> args0, out Vector256<sbyte> args1, out Vector256<sbyte> args2, out Vector256<sbyte> args3);
 
         /// <inheritdoc cref="YShuffleX3Kernel_Args(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>

@@ -3279,7 +3279,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<int> vzero = Vector256<int>.Zero;
                 Vector256<int> indices1 = Avx2.Subtract(indices, vCount);
                 Vector256<int> indices2 = Avx2.Subtract(indices1, vCount);
-                Vector256<int> indices3 = Avx2.Subtract(indices2, vCount);
                 Vector256<float> mask1 = Avx2.CompareGreaterThan(vzero, indices1.AsInt32()).AsSingle(); // 0>indices1[i] ==> indices1[i]<0 ==> indices[i]<Count.
                 Vector256<float> rt0 = Avx2.PermuteVar8x32(vector0, indices);
                 Vector256<float> rt1 = Avx2.PermuteVar8x32(vector1, indices1);
@@ -3410,7 +3409,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 #if NET8_0_OR_GREATER
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YShuffleX3Kernel_Permute(Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> indices) {
@@ -3432,7 +3431,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
             }
 
-            /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+            /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YShuffleX3Kernel_PermuteLonger(Vector256<sbyte> vector0, Vector256<sbyte> vector1, Vector256<sbyte> vector2, Vector256<sbyte> indices) {

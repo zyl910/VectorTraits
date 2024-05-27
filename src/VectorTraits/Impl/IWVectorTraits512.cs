@@ -2210,7 +2210,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{float}, Vector512{int})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{float}, Vector512{int})"/>
         Vector512<float> Shuffle(Vector512<float> vector, Vector512<int> indices);
 
         /// <summary>
@@ -2233,7 +2232,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{sbyte}, Vector512{sbyte})"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{sbyte}, Vector512{sbyte})"/>
         Vector512<sbyte> Shuffle(Vector512<sbyte> vector, Vector512<sbyte> indices);
 
         /// <summary>
@@ -2245,7 +2243,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{byte}, Vector512{byte})"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{byte}, Vector512{byte})"/>
         Vector512<byte> Shuffle(Vector512<byte> vector, Vector512<byte> indices);
 
         /// <summary>
@@ -2279,7 +2276,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{int}, Vector512{int})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{int}, Vector512{int})"/>
         Vector512<int> Shuffle(Vector512<int> vector, Vector512<int> indices);
 
         /// <summary>
@@ -2291,7 +2287,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <paramref name="indices" /> (一个新向量，其中包含给定 <paramref name="indices" /> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Vector512.Shuffle(Vector512{uint}, Vector512{uint})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{uint}, Vector512{uint})"/>
         Vector512<uint> Shuffle(Vector512<uint> vector, Vector512<uint> indices);
 
         /// <summary>
@@ -2416,7 +2411,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector512{int}, out Vector512{int}, out Vector512{int})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{float}, Vector512{int})"/>
         Vector512<float> Shuffle_Core(Vector512<float> vector, Vector512<int> args0, Vector512<int> args1);
 
         /// <summary>
@@ -2441,7 +2435,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{sbyte}, Vector512{sbyte})"/>
         Vector512<sbyte> Shuffle_Core(Vector512<sbyte> vector, Vector512<sbyte> args0, Vector512<sbyte> args1);
 
         /// <summary>
@@ -2454,7 +2447,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
-        /// <seealso cref="Avx2.Shuffle(Vector512{byte}, Vector512{byte})"/>
         Vector512<byte> Shuffle_Core(Vector512<byte> vector, Vector512<byte> args0, Vector512<byte> args1);
 
         /// <summary>
@@ -2491,7 +2483,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector512{int}, out Vector512{int}, out Vector512{int})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{int}, Vector512{int})"/>
         Vector512<int> Shuffle_Core(Vector512<int> vector, Vector512<int> args0, Vector512<int> args1);
 
         /// <summary>
@@ -2504,7 +2495,6 @@ namespace Zyl.VectorTraits.Impl {
         /// <returns>A new vector containing the values from <paramref name="vector" /> selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从 <paramref name="vector" /> 中选择的值).</returns>
         /// <seealso cref="Shuffle_AcceleratedTypes"/>
         /// <seealso cref="Shuffle_Args(Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
-        /// <seealso cref="Avx2.PermuteVar8x32(Vector512{uint}, Vector512{uint})"/>
         Vector512<uint> Shuffle_Core(Vector512<uint> vector, Vector512<uint> args0, Vector512<uint> args1);
 
         /// <summary>

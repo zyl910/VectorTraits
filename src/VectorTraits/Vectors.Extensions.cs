@@ -27,7 +27,7 @@ namespace Zyl.VectorTraits {
         /// <param name="left">The vector to compare with <paramref name="right" /> (将会与<paramref name="right" />进行比较的向量).</param>
         /// <param name="right">The vector to compare with <paramref name="left" /> (将会与<paramref name="left" />进行比较的向量).</param>
         /// <returns>A vector whose elements are all-bits-set or zero, depending on if which of the corresponding elements in <paramref name="left" /> and <paramref name="right" /> were greater (一个向量，其元素是全位为1或0，取决于<paramref name="left" />和<paramref name="right" />的对应元素中哪个更大).</returns>
-        /// <seealso cref="GreaterThan_AcceleratedTypes"/>
+        // / <seealso cref="GreaterThan_AcceleratedTypes"/>
         /// <seealso cref="Vector.GreaterThan{T}(Vector{T}, Vector{T})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
