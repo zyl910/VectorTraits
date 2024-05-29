@@ -1,7 +1,5 @@
 ﻿#if NET7_0_OR_GREATER
 #define BCL_SHUFFLE_HAS
-#endif // NET7_0_OR_GREATER
-#if NET7_0_OR_GREATER
 #define VECTOR_HAS_METHOD
 #endif // NET7_0_OR_GREATER
 
@@ -1494,7 +1492,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX2(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX2_Bit(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> indices) {
-                Vector256<byte> mask = Vector256.GreaterThan (Vector256.Create((byte)64), indices);
+                const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector256<byte>.Count
+                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<byte> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 Vector256<byte> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -1510,7 +1509,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX2_Bit(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> indices) {
-                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create((ushort)32), indices);
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector256<ushort>.Count
+                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ushort> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 Vector256<ushort> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -1526,7 +1526,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX2_Bit(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> indices) {
-                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create((uint)16), indices);
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector256<uint>.Count
+                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<uint> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 Vector256<uint> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -1542,7 +1543,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX2_Bit(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> indices) {
-                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create((ulong)8), indices);
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector256<ulong>.Count
+                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ulong> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 Vector256<ulong> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -1881,7 +1883,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX2Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX2Insert_Basic(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> indices) {
-                byte cnt = (byte)(Vector256<byte>.Count * 2);
+                const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector256<byte>.Count
                 Span<Vector256<byte>> rt = stackalloc Vector256<byte>[1];
                 Span<Vector256<byte>> temp = [vector0, vector1];
                 Span<byte> p = MemoryMarshal.Cast<Vector256<byte>, byte>(temp);
@@ -1891,7 +1893,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<byte>.Count; ++i) {
                     byte selectedIndex = Unsafe.Add(ref pindices, i);
                     byte selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -1909,7 +1911,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX2Insert_Basic(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> indices) {
-                ushort cnt = (ushort)(Vector256<ushort>.Count * 2);
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector256<ushort>.Count
                 Span<Vector256<ushort>> rt = stackalloc Vector256<ushort>[1];
                 Span<Vector256<ushort>> temp = [vector0, vector1];
                 Span<ushort> p = MemoryMarshal.Cast<Vector256<ushort>, ushort>(temp);
@@ -1919,7 +1921,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ushort>.Count; ++i) {
                     ushort selectedIndex = Unsafe.Add(ref pindices, i);
                     ushort selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -1937,7 +1939,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX2Insert_Basic(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> indices) {
-                uint cnt = (uint)(Vector256<uint>.Count * 2);
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector256<uint>.Count
                 Span<Vector256<uint>> rt = stackalloc Vector256<uint>[1];
                 Span<Vector256<uint>> temp = [vector0, vector1];
                 Span<uint> p = MemoryMarshal.Cast<Vector256<uint>, uint>(temp);
@@ -1947,7 +1949,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<uint>.Count; ++i) {
                     uint selectedIndex = Unsafe.Add(ref pindices, i);
                     uint selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -1965,7 +1967,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX2Insert_Basic(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> indices) {
-                ulong cnt = (ulong)(Vector256<ulong>.Count * 2);
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector256<ulong>.Count
                 Span<Vector256<ulong>> rt = stackalloc Vector256<ulong>[1];
                 Span<Vector256<ulong>> temp = [vector0, vector1];
                 Span<ulong> p = MemoryMarshal.Cast<Vector256<ulong>, ulong>(temp);
@@ -1975,7 +1977,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ulong>.Count; ++i) {
                     ulong selectedIndex = Unsafe.Add(ref pindices, i);
                     ulong selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -2007,7 +2009,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX2Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX2Insert_Bit(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> indices) {
-                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create((byte)64), indices);
+                const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector256<byte>.Count
+                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<byte> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 Vector256<byte> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2023,7 +2026,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX2Insert_Bit(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> indices) {
-                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create((ushort)32), indices);
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector256<ushort>.Count
+                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ushort> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 Vector256<ushort> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2039,7 +2043,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX2Insert_Bit(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> indices) {
-                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create((uint)16), indices);
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector256<uint>.Count
+                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<uint> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 Vector256<uint> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2055,7 +2060,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX2Insert_Bit(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> indices) {
-                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create((ulong)8), indices);
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector256<ulong>.Count
+                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ulong> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 Vector256<ulong> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2395,7 +2401,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX2Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX2Kernel_Basic(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> indices) {
-                byte cnt = (byte)(Vector256<byte>.Count * 2);
+                const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector256<byte>.Count
                 Span<Vector256<byte>> rt = stackalloc Vector256<byte>[1];
                 Span<Vector256<byte>> temp = [vector0, vector1];
                 Span<byte> p = MemoryMarshal.Cast<Vector256<byte>, byte>(temp);
@@ -2404,7 +2410,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<byte>.Count; ++i) {
                     byte selectedIndex = Unsafe.Add(ref pindices, i);
                     byte selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -2422,7 +2428,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX2Kernel_Basic(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> indices) {
-                ushort cnt = (ushort)(Vector256<ushort>.Count * 2);
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector256<ushort>.Count
                 Span<Vector256<ushort>> rt = stackalloc Vector256<ushort>[1];
                 Span<Vector256<ushort>> temp = [vector0, vector1];
                 Span<ushort> p = MemoryMarshal.Cast<Vector256<ushort>, ushort>(temp);
@@ -2431,7 +2437,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ushort>.Count; ++i) {
                     ushort selectedIndex = Unsafe.Add(ref pindices, i);
                     ushort selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -2449,7 +2455,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX2Kernel_Basic(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> indices) {
-                uint cnt = (uint)(Vector256<uint>.Count * 2);
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector256<uint>.Count
                 Span<Vector256<uint>> rt = stackalloc Vector256<uint>[1];
                 Span<Vector256<uint>> temp = [vector0, vector1];
                 Span<uint> p = MemoryMarshal.Cast<Vector256<uint>, uint>(temp);
@@ -2458,7 +2464,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<uint>.Count; ++i) {
                     uint selectedIndex = Unsafe.Add(ref pindices, i);
                     uint selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -2476,7 +2482,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX2Kernel_Basic(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> indices) {
-                ulong cnt = (ulong)(Vector256<ulong>.Count * 2);
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector256<ulong>.Count
                 Span<Vector256<ulong>> rt = stackalloc Vector256<ulong>[1];
                 Span<Vector256<ulong>> temp = [vector0, vector1];
                 Span<ulong> p = MemoryMarshal.Cast<Vector256<ulong>, ulong>(temp);
@@ -2485,7 +2491,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ulong>.Count; ++i) {
                     ulong selectedIndex = Unsafe.Add(ref pindices, i);
                     ulong selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -2961,7 +2967,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX3_Bit(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> indices) {
-                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create((byte)96), indices);
+                const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector256<byte>.Count
+                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<byte> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 Vector256<byte> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -2977,7 +2984,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX3_Bit(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> indices) {
-                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create((ushort)48), indices);
+                const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector256<ushort>.Count
+                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ushort> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 Vector256<ushort> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -2993,7 +3001,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX3_Bit(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> indices) {
-                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create((uint)24), indices);
+                const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector256<uint>.Count
+                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<uint> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 Vector256<uint> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -3009,7 +3018,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX3_Bit(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> indices) {
-                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create((ulong)12), indices);
+                const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector256<ulong>.Count
+                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ulong> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 Vector256<ulong> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -3349,7 +3359,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX3Insert_Basic(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> indices) {
-                byte cnt = (byte)(Vector256<byte>.Count * 3);
+                const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector256<byte>.Count
                 Span<Vector256<byte>> rt = stackalloc Vector256<byte>[1];
                 Span<Vector256<byte>> temp = [vector0, vector1, vector2];
                 Span<byte> p = MemoryMarshal.Cast<Vector256<byte>, byte>(temp);
@@ -3359,7 +3369,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<byte>.Count; ++i) {
                     byte selectedIndex = Unsafe.Add(ref pindices, i);
                     byte selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -3377,7 +3387,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX3Insert_Basic(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> indices) {
-                ushort cnt = (ushort)(Vector256<ushort>.Count * 3);
+                const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector256<ushort>.Count
                 Span<Vector256<ushort>> rt = stackalloc Vector256<ushort>[1];
                 Span<Vector256<ushort>> temp = [vector0, vector1, vector2];
                 Span<ushort> p = MemoryMarshal.Cast<Vector256<ushort>, ushort>(temp);
@@ -3387,7 +3397,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ushort>.Count; ++i) {
                     ushort selectedIndex = Unsafe.Add(ref pindices, i);
                     ushort selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -3405,7 +3415,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX3Insert_Basic(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> indices) {
-                uint cnt = (uint)(Vector256<uint>.Count * 3);
+                const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector256<uint>.Count
                 Span<Vector256<uint>> rt = stackalloc Vector256<uint>[1];
                 Span<Vector256<uint>> temp = [vector0, vector1, vector2];
                 Span<uint> p = MemoryMarshal.Cast<Vector256<uint>, uint>(temp);
@@ -3415,7 +3425,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<uint>.Count; ++i) {
                     uint selectedIndex = Unsafe.Add(ref pindices, i);
                     uint selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -3433,7 +3443,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX3Insert_Basic(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> indices) {
-                ulong cnt = (ulong)(Vector256<ulong>.Count * 3);
+                const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector256<ulong>.Count
                 Span<Vector256<ulong>> rt = stackalloc Vector256<ulong>[1];
                 Span<Vector256<ulong>> temp = [vector0, vector1, vector2];
                 Span<ulong> p = MemoryMarshal.Cast<Vector256<ulong>, ulong>(temp);
@@ -3443,7 +3453,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ulong>.Count; ++i) {
                     ulong selectedIndex = Unsafe.Add(ref pindices, i);
                     ulong selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -3475,7 +3485,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX3Insert_Bit(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> indices) {
-                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create((byte)96), indices);
+                const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector256<byte>.Count
+                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<byte> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 Vector256<byte> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -3491,7 +3502,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX3Insert_Bit(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> indices) {
-                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create((ushort)48), indices);
+                const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector256<ushort>.Count
+                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ushort> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 Vector256<ushort> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -3507,7 +3519,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX3Insert_Bit(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> indices) {
-                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create((uint)24), indices);
+                const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector256<uint>.Count
+                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<uint> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 Vector256<uint> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -3523,7 +3536,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX3Insert_Bit(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> indices) {
-                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create((ulong)12), indices);
+                const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector256<ulong>.Count
+                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ulong> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 Vector256<ulong> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -3863,7 +3877,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX3Kernel_Basic(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> indices) {
-                byte cnt = (byte)(Vector256<byte>.Count * 3);
+                const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector256<byte>.Count
                 Span<Vector256<byte>> rt = stackalloc Vector256<byte>[1];
                 Span<Vector256<byte>> temp = [vector0, vector1, vector2];
                 Span<byte> p = MemoryMarshal.Cast<Vector256<byte>, byte>(temp);
@@ -3872,7 +3886,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<byte>.Count; ++i) {
                     byte selectedIndex = Unsafe.Add(ref pindices, i);
                     byte selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -3890,7 +3904,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX3Kernel_Basic(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> indices) {
-                ushort cnt = (ushort)(Vector256<ushort>.Count * 3);
+                const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector256<ushort>.Count
                 Span<Vector256<ushort>> rt = stackalloc Vector256<ushort>[1];
                 Span<Vector256<ushort>> temp = [vector0, vector1, vector2];
                 Span<ushort> p = MemoryMarshal.Cast<Vector256<ushort>, ushort>(temp);
@@ -3899,7 +3913,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ushort>.Count; ++i) {
                     ushort selectedIndex = Unsafe.Add(ref pindices, i);
                     ushort selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -3917,7 +3931,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX3Kernel_Basic(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> indices) {
-                uint cnt = (uint)(Vector256<uint>.Count * 3);
+                const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector256<uint>.Count
                 Span<Vector256<uint>> rt = stackalloc Vector256<uint>[1];
                 Span<Vector256<uint>> temp = [vector0, vector1, vector2];
                 Span<uint> p = MemoryMarshal.Cast<Vector256<uint>, uint>(temp);
@@ -3926,7 +3940,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<uint>.Count; ++i) {
                     uint selectedIndex = Unsafe.Add(ref pindices, i);
                     uint selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -3944,7 +3958,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX3Kernel_Basic(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> indices) {
-                ulong cnt = (ulong)(Vector256<ulong>.Count * 3);
+                const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector256<ulong>.Count
                 Span<Vector256<ulong>> rt = stackalloc Vector256<ulong>[1];
                 Span<Vector256<ulong>> temp = [vector0, vector1, vector2];
                 Span<ulong> p = MemoryMarshal.Cast<Vector256<ulong>, ulong>(temp);
@@ -3953,7 +3967,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ulong>.Count; ++i) {
                     ulong selectedIndex = Unsafe.Add(ref pindices, i);
                     ulong selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -4441,7 +4455,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX4_Bit(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> indices) {
-                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create((byte)128), indices);
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector256<byte>.Count
+                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<byte> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 Vector256<byte> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -4457,7 +4472,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX4_Bit(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> indices) {
-                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create((ushort)64), indices);
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector256<ushort>.Count
+                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ushort> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 Vector256<ushort> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -4473,7 +4489,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX4_Bit(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> indices) {
-                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create((uint)32), indices);
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector256<uint>.Count
+                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<uint> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 Vector256<uint> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -4489,7 +4506,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX4_Bit(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> indices) {
-                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create((ulong)16), indices);
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector256<ulong>.Count
+                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ulong> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 Vector256<ulong> rt = Vector256.BitwiseAnd(raw, mask);
                 return rt;
@@ -4829,7 +4847,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX4Insert_Basic(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> indices) {
-                byte cnt = (byte)(Vector256<byte>.Count * 4);
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector256<byte>.Count
                 Span<Vector256<byte>> rt = stackalloc Vector256<byte>[1];
                 Span<Vector256<byte>> temp = [vector0, vector1, vector2, vector3];
                 Span<byte> p = MemoryMarshal.Cast<Vector256<byte>, byte>(temp);
@@ -4839,7 +4857,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<byte>.Count; ++i) {
                     byte selectedIndex = Unsafe.Add(ref pindices, i);
                     byte selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -4857,7 +4875,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX4Insert_Basic(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> indices) {
-                ushort cnt = (ushort)(Vector256<ushort>.Count * 4);
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector256<ushort>.Count
                 Span<Vector256<ushort>> rt = stackalloc Vector256<ushort>[1];
                 Span<Vector256<ushort>> temp = [vector0, vector1, vector2, vector3];
                 Span<ushort> p = MemoryMarshal.Cast<Vector256<ushort>, ushort>(temp);
@@ -4867,7 +4885,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ushort>.Count; ++i) {
                     ushort selectedIndex = Unsafe.Add(ref pindices, i);
                     ushort selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -4885,7 +4903,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX4Insert_Basic(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> indices) {
-                uint cnt = (uint)(Vector256<uint>.Count * 4);
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector256<uint>.Count
                 Span<Vector256<uint>> rt = stackalloc Vector256<uint>[1];
                 Span<Vector256<uint>> temp = [vector0, vector1, vector2, vector3];
                 Span<uint> p = MemoryMarshal.Cast<Vector256<uint>, uint>(temp);
@@ -4895,7 +4913,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<uint>.Count; ++i) {
                     uint selectedIndex = Unsafe.Add(ref pindices, i);
                     uint selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -4913,7 +4931,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX4Insert_Basic(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> indices) {
-                ulong cnt = (ulong)(Vector256<ulong>.Count * 4);
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector256<ulong>.Count
                 Span<Vector256<ulong>> rt = stackalloc Vector256<ulong>[1];
                 Span<Vector256<ulong>> temp = [vector0, vector1, vector2, vector3];
                 Span<ulong> p = MemoryMarshal.Cast<Vector256<ulong>, ulong>(temp);
@@ -4923,7 +4941,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ulong>.Count; ++i) {
                     ulong selectedIndex = Unsafe.Add(ref pindices, i);
                     ulong selectedValue = Unsafe.Add(ref pback, i);
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -4955,7 +4973,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Insert(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX4Insert_Bit(Vector256<byte> back, Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> indices) {
-                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create((byte)128), indices);
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector256<byte>.Count
+                Vector256<byte> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<byte> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 Vector256<byte> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -4971,7 +4990,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX4Insert_Bit(Vector256<ushort> back, Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> indices) {
-                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create((ushort)64), indices);
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector256<ushort>.Count
+                Vector256<ushort> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ushort> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 Vector256<ushort> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -4987,7 +5007,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX4Insert_Bit(Vector256<uint> back, Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> indices) {
-                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create((uint)32), indices);
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector256<uint>.Count
+                Vector256<uint> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<uint> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 Vector256<uint> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -5003,7 +5024,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX4Insert_Bit(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> indices) {
-                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create((ulong)16), indices);
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector256<ulong>.Count
+                Vector256<ulong> mask = Vector256.GreaterThan(Vector256.Create(total), indices);
                 Vector256<ulong> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 Vector256<ulong> rt = Vector256.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -5343,7 +5365,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX4Kernel_Basic(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> indices) {
-                byte cnt = (byte)(Vector256<byte>.Count * 4);
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector256<byte>.Count
                 Span<Vector256<byte>> rt = stackalloc Vector256<byte>[1];
                 Span<Vector256<byte>> temp = [vector0, vector1, vector2, vector3];
                 Span<byte> p = MemoryMarshal.Cast<Vector256<byte>, byte>(temp);
@@ -5352,7 +5374,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<byte>.Count; ++i) {
                     byte selectedIndex = Unsafe.Add(ref pindices, i);
                     byte selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -5370,7 +5392,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX4Kernel_Basic(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> indices) {
-                ushort cnt = (ushort)(Vector256<ushort>.Count * 4);
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector256<ushort>.Count
                 Span<Vector256<ushort>> rt = stackalloc Vector256<ushort>[1];
                 Span<Vector256<ushort>> temp = [vector0, vector1, vector2, vector3];
                 Span<ushort> p = MemoryMarshal.Cast<Vector256<ushort>, ushort>(temp);
@@ -5379,7 +5401,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ushort>.Count; ++i) {
                     ushort selectedIndex = Unsafe.Add(ref pindices, i);
                     ushort selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -5397,7 +5419,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX4Kernel_Basic(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> indices) {
-                uint cnt = (uint)(Vector256<uint>.Count * 4);
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector256<uint>.Count
                 Span<Vector256<uint>> rt = stackalloc Vector256<uint>[1];
                 Span<Vector256<uint>> temp = [vector0, vector1, vector2, vector3];
                 Span<uint> p = MemoryMarshal.Cast<Vector256<uint>, uint>(temp);
@@ -5406,7 +5428,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<uint>.Count; ++i) {
                     uint selectedIndex = Unsafe.Add(ref pindices, i);
                     uint selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;
@@ -5424,7 +5446,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX4Kernel_Basic(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> indices) {
-                ulong cnt = (ulong)(Vector256<ulong>.Count * 4);
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector256<ulong>.Count
                 Span<Vector256<ulong>> rt = stackalloc Vector256<ulong>[1];
                 Span<Vector256<ulong>> temp = [vector0, vector1, vector2, vector3];
                 Span<ulong> p = MemoryMarshal.Cast<Vector256<ulong>, ulong>(temp);
@@ -5433,7 +5455,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 for (int i = 0; i < Vector256<ulong>.Count; ++i) {
                     ulong selectedIndex = Unsafe.Add(ref pindices, i);
                     ulong selectedValue = default;
-                    if (selectedIndex < cnt) {
+                    if (selectedIndex < total) {
                         selectedValue = p[(int)selectedIndex];
                     }
                     q[i] = selectedValue;

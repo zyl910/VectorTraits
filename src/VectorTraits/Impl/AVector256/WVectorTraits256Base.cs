@@ -1,7 +1,5 @@
 ﻿#if NET7_0_OR_GREATER
 #define BCL_SHUFFLE_HAS
-#endif // NET7_0_OR_GREATER
-#if NET7_0_OR_GREATER
 #define VECTOR_HAS_METHOD
 #endif // NET7_0_OR_GREATER
 
