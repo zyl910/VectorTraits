@@ -9,6 +9,11 @@ namespace Zyl.VectorTraits.Impl {
     public static class VectorMessageFormats {
 
         /// <summary>
+        /// Text - No hardware acceleration! (文本 - 没有硬件加速).
+        /// </summary>
+        public static readonly string TEXT_NO_HARDWARE_ACCELERATION = "No hardware acceleration!";
+
+        /// <summary>
         /// Message format of NOT_SUPPORTED in case of 1 types (1个类型时，NOT_SUPPORTED的消息格式).
         /// </summary>
         public static readonly string FORMAT_TYPE_NOT_SUPPORTED_1 = "These element types({0}) are not supported!";
