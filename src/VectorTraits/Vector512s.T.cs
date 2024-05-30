@@ -119,6 +119,10 @@ namespace Zyl.VectorTraits {
         public static readonly Vector512<T> IndexMask;
         /// <summary>The mask of the index on Each128 (Each128上索引的掩码). All the elements have a value of <c>(16/sizeof(T))-1</c>.</summary>
         public static readonly Vector512<T> IndexMaskEach128;
+        /// <summary>The mask of the index*2 (索引*2时的掩码). All the elements have a value of <c>Count*2-1</c>.</summary>
+        public static readonly Vector512<T> IndexX2Mask;
+        /// <summary>The mask of the index*4 (索引*4时的掩码). All the elements have a value of <c>Count*4-1</c>.</summary>
+        public static readonly Vector512<T> IndexX4Mask;
         /// <summary>Serial Value (顺序值). e.g. 0, 1, 2, 3 ...</summary>
         public static readonly Vector512<T> Serial;
         /// <summary>Serial Value descend (顺序值降序). e.g. (Count-1), (Count-2), ... 2, 1, 0</summary>
@@ -259,6 +263,8 @@ namespace Zyl.VectorTraits {
             // -- Specified value --
             IndexMask = Vector512s.CreateByBits<T>(Vector512<T>.Count - 1);
             IndexMaskEach128 = Vector512s.CreateByBits<T>((16 / Scalars<T>.ByteSize) - 1);
+            IndexX2Mask = Vector512s.CreateByBits<T>(Vector512<T>.Count * 2 - 1);
+            IndexX4Mask = Vector512s.CreateByBits<T>(Vector512<T>.Count * 4 - 1);
             Serial = Vector512s.CreateByDoubleLoop<T>(0, 1);
             SerialDesc = Vector512s.CreateByDoubleLoop<T>(Vector512<T>.Count - 1, -1);
             SerialNegative = Vector512s.CreateByDoubleLoop<T>(0, -1);

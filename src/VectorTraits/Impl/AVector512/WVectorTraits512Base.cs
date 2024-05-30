@@ -1,4 +1,5 @@
 ﻿#if NET7_0_OR_GREATER
+#define BCL_SHUFFLE_HAS
 #define VECTOR_HAS_METHOD
 #endif // NET7_0_OR_GREATER
 
@@ -39,6 +40,12 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         /// <see cref="Vector512{T}"/> traits.Statics - Base.
         /// </summary>
         public static partial class Statics {
+
+#if NETX_0_OR_GREATER
+            private const bool Bcl_Shuffle_Used = true;
+#else
+            private const bool Bcl_Shuffle_Used = true;
+#endif // NETX_0_OR_GREATER
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {
