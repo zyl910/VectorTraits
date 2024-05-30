@@ -4470,7 +4470,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<sbyte> YShuffleX4_Bit(Vector512<sbyte> vector0, Vector512<sbyte> vector1, Vector512<sbyte> vector2, Vector512<sbyte> vector3, Vector512<sbyte> indices) {
                 Vector512<sbyte> mask, raw, rt;
                 mask = Vector512.GreaterThanOrEqual(indices, Vector512<sbyte>.Zero); // i >= 0
-                raw = YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices).AsSByte();
+                raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices).AsSByte();
                 rt = Vector512.BitwiseAnd(raw, mask);
                 return rt;
             }
