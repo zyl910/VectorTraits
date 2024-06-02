@@ -45,6 +45,12 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #endif // NET9_0_OR_GREATER
 #endif // NET8_0_OR_GREATER
 
+#if NETCOREAPP3_0_OR_GREATER
+            private const bool Shuffle_Use_Longer = true;
+#else
+            private const bool Shuffle_Use_Longer = false;
+#endif // NETCOREAPP3_0_OR_GREATER
+
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {
                 get { return ByteCountValue; }

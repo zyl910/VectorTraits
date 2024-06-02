@@ -1,4 +1,5 @@
 ﻿#if NET7_0_OR_GREATER
+#define BCL_SHUFFLE_HAS
 #define VECTOR_HAS_METHOD
 #endif // NET7_0_OR_GREATER
 
@@ -10,6 +11,7 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Text;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -1229,6 +1231,4469 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> YShuffleKernel_Core(Vector128<ulong> vector, Vector128<ulong> args0, Vector128<ulong> args1) {
                 _ = args1;
                 return YShuffleKernel(vector, args0);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleX2_AcceleratedTypes {
+                get {
+                    return YShuffleX2Kernel_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2_Basic(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2_Basic(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2_Basic(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2_Basic(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2_Basic(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2_Basic(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2_Basic(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2_Basic(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2_Basic(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2_Basic(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+#if BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2_Bit(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
+                return YShuffleX2_Bit(vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2_Bit(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
+                return YShuffleX2_Bit(vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2_Bit(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
+                return YShuffleX2_Bit(vector0.AsByte(), vector1.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2_Bit(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
+                const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector128<byte>.Count
+                Vector128<byte> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<byte> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                Vector128<byte> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2_Bit(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
+                return YShuffleX2_Bit(vector0.AsUInt16(), vector1.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2_Bit(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector128<ushort>.Count
+                Vector128<ushort> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ushort> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                Vector128<ushort> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2_Bit(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
+                return YShuffleX2_Bit(vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2_Bit(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector128<uint>.Count
+                Vector128<uint> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<uint> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                Vector128<uint> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2_Bit(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
+                return YShuffleX2_Bit(vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2_Bit(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector128<ulong>.Count
+                Vector128<ulong> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ulong> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                Vector128<ulong> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+#endif // BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2, out Vector128<sbyte> args3, out Vector128<sbyte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2, out Vector128<short> args3, out Vector128<short> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3, out Vector128<ushort> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2, out Vector128<int> args3, out Vector128<int> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3, out Vector128<uint> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2, out Vector128<long> args3, out Vector128<long> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3, out Vector128<ulong> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2_Core(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{double}, Vector128{double}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2_Core(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2_Core(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> args0, Vector128<sbyte> args1, Vector128<sbyte> args2, Vector128<sbyte> args3, Vector128<sbyte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2_Core(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3, Vector128<byte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2_Core(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> args0, Vector128<short> args1, Vector128<short> args2, Vector128<short> args3, Vector128<short> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2_Core(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3, Vector128<ushort> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2_Core(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2_Core(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3, Vector128<uint> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2_Core(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2_Core(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3, Vector128<ulong> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2(vector0, vector1, args0);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleX2Insert_AcceleratedTypes {
+                get {
+                    return YShuffleX2Kernel_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2Insert(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2Insert(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2Insert(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2Insert(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2Insert(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2Insert(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2Insert(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2Insert(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2Insert(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2Insert(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
+#else
+                return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2Insert_Basic(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
+                return YShuffleX2Insert_Basic(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2Insert_Basic(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
+                return YShuffleX2Insert_Basic(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2Insert_Basic(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
+                return YShuffleX2Insert_Basic(back.AsByte(), vector0.AsByte(), vector1.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2Insert_Basic(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
+                const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector128<byte>.Count
+                Span<Vector128<byte>> rt = stackalloc Vector128<byte>[1];
+                Span<Vector128<byte>> temp = [vector0, vector1];
+                Span<byte> p = MemoryMarshal.Cast<Vector128<byte>, byte>(temp);
+                Span<byte> q = MemoryMarshal.Cast<Vector128<byte>, byte>(rt);
+                ref byte pindices = ref Unsafe.As<Vector128<byte>, byte>(ref indices);
+                ref byte pback = ref Unsafe.As<Vector128<byte>, byte>(ref back);
+                for (int i = 0; i < Vector128<byte>.Count; ++i) {
+                    byte selectedIndex = Unsafe.Add(ref pindices, i);
+                    byte selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2Insert_Basic(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
+                return YShuffleX2Insert_Basic(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2Insert_Basic(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector128<ushort>.Count
+                Span<Vector128<ushort>> rt = stackalloc Vector128<ushort>[1];
+                Span<Vector128<ushort>> temp = [vector0, vector1];
+                Span<ushort> p = MemoryMarshal.Cast<Vector128<ushort>, ushort>(temp);
+                Span<ushort> q = MemoryMarshal.Cast<Vector128<ushort>, ushort>(rt);
+                ref ushort pindices = ref Unsafe.As<Vector128<ushort>, ushort>(ref indices);
+                ref ushort pback = ref Unsafe.As<Vector128<ushort>, ushort>(ref back);
+                for (int i = 0; i < Vector128<ushort>.Count; ++i) {
+                    ushort selectedIndex = Unsafe.Add(ref pindices, i);
+                    ushort selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2Insert_Basic(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
+                return YShuffleX2Insert_Basic(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2Insert_Basic(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector128<uint>.Count
+                Span<Vector128<uint>> rt = stackalloc Vector128<uint>[1];
+                Span<Vector128<uint>> temp = [vector0, vector1];
+                Span<uint> p = MemoryMarshal.Cast<Vector128<uint>, uint>(temp);
+                Span<uint> q = MemoryMarshal.Cast<Vector128<uint>, uint>(rt);
+                ref uint pindices = ref Unsafe.As<Vector128<uint>, uint>(ref indices);
+                ref uint pback = ref Unsafe.As<Vector128<uint>, uint>(ref back);
+                for (int i = 0; i < Vector128<uint>.Count; ++i) {
+                    uint selectedIndex = Unsafe.Add(ref pindices, i);
+                    uint selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2Insert_Basic(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
+                return YShuffleX2Insert_Basic(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2Insert_Basic(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector128<ulong>.Count
+                Span<Vector128<ulong>> rt = stackalloc Vector128<ulong>[1];
+                Span<Vector128<ulong>> temp = [vector0, vector1];
+                Span<ulong> p = MemoryMarshal.Cast<Vector128<ulong>, ulong>(temp);
+                Span<ulong> q = MemoryMarshal.Cast<Vector128<ulong>, ulong>(rt);
+                ref ulong pindices = ref Unsafe.As<Vector128<ulong>, ulong>(ref indices);
+                ref ulong pback = ref Unsafe.As<Vector128<ulong>, ulong>(ref back);
+                for (int i = 0; i < Vector128<ulong>.Count; ++i) {
+                    ulong selectedIndex = Unsafe.Add(ref pindices, i);
+                    ulong selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+#if BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2Insert_Bit(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
+                return YShuffleX2Insert_Bit(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2Insert_Bit(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
+                return YShuffleX2Insert_Bit(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2Insert_Bit(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
+                return YShuffleX2Insert_Bit(back.AsByte(), vector0.AsByte(), vector1.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2Insert_Bit(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
+                const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector128<byte>.Count
+                Vector128<byte> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<byte> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                Vector128<byte> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2Insert_Bit(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
+                return YShuffleX2Insert_Bit(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2Insert_Bit(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector128<ushort>.Count
+                Vector128<ushort> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ushort> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                Vector128<ushort> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2Insert_Bit(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
+                return YShuffleX2Insert_Bit(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2Insert_Bit(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector128<uint>.Count
+                Vector128<uint> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<uint> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                Vector128<uint> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2Insert_Bit(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
+                return YShuffleX2Insert_Bit(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2Insert_Bit(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector128<ulong>.Count
+                Vector128<ulong> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ulong> raw = YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                Vector128<ulong> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+#endif // BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Insert_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2, out Vector128<sbyte> args3, out Vector128<sbyte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Insert_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Insert_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2, out Vector128<short> args3, out Vector128<short> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Insert_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3, out Vector128<ushort> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Insert_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2, out Vector128<int> args3, out Vector128<int> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Insert_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3, out Vector128<uint> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Insert_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2, out Vector128<long> args3, out Vector128<long> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Insert_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3, out Vector128<ulong> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2Insert_Core(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2Insert_Core(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2Insert_Core(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> args0, Vector128<sbyte> args1, Vector128<sbyte> args2, Vector128<sbyte> args3, Vector128<sbyte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2Insert_Core(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3, Vector128<byte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2Insert_Core(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> args0, Vector128<short> args1, Vector128<short> args2, Vector128<short> args3, Vector128<short> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2Insert_Core(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3, Vector128<ushort> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2Insert_Core(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2Insert_Core(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3, Vector128<uint> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2Insert_Core(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2Insert_Core(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3, Vector128<ulong> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX2Insert(back, vector0, vector1, args0);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleX2Kernel_AcceleratedTypes {
+                get {
+                    return Shuffle_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2Kernel(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2Kernel(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2Kernel(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2Kernel(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2Kernel(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2Kernel(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2Kernel(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2Kernel(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2Kernel(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2Kernel(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX2Kernel_Bit(vector0, vector1, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX2Kernel_Basic(vector0, vector1, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2Kernel_Basic(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
+                return YShuffleX2Kernel_Basic(vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2Kernel_Basic(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
+                return YShuffleX2Kernel_Basic(vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2Kernel_Basic(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
+                return YShuffleX2Kernel_Basic(vector0.AsByte(), vector1.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2Kernel_Basic(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
+                const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector128<byte>.Count
+                Span<Vector128<byte>> rt = stackalloc Vector128<byte>[1];
+                Span<Vector128<byte>> temp = [vector0, vector1];
+                Span<byte> p = MemoryMarshal.Cast<Vector128<byte>, byte>(temp);
+                Span<byte> q = MemoryMarshal.Cast<Vector128<byte>, byte>(rt);
+                ref byte pindices = ref Unsafe.As<Vector128<byte>, byte>(ref indices);
+                for (int i = 0; i < Vector128<byte>.Count; ++i) {
+                    byte selectedIndex = Unsafe.Add(ref pindices, i);
+                    byte selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2Kernel_Basic(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
+                return YShuffleX2Kernel_Basic(vector0.AsUInt16(), vector1.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2Kernel_Basic(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector128<ushort>.Count
+                Span<Vector128<ushort>> rt = stackalloc Vector128<ushort>[1];
+                Span<Vector128<ushort>> temp = [vector0, vector1];
+                Span<ushort> p = MemoryMarshal.Cast<Vector128<ushort>, ushort>(temp);
+                Span<ushort> q = MemoryMarshal.Cast<Vector128<ushort>, ushort>(rt);
+                ref ushort pindices = ref Unsafe.As<Vector128<ushort>, ushort>(ref indices);
+                for (int i = 0; i < Vector128<ushort>.Count; ++i) {
+                    ushort selectedIndex = Unsafe.Add(ref pindices, i);
+                    ushort selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2Kernel_Basic(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
+                return YShuffleX2Kernel_Basic(vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2Kernel_Basic(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector128<uint>.Count
+                Span<Vector128<uint>> rt = stackalloc Vector128<uint>[1];
+                Span<Vector128<uint>> temp = [vector0, vector1];
+                Span<uint> p = MemoryMarshal.Cast<Vector128<uint>, uint>(temp);
+                Span<uint> q = MemoryMarshal.Cast<Vector128<uint>, uint>(rt);
+                ref uint pindices = ref Unsafe.As<Vector128<uint>, uint>(ref indices);
+                for (int i = 0; i < Vector128<uint>.Count; ++i) {
+                    uint selectedIndex = Unsafe.Add(ref pindices, i);
+                    uint selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2Kernel_Basic(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
+                return YShuffleX2Kernel_Basic(vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2Kernel_Basic(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector128<ulong>.Count
+                Span<Vector128<ulong>> rt = stackalloc Vector128<ulong>[1];
+                Span<Vector128<ulong>> temp = [vector0, vector1];
+                Span<ulong> p = MemoryMarshal.Cast<Vector128<ulong>, ulong>(temp);
+                Span<ulong> q = MemoryMarshal.Cast<Vector128<ulong>, ulong>(rt);
+                ref ulong pindices = ref Unsafe.As<Vector128<ulong>, ulong>(ref indices);
+                for (int i = 0; i < Vector128<ulong>.Count; ++i) {
+                    ulong selectedIndex = Unsafe.Add(ref pindices, i);
+                    ulong selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+#if BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2Kernel_Bit(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
+                return YShuffleX2Kernel_Bit(vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2Kernel_Bit(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
+                return YShuffleX2Kernel_Bit(vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2Kernel_Bit(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
+                return YShuffleX2Kernel_Bit(vector0.AsByte(), vector1.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2Kernel_Bit(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
+                Vector128<byte> vCount = Vector128.Create((byte)Vector128<byte>.Count);
+                Vector128<byte> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<byte> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<byte> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<byte> rt = Vector128.BitwiseOr(rt0, rt1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2Kernel_Bit(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
+                return YShuffleX2Kernel_Bit(vector0.AsUInt16(), vector1.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2Kernel_Bit(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+                Vector128<ushort> vCount = Vector128.Create((ushort)Vector128<ushort>.Count);
+                Vector128<ushort> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<ushort> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<ushort> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<ushort> rt = Vector128.BitwiseOr(rt0, rt1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2Kernel_Bit(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
+                return YShuffleX2Kernel_Bit(vector0.AsUInt32(), vector1.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2Kernel_Bit(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+                Vector128<uint> vCount = Vector128.Create((uint)Vector128<uint>.Count);
+                Vector128<uint> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<uint> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<uint> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<uint> rt = Vector128.BitwiseOr(rt0, rt1);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2Kernel_Bit(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
+                return YShuffleX2Kernel_Bit(vector0.AsUInt64(), vector1.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2Kernel_Bit(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+                Vector128<ulong> vCount = Vector128.Create((ulong)Vector128<ulong>.Count);
+                Vector128<ulong> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<ulong> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<ulong> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<ulong> rt = Vector128.BitwiseOr(rt0, rt1);
+                return rt;
+            }
+
+#endif // BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Kernel_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2, out Vector128<sbyte> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Kernel_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Kernel_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2, out Vector128<short> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Kernel_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Kernel_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2, out Vector128<int> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Kernel_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Kernel_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2, out Vector128<long> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX2Kernel_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX2Kernel_Core(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{double}, Vector128{double}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX2Kernel_Core(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX2Kernel_Core(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> args0, Vector128<sbyte> args1, Vector128<sbyte> args2, Vector128<sbyte> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX2Kernel_Core(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX2Kernel_Core(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> args0, Vector128<short> args1, Vector128<short> args2, Vector128<short> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX2Kernel_Core(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX2Kernel_Core(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX2Kernel_Core(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX2Kernel_Core(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX2Kernel_Core(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX2Kernel(vector0, vector1, args0);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleX3_AcceleratedTypes {
+                get {
+                    return YShuffleX3Kernel_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3_Basic(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3_Basic(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3_Basic(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3_Basic(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3_Basic(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3_Basic(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3_Basic(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3_Basic(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3_Basic(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3_Basic(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+#if BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3_Bit(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
+                return YShuffleX3_Bit(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3_Bit(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
+                return YShuffleX3_Bit(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3_Bit(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
+                return YShuffleX3_Bit(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3_Bit(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
+                const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector128<byte>.Count
+                Vector128<byte> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<byte> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                Vector128<byte> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3_Bit(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
+                return YShuffleX3_Bit(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3_Bit(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
+                const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector128<ushort>.Count
+                Vector128<ushort> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ushort> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                Vector128<ushort> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3_Bit(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
+                return YShuffleX3_Bit(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3_Bit(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
+                const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector128<uint>.Count
+                Vector128<uint> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<uint> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                Vector128<uint> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3_Bit(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
+                return YShuffleX3_Bit(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3_Bit(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
+                const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector128<ulong>.Count
+                Vector128<ulong> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ulong> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                Vector128<ulong> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+#endif // BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2, out Vector128<sbyte> args3, out Vector128<sbyte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2, out Vector128<short> args3, out Vector128<short> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3, out Vector128<ushort> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2, out Vector128<int> args3, out Vector128<int> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3, out Vector128<uint> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2, out Vector128<long> args3, out Vector128<long> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3, out Vector128<ulong> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3_Core(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3_Core(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3_Core(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> args0, Vector128<sbyte> args1, Vector128<sbyte> args2, Vector128<sbyte> args3, Vector128<sbyte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3_Core(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3, Vector128<byte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3_Core(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> args0, Vector128<short> args1, Vector128<short> args2, Vector128<short> args3, Vector128<short> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3_Core(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3, Vector128<ushort> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3_Core(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3_Core(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3, Vector128<uint> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3_Core(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3_Core(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3, Vector128<ulong> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3(vector0, vector1, vector2, args0);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleX3Insert_AcceleratedTypes {
+                get {
+                    return YShuffleX3Kernel_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3Insert(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3Insert(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3Insert(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3Insert(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3Insert(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3Insert(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3Insert(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3Insert(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3Insert(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3Insert(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3Insert_Basic(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
+                return YShuffleX3Insert_Basic(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3Insert_Basic(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
+                return YShuffleX3Insert_Basic(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3Insert_Basic(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
+                return YShuffleX3Insert_Basic(back.AsByte(), vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3Insert_Basic(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
+                const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector128<byte>.Count
+                Span<Vector128<byte>> rt = stackalloc Vector128<byte>[1];
+                Span<Vector128<byte>> temp = [vector0, vector1, vector2];
+                Span<byte> p = MemoryMarshal.Cast<Vector128<byte>, byte>(temp);
+                Span<byte> q = MemoryMarshal.Cast<Vector128<byte>, byte>(rt);
+                ref byte pindices = ref Unsafe.As<Vector128<byte>, byte>(ref indices);
+                ref byte pback = ref Unsafe.As<Vector128<byte>, byte>(ref back);
+                for (int i = 0; i < Vector128<byte>.Count; ++i) {
+                    byte selectedIndex = Unsafe.Add(ref pindices, i);
+                    byte selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3Insert_Basic(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
+                return YShuffleX3Insert_Basic(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3Insert_Basic(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
+                const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector128<ushort>.Count
+                Span<Vector128<ushort>> rt = stackalloc Vector128<ushort>[1];
+                Span<Vector128<ushort>> temp = [vector0, vector1, vector2];
+                Span<ushort> p = MemoryMarshal.Cast<Vector128<ushort>, ushort>(temp);
+                Span<ushort> q = MemoryMarshal.Cast<Vector128<ushort>, ushort>(rt);
+                ref ushort pindices = ref Unsafe.As<Vector128<ushort>, ushort>(ref indices);
+                ref ushort pback = ref Unsafe.As<Vector128<ushort>, ushort>(ref back);
+                for (int i = 0; i < Vector128<ushort>.Count; ++i) {
+                    ushort selectedIndex = Unsafe.Add(ref pindices, i);
+                    ushort selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3Insert_Basic(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
+                return YShuffleX3Insert_Basic(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3Insert_Basic(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
+                const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector128<uint>.Count
+                Span<Vector128<uint>> rt = stackalloc Vector128<uint>[1];
+                Span<Vector128<uint>> temp = [vector0, vector1, vector2];
+                Span<uint> p = MemoryMarshal.Cast<Vector128<uint>, uint>(temp);
+                Span<uint> q = MemoryMarshal.Cast<Vector128<uint>, uint>(rt);
+                ref uint pindices = ref Unsafe.As<Vector128<uint>, uint>(ref indices);
+                ref uint pback = ref Unsafe.As<Vector128<uint>, uint>(ref back);
+                for (int i = 0; i < Vector128<uint>.Count; ++i) {
+                    uint selectedIndex = Unsafe.Add(ref pindices, i);
+                    uint selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3Insert_Basic(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
+                return YShuffleX3Insert_Basic(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3Insert_Basic(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
+                const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector128<ulong>.Count
+                Span<Vector128<ulong>> rt = stackalloc Vector128<ulong>[1];
+                Span<Vector128<ulong>> temp = [vector0, vector1, vector2];
+                Span<ulong> p = MemoryMarshal.Cast<Vector128<ulong>, ulong>(temp);
+                Span<ulong> q = MemoryMarshal.Cast<Vector128<ulong>, ulong>(rt);
+                ref ulong pindices = ref Unsafe.As<Vector128<ulong>, ulong>(ref indices);
+                ref ulong pback = ref Unsafe.As<Vector128<ulong>, ulong>(ref back);
+                for (int i = 0; i < Vector128<ulong>.Count; ++i) {
+                    ulong selectedIndex = Unsafe.Add(ref pindices, i);
+                    ulong selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+#if BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3Insert_Bit(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
+                return YShuffleX3Insert_Bit(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3Insert_Bit(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
+                return YShuffleX3Insert_Bit(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3Insert_Bit(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
+                return YShuffleX3Insert_Bit(back.AsByte(), vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3Insert_Bit(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
+                const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector128<byte>.Count
+                Vector128<byte> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<byte> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                Vector128<byte> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3Insert_Bit(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
+                return YShuffleX3Insert_Bit(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3Insert_Bit(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
+                const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector128<ushort>.Count
+                Vector128<ushort> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ushort> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                Vector128<ushort> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3Insert_Bit(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
+                return YShuffleX3Insert_Bit(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3Insert_Bit(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
+                const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector128<uint>.Count
+                Vector128<uint> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<uint> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                Vector128<uint> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3Insert_Bit(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
+                return YShuffleX3Insert_Bit(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3Insert_Bit(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
+                const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector128<ulong>.Count
+                Vector128<ulong> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ulong> raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                Vector128<ulong> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+#endif // BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Insert_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2, out Vector128<sbyte> args3, out Vector128<sbyte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Insert_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Insert_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2, out Vector128<short> args3, out Vector128<short> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Insert_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3, out Vector128<ushort> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Insert_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2, out Vector128<int> args3, out Vector128<int> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Insert_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3, out Vector128<uint> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Insert_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2, out Vector128<long> args3, out Vector128<long> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Insert_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3, out Vector128<ulong> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3Insert_Core(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3Insert_Core(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3Insert_Core(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> args0, Vector128<sbyte> args1, Vector128<sbyte> args2, Vector128<sbyte> args3, Vector128<sbyte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3Insert_Core(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3, Vector128<byte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3Insert_Core(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> args0, Vector128<short> args1, Vector128<short> args2, Vector128<short> args3, Vector128<short> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3Insert_Core(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3, Vector128<ushort> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3Insert_Core(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3Insert_Core(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3, Vector128<uint> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3Insert_Core(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3Insert_Core(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3, Vector128<ulong> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX3Insert(back, vector0, vector1, vector2, args0);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleX3Kernel_AcceleratedTypes {
+                get {
+                    return Shuffle_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3Kernel(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3Kernel(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3Kernel(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3Kernel(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3Kernel(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3Kernel(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3Kernel(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3Kernel(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3Kernel(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3Kernel(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3Kernel_Basic(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
+                return YShuffleX3Kernel_Basic(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3Kernel_Basic(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
+                return YShuffleX3Kernel_Basic(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3Kernel_Basic(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
+                return YShuffleX3Kernel_Basic(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3Kernel_Basic(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
+                const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector128<byte>.Count
+                Span<Vector128<byte>> rt = stackalloc Vector128<byte>[1];
+                Span<Vector128<byte>> temp = [vector0, vector1, vector2];
+                Span<byte> p = MemoryMarshal.Cast<Vector128<byte>, byte>(temp);
+                Span<byte> q = MemoryMarshal.Cast<Vector128<byte>, byte>(rt);
+                ref byte pindices = ref Unsafe.As<Vector128<byte>, byte>(ref indices);
+                for (int i = 0; i < Vector128<byte>.Count; ++i) {
+                    byte selectedIndex = Unsafe.Add(ref pindices, i);
+                    byte selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3Kernel_Basic(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
+                return YShuffleX3Kernel_Basic(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3Kernel_Basic(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
+                const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector128<ushort>.Count
+                Span<Vector128<ushort>> rt = stackalloc Vector128<ushort>[1];
+                Span<Vector128<ushort>> temp = [vector0, vector1, vector2];
+                Span<ushort> p = MemoryMarshal.Cast<Vector128<ushort>, ushort>(temp);
+                Span<ushort> q = MemoryMarshal.Cast<Vector128<ushort>, ushort>(rt);
+                ref ushort pindices = ref Unsafe.As<Vector128<ushort>, ushort>(ref indices);
+                for (int i = 0; i < Vector128<ushort>.Count; ++i) {
+                    ushort selectedIndex = Unsafe.Add(ref pindices, i);
+                    ushort selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3Kernel_Basic(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
+                return YShuffleX3Kernel_Basic(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3Kernel_Basic(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
+                const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector128<uint>.Count
+                Span<Vector128<uint>> rt = stackalloc Vector128<uint>[1];
+                Span<Vector128<uint>> temp = [vector0, vector1, vector2];
+                Span<uint> p = MemoryMarshal.Cast<Vector128<uint>, uint>(temp);
+                Span<uint> q = MemoryMarshal.Cast<Vector128<uint>, uint>(rt);
+                ref uint pindices = ref Unsafe.As<Vector128<uint>, uint>(ref indices);
+                for (int i = 0; i < Vector128<uint>.Count; ++i) {
+                    uint selectedIndex = Unsafe.Add(ref pindices, i);
+                    uint selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3Kernel_Basic(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
+                return YShuffleX3Kernel_Basic(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3Kernel_Basic(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
+                const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector128<ulong>.Count
+                Span<Vector128<ulong>> rt = stackalloc Vector128<ulong>[1];
+                Span<Vector128<ulong>> temp = [vector0, vector1, vector2];
+                Span<ulong> p = MemoryMarshal.Cast<Vector128<ulong>, ulong>(temp);
+                Span<ulong> q = MemoryMarshal.Cast<Vector128<ulong>, ulong>(rt);
+                ref ulong pindices = ref Unsafe.As<Vector128<ulong>, ulong>(ref indices);
+                for (int i = 0; i < Vector128<ulong>.Count; ++i) {
+                    ulong selectedIndex = Unsafe.Add(ref pindices, i);
+                    ulong selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+#if BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3Kernel_Bit(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
+                return YShuffleX3Kernel_Bit(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3Kernel_Bit(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
+                return YShuffleX3Kernel_Bit(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3Kernel_Bit(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
+                return YShuffleX3Kernel_Bit(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3Kernel_Bit(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
+                Vector128<byte> vCount = Vector128.Create((byte)Vector128<byte>.Count);
+                Vector128<byte> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<byte> indices2 = Vector128.Subtract(indices1, vCount);
+                Vector128<byte> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<byte> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<byte> rt2 = Vector128.Shuffle(vector2, indices2);
+                rt0 = Vector128.BitwiseOr(rt0, rt1);
+                Vector128<byte> rt = Vector128.BitwiseOr(rt0, rt2);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3Kernel_Bit(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
+                return YShuffleX3Kernel_Bit(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3Kernel_Bit(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
+                Vector128<ushort> vCount = Vector128.Create((ushort)Vector128<ushort>.Count);
+                Vector128<ushort> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<ushort> indices2 = Vector128.Subtract(indices1, vCount);
+                Vector128<ushort> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<ushort> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<ushort> rt2 = Vector128.Shuffle(vector2, indices2);
+                rt0 = Vector128.BitwiseOr(rt0, rt1);
+                Vector128<ushort> rt = Vector128.BitwiseOr(rt0, rt2);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3Kernel_Bit(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
+                return YShuffleX3Kernel_Bit(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3Kernel_Bit(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
+                Vector128<uint> vCount = Vector128.Create((uint)Vector128<uint>.Count);
+                Vector128<uint> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<uint> indices2 = Vector128.Subtract(indices1, vCount);
+                Vector128<uint> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<uint> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<uint> rt2 = Vector128.Shuffle(vector2, indices2);
+                rt0 = Vector128.BitwiseOr(rt0, rt1);
+                Vector128<uint> rt = Vector128.BitwiseOr(rt0, rt2);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3Kernel_Bit(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
+                return YShuffleX3Kernel_Bit(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3Kernel_Bit(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
+                Vector128<ulong> vCount = Vector128.Create((ulong)Vector128<ulong>.Count);
+                Vector128<ulong> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<ulong> indices2 = Vector128.Subtract(indices1, vCount);
+                Vector128<ulong> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<ulong> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<ulong> rt2 = Vector128.Shuffle(vector2, indices2);
+                rt0 = Vector128.BitwiseOr(rt0, rt1);
+                Vector128<ulong> rt = Vector128.BitwiseOr(rt0, rt2);
+                return rt;
+            }
+
+#endif // BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Kernel_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2, out Vector128<sbyte> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Kernel_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Kernel_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2, out Vector128<short> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Kernel_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Kernel_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2, out Vector128<int> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Kernel_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Kernel_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2, out Vector128<long> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX3Kernel_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX3Kernel_Core(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX3Kernel_Core(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX3Kernel_Core(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> args0, Vector128<sbyte> args1, Vector128<sbyte> args2, Vector128<sbyte> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX3Kernel_Core(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX3Kernel_Core(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> args0, Vector128<short> args1, Vector128<short> args2, Vector128<short> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX3Kernel_Core(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX3Kernel_Core(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX3Kernel_Core(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX3Kernel_Core(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX3Kernel_Core(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX3Kernel(vector0, vector1, vector2, args0);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleX4_AcceleratedTypes {
+                get {
+                    return YShuffleX4Kernel_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4_Basic(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4_Basic(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4_Basic(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4_Basic(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4_Basic(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4_Basic(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4_Basic(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4_Basic(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4_Basic(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4_Basic(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+#if BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4_Bit(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
+                return YShuffleX4_Bit(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4_Bit(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
+                return YShuffleX4_Bit(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4_Bit(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
+                return YShuffleX4_Bit(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), vector3.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4_Bit(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector128<byte>.Count
+                Vector128<byte> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<byte> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                Vector128<byte> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4_Bit(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
+                return YShuffleX4_Bit(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), vector3.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4_Bit(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector128<ushort>.Count
+                Vector128<ushort> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ushort> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                Vector128<ushort> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4_Bit(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
+                return YShuffleX4_Bit(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4_Bit(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector128<uint>.Count
+                Vector128<uint> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<uint> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                Vector128<uint> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4_Bit(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
+                return YShuffleX4_Bit(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4_Bit(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector128<ulong>.Count
+                Vector128<ulong> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ulong> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                Vector128<ulong> rt = Vector128.BitwiseAnd(raw, mask);
+                return rt;
+            }
+
+#endif // BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2, out Vector128<sbyte> args3, out Vector128<sbyte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2, out Vector128<short> args3, out Vector128<short> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3, out Vector128<ushort> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2, out Vector128<int> args3, out Vector128<int> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3, out Vector128<uint> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2, out Vector128<long> args3, out Vector128<long> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3, out Vector128<ulong> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4_Core(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4_Core(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4_Core(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> args0, Vector128<sbyte> args1, Vector128<sbyte> args2, Vector128<sbyte> args3, Vector128<sbyte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4_Core(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3, Vector128<byte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4_Core(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> args0, Vector128<short> args1, Vector128<short> args2, Vector128<short> args3, Vector128<short> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4_Core(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3, Vector128<ushort> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4_Core(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4_Core(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3, Vector128<uint> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4_Core(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4_Core(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3, Vector128<ulong> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4(vector0, vector1, vector2, vector3, args0);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleX4Insert_AcceleratedTypes {
+                get {
+                    return YShuffleX4Kernel_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4Insert(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4Insert(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4Insert(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4Insert(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4Insert(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4Insert(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4Insert(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4Insert(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4Insert(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4Insert(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4Insert_Basic(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
+                return YShuffleX4Insert_Basic(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4Insert_Basic(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
+                return YShuffleX4Insert_Basic(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4Insert_Basic(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
+                return YShuffleX4Insert_Basic(back.AsByte(), vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), vector3.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4Insert_Basic(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector128<byte>.Count
+                Span<Vector128<byte>> rt = stackalloc Vector128<byte>[1];
+                Span<Vector128<byte>> temp = [vector0, vector1, vector2, vector3];
+                Span<byte> p = MemoryMarshal.Cast<Vector128<byte>, byte>(temp);
+                Span<byte> q = MemoryMarshal.Cast<Vector128<byte>, byte>(rt);
+                ref byte pindices = ref Unsafe.As<Vector128<byte>, byte>(ref indices);
+                ref byte pback = ref Unsafe.As<Vector128<byte>, byte>(ref back);
+                for (int i = 0; i < Vector128<byte>.Count; ++i) {
+                    byte selectedIndex = Unsafe.Add(ref pindices, i);
+                    byte selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4Insert_Basic(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
+                return YShuffleX4Insert_Basic(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), vector3.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4Insert_Basic(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector128<ushort>.Count
+                Span<Vector128<ushort>> rt = stackalloc Vector128<ushort>[1];
+                Span<Vector128<ushort>> temp = [vector0, vector1, vector2, vector3];
+                Span<ushort> p = MemoryMarshal.Cast<Vector128<ushort>, ushort>(temp);
+                Span<ushort> q = MemoryMarshal.Cast<Vector128<ushort>, ushort>(rt);
+                ref ushort pindices = ref Unsafe.As<Vector128<ushort>, ushort>(ref indices);
+                ref ushort pback = ref Unsafe.As<Vector128<ushort>, ushort>(ref back);
+                for (int i = 0; i < Vector128<ushort>.Count; ++i) {
+                    ushort selectedIndex = Unsafe.Add(ref pindices, i);
+                    ushort selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4Insert_Basic(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
+                return YShuffleX4Insert_Basic(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4Insert_Basic(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector128<uint>.Count
+                Span<Vector128<uint>> rt = stackalloc Vector128<uint>[1];
+                Span<Vector128<uint>> temp = [vector0, vector1, vector2, vector3];
+                Span<uint> p = MemoryMarshal.Cast<Vector128<uint>, uint>(temp);
+                Span<uint> q = MemoryMarshal.Cast<Vector128<uint>, uint>(rt);
+                ref uint pindices = ref Unsafe.As<Vector128<uint>, uint>(ref indices);
+                ref uint pback = ref Unsafe.As<Vector128<uint>, uint>(ref back);
+                for (int i = 0; i < Vector128<uint>.Count; ++i) {
+                    uint selectedIndex = Unsafe.Add(ref pindices, i);
+                    uint selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4Insert_Basic(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
+                return YShuffleX4Insert_Basic(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4Insert_Basic(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector128<ulong>.Count
+                Span<Vector128<ulong>> rt = stackalloc Vector128<ulong>[1];
+                Span<Vector128<ulong>> temp = [vector0, vector1, vector2, vector3];
+                Span<ulong> p = MemoryMarshal.Cast<Vector128<ulong>, ulong>(temp);
+                Span<ulong> q = MemoryMarshal.Cast<Vector128<ulong>, ulong>(rt);
+                ref ulong pindices = ref Unsafe.As<Vector128<ulong>, ulong>(ref indices);
+                ref ulong pback = ref Unsafe.As<Vector128<ulong>, ulong>(ref back);
+                for (int i = 0; i < Vector128<ulong>.Count; ++i) {
+                    ulong selectedIndex = Unsafe.Add(ref pindices, i);
+                    ulong selectedValue = Unsafe.Add(ref pback, i);
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+#if BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4Insert_Bit(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
+                return YShuffleX4Insert_Bit(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4Insert_Bit(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
+                return YShuffleX4Insert_Bit(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4Insert_Bit(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
+                return YShuffleX4Insert_Bit(back.AsByte(), vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), vector3.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4Insert_Bit(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector128<byte>.Count
+                Vector128<byte> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<byte> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                Vector128<byte> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4Insert_Bit(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
+                return YShuffleX4Insert_Bit(back.AsUInt16(), vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), vector3.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4Insert_Bit(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector128<ushort>.Count
+                Vector128<ushort> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ushort> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                Vector128<ushort> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4Insert_Bit(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
+                return YShuffleX4Insert_Bit(back.AsUInt32(), vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4Insert_Bit(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector128<uint>.Count
+                Vector128<uint> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<uint> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                Vector128<uint> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4Insert_Bit(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
+                return YShuffleX4Insert_Bit(back.AsUInt64(), vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4Insert_Bit(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector128<ulong>.Count
+                Vector128<ulong> mask = Vector128.GreaterThan(Vector128.Create(total), indices);
+                Vector128<ulong> raw = YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                Vector128<ulong> rt = Vector128.ConditionalSelect(mask, raw, back);
+                return rt;
+            }
+
+#endif // BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Insert_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2, out Vector128<sbyte> args3, out Vector128<sbyte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Insert_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Insert_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2, out Vector128<short> args3, out Vector128<short> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Insert_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3, out Vector128<ushort> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Insert_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2, out Vector128<int> args3, out Vector128<int> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Insert_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3, out Vector128<uint> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Insert_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2, out Vector128<long> args3, out Vector128<long> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Insert_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3, out Vector128<ulong> args4) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+                args4 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4Insert_Core(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4Insert_Core(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4Insert_Core(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> args0, Vector128<sbyte> args1, Vector128<sbyte> args2, Vector128<sbyte> args3, Vector128<sbyte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4Insert_Core(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3, Vector128<byte> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4Insert_Core(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> args0, Vector128<short> args1, Vector128<short> args2, Vector128<short> args3, Vector128<short> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4Insert_Core(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3, Vector128<ushort> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4Insert_Core(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3, Vector128<int> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4Insert_Core(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3, Vector128<uint> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4Insert_Core(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3, Vector128<long> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4Insert_Core(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3, Vector128<ulong> args4) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                _ = args4;
+                return YShuffleX4Insert(back, vector0, vector1, vector2, vector3, args0);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_AcceleratedTypes"/>
+            public static TypeCodeFlags YShuffleX4Kernel_AcceleratedTypes {
+                get {
+                    return Shuffle_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4Kernel(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4Kernel(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4Kernel(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4Kernel(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4Kernel(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4Kernel(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4Kernel(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4Kernel(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4Kernel(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4Kernel(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
+                    return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+                return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4Kernel_Basic(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
+                return YShuffleX4Kernel_Basic(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4Kernel_Basic(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
+                return YShuffleX4Kernel_Basic(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4Kernel_Basic(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
+                return YShuffleX4Kernel_Basic(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), vector3.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4Kernel_Basic(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector128<byte>.Count
+                Span<Vector128<byte>> rt = stackalloc Vector128<byte>[1];
+                Span<Vector128<byte>> temp = [vector0, vector1, vector2, vector3];
+                Span<byte> p = MemoryMarshal.Cast<Vector128<byte>, byte>(temp);
+                Span<byte> q = MemoryMarshal.Cast<Vector128<byte>, byte>(rt);
+                ref byte pindices = ref Unsafe.As<Vector128<byte>, byte>(ref indices);
+                for (int i = 0; i < Vector128<byte>.Count; ++i) {
+                    byte selectedIndex = Unsafe.Add(ref pindices, i);
+                    byte selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4Kernel_Basic(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
+                return YShuffleX4Kernel_Basic(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), vector3.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4Kernel_Basic(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector128<ushort>.Count
+                Span<Vector128<ushort>> rt = stackalloc Vector128<ushort>[1];
+                Span<Vector128<ushort>> temp = [vector0, vector1, vector2, vector3];
+                Span<ushort> p = MemoryMarshal.Cast<Vector128<ushort>, ushort>(temp);
+                Span<ushort> q = MemoryMarshal.Cast<Vector128<ushort>, ushort>(rt);
+                ref ushort pindices = ref Unsafe.As<Vector128<ushort>, ushort>(ref indices);
+                for (int i = 0; i < Vector128<ushort>.Count; ++i) {
+                    ushort selectedIndex = Unsafe.Add(ref pindices, i);
+                    ushort selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4Kernel_Basic(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
+                return YShuffleX4Kernel_Basic(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4Kernel_Basic(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector128<uint>.Count
+                Span<Vector128<uint>> rt = stackalloc Vector128<uint>[1];
+                Span<Vector128<uint>> temp = [vector0, vector1, vector2, vector3];
+                Span<uint> p = MemoryMarshal.Cast<Vector128<uint>, uint>(temp);
+                Span<uint> q = MemoryMarshal.Cast<Vector128<uint>, uint>(rt);
+                ref uint pindices = ref Unsafe.As<Vector128<uint>, uint>(ref indices);
+                for (int i = 0; i < Vector128<uint>.Count; ++i) {
+                    uint selectedIndex = Unsafe.Add(ref pindices, i);
+                    uint selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4Kernel_Basic(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
+                return YShuffleX4Kernel_Basic(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4Kernel_Basic(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector128<ulong>.Count
+                Span<Vector128<ulong>> rt = stackalloc Vector128<ulong>[1];
+                Span<Vector128<ulong>> temp = [vector0, vector1, vector2, vector3];
+                Span<ulong> p = MemoryMarshal.Cast<Vector128<ulong>, ulong>(temp);
+                Span<ulong> q = MemoryMarshal.Cast<Vector128<ulong>, ulong>(rt);
+                ref ulong pindices = ref Unsafe.As<Vector128<ulong>, ulong>(ref indices);
+                for (int i = 0; i < Vector128<ulong>.Count; ++i) {
+                    ulong selectedIndex = Unsafe.Add(ref pindices, i);
+                    ulong selectedValue = default;
+                    if (selectedIndex < total) {
+                        selectedValue = p[(int)selectedIndex];
+                    }
+                    q[i] = selectedValue;
+                }
+                return rt[0];
+            }
+
+#if BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4Kernel_Bit(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
+                return YShuffleX4Kernel_Bit(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4Kernel_Bit(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
+                return YShuffleX4Kernel_Bit(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4Kernel_Bit(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
+                return YShuffleX4Kernel_Bit(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), vector3.AsByte(), indices.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4Kernel_Bit(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
+                Vector128<byte> vCount = Vector128.Create((byte)Vector128<byte>.Count);
+                Vector128<byte> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<byte> indices2 = Vector128.Subtract(indices1, vCount);
+                Vector128<byte> indices3 = Vector128.Subtract(indices2, vCount);
+                Vector128<byte> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<byte> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<byte> rt2 = Vector128.Shuffle(vector2, indices2);
+                Vector128<byte> rt3 = Vector128.Shuffle(vector3, indices3);
+                rt0 = Vector128.BitwiseOr(rt0, rt1);
+                rt2 = Vector128.BitwiseOr(rt2, rt3);
+                Vector128<byte> rt = Vector128.BitwiseOr(rt0, rt2);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4Kernel_Bit(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
+                return YShuffleX4Kernel_Bit(vector0.AsUInt16(), vector1.AsUInt16(), vector2.AsUInt16(), vector3.AsUInt16(), indices.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4Kernel_Bit(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+                Vector128<ushort> vCount = Vector128.Create((ushort)Vector128<ushort>.Count);
+                Vector128<ushort> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<ushort> indices2 = Vector128.Subtract(indices1, vCount);
+                Vector128<ushort> indices3 = Vector128.Subtract(indices2, vCount);
+                Vector128<ushort> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<ushort> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<ushort> rt2 = Vector128.Shuffle(vector2, indices2);
+                Vector128<ushort> rt3 = Vector128.Shuffle(vector3, indices3);
+                rt0 = Vector128.BitwiseOr(rt0, rt1);
+                rt2 = Vector128.BitwiseOr(rt2, rt3);
+                Vector128<ushort> rt = Vector128.BitwiseOr(rt0, rt2);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4Kernel_Bit(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
+                return YShuffleX4Kernel_Bit(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), indices.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4Kernel_Bit(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+                Vector128<uint> vCount = Vector128.Create((uint)Vector128<uint>.Count);
+                Vector128<uint> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<uint> indices2 = Vector128.Subtract(indices1, vCount);
+                Vector128<uint> indices3 = Vector128.Subtract(indices2, vCount);
+                Vector128<uint> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<uint> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<uint> rt2 = Vector128.Shuffle(vector2, indices2);
+                Vector128<uint> rt3 = Vector128.Shuffle(vector3, indices3);
+                rt0 = Vector128.BitwiseOr(rt0, rt1);
+                rt2 = Vector128.BitwiseOr(rt2, rt3);
+                Vector128<uint> rt = Vector128.BitwiseOr(rt0, rt2);
+                return rt;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4Kernel_Bit(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
+                return YShuffleX4Kernel_Bit(vector0.AsUInt64(), vector1.AsUInt64(), vector2.AsUInt64(), vector3.AsUInt64(), indices.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4Kernel_Bit(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+                Vector128<ulong> vCount = Vector128.Create((ulong)Vector128<ulong>.Count);
+                Vector128<ulong> indices1 = Vector128.Subtract(indices, vCount);
+                Vector128<ulong> indices2 = Vector128.Subtract(indices1, vCount);
+                Vector128<ulong> indices3 = Vector128.Subtract(indices2, vCount);
+                Vector128<ulong> rt0 = Vector128.Shuffle(vector0, indices);
+                Vector128<ulong> rt1 = Vector128.Shuffle(vector1, indices1);
+                Vector128<ulong> rt2 = Vector128.Shuffle(vector2, indices2);
+                Vector128<ulong> rt3 = Vector128.Shuffle(vector3, indices3);
+                rt0 = Vector128.BitwiseOr(rt0, rt1);
+                rt2 = Vector128.BitwiseOr(rt2, rt3);
+                Vector128<ulong> rt = Vector128.BitwiseOr(rt0, rt2);
+                return rt;
+            }
+
+#endif // BCL_SHUFFLE_HAS
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Kernel_Args(Vector128<sbyte> indices, out Vector128<sbyte> args0, out Vector128<sbyte> args1, out Vector128<sbyte> args2, out Vector128<sbyte> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Kernel_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Kernel_Args(Vector128<short> indices, out Vector128<short> args0, out Vector128<short> args1, out Vector128<short> args2, out Vector128<short> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Args(Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Kernel_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Kernel_Args(Vector128<int> indices, out Vector128<int> args0, out Vector128<int> args1, out Vector128<int> args2, out Vector128<int> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Args(Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Kernel_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Kernel_Args(Vector128<long> indices, out Vector128<long> args0, out Vector128<long> args1, out Vector128<long> args2, out Vector128<long> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Args(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static void YShuffleX4Kernel_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3) {
+                args0 = indices;
+                args1 = default;
+                args2 = default;
+                args3 = default;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YShuffleX4Kernel_Core(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YShuffleX4Kernel_Core(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YShuffleX4Kernel_Core(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> args0, Vector128<sbyte> args1, Vector128<sbyte> args2, Vector128<sbyte> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YShuffleX4Kernel_Core(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YShuffleX4Kernel_Core(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> args0, Vector128<short> args1, Vector128<short> args2, Vector128<short> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YShuffleX4Kernel_Core(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YShuffleX4Kernel_Core(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> args0, Vector128<int> args1, Vector128<int> args2, Vector128<int> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YShuffleX4Kernel_Core(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YShuffleX4Kernel_Core(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> args0, Vector128<long> args1, Vector128<long> args2, Vector128<long> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YShuffleX4Kernel_Core(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3) {
+                _ = args1;
+                _ = args2;
+                _ = args3;
+                return YShuffleX4Kernel(vector0, vector1, vector2, vector3, args0);
             }
 
 

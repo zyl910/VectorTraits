@@ -1,4 +1,5 @@
 ﻿#if NET7_0_OR_GREATER
+#define BCL_SHUFFLE_HAS
 #define VECTOR_HAS_METHOD
 #endif // NET7_0_OR_GREATER
 
@@ -39,6 +40,26 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         /// <see cref="Vector128{T}"/> traits.Statics - Base.
         /// </summary>
         public static partial class Statics {
+
+#if NETX_0_OR_GREATER
+            private const bool Bcl_Shuffle_Used = true;
+#elif NET8_0_OR_GREATER
+            private static readonly bool Bcl_Shuffle_Used = MakeBcl_Shuffle_Used();
+#else
+            private const bool Bcl_Shuffle_Used = false;
+#endif // NETX_0_OR_GREATER
+#if NET8_0_OR_GREATER
+            /// <summary>
+            /// Make Bcl_Shuffle_Used.
+            /// </summary>
+            /// <returns>Return Bcl_Shuffle_Used.</returns>
+            private static bool MakeBcl_Shuffle_Used() {
+                if (System.Runtime.Intrinsics.Wasm.PackedSimd.IsSupported) {
+                    return true;
+                }
+                return false;
+            }
+#endif // NET8_0_OR_GREATER
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {

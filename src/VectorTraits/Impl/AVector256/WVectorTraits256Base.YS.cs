@@ -11,15 +11,13 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Text;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
 using Zyl.VectorTraits.Numerics;
-using System.Numerics;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
     partial class WVectorTraits256Base {

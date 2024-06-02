@@ -13,7 +13,6 @@ using System.Runtime.Intrinsics.X86;
 #endif
 using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.Impl.Util;
-using System.Numerics;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
     using SuperStatics = WVectorTraits256Base.Statics;
