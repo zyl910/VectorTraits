@@ -240,7 +240,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark]
         public void Sum256Avx2_Permute() {
-            WVectorTraits512Avx512.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
@@ -288,7 +287,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
 
         [Benchmark]
         public void Sum256Avx2_PermuteLonger() {
-            WVectorTraits512Avx512.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);

@@ -3310,27 +3310,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YShuffleX3Kernel_Permute(Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<int> indices) {
-                if (Avx512F.VL.IsSupported) {
-                    Vector256<int> vCount2 = Vector256.Create((int)(Vector256<float>.Count * 2));
-                    Vector256<int> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<float> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsSingle(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<float> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
-                    Vector256<float> rt1 = Avx2.PermuteVar8x32(vector2, indices1);
-                    Vector256<float> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                Vector256<int> vCount2 = Vector256.Create((int)(Vector256<float>.Count * 2));
+                Vector256<int> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<float> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsSingle(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<float> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
+                Vector256<float> rt1 = Avx2.PermuteVar8x32(vector2, indices1);
+                Vector256<float> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YShuffleX3Kernel_PermuteLonger(Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<int> indices) {
-                if (Avx512F.IsSupported) {
-                    Vector512<float> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<float> u = vector2.ToVector512Unsafe();
-                    return Avx512F.PermuteVar16x32x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX3Kernel_Permute(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.IsSupported, "Avx512F");
+                Vector512<float> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<float> u = vector2.ToVector512Unsafe();
+                return Avx512F.PermuteVar16x32x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 #endif // NET8_0_OR_GREATER
 
@@ -3361,27 +3357,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YShuffleX3Kernel_Permute(Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<long> indices) {
-                if (Avx512F.VL.IsSupported) {
-                    Vector256<long> vCount2 = Vector256.Create((long)(Vector256<long>.Count * 2));
-                    Vector256<long> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<double> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsDouble(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<double> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
-                    Vector256<double> rt1 = Avx512F.VL.PermuteVar4x64(vector2, indices1);
-                    Vector256<double> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                Vector256<long> vCount2 = Vector256.Create((long)(Vector256<long>.Count * 2));
+                Vector256<long> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<double> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsDouble(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<double> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
+                Vector256<double> rt1 = Avx512F.VL.PermuteVar4x64(vector2, indices1);
+                Vector256<double> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YShuffleX3Kernel_PermuteLonger(Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<long> indices) {
-                if (Avx512F.IsSupported) {
-                    Vector512<double> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<double> u = vector2.ToVector512Unsafe();
-                    return Avx512F.PermuteVar8x64x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX3Kernel_Permute(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.IsSupported, "Avx512F");
+                Vector512<double> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<double> u = vector2.ToVector512Unsafe();
+                return Avx512F.PermuteVar8x64x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 #endif // NET8_0_OR_GREATER
 
@@ -3436,16 +3428,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX3Kernel_Permute(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> indices) {
-                if (Avx512Vbmi.VL.IsSupported) {
-                    Vector256<byte> vCount2 = Vector256.Create((byte)(Vector256<byte>.Count * 2));
-                    Vector256<byte> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<byte> mask = Avx2.CompareGreaterThan(vCount2.AsSByte(), indices.AsSByte()).AsByte(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<byte> rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, indices, vector1);
-                    Vector256<byte> rt1 = Avx512Vbmi.VL.PermuteVar32x8(vector2, indices1);
-                    Vector256<byte> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                Vector256<byte> vCount2 = Vector256.Create((byte)(Vector256<byte>.Count * 2));
+                Vector256<byte> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<byte> mask = Avx2.CompareGreaterThan(vCount2.AsSByte(), indices.AsSByte()).AsByte(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<byte> rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, indices, vector1);
+                Vector256<byte> rt1 = Avx512Vbmi.VL.PermuteVar32x8(vector2, indices1);
+                Vector256<byte> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
@@ -3458,12 +3448,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX3Kernel_PermuteLonger(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> indices) {
-                if (Avx512Vbmi.IsSupported) {
-                    Vector512<byte> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<byte> u = vector2.ToVector512Unsafe();
-                    return Avx512Vbmi.PermuteVar64x8x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX3Kernel_Permute(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.IsSupported, "Avx512Vbmi");
+                Vector512<byte> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<byte> u = vector2.ToVector512Unsafe();
+                return Avx512Vbmi.PermuteVar64x8x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 
 #endif // NET8_0_OR_GREATER
@@ -3516,16 +3504,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX3Kernel_Permute(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> indices) {
-                if (Avx512BW.VL.IsSupported) {
-                    Vector256<ushort> vCount2 = Vector256.Create((ushort)(Vector256<ushort>.Count * 2));
-                    Vector256<ushort> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<ushort> mask = Avx2.CompareGreaterThan(vCount2.AsInt16(), indices.AsInt16()).AsUInt16(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<ushort> rt0 = Avx512BW.VL.PermuteVar16x16x2(vector0, indices, vector1);
-                    Vector256<ushort> rt1 = Avx512BW.VL.PermuteVar16x16(vector2, indices1);
-                    Vector256<ushort> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                Vector256<ushort> vCount2 = Vector256.Create((ushort)(Vector256<ushort>.Count * 2));
+                Vector256<ushort> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<ushort> mask = Avx2.CompareGreaterThan(vCount2.AsInt16(), indices.AsInt16()).AsUInt16(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<ushort> rt0 = Avx512BW.VL.PermuteVar16x16x2(vector0, indices, vector1);
+                Vector256<ushort> rt1 = Avx512BW.VL.PermuteVar16x16(vector2, indices1);
+                Vector256<ushort> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
@@ -3539,12 +3525,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX3Kernel_PermuteLonger(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> indices) {
-                if (Avx512BW.IsSupported) {
-                    Vector512<ushort> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<ushort> u = vector2.ToVector512Unsafe();
-                    return Avx512BW.PermuteVar32x16x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX3Kernel_Permute(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512BW.IsSupported, "Avx512BW");
+                Vector512<ushort> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<ushort> u = vector2.ToVector512Unsafe();
+                return Avx512BW.PermuteVar32x16x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 
 #endif // NET8_0_OR_GREATER
@@ -3607,16 +3591,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX3Kernel_Permute(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> indices) {
-                if (Avx512F.VL.IsSupported) {
-                    Vector256<uint> vCount2 = Vector256.Create((uint)(Vector256<uint>.Count * 2));
-                    Vector256<uint> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<uint> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsUInt32(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<uint> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
-                    Vector256<uint> rt1 = Avx2.PermuteVar8x32(vector2, indices1);
-                    Vector256<uint> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                Vector256<uint> vCount2 = Vector256.Create((uint)(Vector256<uint>.Count * 2));
+                Vector256<uint> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<uint> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsUInt32(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<uint> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
+                Vector256<uint> rt1 = Avx2.PermuteVar8x32(vector2, indices1);
+                Vector256<uint> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
@@ -3630,6 +3612,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX3Kernel_PermuteLonger(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> indices) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.IsSupported, "Avx512F");
                 if (Avx512F.IsSupported) {
                     Vector512<uint> l = vector0.ToVector512Unsafe().WithUpper(vector1);
                     Vector512<uint> u = vector2.ToVector512Unsafe();
@@ -3690,16 +3673,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX3Kernel_Permute(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> indices) {
-                if (Avx512F.VL.IsSupported) {
-                    Vector256<ulong> vCount2 = Vector256.Create((ulong)(Vector256<ulong>.Count * 2));
-                    Vector256<ulong> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<ulong> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsUInt64(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<ulong> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
-                    Vector256<ulong> rt1 = Avx512F.VL.PermuteVar4x64(vector2, indices1);
-                    Vector256<ulong> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX3Kernel_Combine(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                Vector256<ulong> vCount2 = Vector256.Create((ulong)(Vector256<ulong>.Count * 2));
+                Vector256<ulong> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<ulong> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsUInt64(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<ulong> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
+                Vector256<ulong> rt1 = Avx512F.VL.PermuteVar4x64(vector2, indices1);
+                Vector256<ulong> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX3Kernel(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
@@ -3713,12 +3694,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX3Kernel_PermuteLonger(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> indices) {
-                if (Avx512F.IsSupported) {
-                    Vector512<ulong> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<ulong> u = vector2.ToVector512Unsafe();
-                    return Avx512F.PermuteVar8x64x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX3Kernel_Permute(vector0, vector1, vector2, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.IsSupported, "Avx512F");
+                Vector512<ulong> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<ulong> u = vector2.ToVector512Unsafe();
+                return Avx512F.PermuteVar8x64x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 
 #endif // NET8_0_OR_GREATER
@@ -4633,27 +4612,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YShuffleX4Kernel_Permute(Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<float> vector3, Vector256<int> indices) {
-                if (Avx512F.VL.IsSupported) {
-                    Vector256<int> vCount2 = Vector256.Create((int)(Vector256<float>.Count * 2));
-                    Vector256<int> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<float> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsSingle(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<float> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
-                    Vector256<float> rt1 = Avx512F.VL.PermuteVar8x32x2(vector2, indices1, vector3);
-                    Vector256<float> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX4Kernel_Combine(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                Vector256<int> vCount2 = Vector256.Create((int)(Vector256<float>.Count * 2));
+                Vector256<int> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<float> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsSingle(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<float> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
+                Vector256<float> rt1 = Avx512F.VL.PermuteVar8x32x2(vector2, indices1, vector3);
+                Vector256<float> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YShuffleX4Kernel_PermuteLonger(Vector256<float> vector0, Vector256<float> vector1, Vector256<float> vector2, Vector256<float> vector3, Vector256<int> indices) {
-                if (Avx512F.IsSupported) {
-                    Vector512<float> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<float> u = vector2.ToVector512Unsafe().WithUpper(vector3);
-                    return Avx512F.PermuteVar16x32x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX4Kernel_Permute(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.IsSupported, "Avx512F");
+                Vector512<float> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<float> u = vector2.ToVector512Unsafe().WithUpper(vector3);
+                return Avx512F.PermuteVar16x32x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 #endif // NET8_0_OR_GREATER
 
@@ -4685,27 +4660,23 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YShuffleX4Kernel_Permute(Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<double> vector3, Vector256<long> indices) {
-                if (Avx512F.VL.IsSupported) {
-                    Vector256<long> vCount2 = Vector256.Create((long)(Vector256<long>.Count * 2));
-                    Vector256<long> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<double> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsDouble(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<double> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
-                    Vector256<double> rt1 = Avx512F.VL.PermuteVar4x64x2(vector2, indices1, vector3);
-                    Vector256<double> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX4Kernel_Combine(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                Vector256<long> vCount2 = Vector256.Create((long)(Vector256<long>.Count * 2));
+                Vector256<long> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<double> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsDouble(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<double> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
+                Vector256<double> rt1 = Avx512F.VL.PermuteVar4x64x2(vector2, indices1, vector3);
+                Vector256<double> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YShuffleX4Kernel_PermuteLonger(Vector256<double> vector0, Vector256<double> vector1, Vector256<double> vector2, Vector256<double> vector3, Vector256<long> indices) {
-                if (Avx512F.IsSupported) {
-                    Vector512<double> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<double> u = vector2.ToVector512Unsafe().WithUpper(vector3);
-                    return Avx512F.PermuteVar8x64x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX4Kernel_Permute(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.IsSupported, "Avx512F");
+                Vector512<double> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<double> u = vector2.ToVector512Unsafe().WithUpper(vector3);
+                return Avx512F.PermuteVar8x64x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 
 #endif // NET8_0_OR_GREATER
@@ -4762,16 +4733,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX4Kernel_Permute(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> indices) {
-                if (Avx512Vbmi.VL.IsSupported) {
-                    Vector256<byte> vCount2 = Vector256.Create((byte)(Vector256<byte>.Count * 2));
-                    Vector256<byte> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<byte> mask = Avx2.CompareGreaterThan(vCount2.AsSByte(), indices.AsSByte()).AsByte(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<byte> rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, indices, vector1);
-                    Vector256<byte> rt1 = Avx512Vbmi.VL.PermuteVar32x8x2(vector2, indices1, vector3);
-                    Vector256<byte> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX4Kernel_Combine(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                Vector256<byte> vCount2 = Vector256.Create((byte)(Vector256<byte>.Count * 2));
+                Vector256<byte> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<byte> mask = Avx2.CompareGreaterThan(vCount2.AsSByte(), indices.AsSByte()).AsByte(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<byte> rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, indices, vector1);
+                Vector256<byte> rt1 = Avx512Vbmi.VL.PermuteVar32x8x2(vector2, indices1, vector3);
+                Vector256<byte> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
@@ -4785,12 +4754,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX4Kernel_PermuteLonger(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> vector3, Vector256<byte> indices) {
-                if (Avx512Vbmi.IsSupported) {
-                    Vector512<byte> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<byte> u = vector2.ToVector512Unsafe().WithUpper(vector3);
-                    return Avx512Vbmi.PermuteVar64x8x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX4Kernel_Permute(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.IsSupported, "Avx512Vbmi");
+                Vector512<byte> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<byte> u = vector2.ToVector512Unsafe().WithUpper(vector3);
+                return Avx512Vbmi.PermuteVar64x8x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 
 #endif // NET8_0_OR_GREATER
@@ -4843,16 +4810,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX4Kernel_Permute(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> indices) {
-                if (Avx512BW.VL.IsSupported) {
-                    Vector256<ushort> vCount2 = Vector256.Create((ushort)(Vector256<ushort>.Count * 2));
-                    Vector256<ushort> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<ushort> mask = Avx2.CompareGreaterThan(vCount2.AsInt16(), indices.AsInt16()).AsUInt16(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<ushort> rt0 = Avx512BW.VL.PermuteVar16x16x2(vector0, indices, vector1);
-                    Vector256<ushort> rt1 = Avx512BW.VL.PermuteVar16x16x2(vector2, indices1, vector3);
-                    Vector256<ushort> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX4Kernel_Combine(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                Vector256<ushort> vCount2 = Vector256.Create((ushort)(Vector256<ushort>.Count * 2));
+                Vector256<ushort> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<ushort> mask = Avx2.CompareGreaterThan(vCount2.AsInt16(), indices.AsInt16()).AsUInt16(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<ushort> rt0 = Avx512BW.VL.PermuteVar16x16x2(vector0, indices, vector1);
+                Vector256<ushort> rt1 = Avx512BW.VL.PermuteVar16x16x2(vector2, indices1, vector3);
+                Vector256<ushort> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
@@ -4866,12 +4831,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX4Kernel_PermuteLonger(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> vector3, Vector256<ushort> indices) {
-                if (Avx512BW.IsSupported) {
-                    Vector512<ushort> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<ushort> u = vector2.ToVector512Unsafe().WithUpper(vector3);
-                    return Avx512BW.PermuteVar32x16x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX4Kernel_Permute(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512BW.IsSupported, "Avx512BW");
+                Vector512<ushort> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<ushort> u = vector2.ToVector512Unsafe().WithUpper(vector3);
+                return Avx512BW.PermuteVar32x16x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 
 #endif // NET8_0_OR_GREATER
@@ -4938,16 +4901,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX4Kernel_Permute(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> indices) {
-                if (Avx512F.VL.IsSupported) {
-                    Vector256<uint> vCount2 = Vector256.Create((uint)(Vector256<uint>.Count * 2));
-                    Vector256<uint> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<uint> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsUInt32(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<uint> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
-                    Vector256<uint> rt1 = Avx512F.VL.PermuteVar8x32x2(vector2, indices1, vector3);
-                    Vector256<uint> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX4Kernel_Combine(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                Vector256<uint> vCount2 = Vector256.Create((uint)(Vector256<uint>.Count * 2));
+                Vector256<uint> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<uint> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsUInt32(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<uint> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
+                Vector256<uint> rt1 = Avx512F.VL.PermuteVar8x32x2(vector2, indices1, vector3);
+                Vector256<uint> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
@@ -4961,12 +4922,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX4Kernel_PermuteLonger(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> vector3, Vector256<uint> indices) {
-                if (Avx512F.IsSupported) {
-                    Vector512<uint> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<uint> u = vector2.ToVector512Unsafe().WithUpper(vector3);
-                    return Avx512F.PermuteVar16x32x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX4Kernel_Permute(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.IsSupported, "Avx512F");
+                Vector512<uint> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<uint> u = vector2.ToVector512Unsafe().WithUpper(vector3);
+                return Avx512F.PermuteVar16x32x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 
 #endif // NET8_0_OR_GREATER
@@ -5021,16 +4980,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX4Kernel_Permute(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> indices) {
-                if (Avx512F.VL.IsSupported) {
-                    Vector256<ulong> vCount2 = Vector256.Create((ulong)(Vector256<ulong>.Count * 2));
-                    Vector256<ulong> indices1 = Avx2.Subtract(indices, vCount2);
-                    Vector256<ulong> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsUInt64(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
-                    Vector256<ulong> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
-                    Vector256<ulong> rt1 = Avx512F.VL.PermuteVar4x64x2(vector2, indices1, vector3);
-                    Vector256<ulong> rt = ConditionalSelect(mask, rt0, rt1);
-                    return rt;
-                }
-                return YShuffleX4Kernel_Combine(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                Vector256<ulong> vCount2 = Vector256.Create((ulong)(Vector256<ulong>.Count * 2));
+                Vector256<ulong> indices1 = Avx2.Subtract(indices, vCount2);
+                Vector256<ulong> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsUInt64(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
+                Vector256<ulong> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
+                Vector256<ulong> rt1 = Avx512F.VL.PermuteVar4x64x2(vector2, indices1, vector3);
+                Vector256<ulong> rt = ConditionalSelect(mask, rt0, rt1);
+                return rt;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX4Kernel(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
@@ -5044,12 +5001,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX4Kernel_PermuteLonger(Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> vector2, Vector256<ulong> vector3, Vector256<ulong> indices) {
-                if (Avx512F.IsSupported) {
-                    Vector512<ulong> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<ulong> u = vector2.ToVector512Unsafe().WithUpper(vector3);
-                    return Avx512F.PermuteVar8x64x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX4Kernel_Permute(vector0, vector1, vector2, vector3, indices);
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.IsSupported, "Avx512F");
+                Vector512<ulong> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<ulong> u = vector2.ToVector512Unsafe().WithUpper(vector3);
+                return Avx512F.PermuteVar8x64x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 
 #endif // NET8_0_OR_GREATER
