@@ -51,6 +51,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             private const bool Shuffle_Use_Longer = false;
 #endif // NETCOREAPP3_0_OR_GREATER
 
+            private const bool Shuffle_Use_Longer_Avx2 = false;
+
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {
                 get { return ByteCountValue; }

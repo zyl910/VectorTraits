@@ -4,6 +4,7 @@
         <EnvironmentVariables>
             <!-- List of environment variables we want to set
             -->
+            <COMPlus_EnableSSSE3>1</COMPlus_EnableSSSE3>
             <COMPlus_EnableAVX2>1</COMPlus_EnableAVX2>
         </EnvironmentVariables>
     </RunConfiguration>

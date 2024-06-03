@@ -3388,9 +3388,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YShuffleX3Kernel(Vector256<byte> vector0, Vector256<byte> vector1, Vector256<byte> vector2, Vector256<byte> indices) {
 #if NET8_0_OR_GREATER
-                if (Shuffle_Use_Longer && Avx512F.IsSupported) {
+                if (Shuffle_Use_Longer && Avx512Vbmi.IsSupported) {
                     return YShuffleX3Kernel_PermuteLonger(vector0, vector1, vector2, indices);
-                } else if (Avx512F.VL.IsSupported) {
+                } else if (Avx512Vbmi.VL.IsSupported) {
                     return YShuffleX3Kernel_Permute(vector0, vector1, vector2, indices);
                 }
 #endif // NET8_0_OR_GREATER
@@ -3467,9 +3467,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YShuffleX3Kernel(Vector256<ushort> vector0, Vector256<ushort> vector1, Vector256<ushort> vector2, Vector256<ushort> indices) {
 #if NET8_0_OR_GREATER
-                if (Shuffle_Use_Longer && Avx512F.IsSupported) {
+                if (Shuffle_Use_Longer && Avx512BW.IsSupported) {
                     return YShuffleX3Kernel_PermuteLonger(vector0, vector1, vector2, indices);
-                } else if (Avx512F.VL.IsSupported) {
+                } else if (Avx512BW.VL.IsSupported) {
                     return YShuffleX3Kernel_Permute(vector0, vector1, vector2, indices);
                 }
 #endif // NET8_0_OR_GREATER
@@ -3613,12 +3613,9 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YShuffleX3Kernel_PermuteLonger(Vector256<uint> vector0, Vector256<uint> vector1, Vector256<uint> vector2, Vector256<uint> indices) {
                 VectorMessageFormats.ThrowForUnsupported(Avx512F.IsSupported, "Avx512F");
-                if (Avx512F.IsSupported) {
-                    Vector512<uint> l = vector0.ToVector512Unsafe().WithUpper(vector1);
-                    Vector512<uint> u = vector2.ToVector512Unsafe();
-                    return Avx512F.PermuteVar16x32x2(l, indices.ToVector512Unsafe(), u).GetLower();
-                }
-                return YShuffleX3Kernel_Permute(vector0, vector1, vector2, indices);
+                Vector512<uint> l = vector0.ToVector512Unsafe().WithUpper(vector1);
+                Vector512<uint> u = vector2.ToVector512Unsafe();
+                return Avx512F.PermuteVar16x32x2(l, indices.ToVector512Unsafe(), u).GetLower();
             }
 
 #endif // NET8_0_OR_GREATER
