@@ -125,7 +125,7 @@ namespace Zyl.VectorTraits {
 
 #if NETCOREAPP3_0_OR_GREATER
         ///// <summary>
-        ///// Reinterprets a <see cref="Vector64{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector64{T}"/> 重新解释为新的 <see cref="Vector{T}"/>).
+        ///// Reinterprets a <see cref="Vector64{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector64{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). No type checking (不进行类型检查).
         ///// </summary>
         ///// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         ///// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -137,7 +137,7 @@ namespace Zyl.VectorTraits {
         //}
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector128{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector128{T}"/> 重新解释为新的 <see cref="Vector{T}"/>).
+        /// Reinterprets a <see cref="Vector128{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector128{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). No type checking (不进行类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -146,11 +146,27 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(Vector128<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-            return Unsafe.As<Vector128<T>, Vector<T>>(ref value);
+#if NET8_0_OR_GREATER
+            if (Vector<T>.Count == Vector512<T>.Count) {
+                var temp = value.ToVector256().ToVector512();
+                return Unsafe.As<Vector512<T>, Vector<T>>(ref temp);
+            }
+#endif // NET8_0_OR_GREATER
+            if (Vector<T>.Count == Vector256<T>.Count) {
+                var temp = value.ToVector256();
+                return Unsafe.As<Vector256<T>, Vector<T>>(ref temp);
+            }
+            if (Vector128<T>.Count >= Vector<T>.Count) {
+                return Unsafe.As<Vector128<T>, Vector<T>>(ref value);
+            } else {
+                Vector<T> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector<T>, byte>(ref source), value);
+                return source;
+            }
         }
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector256{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector256{T}"/> 重新解释为新的 <see cref="Vector{T}"/>).
+        /// Reinterprets a <see cref="Vector256{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector256{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). No type checking (不进行类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -159,11 +175,44 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(Vector256<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-            return Unsafe.As<Vector256<T>, Vector<T>>(ref value);
+#if NET8_0_OR_GREATER
+            if (Vector<T>.Count == Vector512<T>.Count) {
+                var temp = value.ToVector512();
+                return Unsafe.As<Vector512<T>, Vector<T>>(ref temp);
+            }
+#endif // NET8_0_OR_GREATER
+            if (Vector256<T>.Count >= Vector<T>.Count) {
+                return Unsafe.As<Vector256<T>, Vector<T>>(ref value);
+            } else {
+                Vector<T> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector<T>, byte>(ref source), value);
+                return source;
+            }
         }
 
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Reinterprets a <see cref="Vector512{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector512{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). No type checking (不进行类型检查).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
+        /// <returns>value reinterpreted as a new <see cref="Vector{T}"/> (重新解释后新的 <see cref="Vector{T}"/>)值.</returns>
+        /// <seealso cref="Vector512.AsVector{T}(Vector512{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<T> AsVector<T>(Vector512<T> value) where T : struct {
+            //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
+            if (Vector512<T>.Count >= Vector<T>.Count) {
+                return Unsafe.As<Vector512<T>, Vector<T>>(ref value);
+            } else {
+                Vector<T> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector<T>, byte>(ref source), value);
+                return source;
+            }
+        }
+#endif // NET8_0_OR_GREATER
+
         ///// <summary>
-        ///// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector64{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector64{T}"/>).
+        ///// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector64{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector64{T}"/>). No type checking (不进行类型检查).
         ///// </summary>
         ///// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         ///// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -177,7 +226,7 @@ namespace Zyl.VectorTraits {
         //}
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector128{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector128{T}"/>).
+        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector128{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector128{T}"/>). No type checking (不进行类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -186,13 +235,25 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> AsVector128<T>(Vector<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-            Vector128<T> source = default;
-            Unsafe.WriteUnaligned(ref Unsafe.As<Vector128<T>, byte>(ref source), value);
-            return source;
+#if NET8_0_OR_GREATER
+            if (Vector<T>.Count == Vector512<T>.Count) {
+                return Unsafe.As<Vector<T>, Vector512<T>>(ref value).GetLower().GetLower();
+            }
+#endif // NET8_0_OR_GREATER
+            if (Vector<T>.Count == Vector256<T>.Count) {
+                return Unsafe.As<Vector<T>, Vector256<T>>(ref value).GetLower();
+            }
+            if (Vector<T>.Count >= Vector128<T>.Count) {
+                return Unsafe.As<Vector<T>, Vector128<T>>(ref value);
+            } else {
+                Vector128<T> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector128<T>, byte>(ref source), value);
+                return source;
+            }
         }
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector256{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector256{T}"/>).
+        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector256{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector256{T}"/>). No type checking (不进行类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -201,13 +262,22 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> AsVector256<T>(Vector<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-            Vector256<T> source = default;
-            Unsafe.WriteUnaligned(ref Unsafe.As<Vector256<T>, byte>(ref source), value);
-            return source;
+#if NET8_0_OR_GREATER
+            if (Vector<T>.Count == Vector512<T>.Count) {
+                return Unsafe.As<Vector<T>, Vector512<T>>(ref value).GetLower();
+            }
+#endif // NET8_0_OR_GREATER
+            if (Vector<T>.Count >= Vector256<T>.Count) {
+                return Unsafe.As<Vector<T>, Vector256<T>>(ref value);
+            } else {
+                Vector256<T> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector256<T>, byte>(ref source), value);
+                return source;
+            }
         }
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector256{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector256{T}"/>).
+        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector256{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector256{T}"/>). No type checking (不进行类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -217,6 +287,27 @@ namespace Zyl.VectorTraits {
         public static Vector256<T> AsVector256A<T>(Vector<T> value) where T : struct {
             return Unsafe.As<Vector<T>, Vector256<T>>(ref value);
         }
+
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector512{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector512{T}"/>). No type checking (不进行类型检查).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
+        /// <returns>value reinterpreted as a new <see cref="Vector512{T}"/> (重新解释后新的 <see cref="Vector512{T}"/>)值.</returns>
+        /// <seealso cref="Vector512.AsVector512{T}(Vector{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<T> AsVector512<T>(Vector<T> value) where T : struct {
+            //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
+            if (Vector<T>.Count >= Vector512<T>.Count) {
+                return Unsafe.As<Vector<T>, Vector512<T>>(ref value);
+            } else {
+                Vector512<T> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector512<T>, byte>(ref source), value);
+                return source;
+            }
+        }
+#endif // NET8_0_OR_GREATER
 
 #endif
 
