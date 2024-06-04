@@ -756,7 +756,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                         ).AsByte(); // Unsigned compare: (i < 32)
                     }
                     Vector256<byte> raw = YShuffleKernel(vector, indices);
-                    Vector256<byte> rt = ConditionalSelect(mask, raw, back);
+                    Vector256<byte> rt = ConditionalSelect_Relaxed(mask, raw, back);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -3316,7 +3316,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<float> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsSingle(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<float> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
                 Vector256<float> rt1 = Avx2.PermuteVar8x32(vector2, indices1);
-                Vector256<float> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<float> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -3363,7 +3363,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<double> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsDouble(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<double> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
                 Vector256<double> rt1 = Avx512F.VL.PermuteVar4x64(vector2, indices1);
-                Vector256<double> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<double> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -3434,7 +3434,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<byte> mask = Avx2.CompareGreaterThan(vCount2.AsSByte(), indices.AsSByte()).AsByte(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<byte> rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, indices, vector1);
                 Vector256<byte> rt1 = Avx512Vbmi.VL.PermuteVar32x8(vector2, indices1);
-                Vector256<byte> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<byte> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -3510,7 +3510,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<ushort> mask = Avx2.CompareGreaterThan(vCount2.AsInt16(), indices.AsInt16()).AsUInt16(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<ushort> rt0 = Avx512BW.VL.PermuteVar16x16x2(vector0, indices, vector1);
                 Vector256<ushort> rt1 = Avx512BW.VL.PermuteVar16x16(vector2, indices1);
-                Vector256<ushort> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<ushort> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -3597,7 +3597,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<uint> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsUInt32(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<uint> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
                 Vector256<uint> rt1 = Avx2.PermuteVar8x32(vector2, indices1);
-                Vector256<uint> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<uint> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -3676,7 +3676,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<ulong> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsUInt64(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<ulong> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
                 Vector256<ulong> rt1 = Avx512F.VL.PermuteVar4x64(vector2, indices1);
-                Vector256<ulong> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<ulong> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -3882,7 +3882,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512F.VL.IsSupported) {
                     Vector256<float> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, args0, vector1);
                     Vector256<float> rt1 = Avx2.PermuteVar8x32(vector2, args1);
-                    Vector256<float> rt = ConditionalSelect(args2.AsSingle(), rt0, rt1);
+                    Vector256<float> rt = ConditionalSelect_Relaxed(args2.AsSingle(), rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -3900,7 +3900,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512F.VL.IsSupported) {
                     Vector256<double> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, args0, vector1);
                     Vector256<double> rt1 = Avx512F.VL.PermuteVar4x64(vector2, args1);
-                    Vector256<double> rt = ConditionalSelect(args2.AsDouble(), rt0, rt1);
+                    Vector256<double> rt = ConditionalSelect_Relaxed(args2.AsDouble(), rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -3925,7 +3925,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512Vbmi.VL.IsSupported) {
                     Vector256<byte> rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, args0, vector1);
                     Vector256<byte> rt1 = Avx512Vbmi.VL.PermuteVar32x8(vector2, args1);
-                    Vector256<byte> rt = ConditionalSelect(args2, rt0, rt1);
+                    Vector256<byte> rt = ConditionalSelect_Relaxed(args2, rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -3977,7 +3977,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512BW.VL.IsSupported) {
                     Vector256<ushort> rt0 = Avx512BW.VL.PermuteVar16x16x2(vector0, args0, vector1);
                     Vector256<ushort> rt1 = Avx512BW.VL.PermuteVar16x16(vector2, args1);
-                    Vector256<ushort> rt = ConditionalSelect(args2, rt0, rt1);
+                    Vector256<ushort> rt = ConditionalSelect_Relaxed(args2, rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -4002,7 +4002,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512F.VL.IsSupported) {
                     Vector256<uint> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, args0, vector1);
                     Vector256<uint> rt1 = Avx2.PermuteVar8x32(vector2, args1);
-                    Vector256<uint> rt = ConditionalSelect(args2, rt0, rt1);
+                    Vector256<uint> rt = ConditionalSelect_Relaxed(args2, rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -4042,7 +4042,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512F.VL.IsSupported) {
                     Vector256<ulong> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, args0, vector1);
                     Vector256<ulong> rt1 = Avx512F.VL.PermuteVar4x64(vector2, args1);
-                    Vector256<ulong> rt = ConditionalSelect(args2, rt0, rt1);
+                    Vector256<ulong> rt = ConditionalSelect_Relaxed(args2, rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -4615,7 +4615,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<float> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsSingle(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<float> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
                 Vector256<float> rt1 = Avx512F.VL.PermuteVar8x32x2(vector2, indices1, vector3);
-                Vector256<float> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<float> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -4663,7 +4663,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<double> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsDouble(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<double> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
                 Vector256<double> rt1 = Avx512F.VL.PermuteVar4x64x2(vector2, indices1, vector3);
-                Vector256<double> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<double> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -4736,7 +4736,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<byte> mask = Avx2.CompareGreaterThan(vCount2.AsSByte(), indices.AsSByte()).AsByte(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<byte> rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, indices, vector1);
                 Vector256<byte> rt1 = Avx512Vbmi.VL.PermuteVar32x8x2(vector2, indices1, vector3);
-                Vector256<byte> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<byte> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -4813,7 +4813,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<ushort> mask = Avx2.CompareGreaterThan(vCount2.AsInt16(), indices.AsInt16()).AsUInt16(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<ushort> rt0 = Avx512BW.VL.PermuteVar16x16x2(vector0, indices, vector1);
                 Vector256<ushort> rt1 = Avx512BW.VL.PermuteVar16x16x2(vector2, indices1, vector3);
-                Vector256<ushort> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<ushort> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -4904,7 +4904,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<uint> mask = Avx2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsUInt32(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<uint> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, indices, vector1);
                 Vector256<uint> rt1 = Avx512F.VL.PermuteVar8x32x2(vector2, indices1, vector3);
-                Vector256<uint> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<uint> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -4983,7 +4983,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<ulong> mask = Avx2.CompareGreaterThan(vCount2.AsInt64(), indices.AsInt64()).AsUInt64(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
                 Vector256<ulong> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, indices, vector1);
                 Vector256<ulong> rt1 = Avx512F.VL.PermuteVar4x64x2(vector2, indices1, vector3);
-                Vector256<ulong> rt = ConditionalSelect(mask, rt0, rt1);
+                Vector256<ulong> rt = ConditionalSelect_Relaxed(mask, rt0, rt1);
                 return rt;
             }
 
@@ -5205,7 +5205,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512F.VL.IsSupported) {
                     Vector256<float> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, args0, vector1);
                     Vector256<float> rt1 = Avx512F.VL.PermuteVar8x32x2(vector2, args1, vector3);
-                    Vector256<float> rt = ConditionalSelect(args2.AsSingle(), rt0, rt1);
+                    Vector256<float> rt = ConditionalSelect_Relaxed(args2.AsSingle(), rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -5223,7 +5223,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512F.VL.IsSupported) {
                     Vector256<double> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, args0, vector1);
                     Vector256<double> rt1 = Avx512F.VL.PermuteVar4x64x2(vector2, args1, vector3);
-                    Vector256<double> rt = ConditionalSelect(args2.AsDouble(), rt0, rt1);
+                    Vector256<double> rt = ConditionalSelect_Relaxed(args2.AsDouble(), rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -5248,7 +5248,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512Vbmi.VL.IsSupported) {
                     Vector256<byte> rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(vector0, args0, vector1);
                     Vector256<byte> rt1 = Avx512Vbmi.VL.PermuteVar32x8x2(vector2, args1, vector3);
-                    Vector256<byte> rt = ConditionalSelect(args2, rt0, rt1);
+                    Vector256<byte> rt = ConditionalSelect_Relaxed(args2, rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -5354,7 +5354,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512BW.VL.IsSupported) {
                     Vector256<ushort> rt0 = Avx512BW.VL.PermuteVar16x16x2(vector0, args0, vector1);
                     Vector256<ushort> rt1 = Avx512BW.VL.PermuteVar16x16x2(vector2, args1, vector3);
-                    Vector256<ushort> rt = ConditionalSelect(args2, rt0, rt1);
+                    Vector256<ushort> rt = ConditionalSelect_Relaxed(args2, rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -5379,7 +5379,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512F.VL.IsSupported) {
                     Vector256<uint> rt0 = Avx512F.VL.PermuteVar8x32x2(vector0, args0, vector1);
                     Vector256<uint> rt1 = Avx512F.VL.PermuteVar8x32x2(vector2, args1, vector3);
-                    Vector256<uint> rt = ConditionalSelect(args2, rt0, rt1);
+                    Vector256<uint> rt = ConditionalSelect_Relaxed(args2, rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
@@ -5422,7 +5422,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 } else if (Avx512F.VL.IsSupported) {
                     Vector256<ulong> rt0 = Avx512F.VL.PermuteVar4x64x2(vector0, args0, vector1);
                     Vector256<ulong> rt1 = Avx512F.VL.PermuteVar4x64x2(vector2, args1, vector3);
-                    Vector256<ulong> rt = ConditionalSelect(args2, rt0, rt1);
+                    Vector256<ulong> rt = ConditionalSelect_Relaxed(args2, rt0, rt1);
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER

@@ -203,6 +203,55 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             CheckResult128("Sum128Sse_Combine");
         }
 
+        /// <summary>
+        /// Sum YShuffleX4Kernel - Vector128 - Sse - CombineAvx.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128Sse_CombineAvx(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> indicesUsed = indices.AsVector128();
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vector2Used = vector2.AsVector128();
+            Vector128<TMy> vector3Used = vector3.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128Sse.Statics.YShuffleX4Kernel_CombineAvx(p0, vector1Used, vector2Used, vector3Used, indicesUsed);
+                vrt = WVectorTraits128Sse.Statics.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            rt = WVectorTraits128Sse.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128Sse_CombineAvx() {
+            WVectorTraits128Sse.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128Sse_CombineAvx(srcArray, srcArray.Length, indices);
+            CheckResult128("Sum128Sse_CombineAvx");
+        }
+
 #if NET8_0_OR_GREATER
 
         /// <summary>
