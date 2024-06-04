@@ -4056,7 +4056,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX4(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
-                const byte total = 4 * ByteCountValue / sizeof(byte); // 2 * Vector128<byte>.Count
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector128<byte>.Count
                 Vector128<byte> mask, raw, rt;
 #if NET8_0_OR_GREATER
                 if (Avx512Vbmi.VL.IsSupported) {
@@ -4068,7 +4068,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                             Sse2.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue))
                         ).AsByte(); // Unsigned compare: (i < total)
                     }
-                    raw = Avx512Vbmi.VL.PermuteVar16x8x2(vector0, indices, vector1);
+                    raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                     rt = Sse2.And(raw, mask);
                     return rt;
                 }
@@ -4148,7 +4148,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX4_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
-                const byte total = 4 * ByteCountValue / sizeof(byte); // 3 * Vector128<byte>.Count
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector128<byte>.Count
                 YShuffleX4Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #if NET8_0_OR_GREATER
                 if ((Shuffle_Use_Longer && Avx512Vbmi.IsSupported) || Avx512Vbmi.VL.IsSupported) {
