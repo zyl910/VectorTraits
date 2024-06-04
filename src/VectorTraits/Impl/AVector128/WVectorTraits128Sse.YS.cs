@@ -4273,7 +4273,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
-                if ((Shuffle_Use_Longer && Avx2.IsSupported) || !Ssse3.IsSupported) {
+                if ((Shuffle_Use_Longer_Avx2_OnCore && Avx2.IsSupported) || !Ssse3.IsSupported) {
                     rt = Sse.And(rt, args4.AsSingle());
                 }
                 return rt;
@@ -4289,7 +4289,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
-                if ((Shuffle_Use_Longer && Avx2.IsSupported) || !Ssse3.IsSupported) {
+                if ((Shuffle_Use_Longer_Avx2_OnCore && Avx2.IsSupported) || !Ssse3.IsSupported) {
                     rt = Sse2.And(rt, args4.AsDouble());
                 }
                 return rt;
@@ -4307,7 +4307,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> YShuffleX4_Core(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3, Vector128<byte> args4) {
                 Vector128<byte> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
 #if NET8_0_OR_GREATER
-                if ((Shuffle_Use_Longer && Avx512Vbmi.IsSupported) || Avx512Vbmi.VL.IsSupported) {
+                if (Avx512Vbmi.VL.IsSupported) {
                     rt = Sse2.And(rt, args4);
                 }
 #endif // NET8_0_OR_GREATER
@@ -4326,7 +4326,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ushort> YShuffleX4_Core(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> args0, Vector128<ushort> args1, Vector128<ushort> args2, Vector128<ushort> args3, Vector128<ushort> args4) {
                 Vector128<ushort> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
 #if NET8_0_OR_GREATER
-                if ((Shuffle_Use_Longer && Avx512BW.IsSupported) || Avx512BW.VL.IsSupported) {
+                if (Avx512BW.VL.IsSupported) {
                     rt = Sse2.And(rt, args4);
                 }
 #endif // NET8_0_OR_GREATER
@@ -4344,7 +4344,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX4_Core(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3, Vector128<uint> args4) {
                 Vector128<uint> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
-                rt = Sse2.And(rt, args4);
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    rt = Sse2.And(rt, args4);
+                    return rt;
+                }
+#endif // NET8_0_OR_GREATER
+                if ((Shuffle_Use_Longer_Avx2_OnCore && Avx2.IsSupported) || !Ssse3.IsSupported) {
+                    rt = Sse2.And(rt, args4);
+                }
                 return rt;
             }
 
@@ -4359,7 +4367,15 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX4_Core(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> args0, Vector128<ulong> args1, Vector128<ulong> args2, Vector128<ulong> args3, Vector128<ulong> args4) {
                 Vector128<ulong> rt = YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
-                rt = Sse2.And(rt, args4);
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    rt = Sse2.And(rt, args4);
+                    return rt;
+                }
+#endif // NET8_0_OR_GREATER
+                if ((Shuffle_Use_Longer_Avx2_OnCore && Avx2.IsSupported) || !Ssse3.IsSupported) {
+                    rt = Sse2.And(rt, args4);
+                }
                 return rt;
             }
 
@@ -5171,7 +5187,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return;
                 }
 #endif // NET8_0_OR_GREATER
-                if (Shuffle_Use_Longer_Avx2 && Avx2.IsSupported) {
+                if (Shuffle_Use_Longer_Avx2_OnCore && Avx2.IsSupported) {
                     Vector128<uint> vCount2 = Vector128.Create((uint)(Vector128<uint>.Count * 2));
                     Vector128<uint> indices1 = Sse2.Subtract(indices, vCount2);
                     Vector128<uint> mask = Sse2.CompareGreaterThan(vCount2.AsInt32(), indices.AsInt32()).AsUInt32(); // vCount2[i]>indices[i] ==> indices[i]<vCount2[i].
@@ -5225,7 +5241,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return;
                 }
 #endif // NET8_0_OR_GREATER
-                if (Shuffle_Use_Longer_Avx2 && Avx2.IsSupported) {
+                if (Shuffle_Use_Longer_Avx2_OnCore && Avx2.IsSupported) {
                     Vector128<uint> temp = Sse2.Shuffle(indices.AsUInt32(), (byte)ShuffleControlG4.XXZZ);
                     temp = Sse2.ShiftLeftLogical(temp, 1); // n*2 = n << 1;
                     Vector128<uint> indices2 = Sse2.Add(temp, Vector128Constants.Shuffle_UInt64_UInt32Offset);
@@ -5377,7 +5393,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
-                if (Shuffle_Use_Longer_Avx2 && Avx2.IsSupported) {
+                if (Shuffle_Use_Longer_Avx2_OnCore && Avx2.IsSupported) {
                     return YShuffleX4Kernel_Core_CombineAvx(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
                 }
                 if (!Ssse3.IsSupported) {
@@ -5389,8 +5405,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Core(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<uint> YShuffleX4Kernel_Core_CombineAvx(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3) {
-                VectorMessageFormats.ThrowForUnsupported(Avx2.IsSupported, "Avx2");
+            private static Vector128<uint> YShuffleX4Kernel_Core_CombineAvx(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> args0, Vector128<uint> args1, Vector128<uint> args2, Vector128<uint> args3) {
+                //VectorMessageFormats.ThrowForUnsupported(Avx2.IsSupported, "Avx2");
                 Vector256<uint> l = vector0.ToVector256Unsafe().WithUpper(vector1);
                 Vector256<uint> u = vector2.ToVector256Unsafe().WithUpper(vector3);
                 Vector128<uint> rt0 = Avx2.PermuteVar8x32(l, args0.ToVector256Unsafe()).GetLower();
@@ -5421,7 +5437,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return rt;
                 }
 #endif // NET8_0_OR_GREATER
-                if (Shuffle_Use_Longer_Avx2 && Avx2.IsSupported) {
+                if (Shuffle_Use_Longer_Avx2_OnCore && Avx2.IsSupported) {
                     return YShuffleX4Kernel_Core_CombineAvx(vector0.AsUInt32(), vector1.AsUInt32(), vector2.AsUInt32(), vector3.AsUInt32(), args0.AsUInt32(), args1.AsUInt32(), args2.AsUInt32(), args3.AsUInt32()).AsUInt64();
                 }
                 if (!Ssse3.IsSupported) {

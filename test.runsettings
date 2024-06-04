@@ -6,6 +6,7 @@
             -->
             <COMPlus_EnableSSSE3>1</COMPlus_EnableSSSE3>
             <COMPlus_EnableAVX2>1</COMPlus_EnableAVX2>
+            <COMPlus_EnableAVX512F>1</COMPlus_EnableAVX512F>
         </EnvironmentVariables>
     </RunConfiguration>
 </RunSettings>
