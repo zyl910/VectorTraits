@@ -46,8 +46,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #endif // NET8_0_OR_GREATER
 
             private const bool Shuffle_Use_Longer = true;
-            private const bool Shuffle_Use_Longer_Avx2 = true;
-            private const bool Shuffle_Use_Longer_Avx2_OnCore = false;
+            private const bool Shuffle_Use_Longer_Avx2 = true; // Because: YShuffleX4Kernel_CombineAvx > YShuffleX4Kernel_Combine
+            private const bool Shuffle_Use_Longer_Avx2_OnCore = false; // Because: YShuffleX4Kernel_Core<byte> > YShuffleX4Kernel_Core_CombineAvx<uint>
 
             /// <inheritdoc cref="IBaseTraits.ByteCount"/>
             public static int ByteCount {
