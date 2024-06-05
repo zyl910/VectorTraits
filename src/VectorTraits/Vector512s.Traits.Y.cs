@@ -5527,7 +5527,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector512<float> YShuffleX4Kernel_Core(Vector512<float> vector0, Vector512<float> vector1, Vector512<float> vector2, Vector512<float> vector3, Vector512<int> args0, Vector512<int> args1, Vector512<int> args2, Vector512<int> args3) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.z(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
+            return BaseStatics.YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
 #else
             return _instance.YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
