@@ -15,6 +15,7 @@ using System.Runtime.Intrinsics.Arm;
 #if NET8_0_OR_GREATER
 using System.Runtime.Intrinsics.Wasm;
 #endif // NET8_0_OR_GREATER
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl {
     partial interface IWVectorTraits128 {
