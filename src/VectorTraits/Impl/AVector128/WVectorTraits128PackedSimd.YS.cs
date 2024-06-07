@@ -1111,8 +1111,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX2(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector128<ushort>.Count
                 Vector128<ushort> mask, raw, rt;
-                mask = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 4), Vector128<ushort>.Zero); // Unsigned compare: (i < 16)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX2Kernel(vector0, vector1, indices);
                 rt = PackedSimd.And(raw, mask);
                 return rt;
@@ -1128,8 +1129,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX2(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector128<uint>.Count
                 Vector128<uint> mask, raw, rt;
-                mask = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 3), Vector128<uint>.Zero); // Unsigned compare: (i < 8)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX2Kernel(vector0, vector1, indices);
                 rt = PackedSimd.And(raw, mask);
                 return rt;
@@ -1145,8 +1147,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX2(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector128<ulong>.Count
                 Vector128<ulong> mask, raw, rt;
-                mask = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 2), Vector128<ulong>.Zero); // Unsigned compare: (i < 4)
+                mask = GreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX2Kernel(vector0, vector1, indices);
                 rt = PackedSimd.And(raw, mask);
                 return rt;
@@ -1169,10 +1172,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleX2_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
                 const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector128<byte>.Count
                 YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((sbyte)(total + sbyte.MinValue)),
-                    PackedSimd.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < total)
+                args4 = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
@@ -1190,8 +1190,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX2_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3, out Vector128<ushort> args4) {
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector128<ushort>.Count
                 YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 4), Vector128<ushort>.Zero); // Unsigned compare: (i < 16)
+                args4 = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
@@ -1209,8 +1210,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX2_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3, out Vector128<uint> args4) {
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector128<uint>.Count
                 YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 3), Vector128<uint>.Zero); // Unsigned compare: (i < 8)
+                args4 = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
@@ -1228,8 +1230,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX2_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3, out Vector128<ulong> args4) {
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector128<ulong>.Count
                 YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = Equals(PackedSimd.ShiftRightLogical(indices, 2), Vector128<ulong>.Zero); // Unsigned compare: (i < 4)
+                args4 = GreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Core(Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
@@ -1336,10 +1339,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> YShuffleX2Insert(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
                 const byte total = 2 * ByteCountValue / sizeof(byte); // 2 * Vector128<byte>.Count
                 Vector128<byte> mask, raw, rt;
-                mask = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((sbyte)(total + sbyte.MinValue)),
-                    PackedSimd.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < total)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX2Kernel(vector0, vector1, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -1355,8 +1355,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX2Insert(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
+                const ushort total = 2 * ByteCountValue / sizeof(ushort); // 2 * Vector128<ushort>.Count
                 Vector128<ushort> mask, raw, rt;
-                mask = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 4), Vector128<ushort>.Zero); // Unsigned compare: (i < 16)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX2Kernel(vector0, vector1, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -1372,8 +1373,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX2Insert(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
+                const uint total = 2 * ByteCountValue / sizeof(uint); // 2 * Vector128<uint>.Count
                 Vector128<uint> mask, raw, rt;
-                mask = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 3), Vector128<uint>.Zero); // Unsigned compare: (i < 8)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX2Kernel(vector0, vector1, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -1389,8 +1391,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX2Insert(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
+                const ulong total = 2 * ByteCountValue / sizeof(ulong); // 2 * Vector128<ulong>.Count
                 Vector128<ulong> mask, raw, rt;
-                mask = Equals(PackedSimd.ShiftRightLogical(indices, 2), Vector128<ulong>.Zero); // Unsigned compare: (i < 4)
+                mask = GreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX2Kernel(vector0, vector1, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -1859,10 +1862,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ushort> YShuffleX3(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
                 const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector128<ushort>.Count
                 Vector128<ushort> mask, raw, rt;
-                mask = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((short)(total + short.MinValue)),
-                    PackedSimd.Add(indices.AsInt16(), Vector128.Create(short.MinValue))
-                ).AsUInt16(); // Unsigned compare: (i < total)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX3Kernel(vector0, vector1, vector2, indices);
                 rt = PackedSimd.And(raw, mask);
                 return rt;
@@ -1880,10 +1880,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<uint> YShuffleX3(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
                 const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector128<uint>.Count
                 Vector128<uint> mask, raw, rt;
-                mask = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((int)(total + int.MinValue)),
-                    PackedSimd.Add(indices.AsInt32(), Vector128.Create(int.MinValue))
-                ).AsUInt32(); // Unsigned compare: (i < total)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX3Kernel(vector0, vector1, vector2, indices);
                 rt = PackedSimd.And(raw, mask);
                 return rt;
@@ -1901,10 +1898,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> YShuffleX3(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
                 const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector128<ulong>.Count
                 Vector128<ulong> mask, raw, rt;
-                mask = GreaterThan(
-                    Vector128.Create((long)(total) + long.MinValue),
-                    PackedSimd.Add(indices.AsInt64(), Vector128.Create(long.MinValue))
-                ).AsUInt64(); // Unsigned compare: (i < total)
+                mask = GreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX3Kernel(vector0, vector1, vector2, indices);
                 rt = PackedSimd.And(raw, mask);
                 return rt;
@@ -1927,10 +1921,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleX3_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
                 const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector128<byte>.Count
                 YShuffleX3Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((sbyte)(total + sbyte.MinValue)),
-                    PackedSimd.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < total)
+                args4 = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
@@ -1950,10 +1941,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleX3_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3, out Vector128<ushort> args4) {
                 const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector128<ushort>.Count
                 YShuffleX3Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((short)(total + short.MinValue)),
-                    PackedSimd.Add(indices.AsInt16(), Vector128.Create(short.MinValue))
-                ).AsUInt16(); // Unsigned compare: (i < total)
+                args4 = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
@@ -1973,10 +1961,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleX3_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3, out Vector128<uint> args4) {
                 const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector128<uint>.Count
                 YShuffleX3Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((int)(total + int.MinValue)),
-                    PackedSimd.Add(indices.AsInt32(), Vector128.Create(int.MinValue))
-                ).AsUInt32(); // Unsigned compare: (i < total)
+                args4 = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
@@ -1996,10 +1981,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleX3_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3, out Vector128<ulong> args4) {
                 const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector128<ulong>.Count
                 YShuffleX3Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = GreaterThan(
-                    Vector128.Create((long)(total) + long.MinValue),
-                    PackedSimd.Add(indices.AsInt64(), Vector128.Create(long.MinValue))
-                ).AsUInt64(); // Unsigned compare: (i < total)
+                args4 = GreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Core(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
@@ -2106,10 +2088,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<byte> YShuffleX3Insert(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
                 const byte total = 3 * ByteCountValue / sizeof(byte); // 3 * Vector128<byte>.Count
                 Vector128<byte> mask, raw, rt;
-                mask = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((sbyte)(total + sbyte.MinValue)),
-                    PackedSimd.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < total)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX3Kernel(vector0, vector1, vector2, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2127,10 +2106,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ushort> YShuffleX3Insert(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
                 const ushort total = 3 * ByteCountValue / sizeof(ushort); // 3 * Vector128<ushort>.Count
                 Vector128<ushort> mask, raw, rt;
-                mask = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((short)(total + short.MinValue)),
-                    PackedSimd.Add(indices.AsInt16(), Vector128.Create(short.MinValue))
-                ).AsUInt16(); // Unsigned compare: (i < total)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX3Kernel(vector0, vector1, vector2, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2148,10 +2124,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<uint> YShuffleX3Insert(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
                 const uint total = 3 * ByteCountValue / sizeof(uint); // 3 * Vector128<uint>.Count
                 Vector128<uint> mask, raw, rt;
-                mask = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((int)(total + int.MinValue)),
-                    PackedSimd.Add(indices.AsInt32(), Vector128.Create(int.MinValue))
-                ).AsUInt32(); // Unsigned compare: (i < total)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX3Kernel(vector0, vector1, vector2, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2169,10 +2142,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static Vector128<ulong> YShuffleX3Insert(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
                 const ulong total = 3 * ByteCountValue / sizeof(ulong); // 3 * Vector128<ulong>.Count
                 Vector128<ulong> mask, raw, rt;
-                mask = GreaterThan(
-                    Vector128.Create((long)(total) + long.MinValue),
-                    PackedSimd.Add(indices.AsInt64(), Vector128.Create(long.MinValue))
-                ).AsUInt64(); // Unsigned compare: (i < total)
+                mask = GreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX3Kernel(vector0, vector1, vector2, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2566,6 +2536,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Core(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX3Kernel_Core_Combine(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> args0, Vector128<byte> args1, Vector128<byte> args2, Vector128<byte> args3) {
+                _ = args3;
                 Vector128<byte> rt0 = PackedSimd.Swizzle(vector0, args0);
                 Vector128<byte> rt1 = PackedSimd.Swizzle(vector1, args1);
                 rt0 = PackedSimd.Or(rt0, rt1);
@@ -2656,8 +2627,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX4(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector128<ushort>.Count
                 Vector128<ushort> mask, raw, rt;
-                mask = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 5), Vector128<ushort>.Zero); // Unsigned compare: (i < 32)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = PackedSimd.And(raw, mask);
                 return rt;
@@ -2673,8 +2645,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX4(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector128<uint>.Count
                 Vector128<uint> mask, raw, rt;
-                mask = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 4), Vector128<uint>.Zero); // Unsigned compare: (i < 16)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = PackedSimd.And(raw, mask);
                 return rt;
@@ -2690,8 +2663,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX4(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+                const ulong total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector128<uint>.Count
                 Vector128<ulong> mask, raw, rt;
-                mask = Equals(PackedSimd.ShiftRightLogical(indices, 3), Vector128<ulong>.Zero); // Unsigned compare: (i < 8)
+                mask = GreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = PackedSimd.And(raw, mask);
                 return rt;
@@ -2714,10 +2688,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             public static void YShuffleX4_Args(Vector128<byte> indices, out Vector128<byte> args0, out Vector128<byte> args1, out Vector128<byte> args2, out Vector128<byte> args3, out Vector128<byte> args4) {
                 const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector128<byte>.Count
                 YShuffleX4Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((sbyte)(total + sbyte.MinValue)),
-                    PackedSimd.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < total)
+                args4 = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
@@ -2735,8 +2706,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX4_Args(Vector128<ushort> indices, out Vector128<ushort> args0, out Vector128<ushort> args1, out Vector128<ushort> args2, out Vector128<ushort> args3, out Vector128<ushort> args4) {
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector128<ushort>.Count
                 YShuffleX4Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 5), Vector128<ushort>.Zero); // Unsigned compare: (i < 32)
+                args4 = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
@@ -2754,8 +2726,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX4_Args(Vector128<uint> indices, out Vector128<uint> args0, out Vector128<uint> args1, out Vector128<uint> args2, out Vector128<uint> args3, out Vector128<uint> args4) {
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector128<uint>.Count
                 YShuffleX4Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 4), Vector128<uint>.Zero); // Unsigned compare: (i < 16)
+                args4 = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
@@ -2773,8 +2746,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void YShuffleX4_Args(Vector128<ulong> indices, out Vector128<ulong> args0, out Vector128<ulong> args1, out Vector128<ulong> args2, out Vector128<ulong> args3, out Vector128<ulong> args4) {
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector128<ulong>.Count
                 YShuffleX4Kernel_Args(indices, out args0, out args1, out args2, out args3);
-                args4 = Equals(PackedSimd.ShiftRightLogical(indices, 3), Vector128<ulong>.Zero); // Unsigned compare: (i < 8)
+                args4 = GreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Core(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
@@ -2883,12 +2857,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX4Insert(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
-                const byte total = 4 * ByteCountValue / sizeof(byte); // 3 * Vector128<byte>.Count
+                const byte total = 4 * ByteCountValue / sizeof(byte); // 4 * Vector128<byte>.Count
                 Vector128<byte> mask, raw, rt;
-                mask = PackedSimd.CompareGreaterThan(
-                    Vector128.Create((sbyte)(total + sbyte.MinValue)),
-                    PackedSimd.Add(indices.AsSByte(), Vector128.Create(sbyte.MinValue))
-                ).AsByte(); // Unsigned compare: (i < total)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2904,8 +2875,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX4Insert(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
+                const ushort total = 4 * ByteCountValue / sizeof(ushort); // 4 * Vector128<ushort>.Count
                 Vector128<ushort> mask, raw, rt;
-                mask = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 5), Vector128<ushort>.Zero); // Unsigned compare: (i < 32)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2921,8 +2893,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX4Insert(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
+                const uint total = 4 * ByteCountValue / sizeof(uint); // 4 * Vector128<uint>.Count
                 Vector128<uint> mask, raw, rt;
-                mask = PackedSimd.CompareEqual(PackedSimd.ShiftRightLogical(indices, 4), Vector128<uint>.Zero); // Unsigned compare: (i < 16)
+                mask = PackedSimd.CompareGreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
@@ -2938,8 +2911,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX4Insert(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
+                const ulong total = 4 * ByteCountValue / sizeof(ulong); // 4 * Vector128<ulong>.Count
                 Vector128<ulong> mask, raw, rt;
-                mask = Equals(PackedSimd.ShiftRightLogical(indices, 3), Vector128<ulong>.Zero); // Unsigned compare: (i < 8)
+                mask = GreaterThan(Vector128.Create(total), indices); // Unsigned compare: (i < total)
                 raw = YShuffleX4Kernel(vector0, vector1, vector2, vector3, indices);
                 rt = Vector128.ConditionalSelect(mask, raw, back);
                 return rt;
