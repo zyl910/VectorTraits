@@ -1,5 +1,5 @@
 ﻿#if NET7_0_OR_GREATER
-#define BCL_SHUFFLE_HAS
+#define BCL_HAS_SHUFFLE
 #define VECTOR_HAS_METHOD
 #endif // NET7_0_OR_GREATER
 
@@ -1244,22 +1244,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleX2(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{double}, Vector128{double}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YShuffleX2(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
@@ -1267,33 +1267,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YShuffleX2(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX2(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{short}, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleX2(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
@@ -1301,22 +1301,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX2(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{int}, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleX2(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
@@ -1324,22 +1324,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX2(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{long}, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YShuffleX2(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
@@ -1347,11 +1347,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX2(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2_Basic(vector0, vector1, indices);
             }
 
@@ -1419,7 +1419,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
-#if BCL_SHUFFLE_HAS
+#if BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2(Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1501,7 +1501,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#endif // BCL_SHUFFLE_HAS
+#endif // BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
@@ -1702,22 +1702,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleX2Insert(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YShuffleX2Insert(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
             }
 
@@ -1725,33 +1725,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YShuffleX2Insert(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX2Insert(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleX2Insert(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
             }
 
@@ -1759,22 +1759,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX2Insert(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleX2Insert(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
             }
 
@@ -1782,22 +1782,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX2Insert(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YShuffleX2Insert(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
             }
 
@@ -1936,7 +1936,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt[0];
             }
 
-#if BCL_SHUFFLE_HAS
+#if BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -2018,7 +2018,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#endif // BCL_SHUFFLE_HAS
+#endif // BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Insert_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
@@ -2219,22 +2219,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleX2Kernel(Vector128<float> vector0, Vector128<float> vector1, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{double}, Vector128{double}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YShuffleX2Kernel(Vector128<double> vector0, Vector128<double> vector1, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
@@ -2242,33 +2242,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YShuffleX2Kernel(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX2Kernel(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{short}, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleX2Kernel(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
@@ -2276,22 +2276,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX2Kernel(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{int}, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleX2Kernel(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
@@ -2299,22 +2299,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX2Kernel(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{long}, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YShuffleX2Kernel(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
@@ -2322,11 +2322,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX2Kernel(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX2Kernel_Bit(vector0, vector1, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Kernel_Basic(vector0, vector1, indices);
             }
 
@@ -2450,7 +2450,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt[0];
             }
 
-#if BCL_SHUFFLE_HAS
+#if BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel(Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -2536,7 +2536,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#endif // BCL_SHUFFLE_HAS
+#endif // BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX2Kernel_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
@@ -2719,22 +2719,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleX3(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YShuffleX3(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -2742,33 +2742,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YShuffleX3(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX3(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleX3(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -2776,22 +2776,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX3(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleX3(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -2799,22 +2799,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX3(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YShuffleX3(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -2822,11 +2822,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX3(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -2894,7 +2894,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
-#if BCL_SHUFFLE_HAS
+#if BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -2976,7 +2976,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#endif // BCL_SHUFFLE_HAS
+#endif // BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
@@ -3177,22 +3177,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleX3Insert(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YShuffleX3Insert(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
@@ -3200,33 +3200,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YShuffleX3Insert(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX3Insert(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleX3Insert(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
@@ -3234,22 +3234,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX3Insert(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleX3Insert(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
@@ -3257,22 +3257,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX3Insert(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YShuffleX3Insert(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
@@ -3280,11 +3280,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX3Insert(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Insert_Bit(back, vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Insert_Basic(back, vector0, vector1, vector2, indices);
             }
 
@@ -3412,7 +3412,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt[0];
             }
 
-#if BCL_SHUFFLE_HAS
+#if BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -3494,7 +3494,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#endif // BCL_SHUFFLE_HAS
+#endif // BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Insert_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
@@ -3695,22 +3695,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleX3Kernel(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YShuffleX3Kernel(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -3718,33 +3718,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YShuffleX3Kernel(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX3Kernel(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleX3Kernel(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -3752,22 +3752,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX3Kernel(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleX3Kernel(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -3775,22 +3775,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX3Kernel(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YShuffleX3Kernel(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -3798,11 +3798,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX3Kernel(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX3Kernel_Basic(vector0, vector1, vector2, indices);
             }
 
@@ -3926,7 +3926,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt[0];
             }
 
-#if BCL_SHUFFLE_HAS
+#if BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -4024,7 +4024,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#endif // BCL_SHUFFLE_HAS
+#endif // BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX3Kernel_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
@@ -4207,22 +4207,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleX4(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YShuffleX4(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4230,33 +4230,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YShuffleX4(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX4(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleX4(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4264,22 +4264,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX4(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleX4(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4287,22 +4287,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX4(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YShuffleX4(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4310,11 +4310,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX4(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4382,7 +4382,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
-#if BCL_SHUFFLE_HAS
+#if BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -4464,7 +4464,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#endif // BCL_SHUFFLE_HAS
+#endif // BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
@@ -4665,22 +4665,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleX4Insert(Vector128<float> back, Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YShuffleX4Insert(Vector128<double> back, Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4688,33 +4688,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YShuffleX4Insert(Vector128<sbyte> back, Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX4Insert(Vector128<byte> back, Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleX4Insert(Vector128<short> back, Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4722,22 +4722,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX4Insert(Vector128<ushort> back, Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleX4Insert(Vector128<int> back, Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4745,22 +4745,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX4Insert(Vector128<uint> back, Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YShuffleX4Insert(Vector128<long> back, Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4768,11 +4768,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX4Insert(Vector128<ulong> back, Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Insert_Bit(back, vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Insert_Basic(back, vector0, vector1, vector2, vector3, indices);
             }
 
@@ -4900,7 +4900,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt[0];
             }
 
-#if BCL_SHUFFLE_HAS
+#if BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -4982,7 +4982,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#endif // BCL_SHUFFLE_HAS
+#endif // BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Insert_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
@@ -5183,22 +5183,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YShuffleX4Kernel(Vector128<float> vector0, Vector128<float> vector1, Vector128<float> vector2, Vector128<float> vector3, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YShuffleX4Kernel(Vector128<double> vector0, Vector128<double> vector1, Vector128<double> vector2, Vector128<double> vector3, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -5206,33 +5206,33 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YShuffleX4Kernel(Vector128<sbyte> vector0, Vector128<sbyte> vector1, Vector128<sbyte> vector2, Vector128<sbyte> vector3, Vector128<sbyte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleX4Kernel(Vector128<byte> vector0, Vector128<byte> vector1, Vector128<byte> vector2, Vector128<byte> vector3, Vector128<byte> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YShuffleX4Kernel(Vector128<short> vector0, Vector128<short> vector1, Vector128<short> vector2, Vector128<short> vector3, Vector128<short> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -5240,22 +5240,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleX4Kernel(Vector128<ushort> vector0, Vector128<ushort> vector1, Vector128<ushort> vector2, Vector128<ushort> vector3, Vector128<ushort> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YShuffleX4Kernel(Vector128<int> vector0, Vector128<int> vector1, Vector128<int> vector2, Vector128<int> vector3, Vector128<int> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -5263,22 +5263,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleX4Kernel(Vector128<uint> vector0, Vector128<uint> vector1, Vector128<uint> vector2, Vector128<uint> vector3, Vector128<uint> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YShuffleX4Kernel(Vector128<long> vector0, Vector128<long> vector1, Vector128<long> vector2, Vector128<long> vector3, Vector128<long> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -5286,11 +5286,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleX4Kernel(Vector128<ulong> vector0, Vector128<ulong> vector1, Vector128<ulong> vector2, Vector128<ulong> vector3, Vector128<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 if (Bcl_Shuffle_Used && Vector128.IsHardwareAccelerated) {
                     return YShuffleX4Kernel_Bit(vector0, vector1, vector2, vector3, indices);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && BCL_SHUFFLE_HAS
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX4Kernel_Basic(vector0, vector1, vector2, vector3, indices);
             }
 
@@ -5414,7 +5414,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt[0];
             }
 
-#if BCL_SHUFFLE_HAS
+#if BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -5524,7 +5524,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return rt;
             }
 
-#endif // BCL_SHUFFLE_HAS
+#endif // BCL_HAS_SHUFFLE
 
             /// <inheritdoc cref="IWVectorTraits128.YShuffleX4Kernel_Args(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
