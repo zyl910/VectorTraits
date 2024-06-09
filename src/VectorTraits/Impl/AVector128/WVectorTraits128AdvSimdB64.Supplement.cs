@@ -52,6 +52,20 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect_AcceleratedTypes"/>
+            internal static TypeCodeFlags ConditionalSelect_AcceleratedTypes {
+                get {
+                    return SuperStatics.ConditionalSelect_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.ConditionalSelect{T}(Vector128{T}, Vector128{T}, Vector128{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            internal static Vector128<T> ConditionalSelect<T>(Vector128<T> condition, Vector128<T> left, Vector128<T> right) where T : struct {
+                return SuperStatics.ConditionalSelect(condition, left, right);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.Divide_AcceleratedTypes"/>
             public static TypeCodeFlags Divide_AcceleratedTypes {
                 get {

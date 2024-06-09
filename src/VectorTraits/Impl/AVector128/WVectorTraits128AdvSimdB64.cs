@@ -560,8 +560,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> Shuffle(Vector128<ulong> vector, Vector128<ulong> indices) {
                 Vector128<ulong> mask = GreaterThan(Vector128.Create((ulong)2), indices); // (0<=i && i<2)
-                Vector128<uint> indices1 = AdvSimd.Or(AdvSimd.ShiftLeftLogical(indices, 32), indices).AsUInt32();
-                Vector128<byte> indices2 = AdvSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt64_ByteOffset.AsUInt32(), indices1, Vector128Constants.Shuffle_UInt64_Multiplier.AsUInt32()).AsByte();
+                Vector128<uint> temp = AdvSimd.Or(AdvSimd.ShiftLeftLogical(indices, 32), indices).AsUInt32();
+                Vector128<byte> indices2 = AdvSimd.MultiplyAdd(Vector128Constants.Shuffle_UInt64_ByteOffset.AsUInt32(), temp, Vector128Constants.Shuffle_UInt64_Multiplier.AsUInt32()).AsByte();
                 indices2 = AdvSimd.OrNot(indices2, mask.AsByte());
                 return Shuffle(vector.AsByte(), indices2).AsUInt64();
             }
