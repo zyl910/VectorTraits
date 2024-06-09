@@ -294,7 +294,7 @@ namespace Zyl.VectorTraits.Impl {
             int rt = 0;
             if (null == onMissed) onMissed = OnMissed_Default;
             var staticDictionaryBy = staticType.GetRuntimeMethods()
-                .Where(o => staticType.Equals(o.DeclaringType))
+                .Where(o => staticType.Equals(o.DeclaringType) && o.IsPublic)
                 .GroupBy(o => o.Name)
                 .ToDictionary(g => g.Key, g => g.ToList());
             var staticDictionary = new SortedDictionary<string, List<MethodInfo>>(staticDictionaryBy);
