@@ -175,7 +175,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector128 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YShuffleX3Kernel_Combine(p0, vector1Used, vector2Used, indicesUsed);
+                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YShuffleX3Kernel(p0, vector1Used, vector2Used, indicesUsed);
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
