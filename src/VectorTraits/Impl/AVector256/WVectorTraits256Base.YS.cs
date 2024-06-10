@@ -1852,11 +1852,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YShuffleX2Insert(Vector256<ulong> back, Vector256<ulong> vector0, Vector256<ulong> vector1, Vector256<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
 #else
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YShuffleX2Insert(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{int})"/>

@@ -1578,6 +1578,38 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven_AcceleratedTypes"/>
+        public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YRoundToEven_AcceleratedTypes;
+#else
+                return _instance.YRoundToEven_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YRoundToEven(Vector256<float> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToEven(value);
+#else
+            return _instance.YRoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YRoundToEven(Vector256<double> value) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YRoundToEven(value);
+#else
+            return _instance.YRoundToEven(value);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YRoundToZero_AcceleratedTypes"/>
         public static TypeCodeFlags YRoundToZero_AcceleratedTypes {
             get {
@@ -3003,7 +3035,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2_Args(Vector256<sbyte> indices, out Vector256<sbyte> args0, out Vector256<sbyte> args1, out Vector256<sbyte> args2, out Vector256<sbyte> args3, out Vector256<sbyte> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3013,7 +3045,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2_Args(Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1, out Vector256<byte> args2, out Vector256<byte> args3, out Vector256<byte> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3023,7 +3055,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2_Args(Vector256<short> indices, out Vector256<short> args0, out Vector256<short> args1, out Vector256<short> args2, out Vector256<short> args3, out Vector256<short> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3034,7 +3066,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2_Args(Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1, out Vector256<ushort> args2, out Vector256<ushort> args3, out Vector256<ushort> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3044,7 +3076,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2_Args(Vector256<int> indices, out Vector256<int> args0, out Vector256<int> args1, out Vector256<int> args2, out Vector256<int> args3, out Vector256<int> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3055,7 +3087,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2_Args(Vector256<uint> indices, out Vector256<uint> args0, out Vector256<uint> args1, out Vector256<uint> args2, out Vector256<uint> args3, out Vector256<uint> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3065,7 +3097,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2_Args(Vector256<long> indices, out Vector256<long> args0, out Vector256<long> args1, out Vector256<long> args2, out Vector256<long> args3, out Vector256<long> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3076,7 +3108,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2_Args(Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1, out Vector256<ulong> args2, out Vector256<ulong> args3, out Vector256<ulong> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3307,7 +3339,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Insert_Args(Vector256<sbyte> indices, out Vector256<sbyte> args0, out Vector256<sbyte> args1, out Vector256<sbyte> args2, out Vector256<sbyte> args3, out Vector256<sbyte> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3317,7 +3349,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Insert_Args(Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1, out Vector256<byte> args2, out Vector256<byte> args3, out Vector256<byte> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3327,7 +3359,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Insert_Args(Vector256<short> indices, out Vector256<short> args0, out Vector256<short> args1, out Vector256<short> args2, out Vector256<short> args3, out Vector256<short> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3338,7 +3370,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Insert_Args(Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1, out Vector256<ushort> args2, out Vector256<ushort> args3, out Vector256<ushort> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3348,7 +3380,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Insert_Args(Vector256<int> indices, out Vector256<int> args0, out Vector256<int> args1, out Vector256<int> args2, out Vector256<int> args3, out Vector256<int> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3359,7 +3391,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Insert_Args(Vector256<uint> indices, out Vector256<uint> args0, out Vector256<uint> args1, out Vector256<uint> args2, out Vector256<uint> args3, out Vector256<uint> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3369,7 +3401,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Insert_Args(Vector256<long> indices, out Vector256<long> args0, out Vector256<long> args1, out Vector256<long> args2, out Vector256<long> args3, out Vector256<long> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3380,7 +3412,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Insert_Args(Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1, out Vector256<ulong> args2, out Vector256<ulong> args3, out Vector256<ulong> args4) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3611,7 +3643,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Kernel_Args(Vector256<sbyte> indices, out Vector256<sbyte> args0, out Vector256<sbyte> args1, out Vector256<sbyte> args2, out Vector256<sbyte> args3) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3621,7 +3653,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Kernel_Args(Vector256<byte> indices, out Vector256<byte> args0, out Vector256<byte> args1, out Vector256<byte> args2, out Vector256<byte> args3) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3631,7 +3663,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Kernel_Args(Vector256<short> indices, out Vector256<short> args0, out Vector256<short> args1, out Vector256<short> args2, out Vector256<short> args3) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3642,7 +3674,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Kernel_Args(Vector256<ushort> indices, out Vector256<ushort> args0, out Vector256<ushort> args1, out Vector256<ushort> args2, out Vector256<ushort> args3) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3652,7 +3684,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Kernel_Args(Vector256<int> indices, out Vector256<int> args0, out Vector256<int> args1, out Vector256<int> args2, out Vector256<int> args3) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3663,7 +3695,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Kernel_Args(Vector256<uint> indices, out Vector256<uint> args0, out Vector256<uint> args1, out Vector256<uint> args2, out Vector256<uint> args3) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3673,7 +3705,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Kernel_Args(Vector256<long> indices, out Vector256<long> args0, out Vector256<long> args1, out Vector256<long> args2, out Vector256<long> args3) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -3684,7 +3716,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void YShuffleX2Kernel_Args(Vector256<ulong> indices, out Vector256<ulong> args0, out Vector256<ulong> args1, out Vector256<ulong> args2, out Vector256<ulong> args3) {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -5624,38 +5656,6 @@ namespace Zyl.VectorTraits {
             return BaseStatics.YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
 #else
             return _instance.YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args0, args1, args2, args3);
-#endif // BCL_BASE_OVERRIDE_STATIC
-        }
-
-
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven_AcceleratedTypes"/>
-        public static TypeCodeFlags YRoundToEven_AcceleratedTypes {
-            get {
-#if BCL_BASE_OVERRIDE_STATIC
-                return BaseStatics.YRoundToEven_AcceleratedTypes;
-#else
-                return _instance.YRoundToEven_AcceleratedTypes;
-#endif // BCL_BASE_OVERRIDE_STATIC
-            }
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{float})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<float> YRoundToEven(Vector256<float> value) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YRoundToEven(value);
-#else
-            return _instance.YRoundToEven(value);
-#endif // BCL_BASE_OVERRIDE_STATIC
-        }
-
-        /// <inheritdoc cref="IWVectorTraits256.YRoundToEven(Vector256{double})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<double> YRoundToEven(Vector256<double> value) {
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YRoundToEven(value);
-#else
-            return _instance.YRoundToEven(value);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

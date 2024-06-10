@@ -4104,7 +4104,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4119,7 +4119,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4134,7 +4134,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4150,7 +4150,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4165,7 +4165,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4181,7 +4181,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4196,7 +4196,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4212,7 +4212,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4548,7 +4548,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4563,7 +4563,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4578,7 +4578,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4594,7 +4594,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4609,7 +4609,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4625,7 +4625,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4640,7 +4640,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4656,7 +4656,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
+            BaseStatics.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #else
             _instance.YShuffleX2Insert_Args(indices, out args0, out args1, out args2, out args3, out args4);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -4992,7 +4992,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -5007,7 +5007,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -5022,7 +5022,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -5038,7 +5038,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -5053,7 +5053,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -5069,7 +5069,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -5084,7 +5084,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -5100,7 +5100,7 @@ namespace Zyl.VectorTraits {
             }
 #endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
+            BaseStatics.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #else
             _instance.YShuffleX2Kernel_Args(indices, out args0, out args1, out args2, out args3);
 #endif // BCL_BASE_OVERRIDE_STATIC

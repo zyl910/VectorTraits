@@ -1852,11 +1852,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YShuffleX2Insert(Vector512<ulong> back, Vector512<ulong> vector0, Vector512<ulong> vector1, Vector512<ulong> indices) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
                 return YShuffleX2Insert_Bit(back, vector0, vector1, indices);
 #else
                 return YShuffleX2Insert_Basic(back, vector0, vector1, indices);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YShuffleX2Insert(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{int})"/>
@@ -3362,7 +3362,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<sbyte> YShuffleX3Insert_Basic(Vector512<sbyte> back, Vector512<sbyte> vector0, Vector512<sbyte> vector1, Vector512<sbyte> vector2, Vector512<sbyte> indices) {
                 Vector512<sbyte> mask, raw, rt;
                 mask = Vector512.GreaterThanOrEqual(indices, Vector512<sbyte>.Zero); // i >= 0
-                raw = YShuffleX3Kernel_Basic(vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
+                raw = YShuffleX3Insert_Basic(back.AsByte(), vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
                 rt = Vector512.ConditionalSelect(mask, raw, back);
                 return rt;
             }
@@ -3492,7 +3492,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             public static Vector512<sbyte> YShuffleX3Insert_Bit(Vector512<sbyte> back, Vector512<sbyte> vector0, Vector512<sbyte> vector1, Vector512<sbyte> vector2, Vector512<sbyte> indices) {
                 Vector512<sbyte> mask, raw, rt;
                 mask = Vector512.GreaterThanOrEqual(indices, Vector512<sbyte>.Zero); // i >= 0
-                raw = YShuffleX3Kernel_Bit(vector0, vector1, vector2, indices);
+                raw = YShuffleX3Insert_Bit(back.AsByte(), vector0.AsByte(), vector1.AsByte(), vector2.AsByte(), indices.AsByte()).AsSByte();
                 rt = Vector512.ConditionalSelect(mask, raw, back);
                 return rt;
             }

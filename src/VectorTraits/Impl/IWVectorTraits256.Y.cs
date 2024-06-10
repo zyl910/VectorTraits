@@ -1134,8 +1134,8 @@ namespace Zyl.VectorTraits.Impl {
         /// Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.
         /// Mnemonic: <c>rt[i] := round_to_even(value[i])</c>.
         /// </summary>
-        /// <param name="value">The vector that will have its round to zero computed (将计算向零舍入的向量).</param>
-        /// <returns>A vector whose elements are the round to zero of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向零舍入).</returns>
+        /// <param name="value">The vector that will have its round to even computed (将计算向偶数舍入的向量).</param>
+        /// <returns>A vector whose elements are the round to even of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向偶数舍入).</returns>
         /// <seealso cref="YRoundToEven_AcceleratedTypes"/>
         Vector256<float> YRoundToEven(Vector256<float> value);
 
@@ -1143,8 +1143,8 @@ namespace Zyl.VectorTraits.Impl {
         /// Computes the round to even of each element in a vector (计算向量中每个元素的向偶数舍入). It is also known as `rounding half to even`/`round to nearest integer` (它也被称作`四舍六入五成双`/`舍入到最近整数`). See more: <see cref="MidpointRounding.ToEven"/>.
         /// Mnemonic: <c>rt[i] := round_to_even(value[i])</c>.
         /// </summary>
-        /// <param name="value">The vector that will have its round to zero computed (将计算向零舍入的向量).</param>
-        /// <returns>A vector whose elements are the round to zero of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向零舍入).</returns>
+        /// <param name="value">The vector that will have its round to even computed (将计算向偶数舍入的向量).</param>
+        /// <returns>A vector whose elements are the round to even of the elements in <paramref name="value" /> (一个向量，其元素是 <paramref name="value" /> 中各元素的向偶数舍入).</returns>
         /// <seealso cref="YRoundToEven_AcceleratedTypes"/>
         Vector256<double> YRoundToEven(Vector256<double> value);
 

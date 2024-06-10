@@ -1078,5 +1078,2266 @@ namespace Zyl.VectorTraits {
             return YShuffleKernel_Core(vector, args.args0, args.args1);
         }
 
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear on 2 vectors (在2个向量上进行换位并清零的参数计算). Provide arguments for YShuffleX2_Core (为 YShuffleX2_Core 提供参数). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2))?( element_ref(indices[i], vector0, vector1) ):0</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleX2_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleX2_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX2_Core .</param>
+        /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX2_Core .</param>
+        /// <param name="args4">Arguments 4 (参数4). Used for YShuffleX2_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.YShuffleX2_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleX2_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear on 2 vectors (在2个向量上进行换位并清零的参数计算). Provide arguments for YShuffleX2_Core (为 YShuffleX2_Core 提供参数). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2))?( element_ref(indices[i], vector0, vector1) ):0</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX2_Core (为 YShuffleX2_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) YShuffleX2_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleX2_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear on 2 vectors (在2个向量上进行换位并清零的参数计算). Provide arguments for YShuffleX2_Core (为 YShuffleX2_Core 提供参数). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2))?( element_ref(indices[i], vector0, vector1) ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from vectors (用于从输入向量集中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX2_Core (为 YShuffleX2_Core 提供参数).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX2_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) YShuffleX2_Args(Vector<sbyte> indices) {
+            YShuffleX2_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) YShuffleX2_Args(Vector<byte> indices) {
+            YShuffleX2_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) YShuffleX2_Args(Vector<short> indices) {
+            YShuffleX2_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) YShuffleX2_Args(Vector<ushort> indices) {
+            YShuffleX2_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) YShuffleX2_Args(Vector<int> indices) {
+            YShuffleX2_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) YShuffleX2_Args(Vector<uint> indices) {
+            YShuffleX2_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) YShuffleX2_Args(Vector<long> indices) {
+            YShuffleX2_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) YShuffleX2_Args(Vector<ulong> indices) {
+            YShuffleX2_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        // -- YShuffleX2_Core: ValueTuple --
+        /// <summary>
+        /// Core calculation for shuffle and clear on 2 vectors (在2个向量上进行换位并清零的核心计算). Its arguments are derived from YShuffleX2_Args (其参数来源于 YShuffleX2_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2))?( element_ref(indices[i], vector0, vector1) ):0</c>.
+        /// </summary>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX2_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleX2_Core(Vector<float> vector0, Vector<float> vector1, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleX2_Core(Vector<double> vector0, Vector<double> vector1, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleX2_Core(Vector<sbyte> vector0, Vector<sbyte> vector1, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleX2_Core(Vector<byte> vector0, Vector<byte> vector1, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleX2_Core(Vector<short> vector0, Vector<short> vector1, (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleX2_Core(Vector<ushort> vector0, Vector<ushort> vector1, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleX2_Core(Vector<int> vector0, Vector<int> vector1, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleX2_Core(Vector<uint> vector0, Vector<uint> vector1, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleX2_Core(Vector<long> vector0, Vector<long> vector1, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleX2_Core(Vector<ulong> vector0, Vector<ulong> vector1, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) args) {
+            return YShuffleX2_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert on 2 vectors (在2个向量上进行换位并插入的参数计算). Provide arguments for YShuffleX2Insert_Core (为 YShuffleX2Insert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2))?( element_ref(indices[i], vector0, vector1) ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleX2Insert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleX2Insert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX2Insert_Core .</param>
+        /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX2Insert_Core .</param>
+        /// <param name="args4">Arguments 4 (参数4). Used for YShuffleX2Insert_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleX2Insert_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2Insert_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2Insert_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2Insert_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2Insert_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2Insert_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2Insert_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2Insert_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX2Insert_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert on 2 vectors (在2个向量上进行换位并插入的参数计算). Provide arguments for YShuffleX2Insert_Core (为 YShuffleX2Insert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2))?( element_ref(indices[i], vector0, vector1) ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX2Insert_Core (为 YShuffleX2Insert_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) YShuffleX2Insert_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleX2Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert on 2 vectors (在2个向量上进行换位并插入的参数计算). Provide arguments for YShuffleX2Insert_Core (为 YShuffleX2Insert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2))?( element_ref(indices[i], vector0, vector1) ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from vectors (用于从输入向量集中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX2Insert_Core (为 YShuffleX2Insert_Core 提供参数).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) YShuffleX2Insert_Args(Vector<sbyte> indices) {
+            YShuffleX2Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) YShuffleX2Insert_Args(Vector<byte> indices) {
+            YShuffleX2Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) YShuffleX2Insert_Args(Vector<short> indices) {
+            YShuffleX2Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) YShuffleX2Insert_Args(Vector<ushort> indices) {
+            YShuffleX2Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) YShuffleX2Insert_Args(Vector<int> indices) {
+            YShuffleX2Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) YShuffleX2Insert_Args(Vector<uint> indices) {
+            YShuffleX2Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) YShuffleX2Insert_Args(Vector<long> indices) {
+            YShuffleX2Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) YShuffleX2Insert_Args(Vector<ulong> indices) {
+            YShuffleX2Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        // -- YShuffleX2Insert_Core: ValueTuple --
+        /// <summary>
+        /// Core calculation for shuffle and insert on 2 vectors (在2个向量上进行换位并插入的核心计算). Its arguments are derived from YShuffleX2Insert_Args (其参数来源于 YShuffleX2Insert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2))?( element_ref(indices[i], vector0, vector1) ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleX2Insert_Core(Vector<float> back, Vector<float> vector0, Vector<float> vector1, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{double}, Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleX2Insert_Core(Vector<double> back, Vector<double> vector0, Vector<double> vector1, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleX2Insert_Core(Vector<sbyte> back, Vector<sbyte> vector0, Vector<sbyte> vector1, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleX2Insert_Core(Vector<byte> back, Vector<byte> vector0, Vector<byte> vector1, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleX2Insert_Core(Vector<short> back, Vector<short> vector0, Vector<short> vector1, (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleX2Insert_Core(Vector<ushort> back, Vector<ushort> vector0, Vector<ushort> vector1, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleX2Insert_Core(Vector<int> back, Vector<int> vector0, Vector<int> vector1, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleX2Insert_Core(Vector<uint> back, Vector<uint> vector0, Vector<uint> vector1, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleX2Insert_Core(Vector<long> back, Vector<long> vector0, Vector<long> vector1, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Insert_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Insert_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleX2Insert_Core(Vector<ulong> back, Vector<ulong> vector0, Vector<ulong> vector1, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) args) {
+            return YShuffleX2Insert_Core(back, vector0, vector1, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for only shuffle on 2 vectors (在2个向量上进行仅换位的参数计算). Provide arguments for YShuffleX2Kernel_Core (为 YShuffleX2Kernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexX2Mask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexX2Mask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2)</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleX2Kernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleX2Kernel_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX2Kernel_Core .</param>
+        /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX2Kernel_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleX2Kernel_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX2Kernel_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX2Kernel_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX2Kernel_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX2Kernel_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX2Kernel_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX2Kernel_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX2Kernel_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX2Kernel_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle on 2 vectors (在2个向量上进行仅换位的参数计算). Provide arguments for YShuffleX2Kernel_Core (为 YShuffleX2Kernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexX2Mask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexX2Mask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2)</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX2Kernel_Core (为 YShuffleX2Kernel_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3) YShuffleX2Kernel_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleX2Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle on 2 vectors (在2个向量上进行仅换位的参数计算). Provide arguments for YShuffleX2Kernel_Core (为 YShuffleX2Kernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexX2Mask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexX2Mask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2)</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from vectors (用于从输入向量集中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX2Kernel_Core (为 YShuffleX2Kernel_Core 提供参数).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3) YShuffleX2Kernel_Args(Vector<sbyte> indices) {
+            YShuffleX2Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3) YShuffleX2Kernel_Args(Vector<byte> indices) {
+            YShuffleX2Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3) YShuffleX2Kernel_Args(Vector<short> indices) {
+            YShuffleX2Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3) YShuffleX2Kernel_Args(Vector<ushort> indices) {
+            YShuffleX2Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3) YShuffleX2Kernel_Args(Vector<int> indices) {
+            YShuffleX2Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3) YShuffleX2Kernel_Args(Vector<uint> indices) {
+            YShuffleX2Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3) YShuffleX2Kernel_Args(Vector<long> indices) {
+            YShuffleX2Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3) YShuffleX2Kernel_Args(Vector<ulong> indices) {
+            YShuffleX2Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        // -- YShuffleX2Kernel_Core: ValueTuple --
+        /// <summary>
+        /// Core calculation for only shuffle on 2 vectors (在2个向量上进行仅换位的核心计算). Its arguments are derived from YShuffleX2Kernel_Args (其参数来源于 YShuffleX2Kernel_Args).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*2)</c>.
+        /// </summary>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleX2Kernel_Core(Vector<float> vector0, Vector<float> vector1, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleX2Kernel_Core(Vector<double> vector0, Vector<double> vector1, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleX2Kernel_Core(Vector<sbyte> vector0, Vector<sbyte> vector1, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleX2Kernel_Core(Vector<byte> vector0, Vector<byte> vector1, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleX2Kernel_Core(Vector<short> vector0, Vector<short> vector1, (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleX2Kernel_Core(Vector<ushort> vector0, Vector<ushort> vector1, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleX2Kernel_Core(Vector<int> vector0, Vector<int> vector1, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleX2Kernel_Core(Vector<uint> vector0, Vector<uint> vector1, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleX2Kernel_Core(Vector<long> vector0, Vector<long> vector1, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX2Kernel_Core(Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX2Kernel_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleX2Kernel_Core(Vector<ulong> vector0, Vector<ulong> vector1, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3) args) {
+            return YShuffleX2Kernel_Core(vector0, vector1, args.args0, args.args1, args.args2, args.args3);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear on 3 vectors (在3个向量上进行换位并清零的参数计算). Provide arguments for YShuffleX3_Core (为 YShuffleX3_Core 提供参数). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3))?( element_ref(indices[i], vector0, vector1, vector2) ):0</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleX3_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleX3_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX3_Core .</param>
+        /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX3_Core .</param>
+        /// <param name="args4">Arguments 4 (参数4). Used for YShuffleX3_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.YShuffleX3_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleX3_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear on 3 vectors (在3个向量上进行换位并清零的参数计算). Provide arguments for YShuffleX3_Core (为 YShuffleX3_Core 提供参数). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3))?( element_ref(indices[i], vector0, vector1, vector2) ):0</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX3_Core (为 YShuffleX3_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) YShuffleX3_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleX3_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear on 3 vectors (在3个向量上进行换位并清零的参数计算). Provide arguments for YShuffleX3_Core (为 YShuffleX3_Core 提供参数). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3))?( element_ref(indices[i], vector0, vector1, vector2) ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from vectors (用于从输入向量集中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX3_Core (为 YShuffleX3_Core 提供参数).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX3_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) YShuffleX3_Args(Vector<sbyte> indices) {
+            YShuffleX3_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) YShuffleX3_Args(Vector<byte> indices) {
+            YShuffleX3_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) YShuffleX3_Args(Vector<short> indices) {
+            YShuffleX3_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) YShuffleX3_Args(Vector<ushort> indices) {
+            YShuffleX3_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) YShuffleX3_Args(Vector<int> indices) {
+            YShuffleX3_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) YShuffleX3_Args(Vector<uint> indices) {
+            YShuffleX3_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) YShuffleX3_Args(Vector<long> indices) {
+            YShuffleX3_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) YShuffleX3_Args(Vector<ulong> indices) {
+            YShuffleX3_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        // -- YShuffleX3_Core: ValueTuple --
+        /// <summary>
+        /// Core calculation for shuffle and clear on 3 vectors (在3个向量上进行换位并清零的核心计算). Its arguments are derived from YShuffleX3_Args (其参数来源于 YShuffleX3_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3))?( element_ref(indices[i], vector0, vector1, vector2) ):0</c>.
+        /// </summary>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="vector2">The input vector 2 from which values are selected (从中选择值的输入向量2).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX3_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleX3_Core(Vector<float> vector0, Vector<float> vector1, Vector<float> vector2, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{double}, Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleX3_Core(Vector<double> vector0, Vector<double> vector1, Vector<double> vector2, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleX3_Core(Vector<sbyte> vector0, Vector<sbyte> vector1, Vector<sbyte> vector2, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleX3_Core(Vector<byte> vector0, Vector<byte> vector1, Vector<byte> vector2, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleX3_Core(Vector<short> vector0, Vector<short> vector1, Vector<short> vector2, (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleX3_Core(Vector<ushort> vector0, Vector<ushort> vector1, Vector<ushort> vector2, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleX3_Core(Vector<int> vector0, Vector<int> vector1, Vector<int> vector2, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleX3_Core(Vector<uint> vector0, Vector<uint> vector1, Vector<uint> vector2, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleX3_Core(Vector<long> vector0, Vector<long> vector1, Vector<long> vector2, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleX3_Core(Vector<ulong> vector0, Vector<ulong> vector1, Vector<ulong> vector2, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) args) {
+            return YShuffleX3_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert on 3 vectors (在3个向量上进行换位并插入的参数计算). Provide arguments for YShuffleX3Insert_Core (为 YShuffleX3Insert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3))?( element_ref(indices[i], vector0, vector1, vector2) ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleX3Insert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleX3Insert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX3Insert_Core .</param>
+        /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX3Insert_Core .</param>
+        /// <param name="args4">Arguments 4 (参数4). Used for YShuffleX3Insert_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleX3Insert_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3Insert_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3Insert_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3Insert_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3Insert_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3Insert_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3Insert_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3Insert_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX3Insert_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert on 3 vectors (在3个向量上进行换位并插入的参数计算). Provide arguments for YShuffleX3Insert_Core (为 YShuffleX3Insert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3))?( element_ref(indices[i], vector0, vector1, vector2) ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX3Insert_Core (为 YShuffleX3Insert_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) YShuffleX3Insert_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleX3Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert on 3 vectors (在3个向量上进行换位并插入的参数计算). Provide arguments for YShuffleX3Insert_Core (为 YShuffleX3Insert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3))?( element_ref(indices[i], vector0, vector1, vector2) ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from vectors (用于从输入向量集中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX3Insert_Core (为 YShuffleX3Insert_Core 提供参数).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) YShuffleX3Insert_Args(Vector<sbyte> indices) {
+            YShuffleX3Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) YShuffleX3Insert_Args(Vector<byte> indices) {
+            YShuffleX3Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) YShuffleX3Insert_Args(Vector<short> indices) {
+            YShuffleX3Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) YShuffleX3Insert_Args(Vector<ushort> indices) {
+            YShuffleX3Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) YShuffleX3Insert_Args(Vector<int> indices) {
+            YShuffleX3Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) YShuffleX3Insert_Args(Vector<uint> indices) {
+            YShuffleX3Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) YShuffleX3Insert_Args(Vector<long> indices) {
+            YShuffleX3Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) YShuffleX3Insert_Args(Vector<ulong> indices) {
+            YShuffleX3Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        // -- YShuffleX3Insert_Core: ValueTuple --
+        /// <summary>
+        /// Core calculation for shuffle and insert on 3 vectors (在3个向量上进行换位并插入的核心计算). Its arguments are derived from YShuffleX3Insert_Args (其参数来源于 YShuffleX3Insert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3))?( element_ref(indices[i], vector0, vector1, vector2) ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="vector2">The input vector 2 from which values are selected (从中选择值的输入向量2).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleX3Insert_Core(Vector<float> back, Vector<float> vector0, Vector<float> vector1, Vector<float> vector2, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{double}, Vector{double}, Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleX3Insert_Core(Vector<double> back, Vector<double> vector0, Vector<double> vector1, Vector<double> vector2, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleX3Insert_Core(Vector<sbyte> back, Vector<sbyte> vector0, Vector<sbyte> vector1, Vector<sbyte> vector2, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleX3Insert_Core(Vector<byte> back, Vector<byte> vector0, Vector<byte> vector1, Vector<byte> vector2, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleX3Insert_Core(Vector<short> back, Vector<short> vector0, Vector<short> vector1, Vector<short> vector2, (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleX3Insert_Core(Vector<ushort> back, Vector<ushort> vector0, Vector<ushort> vector1, Vector<ushort> vector2, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleX3Insert_Core(Vector<int> back, Vector<int> vector0, Vector<int> vector1, Vector<int> vector2, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleX3Insert_Core(Vector<uint> back, Vector<uint> vector0, Vector<uint> vector1, Vector<uint> vector2, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleX3Insert_Core(Vector<long> back, Vector<long> vector0, Vector<long> vector1, Vector<long> vector2, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Insert_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleX3Insert_Core(Vector<ulong> back, Vector<ulong> vector0, Vector<ulong> vector1, Vector<ulong> vector2, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) args) {
+            return YShuffleX3Insert_Core(back, vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for only shuffle on 3 vectors (在3个向量上进行仅换位的参数计算). Provide arguments for YShuffleX3Kernel_Core (为 YShuffleX3Kernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1, vector2)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3)</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleX3Kernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleX3Kernel_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX3Kernel_Core .</param>
+        /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX3Kernel_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleX3Kernel_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX3Kernel_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX3Kernel_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX3Kernel_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX3Kernel_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX3Kernel_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX3Kernel_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX3Kernel_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX3Kernel_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle on 3 vectors (在3个向量上进行仅换位的参数计算). Provide arguments for YShuffleX3Kernel_Core (为 YShuffleX3Kernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1, vector2)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3)</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX3Kernel_Core (为 YShuffleX3Kernel_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3) YShuffleX3Kernel_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleX3Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle on 3 vectors (在3个向量上进行仅换位的参数计算). Provide arguments for YShuffleX3Kernel_Core (为 YShuffleX3Kernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1, vector2)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3)</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from vectors (用于从输入向量集中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX3Kernel_Core (为 YShuffleX3Kernel_Core 提供参数).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3) YShuffleX3Kernel_Args(Vector<sbyte> indices) {
+            YShuffleX3Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3) YShuffleX3Kernel_Args(Vector<byte> indices) {
+            YShuffleX3Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3) YShuffleX3Kernel_Args(Vector<short> indices) {
+            YShuffleX3Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3) YShuffleX3Kernel_Args(Vector<ushort> indices) {
+            YShuffleX3Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3) YShuffleX3Kernel_Args(Vector<int> indices) {
+            YShuffleX3Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3) YShuffleX3Kernel_Args(Vector<uint> indices) {
+            YShuffleX3Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3) YShuffleX3Kernel_Args(Vector<long> indices) {
+            YShuffleX3Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3) YShuffleX3Kernel_Args(Vector<ulong> indices) {
+            YShuffleX3Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        // -- YShuffleX3Kernel_Core: ValueTuple --
+        /// <summary>
+        /// Core calculation for only shuffle on 3 vectors (在3个向量上进行仅换位的核心计算). Its arguments are derived from YShuffleX3Kernel_Args (其参数来源于 YShuffleX3Kernel_Args).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1, vector2)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*3)</c>.
+        /// </summary>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector2">The input vector 2 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleX3Kernel_Core(Vector<float> vector0, Vector<float> vector1, Vector<float> vector2, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{double}, Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleX3Kernel_Core(Vector<double> vector0, Vector<double> vector1, Vector<double> vector2, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleX3Kernel_Core(Vector<sbyte> vector0, Vector<sbyte> vector1, Vector<sbyte> vector2, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleX3Kernel_Core(Vector<byte> vector0, Vector<byte> vector1, Vector<byte> vector2, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleX3Kernel_Core(Vector<short> vector0, Vector<short> vector1, Vector<short> vector2, (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleX3Kernel_Core(Vector<ushort> vector0, Vector<ushort> vector1, Vector<ushort> vector2, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleX3Kernel_Core(Vector<int> vector0, Vector<int> vector1, Vector<int> vector2, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleX3Kernel_Core(Vector<uint> vector0, Vector<uint> vector1, Vector<uint> vector2, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleX3Kernel_Core(Vector<long> vector0, Vector<long> vector1, Vector<long> vector2, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX3Kernel_Core(Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX3Kernel_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleX3Kernel_Core(Vector<ulong> vector0, Vector<ulong> vector1, Vector<ulong> vector2, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3) args) {
+            return YShuffleX3Kernel_Core(vector0, vector1, vector2, args.args0, args.args1, args.args2, args.args3);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear on 4 vectors (在4个向量上进行换位并清零的参数计算). Provide arguments for YShuffleX4_Core (为 YShuffleX4_Core 提供参数). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):0</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleX4_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleX4_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX4_Core .</param>
+        /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX4_Core .</param>
+        /// <param name="args4">Arguments 4 (参数4). Used for YShuffleX4_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.YShuffleX4_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleX4_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear on 4 vectors (在4个向量上进行换位并清零的参数计算). Provide arguments for YShuffleX4_Core (为 YShuffleX4_Core 提供参数). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):0</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX4_Core (为 YShuffleX4_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) YShuffleX4_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and clear on 4 vectors (在4个向量上进行换位并清零的参数计算). Provide arguments for YShuffleX4_Core (为 YShuffleX4_Core 提供参数). If the indices value is out of range, the element will be cleared (若索引值超出范围, 元素会被清零).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):0</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from vectors (用于从输入向量集中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX4_Core (为 YShuffleX4_Core 提供参数).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX4_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) YShuffleX4_Args(Vector<sbyte> indices) {
+            YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) YShuffleX4_Args(Vector<byte> indices) {
+            YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) YShuffleX4_Args(Vector<short> indices) {
+            YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) YShuffleX4_Args(Vector<ushort> indices) {
+            YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) YShuffleX4_Args(Vector<int> indices) {
+            YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) YShuffleX4_Args(Vector<uint> indices) {
+            YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) YShuffleX4_Args(Vector<long> indices) {
+            YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) YShuffleX4_Args(Vector<ulong> indices) {
+            YShuffleX4_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        // -- YShuffleX4_Core: ValueTuple --
+        /// <summary>
+        /// Core calculation for shuffle and clear on 4 vectors (在4个向量上进行换位并清零的核心计算). Its arguments are derived from YShuffleX4_Args (其参数来源于 YShuffleX4_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):0</c>.
+        /// </summary>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="vector2">The input vector 2 from which values are selected (从中选择值的输入向量2).</param>
+        /// <param name="vector3">The input vector 3 from which values are selected (从中选择值的输入向量3).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX4_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleX4_Core(Vector<float> vector0, Vector<float> vector1, Vector<float> vector2, Vector<float> vector3, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{double}, Vector{double}, Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleX4_Core(Vector<double> vector0, Vector<double> vector1, Vector<double> vector2, Vector<double> vector3, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleX4_Core(Vector<sbyte> vector0, Vector<sbyte> vector1, Vector<sbyte> vector2, Vector<sbyte> vector3, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleX4_Core(Vector<byte> vector0, Vector<byte> vector1, Vector<byte> vector2, Vector<byte> vector3, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleX4_Core(Vector<short> vector0, Vector<short> vector1, Vector<short> vector2, Vector<short> vector3, (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleX4_Core(Vector<ushort> vector0, Vector<ushort> vector1, Vector<ushort> vector2, Vector<ushort> vector3, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleX4_Core(Vector<int> vector0, Vector<int> vector1, Vector<int> vector2, Vector<int> vector3, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleX4_Core(Vector<uint> vector0, Vector<uint> vector1, Vector<uint> vector2, Vector<uint> vector3, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleX4_Core(Vector<long> vector0, Vector<long> vector1, Vector<long> vector2, Vector<long> vector3, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleX4_Core(Vector<ulong> vector0, Vector<ulong> vector1, Vector<ulong> vector2, Vector<ulong> vector3, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) args) {
+            return YShuffleX4_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert on 4 vectors (在4个向量上进行换位并插入的参数计算). Provide arguments for YShuffleX4Insert_Core (为 YShuffleX4Insert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleX4Insert_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleX4Insert_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX4Insert_Core .</param>
+        /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX4Insert_Core .</param>
+        /// <param name="args4">Arguments 4 (参数4). Used for YShuffleX4Insert_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleX4Insert_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4Insert_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4Insert_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4Insert_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4Insert_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4Insert_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4Insert_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4Insert_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d, var e) = YShuffleX4Insert_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+                args4 = (Vector<TIdx>)(object)e;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert on 4 vectors (在4个向量上进行换位并插入的参数计算). Provide arguments for YShuffleX4Insert_Core (为 YShuffleX4Insert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):back[i]</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX4Insert_Core (为 YShuffleX4Insert_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) YShuffleX4Insert_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <summary>
+        /// Arguments calculation for shuffle and insert on 4 vectors (在4个向量上进行换位并插入的参数计算). Provide arguments for YShuffleX4Insert_Core (为 YShuffleX4Insert_Core 提供参数). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):back[i]</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from vectors (用于从输入向量集中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX4Insert_Core (为 YShuffleX4Insert_Core 提供参数).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) YShuffleX4Insert_Args(Vector<sbyte> indices) {
+            YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) YShuffleX4Insert_Args(Vector<byte> indices) {
+            YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) YShuffleX4Insert_Args(Vector<short> indices) {
+            YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) YShuffleX4Insert_Args(Vector<ushort> indices) {
+            YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) YShuffleX4Insert_Args(Vector<int> indices) {
+            YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) YShuffleX4Insert_Args(Vector<uint> indices) {
+            YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) YShuffleX4Insert_Args(Vector<long> indices) {
+            YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) YShuffleX4Insert_Args(Vector<ulong> indices) {
+            YShuffleX4Insert_Args(indices, out var a, out var b, out var c, out var d, out var e);
+            return (a, b, c, d, e);
+        }
+
+        // -- YShuffleX4Insert_Core: ValueTuple --
+        /// <summary>
+        /// Core calculation for shuffle and insert on 4 vectors (在4个向量上进行换位并插入的核心计算). Its arguments are derived from YShuffleX4Insert_Args (其参数来源于 YShuffleX4Insert_Args).
+        /// Mnemonic: <c>rt[i] := (0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4))?( element_ref(indices[i], vector0, vector1, vector2, vector3) ):back[i]</c>.
+        /// </summary>
+        /// <param name="back">The background vector (背景向量).</param>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="vector2">The input vector 2 from which values are selected (从中选择值的输入向量2).</param>
+        /// <param name="vector3">The input vector 3 from which values are selected (从中选择值的输入向量3).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleX4Insert_Core(Vector<float> back, Vector<float> vector0, Vector<float> vector1, Vector<float> vector2, Vector<float> vector3, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{double}, Vector{double}, Vector{double}, Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleX4Insert_Core(Vector<double> back, Vector<double> vector0, Vector<double> vector1, Vector<double> vector2, Vector<double> vector3, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleX4Insert_Core(Vector<sbyte> back, Vector<sbyte> vector0, Vector<sbyte> vector1, Vector<sbyte> vector2, Vector<sbyte> vector3, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3, Vector<sbyte> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleX4Insert_Core(Vector<byte> back, Vector<byte> vector0, Vector<byte> vector1, Vector<byte> vector2, Vector<byte> vector3, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3, Vector<byte> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleX4Insert_Core(Vector<short> back, Vector<short> vector0, Vector<short> vector1, Vector<short> vector2, Vector<short> vector3, (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3, Vector<short> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleX4Insert_Core(Vector<ushort> back, Vector<ushort> vector0, Vector<ushort> vector1, Vector<ushort> vector2, Vector<ushort> vector3, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3, Vector<ushort> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleX4Insert_Core(Vector<int> back, Vector<int> vector0, Vector<int> vector1, Vector<int> vector2, Vector<int> vector3, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3, Vector<int> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleX4Insert_Core(Vector<uint> back, Vector<uint> vector0, Vector<uint> vector1, Vector<uint> vector2, Vector<uint> vector3, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3, Vector<uint> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleX4Insert_Core(Vector<long> back, Vector<long> vector0, Vector<long> vector1, Vector<long> vector2, Vector<long> vector3, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3, Vector<long> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Insert_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Insert_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleX4Insert_Core(Vector<ulong> back, Vector<ulong> vector0, Vector<ulong> vector1, Vector<ulong> vector2, Vector<ulong> vector3, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3, Vector<ulong> args4) args) {
+            return YShuffleX4Insert_Core(back, vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3, args.args4);
+        }
+
+
+        /// <summary>
+        /// Arguments calculation for only shuffle on 4 vectors (在4个向量上进行仅换位的参数计算). Provide arguments for YShuffleX4Kernel_Core (为 YShuffleX4Kernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexX4Mask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexX4Mask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1, vector2, vector3)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4)</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <param name="args0">Arguments 0 (参数0). Used for YShuffleX4Kernel_Core .</param>
+        /// <param name="args1">Arguments 1 (参数1). Used for YShuffleX4Kernel_Core .</param>
+        /// <param name="args2">Arguments 2 (参数2). Used for YShuffleX4Kernel_Core .</param>
+        /// <param name="args3">Arguments 3 (参数3). Used for YShuffleX4Kernel_Core .</param>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static void YShuffleX4Kernel_Args<TIdx>(Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3)
+                 where TIdx : struct {
+            if (typeof(sbyte) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX4Kernel_Args((Vector<sbyte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(byte) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX4Kernel_Args((Vector<byte>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(short) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX4Kernel_Args((Vector<short>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(ushort) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX4Kernel_Args((Vector<ushort>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(int) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX4Kernel_Args((Vector<int>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(uint) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX4Kernel_Args((Vector<uint>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(long) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX4Kernel_Args((Vector<long>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else if (typeof(ulong) == typeof(TIdx)) {
+                (var a, var b, var c, var d) = YShuffleX4Kernel_Args((Vector<ulong>)(object)indices);
+                args0 = (Vector<TIdx>)(object)a;
+                args1 = (Vector<TIdx>)(object)b;
+                args2 = (Vector<TIdx>)(object)c;
+                args3 = (Vector<TIdx>)(object)d;
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
+            }
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle on 4 vectors (在4个向量上进行仅换位的参数计算). Provide arguments for YShuffleX4Kernel_Core (为 YShuffleX4Kernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexX4Mask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexX4Mask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1, vector2, vector3)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4)</c>.
+        /// </summary>
+        /// <typeparam name="TIdx">The element type of the indices parameter (索引参数的元素类型).</typeparam>
+        /// <param name="indices">The per-element indices used to select a value from vector (用于从 vector 中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX4Kernel_Core (为 YShuffleX4Kernel_Core 提供参数).</returns>
+        /// <exception cref="NotSupportedException">These element types(<typeparamref name="TIdx"/>) are not supported.</exception>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3) YShuffleX4Kernel_Args<TIdx>(Vector<TIdx> indices)
+                where TIdx : struct {
+            YShuffleX4Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <summary>
+        /// Arguments calculation for only shuffle on 4 vectors (在4个向量上进行仅换位的参数计算). Provide arguments for YShuffleX4Kernel_Core (为 YShuffleX4Kernel_Core 提供参数). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the <see cref="Vectors{T}.IndexX4Mask"/> to constrain the parameters (可使用 <see cref="Vectors{T}.IndexX4Mask"/> 掩码来约束参数).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1, vector2, vector3)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4)</c>.
+        /// </summary>
+        /// <param name="indices">The per-element indices used to select a value from vectors (用于从输入向量集中选择值的每个元素索引).</param>
+        /// <returns>The arguments provided for YShuffleX4Kernel_Core (为 YShuffleX4Kernel_Core 提供参数).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Args(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3) YShuffleX4Kernel_Args(Vector<sbyte> indices) {
+            YShuffleX4Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Args(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3) YShuffleX4Kernel_Args(Vector<byte> indices) {
+            YShuffleX4Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Args(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3) YShuffleX4Kernel_Args(Vector<short> indices) {
+            YShuffleX4Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Args(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3) YShuffleX4Kernel_Args(Vector<ushort> indices) {
+            YShuffleX4Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Args(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3) YShuffleX4Kernel_Args(Vector<int> indices) {
+            YShuffleX4Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Args(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3) YShuffleX4Kernel_Args(Vector<uint> indices) {
+            YShuffleX4Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Args(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3) YShuffleX4Kernel_Args(Vector<long> indices) {
+            YShuffleX4Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Args(Vector{sbyte})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Args(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3) YShuffleX4Kernel_Args(Vector<ulong> indices) {
+            YShuffleX4Kernel_Args(indices, out var a, out var b, out var c, out var d);
+            return (a, b, c, d);
+        }
+
+        // -- YShuffleX4Kernel_Core: ValueTuple --
+        /// <summary>
+        /// Core calculation for only shuffle on 4 vectors (在4个向量上进行仅换位的核心计算). Its arguments are derived from YShuffleX4Kernel_Args (其参数来源于 YShuffleX4Kernel_Args).
+        /// Mnemonic: <c>rt[i] := element_ref(indices[i], vector0, vector1, vector2, vector3)</c>. Conditions: <c>0&lt;=indices[i] &amp;&amp; indices[i]&lt;(Count*4)</c>.
+        /// </summary>
+        /// <param name="vector0">The input vector 0 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector1">The input vector 1 from which values are selected (从中选择值的输入向量0).</param>
+        /// <param name="vector2">The input vector 2 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="vector3">The input vector 3 from which values are selected (从中选择值的输入向量1).</param>
+        /// <param name="args">The arguments(参数). Derived from YShuffleKernel_Args .</param>
+        /// <returns>A new vector containing the values from input vectors selected by the given <c>indices</c> (一个新向量，其中包含给定 <c>indices</c> 从输入向量集中选择的值).</returns>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_AcceleratedTypes"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<float> YShuffleX4Kernel_Core(Vector<float> vector0, Vector<float> vector1, Vector<float> vector2, Vector<float> vector3, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{double}, Vector{double}, Vector{double}, Vector{double}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<double> YShuffleX4Kernel_Core(Vector<double> vector0, Vector<double> vector1, Vector<double> vector2, Vector<double> vector3, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<sbyte> YShuffleX4Kernel_Core(Vector<sbyte> vector0, Vector<sbyte> vector1, Vector<sbyte> vector2, Vector<sbyte> vector3, (Vector<sbyte> args0, Vector<sbyte> args1, Vector<sbyte> args2, Vector<sbyte> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<byte> YShuffleX4Kernel_Core(Vector<byte> vector0, Vector<byte> vector1, Vector<byte> vector2, Vector<byte> vector3, (Vector<byte> args0, Vector<byte> args1, Vector<byte> args2, Vector<byte> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short}, Vector{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<short> YShuffleX4Kernel_Core(Vector<short> vector0, Vector<short> vector1, Vector<short> vector2, Vector<short> vector3, (Vector<short> args0, Vector<short> args1, Vector<short> args2, Vector<short> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ushort> YShuffleX4Kernel_Core(Vector<ushort> vector0, Vector<ushort> vector1, Vector<ushort> vector2, Vector<ushort> vector3, (Vector<ushort> args0, Vector<ushort> args1, Vector<ushort> args2, Vector<ushort> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int}, Vector{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<int> YShuffleX4Kernel_Core(Vector<int> vector0, Vector<int> vector1, Vector<int> vector2, Vector<int> vector3, (Vector<int> args0, Vector<int> args1, Vector<int> args2, Vector<int> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<uint> YShuffleX4Kernel_Core(Vector<uint> vector0, Vector<uint> vector1, Vector<uint> vector2, Vector<uint> vector3, (Vector<uint> args0, Vector<uint> args1, Vector<uint> args2, Vector<uint> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long}, Vector{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<long> YShuffleX4Kernel_Core(Vector<long> vector0, Vector<long> vector1, Vector<long> vector2, Vector<long> vector3, (Vector<long> args0, Vector<long> args1, Vector<long> args2, Vector<long> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
+        /// <inheritdoc cref="YShuffleX4Kernel_Core(Vector{float}, Vector{float}, Vector{float}, Vector{float}, ValueTuple{Vector{int}, Vector{int}, Vector{int}, Vector{int}})"/>
+        /// <seealso cref="IVectorTraits.YShuffleX4Kernel_Core(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ulong> YShuffleX4Kernel_Core(Vector<ulong> vector0, Vector<ulong> vector1, Vector<ulong> vector2, Vector<ulong> vector3, (Vector<ulong> args0, Vector<ulong> args1, Vector<ulong> args2, Vector<ulong> args3) args) {
+            return YShuffleX4Kernel_Core(vector0, vector1, vector2, vector3, args.args0, args.args1, args.args2, args.args3);
+        }
+
     }
 }
