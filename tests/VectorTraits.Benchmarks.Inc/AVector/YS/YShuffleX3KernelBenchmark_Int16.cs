@@ -40,6 +40,238 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         private static readonly Vector<TMy> vector1 = Vectors<TMy>.SerialNegative;
         private static readonly Vector<TMy> vector2 = Vectors.CreateByDoubleLoop<TMy>(-Vector<TMy>.Count, -1);
 
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum YShuffleX3Kernel - Vector - base - basic.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumBase_Basic(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YShuffleX3Kernel_Basic(p0, vector1, vector2, indices);
+                vrt = VectorTraitsBase.Statics.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            rt = VectorTraitsBase.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark(Baseline = true)]
+        //[Benchmark]
+        public void SumBase_Basic() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumBase_Basic(srcArray, srcArray.Length, indices);
+            if (CheckMode) {
+                baselineTMy = dstTMy;
+                BenchmarkUtil.WriteItem("# SumBase_Basic", string.Format("{0}", baselineTMy));
+            }
+        }
+
+        /// <summary>
+        /// Sum YShuffleX3Kernel - Vector - base.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumBase(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YShuffleX3Kernel(p0, vector1, vector2, indices);
+                vrt = VectorTraitsBase.Statics.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            rt = VectorTraitsBase.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumBase() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumBase(srcArray, srcArray.Length, indices);
+            CheckResult("SumBase");
+        }
+
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum YShuffleX3Kernel - Vector - Traits.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumTraits(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vectors.YShuffleX3Kernel(p0, vector1, vector2, indices);
+                vrt = Vectors.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            rt = Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumTraits() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumTraits(srcArray, srcArray.Length, indices);
+            CheckResult("SumTraits");
+        }
+
+        /// <summary>
+        /// Sum YShuffleX3Kernel - Vector - Traits - Args without ValueTuple.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumTraits_Args(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vectors.YShuffleX3Kernel_Args(indices, out var args0, out var args1, out var args2, out var args3);
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vectors.YShuffleX3Kernel_Core(p0, vector1, vector2, args0, args1, args2, args3);
+                vrt = Vectors.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            rt = Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumTraits_Args() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumTraits_Args(srcArray, srcArray.Length, indices);
+            CheckResult("SumTraits_Args");
+        }
+
+        /// <summary>
+        /// Sum YShuffleX3Kernel - Vector - Traits - Args with ValueTuple.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <param name="indices">The indices.</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumTraits_ArgsT(TMy[] src, int srcCount, Vector<TMy> indices) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            var args = Vectors.YShuffleX3Kernel_Args(indices);
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vectors.YShuffleX3Kernel_Core(p0, vector1, vector2, args);
+                vrt = Vectors.Add(vrt, vtemp);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            rt = Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumTraits_ArgsT() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumTraits_ArgsT(srcArray, srcArray.Length, indices);
+            CheckResult("SumTraits_ArgsT");
+        }
+
         #region BENCHMARKS_128
 #if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
 
@@ -90,8 +322,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             return rt;
         }
 
-        [Benchmark(Baseline = true)]
-        //[Benchmark]
+        [Benchmark]
         public void Sum128Base_Basic() {
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();

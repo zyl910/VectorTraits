@@ -4,7 +4,8 @@
       "commandName": "Project",
       "commandLineArgs": " -allowFakeBenchmark=0",
       "environmentVariables": {
-        "COMPlus_EnableAVX2": "1"
+        "COMPlus_EnableAVX2": "1",
+        "COMPlus_EnableAVX512F": "1"
       }
     }
   }
