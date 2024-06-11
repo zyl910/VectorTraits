@@ -127,9 +127,8 @@ Types: Vector, Vector128, Vector256 .
 
 ### Methods of INumber (数字性接口的方法)
 Summary (概要):
-- Provides the vector methods of clamp (提供限制的向量方法): YClamp .
+- Provides the vector methods of clamp (提供限制的向量方法): YClamp, YMaxNumber, YMinNumber .
 - Provides the vector methods of check sign (提供符号判断的向量方法): YCopySign, YSign, YSignFloat .
-- Provides the vector methods of clamp (提供限制的向量方法): YMaxNumber, YMinNumber .
 
 List (列表):
 - `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
