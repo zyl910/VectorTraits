@@ -10,6 +10,7 @@ using System.Runtime.Intrinsics;
 using System.IO;
 using System.Text;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.Delegates;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
 #if USED_NUNIT3
@@ -54,7 +55,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
-            bool allowLog = true;
+            bool allowLog = false;
             bool isFloatType = Scalars<T>.ExponentBits > 0;
             for (int i=0; i<samples.Length; i++) {
                 Vector256<T> x = samples[i];

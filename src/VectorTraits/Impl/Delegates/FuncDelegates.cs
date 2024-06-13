@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Zyl.VectorTraits.Impl {
+namespace Zyl.VectorTraits.Impl.Delegates {
 
     /// <summary>
     /// Functions with 2 input parameters and 1 output parameter (具有2个输入参数与1个输出参数的函数).
