@@ -18,7 +18,7 @@ using Zyl.VectorTraits.Impl.AVector128;
 using Zyl.VectorTraits.Impl.AVector256;
 using Zyl.VectorTraits.Impl.AVector512;
 
-namespace Zyl.VectorTraits.Benchmarks.AVector.S {
+namespace Zyl.VectorTraits.Benchmarks.AVector.YS {
 #if BENCHMARKS_OFF
     using BenchmarkAttribute = FakeBenchmarkAttribute;
 #else
@@ -160,7 +160,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.YShuffleX4Kernel(p0, vector1, vector2, vector3, indices);
-                vrt = Vectors.Add(vrt, vtemp);
+                vrt = Vector.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -205,7 +205,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.YShuffleX4Kernel_Core(p0, vector1, vector2, vector3, args0, args1, args2, args3);
-                vrt = Vectors.Add(vrt, vtemp);
+                vrt = Vector.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -250,7 +250,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
                 Vector<TMy> vtemp = Vectors.YShuffleX4Kernel_Core(p0, vector1, vector2, vector3, args);
-                vrt = Vectors.Add(vrt, vtemp);
+                vrt = Vector.Add(vrt, vtemp);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.

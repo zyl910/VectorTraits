@@ -21,7 +21,7 @@ using Zyl.VectorTraits.Impl.AVector128;
 using Zyl.VectorTraits.Impl.AVector256;
 using Zyl.VectorTraits.Impl.AVector512;
 
-namespace Zyl.VectorTraits.Benchmarks.AVector.S {
+namespace Zyl.VectorTraits.Benchmarks.AVector.YS {
 #if BENCHMARKS_OFF
     using BenchmarkAttribute = FakeBenchmarkAttribute;
 #else
