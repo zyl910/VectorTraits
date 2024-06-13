@@ -17,6 +17,116 @@ namespace Zyl.VectorTraits.Impl {
     partial class IWVectorTraits256_Extensions {
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="Vector256s.YGroup2Zip{T}(Vector256{T}, Vector256{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector256<T> Data0, Vector256<T> Data1) YGroup2Zip<T>(this IWVectorTraits256 athis, Vector256<T> x, Vector256<T> y) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<float>)(object)x, (Vector256<float>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<double>)(object)x, (Vector256<double>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<sbyte>)(object)x, (Vector256<sbyte>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<byte>)(object)x, (Vector256<byte>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<short>)(object)x, (Vector256<short>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<ushort>)(object)x, (Vector256<ushort>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<int>)(object)x, (Vector256<int>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<uint>)(object)x, (Vector256<uint>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<long>)(object)x, (Vector256<long>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector256<ulong>)(object)x, (Vector256<ulong>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<float> Data0, Vector256<float> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<float> x, Vector256<float> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{double}, Vector256{double})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<double> Data0, Vector256<double> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<double> x, Vector256<double> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<sbyte> Data0, Vector256<sbyte> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<sbyte> x, Vector256<sbyte> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{byte}, Vector256{byte})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<byte> Data0, Vector256<byte> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<byte> x, Vector256<byte> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{short}, Vector256{short})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<short> Data0, Vector256<short> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<short> x, Vector256<short> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<ushort> Data0, Vector256<ushort> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<ushort> x, Vector256<ushort> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{int}, Vector256{int})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<int> Data0, Vector256<int> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<int> x, Vector256<int> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<uint> Data0, Vector256<uint> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<uint> x, Vector256<uint> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{long}, Vector256{long})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<long> Data0, Vector256<long> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<long> x, Vector256<long> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup2Zip(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        public static (Vector256<ulong> Data0, Vector256<ulong> Data1) YGroup2Zip(this IWVectorTraits256 athis, Vector256<ulong> x, Vector256<ulong> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+
         /// <inheritdoc cref="Vector256s.YShuffleG4X2{T}(Vector256{T}, Vector256{T}, ShuffleControlG4)"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]

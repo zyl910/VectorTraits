@@ -286,6 +286,111 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2Zip</c> (运行 <c>YGroup2Zip</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>Sample (示例).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Elements</term>
+        ///        <description>Result</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>2</term>
+        ///        <description><c>f({x[0], x[1]}, {y[0], y[1]}) = ({x[0], y[0]}, {x[1], y[1]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>4</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3]}, {y[0], y[1], y[2], y[3]}) = ({x[0], y[0], x[1], y[1]}, {x[2], y[2], x[3], y[3]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>8</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7]}) = ({x[0], y[0], x[1], y[1], x[2], y[2], x[3], y[3]}, {x[4], y[4], x[5], y[5], x[6], y[6], x[7], y[7]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>16</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12], x[13], x[14], x[15]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7], y[8], y[9], y[10], y[11], y[12], y[13], y[14], y[15]}) = ({x[0], y[0], x[1], y[1], x[2], y[2], x[3], y[3], x[4], y[4], x[5], y[5], x[6], y[6], x[7], y[7]}, {x[8], y[8], x[9], y[9], x[10], y[10], x[11], y[11], x[12], y[12], x[13], y[13], x[14], y[14], x[15], y[15]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>...</term>
+        ///        <description>...</description>
+        ///    </item>
+        /// </list>
+        /// <para>Related hardware instructions (相关的硬件指令).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{byte}, Vector128{byte})">ZIP1(vzip1q_u8)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{byte}, Vector128{byte})">ZIP2(vzip2q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{ushort}, Vector128{ushort})">ZIP1(vzip1q_u16)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{ushort}, Vector128{ushort})">ZIP2(vzip2q_u16)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{uint}, Vector128{uint})">ZIP1(vzip1q_u32)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{uint}, Vector128{uint})">ZIP2(vzip2q_u32)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{ulong}, Vector128{ulong})">ZIP1(vzip1q_u64)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{ulong}, Vector128{ulong})">ZIP2(vzip2q_u64)</see></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{byte}, Vector128{byte})">PUNPCKLBW(_mm_unpacklo_epi8)</see>/<see cref="Sse2.UnpackHigh(Vector128{byte}, Vector128{byte})">PUNPCKHBW(_mm_unpackhi_epi8)</see></description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{ushort}, Vector128{ushort})">PUNPCKLWD(_mm_unpacklo_epi16)</see>/<see cref="Sse2.UnpackHigh(Vector128{ushort}, Vector128{ushort})">PUNPCKHWD(_mm_unpackhi_epi16)</see></description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{uint}, Vector128{uint})">PUNPCKLDQ(_mm_unpacklo_epi32)</see>/<see cref="Sse2.UnpackHigh(Vector128{uint}, Vector128{uint})">PUNPCKHDQ(_mm_unpackhi_epi32)</see></description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{ulong}, Vector128{ulong})">PUNPCKLQDQ(_mm_unpacklo_epi64)</see>/<see cref="Sse2.UnpackHigh(Vector128{ulong}, Vector128{ulong})">PUNPCKHQDQ(_mm_unpackhi_epi64)</see></description>
+        ///    </item>
+        /// </list>
+        /// </remarks>
+        /// <seealso cref="YGroup2Zip(Vector256{byte}, Vector256{byte}, out Vector256{byte})"/>
+        TypeCodeFlags YGroup2Zip_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups (将2个向量交织为2-元素组).
+        /// Mnemonic: <c>element_ref(i, data0, data1) := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := i/2</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        /// <seealso cref="YGroup2Zip_AcceleratedTypes"/>
+        Vector256<float> YGroup2Zip(Vector256<float> x, Vector256<float> y, out Vector256<float> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<double> YGroup2Zip(Vector256<double> x, Vector256<double> y, out Vector256<double> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<sbyte> YGroup2Zip(Vector256<sbyte> x, Vector256<sbyte> y, out Vector256<sbyte> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<byte> YGroup2Zip(Vector256<byte> x, Vector256<byte> y, out Vector256<byte> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<short> YGroup2Zip(Vector256<short> x, Vector256<short> y, out Vector256<short> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<ushort> YGroup2Zip(Vector256<ushort> x, Vector256<ushort> y, out Vector256<ushort> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<int> YGroup2Zip(Vector256<int> x, Vector256<int> y, out Vector256<int> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<uint> YGroup2Zip(Vector256<uint> x, Vector256<uint> y, out Vector256<uint> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<long> YGroup2Zip(Vector256<long> x, Vector256<long> y, out Vector256<long> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<ulong> YGroup2Zip(Vector256<ulong> x, Vector256<ulong> y, out Vector256<ulong> data1);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YIsAllTrue</c> (运行 <c>YIsAllTrue</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YIsAllTrue{T}(Vector256{T})"/>

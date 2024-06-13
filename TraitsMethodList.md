@@ -1,7 +1,7 @@
 # Traits method list
 
 ## Vector traits method of official BCL library (官方BCL库的向量特性方法)
-Types: Vector, Vector128, Vector256 .
+Types: Vector, Vector128, Vector256, Vector512 .
 
 Summary (概要):
 - Support for `.NET Standard 2.1` new vector methods (支持 `.NET Standard 2.1` 新增的向量方法): ConvertToDouble, ConvertToInt32, ConvertToInt64, ConvertToSingle, ConvertToUInt32, ConvertToUInt64, Narrow, Widen .
@@ -52,7 +52,7 @@ Remarks:
 - ①: It also works for Vector (它也适用于Vector).
 
 ## Fixed width Vector supplement traits methods (固定宽度向量补充的特性方法)
-Types: Vector128, Vector256 .
+Types: Vector128, Vector256, Vector512 .
 
 List (列表):
 - `Abs`: Computes the absolute value of each element in a vector (计算向量中每个元素的绝对值).
@@ -123,7 +123,18 @@ Remarks:
 
 
 ## Vector traits method appended by this library (由本库追加的向量特性方法)
-Types: Vector, Vector128, Vector256 .
+Types: Vector, Vector128, Vector256, Vector512 .
+
+### Methods of group (组的方法)
+Summary (概要):
+- Provides vector methods for interleave (提供交织的向量方法): YGroup2Zip, YGroup2ZipHigh, YGroup2ZipLow.
+
+- `YGroup2Zip`: Interleave 2 vectors into 2-element groups (将2个向量交织为2-元素组).
+  Mnemonic: `element_ref(i, data0, data1) := (0==(i&1))?( x[i2] ):( y[i2] )`, `i2 := i/2`.
+- `YGroup2ZipHigh`: Interleave 2 vectors into 2-element groups and returns the data in the high position. (将2个向量交织为2-元素组, 并返回高位置的数据).
+  Mnemonic: `rt[i] := (0==(i&1))?( x[i2] ):( y[i2] )`, `i2 := (i+T.Count)/2`.
+- `YGroup2ZipLow`: Interleave 2 vectors into 2-element groups and returns the data in the low position. (将2个向量交织为2-元素组, 并返回低位置的数据). 
+  Mnemonic: `rt[i] := (0==(i&1))?( x[i2] ):( y[i2] )`, `i2 := i/2`.
 
 ### Methods of INumber (数字性接口的方法)
 Summary (概要):

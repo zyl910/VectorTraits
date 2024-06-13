@@ -21,6 +21,126 @@ namespace Zyl.VectorTraits {
 
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector256<T> Data0, Vector256<T> Data1) YGroup2Zip<T>(Vector256<T> x, Vector256<T> y) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<float>)(object)x, (Vector256<float>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<double>)(object)x, (Vector256<double>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<sbyte>)(object)x, (Vector256<sbyte>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<byte>)(object)x, (Vector256<byte>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<short>)(object)x, (Vector256<short>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<ushort>)(object)x, (Vector256<ushort>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<int>)(object)x, (Vector256<int>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<uint>)(object)x, (Vector256<uint>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<long>)(object)x, (Vector256<long>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<ulong>)(object)x, (Vector256<ulong>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups (将2个向量交织为2-元素组).
+        /// Mnemonic: <c>element_ref(i, data0, data1) := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := i/2</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <returns>Returns the interleaved data (返回交织后数据).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<float> Data0, Vector256<float> Data1) YGroup2Zip(Vector256<float> x, Vector256<float> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<double> Data0, Vector256<double> Data1) YGroup2Zip(Vector256<double> x, Vector256<double> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> Data0, Vector256<sbyte> Data1) YGroup2Zip(Vector256<sbyte> x, Vector256<sbyte> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> Data0, Vector256<byte> Data1) YGroup2Zip(Vector256<byte> x, Vector256<byte> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> Data0, Vector256<short> Data1) YGroup2Zip(Vector256<short> x, Vector256<short> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> Data0, Vector256<ushort> Data1) YGroup2Zip(Vector256<ushort> x, Vector256<ushort> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> Data0, Vector256<int> Data1) YGroup2Zip(Vector256<int> x, Vector256<int> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> Data0, Vector256<uint> Data1) YGroup2Zip(Vector256<uint> x, Vector256<uint> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> Data0, Vector256<long> Data1) YGroup2Zip(Vector256<long> x, Vector256<long> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> Data0, Vector256<ulong> Data1) YGroup2Zip(Vector256<ulong> x, Vector256<ulong> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+
         /// <summary>
         /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.

@@ -6,7 +6,6 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Text;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
