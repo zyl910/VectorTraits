@@ -25,4 +25,6 @@
 - [YRoundToZero](Ceiling.md): Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: `MidpointRounding.ToZero`.
 - [YShuffleG2](YShuffleG2.md): For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
 - [YShuffleG4X2](YShuffleG4X2.md): For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
-
+- [YShuffleX2Kernel](YShuffleX2Kernel.md): Only shuffle on 2 vectors (在2个向量上进行仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). 
+- [YShuffleX3Kernel](YShuffleX3Kernel.md): Only shuffle on 3 vectors (在3个向量上进行仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). 
+- [YShuffleX4Kernel](YShuffleX4Kernel.md): Only shuffle on 4 vectors (在4个向量上进行仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). 
