@@ -41,7 +41,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector256s.GetSupportedMethodList<FuncIn2Out1<Vector256<T>>>("YGroup2Zip_Basic", "YGroup2Zip_Unpack", "YGroup2Zip_Widen");
+            var funcList = Vector256s.GetSupportedMethodList<FuncIn2Out1<Vector256<T>>>("YGroup2Zip_Basic", "YGroup2Zip_Permute", "YGroup2Zip_Unpack", "YGroup2Zip_Widen");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
