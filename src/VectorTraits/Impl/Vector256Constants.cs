@@ -875,7 +875,7 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>YGroup2Zip - Byte - The index of ShuffleX2 - Part0.</summary>
-        public static Vector256<byte> YGroup2Zip_Byte_X2Index_0 {
+        public static Vector256<byte> YGroup2Zip_Byte_ShuffleX2_Index0 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
             get => Vector256.Create((byte)0, 32, 1, 33, 2, 34, 3, 35, 4, 36, 5, 37, 6, 38, 7, 39, 8, 40, 9, 41, 10, 42, 11, 43, 12, 44, 13, 45, 14, 46, 15, 47);
@@ -886,7 +886,7 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup2Zip - Byte - The index of ShuffleX2 - Part1.</summary>
-        public static Vector256<byte> YGroup2Zip_Byte_X2Index_1 {
+        public static Vector256<byte> YGroup2Zip_Byte_ShuffleX2_Index1 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
             get => Vector256.Create((byte)16, 48, 17, 49, 18, 50, 19, 51, 20, 52, 21, 53, 22, 54, 23, 55, 24, 56, 25, 57, 26, 58, 27, 59, 28, 60, 29, 61, 30, 62, 31, 63);
@@ -898,7 +898,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>YGroup2Zip - UInt16 - The index of ShuffleX2 - Part0.</summary>
         [CLSCompliant(false)]
-        public static Vector256<ushort> YGroup2Zip_UInt16_X2Index_0 {
+        public static Vector256<ushort> YGroup2Zip_UInt16_ShuffleX2_Index0 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
             get => Vector256.Create((ushort)0, 16, 1, 17, 2, 18, 3, 19, 4, 20, 5, 21, 6, 22, 7, 23);
@@ -910,7 +910,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>YGroup2Zip - UInt16 - The index of ShuffleX2 - Part1.</summary>
         [CLSCompliant(false)]
-        public static Vector256<ushort> YGroup2Zip_UInt16_X2Index_1 {
+        public static Vector256<ushort> YGroup2Zip_UInt16_ShuffleX2_Index1 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
             get => Vector256.Create((ushort)8, 24, 9, 25, 10, 26, 11, 27, 12, 28, 13, 29, 14, 30, 15, 31);
@@ -922,7 +922,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>YGroup2Zip - UInt32 - The index of ShuffleX2 - Part0.</summary>
         [CLSCompliant(false)]
-        public static Vector256<uint> YGroup2Zip_UInt32_X2Index_0 {
+        public static Vector256<uint> YGroup2Zip_UInt32_ShuffleX2_Index0 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
             get => Vector256.Create((uint)0, 8, 1, 9, 2, 10, 3, 11);
@@ -934,7 +934,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>YGroup2Zip - UInt32 - The index of ShuffleX2 - Part1.</summary>
         [CLSCompliant(false)]
-        public static Vector256<uint> YGroup2Zip_UInt32_X2Index_1 {
+        public static Vector256<uint> YGroup2Zip_UInt32_ShuffleX2_Index1 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
             get => Vector256.Create((uint)4, 12, 5, 13, 6, 14, 7, 15);
@@ -946,7 +946,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>YGroup2Zip - UInt64 - The index of ShuffleX2 - Part0.</summary>
         [CLSCompliant(false)]
-        public static Vector256<ulong> YGroup2Zip_UInt64_X2Index_0 {
+        public static Vector256<ulong> YGroup2Zip_UInt64_ShuffleX2_Index0 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
             get => Vector256.Create((ulong)0, 4, 1, 5);
@@ -958,7 +958,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <summary>YGroup2Zip - UInt64 - The index of ShuffleX2 - Part1.</summary>
         [CLSCompliant(false)]
-        public static Vector256<ulong> YGroup2Zip_UInt64_X2Index_1 {
+        public static Vector256<ulong> YGroup2Zip_UInt64_ShuffleX2_Index1 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
             get => Vector256.Create((ulong)2, 6, 3, 7);
