@@ -416,6 +416,238 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh_AcceleratedTypes"/>
+        public static TypeCodeFlags YGroup2ZipHigh_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YGroup2ZipHigh_AcceleratedTypes;
+#else
+                return _instance.YGroup2ZipHigh_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YGroup2ZipHigh(Vector256<float> x, Vector256<float> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YGroup2ZipHigh(Vector256<double> x, Vector256<double> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YGroup2ZipHigh(Vector256<sbyte> x, Vector256<sbyte> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YGroup2ZipHigh(Vector256<byte> x, Vector256<byte> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YGroup2ZipHigh(Vector256<short> x, Vector256<short> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YGroup2ZipHigh(Vector256<ushort> x, Vector256<ushort> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YGroup2ZipHigh(Vector256<int> x, Vector256<int> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YGroup2ZipHigh(Vector256<uint> x, Vector256<uint> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YGroup2ZipHigh(Vector256<long> x, Vector256<long> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YGroup2ZipHigh(Vector256<ulong> x, Vector256<ulong> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipHigh(x, y);
+#else
+            return _instance.YGroup2ZipHigh(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow_AcceleratedTypes"/>
+        public static TypeCodeFlags YGroup2ZipLow_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YGroup2ZipLow_AcceleratedTypes;
+#else
+                return _instance.YGroup2ZipLow_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YGroup2ZipLow(Vector256<float> x, Vector256<float> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YGroup2ZipLow(Vector256<double> x, Vector256<double> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YGroup2ZipLow(Vector256<sbyte> x, Vector256<sbyte> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YGroup2ZipLow(Vector256<byte> x, Vector256<byte> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YGroup2ZipLow(Vector256<short> x, Vector256<short> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YGroup2ZipLow(Vector256<ushort> x, Vector256<ushort> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YGroup2ZipLow(Vector256<int> x, Vector256<int> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YGroup2ZipLow(Vector256<uint> x, Vector256<uint> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YGroup2ZipLow(Vector256<long> x, Vector256<long> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YGroup2ZipLow(Vector256<ulong> x, Vector256<ulong> y) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2ZipLow(x, y);
+#else
+            return _instance.YGroup2ZipLow(x, y);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YIsAllTrue_AcceleratedTypes"/>
         public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
             get {

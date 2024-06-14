@@ -267,6 +267,150 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YGroup2ZipHigh_AcceleratedTypes {
+            get {
+                return Statics.YGroup2ZipHigh_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YGroup2ZipHigh(Vector256<float> x, Vector256<float> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YGroup2ZipHigh(Vector256<double> x, Vector256<double> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YGroup2ZipHigh(Vector256<sbyte> x, Vector256<sbyte> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> YGroup2ZipHigh(Vector256<byte> x, Vector256<byte> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YGroup2ZipHigh(Vector256<short> x, Vector256<short> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> YGroup2ZipHigh(Vector256<ushort> x, Vector256<ushort> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YGroup2ZipHigh(Vector256<int> x, Vector256<int> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> YGroup2ZipHigh(Vector256<uint> x, Vector256<uint> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YGroup2ZipHigh(Vector256<long> x, Vector256<long> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> YGroup2ZipHigh(Vector256<ulong> x, Vector256<ulong> y) {
+            return Statics.YGroup2ZipHigh(x, y);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YGroup2ZipLow_AcceleratedTypes {
+            get {
+                return Statics.YGroup2ZipLow_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YGroup2ZipLow(Vector256<float> x, Vector256<float> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YGroup2ZipLow(Vector256<double> x, Vector256<double> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YGroup2ZipLow(Vector256<sbyte> x, Vector256<sbyte> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> YGroup2ZipLow(Vector256<byte> x, Vector256<byte> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YGroup2ZipLow(Vector256<short> x, Vector256<short> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> YGroup2ZipLow(Vector256<ushort> x, Vector256<ushort> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YGroup2ZipLow(Vector256<int> x, Vector256<int> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> YGroup2ZipLow(Vector256<uint> x, Vector256<uint> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YGroup2ZipLow(Vector256<long> x, Vector256<long> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> YGroup2ZipLow(Vector256<ulong> x, Vector256<ulong> y) {
+            return Statics.YGroup2ZipLow(x, y);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YIsAllTrue_AcceleratedTypes"/>
         public virtual TypeCodeFlags YIsAllTrue_AcceleratedTypes {
             get {

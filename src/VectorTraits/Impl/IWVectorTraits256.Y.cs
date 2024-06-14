@@ -289,6 +289,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Types with hardware acceleration when running <c>YGroup2Zip</c> (运行 <c>YGroup2Zip</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
+        /// <para><c>YGroup2ZipLow + YGroup2ZipHigh = YGroup2Zip </c>.</para>
         /// <para>Sample (示例).</para>
         /// <list type="table">
         ///    <listheader>
@@ -388,6 +389,100 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
         Vector256<ulong> YGroup2Zip(Vector256<ulong> x, Vector256<ulong> y, out Vector256<ulong> data1);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2ZipHigh</c> (运行 <c>YGroup2ZipHigh</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2ZipLow + YGroup2ZipHigh = YGroup2Zip </c>. See more: <see cref="YGroup2Zip_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2ZipHigh(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags YGroup2ZipHigh_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups and returns the data in the high position. (将2个向量交织为2-元素组, 并返回高位置的数据).
+        /// Mnemonic: <c>rt[i] := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := (i+T.Count)/2</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <returns>Returns part 1 of the interleaved data (返回交织后数据的第1部分).</returns>
+        /// <seealso cref="YGroup2ZipHigh_AcceleratedTypes"/>
+        Vector256<float> YGroup2ZipHigh(Vector256<float> x, Vector256<float> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<double> YGroup2ZipHigh(Vector256<double> x, Vector256<double> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<sbyte> YGroup2ZipHigh(Vector256<sbyte> x, Vector256<sbyte> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<byte> YGroup2ZipHigh(Vector256<byte> x, Vector256<byte> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<short> YGroup2ZipHigh(Vector256<short> x, Vector256<short> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<ushort> YGroup2ZipHigh(Vector256<ushort> x, Vector256<ushort> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<int> YGroup2ZipHigh(Vector256<int> x, Vector256<int> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<uint> YGroup2ZipHigh(Vector256<uint> x, Vector256<uint> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<long> YGroup2ZipHigh(Vector256<long> x, Vector256<long> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<ulong> YGroup2ZipHigh(Vector256<ulong> x, Vector256<ulong> y);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2ZipLow</c> (运行 <c>YGroup2ZipLow</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2ZipLow + YGroup2ZipHigh = YGroup2Zip </c>. See more: <see cref="YGroup2Zip_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2ZipLow(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags YGroup2ZipLow_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups and returns the data in the low position. (将2个向量交织为2-元素组, 并返回低位置的数据).
+        /// Mnemonic: <c>rt[i] := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := i/2</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        /// <seealso cref="YGroup2ZipLow_AcceleratedTypes"/>
+        Vector256<float> YGroup2ZipLow(Vector256<float> x, Vector256<float> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<double> YGroup2ZipLow(Vector256<double> x, Vector256<double> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<sbyte> YGroup2ZipLow(Vector256<sbyte> x, Vector256<sbyte> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<byte> YGroup2ZipLow(Vector256<byte> x, Vector256<byte> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<short> YGroup2ZipLow(Vector256<short> x, Vector256<short> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<ushort> YGroup2ZipLow(Vector256<ushort> x, Vector256<ushort> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<int> YGroup2ZipLow(Vector256<int> x, Vector256<int> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<uint> YGroup2ZipLow(Vector256<uint> x, Vector256<uint> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<long> YGroup2ZipLow(Vector256<long> x, Vector256<long> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<ulong> YGroup2ZipLow(Vector256<ulong> x, Vector256<ulong> y);
 
 
         /// <summary>
