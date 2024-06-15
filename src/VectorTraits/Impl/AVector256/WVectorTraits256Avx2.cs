@@ -1024,8 +1024,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
 #endif // NET8_0_OR_GREATER
                 Vector256<uint> mask = Vector256Constants.UInt32_VMaxUInt16;
-                Vector256<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt32(), Avx2.And(upper, mask).AsInt32()); // bit64(x, z, y, w)
-                Vector256<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w)
+                // Format: Code; //Latency, Throughput(references IceLake)
+                Vector256<ushort> raw = Avx2.PackUnsignedSaturate(Avx2.And(lower, mask).AsInt32(), Avx2.And(upper, mask).AsInt32()); // bit64(x, z, y, w) // (3+1+1), (1+0.33+0.33)
+                Vector256<ushort> rt = Avx2.Permute4x64(raw.AsUInt64(), (byte)ShuffleControlG4.XZYW).AsUInt16(); // ShuffleG4(bit64(x, z, y, w), XZYW) := bit64(x, y, z, w) // 3,1
+                //total latency: 8, total throughput CPI: 2.66
                 return rt;
             }
 

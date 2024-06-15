@@ -34,7 +34,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Narrow(data0, data1, out y);
+                return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{double}, Vector256{double}, out Vector256{double})"/>
@@ -79,7 +79,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Narrow(data0, data1, out y);
+                return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort})"/>
@@ -91,7 +91,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Narrow(data0, data1, out y);
+                return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{int}, Vector256{int}, out Vector256{int})"/>
@@ -102,7 +102,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Narrow(data0, data1, out y);
+                return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{uint}, Vector256{uint}, out Vector256{uint})"/>
@@ -114,7 +114,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Narrow(data0, data1, out y);
+                return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{long}, Vector256{long}, out Vector256{long})"/>
@@ -188,12 +188,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 Vector256<ushort> rt0, rt1;
                 Vector256<uint> temp0 = data0.AsUInt32();
                 Vector256<uint> temp1 = data1.AsUInt32();
-                rt0 = Narrow(temp0, temp1);
-                temp0 = Avx2.ShiftRightLogical(temp0, L);
-                temp1 = Avx2.ShiftRightLogical(temp1, L);
-                rt1 = Narrow(temp0, temp1);
+                // Format: Code; //Latency, Throughput(references IceLake)
+                rt0 = Narrow(temp0, temp1); // 8, 2.66
+                temp0 = Avx2.ShiftRightLogical(temp0, L); // 1,0.5
+                temp1 = Avx2.ShiftRightLogical(temp1, L); // 1,0.5
+                rt1 = Narrow(temp0, temp1); // 8, 2.66
                 y = rt1;
-                return rt0;
+                return rt0; //total latency: 18, total throughput CPI: 6.33
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{int}, Vector256{int}, out Vector256{int})"/>
@@ -384,16 +385,17 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ushort> YGroup2Unzip_Unpack(Vector256<ushort> data0, Vector256<ushort> data1, out Vector256<ushort> y) {
                 const byte ctl = (byte)ShuffleControlG4.XZYW;
                 Vector256<ushort> a0, a1, b0, b1;
-                a0 = Avx2.UnpackLow(data0, data1);
-                a1 = Avx2.UnpackHigh(data0, data1);
-                b0 = Avx2.UnpackLow(a0, a1);
-                b1 = Avx2.UnpackHigh(a0, a1);
-                a0 = Avx2.UnpackLow(b0, b1);
-                a1 = Avx2.UnpackHigh(b0, b1);
-                a0 = Avx2.Permute4x64(a0.AsUInt64(), ctl).AsUInt16();
-                a1 = Avx2.Permute4x64(a1.AsUInt64(), ctl).AsUInt16();
+                // Format: Code; //Latency, Throughput(references IceLake)
+                a0 = Avx2.UnpackLow(data0, data1);  // 1,0.5
+                a1 = Avx2.UnpackHigh(data0, data1); // 1,0.5
+                b0 = Avx2.UnpackLow(a0, a1);  // 1,0.5
+                b1 = Avx2.UnpackHigh(a0, a1); // 1,0.5
+                a0 = Avx2.UnpackLow(b0, b1);  // 1,0.5
+                a1 = Avx2.UnpackHigh(b0, b1); // 1,0.5
+                a0 = Avx2.Permute4x64(a0.AsUInt64(), ctl).AsUInt16(); // 3,1
+                a1 = Avx2.Permute4x64(a1.AsUInt64(), ctl).AsUInt16(); // 3,1
                 y = a1;
-                return a0;
+                return a0; //total latency: 12, total throughput CPI: 5
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{int}, Vector256{int}, out Vector256{int})"/>
