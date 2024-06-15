@@ -29,12 +29,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YGroup2Unzip(Vector256<float> data0, Vector256<float> data1, out Vector256<float> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{double}, Vector256{double}, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YGroup2Unzip(Vector256<double> data0, Vector256<double> data1, out Vector256<double> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
@@ -42,18 +52,33 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YGroup2Unzip(Vector256<sbyte> data0, Vector256<sbyte> data1, out Vector256<sbyte> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512Vbmi.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{byte}, Vector256{byte}, out Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YGroup2Unzip(Vector256<byte> data0, Vector256<byte> data1, out Vector256<byte> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512Vbmi.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{short}, Vector256{short}, out Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YGroup2Unzip(Vector256<short> data0, Vector256<short> data1, out Vector256<short> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
@@ -61,12 +86,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YGroup2Unzip(Vector256<ushort> data0, Vector256<ushort> data1, out Vector256<ushort> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{int}, Vector256{int}, out Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YGroup2Unzip(Vector256<int> data0, Vector256<int> data1, out Vector256<int> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
@@ -74,12 +109,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YGroup2Unzip(Vector256<uint> data0, Vector256<uint> data1, out Vector256<uint> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{long}, Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup2Unzip(Vector256<long> data0, Vector256<long> data1, out Vector256<long> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
@@ -87,6 +132,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup2Unzip(Vector256<ulong> data0, Vector256<ulong> data1, out Vector256<ulong> y) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup2Unzip_Permute(data0, data1, out y);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
             }
 
@@ -170,20 +220,126 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return rt0;
             }
 
+#if NET8_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup2Unzip_Permute(Vector256<float> data0, Vector256<float> data1, out Vector256<float> rt1) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                var rt0 = Avx512F.VL.PermuteVar8x32x2(data0, Vector256Constants.YGroup2Unzip_UInt32_ShuffleX2_Index0.AsInt32(), data1);
+                rt1 = Avx512F.VL.PermuteVar8x32x2(data0, Vector256Constants.YGroup2Unzip_UInt32_ShuffleX2_Index1.AsInt32(), data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{double}, Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup2Unzip_Permute(Vector256<double> data0, Vector256<double> data1, out Vector256<double> rt1) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                var rt0 = Avx512F.VL.PermuteVar4x64x2(data0, Vector256Constants.YGroup2Unzip_UInt64_ShuffleX2_Index0.AsInt64(), data1);
+                rt1 = Avx512F.VL.PermuteVar4x64x2(data0, Vector256Constants.YGroup2Unzip_UInt64_ShuffleX2_Index1.AsInt64(), data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup2Unzip_Permute(Vector256<sbyte> data0, Vector256<sbyte> data1, out Vector256<sbyte> rt1) {
+                var d0 = YGroup2Unzip_Permute(data0.AsByte(), data1.AsByte(), out var d1);
+                rt1 = d1.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{byte}, Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup2Unzip_Permute(Vector256<byte> data0, Vector256<byte> data1, out Vector256<byte> rt1) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                var rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(data0, Vector256Constants.YGroup2Unzip_Byte_ShuffleX2_Index0, data1);
+                rt1 = Avx512Vbmi.VL.PermuteVar32x8x2(data0, Vector256Constants.YGroup2Unzip_Byte_ShuffleX2_Index1, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{short}, Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup2Unzip_Permute(Vector256<short> data0, Vector256<short> data1, out Vector256<short> rt1) {
+                var d0 = YGroup2Unzip_Permute(data0.AsUInt16(), data1.AsUInt16(), out var d1);
+                rt1 = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup2Unzip_Permute(Vector256<ushort> data0, Vector256<ushort> data1, out Vector256<ushort> rt1) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                var rt0 = Avx512BW.VL.PermuteVar16x16x2(data0, Vector256Constants.YGroup2Unzip_UInt16_ShuffleX2_Index0, data1);
+                rt1 = Avx512BW.VL.PermuteVar16x16x2(data0, Vector256Constants.YGroup2Unzip_UInt16_ShuffleX2_Index1, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{int}, Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup2Unzip_Permute(Vector256<int> data0, Vector256<int> data1, out Vector256<int> rt1) {
+                var d0 = YGroup2Unzip_Permute(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                rt1 = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{uint}, Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup2Unzip_Permute(Vector256<uint> data0, Vector256<uint> data1, out Vector256<uint> rt1) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                var rt0 = Avx512F.VL.PermuteVar8x32x2(data0, Vector256Constants.YGroup2Unzip_UInt32_ShuffleX2_Index0, data1);
+                rt1 = Avx512F.VL.PermuteVar8x32x2(data0, Vector256Constants.YGroup2Unzip_UInt32_ShuffleX2_Index1, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{long}, Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup2Unzip_Permute(Vector256<long> data0, Vector256<long> data1, out Vector256<long> rt1) {
+                var d0 = YGroup2Unzip_Permute(data0.AsUInt64(), data1.AsUInt64(), out var d1);
+                rt1 = d1.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ulong}, Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup2Unzip_Permute(Vector256<ulong> data0, Vector256<ulong> data1, out Vector256<ulong> rt1) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                var rt0 = Avx512F.VL.PermuteVar4x64x2(data0, Vector256Constants.YGroup2Unzip_UInt64_ShuffleX2_Index0, data1);
+                rt1 = Avx512F.VL.PermuteVar4x64x2(data0, Vector256Constants.YGroup2Unzip_UInt64_ShuffleX2_Index1, data1);
+                return rt0;
+            }
+
+#endif // NET8_0_OR_GREATER
+
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YGroup2Unzip_Unpack(Vector256<float> data0, Vector256<float> data1, out Vector256<float> y) {
-                var d0 = YGroup2Unzip_Unpack(data0.AsUInt32(), data1.AsUInt32(), out var d1);
-                y = d1.AsSingle();
-                return d0.AsSingle();
+                const byte ctl = (byte)ShuffleControlG4.XZYW;
+                Vector256<float> a0, a1, b0, b1;
+                a0 = Avx2.UnpackLow(data0, data1);
+                a1 = Avx2.UnpackHigh(data0, data1);
+                b0 = Avx2.UnpackLow(a0, a1);
+                b1 = Avx2.UnpackHigh(a0, a1);
+                b0 = Avx2.Permute4x64(b0.AsUInt64(), ctl).AsSingle();
+                b1 = Avx2.Permute4x64(b1.AsUInt64(), ctl).AsSingle();
+                y = b1;
+                return b0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{double}, Vector256{double}, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YGroup2Unzip_Unpack(Vector256<double> data0, Vector256<double> data1, out Vector256<double> y) {
-                var d0 = YGroup2Unzip_Unpack(data0.AsUInt64(), data1.AsUInt64(), out var d1);
-                y = d1.AsDouble();
-                return d0.AsDouble();
+                const byte ctl = (byte)ShuffleControlG4.XZYW;
+                Vector256<double> a0, a1;
+                a0 = Avx2.UnpackLow(data0, data1);
+                a1 = Avx2.UnpackHigh(data0, data1);
+                a0 = Avx2.Permute4x64(a0, ctl);
+                a1 = Avx2.Permute4x64(a1, ctl);
+                y = a1;
+                return a0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte})"/>
