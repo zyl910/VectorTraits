@@ -132,9 +132,9 @@ Summary (概要):
 
 - `YGroup2Unzip`: De-Interleave 2-element groups into 2 vectors (将2-元素组解交织为2个向量).
   Mnemonic: `x[i] =: element_ref(2*i, data0, data1)`, `y[i] =: element_ref(2*i+1, data0, data1)`.
-- `YGroup2UnzipEven`: De-Interleave the 2-element group into 2 vectors, and return the vector of even positions (将2-元素组解交织为2个向量, 并返回偶数位置的向量)
+- `YGroup2UnzipEven`: De-Interleave the 2-element group into 2 vectors, and return the vector of even positions (将2-元素组解交织为2个向量, 并返回偶数位置的数据).
   Mnemonic: `rt[i] =: element_ref(2*i, data0, data1)`.
-- `YGroup2UnzipOdd`: De-Interleave the 2-element group into 2 vectors, and return the vector of odd positions (将2-元素组解交织为2个向量, 并返回奇数位置的向量)
+- `YGroup2UnzipOdd`: De-Interleave the 2-element group into 2 vectors, and return the vector of odd positions (将2-元素组解交织为2个向量, 并返回奇数位置的数据).
   Mnemonic: `rt[i] =: element_ref(2*i+1, data0, data1)`.
 - `YGroup2Zip`: Interleave 2 vectors into 2-element groups (将2个向量交织为2-元素组).
   Mnemonic: `element_ref(i, data0, data1) := (0==(i&1))?( x[i2] ):( y[i2] )`, `i2 := i/2`.

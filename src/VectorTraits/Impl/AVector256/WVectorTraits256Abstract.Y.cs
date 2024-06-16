@@ -267,6 +267,150 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YGroup2UnzipEven_AcceleratedTypes {
+            get {
+                return Statics.YGroup2UnzipEven_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YGroup2UnzipEven(Vector256<float> data0, Vector256<float> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YGroup2UnzipEven(Vector256<double> data0, Vector256<double> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YGroup2UnzipEven(Vector256<sbyte> data0, Vector256<sbyte> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> YGroup2UnzipEven(Vector256<byte> data0, Vector256<byte> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YGroup2UnzipEven(Vector256<short> data0, Vector256<short> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> YGroup2UnzipEven(Vector256<ushort> data0, Vector256<ushort> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YGroup2UnzipEven(Vector256<int> data0, Vector256<int> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> YGroup2UnzipEven(Vector256<uint> data0, Vector256<uint> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YGroup2UnzipEven(Vector256<long> data0, Vector256<long> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> YGroup2UnzipEven(Vector256<ulong> data0, Vector256<ulong> data1) {
+            return Statics.YGroup2UnzipEven(data0, data1);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YGroup2UnzipOdd_AcceleratedTypes {
+            get {
+                return Statics.YGroup2UnzipOdd_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<float> YGroup2UnzipOdd(Vector256<float> data0, Vector256<float> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<double> YGroup2UnzipOdd(Vector256<double> data0, Vector256<double> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<sbyte> YGroup2UnzipOdd(Vector256<sbyte> data0, Vector256<sbyte> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<byte> YGroup2UnzipOdd(Vector256<byte> data0, Vector256<byte> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<short> YGroup2UnzipOdd(Vector256<short> data0, Vector256<short> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ushort> YGroup2UnzipOdd(Vector256<ushort> data0, Vector256<ushort> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<int> YGroup2UnzipOdd(Vector256<int> data0, Vector256<int> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<uint> YGroup2UnzipOdd(Vector256<uint> data0, Vector256<uint> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<long> YGroup2UnzipOdd(Vector256<long> data0, Vector256<long> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector256<ulong> YGroup2UnzipOdd(Vector256<ulong> data0, Vector256<ulong> data1) {
+            return Statics.YGroup2UnzipOdd(data0, data1);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip_AcceleratedTypes"/>
         public virtual TypeCodeFlags YGroup2Zip_AcceleratedTypes {
             get {

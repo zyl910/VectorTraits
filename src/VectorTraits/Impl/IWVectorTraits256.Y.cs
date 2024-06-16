@@ -392,6 +392,100 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2UnzipEven</c> (运行 <c>YGroup2UnzipEven</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2UnzipEven + YGroup2UnzipOdd = YGroup2Unzip</c>. See more: <see cref="YGroup2Unzip_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2UnzipEven(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags YGroup2UnzipEven_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// De-Interleave the 2-element group into 2 vectors, and return the vector of even positions (将2-元素组解交织为2个向量, 并返回偶数位置的数据).
+        /// Mnemonic: <c>rt[i] =: element_ref(2*i, data0, data1)</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 2-element groups - Part 0 (由2元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 2-element groups - Part 1 (由2元素组所组成的向量 - 第1部分).</param>
+        /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
+        /// <seealso cref="YGroup2UnzipEven_AcceleratedTypes"/>
+        Vector256<float> YGroup2UnzipEven(Vector256<float> data0, Vector256<float> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<double> YGroup2UnzipEven(Vector256<double> data0, Vector256<double> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<sbyte> YGroup2UnzipEven(Vector256<sbyte> data0, Vector256<sbyte> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<byte> YGroup2UnzipEven(Vector256<byte> data0, Vector256<byte> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<short> YGroup2UnzipEven(Vector256<short> data0, Vector256<short> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<ushort> YGroup2UnzipEven(Vector256<ushort> data0, Vector256<ushort> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<int> YGroup2UnzipEven(Vector256<int> data0, Vector256<int> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<uint> YGroup2UnzipEven(Vector256<uint> data0, Vector256<uint> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<long> YGroup2UnzipEven(Vector256<long> data0, Vector256<long> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<ulong> YGroup2UnzipEven(Vector256<ulong> data0, Vector256<ulong> data1);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2UnzipOdd</c> (运行 <c>YGroup2UnzipOdd</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2UnzipEven + YGroup2UnzipOdd = YGroup2Unzip</c>. See more: <see cref="YGroup2Unzip_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2UnzipOdd(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags YGroup2UnzipOdd_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// De-Interleave the 2-element group into 2 vectors, and return the vector of odd positions (将2-元素组解交织为2个向量, 并返回奇数位置的数据).
+        /// Mnemonic: <c>rt[i] =: element_ref(2*i+1, data0, data1)</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 2-element groups - Part 0 (由2元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 2-element groups - Part 1 (由2元素组所组成的向量 - 第1部分).</param>
+        /// <returns>Returns the vector made of the Y-components (返回Y分量所组成的向量).</returns>
+        /// <seealso cref="YGroup2UnzipOdd_AcceleratedTypes"/>
+        Vector256<float> YGroup2UnzipOdd(Vector256<float> data0, Vector256<float> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<double> YGroup2UnzipOdd(Vector256<double> data0, Vector256<double> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<sbyte> YGroup2UnzipOdd(Vector256<sbyte> data0, Vector256<sbyte> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<byte> YGroup2UnzipOdd(Vector256<byte> data0, Vector256<byte> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<short> YGroup2UnzipOdd(Vector256<short> data0, Vector256<short> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<ushort> YGroup2UnzipOdd(Vector256<ushort> data0, Vector256<ushort> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<int> YGroup2UnzipOdd(Vector256<int> data0, Vector256<int> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<uint> YGroup2UnzipOdd(Vector256<uint> data0, Vector256<uint> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<long> YGroup2UnzipOdd(Vector256<long> data0, Vector256<long> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<ulong> YGroup2UnzipOdd(Vector256<ulong> data0, Vector256<ulong> data1);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2Zip</c> (运行 <c>YGroup2Zip</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
