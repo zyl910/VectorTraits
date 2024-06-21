@@ -130,13 +130,13 @@ Summary (概要):
 - Provides vector methods for de-interleave (提供解交织的向量方法): YGroup2Unzip, YGroup2UnzipEven, YGroup2UnzipOdd.
 - Provides vector methods for interleave (提供交织的向量方法): YGroup2Zip, YGroup2ZipHigh, YGroup2ZipLow.
 
-- `YGroup2Unzip`: De-Interleave 2-element groups into 2 vectors (将2-元素组解交织为2个向量).
+- `YGroup2Unzip`: De-Interleave 2-element groups into 2 vectors. It converts the 2-element groups AoS to SoA (将2-元素组解交织为2个向量. 它能将2元素组的 数组结构体 转为 结构体数组).
   Mnemonic: `x[i] =: element_ref(2*i, data0, data1)`, `y[i] =: element_ref(2*i+1, data0, data1)`.
-- `YGroup2UnzipEven`: De-Interleave the 2-element group into 2 vectors, and return the vector of even positions (将2-元素组解交织为2个向量, 并返回偶数位置的数据).
+- `YGroup2UnzipEven`: De-Interleave the 2-element groups into 2 vectors, and return the vector of even positions (将2-元素组解交织为2个向量, 并返回偶数位置的数据).
   Mnemonic: `rt[i] =: element_ref(2*i, data0, data1)`.
-- `YGroup2UnzipOdd`: De-Interleave the 2-element group into 2 vectors, and return the vector of odd positions (将2-元素组解交织为2个向量, 并返回奇数位置的数据).
+- `YGroup2UnzipOdd`: De-Interleave the 2-element groups into 2 vectors, and return the vector of odd positions (将2-元素组解交织为2个向量, 并返回奇数位置的数据).
   Mnemonic: `rt[i] =: element_ref(2*i+1, data0, data1)`.
-- `YGroup2Zip`: Interleave 2 vectors into 2-element groups (将2个向量交织为2-元素组).
+- `YGroup2Zip`: Interleave 2 vectors into 2-element groups. It converts the 2-element groups SoA to AoS (将2个向量交织为2-元素组. 它能将2元素组的 结构体数组 转为 数组结构体).
   Mnemonic: `element_ref(i, data0, data1) := (0==(i&1))?( x[i2] ):( y[i2] )`, `i2 := i/2`.
 - `YGroup2ZipHigh`: Interleave 2 vectors into 2-element groups and returns the data in the high position. (将2个向量交织为2-元素组, 并返回高位置的数据).
   Mnemonic: `rt[i] := (0==(i&1))?( x[i2] ):( y[i2] )`, `i2 := (i+T.Count)/2`.
@@ -208,11 +208,11 @@ Summary (概要):
 - Provides vector methods for indices-based shuffle (提供基于索引的换位的向量方法): YShuffleInsert, YShuffleKernel, YShuffleX2Kernel.
 
 List (列表):
-- `YShuffleG2`: For each 2-element group in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
+- `YShuffleG2`: For each 2-element groups in a vector, shuffle is performed (对于一个向量中的每个 2-元素组, 进行换位).
   Mnemonic: View for group: `rt.xy = shuffleG2_ref(control, source)`. View for element: `rt[i] := source[(i&(~1)) | ((control >> (i&1)) & 1)]`.
-- `YShuffleG4[/_Const]`: For each 4-element group in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).
+- `YShuffleG4[/_Const]`: For each 4-element groups in a vector, shuffle is performed (对于一个向量中的每个 4-元素组, 进行换位). If the count of elements in a vector is less than 4, please use YShuffleG4X2 instead (如果向量的元素数量小于4，请使用 YShuffleG4X2 代替).
   Mnemonic: View for group: `rt.xyzw = shuffleG4_ref(control, source)`. View for element: `rt[i] := source[(i&(~3)) | ((control >> ((i&3)*2)) & 3)]`.
-- `YShuffleG4X2[/_Const]`: For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+- `YShuffleG4X2[/_Const]`: For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
   Mnemonic: View for group: `rt.xyzw = shuffleG4_ref(control, source0, source1)`. View for element: `element_ref(i, result0, result1) := element_ref((i&(~3)) | ((control >> ((i&3)*2)) & 3), source0, source1)`.
 - `YShuffleInsert[/_Args/_Core]`: Shuffle and insert (换位并插入). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the elements of the background vector will be inserted (若索引值超出范围, 会插入背景向量的元素).
   Mnemonic: `rt[i] := (0<=indices[i] && indices[i]<Count)?( vector[indices[i]] ):back[i]`.

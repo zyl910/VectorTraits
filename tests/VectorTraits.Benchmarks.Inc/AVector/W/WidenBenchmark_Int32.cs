@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using System.Threading;
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector128;
@@ -1260,6 +1261,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.W {
 
         [Benchmark]
         public void SumWidenVectorTraits() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
             dstTMy = StaticSumWidenVectorTraits(srcArray, srcArray.Length);
             CheckResult("SumWidenVectorTraits");
         }
