@@ -99,9 +99,9 @@ namespace Zyl.VectorTraits {
         public static int GetHexTo<T>(Action<string> action, Vector<T> src, string? separator = null, bool noFixEndian = false) where T : struct {
             int rt = 0;
             string hex;
-            Vector<byte> list = Vector.AsVectorByte(src);
-            int unitCount = Vector<T>.Count;
-            int unitSize = Vector<byte>.Count / unitCount;
+            Vector<byte> list = src.ExAsByte();
+            int unitSize = Unsafe.SizeOf<T>();
+            int unitCount = Vector<byte>.Count / unitSize;
             bool fixEndian = false;
             if (!noFixEndian && BitConverter.IsLittleEndian) fixEndian = true;
             if (fixEndian) {
@@ -152,9 +152,9 @@ namespace Zyl.VectorTraits {
         public static int GetHexTo<T>(Action<string> action, Vector64<T> src, string? separator = null, bool noFixEndian = false) where T : struct {
             int rt = 0;
             string hex;
-            Vector64<byte> list = Vector64.AsByte(src);
-            int unitCount = Vector64<T>.Count;
-            int unitSize = Vector64<byte>.Count / unitCount;
+            Vector64<byte> list = src.ExAsByte();
+            int unitSize = Unsafe.SizeOf<T>();
+            int unitCount = Vector64<byte>.Count / unitSize;
             bool fixEndian = false;
             if (!noFixEndian && BitConverter.IsLittleEndian) fixEndian = true;
             if (fixEndian) {
@@ -204,9 +204,9 @@ namespace Zyl.VectorTraits {
         public static int GetHexTo<T>(Action<string> action, Vector128<T> src, string? separator = null, bool noFixEndian = false) where T : struct {
             int rt = 0;
             string hex;
-            Vector128<byte> list = Vector128.AsByte(src);
-            int unitCount = Vector128<T>.Count;
-            int unitSize = Vector128<byte>.Count / unitCount;
+            Vector128<byte> list = src.ExAsByte();
+            int unitSize = Unsafe.SizeOf<T>();
+            int unitCount = Vector128<byte>.Count / unitSize;
             bool fixEndian = false;
             if (!noFixEndian && BitConverter.IsLittleEndian) fixEndian = true;
             if (fixEndian) {
@@ -256,9 +256,9 @@ namespace Zyl.VectorTraits {
         public static int GetHexTo<T>(Action<string> action, Vector256<T> src, string? separator = null, bool noFixEndian = false) where T : struct {
             int rt = 0;
             string hex;
-            Vector256<byte> list = Vector256.AsByte(src);
-            int unitCount = Vector256<T>.Count;
-            int unitSize = Vector256<byte>.Count / unitCount;
+            Vector256<byte> list = src.ExAsByte();
+            int unitSize = Unsafe.SizeOf<T>();
+            int unitCount = Vector256<byte>.Count / unitSize;
             bool fixEndian = false;
             if (!noFixEndian && BitConverter.IsLittleEndian) fixEndian = true;
             if (fixEndian) {
@@ -311,9 +311,9 @@ namespace Zyl.VectorTraits {
         public static int GetHexTo<T>(Action<string> action, Vector512<T> src, string? separator = null, bool noFixEndian = false) where T : struct {
             int rt = 0;
             string hex;
-            Vector512<byte> list = Vector512.AsByte(src);
-            int unitCount = Vector512<T>.Count;
-            int unitSize = Vector512<byte>.Count / unitCount;
+            Vector512<byte> list = src.ExAsByte();
+            int unitSize = Unsafe.SizeOf<T>();
+            int unitCount = Vector512<byte>.Count / unitSize;
             bool fixEndian = false;
             if (!noFixEndian && BitConverter.IsLittleEndian) fixEndian = true;
             if (fixEndian) {
@@ -481,7 +481,7 @@ namespace Zyl.VectorTraits {
             int rt = 0;
             if (null == lineCommentSeparator) lineCommentSeparator = DefaultLineCommentSeparator;
             if (null == lineCommentItemSeparator) lineCommentItemSeparator = DefaultLineCommentItemSeparator;
-            string str = string.Format(format, args);
+            string str = ExVectorUtil.Format(format, args);
             if (!string.IsNullOrEmpty(str)) {
                 action(str);
                 rt += str.Length;
@@ -674,7 +674,7 @@ namespace Zyl.VectorTraits {
         /// <param name="lines">Text lines (多行内容).</param>
         public static void WriteLines(TextWriter textWriter, IEnumerable? lines) {
             if (null == lines) return;
-            foreach(object line in lines) {
+            foreach(object? line in lines) {
                 if (null== line) {
                     textWriter.WriteLine();
                 } else {

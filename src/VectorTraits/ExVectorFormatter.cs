@@ -97,6 +97,36 @@ namespace Zyl.VectorTraits {
         /// <param name="arg">An object to format(要设置其格式的对象).</param>
         /// <param name="formatProvider">An object that supplies format information about the current instance (一个对象，提供有关当前实例的区域性特定格式信息).</param>
         /// <returns>Formatted string (格式化之后的字符串).</returns>
+        private static string CallFormat<T>(string? format, Vector64<T> arg, IFormatProvider formatProvider) where T : struct {
+            if (Vector64s.IsNativeSupported<T>()) {
+                return HandleOtherFormats(format, arg, formatProvider);
+            }
+            var sb = new StringBuilder();
+            string separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
+            int Count = Vector64<byte>.Count / Unsafe.SizeOf<T>();
+            ref T p = ref Unsafe.As<Vector64<T>, T>(ref arg);
+            sb.Append('<');
+            string temp = HandleOtherFormats(format, p, formatProvider);
+            sb.Append(temp);
+            for (int i = 1; i < Count; i++) {
+                p = ref Unsafe.Add(ref p, 1);
+                sb.Append(separator);
+                sb.Append(' ');
+                temp = HandleOtherFormats(format, p, formatProvider);
+                sb.Append(temp);
+            }
+            sb.Append('>');
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Call Format method (调用 Format 方法).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="format">A format string containing formatting specifications (包含格式规范的格式字符串).</param>
+        /// <param name="arg">An object to format(要设置其格式的对象).</param>
+        /// <param name="formatProvider">An object that supplies format information about the current instance (一个对象，提供有关当前实例的区域性特定格式信息).</param>
+        /// <returns>Formatted string (格式化之后的字符串).</returns>
         private static string CallFormat<T>(string? format, Vector128<T> arg, IFormatProvider formatProvider) where T : struct {
             if (Vector128s.IsNativeSupported<T>()) {
                 return HandleOtherFormats(format, arg, formatProvider);

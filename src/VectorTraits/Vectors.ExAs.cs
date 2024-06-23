@@ -7,7 +7,6 @@ using System.Text;
 namespace Zyl.VectorTraits {
 
     partial class Vectors {
-#if NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
         /// (ExType) Reinterprets a <see cref="Vector{T}" /> of type <typeparamref name="TFrom"/> as a new <see cref="Vector{T}" /> of type <typeparamref name="TTo"/>. It supports ExType, so there is no element type check (将 <typeparamref name="TFrom"/> 类型的 <see cref="Vector{T}" /> 重新解释为 <typeparamref name="TTo"/> 类型的新 <see cref="Vector{T}" />. 它支持 ExType, 故没有元素类型检查).
@@ -145,6 +144,5 @@ namespace Zyl.VectorTraits {
             return ExAs<T, ulong>(vector);
         }
 
-#endif
     }
 }
