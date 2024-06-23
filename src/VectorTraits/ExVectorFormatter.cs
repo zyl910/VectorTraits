@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Numerics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
@@ -65,7 +66,7 @@ namespace Zyl.VectorTraits {
         /// <param name="arg">An object to format(要设置其格式的对象).</param>
         /// <param name="formatProvider">An object that supplies format information about the current instance (一个对象，提供有关当前实例的区域性特定格式信息).</param>
         /// <returns>Formatted string (格式化之后的字符串).</returns>
-        private static string CallFormat<T>(string? format, Vector<T> arg, IFormatProvider formatProvider) where T : struct {
+        private static string CallFormat_Vector<T>(string? format, Vector<T> arg, IFormatProvider formatProvider) where T : struct {
             if (Vectors.IsNativeSupported<T>()) {
                 return HandleOtherFormats(format, arg, formatProvider);
             }
@@ -87,6 +88,11 @@ namespace Zyl.VectorTraits {
             return sb.ToString();
         }
 
+        /// <inheritdoc cref="CallFormat_Vector"/>
+        private static string CallFormat<T>(string? format, Vector<T> arg, IFormatProvider formatProvider) where T : struct {
+            return CallFormat_Vector(format, arg, formatProvider);
+        }
+
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
@@ -97,7 +103,7 @@ namespace Zyl.VectorTraits {
         /// <param name="arg">An object to format(要设置其格式的对象).</param>
         /// <param name="formatProvider">An object that supplies format information about the current instance (一个对象，提供有关当前实例的区域性特定格式信息).</param>
         /// <returns>Formatted string (格式化之后的字符串).</returns>
-        private static string CallFormat<T>(string? format, Vector64<T> arg, IFormatProvider formatProvider) where T : struct {
+        private static string CallFormat_Vector64<T>(string? format, Vector64<T> arg, IFormatProvider formatProvider) where T : struct {
             if (Vector64s.IsNativeSupported<T>()) {
                 return HandleOtherFormats(format, arg, formatProvider);
             }
@@ -119,6 +125,11 @@ namespace Zyl.VectorTraits {
             return sb.ToString();
         }
 
+        /// <inheritdoc cref="CallFormat_Vector64"/>
+        private static string CallFormat<T>(string? format, Vector64<T> arg, IFormatProvider formatProvider) where T : struct {
+            return CallFormat_Vector64(format, arg, formatProvider);
+        }
+
         /// <summary>
         /// Call Format method (调用 Format 方法).
         /// </summary>
@@ -127,7 +138,7 @@ namespace Zyl.VectorTraits {
         /// <param name="arg">An object to format(要设置其格式的对象).</param>
         /// <param name="formatProvider">An object that supplies format information about the current instance (一个对象，提供有关当前实例的区域性特定格式信息).</param>
         /// <returns>Formatted string (格式化之后的字符串).</returns>
-        private static string CallFormat<T>(string? format, Vector128<T> arg, IFormatProvider formatProvider) where T : struct {
+        private static string CallFormat_Vector128<T>(string? format, Vector128<T> arg, IFormatProvider formatProvider) where T : struct {
             if (Vector128s.IsNativeSupported<T>()) {
                 return HandleOtherFormats(format, arg, formatProvider);
             }
@@ -149,6 +160,11 @@ namespace Zyl.VectorTraits {
             return sb.ToString();
         }
 
+        /// <inheritdoc cref="CallFormat_Vector128"/>
+        private static string CallFormat<T>(string? format, Vector128<T> arg, IFormatProvider formatProvider) where T : struct {
+            return CallFormat_Vector128(format, arg, formatProvider);
+        }
+
         /// <summary>
         /// Call Format method (调用 Format 方法).
         /// </summary>
@@ -157,7 +173,7 @@ namespace Zyl.VectorTraits {
         /// <param name="arg">An object to format(要设置其格式的对象).</param>
         /// <param name="formatProvider">An object that supplies format information about the current instance (一个对象，提供有关当前实例的区域性特定格式信息).</param>
         /// <returns>Formatted string (格式化之后的字符串).</returns>
-        private static string CallFormat<T>(string? format, Vector256<T> arg, IFormatProvider formatProvider) where T : struct {
+        private static string CallFormat_Vector256<T>(string? format, Vector256<T> arg, IFormatProvider formatProvider) where T : struct {
             if (Vector256s.IsNativeSupported<T>()) {
                 return HandleOtherFormats(format, arg, formatProvider);
             }
@@ -179,6 +195,11 @@ namespace Zyl.VectorTraits {
             return sb.ToString();
         }
 
+        /// <inheritdoc cref="CallFormat_Vector256"/>
+        private static string CallFormat<T>(string? format, Vector256<T> arg, IFormatProvider formatProvider) where T : struct {
+            return CallFormat_Vector256(format, arg, formatProvider);
+        }
+
 #endif
 
 #if NET8_0_OR_GREATER
@@ -190,7 +211,7 @@ namespace Zyl.VectorTraits {
         /// <param name="arg">An object to format(要设置其格式的对象).</param>
         /// <param name="formatProvider">An object that supplies format information about the current instance (一个对象，提供有关当前实例的区域性特定格式信息).</param>
         /// <returns>Formatted string (格式化之后的字符串).</returns>
-        private static string CallFormat<T>(string? format, Vector512<T> arg, IFormatProvider formatProvider) where T : struct {
+        private static string CallFormat_Vector512<T>(string? format, Vector512<T> arg, IFormatProvider formatProvider) where T : struct {
             if (Vector512s.IsNativeSupported<T>()) {
                 return HandleOtherFormats(format, arg, formatProvider);
             }
@@ -211,6 +232,11 @@ namespace Zyl.VectorTraits {
             sb.Append('>');
             return sb.ToString();
         }
+
+        /// <inheritdoc cref="CallFormat_Vector512"/>
+        private static string CallFormat<T>(string? format, Vector512<T> arg, IFormatProvider formatProvider) where T : struct {
+            return CallFormat_Vector512(format, arg, formatProvider);
+        }
 #endif // NET8_0_OR_GREATER
 
         /// <summary>
@@ -228,8 +254,91 @@ namespace Zyl.VectorTraits {
         public string Format(string? format, object? arg, IFormatProvider? formatProvider) {
             if (arg == null) return string.Empty;
             IFormatProvider provider = NextProvider ?? CultureInfo.CurrentCulture;
-            return CallFormat(format, (dynamic)arg, provider);
+            string rt;
+#if NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_0_OR_GREATER
+            rt = Format_Reflection(format, arg, provider);
+#else
+            rt = Format_Dynamic(format, arg, provider);
+#endif
+            return rt;
         }
+
+        /// <inheritdoc cref="Format(string?, object?, IFormatProvider?)"/>
+        public string Format_Dynamic(string? format, object arg, IFormatProvider formatProvider) {
+            return CallFormat(format, arg as dynamic, formatProvider);
+        }
+
+#if NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_0_OR_GREATER
+
+        /// <inheritdoc cref="Format(string?, object?, IFormatProvider?)"/>
+        public string Format_Reflection(string? format, object arg, IFormatProvider formatProvider) {
+            Type argType = arg.GetType();
+            MethodInfoBuffer? found = null;
+            if (argType.IsGenericType) {
+                Type defineType = argType.GetGenericTypeDefinition();
+                foreach (MethodInfoBuffer item in _methodInfoBufferList) {
+                    if (defineType.Equals(item.VectorType)) {
+                        found = item;
+                        break;
+                    }
+                }
+                if (null != found) {
+                    Type[] typeMethodArguments = argType.GetGenericArguments();
+                    Type typeMethodArgument = typeMethodArguments[0];
+                    MethodInfo? methodInfo;
+                    if (!found.Buffer.TryGetValue(typeMethodArgument, out methodInfo)) {
+                        methodInfo = null;
+                    }
+                    if (null == methodInfo && null != found.SourceMethodInfo) {
+                        methodInfo = found.SourceMethodInfo.MakeGenericMethod(typeMethodArguments);
+                        found.Buffer.Add(typeMethodArgument, methodInfo);
+                    }
+                    if (null != methodInfo) {
+                        object? rt = methodInfo.Invoke(null, [format, arg, formatProvider]);
+                        return rt?.ToString() ?? string.Empty;
+                    }
+                }
+            }
+            return HandleOtherFormats(format, arg, formatProvider);
+        }
+
+        private record MethodInfoBuffer {
+            public Type? VectorType { get; set; }
+            public MethodInfo? SourceMethodInfo { get; set; }
+            public Dictionary<Type, MethodInfo> Buffer { get; } = [];
+
+            public MethodInfoBuffer() : this(null, null) {
+            }
+
+            public MethodInfoBuffer(Type? vectorType) : this(vectorType, null) {
+            }
+
+            public MethodInfoBuffer(Type? vectorType, MethodInfo? sourceMethodInfo) {
+                VectorType = vectorType;
+                SourceMethodInfo = sourceMethodInfo;
+            }
+        }
+
+        private static readonly List<MethodInfoBuffer> _methodInfoBufferList = new List<MethodInfoBuffer>();
+
+        static ExVectorFormatter() {
+            const BindingFlags flags = BindingFlags.Static | BindingFlags.NonPublic;
+            Type selfType = typeof(ExVectorFormatter);
+            _methodInfoBufferList.Add(new MethodInfoBuffer(typeof(Vector<>), selfType.GetMethod(nameof(CallFormat_Vector), flags)));
+
+#if NETCOREAPP3_0_OR_GREATER
+            _methodInfoBufferList.Add(new MethodInfoBuffer(typeof(Vector64<>), selfType.GetMethod(nameof(CallFormat_Vector64), flags)));
+            _methodInfoBufferList.Add(new MethodInfoBuffer(typeof(Vector128<>), selfType.GetMethod(nameof(CallFormat_Vector128), flags)));
+            _methodInfoBufferList.Add(new MethodInfoBuffer(typeof(Vector256<>), selfType.GetMethod(nameof(CallFormat_Vector256), flags)));
+#endif
+
+#if NET8_0_OR_GREATER
+            _methodInfoBufferList.Add(new MethodInfoBuffer(typeof(Vector512<>), selfType.GetMethod(nameof(CallFormat_Vector512), flags)));
+#endif
+        }
+
+#endif
+
     }
 
 }
