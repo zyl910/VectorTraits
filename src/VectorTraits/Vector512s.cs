@@ -440,6 +440,17 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
+        /// Determines if this element type is native supported (判断是否原生支持这种元素类型).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <returns><c>true</c> if <typeparamref name="T" /> is supported; otherwise, <c>false</c>. (当支持 <typeparamref name="T" /> 时返回<c>true</c>; 其他情况返回 <c>false</c>)</returns>
+        /// <seealso cref="Vector512{T}.IsSupported"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNativeSupported<T>() where T : struct {
+            return Vector512<T>.IsSupported;
+        }
+
+        /// <summary>
         /// [Base] Computes the ones-complement (~) of a vector (计算向量的补数).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
