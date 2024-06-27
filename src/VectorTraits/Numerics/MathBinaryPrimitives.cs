@@ -1,10 +1,16 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#define GENERICS_MATH
+#endif // NET7_0_OR_GREATER
+
+using System;
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP2_1_OR_GREATER
 using System.Buffers.Binary;
 #endif
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits.Numerics {
     /// <summary>
@@ -54,6 +60,31 @@ namespace Zyl.VectorTraits.Numerics {
         /// <returns>The reversed value.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static nint ReverseEndianness(nint value) => (nint)ReverseEndianness((nuint)value);
+
+        /// <summary>
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="ExInt128" /> value.
+        /// </summary>
+        /// <param name="value">The value to reverse.</param>
+        /// <returns>The reversed value.</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExInt128 ReverseEndianness(ExInt128 value) {
+#if BCL_TYPE_INT128 && NET8_0_OR_GREATER
+            return (ExInt128)BinaryPrimitives.ReverseEndianness((Int128)value);
+#else
+            ulong lower = (ulong)value; // value.Lower
+            ulong upper; // value.Upper
+            if (BitConverter.IsLittleEndian) {
+                upper = Unsafe.Add(ref Unsafe.As<ExInt128, ulong>(ref value), 1);
+            } else {
+                upper = Unsafe.As<ExInt128, ulong>(ref value);
+            }
+            return new ExInt128(
+                ReverseEndianness(lower),
+                ReverseEndianness(upper)
+            );
+#endif
+        }
 
 #if NET7_0_OR_GREATER
         /// <summary>
@@ -195,7 +226,32 @@ namespace Zyl.VectorTraits.Numerics {
             }
         }
 
-#if NET7_0_OR_GREATER
+        /// <summary>
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="ExUInt128" /> value.
+        /// </summary>
+        /// <param name="value">The value to reverse.</param>
+        /// <returns>The reversed value.</returns>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExUInt128 ReverseEndianness(ExUInt128 value) {
+#if BCL_TYPE_INT128 && NET8_0_OR_GREATER
+            return (ExUInt128)BinaryPrimitives.ReverseEndianness((UInt128)value);
+#else
+            ulong lower = (ulong)value; // value.Lower
+            ulong upper; // value.Upper
+            if (BitConverter.IsLittleEndian) {
+                upper = Unsafe.Add(ref Unsafe.As<ExUInt128, ulong>(ref value), 1);
+            } else {
+                upper = Unsafe.As<ExUInt128, ulong>(ref value);
+            }
+            return new ExUInt128(
+                ReverseEndianness(lower),
+                ReverseEndianness(upper)
+            );
+#endif
+        }
+
+#if BCL_TYPE_INT128
         /// <summary>
         /// Reverses a primitive value by performing an endianness swap of the specified <see cref="UInt128" /> value.
         /// </summary>
@@ -220,7 +276,7 @@ namespace Zyl.VectorTraits.Numerics {
             );
 #endif
         }
-#endif // NET7_0_OR_GREATER
+#endif // BCL_TYPE_INT128
 
     }
 }

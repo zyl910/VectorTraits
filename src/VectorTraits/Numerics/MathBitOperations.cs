@@ -49,13 +49,11 @@ namespace Zyl.VectorTraits.Numerics {
             19, 27, 23, 06, 26, 05, 04, 31
         ];
 
-        /// <summary>
-        /// Is 64bit system (是不是64位系统).
-        /// </summary>
-        public static bool Is64Bit {
+        /// <inheritdoc cref="BitMathCore.Is64Bit"/>
+        private static bool Is64Bit {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get {
-                return IntPtr.Size == sizeof(ulong);
+                return BitMathCore.Is64Bit;
             }
         }
 

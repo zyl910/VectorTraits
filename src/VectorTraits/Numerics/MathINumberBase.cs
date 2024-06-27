@@ -850,6 +850,22 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
+        /// <summary>
+        /// Determines if a element represents a negative number (确定元素是否为负数).
+        /// </summary>
+        /// <param name="value">The value to be checked (要检查的值).</param>
+        /// <returns>Return <c>true</c> if value represents negative zero or a negative real number, otherwise is <c>false</c> (如果值表示负零或负实数，则返回 <c>true</c>，否则返回 <c>false</c>).</returns>
+        /// <seealso cref="INumberBase{TSelf}.IsNegative(TSelf)"/>
+        /// <seealso cref="decimal.IsNegative"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative(decimal value) {
+#if NET7_0_OR_GREATER
+            return IsNegative_Bcl(value);
+#else
+            return IsNegative_Bit(value);
+#endif // NET7_0_OR_GREATER
+        }
+
 #if NET5_0_OR_GREATER
         /// <inheritdoc cref="IsNegative(double)"/>
         /// <seealso cref="Half.IsNegative"/>
@@ -921,6 +937,14 @@ namespace Zyl.VectorTraits.Numerics {
             return double.IsNegative(value);
         }
 
+#if NET7_0_OR_GREATER
+        /// <inheritdoc cref="IsNegative(decimal)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bcl(decimal value) {
+            return decimal.IsNegative(value);
+        }
+#endif // NET7_0_OR_GREATER
+
 #if NET5_0_OR_GREATER
         /// <inheritdoc cref="IsNegative(Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -981,6 +1005,12 @@ namespace Zyl.VectorTraits.Numerics {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNegative_Bit(double value) {
             return BitConverter.DoubleToInt64Bits(value) < 0;
+        }
+
+        /// <inheritdoc cref="IsNegative(decimal)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNegative_Bit(decimal value) {
+            return value < 0;
         }
 
 #if NET5_0_OR_GREATER

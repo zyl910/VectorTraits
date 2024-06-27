@@ -14,6 +14,16 @@ namespace Zyl.VectorTraits.Numerics {
     public abstract class BitMathCore {
 
         /// <summary>
+        /// Is 64bit system (是不是64位系统).
+        /// </summary>
+        public static bool Is64Bit {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get {
+                return IntPtr.Size == sizeof(ulong);
+            }
+        }
+
+        /// <summary>
         /// Make the shuffle control code for selecting four 2-bit values (制作shuffle控制码, 用于选择4个2位值).
         /// </summary>
         /// <param name="fp3">The 3rd 2-bit value (第3个2位值).</param>

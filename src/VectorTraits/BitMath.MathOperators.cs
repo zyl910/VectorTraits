@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits {
@@ -19,6 +20,12 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong BigMul(ulong a, ulong b, out ulong low) {
             return MathOperators.BigMul(a, b, out low);
+        }
+
+        /// <inheritdoc cref="MathOperators.BigMul(ulong, ulong)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static ExUInt128 BigMul(ulong a, ulong b) {
+            return MathOperators.BigMul(a, b);
         }
 
         /// <inheritdoc cref="MathOperators.BigMul_BigNum(long, long, out long)"/>

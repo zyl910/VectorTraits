@@ -1,8 +1,14 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#define GENERICS_MATH
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Numerics {
@@ -71,6 +77,26 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET5_0_OR_GREATER
 #pragma warning restore CS0618 // Type or member is obsolete
         }
+
+        /// <summary>Produces the full product of two unsigned 64-bit numbers.</summary>
+        /// <param name="a">The first number to multiply.</param>
+        /// <param name="b">The second number to multiply.</param>
+        /// <returns>The full product of the specified numbers.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExUInt128 BigMul(ulong a, ulong b) {
+            ulong high = BigMul(a, b, out ulong low);
+            return new ExUInt128(high, low);
+        }
+
+        /*
+        /// <summary>Produces the full product of two 64-bit numbers.</summary>
+        /// <param name="a">The first number to multiply.</param>
+        /// <param name="b">The second number to multiply.</param>
+        /// <returns>The full product of the specified numbers.</returns>
+        public static ExInt128 BigMul(long a, long b) {
+            long high = BigMul(a, b, out long low);
+            return new ExInt128((ulong)high, (ulong)low);
+        }*/
 
         /// <summary>
         /// Produces the full product of two signed 64-bit numbers - BigNum (生成两个有符号 64 位数的完整乘积 - 大数算法).
