@@ -1,8 +1,18 @@
-﻿using System;
+﻿#if NET5_0_OR_GREATER
+#define BCL_TYPE_HALF
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#define GENERICS_MATH
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Buffers.Binary;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using Zyl.VectorTraits.Impl.Util;
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.ExTypes.Impl {
     partial class Number {
@@ -693,51 +703,56 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         ];
 
         private static void AccumulateDecimalDigitsIntoBigInteger(scoped ref NumberBuffer number, uint firstIndex, uint lastIndex, out BigInteger result) {
-            BigInteger.SetZero(out result);
+            //BigInteger.SetZero(out result);
+            result = BigInteger.Zero;
 
-            byte* src = number.DigitsPtr + firstIndex;
+            ref byte src = ref Unsafe.Add(ref number.DigitsPtr, (nint)firstIndex);
             uint remaining = lastIndex - firstIndex;
 
             while (remaining != 0) {
                 uint count = Math.Min(remaining, 9);
-                uint value = DigitsToUInt32(src, (int)(count));
+                uint value = DigitsToUInt32(ref src, (int)(count));
 
-                result.MultiplyPow10(count);
-                result.Add(value);
+                result = result.MultiplyPow10(count);
+                result = result.Add(value);
 
-                src += count;
+                src = ref Unsafe.Add(ref number.DigitsPtr, (nint)count);
                 remaining -= count;
             }
         }
 
         private static ulong AssembleFloatingPointBits<TFloat>(ulong initialMantissa, int initialExponent, bool hasZeroTail)
-            where TFloat : unmanaged, IBinaryFloatParseAndFormatInfo<TFloat> {
+            where TFloat : unmanaged, IComparable<TFloat>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TFloat>
+#endif
+            {
             // number of bits by which we must adjust the mantissa to shift it into the
             // correct position, and compute the resulting base two exponent for the
             // normalized mantissa:
-            uint initialMantissaBits = BigInteger.CountSignificantBits(initialMantissa);
-            int normalMantissaShift = TFloat.NormalMantissaBits - (int)(initialMantissaBits);
+            uint initialMantissaBits = BigIntegerExtensions.CountSignificantBits(initialMantissa);
+            int normalMantissaShift = FloatFormatInfo<TFloat>.NormalMantissaBits - (int)(initialMantissaBits);
             int normalExponent = initialExponent - normalMantissaShift;
 
             ulong mantissa = initialMantissa;
             int exponent = normalExponent;
 
-            if (normalExponent > TFloat.MaxBinaryExponent) {
+            if (normalExponent > FloatFormatInfo<TFloat>.MaxBinaryExponent) {
                 // The exponent is too large to be represented by the floating point
                 // type; report the overflow condition:
-                return TFloat.InfinityBits;
-            } else if (normalExponent < TFloat.MinBinaryExponent) {
+                return FloatFormatInfo<TFloat>.InfinityBits;
+            } else if (normalExponent < FloatFormatInfo<TFloat>.MinBinaryExponent) {
                 // The exponent is too small to be represented by the floating point
                 // type as a normal value, but it may be representable as a denormal
                 // value.  Compute the number of bits by which we need to shift the
                 // mantissa in order to form a denormal number.  (The subtraction of
                 // an extra 1 is to account for the hidden bit of the mantissa that
                 // is not available for use when representing a denormal.)
-                int denormalMantissaShift = normalMantissaShift + normalExponent + TFloat.ExponentBias - 1;
+                int denormalMantissaShift = normalMantissaShift + normalExponent + FloatFormatInfo<TFloat>.ExponentBias - 1;
 
                 // Denormal values have an exponent of zero, so the debiased exponent is
                 // the negation of the exponent bias:
-                exponent = -TFloat.ExponentBias;
+                exponent = -FloatFormatInfo<TFloat>.ExponentBias;
 
                 if (denormalMantissaShift < 0) {
                     // Use two steps for right shifts:  for a shift of N bits, we first
@@ -747,7 +762,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
                     // If the mantissa is now zero, we have underflowed:
                     if (mantissa == 0) {
-                        return TFloat.ZeroBits;
+                        return FloatFormatInfo<TFloat>.ZeroBits;
                     }
 
                     // When we round the mantissa, the result may be so large that the
@@ -766,7 +781,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     //
                     // We detect this case here and re-adjust the mantissa and exponent
                     // appropriately, to form a normal number:
-                    if (mantissa > TFloat.DenormalMantissaMask) {
+                    if (mantissa > FloatFormatInfo<TFloat>.DenormalMantissaMask) {
                         // We add one to the denormalMantissaShift to account for the
                         // hidden mantissa bit (we subtracted one to account for this bit
                         // when we computed the denormalMantissaShift above).
@@ -785,14 +800,14 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     // When we round the mantissa, it may produce a result that is too
                     // large.  In this case, we divide the mantissa by two and increment
                     // the exponent (this does not change the value).
-                    if (mantissa > TFloat.NormalMantissaMask) {
+                    if (mantissa > FloatFormatInfo<TFloat>.NormalMantissaMask) {
                         mantissa >>= 1;
                         exponent++;
 
                         // The increment of the exponent may have generated a value too
                         // large to be represented.  In this case, report the overflow:
-                        if (exponent > TFloat.MaxBinaryExponent) {
-                            return TFloat.InfinityBits;
+                        if (exponent > FloatFormatInfo<TFloat>.MaxBinaryExponent) {
+                            return FloatFormatInfo<TFloat>.InfinityBits;
                         }
                     }
                 } else if (normalMantissaShift > 0) {
@@ -802,27 +817,32 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             // Unset the hidden bit in the mantissa and assemble the floating point value
             // from the computed components:
-            mantissa &= TFloat.DenormalMantissaMask;
+            mantissa &= FloatFormatInfo<TFloat>.DenormalMantissaMask;
 
-            Debug.Assert((TFloat.DenormalMantissaMask & (1UL << TFloat.DenormalMantissaBits)) == 0);
-            ulong shiftedExponent = ((ulong)(exponent + TFloat.ExponentBias)) << TFloat.DenormalMantissaBits;
-            Debug.Assert((shiftedExponent & TFloat.DenormalMantissaMask) == 0);
-            Debug.Assert((mantissa & ~TFloat.DenormalMantissaMask) == 0);
-            Debug.Assert((shiftedExponent & ~(((1UL << TFloat.ExponentBits) - 1) << TFloat.DenormalMantissaBits)) == 0); // exponent fits in its place
+            Debug.Assert((FloatFormatInfo<TFloat>.DenormalMantissaMask & (1UL << FloatFormatInfo<TFloat>.DenormalMantissaBits)) == 0);
+            ulong shiftedExponent = ((ulong)(exponent + FloatFormatInfo<TFloat>.ExponentBias)) << FloatFormatInfo<TFloat>.DenormalMantissaBits;
+            Debug.Assert((shiftedExponent & FloatFormatInfo<TFloat>.DenormalMantissaMask) == 0);
+            Debug.Assert((mantissa & ~FloatFormatInfo<TFloat>.DenormalMantissaMask) == 0);
+            Debug.Assert((shiftedExponent & ~(((1UL << FloatFormatInfo<TFloat>.ExponentBits) - 1) << FloatFormatInfo<TFloat>.DenormalMantissaBits)) == 0); // exponent fits in its place
 
             return shiftedExponent | mantissa;
         }
 
         private static ulong ConvertBigIntegerToFloatingPointBits<TFloat>(ref BigInteger value, uint integerBitsOfPrecision, bool hasNonZeroFractionalPart)
-            where TFloat : unmanaged, IBinaryFloatParseAndFormatInfo<TFloat> {
-            int baseExponent = TFloat.DenormalMantissaBits;
+            where TFloat : unmanaged, IComparable<TFloat>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TFloat>
+#endif
+            {
+            /*
+            int baseExponent = FloatFormatInfo<TFloat>.DenormalMantissaBits;
 
             // When we have 64-bits or less of precision, we can just get the mantissa directly
             if (integerBitsOfPrecision <= 64) {
-                return AssembleFloatingPointBits<TFloat>(value.ToUInt64(), baseExponent, !hasNonZeroFractionalPart);
+                return AssembleFloatingPointBits<TFloat>((ulong)value, baseExponent, !hasNonZeroFractionalPart);
             }
 
-            (uint topBlockIndex, uint topBlockBits) = Math.DivRem(integerBitsOfPrecision, 32);
+            (uint topBlockIndex, uint topBlockBits) = BitMath.DivRem(integerBitsOfPrecision, 32);
             uint middleBlockIndex = topBlockIndex - 1;
             uint bottomBlockIndex = middleBlockIndex - 1;
 
@@ -859,56 +879,71 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             return AssembleFloatingPointBits<TFloat>(mantissa, exponent, hasZeroTail);
+            */
+            double temp = (double)value;
+            ulong rt = 0;
+            if (typeof(TFloat) == typeof(double)) {
+                return rt = MathBitConverter.DoubleToUInt64Bits(temp);
+            } else if (typeof(TFloat) == typeof(float)) {
+                return rt = MathBitConverter.SingleToUInt32Bits((float)temp);
+#if BCL_TYPE_HALF
+            } else if (typeof(TFloat) == typeof(Half)) {
+                return rt = MathBitConverter.HalfToUInt16Bits((Half)temp);
+#endif // BCL_TYPE_HALF
+            }
+            return rt;
         }
 
         // get 32-bit integer from at most 9 digits
-        private static uint DigitsToUInt32(byte* p, int count) {
+        private static uint DigitsToUInt32(ref byte p, int count) {
             Debug.Assert((1 <= count) && (count <= 9));
 
-            byte* end = (p + count);
+            ref byte end = ref Unsafe.Add(ref p, count);
             uint res = 0;
 
             // parse batches of 8 digits with SWAR
-            while (p <= end - 8) {
-                res = (res * 100000000) + ParseEightDigitsUnrolled(p);
-                p += 8;
+            ref byte endFix8 = ref Unsafe.Add(ref end, -8);
+            while (UnsafeUtil.IsAddressLessThaOrEqual(ref p, ref endFix8)) {
+                res = (res * 100000000) + ParseEightDigitsUnrolled(ref p);
+                p = ref Unsafe.Add(ref p, 8);
             }
 
-            while (p != end) {
-                res = (10 * res) + p[0] - '0';
-                ++p;
+            while (!Unsafe.AreSame(ref p, ref end)) {
+                res = (10 * res) + p - '0';
+                p = ref Unsafe.Add(ref p, 1);
             }
 
             return res;
         }
 
         // get 64-bit integer from at most 19 digits
-        private static ulong DigitsToUInt64(byte* p, int count) {
+        private static ulong DigitsToUInt64(ref byte p, int count) {
             Debug.Assert((1 <= count) && (count <= 19));
 
-            byte* end = (p + count);
+            ref byte end = ref Unsafe.Add(ref p, count);
             ulong res = 0;
 
             // parse batches of 8 digits with SWAR
-            while (end - p >= 8) {
-                res = (res * 100000000) + ParseEightDigitsUnrolled(p);
-                p += 8;
+            ref byte endFix8 = ref Unsafe.Add(ref end, -8);
+            while (UnsafeUtil.IsAddressLessThaOrEqual(ref p, ref endFix8)) {
+                res = (res * 100000000) + ParseEightDigitsUnrolled(ref p);
+                p = ref Unsafe.Add(ref p, 8);
             }
 
-            while (p != end) {
-                res = (10 * res) + p[0] - '0';
-                ++p;
+            while (!Unsafe.AreSame(ref p, ref end)) {
+                res = (10 * res) + p - '0';
+                p = ref Unsafe.Add(ref p, 1);
             }
 
             return res;
         }
-
+        
         /// <summary>
         /// Parse eight consecutive digits using SWAR
         /// https://lemire.me/blog/2022/01/21/swar-explained-parsing-eight-digits/
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static uint ParseEightDigitsUnrolled(byte* chars) {
+        internal static uint ParseEightDigitsUnrolled(ref byte chars) {
             // let's take the following value (byte*) 12345678 and read it unaligned :
             // we get a ulong value of 0x3837363534333231
             // 1. Subtract character '0' 0x30 for each byte to get 0x0807060504030201
@@ -916,7 +951,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             // we need to transform it to b1b2b3b4b5b6b7b8 by computing :
             // 10000 * (100 * (10*b1+b2) + 10*b3+b4) + 100*(10*b5+b6) + 10*b7+b8
             // this is achieved by masking and shifting values
-            ulong val = Unsafe.ReadUnaligned<ulong>(chars);
+            ulong val = Unsafe.ReadUnaligned<ulong>(ref chars);
 
             // With BigEndian system an endianness swap has to be performed
             // before the following operations as if it has been read with LittleEndian system
@@ -934,10 +969,14 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         private static ulong NumberToFloatingPointBits<TFloat>(ref NumberBuffer number)
-            where TFloat : unmanaged, IBinaryFloatParseAndFormatInfo<TFloat> {
-            Debug.Assert(TFloat.DenormalMantissaBits <= FloatingPointMaxDenormalMantissaBits);
+            where TFloat : unmanaged, IComparable<TFloat>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TFloat>
+#endif
+            {
+            Debug.Assert(FloatFormatInfo<TFloat>.DenormalMantissaBits <= FloatingPointMaxDenormalMantissaBits);
 
-            Debug.Assert(number.DigitsPtr[0] != '0');
+            Debug.Assert(number.DigitsPtr != '0');
 
             Debug.Assert(number.Scale <= FloatingPointMaxExponent);
             Debug.Assert(number.Scale >= FloatingPointMinExponent);
@@ -960,9 +999,9 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             // Above 19 digits, we rely on slow path
             if (totalDigits <= 19) {
-                byte* src = number.DigitsPtr;
+                ref byte src = ref number.DigitsPtr;
 
-                ulong mantissa = DigitsToUInt64(src, (int)(totalDigits));
+                ulong mantissa = DigitsToUInt64(ref src, (int)(totalDigits));
 
                 int exponent = (int)(number.Scale - integerDigitsPresent - fractionalDigitsPresent);
                 int fastExponent = Math.Abs(exponent);
@@ -977,7 +1016,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 // we can rely on it to produce the correct result when both inputs are exact.
                 // This is known as Clinger's fast path
 
-                if ((mantissa <= TFloat.MaxMantissaFastPath) && (fastExponent <= TFloat.MaxExponentFastPath)) {
+                if ((mantissa <= FloatFormatInfo<TFloat>.MaxMantissaFastPath) && (fastExponent <= FloatFormatInfo<TFloat>.MaxExponentFastPath)) {
                     double mantissa_d = mantissa;
                     double scale = Pow10DoubleTable[fastExponent];
 
@@ -987,8 +1026,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         mantissa_d *= scale;
                     }
 
-                    TFloat result = TFloat.CreateSaturating(mantissa_d);
-                    return TFloat.FloatToBits(result);
+                    TFloat result = FloatFormatInfo<TFloat>.CreateSaturating(mantissa_d);
+                    return FloatFormatInfo<TFloat>.FloatToBits(result);
                 }
 
                 // Number Parsing at a Gigabyte per Second, Software: Practice and Experience 51(8), 2021
@@ -999,7 +1038,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 // then we need to go the slow way around again. This is very uncommon.
                 if (am.Exponent > 0) {
                     ulong word = am.Mantissa;
-                    word |= (ulong)(uint)(am.Exponent) << TFloat.DenormalMantissaBits;
+                    word |= (ulong)(uint)(am.Exponent) << FloatFormatInfo<TFloat>.DenormalMantissaBits;
                     return word;
 
                 }
@@ -1009,12 +1048,16 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         private static ulong NumberToFloatingPointBitsSlow<TFloat>(ref NumberBuffer number, uint positiveExponent, uint integerDigitsPresent, uint fractionalDigitsPresent)
-            where TFloat : unmanaged, IBinaryFloatParseAndFormatInfo<TFloat> {
+            where TFloat : unmanaged, IComparable<TFloat>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TFloat>
+#endif
+            {
             // To generate an N bit mantissa we require N + 1 bits of precision.  The
             // extra bit is used to correctly round the mantissa (if there are fewer bits
             // than this available, then that's totally okay; in that case we use what we
             // have and we don't need to round).
-            uint requiredBitsOfPrecision = (uint)(TFloat.NormalMantissaBits + 1);
+            uint requiredBitsOfPrecision = (uint)(FloatFormatInfo<TFloat>.NormalMantissaBits + 1);
 
             uint totalDigits = (uint)(number.DigitsCount);
             uint integerDigitsMissing = positiveExponent - integerDigitsPresent;
@@ -1029,18 +1072,18 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             AccumulateDecimalDigitsIntoBigInteger(ref number, IntegerFirstIndex, integerLastIndex, out BigInteger integerValue);
 
             if (integerDigitsMissing > 0) {
-                if (integerDigitsMissing > TFloat.OverflowDecimalExponent) {
-                    return TFloat.InfinityBits;
+                if (integerDigitsMissing > FloatFormatInfo<TFloat>.OverflowDecimalExponent) {
+                    return FloatFormatInfo<TFloat>.InfinityBits;
                 }
 
-                integerValue.MultiplyPow10(integerDigitsMissing);
+                integerValue = integerValue.MultiplyPow10(integerDigitsMissing);
             }
 
             // At this point, the integerValue contains the value of the integer part
             // of the mantissa.  If either [1] this number has more than the required
             // number of bits of precision or [2] the mantissa has no fractional part,
             // then we can assemble the result immediately:
-            uint integerBitsOfPrecision = BigInteger.CountSignificantBits(ref integerValue);
+            uint integerBitsOfPrecision = BigIntegerExtensions.CountSignificantBits(ref integerValue);
 
             if ((integerBitsOfPrecision >= requiredBitsOfPrecision) || (fractionalDigitsPresent == 0)) {
                 return ConvertBigIntegerToFloatingPointBits<TFloat>(
@@ -1064,16 +1107,16 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 fractionalDenominatorExponent += (uint)(-number.Scale);
             }
 
-            if ((integerBitsOfPrecision == 0) && (fractionalDenominatorExponent - (int)(totalDigits)) > TFloat.OverflowDecimalExponent) {
+            if ((integerBitsOfPrecision == 0) && (fractionalDenominatorExponent - (int)(totalDigits)) > FloatFormatInfo<TFloat>.OverflowDecimalExponent) {
                 // If there were any digits in the integer part, it is impossible to
                 // underflow (because the exponent cannot possibly be small enough),
                 // so if we underflow here it is a true underflow and we return zero.
-                return TFloat.ZeroBits;
+                return FloatFormatInfo<TFloat>.ZeroBits;
             }
 
             AccumulateDecimalDigitsIntoBigInteger(ref number, fractionalFirstIndex, fractionalLastIndex, out BigInteger fractionalNumerator);
 
-            if (fractionalNumerator.IsZero()) {
+            if (fractionalNumerator.IsZero) {
                 return ConvertBigIntegerToFloatingPointBits<TFloat>(
                     ref integerValue,
                     integerBitsOfPrecision,
@@ -1081,7 +1124,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 );
             }
 
-            BigInteger.Pow10(fractionalDenominatorExponent, out BigInteger fractionalDenominator);
+            BigIntegerExtensions.Pow10(fractionalDenominatorExponent, out BigInteger fractionalDenominator);
 
             // Because we are using only the fractional part of the mantissa here, the
             // numerator is guaranteed to be smaller than the denominator.  We normalize
@@ -1089,8 +1132,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             // the same position as the most significant bit in the denominator.  This
             // ensures that when we later shift the numerator N bits to the left, we
             // will produce N bits of precision.
-            uint fractionalNumeratorBits = BigInteger.CountSignificantBits(ref fractionalNumerator);
-            uint fractionalDenominatorBits = BigInteger.CountSignificantBits(ref fractionalDenominator);
+            uint fractionalNumeratorBits = BigIntegerExtensions.CountSignificantBits(ref fractionalNumerator);
+            uint fractionalDenominatorBits = BigIntegerExtensions.CountSignificantBits(ref fractionalDenominator);
 
             uint fractionalShift = 0;
 
@@ -1099,7 +1142,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             if (fractionalShift > 0) {
-                fractionalNumerator.ShiftLeft(fractionalShift);
+                fractionalNumerator = fractionalNumerator.ShiftLeft(fractionalShift);
             }
 
             uint requiredFractionalBitsOfPrecision = requiredBitsOfPrecision - integerBitsOfPrecision;
@@ -1136,19 +1179,19 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             // earlier, or one greater than that shift:
             uint fractionalExponent = fractionalShift;
 
-            if (BigInteger.Compare(ref fractionalNumerator, ref fractionalDenominator) < 0) {
+            if (fractionalNumerator < fractionalDenominator) {
                 fractionalExponent++;
             }
 
-            fractionalNumerator.ShiftLeft(remainingBitsOfPrecisionRequired);
+            fractionalNumerator = fractionalNumerator.ShiftLeft(remainingBitsOfPrecisionRequired);
 
-            BigInteger.DivRem(ref fractionalNumerator, ref fractionalDenominator, out BigInteger bigFractionalMantissa, out BigInteger fractionalRemainder);
-            ulong fractionalMantissa = bigFractionalMantissa.ToUInt64();
-            bool hasZeroTail = !number.HasNonZeroTail && fractionalRemainder.IsZero();
+            BigIntegerExtensions.DivRem(ref fractionalNumerator, ref fractionalDenominator, out BigInteger bigFractionalMantissa, out BigInteger fractionalRemainder);
+            ulong fractionalMantissa = (ulong)bigFractionalMantissa;
+            bool hasZeroTail = !number.HasNonZeroTail && fractionalRemainder.IsZero;
 
             // We may have produced more bits of precision than were required.  Check,
             // and remove any "extra" bits:
-            uint fractionalMantissaBits = BigInteger.CountSignificantBits(fractionalMantissa);
+            uint fractionalMantissaBits = BigIntegerExtensions.CountSignificantBits(fractionalMantissa);
 
             if (fractionalMantissaBits > requiredFractionalBitsOfPrecision) {
                 int shift = (int)(fractionalMantissaBits - requiredFractionalBitsOfPrecision);
@@ -1157,7 +1200,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             // Compose the mantissa from the integer and fractional parts:
-            ulong integerMantissa = integerValue.ToUInt64();
+            ulong integerMantissa = (ulong)integerValue;
             ulong completeMantissa = (integerMantissa << (int)(requiredFractionalBitsOfPrecision)) + fractionalMantissa;
 
             // Compute the final exponent:
@@ -1174,7 +1217,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return AssembleFloatingPointBits<TFloat>(completeMantissa, finalExponent, hasZeroTail);
         }
-
+        
         private static ulong RightShiftWithRounding(ulong value, int shift, bool hasZeroTail) {
             // If we'd need to shift further than it is possible to shift, the answer
             // is always zero:
@@ -1213,23 +1256,27 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         /// <param name="w">decimal significant (mantissa)</param>
         /// <returns>Tuple : Exponent (power of 2) and adjusted mantissa </returns>
         internal static (int Exponent, ulong Mantissa) ComputeFloat<TFloat>(long q, ulong w)
-            where TFloat : unmanaged, IBinaryFloatParseAndFormatInfo<TFloat> {
+            where TFloat : unmanaged, IComparable<TFloat>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TFloat>
+#endif
+            {
             int exponent;
             ulong mantissa = 0;
 
-            if ((w == 0) || (q < TFloat.MinFastFloatDecimalExponent)) {
+            if ((w == 0) || (q < FloatFormatInfo<TFloat>.MinFastFloatDecimalExponent)) {
                 // result should be zero
                 return default;
             }
-            if (q > TFloat.MaxFastFloatDecimalExponent) {
+            if (q > FloatFormatInfo<TFloat>.MaxFastFloatDecimalExponent) {
                 // we want to get infinity:
-                exponent = TFloat.InfinityExponent;
+                exponent = FloatFormatInfo<TFloat>.InfinityExponent;
                 mantissa = 0;
                 return (exponent, mantissa);
             }
 
             // We want the most significant bit of i to be 1. Shift if needed.
-            int lz = BitOperations.LeadingZeroCount(w);
+            int lz = MathBitOperations.LeadingZeroCount(w);
             w <<= lz;
 
             // The required precision is info.DenormalMantissaBits + 3 because
@@ -1237,7 +1284,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             // 2. We need an extra bit for rounding purposes
             // 3. We might lose a bit due to the "upperbit" routine (result too small, requiring a shift)
 
-            var product = ComputeProductApproximation(TFloat.DenormalMantissaBits + 3, q, w);
+            var product = ComputeProductApproximation(FloatFormatInfo<TFloat>.DenormalMantissaBits + 3, q, w);
             if (product.low == 0xFFFFFFFFFFFFFFFF) {
                 // could guard it further
                 // In some very rare cases, this could happen, in which case we might need a more accurate
@@ -1255,9 +1302,9 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             // is easily predicted. Which is best is data specific.
             int upperBit = (int)(product.high >> 63);
 
-            mantissa = product.high >> (upperBit + 64 - TFloat.DenormalMantissaBits - 3);
+            mantissa = product.high >> (upperBit + 64 - FloatFormatInfo<TFloat>.DenormalMantissaBits - 3);
 
-            exponent = (int)(CalculatePower((int)(q)) + upperBit - lz - (-TFloat.MaxBinaryExponent));
+            exponent = (int)(CalculatePower((int)(q)) + upperBit - lz - (-FloatFormatInfo<TFloat>.MaxBinaryExponent));
             if (exponent <= 0) {
                 // we have a subnormal?
                 // Here have that answer.power2 <= 0 so -answer.power2 >= 0
@@ -1281,20 +1328,20 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 // up 0x3fffffffffffff x 2^-1023-53  and once we do, we are no longer
                 // subnormal, but we can only know this after rounding.
                 // So we only declare a subnormal if we are smaller than the threshold.
-                exponent = (mantissa < (1UL << TFloat.DenormalMantissaBits)) ? 0 : 1;
+                exponent = (mantissa < (1UL << FloatFormatInfo<TFloat>.DenormalMantissaBits)) ? 0 : 1;
                 return (exponent, mantissa);
             }
 
             // usually, we round *up*, but if we fall right in between and and we have an
             // even basis, we need to round down
             // We are only concerned with the cases where 5**q fits in single 64-bit word.
-            if ((product.low <= 1) && (q >= TFloat.MinExponentRoundToEven) && (q <= TFloat.MaxExponentRoundToEven) &&
+            if ((product.low <= 1) && (q >= FloatFormatInfo<TFloat>.MinExponentRoundToEven) && (q <= FloatFormatInfo<TFloat>.MaxExponentRoundToEven) &&
                 ((mantissa & 3) == 1)) {
                 // We may fall between two floats!
                 // To be in-between two floats we need that in doing
                 // answer.mantissa = product.high >> (upperBit + 64 - info.DenormalMantissaBits  - 3);
                 // ... we dropped out only zeroes. But if this happened, then we can go back!!!
-                if ((mantissa << (upperBit + 64 - TFloat.DenormalMantissaBits - 3)) == product.high) {
+                if ((mantissa << (upperBit + 64 - FloatFormatInfo<TFloat>.DenormalMantissaBits - 3)) == product.high) {
                     // flip it so that we do not round up
                     mantissa &= ~1UL;
                 }
@@ -1302,31 +1349,32 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             mantissa += (mantissa & 1); // round up
             mantissa >>= 1;
-            if (mantissa >= (2UL << TFloat.DenormalMantissaBits)) {
-                mantissa = (1UL << TFloat.DenormalMantissaBits);
+            if (mantissa >= (2UL << FloatFormatInfo<TFloat>.DenormalMantissaBits)) {
+                mantissa = (1UL << FloatFormatInfo<TFloat>.DenormalMantissaBits);
                 // undo previous addition
                 exponent++;
             }
 
-            mantissa &= ~(1UL << TFloat.DenormalMantissaBits);
-            if (exponent >= TFloat.InfinityExponent) {
+            mantissa &= ~(1UL << FloatFormatInfo<TFloat>.DenormalMantissaBits);
+            if (exponent >= FloatFormatInfo<TFloat>.InfinityExponent) {
                 // infinity
-                exponent = TFloat.InfinityExponent;
+                exponent = FloatFormatInfo<TFloat>.InfinityExponent;
                 mantissa = 0;
             }
             return (exponent, mantissa);
         }
+        
         private static (ulong high, ulong low) ComputeProductApproximation(int bitPrecision, long q, ulong w) {
             // -342 being the SmallestPowerOfFive
             int index = 2 * (int)(q - -342);
             // For small values of q, e.g., q in [0,27], the answer is always exact because
             // Math.BigMul gives the exact answer.
-            ulong high = Math.BigMul(w, Pow5128Table[index], out ulong low);
+            ulong high = BitMath.BigMul(w, Pow5128Table[index], out ulong low);
             ulong precisionMask = (bitPrecision < 64) ? (0xFFFFFFFFFFFFFFFFUL >> bitPrecision) : 0xFFFFFFFFFFFFFFFFUL;
             if ((high & precisionMask) == precisionMask) {
                 // could further guard with  (lower + w < lower)
                 // regarding the second product, we only need secondproduct.high, but our expectation is that the compiler will optimize this extra work away if needed.
-                ulong high2 = Math.BigMul(w, Pow5128Table[index + 1], out ulong _);
+                ulong high2 = BitMath.BigMul(w, Pow5128Table[index + 1], out ulong _);
                 low += high2;
                 if (high2 > low) {
                     high++;

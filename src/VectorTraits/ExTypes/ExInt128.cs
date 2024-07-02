@@ -20,12 +20,14 @@ using System.Runtime.InteropServices;
 using Zyl.VectorTraits.ExTypes.Impl;
 using Zyl.VectorTraits.Numerics;
 
-namespace Zyl.VectorTraits.ExTypes
-{
+namespace Zyl.VectorTraits.ExTypes {
 
     /// <summary>Represents a 128-bit signed integer. It is binary compatible with <see cref="Int128"/> (表示 128 位有符号整数. 它与 <see cref="Int128"/> 是二进制兼容的).</summary>
     [StructLayout(LayoutKind.Sequential)]
-    public readonly partial struct ExInt128: IFormattable
+    public readonly partial struct ExInt128: IFormattable, IComparable, IComparable<ExInt128>, IEquatable<ExInt128>
+#if NET6_0_OR_GREATER
+        , ISpanFormattable
+#endif // NET6_0_OR_GREATER
 #if NET7_0_OR_GREATER
         , IBinaryInteger<ExInt128>,
           IMinMaxValue<ExInt128>,

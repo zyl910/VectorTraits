@@ -1,4 +1,14 @@
-﻿using System;
+﻿#undef THIS_HIDE
+#define TARGET_64BIT
+#if NET5_0_OR_GREATER
+#define BCL_TYPE_HALF
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#define GENERICS_MATH
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,9 +17,14 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using Zyl.VectorTraits.Impl.Util;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.ExTypes.Impl {
+    using BitConverter = MathBitConverter;
+    //using IBinaryFloatParseAndFormatInfo = IComparable;
+    //using IUtfChar = IEquatable;
+
     internal static partial class Number {
         internal const int DecimalPrecision = 29; // Decimal.DecCalc also uses this value
 
@@ -43,7 +58,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                                         "60616263646566676869" +
                                         "70717273747576777879" +
                                         "80818283848586878889" +
-                                        "90919293949596979899").ToCharArray()).ToArray();
+                                        "90919293949596979899").AsSpan()).ToArray();
         private static readonly byte[] TwoDigitsBytes =
                                        ("00010203040506070809"u8 +
                                         "10111213141516171819"u8 +
@@ -56,16 +71,16 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                                         "80818283848586878889"u8 +
                                         "90919293949596979899"u8).ToArray();
 
-        public static unsafe string FormatDecimal(decimal value, ReadOnlySpan<char> format, NumberFormatInfo info) {
+        public static string FormatDecimal(decimal value, ReadOnlySpan<char> format, NumberFormatInfo info) {
             char fmt = ParseFormatSpecifier(format, out int digits);
 
-            byte* pDigits = stackalloc byte[DecimalNumberBufferLength];
-            NumberBuffer number = new NumberBuffer(NumberBufferKind.Decimal, pDigits, DecimalNumberBufferLength);
+            Span<byte> pDigits = stackalloc byte[DecimalNumberBufferLength];
+            NumberBuffer number = new NumberBuffer(NumberBufferKind.Decimal, pDigits);
 
             DecimalToNumber(ref value, ref number);
 
-            char* stackPtr = stackalloc char[CharStackBufferSize];
-            var vlb = new ValueListBuilder<char>(new Span<char>(stackPtr, CharStackBufferSize));
+            Span<char> stackPtr = stackalloc char[CharStackBufferSize];
+            var vlb = new ValueListBuilder<char>(stackPtr);
 
             if (fmt != 0) {
                 NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -78,18 +93,18 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return result;
         }
 
-        public static unsafe bool TryFormatDecimal<TChar>(decimal value, ReadOnlySpan<char> format, NumberFormatInfo info, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        public static bool TryFormatDecimal<TChar>(decimal value, ReadOnlySpan<char> format, NumberFormatInfo info, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             char fmt = ParseFormatSpecifier(format, out int digits);
 
-            byte* pDigits = stackalloc byte[DecimalNumberBufferLength];
-            NumberBuffer number = new NumberBuffer(NumberBufferKind.Decimal, pDigits, DecimalNumberBufferLength);
+            Span<byte> pDigits = stackalloc byte[DecimalNumberBufferLength];
+            NumberBuffer number = new NumberBuffer(NumberBufferKind.Decimal, pDigits);
 
             DecimalToNumber(ref value, ref number);
 
-            TChar* stackPtr = stackalloc TChar[CharStackBufferSize];
-            var vlb = new ValueListBuilder<TChar>(new Span<TChar>(stackPtr, CharStackBufferSize));
+            Span<TChar> stackPtr = stackalloc TChar[CharStackBufferSize];
+            var vlb = new ValueListBuilder<TChar>(stackPtr);
 
             if (fmt != 0) {
                 NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -102,27 +117,31 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return success;
         }
 
-        internal static unsafe void DecimalToNumber(scoped ref decimal d, ref NumberBuffer number) {
-            byte* buffer = number.DigitsPtr;
+        internal static void DecimalToNumber(scoped ref decimal d, ref NumberBuffer number) {
+            ref byte buffer = ref number.DigitsPtr;
             number.DigitsCount = DecimalPrecision;
-            number.IsNegative = decimal.IsNegative(d);
+            number.IsNegative = MathINumberBase.IsNegative(d);
 
-            byte* p = buffer + DecimalPrecision;
-            while ((d.Mid | d.High) != 0) {
-                p = UInt32ToDecChars(p, decimal.DecDivMod1E9(ref d), 9);
+            ref byte pEnd = ref Unsafe.Add(ref buffer, DecimalPrecision);
+            ref byte p = ref pEnd;
+            while (DecimalGetMidOrHigh(d) != 0) { // while ((d.Mid | d.High) != 0)
+                p = UInt32ToDecChars(ref p, DecDivMod1E9(ref d), 9);
             }
-            p = UInt32ToDecChars(p, d.Low, 0);
+            p = UInt32ToDecChars(ref p, DecimalGetLow(d), 0);
 
-            int i = (int)((buffer + DecimalPrecision) - p);
+            int i = (int)(Unsafe.ByteOffset(ref p, ref pEnd));
 
             number.DigitsCount = i;
-            number.Scale = i - d.Scale;
+            number.Scale = i - DecimalGetScale(d);
 
-            byte* dst = number.DigitsPtr;
+            ref byte dst = ref number.DigitsPtr;
             while (--i >= 0) {
-                *dst++ = *p++;
+                // *dst++ = *p++;
+                dst = p;
+                dst = ref Unsafe.Add(ref dst, 1);
+                p = ref Unsafe.Add(ref p, 1);
             }
-            *dst = (byte)'\0';
+            dst = (byte)'\0';
 
             number.CheckConsistency();
         }
@@ -232,18 +251,25 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return maxDigits;
         }
-
+/*
         public static string FormatFloat<TNumber>(TNumber value, string? format, NumberFormatInfo info)
-            where TNumber : unmanaged, IBinaryFloatParseAndFormatInfo<TNumber> {
+            where TNumber : unmanaged, IComparable<TNumber>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TNumber>
+#endif
+            {
             var vlb = new ValueListBuilder<char>(stackalloc char[CharStackBufferSize]);
-            string result = FormatFloat(ref vlb, value, format, info) ?? vlb.AsSpan().ToString();
+            string result = FormatFloat(ref vlb, value, format.AsSpan(), info) ?? vlb.AsSpan().ToString();
             vlb.Dispose();
             return result;
         }
 
         public static bool TryFormatFloat<TNumber, TChar>(TNumber value, ReadOnlySpan<char> format, NumberFormatInfo info, Span<TChar> destination, out int charsWritten)
-            where TNumber : unmanaged, IBinaryFloatParseAndFormatInfo<TNumber>
-            where TChar : unmanaged, IUtfChar<TChar> {
+            where TNumber : unmanaged, IComparable<TNumber>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TNumber>
+#endif
+            where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             var vlb = new ValueListBuilder<TChar>(stackalloc TChar[CharStackBufferSize]);
@@ -263,13 +289,16 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         /// Non-null if an existing string can be returned, in which case the builder will be unmodified.
         /// Null if no existing string was returned, in which case the formatted output is in the builder.
         /// </returns>
-        private static unsafe string? FormatFloat<TNumber, TChar>(ref ValueListBuilder<TChar> vlb, TNumber value, ReadOnlySpan<char> format, NumberFormatInfo info)
-            where TNumber : unmanaged, IBinaryFloatParseAndFormatInfo<TNumber>
-            where TChar : unmanaged, IUtfChar<TChar> {
+        private static string? FormatFloat<TNumber, TChar>(scoped ref ValueListBuilder<TChar> vlb, TNumber value, ReadOnlySpan<char> format, NumberFormatInfo info)
+            where TNumber : unmanaged, IComparable<TNumber>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TNumber>
+#endif
+            where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
-            if (!TNumber.IsFinite(value)) {
-                if (TNumber.IsNaN(value)) {
+            if (!IsFinite(value)) {
+                if (IsNaN(value)) {
                     if (typeof(TChar) == typeof(char)) {
                         return info.NaNSymbol;
                     } else {
@@ -279,30 +308,32 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 }
 
                 if (typeof(TChar) == typeof(char)) {
-                    return TNumber.IsNegative(value) ? info.NegativeInfinitySymbol : info.PositiveInfinitySymbol;
+                    return IsNegative(value) ? info.NegativeInfinitySymbol : info.PositiveInfinitySymbol;
                 } else {
-                    vlb.Append(TNumber.IsNegative(value) ? info.NegativeInfinitySymbolTChar<TChar>() : info.PositiveInfinitySymbolTChar<TChar>());
+                    vlb.Append(IsNegative(value) ? info.NegativeInfinitySymbolTChar<TChar>() : info.PositiveInfinitySymbolTChar<TChar>());
                     return null;
                 }
             }
 
             char fmt = ParseFormatSpecifier(format, out int precision);
-            byte* pDigits = stackalloc byte[TNumber.NumberBufferLength];
+            Span<byte> pDigits = stackalloc byte[FloatFormatInfo<TNumber>.NumberBufferLength];
 
             if (fmt == '\0') {
-                precision = TNumber.MaxPrecisionCustomFormat;
+                precision = FloatFormatInfo<TNumber>.MaxPrecisionCustomFormat;
             }
 
-            NumberBuffer number = new NumberBuffer(NumberBufferKind.FloatingPoint, pDigits, TNumber.NumberBufferLength);
-            number.IsNegative = TNumber.IsNegative(value);
+            NumberBuffer number = new NumberBuffer(NumberBufferKind.FloatingPoint, pDigits);
+            number.IsNegative = IsNegative(value);
 
             // We need to track the original precision requested since some formats
             // accept values like 0 and others may require additional fixups.
             int nMaxDigits = GetFloatingPointMaxDigitsAndPrecision(fmt, ref precision, info, out bool isSignificantDigits);
 
+#if THIS_HIDE
             if ((value != default) && (!isSignificantDigits || !Grisu3.TryRun(value, precision, ref number))) {
                 Dragon4(value, precision, isSignificantDigits, ref number);
             }
+#endif
 
             number.CheckConsistency();
 
@@ -310,7 +341,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             // because we know we have enough digits to satisfy roundtrippability), we should validate
             // that the number actually roundtrips back to the original result.
 
-            Debug.Assert(((precision != -1) && (precision < TNumber.MaxRoundTripDigits)) || (TNumber.FloatToBits(value) == TNumber.FloatToBits(NumberToFloat<TNumber>(ref number))));
+            Debug.Assert(((precision != -1) && (precision < FloatFormatInfo<TNumber>.MaxRoundTripDigits)) || (FloatFormatInfo<TNumber>.FloatToBits(value) == FloatFormatInfo<TNumber>.FloatToBits(NumberToFloat<TNumber>(ref number))));
 
             if (fmt != 0) {
                 if (precision == -1) {
@@ -322,30 +353,30 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     // less digits. One example this fixes is "-60", which would otherwise be formatted as "-6E+01"
                     // since DigitsCount would be 1 and the formatter would almost immediately switch to scientific notation.
 
-                    nMaxDigits = Math.Max(number.DigitsCount, TNumber.MaxRoundTripDigits);
+                    nMaxDigits = Math.Max(number.DigitsCount, FloatFormatInfo<TNumber>.MaxRoundTripDigits);
                 }
                 NumberToString(ref vlb, ref number, fmt, nMaxDigits, info);
             } else {
-                Debug.Assert(precision == TNumber.MaxPrecisionCustomFormat);
+                Debug.Assert(precision == FloatFormatInfo<TNumber>.MaxPrecisionCustomFormat);
                 NumberToStringFormat(ref vlb, ref number, format, info);
             }
             return null;
         }
-
-        private static bool TryCopyTo<TChar>(string source, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+*/
+        private static bool TryCopyTo<TChar>(string source, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
             Debug.Assert(source != null);
 
             if (typeof(TChar) == typeof(char)) {
-                if (source.TryCopyTo(Unsafe.BitCast<Span<TChar>, Span<char>>(destination))) {
-                    charsWritten = source.Length;
+                if (source.AsSpan().TryCopyTo(MemoryMarshal.Cast<TChar, char>(destination))) {
+                    charsWritten = source!.Length;
                     return true;
                 }
 
                 charsWritten = 0;
                 return false;
             } else {
-                return Encoding.UTF8.TryGetBytes(source, Unsafe.BitCast<Span<TChar>, Span<byte>>(destination), out charsWritten);
+                return Encoding.UTF8.TryGetBytes(source.AsSpan(), MemoryMarshal.Cast<TChar, byte>(destination), out charsWritten);
             }
         }
 
@@ -365,8 +396,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return FormatInt32Slow(value, hexMask, format, provider);
 
-            static unsafe string FormatInt32Slow(int value, int hexMask, string? format, IFormatProvider? provider) {
-                ReadOnlySpan<char> formatSpan = format;
+            static string FormatInt32Slow(int value, int hexMask, string? format, IFormatProvider? provider) {
+                ReadOnlySpan<char> formatSpan = format.AsSpan();
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
@@ -380,13 +411,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[Int32NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, Int32NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[Int32NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
                     Int32ToNumber(value, ref number);
 
-                    char* stackPtr = stackalloc char[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<char>(new Span<char>(stackPtr, CharStackBufferSize));
+                    Span<char> stackPtr = stackalloc char[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<char>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -402,7 +433,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // expose to caller's likely-const format to trim away slow path
-        public static bool TryFormatInt32<TChar>(int value, int hexMask, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        public static bool TryFormatInt32<TChar>(int value, int hexMask, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             // Fast path for default format
             if (format.Length == 0) {
                 return value >= 0 ?
@@ -412,7 +443,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return TryFormatInt32Slow(value, hexMask, format, provider, destination, out charsWritten);
 
-            static unsafe bool TryFormatInt32Slow(int value, int hexMask, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
+            static bool TryFormatInt32Slow(int value, int hexMask, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
@@ -426,13 +457,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[Int32NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, Int32NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[Int32NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
                     Int32ToNumber(value, ref number);
 
-                    TChar* stackPtr = stackalloc TChar[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<TChar>(new Span<TChar>(stackPtr, CharStackBufferSize));
+                    Span<TChar> stackPtr = stackalloc TChar[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<TChar>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -455,8 +486,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return FormatUInt32Slow(value, format, provider);
 
-            static unsafe string FormatUInt32Slow(uint value, string? format, IFormatProvider? provider) {
-                ReadOnlySpan<char> formatSpan = format;
+            static string FormatUInt32Slow(uint value, string? format, IFormatProvider? provider) {
+                ReadOnlySpan<char> formatSpan = format.AsSpan();
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
@@ -468,13 +499,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[UInt32NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, UInt32NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[UInt32NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
                     UInt32ToNumber(value, ref number);
 
-                    char* stackPtr = stackalloc char[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<char>(new Span<char>(stackPtr, CharStackBufferSize));
+                    Span<char> stackPtr = stackalloc char[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<char>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -490,7 +521,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // expose to caller's likely-const format to trim away slow path
-        public static bool TryFormatUInt32<TChar>(uint value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        public static bool TryFormatUInt32<TChar>(uint value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             // Fast path for default format
@@ -500,7 +531,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return TryFormatUInt32Slow(value, format, provider, destination, out charsWritten);
 
-            static unsafe bool TryFormatUInt32Slow(uint value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
+            static bool TryFormatUInt32Slow(uint value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
@@ -512,13 +543,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[UInt32NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, UInt32NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[UInt32NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
                     UInt32ToNumber(value, ref number);
 
-                    TChar* stackPtr = stackalloc TChar[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<TChar>(new Span<TChar>(stackPtr, CharStackBufferSize));
+                    Span<TChar> stackPtr = stackalloc TChar[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<TChar>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -543,8 +574,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return FormatInt64Slow(value, format, provider);
 
-            static unsafe string FormatInt64Slow(long value, string? format, IFormatProvider? provider) {
-                ReadOnlySpan<char> formatSpan = format;
+            static string FormatInt64Slow(long value, string? format, IFormatProvider? provider) {
+                ReadOnlySpan<char> formatSpan = format.AsSpan();
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
@@ -558,13 +589,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[Int64NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, Int64NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[Int64NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
                     Int64ToNumber(value, ref number);
 
-                    char* stackPtr = stackalloc char[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<char>(new Span<char>(stackPtr, CharStackBufferSize));
+                    Span<char> stackPtr = stackalloc char[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<char>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -580,7 +611,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // expose to caller's likely-const format to trim away slow path
-        public static bool TryFormatInt64<TChar>(long value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        public static bool TryFormatInt64<TChar>(long value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             // Fast path for default format
@@ -592,7 +623,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return TryFormatInt64Slow(value, format, provider, destination, out charsWritten);
 
-            static unsafe bool TryFormatInt64Slow(long value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
+            static bool TryFormatInt64Slow(long value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
@@ -606,13 +637,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[Int64NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, Int64NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[Int64NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
                     Int64ToNumber(value, ref number);
 
-                    char* stackPtr = stackalloc char[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<TChar>(new Span<TChar>(stackPtr, CharStackBufferSize));
+                    Span<TChar> stackPtr = stackalloc TChar[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<TChar>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -635,8 +666,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return FormatUInt64Slow(value, format, provider);
 
-            static unsafe string FormatUInt64Slow(ulong value, string? format, IFormatProvider? provider) {
-                ReadOnlySpan<char> formatSpan = format;
+            static string FormatUInt64Slow(ulong value, string? format, IFormatProvider? provider) {
+                ReadOnlySpan<char> formatSpan = format.AsSpan();
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
@@ -648,13 +679,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[UInt64NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, UInt64NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[UInt64NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
                     UInt64ToNumber(value, ref number);
 
-                    char* stackPtr = stackalloc char[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<char>(new Span<char>(stackPtr, CharStackBufferSize));
+                    Span<char> stackPtr = stackalloc char[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<char>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -670,7 +701,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // expose to caller's likely-const format to trim away slow path
-        public static bool TryFormatUInt64<TChar>(ulong value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        public static bool TryFormatUInt64<TChar>(ulong value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             // Fast path for default format
@@ -680,7 +711,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return TryFormatUInt64Slow(value, format, provider, destination, out charsWritten);
 
-            static unsafe bool TryFormatUInt64Slow(ulong value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
+            static bool TryFormatUInt64Slow(ulong value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
@@ -692,13 +723,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[UInt64NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, UInt64NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[UInt64NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
                     UInt64ToNumber(value, ref number);
 
-                    TChar* stackPtr = stackalloc TChar[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<TChar>(new Span<TChar>(stackPtr, CharStackBufferSize));
+                    Span<TChar> stackPtr = stackalloc TChar[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<TChar>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -713,40 +744,40 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
         }
 
-        public static string FormatInt128(Int128 value, string? format, IFormatProvider? provider) {
+        public static string FormatExInt128(ExInt128 value, string? format, IFormatProvider? provider) {
             // Fast path for default format
             if (string.IsNullOrEmpty(format)) {
-                return Int128.IsPositive(value)
-                     ? UInt128ToDecStr((UInt128)value, digits: -1)
-                     : NegativeInt128ToDecStr(value, digits: -1, NumberFormatInfo.GetInstance(provider).NegativeSign);
+                return ExInt128.IsPositive(value)
+                     ? ExUInt128ToDecStr((ExUInt128)value, digits: -1)
+                     : NegativeExInt128ToDecStr(value, digits: -1, NumberFormatInfo.GetInstance(provider).NegativeSign);
             }
 
-            return FormatInt128Slow(value, format, provider);
+            return FormatExInt128Slow(value, format, provider);
 
-            static unsafe string FormatInt128Slow(Int128 value, string? format, IFormatProvider? provider) {
-                ReadOnlySpan<char> formatSpan = format;
+            static string FormatExInt128Slow(ExInt128 value, string? format, IFormatProvider? provider) {
+                ReadOnlySpan<char> formatSpan = format.AsSpan();
 
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
 
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
-                    return Int128.IsPositive(value)
-                        ? UInt128ToDecStr((UInt128)value, digits)
-                        : NegativeInt128ToDecStr(value, digits, NumberFormatInfo.GetInstance(provider).NegativeSign);
+                    return ExInt128.IsPositive(value)
+                        ? ExUInt128ToDecStr((ExUInt128)value, digits)
+                        : NegativeExInt128ToDecStr(value, digits, NumberFormatInfo.GetInstance(provider).NegativeSign);
                 } else if (fmtUpper == 'X') {
-                    return Int128ToHexStr(value, GetHexBase(fmt), digits);
+                    return ExInt128ToHexStr(value, GetHexBase(fmt), digits);
                 } else if (fmtUpper == 'B') {
-                    return UInt128ToBinaryStr(value, digits);
+                    return ExUInt128ToBinaryStr(value, digits);
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[Int128NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, Int128NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[ExInt128NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
-                    Int128ToNumber(value, ref number);
+                    ExInt128ToNumber(value, ref number);
 
-                    char* stackPtr = stackalloc char[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<char>(new Span<char>(stackPtr, CharStackBufferSize));
+                    Span<char> stackPtr = stackalloc char[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<char>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -761,40 +792,40 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
         }
 
-        public static bool TryFormatInt128<TChar>(Int128 value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        public static bool TryFormatExInt128<TChar>(ExInt128 value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             // Fast path for default format
             if (format.Length == 0) {
-                return Int128.IsPositive(value)
-                     ? TryUInt128ToDecStr((UInt128)value, digits: -1, destination, out charsWritten)
-                     : TryNegativeInt128ToDecStr(value, digits: -1, NumberFormatInfo.GetInstance(provider).NegativeSignTChar<TChar>(), destination, out charsWritten);
+                return ExInt128.IsPositive(value)
+                     ? TryExUInt128ToDecStr((ExUInt128)value, digits: -1, destination, out charsWritten)
+                     : TryNegativeExInt128ToDecStr(value, digits: -1, NumberFormatInfo.GetInstance(provider).NegativeSignTChar<TChar>(), destination, out charsWritten);
             }
 
-            return TryFormatInt128Slow(value, format, provider, destination, out charsWritten);
+            return TryFormatExInt128Slow(value, format, provider, destination, out charsWritten);
 
-            static unsafe bool TryFormatInt128Slow(Int128 value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
+            static bool TryFormatExInt128Slow(ExInt128 value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
 
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
-                    return Int128.IsPositive(value)
-                        ? TryUInt128ToDecStr((UInt128)value, digits, destination, out charsWritten)
-                        : TryNegativeInt128ToDecStr(value, digits, NumberFormatInfo.GetInstance(provider).NegativeSignTChar<TChar>(), destination, out charsWritten);
+                    return ExInt128.IsPositive(value)
+                        ? TryExUInt128ToDecStr((ExUInt128)value, digits, destination, out charsWritten)
+                        : TryNegativeExInt128ToDecStr(value, digits, NumberFormatInfo.GetInstance(provider).NegativeSignTChar<TChar>(), destination, out charsWritten);
                 } else if (fmtUpper == 'X') {
-                    return TryInt128ToHexStr(value, GetHexBase(fmt), digits, destination, out charsWritten);
+                    return TryExInt128ToHexStr(value, GetHexBase(fmt), digits, destination, out charsWritten);
                 } else if (fmtUpper == 'B') {
-                    return TryUInt128ToBinaryStr(value, digits, destination, out charsWritten);
+                    return TryExUInt128ToBinaryStr(value, digits, destination, out charsWritten);
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[Int128NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, Int128NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[ExInt128NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
-                    Int128ToNumber(value, ref number);
+                    ExInt128ToNumber(value, ref number);
 
-                    TChar* stackPtr = stackalloc TChar[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<TChar>(new Span<TChar>(stackPtr, CharStackBufferSize));
+                    Span<TChar> stackPtr = stackalloc TChar[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<TChar>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -809,36 +840,36 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
         }
 
-        public static string FormatUInt128(UInt128 value, string? format, IFormatProvider? provider) {
+        public static string FormatExUInt128(ExUInt128 value, string? format, IFormatProvider? provider) {
             // Fast path for default format
             if (string.IsNullOrEmpty(format)) {
-                return UInt128ToDecStr(value, digits: -1);
+                return ExUInt128ToDecStr(value, digits: -1);
             }
 
-            return FormatUInt128Slow(value, format, provider);
+            return FormatExUInt128Slow(value, format, provider);
 
-            static unsafe string FormatUInt128Slow(UInt128 value, string? format, IFormatProvider? provider) {
-                ReadOnlySpan<char> formatSpan = format;
+            static string FormatExUInt128Slow(ExUInt128 value, string? format, IFormatProvider? provider) {
+                ReadOnlySpan<char> formatSpan = format.AsSpan();
 
                 char fmt = ParseFormatSpecifier(formatSpan, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
 
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
-                    return UInt128ToDecStr(value, digits);
+                    return ExUInt128ToDecStr(value, digits);
                 } else if (fmtUpper == 'X') {
-                    return Int128ToHexStr((Int128)value, GetHexBase(fmt), digits);
+                    return ExInt128ToHexStr((ExInt128)value, GetHexBase(fmt), digits);
                 } else if (fmtUpper == 'B') {
-                    return UInt128ToBinaryStr((Int128)value, digits);
+                    return ExUInt128ToBinaryStr((ExInt128)value, digits);
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[UInt128NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, UInt128NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[ExUInt128NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
-                    UInt128ToNumber(value, ref number);
+                    ExUInt128ToNumber(value, ref number);
 
-                    char* stackPtr = stackalloc char[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<char>(new Span<char>(stackPtr, CharStackBufferSize));
+                    Span<char> stackPtr = stackalloc char[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<char>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -853,36 +884,36 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
         }
 
-        public static bool TryFormatUInt128<TChar>(UInt128 value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        public static bool TryFormatExUInt128<TChar>(ExUInt128 value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             // Fast path for default format
             if (format.Length == 0) {
-                return TryUInt128ToDecStr(value, digits: -1, destination, out charsWritten);
+                return TryExUInt128ToDecStr(value, digits: -1, destination, out charsWritten);
             }
 
-            return TryFormatUInt128Slow(value, format, provider, destination, out charsWritten);
+            return TryFormatExUInt128Slow(value, format, provider, destination, out charsWritten);
 
-            static unsafe bool TryFormatUInt128Slow(UInt128 value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
+            static bool TryFormatExUInt128Slow(ExUInt128 value, ReadOnlySpan<char> format, IFormatProvider? provider, Span<TChar> destination, out int charsWritten) {
                 char fmt = ParseFormatSpecifier(format, out int digits);
                 char fmtUpper = (char)(fmt & 0xFFDF); // ensure fmt is upper-cased for purposes of comparison
 
                 if (fmtUpper == 'G' ? digits < 1 : fmtUpper == 'D') {
-                    return TryUInt128ToDecStr(value, digits, destination, out charsWritten);
+                    return TryExUInt128ToDecStr(value, digits, destination, out charsWritten);
                 } else if (fmtUpper == 'X') {
-                    return TryInt128ToHexStr((Int128)value, GetHexBase(fmt), digits, destination, out charsWritten);
+                    return TryExInt128ToHexStr((ExInt128)value, GetHexBase(fmt), digits, destination, out charsWritten);
                 } else if (fmtUpper == 'B') {
-                    return TryUInt128ToBinaryStr((Int128)value, digits, destination, out charsWritten);
+                    return TryExUInt128ToBinaryStr((ExInt128)value, digits, destination, out charsWritten);
                 } else {
                     NumberFormatInfo info = NumberFormatInfo.GetInstance(provider);
 
-                    byte* pDigits = stackalloc byte[UInt128NumberBufferLength];
-                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits, UInt128NumberBufferLength);
+                    Span<byte> pDigits = stackalloc byte[ExUInt128NumberBufferLength];
+                    NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, pDigits);
 
-                    UInt128ToNumber(value, ref number);
+                    ExUInt128ToNumber(value, ref number);
 
-                    TChar* stackPtr = stackalloc TChar[CharStackBufferSize];
-                    var vlb = new ValueListBuilder<TChar>(new Span<TChar>(stackPtr, CharStackBufferSize));
+                    Span<TChar>  stackPtr = stackalloc TChar[CharStackBufferSize];
+                    var vlb = new ValueListBuilder<TChar>(stackPtr);
 
                     if (fmt != 0) {
                         NumberToString(ref vlb, ref number, fmt, digits, info);
@@ -898,7 +929,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe void Int32ToNumber(int value, ref NumberBuffer number) {
+        private static void Int32ToNumber(int value, ref NumberBuffer number) {
             number.DigitsCount = Int32Precision;
 
             if (value >= 0) {
@@ -908,19 +939,22 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 value = -value;
             }
 
-            byte* buffer = number.DigitsPtr;
-            byte* p = UInt32ToDecChars(buffer + Int32Precision, (uint)value, 0);
+            ref byte buffer = ref number.DigitsPtr;
+            ref byte p = ref UInt32ToDecChars(ref Unsafe.Add(ref buffer, Int32Precision), (uint)value, 0);
 
             int i = (int)(buffer + Int32Precision - p);
 
             number.DigitsCount = i;
             number.Scale = i;
 
-            byte* dst = number.DigitsPtr;
+            ref byte dst = ref number.DigitsPtr;
             while (--i >= 0) {
-                *dst++ = *p++;
+                //*dst++ = *p++;
+                dst = p;
+                dst = ref Unsafe.Add(ref dst, 1);
+                p = ref Unsafe.Add(ref p, 1);
             }
-            *dst = (byte)'\0';
+            dst = (byte)'\0';
 
             number.CheckConsistency();
         }
@@ -930,7 +964,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 UInt32ToDecStr((uint)value) :
                 NegativeInt32ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
 
-        private static unsafe string NegativeInt32ToDecStr(int value, int digits, string sNegative) {
+        private static string NegativeInt32ToDecStr(int value, int digits, string sNegative) {
             Debug.Assert(value < 0);
 
             if (digits < 1) {
@@ -938,20 +972,22 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountDigits((uint)(-value))) + sNegative.Length;
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = UInt32ToDecChars(buffer + bufferLength, (uint)(-value), digits);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref UInt32ToDecChars(ref Unsafe.Add(ref buffer, bufferLength), (uint)(-value), digits);
                 Debug.Assert(p == buffer + sNegative.Length);
 
                 for (int i = sNegative.Length - 1; i >= 0; i--) {
-                    *(--p) = sNegative[i];
+                    p = ref Unsafe.Subtract(ref p, 1);
+                    p = sNegative[i];
                 }
-                Debug.Assert(p == buffer);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        internal static unsafe bool TryNegativeInt32ToDecStr<TChar>(int value, int digits, ReadOnlySpan<TChar> sNegative, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static bool TryNegativeInt32ToDecStr<TChar>(int value, int digits, ReadOnlySpan<TChar> sNegative, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
             Debug.Assert(value < 0);
 
@@ -966,33 +1002,36 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             charsWritten = bufferLength;
-            fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                TChar* p = UInt32ToDecChars(buffer + bufferLength, (uint)(-value), digits);
-                Debug.Assert(p == buffer + sNegative.Length);
+            if (true) {
+                ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                ref TChar p = ref UInt32ToDecChars(ref Unsafe.Add(ref buffer, bufferLength), (uint)(-value), digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref Unsafe.Add(ref buffer, sNegative.Length)));
 
                 for (int i = sNegative.Length - 1; i >= 0; i--) {
-                    *(--p) = sNegative[i];
+                    p = ref Unsafe.Subtract(ref p, 1);
+                    p = sNegative[i];
                 }
-                Debug.Assert(p == buffer);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
             return true;
         }
 
-        private static unsafe string Int32ToHexStr(int value, char hexBase, int digits) {
+        private static string Int32ToHexStr(int value, char hexBase, int digits) {
             if (digits < 1) {
                 digits = 1;
             }
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountHexDigits((uint)value));
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = Int32ToHexChars(buffer + bufferLength, (uint)value, hexBase, digits);
-                Debug.Assert(p == buffer);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref Int32ToHexChars(ref Unsafe.Add(ref buffer, bufferLength), (uint)value, hexBase, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        internal static unsafe bool TryInt32ToHexStr<TChar>(int value, char hexBase, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static bool TryInt32ToHexStr<TChar>(int value, char hexBase, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             if (digits < 1) {
@@ -1006,102 +1045,110 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             charsWritten = bufferLength;
-            fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                TChar* p = Int32ToHexChars(buffer + bufferLength, (uint)value, hexBase, digits);
-                Debug.Assert(p == buffer);
+            if (true) {
+                ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                ref TChar p = ref Int32ToHexChars(ref Unsafe.Add(ref buffer, bufferLength), (uint)value, hexBase, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TChar* Int32ToHexChars<TChar>(TChar* buffer, uint value, int hexBase, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        private static ref TChar Int32ToHexChars<TChar>(ref TChar buffer, uint value, int hexBase, int digits) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             while (--digits >= 0 || value != 0) {
                 byte digit = (byte)(value & 0xF);
-                *(--buffer) = TChar.CastFrom(digit + (digit < 10 ? (byte)'0' : hexBase));
+                buffer = ref Unsafe.Subtract(ref buffer, 1);
+                buffer = CastFrom<TChar>((byte)(digit + (digit < 10 ? (byte)'0' : hexBase)));
                 value >>= 4;
             }
-            return buffer;
+            return ref buffer;
         }
 
-        private static unsafe string UInt32ToBinaryStr(uint value, int digits) {
+        private static string UInt32ToBinaryStr(uint value, int digits) {
             if (digits < 1) {
                 digits = 1;
             }
 
-            int bufferLength = Math.Max(digits, 32 - (int)uint.LeadingZeroCount(value));
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = UInt32ToBinaryChars(buffer + bufferLength, value, digits);
-                Debug.Assert(p == buffer);
+            int bufferLength = Math.Max(digits, 32 - (int)MathBitOperations.LeadingZeroCount(value));
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref UInt32ToBinaryChars(ref Unsafe.Add(ref buffer, bufferLength), value, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        private static unsafe bool TryUInt32ToBinaryStr<TChar>(uint value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        private static bool TryUInt32ToBinaryStr<TChar>(uint value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             if (digits < 1) {
                 digits = 1;
             }
 
-            int bufferLength = Math.Max(digits, 32 - (int)uint.LeadingZeroCount(value));
+            int bufferLength = Math.Max(digits, 32 - (int)MathBitOperations.LeadingZeroCount(value));
             if (bufferLength > destination.Length) {
                 charsWritten = 0;
                 return false;
             }
 
             charsWritten = bufferLength;
-            fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                TChar* p = UInt32ToBinaryChars(buffer + bufferLength, value, digits);
-                Debug.Assert(p == buffer);
+            if (true) {
+                ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                ref TChar p = ref UInt32ToBinaryChars(ref Unsafe.Add(ref buffer, bufferLength), value, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TChar* UInt32ToBinaryChars<TChar>(TChar* buffer, uint value, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        private static ref TChar UInt32ToBinaryChars<TChar>(ref TChar buffer, uint value, int digits) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             while (--digits >= 0 || value != 0) {
-                *(--buffer) = TChar.CastFrom('0' + (byte)(value & 0x1));
+                buffer = ref Unsafe.Subtract(ref buffer, 1);
+                buffer = CastFrom<TChar>((byte)'0' + (byte)(value & 0x1));
                 value >>= 1;
             }
-            return buffer;
+            return ref buffer;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe void UInt32ToNumber(uint value, ref NumberBuffer number) {
+        private static void UInt32ToNumber(uint value, ref NumberBuffer number) {
             number.DigitsCount = UInt32Precision;
             number.IsNegative = false;
 
-            byte* buffer = number.DigitsPtr;
-            byte* p = UInt32ToDecChars(buffer + UInt32Precision, value, 0);
+            ref byte buffer = ref number.DigitsPtr;
+            ref byte p = ref UInt32ToDecChars(ref Unsafe.Add(ref buffer, UInt32Precision), value, 0);
 
             int i = (int)(buffer + UInt32Precision - p);
 
             number.DigitsCount = i;
             number.Scale = i;
 
-            byte* dst = number.DigitsPtr;
+            ref byte dst = ref number.DigitsPtr;
             while (--i >= 0) {
-                *dst++ = *p++;
+                //*dst++ = *p++;
+                dst = p;
+                dst = ref Unsafe.Add(ref dst, 1);
+                p = ref Unsafe.Add(ref p, 1);
             }
-            *dst = (byte)'\0';
+            dst = (byte)'\0';
 
             number.CheckConsistency();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe void WriteTwoDigits<TChar>(uint value, TChar* ptr) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static void WriteTwoDigits<TChar>(uint value, ref TChar ptr) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
             Debug.Assert(value <= 99);
 
             Unsafe.CopyBlockUnaligned(
-                ref *(byte*)ptr,
-                ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(typeof(TChar) == typeof(char) ? TwoDigitsCharsAsBytes : TwoDigitsBytes), (uint)sizeof(TChar) * 2 * value),
-                (uint)sizeof(TChar) * 2);
+                ref Unsafe.As<TChar, byte>(ref ptr),
+                ref Unsafe.Add(ref UnsafeUtil.GetArrayDataReference(typeof(TChar) == typeof(char) ? TwoDigitsCharsAsBytes : TwoDigitsBytes), (nint)(Unsafe.SizeOf<TChar>() * 2 * value)),
+                (uint)Unsafe.SizeOf<TChar>() * 2);
         }
 
         /// <summary>
@@ -1109,86 +1156,88 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         /// This method performs best when the starting index is a constant literal.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe void WriteFourDigits<TChar>(uint value, TChar* ptr) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static void WriteFourDigits<TChar>(uint value, ref TChar ptr) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
             Debug.Assert(value <= 9999);
 
-            (value, uint remainder) = Math.DivRem(value, 100);
+            (value, uint remainder) = BitMath.DivRem(value, 100);
 
-            ref byte charsArray = ref MemoryMarshal.GetArrayDataReference(typeof(TChar) == typeof(char) ? TwoDigitsCharsAsBytes : TwoDigitsBytes);
-
-            Unsafe.CopyBlockUnaligned(
-                ref *(byte*)ptr,
-                ref Unsafe.Add(ref charsArray, (uint)sizeof(TChar) * 2 * value),
-                (uint)sizeof(TChar) * 2);
+            ref byte charsArray = ref UnsafeUtil.GetArrayDataReference(typeof(TChar) == typeof(char) ? TwoDigitsCharsAsBytes : TwoDigitsBytes);
 
             Unsafe.CopyBlockUnaligned(
-                ref *(byte*)(ptr + 2),
-                ref Unsafe.Add(ref charsArray, (uint)sizeof(TChar) * 2 * remainder),
-                (uint)sizeof(TChar) * 2);
+                ref Unsafe.As<TChar, byte>(ref ptr),
+                ref Unsafe.Add(ref charsArray, (nint)(Unsafe.SizeOf<TChar>() * 2 * value)),
+                (uint)Unsafe.SizeOf<TChar>() * 2);
+
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<TChar, byte>(ref Unsafe.Add(ref ptr, 2)),
+                ref Unsafe.Add(ref charsArray, (nint)(Unsafe.SizeOf<TChar>() * 2 * remainder)),
+                (uint)Unsafe.SizeOf<TChar>() * 2);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe void WriteDigits<TChar>(uint value, TChar* ptr, int count) where TChar : unmanaged, IUtfChar<TChar> {
-            TChar* cur;
-            for (cur = ptr + count - 1; cur > ptr; cur--) {
+        internal static void WriteDigits<TChar>(uint value, ref TChar ptr, int count) where TChar : unmanaged, IEquatable<TChar> {
+            ref TChar cur = ref Unsafe.Add(ref ptr, count - 1);
+            for (; Unsafe.IsAddressGreaterThan(ref cur, ref ptr); cur = ref Unsafe.Subtract(ref cur, 1)) {
                 uint temp = '0' + value;
                 value /= 10;
-                *cur = TChar.CastFrom(temp - (value * 10));
+                cur = CastFrom<TChar>(temp - (value * 10));
             }
 
             Debug.Assert(value < 10);
-            Debug.Assert(cur == ptr);
-            *cur = TChar.CastFrom('0' + value);
+            Debug.Assert(Unsafe.AreSame(ref cur, ref ptr));
+            cur = CastFrom<TChar>('0' + value);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe TChar* UInt32ToDecChars<TChar>(TChar* bufferEnd, uint value) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static ref TChar UInt32ToDecChars<TChar>(ref TChar bufferEnd, uint value) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             if (value >= 10) {
                 // Handle all values >= 100 two-digits at a time so as to avoid expensive integer division operations.
                 while (value >= 100) {
-                    bufferEnd -= 2;
-                    (value, uint remainder) = Math.DivRem(value, 100);
-                    WriteTwoDigits(remainder, bufferEnd);
+                    bufferEnd = ref Unsafe.Add(ref bufferEnd, -2);
+                    (value, uint remainder) = BitMath.DivRem(value, 100);
+                    WriteTwoDigits(remainder, ref bufferEnd);
                 }
 
                 // If there are two digits remaining, store them.
                 if (value >= 10) {
-                    bufferEnd -= 2;
-                    WriteTwoDigits(value, bufferEnd);
-                    return bufferEnd;
+                    bufferEnd = ref Unsafe.Add(ref bufferEnd, -2);
+                    WriteTwoDigits(value, ref bufferEnd);
+                    return ref bufferEnd;
                 }
             }
 
             // Otherwise, store the single digit remaining.
-            *(--bufferEnd) = TChar.CastFrom(value + '0');
-            return bufferEnd;
+            bufferEnd = ref Unsafe.Add(ref bufferEnd, -1);
+            bufferEnd = CastFrom<TChar>(value + '0');
+            return ref bufferEnd;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe TChar* UInt32ToDecChars<TChar>(TChar* bufferEnd, uint value, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static ref TChar UInt32ToDecChars<TChar>(ref TChar bufferEnd, uint value, int digits) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             uint remainder;
             while (value >= 100) {
-                bufferEnd -= 2;
+                bufferEnd = ref Unsafe.Add(ref bufferEnd, -2);
                 digits -= 2;
-                (value, remainder) = Math.DivRem(value, 100);
-                WriteTwoDigits(remainder, bufferEnd);
+                (value, remainder) = BitMath.DivRem(value, 100);
+                WriteTwoDigits(remainder, ref bufferEnd);
             }
 
             while (value != 0 || digits > 0) {
                 digits--;
-                (value, remainder) = Math.DivRem(value, 10);
-                *(--bufferEnd) = TChar.CastFrom(remainder + '0');
+                (value, remainder) = BitMath.DivRem(value, 10);
+                bufferEnd = ref Unsafe.Add(ref bufferEnd, -1);
+                bufferEnd = CastFrom<TChar>(remainder + '0');
             }
 
-            return bufferEnd;
+            return ref bufferEnd;
         }
 
-        internal static unsafe string UInt32ToDecStr(uint value) {
+        internal static string UInt32ToDecStr(uint value) {
             // For small numbers, consult a lazily-populated cache.
             if (value < SmallNumberCacheLength) {
                 return UInt32ToDecStrForKnownSmallNumber(value);
@@ -1206,41 +1255,44 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 s_smallNumberCache[value] = UInt32ToDecStr_NoSmallNumberCheck(value);
         }
 
-        private static unsafe string UInt32ToDecStr_NoSmallNumberCheck(uint value) {
+        private static string UInt32ToDecStr_NoSmallNumberCheck(uint value) {
             int bufferLength = FormattingHelpers.CountDigits(value);
 
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = buffer + bufferLength;
-                p = UInt32ToDecChars(p, value);
-                Debug.Assert(p == buffer);
+            Span<char> result = stackalloc char[bufferLength];
+            ref char buffer = ref result[0];
+            if (true) {
+                ref char p = ref Unsafe.Add(ref buffer, bufferLength);
+                p = UInt32ToDecChars(ref p, value);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        private static unsafe string UInt32ToDecStr(uint value, int digits) {
+        private static string UInt32ToDecStr(uint value, int digits) {
             if (digits <= 1)
                 return UInt32ToDecStr(value);
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountDigits(value));
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = buffer + bufferLength;
-                p = UInt32ToDecChars(p, value, digits);
-                Debug.Assert(p == buffer);
+            Span<char> result = stackalloc char[bufferLength];
+            ref char buffer = ref result[0];
+            if (true) {
+                ref char p = ref Unsafe.Add(ref buffer, bufferLength);
+                p = UInt32ToDecChars(ref p, value, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        internal static unsafe bool TryUInt32ToDecStr<TChar>(uint value, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static bool TryUInt32ToDecStr<TChar>(uint value, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             int bufferLength = FormattingHelpers.CountDigits(value);
             if (bufferLength <= destination.Length) {
                 charsWritten = bufferLength;
-                fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                    TChar* p = UInt32ToDecChars(buffer + bufferLength, value);
-                    Debug.Assert(p == buffer);
+                if (true) {
+                    ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                    ref TChar p = ref UInt32ToDecChars(ref Unsafe.Add(ref buffer, bufferLength), value);
+                    Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
                 }
                 return true;
             }
@@ -1249,19 +1301,20 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return false;
         }
 
-        internal static unsafe bool TryUInt32ToDecStr<TChar>(uint value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static bool TryUInt32ToDecStr<TChar>(uint value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             int countedDigits = FormattingHelpers.CountDigits(value);
             int bufferLength = Math.Max(digits, countedDigits);
             if (bufferLength <= destination.Length) {
                 charsWritten = bufferLength;
-                fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                    TChar* p = buffer + bufferLength;
+                if (true) {
+                    ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                    ref TChar p = ref Unsafe.Add(ref buffer, bufferLength);
                     p = digits > countedDigits ?
-                        UInt32ToDecChars(p, value, digits) :
-                        UInt32ToDecChars(p, value);
-                    Debug.Assert(p == buffer);
+                        UInt32ToDecChars(ref p, value, digits) :
+                        UInt32ToDecChars(ref p, value);
+                    Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
                 }
                 return true;
             }
@@ -1271,7 +1324,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe void Int64ToNumber(long value, ref NumberBuffer number) {
+        private static void Int64ToNumber(long value, ref NumberBuffer number) {
             number.DigitsCount = Int64Precision;
 
             if (value >= 0) {
@@ -1281,19 +1334,22 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 value = -value;
             }
 
-            byte* buffer = number.DigitsPtr;
-            byte* p = UInt64ToDecChars(buffer + Int64Precision, (ulong)value, 0);
+            ref byte buffer = ref number.DigitsPtr;
+            ref byte p = ref UInt64ToDecChars(ref Unsafe.Add(ref buffer, Int64Precision), (ulong)value, 0);
 
             int i = (int)(buffer + Int64Precision - p);
 
             number.DigitsCount = i;
             number.Scale = i;
 
-            byte* dst = number.DigitsPtr;
+            ref byte dst = ref number.DigitsPtr;
             while (--i >= 0) {
-                *dst++ = *p++;
+                //*dst++ = *p++;
+                dst = p;
+                dst = ref Unsafe.Add(ref dst, 1);
+                p = ref Unsafe.Add(ref p, 1);
             }
-            *dst = (byte)'\0';
+            dst = (byte)'\0';
 
             number.CheckConsistency();
         }
@@ -1304,7 +1360,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 NegativeInt64ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
         }
 
-        private static unsafe string NegativeInt64ToDecStr(long value, int digits, string sNegative) {
+        private static string NegativeInt64ToDecStr(long value, int digits, string sNegative) {
             Debug.Assert(value < 0);
 
             if (digits < 1) {
@@ -1312,20 +1368,22 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountDigits((ulong)(-value))) + sNegative.Length;
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = UInt64ToDecChars(buffer + bufferLength, (ulong)(-value), digits);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref UInt64ToDecChars(ref Unsafe.Add(ref buffer, bufferLength), (ulong)(-value), digits);
                 Debug.Assert(p == buffer + sNegative.Length);
 
                 for (int i = sNegative.Length - 1; i >= 0; i--) {
-                    *(--p) = sNegative[i];
+                    p = ref Unsafe.Subtract(ref p, 1);
+                    p = sNegative[i];
                 }
-                Debug.Assert(p == buffer);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        internal static unsafe bool TryNegativeInt64ToDecStr<TChar>(long value, int digits, ReadOnlySpan<TChar> sNegative, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static bool TryNegativeInt64ToDecStr<TChar>(long value, int digits, ReadOnlySpan<TChar> sNegative, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
             Debug.Assert(value < 0);
 
@@ -1340,33 +1398,36 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             charsWritten = bufferLength;
-            fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                TChar* p = UInt64ToDecChars(buffer + bufferLength, (ulong)(-value), digits);
-                Debug.Assert(p == buffer + sNegative.Length);
+            if (true) {
+                ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                ref TChar p = ref UInt64ToDecChars(ref Unsafe.Add(ref buffer, bufferLength), (ulong)(-value), digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref Unsafe.Add(ref buffer, sNegative.Length)));
 
                 for (int i = sNegative.Length - 1; i >= 0; i--) {
-                    *(--p) = sNegative[i];
+                    p = ref Unsafe.Subtract(ref p, 1);
+                    p = sNegative[i];
                 }
-                Debug.Assert(p == buffer);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
             return true;
         }
 
-        private static unsafe string Int64ToHexStr(long value, char hexBase, int digits) {
+        private static string Int64ToHexStr(long value, char hexBase, int digits) {
             if (digits < 1) {
                 digits = 1;
             }
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountHexDigits((ulong)value));
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = Int64ToHexChars(buffer + bufferLength, (ulong)value, hexBase, digits);
-                Debug.Assert(p == buffer);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref Int64ToHexChars(ref Unsafe.Add(ref buffer, bufferLength), (ulong)value, hexBase, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        internal static unsafe bool TryInt64ToHexStr<TChar>(long value, char hexBase, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static bool TryInt64ToHexStr<TChar>(long value, char hexBase, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             if (digits < 1) {
@@ -1380,9 +1441,10 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             charsWritten = bufferLength;
-            fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                TChar* p = Int64ToHexChars(buffer + bufferLength, (ulong)value, hexBase, digits);
-                Debug.Assert(p == buffer);
+            if (true) {
+                ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                ref TChar p = ref Int64ToHexChars(ref Unsafe.Add(ref buffer, bufferLength), (ulong)value, hexBase, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
             return true;
         }
@@ -1390,62 +1452,65 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 #if TARGET_64BIT
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-        private static unsafe TChar* Int64ToHexChars<TChar>(TChar* buffer, ulong value, int hexBase, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        private static ref TChar Int64ToHexChars<TChar>(ref TChar buffer, ulong value, int hexBase, int digits) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-#if TARGET_32BIT
-            uint lower = (uint)value;
-            uint upper = (uint)(value >> 32);
+            if (!BitMathCore.Is64Bit) {
+                uint lower = (uint)value;
+                uint upper = (uint)(value >> 32);
 
-            if (upper != 0)
-            {
-                buffer = Int32ToHexChars(buffer, lower, hexBase, 8);
-                return Int32ToHexChars(buffer, upper, hexBase, digits - 8);
+                if (upper != 0)
+                {
+                    buffer = Int32ToHexChars(ref buffer, lower, hexBase, 8);
+                    return ref Int32ToHexChars(ref buffer, upper, hexBase, digits - 8);
+                }
+                else
+                {
+                    return ref Int32ToHexChars(ref buffer, lower, hexBase, Math.Max(digits, 1));
+                }
+            } else {
+                while (--digits >= 0 || value != 0) {
+                    byte digit = (byte)(value & 0xF);
+                    buffer = ref Unsafe.Subtract(ref buffer, 1);
+                    buffer = CastFrom<TChar>(digit + (digit < 10 ? (byte)'0' : hexBase));
+                    value >>= 4;
+                }
+                return ref buffer;
             }
-            else
-            {
-                return Int32ToHexChars(buffer, lower, hexBase, Math.Max(digits, 1));
-            }
-#else
-            while (--digits >= 0 || value != 0) {
-                byte digit = (byte)(value & 0xF);
-                *(--buffer) = TChar.CastFrom(digit + (digit < 10 ? (byte)'0' : hexBase));
-                value >>= 4;
-            }
-            return buffer;
-#endif
         }
 
-        private static unsafe string UInt64ToBinaryStr(ulong value, int digits) {
+        private static string UInt64ToBinaryStr(ulong value, int digits) {
             if (digits < 1) {
                 digits = 1;
             }
 
-            int bufferLength = Math.Max(digits, 64 - (int)ulong.LeadingZeroCount(value));
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = UInt64ToBinaryChars(buffer + bufferLength, value, digits);
-                Debug.Assert(p == buffer);
+            int bufferLength = Math.Max(digits, 64 - (int)MathBitOperations.LeadingZeroCount(value));
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref UInt64ToBinaryChars(ref Unsafe.Add(ref buffer, bufferLength), value, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        private static unsafe bool TryUInt64ToBinaryStr<TChar>(ulong value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        private static bool TryUInt64ToBinaryStr<TChar>(ulong value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             if (digits < 1) {
                 digits = 1;
             }
 
-            int bufferLength = Math.Max(digits, 64 - (int)ulong.LeadingZeroCount(value));
+            int bufferLength = Math.Max(digits, 64 - (int)MathBitOperations.LeadingZeroCount(value));
             if (bufferLength > destination.Length) {
                 charsWritten = 0;
                 return false;
             }
 
             charsWritten = bufferLength;
-            fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                TChar* p = UInt64ToBinaryChars(buffer + bufferLength, value, digits);
-                Debug.Assert(p == buffer);
+            if (true) {
+                ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                ref TChar p = ref UInt64ToBinaryChars(ref Unsafe.Add(ref buffer, bufferLength), value, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
             return true;
         }
@@ -1453,48 +1518,52 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 #if TARGET_64BIT
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-        private static unsafe TChar* UInt64ToBinaryChars<TChar>(TChar* buffer, ulong value, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        private static ref TChar UInt64ToBinaryChars<TChar>(ref TChar buffer, ulong value, int digits) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-#if TARGET_32BIT
-            uint lower = (uint)value;
-            uint upper = (uint)(value >> 32);
+            if (!BitMathCore.Is64Bit) {
+                uint lower = (uint)value;
+                uint upper = (uint)(value >> 32);
 
-            if (upper != 0)
-            {
-                buffer = UInt32ToBinaryChars(buffer, lower, 32);
-                return UInt32ToBinaryChars(buffer, upper, digits - 32);
+                if (upper != 0)
+                {
+                    buffer = UInt32ToBinaryChars(ref buffer, lower, 32);
+                    return ref UInt32ToBinaryChars(ref buffer, upper, digits - 32);
+                }
+                else
+                {
+                    return ref UInt32ToBinaryChars(ref buffer, lower, Math.Max(digits, 1));
+                }
+            } else {
+                while (--digits >= 0 || value != 0) {
+                    buffer = ref Unsafe.Subtract(ref buffer, 1);
+                    buffer = CastFrom<TChar>('0' + (byte)(value & 0x1));
+                    value >>= 1;
+                }
+                return ref buffer;
             }
-            else
-            {
-                return UInt32ToBinaryChars(buffer, lower, Math.Max(digits, 1));
-            }
-#else
-            while (--digits >= 0 || value != 0) {
-                *(--buffer) = TChar.CastFrom('0' + (byte)(value & 0x1));
-                value >>= 1;
-            }
-            return buffer;
-#endif
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe void UInt64ToNumber(ulong value, ref NumberBuffer number) {
+        private static void UInt64ToNumber(ulong value, ref NumberBuffer number) {
             number.DigitsCount = UInt64Precision;
             number.IsNegative = false;
 
-            byte* buffer = number.DigitsPtr;
-            byte* p = UInt64ToDecChars(buffer + UInt64Precision, value, 0);
+            ref byte buffer = ref number.DigitsPtr;
+            ref byte p = ref UInt64ToDecChars(ref Unsafe.Add(ref buffer, UInt64Precision), value, 0);
 
             int i = (int)(buffer + UInt64Precision - p);
 
             number.DigitsCount = i;
             number.Scale = i;
 
-            byte* dst = number.DigitsPtr;
+            ref byte dst = ref number.DigitsPtr;
             while (--i >= 0) {
-                *dst++ = *p++;
+                // *dst++ = *p++;
+                dst = p;
+                dst = ref Unsafe.Add(ref dst, 1);
+                p = ref Unsafe.Add(ref p, 1);
             }
-            *dst = (byte)'\0';
+            dst = (byte)'\0';
 
             number.CheckConsistency();
         }
@@ -1509,71 +1578,72 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 #if TARGET_64BIT
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-        internal static unsafe TChar* UInt64ToDecChars<TChar>(TChar* bufferEnd, ulong value) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static ref TChar UInt64ToDecChars<TChar>(ref TChar bufferEnd, ulong value) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
-#if TARGET_32BIT
-            while ((uint)(value >> 32) != 0)
-            {
-                bufferEnd = UInt32ToDecChars(bufferEnd, Int64DivMod1E9(ref value), 9);
-            }
-            return UInt32ToDecChars(bufferEnd, (uint)value);
-#else
-            if (value >= 10) {
-                // Handle all values >= 100 two-digits at a time so as to avoid expensive integer division operations.
-                while (value >= 100) {
-                    bufferEnd -= 2;
-                    (value, ulong remainder) = Math.DivRem(value, 100);
-                    WriteTwoDigits((uint)remainder, bufferEnd);
+            if (!BitMathCore.Is64Bit) {
+                while ((uint)(value >> 32) != 0) {
+                    bufferEnd = UInt32ToDecChars(ref bufferEnd, Int64DivMod1E9(ref value), 9);
                 }
-
-                // If there are two digits remaining, store them.
+                return ref UInt32ToDecChars(ref bufferEnd, (uint)value);
+            } else {
                 if (value >= 10) {
-                    bufferEnd -= 2;
-                    WriteTwoDigits((uint)value, bufferEnd);
-                    return bufferEnd;
-                }
-            }
+                    // Handle all values >= 100 two-digits at a time so as to avoid expensive integer division operations.
+                    while (value >= 100) {
+                        bufferEnd = ref Unsafe.Add(ref bufferEnd, -2);
+                        (value, ulong remainder) = BitMath.DivRem(value, 100);
+                        WriteTwoDigits((uint)remainder, ref bufferEnd);
+                    }
 
-            // Otherwise, store the single digit remaining.
-            *(--bufferEnd) = TChar.CastFrom(value + '0');
-            return bufferEnd;
-#endif
+                    // If there are two digits remaining, store them.
+                    if (value >= 10) {
+                        bufferEnd = ref Unsafe.Add(ref bufferEnd, -2);
+                        WriteTwoDigits((uint)value, ref bufferEnd);
+                        return ref bufferEnd;
+                    }
+                }
+
+                // Otherwise, store the single digit remaining.
+                bufferEnd = ref Unsafe.Add(ref bufferEnd, -1);
+                bufferEnd = CastFrom<TChar>(value + '0');
+                return ref bufferEnd;
+            }
         }
 
 #if TARGET_64BIT
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
-        internal static unsafe TChar* UInt64ToDecChars<TChar>(TChar* bufferEnd, ulong value, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static ref TChar UInt64ToDecChars<TChar>(ref TChar bufferEnd, ulong value, int digits) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
-#if TARGET_32BIT
-            while ((uint)(value >> 32) != 0)
-            {
-                bufferEnd = UInt32ToDecChars(bufferEnd, Int64DivMod1E9(ref value), 9);
-                digits -= 9;
-            }
-            return UInt32ToDecChars(bufferEnd, (uint)value, digits);
-#else
-            ulong remainder;
-            while (value >= 100) {
-                bufferEnd -= 2;
-                digits -= 2;
-                (value, remainder) = Math.DivRem(value, 100);
-                WriteTwoDigits((uint)remainder, bufferEnd);
-            }
+            if (!BitMathCore.Is64Bit) {
+                while ((uint)(value >> 32) != 0)
+                {
+                    bufferEnd = ref UInt32ToDecChars(ref bufferEnd, Int64DivMod1E9(ref value), 9);
+                    digits -= 9;
+                }
+                return ref UInt32ToDecChars(ref bufferEnd, (uint)value, digits);
+            } else {
+                ulong remainder;
+                while (value >= 100) {
+                    bufferEnd = ref Unsafe.Add(ref bufferEnd, -2);
+                    digits -= 2;
+                    (value, remainder) = BitMath.DivRem(value, 100);
+                    WriteTwoDigits((uint)remainder, ref bufferEnd);
+                }
 
-            while (value != 0 || digits > 0) {
-                digits--;
-                (value, remainder) = Math.DivRem(value, 10);
-                *(--bufferEnd) = TChar.CastFrom(remainder + '0');
-            }
+                while (value != 0 || digits > 0) {
+                    digits--;
+                    (value, remainder) = BitMath.DivRem(value, 10);
+                    bufferEnd = ref Unsafe.Add(ref bufferEnd, -1);
+                    bufferEnd = CastFrom<TChar>(remainder + '0');
+                }
 
-            return bufferEnd;
-#endif
+                return ref bufferEnd;
+            }
         }
 
-        internal static unsafe string UInt64ToDecStr(ulong value) {
+        internal static string UInt64ToDecStr(ulong value) {
             // For small numbers, consult a lazily-populated cache.
             if (value < SmallNumberCacheLength) {
                 return UInt32ToDecStrForKnownSmallNumber((uint)value);
@@ -1581,40 +1651,43 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             int bufferLength = FormattingHelpers.CountDigits(value);
 
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = buffer + bufferLength;
-                p = UInt64ToDecChars(p, value);
-                Debug.Assert(p == buffer);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref Unsafe.Add(ref buffer, bufferLength);
+                p = UInt64ToDecChars(ref p, value);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        internal static unsafe string UInt64ToDecStr(ulong value, int digits) {
+        internal static string UInt64ToDecStr(ulong value, int digits) {
             if (digits <= 1) {
                 return UInt64ToDecStr(value);
             }
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountDigits(value));
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = buffer + bufferLength;
-                p = UInt64ToDecChars(p, value, digits);
-                Debug.Assert(p == buffer);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref Unsafe.Add(ref buffer, bufferLength);
+                p = UInt64ToDecChars(ref p, value, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        internal static unsafe bool TryUInt64ToDecStr<TChar>(ulong value, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static bool TryUInt64ToDecStr<TChar>(ulong value, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             int bufferLength = FormattingHelpers.CountDigits(value);
             if (bufferLength <= destination.Length) {
                 charsWritten = bufferLength;
-                fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                    TChar* p = buffer + bufferLength;
-                    p = UInt64ToDecChars(p, value);
-                    Debug.Assert(p == buffer);
+                if (true) {
+                    ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                    ref TChar p = ref Unsafe.Add(ref buffer, bufferLength);
+                    p = ref UInt64ToDecChars(ref p, value);
+                    Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
                 }
                 return true;
             }
@@ -1623,17 +1696,18 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return false;
         }
 
-        internal static unsafe bool TryUInt64ToDecStr<TChar>(ulong value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static bool TryUInt64ToDecStr<TChar>(ulong value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             int countedDigits = FormattingHelpers.CountDigits(value);
             int bufferLength = Math.Max(digits, countedDigits);
             if (bufferLength <= destination.Length) {
                 charsWritten = bufferLength;
-                fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                    TChar* p = buffer + bufferLength;
+                if (true) {
+                    ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                    ref TChar p = ref Unsafe.Add(ref buffer, bufferLength);
                     p = digits > countedDigits ?
-                        UInt64ToDecChars(p, value, digits) :
-                        UInt64ToDecChars(p, value);
-                    Debug.Assert(p == buffer);
+                        UInt64ToDecChars(ref p, value, digits) :
+                        UInt64ToDecChars(ref p, value);
+                    Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
                 }
                 return true;
             }
@@ -1642,71 +1716,75 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return false;
         }
 
-        private static unsafe void Int128ToNumber(Int128 value, ref NumberBuffer number) {
-            number.DigitsCount = Int128Precision;
+        private static void ExInt128ToNumber(ExInt128 value, ref NumberBuffer number) {
+            number.DigitsCount = ExInt128Precision;
 
-            if (Int128.IsPositive(value)) {
+            if (ExInt128.IsPositive(value)) {
                 number.IsNegative = false;
             } else {
                 number.IsNegative = true;
                 value = -value;
             }
 
-            byte* buffer = number.DigitsPtr;
-            byte* p = UInt128ToDecChars(buffer + Int128Precision, (UInt128)value, 0);
+            ref byte buffer = ref number.DigitsPtr;
+            ref byte p = ref ExUInt128ToDecChars(ref Unsafe.Add(ref buffer, ExInt128Precision), (ExUInt128)value, 0);
 
-            int i = (int)(buffer + Int128Precision - p);
+            int i = (int)(buffer + ExInt128Precision - p);
 
             number.DigitsCount = i;
             number.Scale = i;
 
-            byte* dst = number.DigitsPtr;
+            ref byte dst = ref number.DigitsPtr;
             while (--i >= 0) {
-                *dst++ = *p++;
+                dst = p;
+                dst = ref Unsafe.Add(ref dst, 1);
+                p = ref Unsafe.Add(ref p, 1);
             }
-            *dst = (byte)'\0';
+            dst = (byte)'\0';
 
             number.CheckConsistency();
         }
 
-        public static string Int128ToDecStr(Int128 value) {
-            return Int128.IsPositive(value)
-                 ? UInt128ToDecStr((UInt128)value, -1)
-                 : NegativeInt128ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
+        public static string ExInt128ToDecStr(ExInt128 value) {
+            return ExInt128.IsPositive(value)
+                 ? ExUInt128ToDecStr((ExUInt128)value, -1)
+                 : NegativeExInt128ToDecStr(value, -1, NumberFormatInfo.CurrentInfo.NegativeSign);
         }
 
-        private static unsafe string NegativeInt128ToDecStr(Int128 value, int digits, string sNegative) {
-            Debug.Assert(Int128.IsNegative(value));
+        private static string NegativeExInt128ToDecStr(ExInt128 value, int digits, string sNegative) {
+            Debug.Assert(ExInt128.IsNegative(value));
 
             if (digits < 1) {
                 digits = 1;
             }
 
-            UInt128 absValue = (UInt128)(-value);
+            ExUInt128 absValue = (ExUInt128)(-value);
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountDigits(absValue)) + sNegative.Length;
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = UInt128ToDecChars(buffer + bufferLength, absValue, digits);
-                Debug.Assert(p == buffer + sNegative.Length);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref ExUInt128ToDecChars(ref Unsafe.Add(ref buffer, bufferLength), absValue, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref Unsafe.Add(ref buffer, sNegative.Length)));
 
                 for (int i = sNegative.Length - 1; i >= 0; i--) {
-                    *(--p) = sNegative[i];
+                    p = ref Unsafe.Add(ref p, -1);
+                    p = sNegative[i];
                 }
-                Debug.Assert(p == buffer);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        private static unsafe bool TryNegativeInt128ToDecStr<TChar>(Int128 value, int digits, ReadOnlySpan<TChar> sNegative, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        private static bool TryNegativeExInt128ToDecStr<TChar>(ExInt128 value, int digits, ReadOnlySpan<TChar> sNegative, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            Debug.Assert(Int128.IsNegative(value));
+            Debug.Assert(ExInt128.IsNegative(value));
 
             if (digits < 1) {
                 digits = 1;
             }
 
-            UInt128 absValue = (UInt128)(-value);
+            ExUInt128 absValue = (ExUInt128)(-value);
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountDigits(absValue)) + sNegative.Length;
             if (bufferLength > destination.Length) {
@@ -1715,42 +1793,45 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             charsWritten = bufferLength;
-            fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                TChar* p = UInt128ToDecChars(buffer + bufferLength, absValue, digits);
-                Debug.Assert(p == buffer + sNegative.Length);
+            if (true) {
+                ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                ref TChar p = ref ExUInt128ToDecChars(ref Unsafe.Add(ref buffer, bufferLength), absValue, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref Unsafe.Add(ref buffer, sNegative.Length)));
 
                 for (int i = sNegative.Length - 1; i >= 0; i--) {
-                    *(--p) = sNegative[i];
+                    p = ref Unsafe.Add(ref p, -1);
+                    p = sNegative[i];
                 }
-                Debug.Assert(p == buffer);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
             return true;
         }
 
-        private static unsafe string Int128ToHexStr(Int128 value, char hexBase, int digits) {
+        private static string ExInt128ToHexStr(ExInt128 value, char hexBase, int digits) {
             if (digits < 1) {
                 digits = 1;
             }
 
-            UInt128 uValue = (UInt128)value;
+            ExUInt128 uValue = (ExUInt128)value;
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountHexDigits(uValue));
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = Int128ToHexChars(buffer + bufferLength, uValue, hexBase, digits);
-                Debug.Assert(p == buffer);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref ExInt128ToHexChars(ref Unsafe.Add(ref buffer, bufferLength), uValue, hexBase, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        private static unsafe bool TryInt128ToHexStr<TChar>(Int128 value, char hexBase, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        private static bool TryExInt128ToHexStr<TChar>(ExInt128 value, char hexBase, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             if (digits < 1) {
                 digits = 1;
             }
 
-            UInt128 uValue = (UInt128)value;
+            ExUInt128 uValue = (ExUInt128)value;
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountHexDigits(uValue));
             if (bufferLength > destination.Length) {
@@ -1759,169 +1840,177 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             charsWritten = bufferLength;
-            fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                TChar* p = Int128ToHexChars(buffer + bufferLength, uValue, hexBase, digits);
-                Debug.Assert(p == buffer);
+            if (true) {
+                ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                ref TChar p = ref ExInt128ToHexChars(ref Unsafe.Add(ref buffer, bufferLength), uValue, hexBase, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TChar* Int128ToHexChars<TChar>(TChar* buffer, UInt128 value, int hexBase, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        private static ref TChar ExInt128ToHexChars<TChar>(ref TChar buffer, ExUInt128 value, int hexBase, int digits) where TChar : unmanaged, IEquatable<TChar> {
             ulong lower = value.Lower;
             ulong upper = value.Upper;
 
             if (upper != 0) {
-                buffer = Int64ToHexChars(buffer, lower, hexBase, 16);
-                return Int64ToHexChars(buffer, upper, hexBase, digits - 16);
+                buffer = ref Int64ToHexChars(ref buffer, lower, hexBase, 16);
+                return ref Int64ToHexChars(ref buffer, upper, hexBase, digits - 16);
             } else {
-                return Int64ToHexChars(buffer, lower, hexBase, Math.Max(digits, 1));
+                return ref Int64ToHexChars(ref buffer, lower, hexBase, Math.Max(digits, 1));
             }
         }
 
-        private static unsafe string UInt128ToBinaryStr(Int128 value, int digits) {
+        private static string ExUInt128ToBinaryStr(ExInt128 value, int digits) {
             if (digits < 1) {
                 digits = 1;
             }
 
-            UInt128 uValue = (UInt128)value;
+            ExUInt128 uValue = (ExUInt128)value;
 
-            int bufferLength = Math.Max(digits, 128 - (int)UInt128.LeadingZeroCount((UInt128)value));
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = UInt128ToBinaryChars(buffer + bufferLength, uValue, digits);
-                Debug.Assert(p == buffer);
+            int bufferLength = Math.Max(digits, 128 - (int)ExUInt128.LeadingZeroCount((ExUInt128)value));
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref ExUInt128ToBinaryChars(ref Unsafe.Add(ref buffer, bufferLength), uValue, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        private static unsafe bool TryUInt128ToBinaryStr<TChar>(Int128 value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        private static bool TryExUInt128ToBinaryStr<TChar>(ExInt128 value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             if (digits < 1) {
                 digits = 1;
             }
 
-            UInt128 uValue = (UInt128)value;
+            ExUInt128 uValue = (ExUInt128)value;
 
-            int bufferLength = Math.Max(digits, 128 - (int)UInt128.LeadingZeroCount((UInt128)value));
+            int bufferLength = Math.Max(digits, 128 - (int)ExUInt128.LeadingZeroCount((ExUInt128)value));
             if (bufferLength > destination.Length) {
                 charsWritten = 0;
                 return false;
             }
 
             charsWritten = bufferLength;
-            fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                TChar* p = UInt128ToBinaryChars(buffer + bufferLength, uValue, digits);
-                Debug.Assert(p == buffer);
+            if (true) {
+                ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                ref TChar p = ref ExUInt128ToBinaryChars(ref Unsafe.Add(ref buffer, bufferLength), uValue, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe TChar* UInt128ToBinaryChars<TChar>(TChar* buffer, UInt128 value, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        private static ref TChar ExUInt128ToBinaryChars<TChar>(ref TChar buffer, ExUInt128 value, int digits) where TChar : unmanaged, IEquatable<TChar> {
             ulong lower = value.Lower;
             ulong upper = value.Upper;
 
             if (upper != 0) {
-                buffer = UInt64ToBinaryChars(buffer, lower, 64);
-                return UInt64ToBinaryChars(buffer, upper, digits - 64);
+                buffer = ref UInt64ToBinaryChars(ref buffer, lower, 64);
+                return ref UInt64ToBinaryChars(ref buffer, upper, digits - 64);
             } else {
-                return UInt64ToBinaryChars(buffer, lower, Math.Max(digits, 1));
+                return ref UInt64ToBinaryChars(ref buffer, lower, Math.Max(digits, 1));
             }
         }
 
-        private static unsafe void UInt128ToNumber(UInt128 value, ref NumberBuffer number) {
-            number.DigitsCount = UInt128Precision;
+        private static void ExUInt128ToNumber(ExUInt128 value, ref NumberBuffer number) {
+            number.DigitsCount = ExUInt128Precision;
             number.IsNegative = false;
 
-            byte* buffer = number.DigitsPtr;
-            byte* p = UInt128ToDecChars(buffer + UInt128Precision, value, 0);
+            ref byte buffer = ref number.DigitsPtr;
+            ref byte p = ref ExUInt128ToDecChars(ref Unsafe.Add(ref buffer, ExUInt128Precision), value, 0);
 
-            int i = (int)(buffer + UInt128Precision - p);
+            int i = (int)(buffer + ExUInt128Precision - p);
 
             number.DigitsCount = i;
             number.Scale = i;
 
-            byte* dst = number.DigitsPtr;
+            ref byte dst = ref number.DigitsPtr;
             while (--i >= 0) {
-                *dst++ = *p++;
+                dst = p;
+                dst = ref Unsafe.Add(ref dst, 1);
+                p = ref Unsafe.Add(ref p, 1);
             }
-            *dst = (byte)'\0';
+            dst = (byte)'\0';
 
             number.CheckConsistency();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static ulong Int128DivMod1E19(ref UInt128 value) {
-            UInt128 divisor = new UInt128(0, 10_000_000_000_000_000_000);
-            (value, UInt128 remainder) = UInt128.DivRem(value, divisor);
+        private static ulong ExInt128DivMod1E19(ref ExUInt128 value) {
+            ExUInt128 divisor = new ExUInt128(0, 10_000_000_000_000_000_000);
+            (value, ExUInt128 remainder) = ExUInt128.DivRem(value, divisor);
             return remainder.Lower;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe TChar* UInt128ToDecChars<TChar>(TChar* bufferEnd, UInt128 value) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static ref TChar ExUInt128ToDecChars<TChar>(ref TChar bufferEnd, ExUInt128 value) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             while (value.Upper != 0) {
-                bufferEnd = UInt64ToDecChars(bufferEnd, Int128DivMod1E19(ref value), 19);
+                bufferEnd = ref UInt64ToDecChars(ref bufferEnd, ExInt128DivMod1E19(ref value), 19);
             }
-            return UInt64ToDecChars(bufferEnd, value.Lower);
+            return ref UInt64ToDecChars(ref bufferEnd, value.Lower);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe TChar* UInt128ToDecChars<TChar>(TChar* bufferEnd, UInt128 value, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static ref TChar ExUInt128ToDecChars<TChar>(ref TChar bufferEnd, ExUInt128 value, int digits) where TChar : unmanaged, IEquatable<TChar> {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
 
             while (value.Upper != 0) {
-                bufferEnd = UInt64ToDecChars(bufferEnd, Int128DivMod1E19(ref value), 19);
+                bufferEnd = ref UInt64ToDecChars(ref bufferEnd, ExInt128DivMod1E19(ref value), 19);
                 digits -= 19;
             }
-            return UInt64ToDecChars(bufferEnd, value.Lower, digits);
+            return ref UInt64ToDecChars(ref bufferEnd, value.Lower, digits);
         }
 
-        internal static unsafe string UInt128ToDecStr(UInt128 value) {
+        internal static string ExUInt128ToDecStr(ExUInt128 value) {
             if (value.Upper == 0) {
                 return UInt64ToDecStr(value.Lower);
             }
 
             int bufferLength = FormattingHelpers.CountDigits(value);
 
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = buffer + bufferLength;
-                p = UInt128ToDecChars(p, value);
-                Debug.Assert(p == buffer);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref Unsafe.Add(ref buffer, bufferLength);
+                p = ref ExUInt128ToDecChars(ref p, value);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        internal static unsafe string UInt128ToDecStr(UInt128 value, int digits) {
+        internal static string ExUInt128ToDecStr(ExUInt128 value, int digits) {
             if (digits <= 1) {
-                return UInt128ToDecStr(value);
+                return ExUInt128ToDecStr(value);
             }
 
             int bufferLength = Math.Max(digits, FormattingHelpers.CountDigits(value));
-            string result = string.FastAllocateString(bufferLength);
-            fixed (char* buffer = result) {
-                char* p = buffer + bufferLength;
-                p = UInt128ToDecChars(p, value, digits);
-                Debug.Assert(p == buffer);
+            Span<char> result = stackalloc char[bufferLength];
+            if (true) {
+                ref char buffer = ref result[0];
+                ref char p = ref Unsafe.Add(ref buffer, bufferLength);
+                p = ref ExUInt128ToDecChars(ref p, value, digits);
+                Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
             }
-            return result;
+            return result.ToString();
         }
 
-        private static unsafe bool TryUInt128ToDecStr<TChar>(UInt128 value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IUtfChar<TChar> {
+        private static bool TryExUInt128ToDecStr<TChar>(ExUInt128 value, int digits, Span<TChar> destination, out int charsWritten) where TChar : unmanaged, IEquatable<TChar> {
             int countedDigits = FormattingHelpers.CountDigits(value);
             int bufferLength = Math.Max(digits, countedDigits);
             if (bufferLength <= destination.Length) {
                 charsWritten = bufferLength;
-                fixed (TChar* buffer = &MemoryMarshal.GetReference(destination)) {
-                    TChar* p = buffer + bufferLength;
+                if (true) {
+                    ref TChar buffer = ref MemoryMarshal.GetReference(destination);
+                    ref TChar p = ref Unsafe.Add(ref buffer, bufferLength);
                     p = digits > countedDigits ?
-                        UInt128ToDecChars(p, value, digits) :
-                        UInt128ToDecChars(p, value);
-                    Debug.Assert(p == buffer);
+                        ExUInt128ToDecChars(ref p, value, digits) :
+                        ExUInt128ToDecChars(ref p, value);
+                    Debug.Assert(Unsafe.AreSame(ref p, ref buffer));
                 }
                 return true;
             }
@@ -1958,6 +2047,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return fraction;
         }
 
+#if BCL_TYPE_HALF
         private static ushort ExtractFractionAndBiasedExponent(Half value, out int exponent) {
             ushort bits = BitConverter.HalfToUInt16Bits(value);
             ushort fraction = (ushort)(bits & 0x3FF);
@@ -1985,6 +2075,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             return fraction;
         }
+#endif
 
         private static uint ExtractFractionAndBiasedExponent(float value, out int exponent) {
             uint bits = BitConverter.SingleToUInt32Bits(value);
@@ -2014,11 +2105,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return fraction;
         }
 
+#if THIS_HIDE
         private static ulong ExtractFractionAndBiasedExponent<TNumber>(TNumber value, out int exponent)
-            where TNumber : unmanaged, IBinaryFloatParseAndFormatInfo<TNumber> {
-            ulong bits = TNumber.FloatToBits(value);
-            ulong fraction = (bits & TNumber.DenormalMantissaMask);
-            exponent = ((int)(bits >> TNumber.DenormalMantissaBits) & TNumber.InfinityExponent);
+            where TNumber : unmanaged, IComparable<TNumber> {
+            ulong bits = FloatFormatInfo<TNumber>.FloatToBits(value);
+            ulong fraction = (bits & FloatFormatInfo<TNumber>.DenormalMantissaMask);
+            exponent = ((int)(bits >> FloatFormatInfo<TNumber>.DenormalMantissaBits) & FloatFormatInfo<TNumber>.InfinityExponent);
 
             if (exponent != 0) {
                 // For normalized value,
@@ -2028,8 +2120,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 //
                 // So f = (2^TrailingSignificandLength + mantissa), e = exp - ExponentBias - TrailingSignificandLength;
 
-                fraction |= (1UL << TNumber.DenormalMantissaBits);
-                exponent -= TNumber.ExponentBias + TNumber.DenormalMantissaBits;
+                fraction |= (1UL << FloatFormatInfo<TNumber>.DenormalMantissaBits);
+                exponent -= FloatFormatInfo<TNumber>.ExponentBias + FloatFormatInfo<TNumber>.DenormalMantissaBits;
             } else {
                 // For denormalized value,
                 // value = 0.fraction * 2^(MinBinaryExponent)
@@ -2037,11 +2129,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 //       = mantissa * 2^(MinBinaryExponent - TrailingSignificandLength)
                 //       = mantissa * 2^(MinBinaryExponent - TrailingSignificandLength)
                 // So f = mantissa, e = MinBinaryExponent - TrailingSignificandLength
-                exponent = TNumber.MinBinaryExponent - TNumber.DenormalMantissaBits;
+                exponent = FloatFormatInfo<TNumber>.MinBinaryExponent - FloatFormatInfo<TNumber>.DenormalMantissaBits;
             }
 
             return fraction;
         }
+#endif // THIS_HIDE
     }
 
 }

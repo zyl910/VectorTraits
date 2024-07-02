@@ -1,10 +1,13 @@
-﻿using System;
+﻿#define SYSTEM_PRIVATE_CORELIB
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.ExTypes.Impl {
     internal static partial class Number {
@@ -108,21 +111,22 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
 #if !SYSTEM_PRIVATE_CORELIB
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe TChar* UInt32ToDecChars<TChar>(TChar* bufferEnd, uint value, int digits) where TChar : unmanaged, IUtfChar<TChar> {
+        internal static ref TChar UInt32ToDecChars<TChar>(ref TChar bufferEnd, uint value, int digits) where TChar : unmanaged, IEquatable<TChar> {
             // TODO: Consider to bring optimized implementation from CoreLib
 
             while (value != 0 || digits > 0) {
                 digits--;
-                (value, uint remainder) = Math.DivRem(value, 10);
-                *(--bufferEnd) = TChar.CastFrom(remainder + '0');
+                (value, uint remainder) = BitMath.DivRem(value, 10);
+                bufferEnd = ref Unsafe.Add(ref bufferEnd, -1);
+                bufferEnd = CastFrom<TChar>(remainder + '0');
             }
 
-            return bufferEnd;
+            return ref bufferEnd;
         }
 #endif
 
-        internal static unsafe void NumberToString<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, char format, int nMaxDigits, NumberFormatInfo info) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+        internal static void NumberToString<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, char format, int nMaxDigits, NumberFormatInfo info) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
             number.CheckConsistency();
             bool isCorrectlyRounded = (number.Kind == NumberBufferKind.FloatingPoint);
@@ -248,8 +252,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
         }
 
-        internal static unsafe void NumberToStringFormat<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, ReadOnlySpan<char> format, NumberFormatInfo info) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+        internal static void NumberToStringFormat<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, ReadOnlySpan<char> format, NumberFormatInfo info) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
             number.CheckConsistency();
 
@@ -267,10 +271,10 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             int section;
             int src;
-            byte* dig = number.DigitsPtr;
+            ref byte dig = ref number.DigitsPtr;
             char ch;
 
-            section = FindSection(format, dig[0] == 0 ? 2 : number.IsNegative ? 1 : 0);
+            section = FindSection(format, dig == 0 ? 2 : number.IsNegative ? 1 : 0);
 
             while (true) {
                 digitCount = 0;
@@ -283,7 +287,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 scaleAdjust = 0;
                 src = section;
 
-                fixed (char* pFormat = &MemoryMarshal.GetReference(format)) {
+                if (true) {
+                    ReadOnlySpan<char> pFormat = format; // char* pFormat = &MemoryMarshal.GetReference(format)
                     while (src < format.Length && (ch = pFormat[src++]) != 0 && ch != ';') {
                         switch (ch) {
                             case '#':
@@ -361,11 +366,11 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     }
                 }
 
-                if (dig[0] != 0) {
+                if (dig != 0) {
                     number.Scale += scaleAdjust;
                     int pos = scientific ? digitCount : number.Scale + digitCount - decimalPos;
                     RoundNumber(ref number, pos, isCorrectlyRounded: false);
-                    if (dig[0] == 0) {
+                    if (dig == 0) {
                         src = FindSection(format, 2);
                         if (src != section) {
                             section = src;
@@ -450,8 +455,9 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             bool decimalWritten = false;
 
-            fixed (char* pFormat = &MemoryMarshal.GetReference(format)) {
-                byte* cur = dig;
+            if (true) {
+                ReadOnlySpan<char> pFormat = format; // char* pFormat = &MemoryMarshal.GetReference(format)
+                ref byte cur = ref dig;
 
                 while (src < format.Length && (ch = pFormat[src++]) != 0 && ch != ';') {
                     if (adjust > 0) {
@@ -462,7 +468,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                                 while (adjust > 0) {
                                     // digPos will be one greater than thousandsSepPos[thousandsSepCtr] since we are at
                                     // the character after which the groupSeparator needs to be appended.
-                                    vlb.Append(TChar.CastFrom(*cur != 0 ? (char)(*cur++) : '0'));
+                                    byte curChar = (byte)'0'; // (*cur != 0 ? (char)(*cur++) : '0')
+                                    if (cur != 0) {
+                                        curChar = cur;
+                                        cur = ref Unsafe.Add(ref cur, 1);
+                                    }
+                                    vlb.Append(CastFrom<TChar>(curChar));
                                     if (thousandSeps && digPos > 1 && thousandsSepCtr >= 0) {
                                         if (digPos == thousandsSepPos[thousandsSepCtr] + 1) {
                                             vlb.Append(info.NumberGroupSeparatorTChar<TChar>());
@@ -483,11 +494,17 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                                     adjust++;
                                     ch = digPos <= firstDigit ? '0' : '\0';
                                 } else {
-                                    ch = *cur != 0 ? (char)(*cur++) : digPos > lastDigit ? '0' : '\0';
+                                    //ch = *cur != 0 ? (char)(*cur++) : digPos > lastDigit ? '0' : '\0';
+                                    if (cur != 0) {
+                                        ch = (char)cur;
+                                        cur = ref Unsafe.Add(ref cur, 1);
+                                    } else {
+                                        ch = digPos > lastDigit ? '0' : '\0';
+                                    }
                                 }
 
                                 if (ch != 0) {
-                                    vlb.Append(TChar.CastFrom(ch));
+                                    vlb.Append(CastFrom<TChar>(ch));
                                     if (thousandSeps && digPos > 1 && thousandsSepCtr >= 0) {
                                         if (digPos == thousandsSepPos[thousandsSepCtr] + 1) {
                                             vlb.Append(info.NumberGroupSeparatorTChar<TChar>());
@@ -507,7 +524,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                                 }
 
                                 // If the format has trailing zeros or the format has a decimal and digits remain
-                                if (lastDigit < 0 || (decimalPos < digitCount && *cur != 0)) {
+                                if (lastDigit < 0 || (decimalPos < digitCount && cur != 0)) {
                                     vlb.Append(info.NumberDecimalSeparatorTChar<TChar>());
                                     decimalWritten = true;
                                 }
@@ -557,7 +574,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                                         // Handles E-0
                                         // Do nothing, this is just a place holder s.t. we don't break out of the loop.
                                     } else {
-                                        vlb.Append(TChar.CastFrom(ch));
+                                        vlb.Append(CastFrom<TChar>(ch));
                                         break;
                                     }
 
@@ -569,11 +586,11 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                                         i = 10;
                                     }
 
-                                    int exp = dig[0] == 0 ? 0 : number.Scale - decimalPos;
+                                    int exp = dig == 0 ? 0 : number.Scale - decimalPos;
                                     FormatExponent(ref vlb, info, exp, ch, i, positiveSign);
                                     scientific = false;
                                 } else {
-                                    vlb.Append(TChar.CastFrom(ch));
+                                    vlb.Append(CastFrom<TChar>(ch));
                                     if (src < format.Length) {
                                         if (pFormat[src] == '+' || pFormat[src] == '-') {
                                             AppendUnknownChar(ref vlb, pFormat[src++]);
@@ -599,14 +616,14 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
         }
 
-        private static unsafe void FormatCurrency<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+        private static void FormatCurrency<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
             string fmt = number.IsNegative ?
                 s_negCurrencyFormats[info.CurrencyNegativePattern] :
                 s_posCurrencyFormats[info.CurrencyPositivePattern];
-
-            foreach (char ch in fmt) {
+            
+            foreach (char ch in fmt.AsSpan()) {
                 switch (ch) {
                     case '#':
                         FormatFixed(ref vlb, ref number, nMaxDigits, info.CurrencyGroupSizes(), info.CurrencyDecimalSeparatorTChar<TChar>(), info.CurrencyGroupSeparatorTChar<TChar>());
@@ -621,20 +638,20 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         break;
 
                     default:
-                        vlb.Append(TChar.CastFrom(ch));
+                        vlb.Append(CastFrom<TChar>(ch));
                         break;
                 }
             }
         }
 
-        private static unsafe void FormatFixed<TChar>(
+        private static void FormatFixed<TChar>(
             ref ValueListBuilder<TChar> vlb, ref NumberBuffer number,
             int nMaxDigits, int[]? groupDigits,
-            ReadOnlySpan<TChar> sDecimal, ReadOnlySpan<TChar> sGroup) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+            ReadOnlySpan<TChar> sDecimal, ReadOnlySpan<TChar> sGroup) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
             int digPos = number.Scale;
-            byte* dig = number.DigitsPtr;
+            ref byte dig = ref number.DigitsPtr;
 
             if (digPos > 0) {
                 if (groupDigits != null) {
@@ -659,7 +676,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                             }
 
                             groupSizeCount += groupDigits[groupSizeIndex];
-                            ArgumentOutOfRangeException.ThrowIfNegative(groupSizeCount | bufferSize, string.Empty); // If we overflow
+                            ThrowHelper.ThrowIfNegative(groupSizeCount | bufferSize, string.Empty); // If we overflow
                         }
 
                         groupSize = groupSizeCount == 0 ? 0 : groupDigits[0]; // If you passed in an array with one entry as 0, groupSizeCount == 0
@@ -669,16 +686,19 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     int digitCount = 0;
                     int digLength = number.DigitsCount;
                     int digStart = (digPos < digLength) ? digPos : digLength;
-                    fixed (TChar* spanPtr = &MemoryMarshal.GetReference(vlb.AppendSpan(bufferSize))) {
-                        TChar* p = spanPtr + bufferSize - 1;
+                    if (true) {
+                        ref TChar spanPtr = ref MemoryMarshal.GetReference(vlb.AppendSpan(bufferSize));
+                        ref TChar p = ref Unsafe.Add(ref spanPtr, bufferSize - 1);
                         for (int i = digPos - 1; i >= 0; i--) {
-                            *(p--) = TChar.CastFrom((i < digStart) ? (char)dig[i] : '0');
+                            p = CastFrom<TChar>((i < digStart) ? (char)Unsafe.Add(ref dig, i) : '0');
+                            p = ref Unsafe.Add(ref p, -1);
 
                             if (groupSize > 0) {
                                 digitCount++;
                                 if ((digitCount == groupSize) && (i != 0)) {
                                     for (int j = sGroup.Length - 1; j >= 0; j--) {
-                                        *(p--) = sGroup[j];
+                                        p = sGroup[j];
+                                        p = ref Unsafe.Add(ref p, -1);
                                     }
 
                                     if (groupSizeIndex < groupDigits.Length - 1) {
@@ -690,17 +710,19 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                             }
                         }
 
-                        Debug.Assert(p >= spanPtr - 1, "Underflow");
-                        dig += digStart;
+                        Debug.Assert(UnsafeUtil.IsAddressGreaterThanOrEqual(ref p, ref spanPtr, -1), "Underflow");
+                        dig = ref Unsafe.Add(ref dig, digStart);
                     }
                 } else {
                     do {
-                        vlb.Append(TChar.CastFrom(*dig != 0 ? (char)(*dig++) : '0'));
+                        // vlb.Append(CastFrom<TChar>(*dig != 0 ? (char)(*dig++) : '0')));
+                        dig = ref UnsafeUtil.PostIncExceptZero(ref dig, out byte temp, (byte)'0');
+                        vlb.Append(CastFrom<TChar>((char)temp));
                     }
                     while (--digPos > 0);
                 }
             } else {
-                vlb.Append(TChar.CastFrom('0'));
+                vlb.Append(CastFrom<TChar>('0'));
             }
 
             if (nMaxDigits > 0) {
@@ -708,14 +730,16 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 if ((digPos < 0) && (nMaxDigits > 0)) {
                     int zeroes = Math.Min(-digPos, nMaxDigits);
                     for (int i = 0; i < zeroes; i++) {
-                        vlb.Append(TChar.CastFrom('0'));
+                        vlb.Append(CastFrom<TChar>('0'));
                     }
                     digPos += zeroes;
                     nMaxDigits -= zeroes;
                 }
 
                 while (nMaxDigits > 0) {
-                    vlb.Append(TChar.CastFrom((*dig != 0) ? (char)(*dig++) : '0'));
+                    //vlb.Append(CastFrom<TChar>((*dig != 0) ? (char)(*dig++) : '0'));
+                    dig = ref UnsafeUtil.PostIncExceptZero(ref dig, out byte temp, (byte)'0');
+                    vlb.Append(CastFrom<TChar>((char)temp));
                     nMaxDigits--;
                 }
             }
@@ -724,30 +748,40 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         /// <summary>Appends a char to the builder when the char is not known to be ASCII.</summary>
         /// <remarks>This requires a helper as if the character isn't ASCII, for UTF-8 encoding it will result in multiple bytes added.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static unsafe void AppendUnknownChar<TChar>(ref ValueListBuilder<TChar> vlb, char ch) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+        private static void AppendUnknownChar<TChar>(ref ValueListBuilder<TChar> vlb, char ch) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
-            if (sizeof(TChar) == sizeof(char) || char.IsAscii(ch)) {
-                vlb.Append(TChar.CastFrom(ch));
+            if (Unsafe.SizeOf<TChar>() == sizeof(char) || IsAscii(ch)) {
+                vlb.Append(CastFrom<TChar>(ch));
             } else {
                 AppendNonAsciiBytes(ref vlb, ch);
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             static void AppendNonAsciiBytes(ref ValueListBuilder<TChar> vlb, char ch) {
+#if NETCOREAPP3_0_OR_GREATER
                 var r = new Rune(ch);
                 r.EncodeToUtf8(MemoryMarshal.AsBytes(vlb.AppendSpan(r.Utf8SequenceLength)));
+#else
+                // TODO: Implements Rune on before NETCOREAPP3_0.
+                if (Unsafe.SizeOf<TChar>() == sizeof(char)) {
+                    vlb.Append(CastFrom<TChar>(ch));
+                } else {
+                    byte[] bytes = Encoding.UTF8.GetBytes(ch.ToString());
+                    vlb.Append((ReadOnlySpan<TChar>)MemoryMarshal.Cast<byte, TChar>(bytes));
+                }
+#endif // NETCOREAPP3_0_OR_GREATER
             }
         }
 
-        private static unsafe void FormatNumber<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+        private static void FormatNumber<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
             string fmt = number.IsNegative ?
                 s_negNumberFormats[info.NumberNegativePattern] :
                 PosNumberFormat;
 
-            foreach (char ch in fmt) {
+            foreach (char ch in fmt.AsSpan()) {
                 switch (ch) {
                     case '#':
                         FormatFixed(ref vlb, ref number, nMaxDigits, info.NumberGroupSizes(), info.NumberDecimalSeparatorTChar<TChar>(), info.NumberGroupSeparatorTChar<TChar>());
@@ -758,18 +792,21 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         break;
 
                     default:
-                        vlb.Append(TChar.CastFrom(ch));
+                        vlb.Append(CastFrom<TChar>(ch));
                         break;
                 }
             }
         }
 
-        private static unsafe void FormatScientific<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info, char expChar) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+        private static void FormatScientific<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info, char expChar) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
-            byte* dig = number.DigitsPtr;
+            ref byte dig = ref number.DigitsPtr;
 
-            vlb.Append(TChar.CastFrom((*dig != 0) ? (char)(*dig++) : '0'));
+            //vlb.Append(CastFrom<TChar>((*dig != 0) ? (char)(*dig++) : '0'));
+            byte temp;
+            dig = ref UnsafeUtil.PostIncExceptZero(ref dig, out temp, (byte)'0');
+            vlb.Append(CastFrom<TChar>((char)temp));
 
             if (nMaxDigits != 1) // For E0 we would like to suppress the decimal point
             {
@@ -777,17 +814,19 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             while (--nMaxDigits > 0) {
-                vlb.Append(TChar.CastFrom((*dig != 0) ? (char)(*dig++) : '0'));
+                //vlb.Append(CastFrom<TChar>((*dig != 0) ? (char)(*dig++) : '0'));
+                dig = ref UnsafeUtil.PostIncExceptZero(ref dig, out temp, (byte)'0');
+                vlb.Append(CastFrom<TChar>((char)temp));
             }
 
             int e = number.Digits[0] == 0 ? 0 : number.Scale - 1;
             FormatExponent(ref vlb, info, e, expChar, 3, true);
         }
 
-        private static unsafe void FormatExponent<TChar>(ref ValueListBuilder<TChar> vlb, NumberFormatInfo info, int value, char expChar, int minDigits, bool positiveSign) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+        private static void FormatExponent<TChar>(ref ValueListBuilder<TChar> vlb, NumberFormatInfo info, int value, char expChar, int minDigits, bool positiveSign) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
-            vlb.Append(TChar.CastFrom(expChar));
+            vlb.Append(CastFrom<TChar>(expChar));
 
             if (value < 0) {
                 vlb.Append(info.NegativeSignTChar<TChar>());
@@ -798,13 +837,18 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 }
             }
 
-            TChar* digits = stackalloc TChar[MaxUInt32DecDigits];
-            TChar* p = UInt32ToDecChars(digits + MaxUInt32DecDigits, (uint)value, minDigits);
-            vlb.Append(new ReadOnlySpan<TChar>(p, (int)(digits + MaxUInt32DecDigits - p)));
+            Span<TChar> digits = stackalloc TChar[MaxUInt32DecDigits];
+            ref TChar pStart = ref digits[0];
+            ref TChar pEnd = ref Unsafe.Add(ref pStart, MaxUInt32DecDigits);
+            ref TChar p = ref UInt32ToDecChars(ref pEnd, (uint)value, minDigits);
+            //vlb.Append(new ReadOnlySpan<TChar>(p, (int)(digits + MaxUInt32DecDigits - p)));
+            int start = (int)Unsafe.ByteOffset(ref pStart, ref p) / Unsafe.SizeOf<TChar>();
+            int len = (int)Unsafe.ByteOffset(ref p, ref pEnd) / Unsafe.SizeOf<TChar>();
+            vlb.Append(digits.Slice(start, len));
         }
 
-        private static unsafe void FormatGeneral<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info, char expChar, bool suppressScientific) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+        private static void FormatGeneral<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info, char expChar, bool suppressScientific) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
             int digPos = number.Scale;
             bool scientific = false;
@@ -817,27 +861,30 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 }
             }
 
-            byte* dig = number.DigitsPtr;
+            ref byte dig = ref number.DigitsPtr;
 
             if (digPos > 0) {
                 do {
-                    vlb.Append(TChar.CastFrom((*dig != 0) ? (char)(*dig++) : '0'));
+                    //vlb.Append(CastFrom<TChar>((*dig != 0) ? (char)(*dig++) : '0'));
+                    dig = ref UnsafeUtil.PostIncExceptZero(ref dig, out byte temp, (byte)'0');
+                    vlb.Append(CastFrom<TChar>((char)temp));
                 }
                 while (--digPos > 0);
             } else {
-                vlb.Append(TChar.CastFrom('0'));
+                vlb.Append(CastFrom<TChar>('0'));
             }
 
-            if (*dig != 0 || digPos < 0) {
+            if (dig != 0 || digPos < 0) {
                 vlb.Append(info.NumberDecimalSeparatorTChar<TChar>());
 
                 while (digPos < 0) {
-                    vlb.Append(TChar.CastFrom('0'));
+                    vlb.Append(CastFrom<TChar>('0'));
                     digPos++;
                 }
 
-                while (*dig != 0) {
-                    vlb.Append(TChar.CastFrom(*dig++));
+                while (dig != 0) {
+                    vlb.Append(CastFrom<TChar>(dig));
+                    dig = ref UnsafeUtil.Inc(ref dig);
                 }
             }
 
@@ -846,14 +893,14 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
         }
 
-        private static unsafe void FormatPercent<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info) where TChar : unmanaged, IUtfChar<TChar> {
-            Debug.Assert(sizeof(TChar) == sizeof(char) || sizeof(TChar) == sizeof(byte));
+        private static void FormatPercent<TChar>(ref ValueListBuilder<TChar> vlb, ref NumberBuffer number, int nMaxDigits, NumberFormatInfo info) where TChar : unmanaged, IEquatable<TChar> {
+            Debug.Assert(Unsafe.SizeOf<TChar>() == sizeof(char) || Unsafe.SizeOf<TChar>() == sizeof(byte));
 
             string fmt = number.IsNegative ?
                 s_negPercentFormats[info.PercentNegativePattern] :
                 s_posPercentFormats[info.PercentPositivePattern];
 
-            foreach (char ch in fmt) {
+            foreach (char ch in fmt.AsSpan()) {
                 switch (ch) {
                     case '#':
                         FormatFixed(ref vlb, ref number, nMaxDigits, info.PercentGroupSizes(), info.PercentDecimalSeparatorTChar<TChar>(), info.PercentGroupSeparatorTChar<TChar>());
@@ -868,34 +915,34 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         break;
 
                     default:
-                        vlb.Append(TChar.CastFrom(ch));
+                        vlb.Append(CastFrom<TChar>(ch));
                         break;
                 }
             }
         }
 
-        internal static unsafe void RoundNumber(ref NumberBuffer number, int pos, bool isCorrectlyRounded) {
-            byte* dig = number.DigitsPtr;
+        internal static void RoundNumber(ref NumberBuffer number, int pos, bool isCorrectlyRounded) {
+            ref byte dig = ref number.DigitsPtr;
 
             int i = 0;
-            while (i < pos && dig[i] != '\0') {
+            while (i < pos && Unsafe.Add(ref dig, i) != '\0') {
                 i++;
             }
 
-            if ((i == pos) && ShouldRoundUp(dig, i, number.Kind, isCorrectlyRounded)) {
-                while (i > 0 && dig[i - 1] == '9') {
+            if ((i == pos) && ShouldRoundUp(ref dig, i, number.Kind, isCorrectlyRounded)) {
+                while (i > 0 && Unsafe.Add(ref dig, i - 1) == '9') {
                     i--;
                 }
 
                 if (i > 0) {
-                    dig[i - 1]++;
+                    Unsafe.Add(ref dig, i - 1)++;
                 } else {
                     number.Scale++;
-                    dig[0] = (byte)('1');
+                    dig = (byte)('1');
                     i = 1;
                 }
             } else {
-                while (i > 0 && dig[i - 1] == '0') {
+                while (i > 0 && Unsafe.Add(ref dig, i - 1) == '0') {
                     i--;
                 }
             }
@@ -908,11 +955,11 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 number.Scale = 0;      // Decimals with scale ('0.00') should be rounded.
             }
 
-            dig[i] = (byte)('\0');
+            Unsafe.Add(ref dig, i) = (byte)('\0');
             number.DigitsCount = i;
             number.CheckConsistency();
 
-            static bool ShouldRoundUp(byte* dig, int i, NumberBufferKind numberKind, bool isCorrectlyRounded) {
+            static bool ShouldRoundUp(ref byte dig, int i, NumberBufferKind numberKind, bool isCorrectlyRounded) {
                 // We only want to round up if the digit is greater than or equal to 5 and we are
                 // not rounding a floating-point number. If we are rounding a floating-point number
                 // we have one of two cases.
@@ -926,7 +973,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 // function to round correctly instead. This can unfortunately lead to double-rounding
                 // bugs but is the best we have right now due to back-compat concerns.
 
-                byte digit = dig[i];
+                byte digit = Unsafe.Add(ref dig, i);
 
                 if ((digit == '\0') || isCorrectlyRounded) {
                     // Fast path for the common case with no rounding
@@ -943,7 +990,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
         }
 
-        private static unsafe int FindSection(ReadOnlySpan<char> format, int section) {
+        private static int FindSection(ReadOnlySpan<char> format, int section) {
             int src;
             char ch;
 
@@ -951,7 +998,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 return 0;
             }
 
-            fixed (char* pFormat = &MemoryMarshal.GetReference(format)) {
+            if (true) {
+                ReadOnlySpan<char> pFormat = format;
                 src = 0;
                 while (true) {
                     if (src >= format.Length) {
@@ -987,19 +1035,10 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
         }
 
-#if SYSTEM_PRIVATE_CORELIB
-        private static int[] NumberGroupSizes(this NumberFormatInfo info) => info._numberGroupSizes;
- 
-        private static int[] CurrencyGroupSizes(this NumberFormatInfo info) => info._currencyGroupSizes;
- 
-        private static int[] PercentGroupSizes(this NumberFormatInfo info) => info._percentGroupSizes;
-#else
-
         private static int[] NumberGroupSizes(this NumberFormatInfo info) => info.NumberGroupSizes;
 
         private static int[] CurrencyGroupSizes(this NumberFormatInfo info) => info.CurrencyGroupSizes;
 
         private static int[] PercentGroupSizes(this NumberFormatInfo info) => info.PercentGroupSizes;
-#endif
     }
 }

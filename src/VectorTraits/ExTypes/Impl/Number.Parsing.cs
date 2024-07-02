@@ -1,4 +1,14 @@
-﻿using System;
+﻿#undef THIS_HIDE
+#define TARGET_64BIT
+#if NET5_0_OR_GREATER
+#define BCL_TYPE_HALF
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#define GENERICS_MATH
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -6,47 +16,60 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
+using Zyl.VectorTraits.Impl.Util;
+using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.ExTypes.Impl {
+    using BitConverter = MathBitConverter;
+    //using IBinaryIntegerParseAndFormatInfo = IComparable;
+    //using IBinaryFloatParseAndFormatInfo = IComparable;
+    //using IUtfChar = IEquatable;
+
     internal static partial class Number {
         private const int Int32Precision = 10;
         private const int UInt32Precision = Int32Precision;
         private const int Int64Precision = 19;
         private const int UInt64Precision = 20;
-        private const int Int128Precision = 39;
-        private const int UInt128Precision = 39;
+        private const int ExInt128Precision = 39;
+        private const int ExUInt128Precision = 39;
 
         private const int FloatingPointMaxExponent = 309;
         private const int FloatingPointMinExponent = -324;
 
         private const int FloatingPointMaxDenormalMantissaBits = 52;
 
-        private static unsafe bool TryNumberBufferToBinaryInteger<TInteger>(ref NumberBuffer number, ref TInteger value)
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
+        private static bool TryNumberBufferToBinaryInteger<TInteger>(ref NumberBuffer number, ref TInteger value)
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
             number.CheckConsistency();
 
             int i = number.Scale;
 
-            if ((i > TInteger.MaxDigitCount) || (i < number.DigitsCount) || (!TInteger.IsSigned && number.IsNegative)) {
+            if ((i > IntegerFormatInfo<TInteger>.MaxDigitCount) || (i < number.DigitsCount) || (!IntegerFormatInfo<TInteger>.IsSigned && number.IsNegative)) {
                 return false;
             }
 
-            byte* p = number.DigitsPtr;
+            ref byte p = ref number.DigitsPtr;
 
-            Debug.Assert(p != null);
-            TInteger n = TInteger.Zero;
+            Debug.Assert(!UnsafeUtil.IsNullRef(ref p));
+            TInteger n = IntegerFormatInfo<TInteger>.Zero;
 
             while (--i >= 0) {
-                if (TInteger.IsGreaterThanAsUnsigned(n, TInteger.MaxValueDiv10)) {
+                if (IntegerFormatInfo<TInteger>.IsGreaterThanAsUnsigned(n, IntegerFormatInfo<TInteger>.MaxValueDiv10)) {
                     return false;
                 }
 
-                n = TInteger.MultiplyBy10(n);
+                n = IntegerFormatInfo<TInteger>.MultiplyBy10(n);
 
-                if (*p != '\0') {
-                    TInteger newN = n + TInteger.CreateTruncating(*p++ - '0');
+                if (p != '\0') {
+                    // TInteger newN = n + TInteger.CreateTruncating(*p++ - '0');
+                    TInteger newN = IntegerFormatInfo<TInteger>.AddInt(n, p - (byte)'0');
+                    p = ref Unsafe.Add(ref p, 1);
 
-                    if (!TInteger.IsSigned && (newN < n)) {
+                    if (!IntegerFormatInfo<TInteger>.IsSigned && (newN.CompareTo(n)<0)) {
                         return false;
                     }
 
@@ -54,14 +77,15 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 }
             }
 
-            if (TInteger.IsSigned) {
+            if (IntegerFormatInfo<TInteger>.IsSigned) {
+                TInteger zero = IntegerFormatInfo<TInteger>.Zero;
                 if (number.IsNegative) {
-                    n = -n;
+                    n = IntegerFormatInfo<TInteger>.UnaryNegation(n);
 
-                    if (n > TInteger.Zero) {
+                    if (n.CompareTo(zero) > 0) {
                         return false;
                     }
-                } else if (n < TInteger.Zero) {
+                } else if (n.CompareTo(zero) < 0) {
                     return false;
                 }
             }
@@ -71,8 +95,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         internal static TInteger ParseBinaryInteger<TChar, TInteger>(ReadOnlySpan<TChar> value, NumberStyles styles, NumberFormatInfo info)
-            where TChar : unmanaged, IUtfChar<TChar>
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
+            where TChar : unmanaged, IEquatable<TChar>
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
             ParsingStatus status = TryParseBinaryInteger(value, styles, info, out TInteger result);
 
             if (status != ParsingStatus.OK) {
@@ -83,8 +111,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static ParsingStatus TryParseBinaryInteger<TChar, TInteger>(ReadOnlySpan<TChar> value, NumberStyles styles, NumberFormatInfo info, out TInteger result)
-            where TChar : unmanaged, IUtfChar<TChar>
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
+            where TChar : unmanaged, IEquatable<TChar>
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
             if ((styles & ~NumberStyles.Integer) == 0) {
                 // Optimized path for the common case of anything that's allowed for integer style.
                 return TryParseBinaryIntegerStyle(value, styles, info, out result);
@@ -94,18 +126,24 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 return TryParseBinaryIntegerHexNumberStyle(value, styles, out result);
             }
 
+#if NET8_0_OR_GREATER
             if ((styles & NumberStyles.AllowBinarySpecifier) != 0) {
                 return TryParseBinaryIntegerHexOrBinaryNumberStyle<TChar, TInteger, BinaryParser<TInteger>>(value, styles, out result);
             }
+#endif // NET8_0_OR_GREATER
 
             return TryParseBinaryIntegerNumber(value, styles, info, out result);
         }
 
         private static ParsingStatus TryParseBinaryIntegerNumber<TChar, TInteger>(ReadOnlySpan<TChar> value, NumberStyles styles, NumberFormatInfo info, out TInteger result)
-            where TChar : unmanaged, IUtfChar<TChar>
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
-            result = TInteger.Zero;
-            NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, stackalloc byte[TInteger.MaxDigitCount + 1]);
+            where TChar : unmanaged, IEquatable<TChar>
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
+            result = IntegerFormatInfo<TInteger>.Zero;
+            NumberBuffer number = new NumberBuffer(NumberBufferKind.Integer, stackalloc byte[IntegerFormatInfo<TInteger>.MaxDigitCount + 1]);
 
             if (!TryStringToNumber(value, styles, ref number, info)) {
                 return ParsingStatus.Failed;
@@ -120,8 +158,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
         /// <summary>Parses int limited to styles that make up NumberStyles.Integer.</summary>
         internal static ParsingStatus TryParseBinaryIntegerStyle<TChar, TInteger>(ReadOnlySpan<TChar> value, NumberStyles styles, NumberFormatInfo info, out TInteger result)
-            where TChar : unmanaged, IUtfChar<TChar>
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
+            where TChar : unmanaged, IEquatable<TChar>
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
             Debug.Assert((styles & ~NumberStyles.Integer) == 0, "Only handles subsets of Integer format");
 
             if (value.IsEmpty) {
@@ -129,7 +171,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
             int index = 0;
-            uint num = TChar.CastToUInt32(value[0]);
+            uint num = CastToUInt32(value[0]);
 
             // Skip past any whitespace at the beginning.
             if ((styles & NumberStyles.AllowLeadingWhite) != 0 && IsWhite(num)) {
@@ -139,7 +181,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     if ((uint)index >= (uint)value.Length) {
                         goto FalseExit;
                     }
-                    num = TChar.CastToUInt32(value[index]);
+                    num = CastToUInt32(value[index]);
                 }
                 while (IsWhite(num));
             }
@@ -147,7 +189,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             // Parse leading sign.
             bool isNegative = false;
             if ((styles & NumberStyles.AllowLeadingSign) != 0) {
-                if (info.HasInvariantNumberSigns) {
+                if (info.HasInvariantNumberSignsCheck()) {
                     if (num == '-') {
                         isNegative = true;
                         index++;
@@ -155,14 +197,14 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         if ((uint)index >= (uint)value.Length) {
                             goto FalseExit;
                         }
-                        num = TChar.CastToUInt32(value[index]);
+                        num = CastToUInt32(value[index]);
                     } else if (num == '+') {
                         index++;
 
                         if ((uint)index >= (uint)value.Length) {
                             goto FalseExit;
                         }
-                        num = TChar.CastToUInt32(value[index]);
+                        num = CastToUInt32(value[index]);
                     }
                 } else if (info.AllowHyphenDuringParsing() && num == '-') {
                     isNegative = true;
@@ -171,7 +213,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     if ((uint)index >= (uint)value.Length) {
                         goto FalseExit;
                     }
-                    num = TChar.CastToUInt32(value[index]);
+                    num = CastToUInt32(value[index]);
                 } else {
                     value = value.Slice(index);
                     index = 0;
@@ -185,7 +227,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         if ((uint)index >= (uint)value.Length) {
                             goto FalseExit;
                         }
-                        num = TChar.CastToUInt32(value[index]);
+                        num = CastToUInt32(value[index]);
                     } else if (!negativeSign.IsEmpty && value.StartsWith(negativeSign)) {
                         isNegative = true;
                         index += negativeSign.Length;
@@ -193,13 +235,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         if ((uint)index >= (uint)value.Length) {
                             goto FalseExit;
                         }
-                        num = TChar.CastToUInt32(value[index]);
+                        num = CastToUInt32(value[index]);
                     }
                 }
             }
 
-            bool overflow = !TInteger.IsSigned && isNegative;
-            TInteger answer = TInteger.Zero;
+            bool overflow = !IntegerFormatInfo<TInteger>.IsSigned && isNegative;
+            TInteger answer = IntegerFormatInfo<TInteger>.Zero;
 
             if (IsDigit(num)) {
                 // Skip past leading zeros.
@@ -210,11 +252,11 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         if ((uint)index >= (uint)value.Length) {
                             goto DoneAtEnd;
                         }
-                        num = TChar.CastToUInt32(value[index]);
+                        num = CastToUInt32(value[index]);
                     } while (num == '0');
 
                     if (!IsDigit(num)) {
-                        if (!TInteger.IsSigned) {
+                        if (!IntegerFormatInfo<TInteger>.IsSigned) {
                             overflow = false;
                         }
                         goto HasTrailingChars;
@@ -222,39 +264,40 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 }
 
                 // Parse most digits, up to the potential for overflow, which can't happen until after MaxDigitCount - 1 digits.
-                answer = TInteger.CreateTruncating(num - '0'); // first digit
+                answer = IntegerFormatInfo<TInteger>.CreateTruncating((int)num - '0'); // first digit
                 index++;
 
-                for (int i = 0; i < TInteger.MaxDigitCount - 2; i++) // next MaxDigitCount - 2 digits can't overflow
+                for (int i = 0; i < IntegerFormatInfo<TInteger>.MaxDigitCount - 2; i++) // next MaxDigitCount - 2 digits can't overflow
                 {
                     if ((uint)index >= (uint)value.Length) {
-                        if (!TInteger.IsSigned) {
+                        if (!IntegerFormatInfo<TInteger>.IsSigned) {
                             goto DoneAtEndButPotentialOverflow;
                         } else {
                             goto DoneAtEnd;
                         }
                     }
 
-                    num = TChar.CastToUInt32(value[index]);
+                    num = CastToUInt32(value[index]);
 
                     if (!IsDigit(num)) {
                         goto HasTrailingChars;
                     }
                     index++;
 
-                    answer = TInteger.MultiplyBy10(answer);
-                    answer += TInteger.CreateTruncating(num - '0');
+                    answer = IntegerFormatInfo<TInteger>.MultiplyBy10(answer);
+                    //answer += TInteger.CreateTruncating(num - '0');
+                    answer = IntegerFormatInfo<TInteger>.AddInt(answer, (int)num - '0');
                 }
 
                 if ((uint)index >= (uint)value.Length) {
-                    if (!TInteger.IsSigned) {
+                    if (!IntegerFormatInfo<TInteger>.IsSigned) {
                         goto DoneAtEndButPotentialOverflow;
                     } else {
                         goto DoneAtEnd;
                     }
                 }
 
-                num = TChar.CastToUInt32(value[index]);
+                num = CastToUInt32(value[index]);
 
                 if (!IsDigit(num)) {
                     goto HasTrailingChars;
@@ -262,17 +305,23 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 index++;
 
                 // Potential overflow now processing the MaxDigitCount digit.
-                if (!TInteger.IsSigned) {
-                    overflow |= (answer > TInteger.MaxValueDiv10) || ((answer == TInteger.MaxValueDiv10) && (num > '5'));
+                int cmp = answer.CompareTo(IntegerFormatInfo<TInteger>.MaxValueDiv10);
+                if (!IntegerFormatInfo<TInteger>.IsSigned) {
+                    overflow |= (cmp > 0) || ((cmp == 0) && (num > '5'));
                 } else {
-                    overflow = answer > TInteger.MaxValueDiv10;
+                    overflow = cmp > 0;
                 }
 
-                answer = TInteger.MultiplyBy10(answer);
-                answer += TInteger.CreateTruncating(num - '0');
+                answer = IntegerFormatInfo<TInteger>.MultiplyBy10(answer);
+                answer = IntegerFormatInfo<TInteger>.AddInt(answer, (int)num - '0');
 
-                if (TInteger.IsSigned) {
-                    overflow |= TInteger.IsGreaterThanAsUnsigned(answer, TInteger.MaxValue + (isNegative ? TInteger.One : TInteger.Zero));
+                if (IntegerFormatInfo<TInteger>.IsSigned) {
+                    // overflow |= TInteger.IsGreaterThanAsUnsigned(answer, TInteger.MaxValue + (isNegative ? TInteger.One : TInteger.Zero));
+                    TInteger right = IntegerFormatInfo<TInteger>.MaxValue;
+                    if (isNegative) {
+                        right = IntegerFormatInfo<TInteger>.AddInt(right, 1);
+                    }
+                    overflow |= IntegerFormatInfo<TInteger>.IsGreaterThanAsUnsigned(answer, right);
                 }
 
                 if ((uint)index >= (uint)value.Length) {
@@ -281,7 +330,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
                 // At this point, we're either overflowing or hitting a formatting error.
                 // Format errors take precedence for compatibility.
-                num = TChar.CastToUInt32(value[index]);
+                num = CastToUInt32(value[index]);
 
                 while (IsDigit(num)) {
                     overflow = true;
@@ -290,7 +339,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     if ((uint)index >= (uint)value.Length) {
                         goto OverflowExit;
                     }
-                    num = TChar.CastToUInt32(value[index]);
+                    num = CastToUInt32(value[index]);
                 }
                 goto HasTrailingChars;
             }
@@ -302,10 +351,10 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             }
 
         DoneAtEnd:
-            if (!TInteger.IsSigned) {
+            if (!IntegerFormatInfo<TInteger>.IsSigned) {
                 result = answer;
             } else {
-                result = isNegative ? -answer : answer;
+                result = isNegative ? IntegerFormatInfo<TInteger>.UnaryNegation(answer) : answer;
             }
             ParsingStatus status = ParsingStatus.OK;
 
@@ -313,12 +362,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return status;
 
         FalseExit: // parsing failed
-            result = TInteger.Zero;
+            result = IntegerFormatInfo<TInteger>.Zero;
             status = ParsingStatus.Failed;
             goto Exit;
 
         OverflowExit:
-            result = TInteger.Zero;
+            result = IntegerFormatInfo<TInteger>.Zero;
             status = ParsingStatus.Overflow;
             goto Exit;
 
@@ -330,7 +379,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 }
 
                 for (index++; index < value.Length; index++) {
-                    uint ch = TChar.CastToUInt32(value[index]);
+                    uint ch = CastToUInt32(value[index]);
 
                     if (!IsWhite(ch)) {
                         break;
@@ -348,51 +397,73 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
         /// <summary>Parses <typeparamref name="TInteger"/> limited to styles that make up NumberStyles.HexNumber.</summary>
         internal static ParsingStatus TryParseBinaryIntegerHexNumberStyle<TChar, TInteger>(ReadOnlySpan<TChar> value, NumberStyles styles, out TInteger result)
-            where TChar : unmanaged, IUtfChar<TChar>
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
+            where TChar : unmanaged, IEquatable<TChar>
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
             return TryParseBinaryIntegerHexOrBinaryNumberStyle<TChar, TInteger, HexParser<TInteger>>(value, styles, out result);
         }
 
         private interface IHexOrBinaryParser<TInteger>
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
-            static abstract NumberStyles AllowedStyles { get; }
-            static abstract bool IsValidChar(uint ch);
-            static abstract uint FromChar(uint ch);
-            static abstract uint MaxDigitValue { get; }
-            static abstract int MaxDigitCount { get; }
-            static abstract TInteger ShiftLeftForNextDigit(TInteger value);
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
+            NumberStyles AllowedStyles { get; }
+            bool IsValidChar(uint ch);
+            uint FromChar(uint ch);
+            uint MaxDigitValue { get; }
+            int MaxDigitCount { get; }
+            TInteger ShiftLeftForNextDigit(TInteger value);
         }
 
-        private readonly struct HexParser<TInteger> : IHexOrBinaryParser<TInteger> where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
-            public static NumberStyles AllowedStyles => NumberStyles.HexNumber;
-            public static bool IsValidChar(uint ch) => HexConverter.IsHexChar((int)ch);
-            public static uint FromChar(uint ch) => (uint)HexConverter.FromChar((int)ch);
-            public static uint MaxDigitValue => 0xF;
-            public static int MaxDigitCount => TInteger.MaxHexDigitCount;
-            public static TInteger ShiftLeftForNextDigit(TInteger value) => TInteger.MultiplyBy16(value);
+        private readonly struct HexParser<TInteger> : IHexOrBinaryParser<TInteger> where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
+            /// <summary>Static instance.</summary>
+            public NumberStyles AllowedStyles => NumberStyles.HexNumber;
+            public bool IsValidChar(uint ch) => HexConverter.IsHexChar((int)ch);
+            public uint FromChar(uint ch) => (uint)HexConverter.FromChar((int)ch);
+            public uint MaxDigitValue => 0xF;
+            public int MaxDigitCount => IntegerFormatInfo<TInteger>.MaxHexDigitCount;
+            public TInteger ShiftLeftForNextDigit(TInteger value) => IntegerFormatInfo<TInteger>.MultiplyBy16(value);
         }
 
-        private readonly struct BinaryParser<TInteger> : IHexOrBinaryParser<TInteger> where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
-            public static NumberStyles AllowedStyles => NumberStyles.BinaryNumber;
-            public static bool IsValidChar(uint ch) => (ch - '0') <= 1;
-            public static uint FromChar(uint ch) => ch - '0';
-            public static uint MaxDigitValue => 1;
-            public static unsafe int MaxDigitCount => sizeof(TInteger) * 8;
-            public static TInteger ShiftLeftForNextDigit(TInteger value) => value << 1;
+        private readonly struct BinaryParser<TInteger> : IHexOrBinaryParser<TInteger> where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
+            /// <summary>Static instance.</summary>
+            public NumberStyles AllowedStyles => BinaryNumber;
+            public bool IsValidChar(uint ch) => (ch - '0') <= 1;
+            public uint FromChar(uint ch) => ch - '0';
+            public uint MaxDigitValue => 1;
+            public int MaxDigitCount => Unsafe.SizeOf<TInteger>() * 8;
+            public TInteger ShiftLeftForNextDigit(TInteger value) => IntegerFormatInfo<TInteger>.MultiplyByInt(value, 2);
         }
 
         private static ParsingStatus TryParseBinaryIntegerHexOrBinaryNumberStyle<TChar, TInteger, TParser>(ReadOnlySpan<TChar> value, NumberStyles styles, out TInteger result)
-            where TChar : unmanaged, IUtfChar<TChar>
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger>
+            where TChar : unmanaged, IEquatable<TChar>
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
             where TParser : struct, IHexOrBinaryParser<TInteger> {
-            Debug.Assert((styles & ~TParser.AllowedStyles) == 0, $"Only handles subsets of {TParser.AllowedStyles} format");
+            TParser aParser = default;
+            Debug.Assert((styles & ~aParser.AllowedStyles) == 0, $"Only handles subsets of {aParser.AllowedStyles} format");
 
             if (value.IsEmpty) {
                 goto FalseExit;
             }
 
             int index = 0;
-            uint num = TChar.CastToUInt32(value[0]);
+            uint num = CastToUInt32(value[0]);
 
             // Skip past any whitespace at the beginning.
             if ((styles & NumberStyles.AllowLeadingWhite) != 0 && IsWhite(num)) {
@@ -402,15 +473,15 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     if ((uint)index >= (uint)value.Length) {
                         goto FalseExit;
                     }
-                    num = TChar.CastToUInt32(value[index]);
+                    num = CastToUInt32(value[index]);
                 }
                 while (IsWhite(num));
             }
 
             bool overflow = false;
-            TInteger answer = TInteger.Zero;
+            TInteger answer = IntegerFormatInfo<TInteger>.Zero;
 
-            if (TParser.IsValidChar(num)) {
+            if (aParser.IsValidChar(num)) {
                 // Skip past leading zeros.
                 if (num == '0') {
                     do {
@@ -419,34 +490,35 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         if ((uint)index >= (uint)value.Length) {
                             goto DoneAtEnd;
                         }
-                        num = TChar.CastToUInt32(value[index]);
+                        num = CastToUInt32(value[index]);
                     } while (num == '0');
 
-                    if (!TParser.IsValidChar(num)) {
+                    if (!aParser.IsValidChar(num)) {
                         goto HasTrailingChars;
                     }
                 }
 
                 // Parse up through MaxDigitCount digits, as no overflow is possible
-                answer = TInteger.CreateTruncating(TParser.FromChar(num)); // first digit
+                answer = IntegerFormatInfo<TInteger>.CreateTruncating(aParser.FromChar(num)); // first digit
                 index++;
 
-                for (int i = 0; i < TParser.MaxDigitCount - 1; i++) // next MaxDigitCount - 1 digits can't overflow
+                for (int i = 0; i < aParser.MaxDigitCount - 1; i++) // next MaxDigitCount - 1 digits can't overflow
                 {
                     if ((uint)index >= (uint)value.Length) {
                         goto DoneAtEnd;
                     }
-                    num = TChar.CastToUInt32(value[index]);
+                    num = CastToUInt32(value[index]);
 
-                    uint numValue = TParser.FromChar(num);
+                    uint numValue = aParser.FromChar(num);
 
-                    if (numValue > TParser.MaxDigitValue) {
+                    if (numValue > aParser.MaxDigitValue) {
                         goto HasTrailingChars;
                     }
                     index++;
 
-                    answer = TParser.ShiftLeftForNextDigit(answer);
-                    answer += TInteger.CreateTruncating(numValue);
+                    answer = aParser.ShiftLeftForNextDigit(answer);
+                    // answer += TInteger.CreateTruncating(numValue);
+                    answer = IntegerFormatInfo<TInteger>.AddInt(answer, numValue);
                 }
 
                 // If there's another digit, it's an overflow.
@@ -454,9 +526,9 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     goto DoneAtEnd;
                 }
 
-                num = TChar.CastToUInt32(value[index]);
+                num = CastToUInt32(value[index]);
 
-                if (!TParser.IsValidChar(num)) {
+                if (!aParser.IsValidChar(num)) {
                     goto HasTrailingChars;
                 }
 
@@ -468,8 +540,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     if ((uint)index >= (uint)value.Length) {
                         goto OverflowExit;
                     }
-                    num = TChar.CastToUInt32(value[index]);
-                } while (TParser.IsValidChar(num));
+                    num = CastToUInt32(value[index]);
+                } while (aParser.IsValidChar(num));
 
                 overflow = true;
                 goto HasTrailingChars;
@@ -489,12 +561,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return status;
 
         FalseExit: // parsing failed
-            result = TInteger.Zero;
+            result = IntegerFormatInfo<TInteger>.Zero;
             status = ParsingStatus.Failed;
             goto Exit;
 
         OverflowExit:
-            result = TInteger.Zero;
+            result = IntegerFormatInfo<TInteger>.Zero;
             status = ParsingStatus.Overflow;
             goto Exit;
 
@@ -506,7 +578,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 }
 
                 for (index++; index < value.Length; index++) {
-                    uint ch = TChar.CastToUInt32(value[index]);
+                    uint ch = CastToUInt32(value[index]);
 
                     if (!IsWhite(ch)) {
                         break;
@@ -525,7 +597,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         internal static decimal ParseDecimal<TChar>(ReadOnlySpan<TChar> value, NumberStyles styles, NumberFormatInfo info)
-            where TChar : unmanaged, IUtfChar<TChar> {
+            where TChar : unmanaged, IEquatable<TChar> {
             ParsingStatus status = TryParseDecimal(value, styles, info, out decimal result);
             if (status != ParsingStatus.OK) {
                 if (status == ParsingStatus.Failed) {
@@ -537,17 +609,17 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             return result;
         }
 
-        internal static unsafe bool TryNumberToDecimal(ref NumberBuffer number, ref decimal value) {
+        internal static bool TryNumberToDecimal(ref NumberBuffer number, ref decimal value) {
             number.CheckConsistency();
 
-            byte* p = number.DigitsPtr;
+            ref byte p = ref number.DigitsPtr;
             int e = number.Scale;
             bool sign = number.IsNegative;
-            uint c = *p;
+            uint c = p;
             if (c == 0) {
                 // To avoid risking an app-compat issue with pre 4.5 (where some app was illegally using Reflection to examine the internal scale bits), we'll only force
                 // the scale to 0 if the scale was previously positive (previously, such cases were unparsable to a bug.)
-                value = new decimal(0, 0, 0, sign, (byte)Math.Clamp(-e, 0, 28));
+                value = new decimal(0, 0, 0, sign, (byte)BitMath.Clamp(-e, 0, 28));
                 return true;
             }
 
@@ -559,7 +631,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 e--;
                 low64 *= 10;
                 low64 += c - '0';
-                c = *++p;
+                p = ref Unsafe.Add(ref p, 1);
+                c = p;
                 if (low64 >= ulong.MaxValue / 10)
                     break;
                 if (c == 0) {
@@ -587,14 +660,16 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     low64 += c;
                     if (low64 < c)
                         high++;
-                    c = *++p;
+                    p = ref Unsafe.Add(ref p, 1);
+                    c = p;
                 }
                 e--;
             }
 
             if (c >= '5') {
                 if ((c == '5') && ((low64 & 1) == 0)) {
-                    c = *++p;
+                    p = ref Unsafe.Add(ref p, 1);
+                    c = p;
 
                     bool hasZeroTail = !number.HasNonZeroTail;
 
@@ -608,7 +683,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
                     while ((c != 0) && hasZeroTail) {
                         hasZeroTail &= c == '0';
-                        c = *++p;
+                        p = ref Unsafe.Add(ref p, 1);
+                        c = p;
                     }
 
                     // We should either be at the end of the stream or have a non-zero tail
@@ -643,8 +719,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         internal static TFloat ParseFloat<TChar, TFloat>(ReadOnlySpan<TChar> value, NumberStyles styles, NumberFormatInfo info)
-            where TChar : unmanaged, IUtfChar<TChar>
-            where TFloat : unmanaged, IBinaryFloatParseAndFormatInfo<TFloat> {
+            where TChar : unmanaged, IEquatable<TChar>
+            where TFloat : unmanaged, IComparable<TFloat>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TFloat>
+#endif
+            {
             if (!TryParseFloat(value, styles, info, out TFloat result)) {
                 ThrowFormatException(value);
             }
@@ -652,7 +732,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         internal static ParsingStatus TryParseDecimal<TChar>(ReadOnlySpan<TChar> value, NumberStyles styles, NumberFormatInfo info, out decimal result)
-            where TChar : unmanaged, IUtfChar<TChar> {
+            where TChar : unmanaged, IEquatable<TChar> {
             NumberBuffer number = new NumberBuffer(NumberBufferKind.Decimal, stackalloc byte[DecimalNumberBufferLength]);
 
             result = 0;
@@ -669,57 +749,61 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         internal static bool SpanStartsWith<TChar>(ReadOnlySpan<TChar> span, TChar c)
-            where TChar : unmanaged, IUtfChar<TChar> {
-            return !span.IsEmpty && (span[0] == c);
+            where TChar : unmanaged, IEquatable<TChar> {
+            return !span.IsEmpty && (span[0].Equals(c));
         }
 
         internal static bool SpanStartsWith<TChar>(ReadOnlySpan<TChar> span, ReadOnlySpan<TChar> value, StringComparison comparisonType)
-            where TChar : unmanaged, IUtfChar<TChar> {
+            where TChar : unmanaged, IEquatable<TChar> {
             if (typeof(TChar) == typeof(char)) {
-                ReadOnlySpan<char> typedSpan = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<char>>(span);
-                ReadOnlySpan<char> typedValue = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<char>>(value);
+                ReadOnlySpan<char> typedSpan = MemoryMarshal.Cast<TChar, char>(span);
+                ReadOnlySpan<char> typedValue = MemoryMarshal.Cast<TChar, char>(value);
                 return typedSpan.StartsWith(typedValue, comparisonType);
             } else {
                 Debug.Assert(typeof(TChar) == typeof(byte));
 
-                ReadOnlySpan<byte> typedSpan = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<byte>>(span);
-                ReadOnlySpan<byte> typedValue = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<byte>>(value);
+                ReadOnlySpan<byte> typedSpan = MemoryMarshal.Cast<TChar, byte>(span);
+                ReadOnlySpan<byte> typedValue = MemoryMarshal.Cast<TChar, byte>(value);
                 return typedSpan.StartsWithUtf8(typedValue, comparisonType);
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static ReadOnlySpan<TChar> SpanTrim<TChar>(ReadOnlySpan<TChar> span)
-            where TChar : unmanaged, IUtfChar<TChar> {
+            where TChar : unmanaged, IEquatable<TChar> {
             if (typeof(TChar) == typeof(char)) {
-                return Unsafe.BitCast<ReadOnlySpan<char>, ReadOnlySpan<TChar>>(Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<char>>(span).Trim());
+                return MemoryMarshal.Cast<char, TChar>(MemoryMarshal.Cast<TChar, char>(span).Trim());
             } else {
                 Debug.Assert(typeof(TChar) == typeof(byte));
 
-                return Unsafe.BitCast<ReadOnlySpan<byte>, ReadOnlySpan<TChar>>(Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<byte>>(span).TrimUtf8());
+                return MemoryMarshal.Cast<byte, TChar>(MemoryMarshal.Cast<TChar, byte>(span).TrimUtf8());
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static bool SpanEqualsOrdinalIgnoreCase<TChar>(ReadOnlySpan<TChar> span, ReadOnlySpan<TChar> value)
-            where TChar : unmanaged, IUtfChar<TChar> {
+            where TChar : unmanaged, IEquatable<TChar> {
             if (typeof(TChar) == typeof(char)) {
-                ReadOnlySpan<char> typedSpan = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<char>>(span);
-                ReadOnlySpan<char> typedValue = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<char>>(value);
+                ReadOnlySpan<char> typedSpan = MemoryMarshal.Cast<TChar, char>(span);
+                ReadOnlySpan<char> typedValue = MemoryMarshal.Cast<TChar, char>(value);
                 return typedSpan.EqualsOrdinalIgnoreCase(typedValue);
             } else {
                 Debug.Assert(typeof(TChar) == typeof(byte));
 
-                ReadOnlySpan<byte> typedSpan = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<byte>>(span);
-                ReadOnlySpan<byte> typedValue = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<byte>>(value);
+                ReadOnlySpan<byte> typedSpan = MemoryMarshal.Cast<TChar, byte>(span);
+                ReadOnlySpan<byte> typedValue = MemoryMarshal.Cast<TChar, byte>(value);
                 return typedSpan.EqualsOrdinalIgnoreCaseUtf8(typedValue);
             }
         }
 
         internal static bool TryParseFloat<TChar, TFloat>(ReadOnlySpan<TChar> value, NumberStyles styles, NumberFormatInfo info, out TFloat result)
-            where TChar : unmanaged, IUtfChar<TChar>
-            where TFloat : unmanaged, IBinaryFloatParseAndFormatInfo<TFloat> {
-            NumberBuffer number = new NumberBuffer(NumberBufferKind.FloatingPoint, stackalloc byte[TFloat.NumberBufferLength]);
+            where TChar : unmanaged, IEquatable<TChar>
+            where TFloat : unmanaged, IComparable<TFloat>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TFloat>
+#endif
+            {
+            NumberBuffer number = new NumberBuffer(NumberBufferKind.FloatingPoint, stackalloc byte[FloatFormatInfo<TFloat>.NumberBufferLength]);
 
             if (!TryStringToNumber(value, styles, ref number, info)) {
                 ReadOnlySpan<TChar> valueTrim = SpanTrim(value);
@@ -731,19 +815,19 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 ReadOnlySpan<TChar> positiveInfinitySymbol = info.PositiveInfinitySymbolTChar<TChar>();
 
                 if (SpanEqualsOrdinalIgnoreCase(valueTrim, positiveInfinitySymbol)) {
-                    result = TFloat.PositiveInfinity;
+                    result = FloatFormatInfo<TFloat>.PositiveInfinity;
                     return true;
                 }
 
                 if (SpanEqualsOrdinalIgnoreCase(valueTrim, info.NegativeInfinitySymbolTChar<TChar>())) {
-                    result = TFloat.NegativeInfinity;
+                    result = FloatFormatInfo<TFloat>.NegativeInfinity;
                     return true;
                 }
 
                 ReadOnlySpan<TChar> nanSymbol = info.NaNSymbolTChar<TChar>();
 
                 if (SpanEqualsOrdinalIgnoreCase(valueTrim, nanSymbol)) {
-                    result = TFloat.NaN;
+                    result = FloatFormatInfo<TFloat>.NaN;
                     return true;
                 }
 
@@ -753,14 +837,14 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     valueTrim = valueTrim.Slice(positiveSign.Length);
 
                     if (SpanEqualsOrdinalIgnoreCase(valueTrim, positiveInfinitySymbol)) {
-                        result = TFloat.PositiveInfinity;
+                        result = FloatFormatInfo<TFloat>.PositiveInfinity;
                         return true;
                     } else if (SpanEqualsOrdinalIgnoreCase(valueTrim, nanSymbol)) {
-                        result = TFloat.NaN;
+                        result = FloatFormatInfo<TFloat>.NaN;
                         return true;
                     }
 
-                    result = TFloat.Zero;
+                    result = FloatFormatInfo<TFloat>.Zero;
                     return false;
                 }
 
@@ -768,17 +852,17 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
                 if (SpanStartsWith(valueTrim, negativeSign, StringComparison.OrdinalIgnoreCase)) {
                     if (SpanEqualsOrdinalIgnoreCase(valueTrim.Slice(negativeSign.Length), nanSymbol)) {
-                        result = TFloat.NaN;
+                        result = FloatFormatInfo<TFloat>.NaN;
                         return true;
                     }
 
-                    if (info.AllowHyphenDuringParsing() && SpanStartsWith(valueTrim, TChar.CastFrom('-')) && SpanEqualsOrdinalIgnoreCase(valueTrim.Slice(1), nanSymbol)) {
-                        result = TFloat.NaN;
+                    if (info.AllowHyphenDuringParsing() && SpanStartsWith(valueTrim, CastFrom<TChar>('-')) && SpanEqualsOrdinalIgnoreCase(valueTrim.Slice(1), nanSymbol)) {
+                        result = FloatFormatInfo<TFloat>.NaN;
                         return true;
                     }
                 }
 
-                result = TFloat.Zero;
+                result = FloatFormatInfo<TFloat>.Zero;
                 return false; // We really failed
             }
 
@@ -790,8 +874,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         [DoesNotReturn]
 #endif // NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         internal static void ThrowOverflowOrFormatException<TChar, TInteger>(ParsingStatus status, ReadOnlySpan<TChar> value)
-            where TChar : unmanaged, IUtfChar<TChar>
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
+            where TChar : unmanaged, IEquatable<TChar>
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
             if (status == ParsingStatus.Failed) {
                 ThrowFormatException(value);
             }
@@ -802,7 +890,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         [DoesNotReturn]
 #endif // NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         internal static void ThrowFormatException<TChar>(ReadOnlySpan<TChar> value)
-            where TChar : unmanaged, IUtfChar<TChar> {
+            where TChar : unmanaged, IEquatable<TChar> {
             string errorMessage;
 
             if (typeof(TChar) == typeof(byte)) {
@@ -812,12 +900,13 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 // It's possible after we check the bytes for validity that they could be concurrently
                 // mutated, but if that's happening, all bets are off, anyway, and it simply impacts
                 // which exception is thrown.
-                ReadOnlySpan<byte> bytes = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<byte>>(value);
-                errorMessage = Utf8.IsValid(bytes) ?
-                    SR.Format(SR.Format_InvalidStringWithValue, Encoding.UTF8.GetString(bytes)) :
-                    SR.Format_InvalidString;
+                //ReadOnlySpan<byte> bytes = Unsafe.BitCast<ReadOnlySpan<TChar>, ReadOnlySpan<byte>>(value);
+                //errorMessage = Utf8.IsValid(bytes) ?
+                //    SR.Format(SR.Format_InvalidStringWithValue, Encoding.UTF8.GetString(bytes)) :
+                //    SR.Format_InvalidString;
+                errorMessage = SR.Format_InvalidString;
             } else {
-                errorMessage = SR.Format(SR.Format_InvalidStringWithValue, value.ToString());
+                errorMessage = string.Format(SR.Format_InvalidStringWithValue, value.ToString());
             }
 
             throw new FormatException(errorMessage);
@@ -827,8 +916,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         [DoesNotReturn]
 #endif // NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         internal static void ThrowOverflowException<TInteger>()
-            where TInteger : unmanaged, IBinaryIntegerParseAndFormatInfo<TInteger> {
-            throw new OverflowException(TInteger.OverflowMessage);
+            where TInteger : unmanaged, IComparable<TInteger>
+#if GENERICS_MATH
+            , IBinaryInteger<TInteger>
+#endif // GENERICS_MATH
+            {
+            throw new OverflowException(IntegerFormatInfo<TInteger>.OverflowMessage);
         }
 
 #if NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
@@ -839,20 +932,24 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         }
 
         internal static TFloat NumberToFloat<TFloat>(ref NumberBuffer number)
-            where TFloat : unmanaged, IBinaryFloatParseAndFormatInfo<TFloat> {
+            where TFloat : unmanaged, IComparable<TFloat>
+#if GENERICS_MATH
+            , IBinaryFloatingPointIeee754<TFloat>
+#endif
+            {
             number.CheckConsistency();
             TFloat result;
 
-            if ((number.DigitsCount == 0) || (number.Scale < TFloat.MinDecimalExponent)) {
-                result = TFloat.Zero;
-            } else if (number.Scale > TFloat.MaxDecimalExponent) {
-                result = TFloat.PositiveInfinity;
+            if ((number.DigitsCount == 0) || (number.Scale < FloatFormatInfo<TFloat>.MinDecimalExponent)) {
+                result = FloatFormatInfo<TFloat>.Zero;
+            } else if (number.Scale > FloatFormatInfo<TFloat>.MaxDecimalExponent) {
+                result = FloatFormatInfo<TFloat>.PositiveInfinity;
             } else {
                 ulong bits = NumberToFloatingPointBits<TFloat>(ref number);
-                result = TFloat.BitsToFloat(bits);
+                result = FloatFormatInfo<TFloat>.BitsToFloat(bits);
             }
 
-            return number.IsNegative ? -result : result;
+            return number.IsNegative ?  ExBitUtil.UnaryNegation(result) : result;
         }
     }
 

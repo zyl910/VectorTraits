@@ -26,7 +26,10 @@ namespace Zyl.VectorTraits.ExTypes
     /// <summary>Represents a 128-bit unsigned integer. It is binary compatible with <see cref="UInt128"/> (表示 128 位无符号整数. 它与 <see cref="UInt128"/> 是二进制兼容的).</summary>
     [CLSCompliant(false)]
     [StructLayout(LayoutKind.Sequential)]
-    public readonly partial struct ExUInt128: IFormattable
+    public readonly partial struct ExUInt128: IFormattable, IComparable, IComparable<ExUInt128>, IEquatable<ExUInt128>
+#if NET6_0_OR_GREATER
+        , ISpanFormattable
+#endif // NET6_0_OR_GREATER
 #if NET7_0_OR_GREATER
           , IBinaryInteger<ExUInt128>,
           IMinMaxValue<ExUInt128>,

@@ -34,8 +34,9 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 )) != 0 &&
                 (style & ~NumberStyles.HexNumber) != 0
 #if NET8_0_OR_GREATER
-                && (style & ~NumberStyles.BinaryNumber) != 0)
+                && (style & ~NumberStyles.BinaryNumber) != 0
 #endif // NET8_0_OR_GREATER
+                )
             {
                 ThrowInvalid(style);
 
