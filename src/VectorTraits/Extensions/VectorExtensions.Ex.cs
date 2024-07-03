@@ -1,8 +1,13 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits.Extensions {
 
@@ -142,6 +147,59 @@ namespace Zyl.VectorTraits.Extensions {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> ExAsUInt64<T>(this Vector<T> vector) where T : struct {
             return ExAs<T, ulong>(vector);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <summary>
+        /// (ExType) Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{T}" /> of type <see cref="Int128" /> (将 <see cref="Vector{T}" /> 重新解释为 <see cref="Int128" /> 类型的新 <see cref="Vector{T}" />).
+        /// </summary>
+        /// <typeparam name="T">The type of the input vector element(输入向量元素的类型).</typeparam>
+        /// <param name="vector">The vector to reinterpret (要重新解释的向量).</param>
+        /// <returns>vector reinterpreted as a new <see cref="Vector{T}" /> of type <see cref="Int128" /> (重新解释为 <see cref="Int128" /> 类型的 <see cref="Vector{T}" /> 向量).</returns>
+        /// <seealso cref="ExAs{TFrom, TTo}(Vector{TFrom})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<Int128> ExAsInt128<T>(this Vector<T> vector) where T : struct {
+            return ExAs<T, Int128>(vector);
+        }
+
+        /// <summary>
+        /// (ExType) Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{T}" /> of type <see cref="UInt128" /> (将 <see cref="Vector{T}" /> 重新解释为 <see cref="UInt128" /> 类型的新 <see cref="Vector{T}" />).
+        /// </summary>
+        /// <typeparam name="T">The type of the input vector element(输入向量元素的类型).</typeparam>
+        /// <param name="vector">The vector to reinterpret (要重新解释的向量).</param>
+        /// <returns>vector reinterpreted as a new <see cref="Vector{T}" /> of type <see cref="UInt128" /> (重新解释为 <see cref="UInt128" /> 类型的 <see cref="Vector{T}" /> 向量).</returns>
+        /// <seealso cref="ExAs{TFrom, TTo}(Vector{TFrom})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<UInt128> ExAsUInt128<T>(this Vector<T> vector) where T : struct {
+            return ExAs<T, UInt128>(vector);
+        }
+#endif // BCL_TYPE_INT128
+
+        /// <summary>
+        /// (ExType) Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{T}" /> of type <see cref="ExInt128" /> (将 <see cref="Vector{T}" /> 重新解释为 <see cref="ExInt128" /> 类型的新 <see cref="Vector{T}" />).
+        /// </summary>
+        /// <typeparam name="T">The type of the input vector element(输入向量元素的类型).</typeparam>
+        /// <param name="vector">The vector to reinterpret (要重新解释的向量).</param>
+        /// <returns>vector reinterpreted as a new <see cref="Vector{T}" /> of type <see cref="ExInt128" /> (重新解释为 <see cref="ExInt128" /> 类型的 <see cref="Vector{T}" /> 向量).</returns>
+        /// <seealso cref="ExAs{TFrom, TTo}(Vector{TFrom})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ExInt128> ExAsExInt128<T>(this Vector<T> vector) where T : struct {
+            return ExAs<T, ExInt128>(vector);
+        }
+
+        /// <summary>
+        /// (ExType) Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{T}" /> of type <see cref="ExUInt128" /> (将 <see cref="Vector{T}" /> 重新解释为 <see cref="ExUInt128" /> 类型的新 <see cref="Vector{T}" />).
+        /// </summary>
+        /// <typeparam name="T">The type of the input vector element(输入向量元素的类型).</typeparam>
+        /// <param name="vector">The vector to reinterpret (要重新解释的向量).</param>
+        /// <returns>vector reinterpreted as a new <see cref="Vector{T}" /> of type <see cref="ExUInt128" /> (重新解释为 <see cref="ExUInt128" /> 类型的 <see cref="Vector{T}" /> 向量).</returns>
+        /// <seealso cref="ExAs{TFrom, TTo}(Vector{TFrom})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<ExUInt128> ExAsExUInt128<T>(this Vector<T> vector) where T : struct {
+            return ExAs<T, ExUInt128>(vector);
         }
 
     }
