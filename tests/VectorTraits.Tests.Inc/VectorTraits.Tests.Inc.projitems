@@ -11,6 +11,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BitMathTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BitMathTests_IRootFunctions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExTypes\ExInt128Tests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ExTypes\ExUInt128Tests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)impl\ivectortraitstest\VectorTests_A.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IVectorTraitsTest\VectorTests_C.cs" />
