@@ -106,7 +106,12 @@ namespace Zyl.VectorTraits.Tests {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void ConditionalSelectTest<T>(T src) where T : struct {
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
+        public void ConditionalSelectTest<T>(T src) where T : struct, IEquatable<T> {
             T[] samples = new T[10];
             samples[0] = src;
             for (int i = 1; i < samples.Length; ++i) {
@@ -119,10 +124,9 @@ namespace Zyl.VectorTraits.Tests {
                     T right = samples[j];
                     T expected;
                     T dst;
-                    expected = Math.Min((dynamic)left, (dynamic)right);
+                    expected = BitMath.Min((dynamic)left, (dynamic)right);
                     dst = BitMath.ConditionalSelect((dynamic)left < (dynamic)right, (dynamic)left, (dynamic)right);
-                    ClassicAssert.AreEqual(expected, dst, $"{left} < {right}");
-                    //Console.WriteLine($"{left} < {right}: {expected}");
+                    ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0} < {1}: {2} // But is {4}({3})", left, right, expected, dst, typeof(T).Name));
                 }
             }
         }

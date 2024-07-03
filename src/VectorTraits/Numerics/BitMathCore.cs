@@ -1,9 +1,17 @@
-﻿using System;
+﻿#if NET5_0_OR_GREATER
+#define BCL_TYPE_HALF
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits.Numerics {
     using static MathBitConverter;
@@ -144,6 +152,36 @@ namespace Zyl.VectorTraits.Numerics {
             return (left & condition) | (right & ~condition);
         }
 
+        /// <inheritdoc cref="BitSelect(byte, byte, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExInt128 BitSelect(ExInt128 condition, ExInt128 left, ExInt128 right) {
+            return (left & condition) | (right & ~condition);
+        }
+
+        /// <inheritdoc cref="BitSelect(byte, byte, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExUInt128 BitSelect(ExUInt128 condition, ExUInt128 left, ExUInt128 right) {
+            return (left & condition) | (right & ~condition);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="BitSelect(byte, byte, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int128 BitSelect(Int128 condition, Int128 left, Int128 right) {
+            return (left & condition) | (right & ~condition);
+        }
+
+        /// <inheritdoc cref="BitSelect(byte, byte, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt128 BitSelect(UInt128 condition, UInt128 left, UInt128 right) {
+            return (left & condition) | (right & ~condition);
+        }
+
+#endif // BCL_TYPE_INT128
+
         /// <summary>Conditionally mask selects a value from two variables on a bitwise basis (按条件掩码从两个变量中按位选择值).</summary>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
         /// <param name="left">The variable that is selected when the corresponding bit in <paramref name="condition" /> is one (当 <paramref name="condition" /> 中的对应位为 1 时选择的变量).</param>
@@ -205,7 +243,7 @@ namespace Zyl.VectorTraits.Numerics {
             return BitSelect(DoubleToInt64Bits(condition), left, right);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
 
         /// <summary>Conditionally mask selects a value from two variables on a bitwise basis (按条件掩码从两个变量中按位选择值).</summary>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -227,7 +265,7 @@ namespace Zyl.VectorTraits.Numerics {
             return BitSelect(HalfToInt16Bits(condition), left, right);
         }
 
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         ///// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
         ///// <param name="value">The value to be clamped (要限制的值).</param>
@@ -283,6 +321,39 @@ namespace Zyl.VectorTraits.Numerics {
             return (value | (ulong)(long)ToInt32Mask(value > amax)) & amax;
         }
 
+        /// <inheritdoc cref="ClampToBitMax(int, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExInt128 ClampToBitMax(ExInt128 value, ExInt128 amax) {
+            Debug.Assert(0 == (amax & (amax + 1)));
+            return (value & (ExInt128)ToInt32Mask(value >= 0) | (ExInt128)ToInt32Mask(value > amax)) & amax;
+        }
+
+        /// <inheritdoc cref="ClampToBitMax(int, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExUInt128 ClampToBitMax(ExUInt128 value, ExUInt128 amax) {
+            Debug.Assert(0 == (amax & (amax + 1)));
+            return (value | (ExUInt128)(ExInt128)ToInt32Mask(value > amax)) & amax;
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="ClampToBitMax(int, int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int128 ClampToBitMax(Int128 value, Int128 amax) {
+            Debug.Assert(0 == (amax & (amax + 1)));
+            return (value & (Int128)ToInt32Mask(value >= 0) | (Int128)ToInt32Mask(value > amax)) & amax;
+        }
+
+        /// <inheritdoc cref="ClampToBitMax(int, int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt128 ClampToBitMax(UInt128 value, UInt128 amax) {
+            Debug.Assert(0 == (amax & (amax + 1)));
+            return (value | (UInt128)(Int128)ToInt32Mask(value > amax)) & amax;
+        }
+#endif // BCL_TYPE_INT128
+
         /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of 0 and <c>byte.MaxValue</c> (返回限制在 0 和 <c>byte.MaxValue</c> 范围内的 <paramref name="value" />).</summary>
         /// <param name="value">The value to be clamped (要限制的值).</param>
         /// <returns>Returns clamped value (返回限制后的值).</returns>
@@ -316,6 +387,36 @@ namespace Zyl.VectorTraits.Numerics {
         public static byte ClampToByte(ulong value) {
             return (byte)(value | (ulong)(long)ToInt32Mask(value > byte.MaxValue));
         }
+
+        /// <inheritdoc cref="ClampToByte(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ClampToByte(ExInt128 value) {
+            return (byte)(value & (ExInt128)ToInt32Mask(value >= 0) | (ExInt128)ToInt32Mask(value > byte.MaxValue));
+        }
+
+        /// <inheritdoc cref="ClampToByte(int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ClampToByte(ExUInt128 value) {
+            return (byte)(value | (ExUInt128)(ExInt128)ToInt32Mask(value > byte.MaxValue));
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="ClampToByte(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ClampToByte(Int128 value) {
+            return (byte)(value & (Int128)ToInt32Mask(value >= 0) | (Int128)ToInt32Mask(value > byte.MaxValue));
+        }
+
+        /// <inheritdoc cref="ClampToByte(int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ClampToByte(UInt128 value) {
+            return (byte)(value | (UInt128)(Int128)ToInt32Mask(value > byte.MaxValue));
+        }
+
+#endif // BCL_TYPE_INT128
 
         /// <summary>Conditionally selects a value from two variables on a bitwise basis (按条件从两个变量中按位选择值).</summary>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -401,6 +502,34 @@ namespace Zyl.VectorTraits.Numerics {
             return BitSelect((ulong)(long)ToInt32Mask(condition), left, right);
         }
 
+        /// <inheritdoc cref="ConditionalSelect(bool, byte, byte)"/>
+        public static ExInt128 ConditionalSelect(bool condition, ExInt128 left, ExInt128 right) {
+            return BitSelect((ExInt128)ToInt32Mask(condition), left, right);
+        }
+
+        /// <inheritdoc cref="ConditionalSelect(bool, byte, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExUInt128 ConditionalSelect(bool condition, ExUInt128 left, ExUInt128 right) {
+            return BitSelect((ExUInt128)(ExInt128)ToInt32Mask(condition), left, right);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="ConditionalSelect(bool, byte, byte)"/>
+        public static Int128 ConditionalSelect(bool condition, Int128 left, Int128 right) {
+            return BitSelect((Int128)ToInt32Mask(condition), left, right);
+        }
+
+        /// <inheritdoc cref="ConditionalSelect(bool, byte, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt128 ConditionalSelect(bool condition, UInt128 left, UInt128 right) {
+            return BitSelect((UInt128)(Int128)ToInt32Mask(condition), left, right);
+        }
+
+#endif // BCL_TYPE_INT128
+
         /// <summary>Conditionally selects a value from two variables on a bitwise basis (按条件从两个变量中按位选择值).</summary>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
         /// <param name="left">The variable that is selected when the corresponding bit in <paramref name="condition" /> is one (当 <paramref name="condition" /> 中的对应位为 1 时选择的变量).</param>
@@ -442,7 +571,7 @@ namespace Zyl.VectorTraits.Numerics {
             return Int64BitsToDouble(ConditionalSelect(condition, DoubleToInt64Bits(left), DoubleToInt64Bits(right)));
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
 
         /// <summary>Conditionally selects a value from two variables on a bitwise basis (按条件从两个变量中按位选择值).</summary>
         /// <param name="condition">The mask that is used to select a value from <paramref name="left" /> or <paramref name="right" /> (用于从 <paramref name="left" /> 或 <paramref name="right" />中选择值的掩码).</param>
@@ -454,7 +583,7 @@ namespace Zyl.VectorTraits.Numerics {
             return Int16BitsToHalf(ConditionalSelect(condition, HalfToInt16Bits(left), HalfToInt16Bits(right)));
         }
 
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <summary>
         /// Get the byte made by the 2-bit value (获取由2位值构成的字节). Generally used to make shuffle control codes, like <see cref="_MM_SHUFFLE"/> (一般用于制作 shuffle 控制码, 类似 <see cref="_MM_SHUFFLE"/>).
@@ -631,6 +760,38 @@ namespace Zyl.VectorTraits.Numerics {
         public static uint GetMostSignificantBit(ulong src) {
             return (uint)(src >> 63);
         }
+
+        /// <inheritdoc cref="GetMostSignificantBit(byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint GetMostSignificantBit(ExInt128 src) {
+            return GetMostSignificantBit((ExUInt128)src);
+        }
+
+        /// <inheritdoc cref="GetMostSignificantBit(byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint GetMostSignificantBit(ExUInt128 src) {
+            return (uint)(src.Upper >> 63);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="GetMostSignificantBit(byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint GetMostSignificantBit(Int128 src) {
+            return GetMostSignificantBit((UInt128)src);
+        }
+
+        /// <inheritdoc cref="GetMostSignificantBit(byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static uint GetMostSignificantBit(UInt128 src) {
+            return GetMostSignificantBit((ExUInt128)src);
+        }
+
+#endif // BCL_TYPE_INT128
 
         /// <summary>
         /// Mapping old flags to new flags (将旧标志映射为新标志).

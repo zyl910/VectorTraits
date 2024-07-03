@@ -1,9 +1,17 @@
-﻿using System;
+﻿#if NET5_0_OR_GREATER
+#define BCL_TYPE_HALF
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits.Numerics {
     using static BitMathCore;
@@ -156,7 +164,7 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(value < amax, ConditionalSelect(value > amin, value, amin), amax);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
 
         /// <summary>Returns <paramref name="value" /> clamped to the inclusive range of <paramref name="amin" /> and <paramref name="amax" /> (返回限制在 <paramref name="amin" /> 和 <paramref name="amax" /> 范围内的 <paramref name="value" />).</summary>
         /// <param name="value">The value to be clamped (要限制的值).</param>
@@ -170,7 +178,7 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(value < amax, ConditionalSelect(value > amin, value, amin), amax);
         }
 
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
         /// <inheritdoc cref="CopySign(double, double)"/>
@@ -205,7 +213,7 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NETCOREAPP3_0_OR_GREATER
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="CopySign(double, double)"/>
         /// <seealso cref="Half.CopySign(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -216,7 +224,7 @@ namespace Zyl.VectorTraits.Numerics {
             return CopySign_Bit(value, sign);
 #endif // NET7_0_OR_GREATER
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="CopySign(double, double)"/>
         /// <seealso cref="sbyte.CopySign(sbyte, sbyte)"/>
@@ -268,7 +276,7 @@ namespace Zyl.VectorTraits.Numerics {
             return Math.CopySign(value, sign);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="CopySign(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half CopySign_Bcl(Half value, Half sign) {
@@ -278,7 +286,7 @@ namespace Zyl.VectorTraits.Numerics {
             return CopySign_Bit(value, sign);
 #endif // NET7_0_OR_GREATER
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="CopySign(sbyte, sbyte)"/>
         [CLSCompliant(false)]
@@ -344,7 +352,7 @@ namespace Zyl.VectorTraits.Numerics {
             return BitConverter.Int64BitsToDouble(xbits | ybits);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="CopySign(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half CopySign_Bit(Half value, Half sign) {
@@ -355,7 +363,7 @@ namespace Zyl.VectorTraits.Numerics {
             ybits &= signMask;
             return MathBitConverter.Int16BitsToHalf((short)(xbits | ybits));
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="CopySign(sbyte, sbyte)"/>
         [CLSCompliant(false)]
@@ -469,6 +477,36 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(val1 > val2, val1, val2);
         }
 
+        /// <inheritdoc cref="Max(byte, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExInt128 Max(ExInt128 val1, ExInt128 val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <inheritdoc cref="Max(byte, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExUInt128 Max(ExUInt128 val1, ExUInt128 val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Max(byte, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int128 Max(Int128 val1, Int128 val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+        /// <inheritdoc cref="Max(byte, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt128 Max(UInt128 val1, UInt128 val2) {
+            return ConditionalSelect(val1 > val2, val1, val2);
+        }
+
+#endif // BCL_TYPE_INT128
+
         /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
         /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
         /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
@@ -506,7 +544,7 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(val1 > val2, val1, val2);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
 
         /// <summary>Get the larger of two variables (取得两个变量中较大的一个).</summary>
         /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
@@ -517,7 +555,7 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(val1 > val2, val1, val2);
         }
 
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="MaxNumber(double, double)"/>
         /// <seealso cref="float.MaxNumber(float, float)"/>
@@ -546,7 +584,7 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET7_0_OR_GREATER
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="MaxNumber(double, double)"/>
         /// <seealso cref="Half.MaxNumber(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -557,7 +595,7 @@ namespace Zyl.VectorTraits.Numerics {
             return MaxNumber_Bit(x, y);
 #endif // NET7_0_OR_GREATER
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 #if NET7_0_OR_GREATER
         /// <inheritdoc cref="MaxNumber(float, float)"/>
@@ -597,7 +635,7 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(mask, x, y);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="MaxNumber(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half MaxNumber_Bit(Half x, Half y) {
@@ -606,7 +644,7 @@ namespace Zyl.VectorTraits.Numerics {
             mask |= IsNaN(y);
             return ConditionalSelect(mask, x, y);
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
         /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
@@ -685,6 +723,36 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(val1 < val2, val1, val2);
         }
 
+        /// <inheritdoc cref="Min(byte, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExInt128 Min(ExInt128 val1, ExInt128 val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <inheritdoc cref="Min(byte, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExUInt128 Min(ExUInt128 val1, ExUInt128 val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Min(byte, byte)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int128 Min(Int128 val1, Int128 val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+        /// <inheritdoc cref="Min(byte, byte)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt128 Min(UInt128 val1, UInt128 val2) {
+            return ConditionalSelect(val1 < val2, val1, val2);
+        }
+
+#endif // BCL_TYPE_INT128
+
         /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
         /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
         /// <param name="val2">The second of two variables to compare (要比较的两个变量中的第二个).</param>
@@ -722,7 +790,7 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(val1 < val2, val1, val2);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
 
         /// <summary>Get the smaller of two variables (取得两个变量中较小的一个).</summary>
         /// <param name="val1">The first of two variables to compare (要比较的两个变量中的第一个).</param>
@@ -733,7 +801,7 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(val1 < val2, val1, val2);
         }
 
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
         /// <inheritdoc cref="MinNumber(double, double)"/>
@@ -763,7 +831,7 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // NET7_0_OR_GREATER
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="MinNumber(double, double)"/>
         /// <seealso cref="Half.MinNumber(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -774,7 +842,7 @@ namespace Zyl.VectorTraits.Numerics {
             return MinNumber_Bit(x, y);
 #endif // NET7_0_OR_GREATER
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 #if NET7_0_OR_GREATER
         /// <inheritdoc cref="MinNumber(float, float)"/>
@@ -814,7 +882,7 @@ namespace Zyl.VectorTraits.Numerics {
             return ConditionalSelect(mask, x, y);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="MinNumber(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half MinNumber_Bit(Half x, Half y) {
@@ -823,7 +891,7 @@ namespace Zyl.VectorTraits.Numerics {
             mask |= IsNaN(y);
             return ConditionalSelect(mask, x, y);
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
         /// <inheritdoc cref="Sign(double)"/>
@@ -854,7 +922,7 @@ namespace Zyl.VectorTraits.Numerics {
             //return Sign_Bcl(value);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="Sign(double)"/>
         /// <seealso cref="Half.Sign"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -863,7 +931,7 @@ namespace Zyl.VectorTraits.Numerics {
             // System.ArithmeticException: Function does not accept floating point Not-a-Number values.
             //return Sign_Bcl(value);
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="Sign(double)"/>
         /// <seealso cref="Math.Sign(sbyte)"/>
@@ -910,7 +978,7 @@ namespace Zyl.VectorTraits.Numerics {
             return Math.Sign(value);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="Sign(Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Sign_Bcl(Half value) {
@@ -920,7 +988,7 @@ namespace Zyl.VectorTraits.Numerics {
             return Sign_Bit(value);
 #endif // NET7_0_OR_GREATER
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="Sign(sbyte)"/>
         [CLSCompliant(false)]
@@ -966,7 +1034,7 @@ namespace Zyl.VectorTraits.Numerics {
             return rt;
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="Sign(Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Sign_Bit(Half value) {
@@ -976,7 +1044,7 @@ namespace Zyl.VectorTraits.Numerics {
             int rt = m - n;
             return rt;
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="Sign(sbyte)"/>
         [CLSCompliant(false)]
@@ -1032,7 +1100,7 @@ namespace Zyl.VectorTraits.Numerics {
             //return SignFloat_Bcl(value);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="SignFloat(double)"/>
         /// <seealso cref="Half.Sign"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1041,7 +1109,7 @@ namespace Zyl.VectorTraits.Numerics {
             // Poor performance due to the presence of branching statements.
             //return SignFloat_Bcl(value);
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="SignFloat(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1057,7 +1125,7 @@ namespace Zyl.VectorTraits.Numerics {
             return (double)Sign_Bit(value);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="SignFloat(Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half SignFloat_Bcl(Half value) {
@@ -1068,7 +1136,7 @@ namespace Zyl.VectorTraits.Numerics {
             return SignFloat_Bit(value);
 #endif // NET7_0_OR_GREATER
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="SignFloat(float)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1088,7 +1156,7 @@ namespace Zyl.VectorTraits.Numerics {
             return rt;
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="SignFloat(Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half SignFloat_Bit(Half value) {
@@ -1097,7 +1165,7 @@ namespace Zyl.VectorTraits.Numerics {
             rt = ConditionalSelect(nanMask, value, rt);
             return rt;
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
     }

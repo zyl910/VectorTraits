@@ -1,9 +1,17 @@
-﻿using System;
+﻿#if NET5_0_OR_GREATER
+#define BCL_TYPE_HALF
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Zyl.VectorTraits.Numerics;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits {
     // INumber: https://learn.microsoft.com/en-us/dotnet/api/system.numerics.inumber-1
@@ -87,7 +95,7 @@ namespace Zyl.VectorTraits {
             return MathINumber.Clamp(value, amin, amax);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
 
         /// <inheritdoc cref="MathINumber.Clamp(Half, Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -95,7 +103,7 @@ namespace Zyl.VectorTraits {
             return MathINumber.Clamp(value, amin, amax);
         }
 
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
         /// <inheritdoc cref="MathINumber.CopySign(float, float)"/>
@@ -110,13 +118,13 @@ namespace Zyl.VectorTraits {
             return MathINumber.CopySign(value, sign);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="MathINumber.CopySign(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half CopySign(Half value, Half sign) {
             return MathINumber.CopySign(value, sign);
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="MathINumber.CopySign(sbyte, sbyte)"/>
         [CLSCompliant(false)]
@@ -196,6 +204,36 @@ namespace Zyl.VectorTraits {
             return MathINumber.Max(val1, val2);
         }
 
+        /// <inheritdoc cref="MathINumber.Max(ExInt128, ExInt128)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExInt128 Max(ExInt128 val1, ExInt128 val2) {
+            return MathINumber.Max(val1, val2);
+        }
+
+        /// <inheritdoc cref="MathINumber.Max(ExUInt128, ExUInt128)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExUInt128 Max(ExUInt128 val1, ExUInt128 val2) {
+            return MathINumber.Max(val1, val2);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="MathINumber.Max(Int128, Int128)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int128 Max(Int128 val1, Int128 val2) {
+            return MathINumber.Max(val1, val2);
+        }
+
+        /// <inheritdoc cref="MathINumber.Max(UInt128, UInt128)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt128 Max(UInt128 val1, UInt128 val2) {
+            return MathINumber.Max(val1, val2);
+        }
+
+#endif // BCL_TYPE_INT128
+
         /// <inheritdoc cref="MathINumber.Max(nint, nint)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static nint Max(nint val1, nint val2) {
@@ -221,7 +259,7 @@ namespace Zyl.VectorTraits {
             return MathINumber.Max(val1, val2);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
 
         /// <inheritdoc cref="MathINumber.Max(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -229,7 +267,7 @@ namespace Zyl.VectorTraits {
             return MathINumber.Max(val1, val2);
         }
 
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
         /// <inheritdoc cref="MathINumber.MaxNumber(float, float)"/>
@@ -244,13 +282,13 @@ namespace Zyl.VectorTraits {
             return MathINumber.MaxNumber(x, y);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="MathINumber.MaxNumber(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half MaxNumber(Half x, Half y) {
             return MathINumber.MaxNumber(x, y);
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
         /// <inheritdoc cref="MathINumber.Min(sbyte, sbyte)"/>
@@ -305,6 +343,36 @@ namespace Zyl.VectorTraits {
             return MathINumber.Min(val1, val2);
         }
 
+        /// <inheritdoc cref="MathINumber.Min(ExInt128, ExInt128)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExInt128 Min(ExInt128 val1, ExInt128 val2) {
+            return MathINumber.Min(val1, val2);
+        }
+
+        /// <inheritdoc cref="MathINumber.Min(ExUInt128, ExUInt128)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static ExUInt128 Min(ExUInt128 val1, ExUInt128 val2) {
+            return MathINumber.Min(val1, val2);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="MathINumber.Min(Int128, Int128)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int128 Min(Int128 val1, Int128 val2) {
+            return MathINumber.Min(val1, val2);
+        }
+
+        /// <inheritdoc cref="MathINumber.Min(UInt128, UInt128)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt128 Min(UInt128 val1, UInt128 val2) {
+            return MathINumber.Min(val1, val2);
+        }
+
+#endif // BCL_TYPE_INT128
+
         /// <inheritdoc cref="MathINumber.Min(nint, nint)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static nint Min(nint val1, nint val2) {
@@ -330,7 +398,7 @@ namespace Zyl.VectorTraits {
             return MathINumber.Min(val1, val2);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
 
         /// <inheritdoc cref="MathINumber.Min(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -338,7 +406,7 @@ namespace Zyl.VectorTraits {
             return MathINumber.Min(val1, val2);
         }
 
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
         /// <inheritdoc cref="MathINumber.MinNumber(float, float)"/>
@@ -353,13 +421,13 @@ namespace Zyl.VectorTraits {
             return MathINumber.MinNumber(x, y);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="MathINumber.MinNumber(Half, Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half MinNumber(Half x, Half y) {
             return MathINumber.MinNumber(x, y);
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
 
         /// <inheritdoc cref="MathINumber.Sign(float)"/>
@@ -374,13 +442,13 @@ namespace Zyl.VectorTraits {
             return MathINumber.Sign(value);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="MathINumber.Sign(Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Sign(Half value) {
             return MathINumber.Sign(value);
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
         /// <inheritdoc cref="MathINumber.Sign(sbyte)"/>
         [CLSCompliant(false)]
@@ -420,13 +488,13 @@ namespace Zyl.VectorTraits {
             return MathINumber.SignFloat(value);
         }
 
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
         /// <inheritdoc cref="MathINumber.SignFloat(Half)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Half SignFloat(Half value) {
             return MathINumber.SignFloat(value);
         }
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
 
     }
 }
