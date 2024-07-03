@@ -1676,7 +1676,7 @@ namespace Zyl.VectorTraits.ExTypes
 #if BCL_TYPE_INT128
             return left._data == right._data;
 #else
-            return (left.Lower != right.Lower) && (left.Upper == right.Upper);
+            return (left.Lower == right.Lower) && (left.Upper == right.Upper);
 #endif
         }
 

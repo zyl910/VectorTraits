@@ -25,6 +25,11 @@ namespace Zyl.VectorTraits.Tests {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseHalf))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void GetByDoubleTest<T>(T src) {
             double srcDouble = double.Parse("" + src);
             T dst = Scalars.GetByDouble<T>(srcDouble);
