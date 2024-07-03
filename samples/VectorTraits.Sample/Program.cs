@@ -1,10 +1,17 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using System.IO;
 using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 #endif
+using System.Text;
 using Zyl.VectorTraits;
+using Zyl.VectorTraits.Extensions;
+using Zyl.VectorTraits.ExTypes;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Sample {
     class Program {
@@ -57,9 +64,72 @@ namespace Zyl.VectorTraits.Sample {
             // Show AcceleratedTypes.
             VectorTextUtil.WriteLine(writer, "ShiftLeft_AcceleratedTypes:\t{0}", Vectors.ShiftLeft_AcceleratedTypes);
             VectorTextUtil.WriteLine(writer, "Shuffle_AcceleratedTypes:\t{0}", Vectors.Shuffle_AcceleratedTypes);
+            writer.WriteLine();
+
+            // ExTypes.
+            ShowExTypes();
+            ShowYGroup2Zip();
 
             // Show cpu info.
+            ShowCpuInfo();
+        }
+
+        /// <summary>
+        /// Show ExTypes.
+        /// </summary>
+        private static void ShowExTypes() {
+            writer.WriteLine("[ExTypes]");
+            var src = Vectors<long>.Serial;
+            var temp = src.ExAsExInt128();
+            VectorTextUtil.WriteLine(writer, "Source:\t{0}", src);
+            VectorTextUtil.WriteLine(writer, "ExAsExInt128:\t{0}", temp);
+            // InterpolatedString.
+            // Bug! - writer.WriteLine($"InterpolatedString:\t{temp}."); // System.NotSupportedException: Specified type is not supported
+#if NETCOREAPP1_0_OR_GREATER || NET461_OR_GREATER
+            writer.WriteLine(ExVectorUtil.ToString($"InterpolatedString:\t{temp}."));
+#endif
+#if NETCOREAPP1_0_OR_GREATER || NET46_OR_GREATER || NETSTANDARD1_3_OR_GREATER
+            writer.WriteLine(ToString($"this-InterpolatedString:\t{temp}."));
+#endif
             writer.WriteLine();
+            // Output of 256-bit vectors on X86 architecture:
+            // Source: <0, 1, 2, 3>    # (0000000000000000 0000000000000001 0000000000000002 0000000000000003)
+            // ExAsExInt128:   <18446744073709551616, 55340232221128654850>    # (00000000000000010000000000000000 00000000000000030000000000000002)
+            // InterpolatedString:     <18446744073709551616, 55340232221128654850>.
+            // this-InterpolatedString:        <18446744073709551616, 55340232221128654850>.
+        }
+
+        /// <summary>
+        /// Show YGroup2Zip on 128-bit.
+        /// </summary>
+        private static void ShowYGroup2Zip() {
+            writer.WriteLine("[YGroup2Zip]");
+#if NETCOREAPP3_0_OR_GREATER
+            var a0 = Vector256s.CreateByDoubleLoop<long>(0, 2);
+            var a1 = Vector256s.CreateByDoubleLoop<long>(1, 2);
+            var b0 = a0.ExAsExInt128();
+            var b1 = a1.ExAsExInt128();
+            var c0 = YGroup2Zip(b0, b1, out var c1);
+            var d0 = c0.ExAsInt64();
+            var d1 = c1.ExAsInt64();
+            VectorTextUtil.WriteLine(writer, "Before   :\t{0}, {1}", a0, a1);
+            VectorTextUtil.WriteLine(writer, "AsInt128 :\t{0}, {1}", b0, b1);
+            VectorTextUtil.WriteLine(writer, "Group2Zip:\t{0}, {1}", c0, c1);
+            VectorTextUtil.WriteLine(writer, "After    :\t{0}, {1}", d0, d1);
+#endif // NETCOREAPP3_0_OR_GREATER
+            writer.WriteLine();
+            // Output of 256-bit vectors on X86 architecture:
+            // Before   :      <0, 2, 4, 6>, <1, 3, 5, 7>      # (0000000000000000 0000000000000002 0000000000000004 0000000000000006), (0000000000000001 0000000000000003 0000000000000005 0000000000000007)
+            // AsInt128 :      <36893488147419103232, 110680464442257309700>, <55340232221128654849, 129127208515966861317>    # (00000000000000020000000000000000 00000000000000060000000000000004), (00000000000000030000000000000001 00000000000000070000000000000005)
+            // Group2Zip:      <36893488147419103232, 55340232221128654849>, <110680464442257309700, 129127208515966861317>    # (00000000000000020000000000000000 00000000000000030000000000000001), (00000000000000060000000000000004 00000000000000070000000000000005)
+            // After    :      <0, 2, 1, 3>, <4, 6, 5, 7>      # (0000000000000000 0000000000000002 0000000000000001 0000000000000003), (0000000000000004 0000000000000006 0000000000000005 0000000000000007)
+        }
+
+        /// <summary>
+        /// Show CpuInfo.
+        /// </summary>
+        private static void ShowCpuInfo() {
+            writer.WriteLine("[CpuInfo]");
             writer.WriteLine("CpuModelName: {0}", VectorEnvironment.CpuModelName);
             writer.WriteLine("CpuFlags: {0}", VectorEnvironment.CpuFlags);
             writer.WriteLine("CpuDetectionException: {0}", VectorEnvironment.CpuDetectionException);
@@ -68,5 +138,24 @@ namespace Zyl.VectorTraits.Sample {
             VectorTextUtil.WriteLines(writer, VectorEnvironment.CpuDetectionResult);
             writer.WriteLine();
         }
+
+#if NETCOREAPP1_0_OR_GREATER || NET46_OR_GREATER || NETSTANDARD1_3_OR_GREATER
+        // FormattableString: .NET Core 1.0+, .NET Framework 4.6+, .NET Standard 1.3+
+        public static string ToString(FormattableString message) {
+            return message.ToString(ExVectorFormatter.Instance);
+        }
+#endif
+
+#if NETCOREAPP3_0_OR_GREATER
+        public static Vector256<ExInt128> YGroup2Zip(Vector256<ExInt128> x, Vector256<ExInt128> y, out Vector256<ExInt128> data1) {
+            VectorMessageFormats.ThrowForUnsupported(Avx.IsSupported, "Avx");
+            // Unhandled exception. System.NotSupportedException: Specified type is not supported //var d0 = Avx.Permute2x128(x.AsUInt64(), y.AsUInt64(), (byte)ShuffleControl2X4Use4.XZ);
+            var d0 = Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.XZ);
+            var d1 = Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.YW);
+            data1 = d1.ExAsExInt128();
+            return d0.ExAsExInt128();
+        }
+#endif
     }
+
 }
