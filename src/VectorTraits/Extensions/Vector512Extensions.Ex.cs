@@ -6,9 +6,9 @@ using System.Text;
 using System.Runtime.Intrinsics;
 #endif
 
-namespace Zyl.VectorTraits {
+namespace Zyl.VectorTraits.Extensions {
 
-    partial class Vector512s {
+    partial class Vector512Extensions {
 #if NET8_0_OR_GREATER
 
         /// <summary>

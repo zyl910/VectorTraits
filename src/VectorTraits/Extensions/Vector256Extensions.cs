@@ -22,7 +22,7 @@ namespace Zyl.VectorTraits.Extensions {
     /// <summary>
     /// <see cref="Vector256"/> extensions.
     /// </summary>
-    public static class Vector256Extensions {
+    public static partial class Vector256Extensions {
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector256{T}" />.</summary>

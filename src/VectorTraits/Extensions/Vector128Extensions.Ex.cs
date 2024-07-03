@@ -6,9 +6,9 @@ using System.Text;
 using System.Runtime.Intrinsics;
 #endif
 
-namespace Zyl.VectorTraits {
+namespace Zyl.VectorTraits.Extensions {
 
-    partial class Vector128s {
+    partial class Vector128Extensions {
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <summary>

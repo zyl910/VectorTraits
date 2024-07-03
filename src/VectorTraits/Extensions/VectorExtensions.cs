@@ -12,7 +12,7 @@ namespace Zyl.VectorTraits.Extensions {
     /// <summary>
     /// <see cref="Vector"/> extensions.
     /// </summary>
-    public static class VectorExtensions {
+    public static partial class VectorExtensions {
 
         /// <summary>Reinterprets a unsigned integer vector as a new signed integer vector (将无符号整数向量, 重新解释为有符号整数向量).</summary>
         /// <param name="value">The vector to reinterpret (将被重新解释的向量).</param>

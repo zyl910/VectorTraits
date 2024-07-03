@@ -18,7 +18,7 @@ namespace Zyl.VectorTraits.Extensions {
     /// <summary>
     /// <see cref="Vector512"/> extensions.
     /// </summary>
-    public static class Vector512Extensions {
+    public static partial class Vector512Extensions {
 #if NET8_0_OR_GREATER
 
         /// <summary>Reinterprets a unsigned integer vector as a new signed integer vector (将无符号整数向量, 重新解释为有符号整数向量).</summary>

@@ -12,6 +12,7 @@ using System.Runtime.Versioning;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using Zyl.VectorTraits.Extensions;
 
 namespace Zyl.VectorTraits {
     /// <summary>
