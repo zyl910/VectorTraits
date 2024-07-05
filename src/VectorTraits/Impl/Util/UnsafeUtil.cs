@@ -65,14 +65,6 @@ namespace Zyl.VectorTraits.Impl.Util {
 
         // == Unsafe ==
 
-#if NET5_0_OR_GREATER
-#else
-#if UNSAFE
-#else
-        private static decimal _fakeNull = default;
-#endif // UNSAFE
-#endif // NET5_0_OR_GREATER
-
         /// <summary>
         /// Reinterprets the given value of type <typeparamref name="TFrom" /> as a value of type <typeparamref name="TTo" />.
         /// </summary>
@@ -100,11 +92,7 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// <seealso cref="Unsafe.IsNullRef{T}(ref readonly T)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullRef<T>(ref T source) {
-#if NET5_0_OR_GREATER
             return Unsafe.IsNullRef(ref source);
-#else
-            return Unsafe.AreSame(ref source, ref NullRef<T>());
-#endif // NET5_0_OR_GREATER
         }
 
         /// <summary>
@@ -115,19 +103,7 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// <seealso cref="Unsafe.NullRef{T}"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ref T NullRef<T>() {
-#if NET5_0_OR_GREATER
             return ref Unsafe.NullRef<T>();
-#else
-#if UNSAFE
-            unsafe {
-                void* ptr = (void*)0;
-                return ref Unsafe.AsRef<T>(ptr);
-            }
-#else
-            //nint = new IntPtr(Unsafe.AsPointer(ref_fakeNull)); // Error CS0214	Pointers and fixed size buffers may only be used in an unsafe context
-            return ref Unsafe.As<decimal, T>(ref _fakeNull); // fallback.
-#endif // UNSAFE
-#endif // NET5_0_OR_GREATER
         }
 
         /// <summary>
@@ -138,13 +114,7 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// <seealso cref="Unsafe.SkipInit{T}(out T)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SkipInit<T>(out T value) {
-#if NET5_0_OR_GREATER
             Unsafe.SkipInit(out value);
-#else
-#pragma warning disable CS8601 // Possible null reference assignment.
-            value = default;
-#pragma warning restore CS8601 // Possible null reference assignment.
-#endif // NET5_0_OR_GREATER
         }
 
         // == My ==
