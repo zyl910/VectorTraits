@@ -1,6 +1,9 @@
 ﻿#if NETCOREAPP3_0_OR_GREATER
 #define BCL_TYPE_THIS
 #endif // NETCOREAPP3_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
 
 using System;
 using System.Buffers.Binary;
@@ -22,6 +25,7 @@ using System.Runtime.Intrinsics.Wasm;
 using System.Runtime.Intrinsics.X86;
 #endif // NETCOREAPP3_0_OR_GREATER
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits.Numerics {
     /// <summary>
@@ -86,6 +90,28 @@ namespace Zyl.VectorTraits.Numerics {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
         public static bool IsPow2(ulong value) => (value & (value - 1)) == 0 && value != 0;
+
+        /// <inheritdoc cref="IsPow2(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPow2(ExInt128 value) => ExInt128.IsPow2(value);
+
+        /// <inheritdoc cref="IsPow2(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static bool IsPow2(ExUInt128 value) => ExUInt128.IsPow2(value);
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="IsPow2(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPow2(Int128 value) => Int128.IsPow2(value);
+
+        /// <inheritdoc cref="IsPow2(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static bool IsPow2(UInt128 value) => UInt128.IsPow2(value);
+
+#endif // BCL_TYPE_INT128
 
         /// <summary>
         /// Evaluate whether a given integral value is a power of 2.
@@ -176,6 +202,42 @@ namespace Zyl.VectorTraits.Numerics {
             return value + 1;
 #endif // BCL_TYPE_THIS && NET6_0_OR_GREATER
         }
+
+        /// <inheritdoc cref="RoundUpToPowerOf2(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static ExUInt128 RoundUpToPowerOf2(ExUInt128 value) {
+#if NET5_0_OR_GREATER
+            if (X86Base.IsSupported || ArmBase.IsSupported
+#if NETX_0_OR_GREATER
+                || WasmBase.IsSupported
+#endif // NETX_0_OR_GREATER
+                ) {
+                int shift = 128 - LeadingZeroCount(value - 1);
+                return (ExUInt128)(1u ^ (uint)(shift >> 7)) << shift;
+            }
+#endif // NET5_0_OR_GREATER
+
+            // Based on https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2
+            --value;
+            value |= value >> 1;
+            value |= value >> 2;
+            value |= value >> 4;
+            value |= value >> 8;
+            value |= value >> 16;
+            value |= value >> 32;
+            value |= value >> 64;
+            return value + 1;
+        }
+
+#if BCL_TYPE_INT128
+        /// <inheritdoc cref="RoundUpToPowerOf2(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static UInt128 RoundUpToPowerOf2(UInt128 value) {
+            return RoundUpToPowerOf2((ExUInt128)value);
+        }
+#endif // BCL_TYPE_INT128
 
         /// <summary>
         /// Round the given integral value up to a power of 2.
@@ -296,6 +358,18 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // BCL_TYPE_THIS
         }
 
+        /// <inheritdoc cref="LeadingZeroCount(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static int LeadingZeroCount(ExUInt128 value) => (int)ExUInt128.LeadingZeroCount(value);
+
+#if BCL_TYPE_INT128
+        /// <inheritdoc cref="LeadingZeroCount(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static int LeadingZeroCount(UInt128 value) => (int)UInt128.LeadingZeroCount(value);
+#endif // BCL_TYPE_INT128
+
         /// <summary>
         /// Count the number of leading zero bits in a mask.
         /// Similar in behavior to the x86 instruction LZCNT.
@@ -411,6 +485,18 @@ namespace Zyl.VectorTraits.Numerics {
             return 32 + Log2(hi);
 #endif // BCL_TYPE_THIS
         }
+
+        /// <inheritdoc cref="Log2(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static int Log2(ExUInt128 value) => (int)ExUInt128.Log2(value);
+
+#if BCL_TYPE_INT128
+        /// <inheritdoc cref="Log2(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static int Log2(UInt128 value) => (int)UInt128.Log2(value);
+#endif // BCL_TYPE_INT128
 
         /// <summary>
         /// Returns the integer (floor) log of the specified value, base 2.
@@ -570,6 +656,18 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // BCL_TYPE_THIS
         }
 
+        /// <inheritdoc cref="PopCount(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static int PopCount(ExUInt128 value) => (int)ExUInt128.PopCount(value);
+
+#if BCL_TYPE_INT128
+        /// <inheritdoc cref="PopCount(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static int PopCount(UInt128 value) => (int)UInt128.PopCount(value);
+#endif // BCL_TYPE_INT128
+
         /// <summary>
         /// Returns the population count (number of bits set) of a mask.
         /// Similar in behavior to the x86 instruction POPCNT.
@@ -702,6 +800,28 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // BCL_TYPE_THIS
         }
 
+        /// <inheritdoc cref="TrailingZeroCount(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int TrailingZeroCount(ExInt128 value) => (int)ExInt128.TrailingZeroCount(value);
+
+        /// <inheritdoc cref="TrailingZeroCount(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static int TrailingZeroCount(ExUInt128 value) => (int)ExUInt128.TrailingZeroCount(value);
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="TrailingZeroCount(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int TrailingZeroCount(Int128 value) => (int)Int128.TrailingZeroCount(value);
+
+        /// <inheritdoc cref="TrailingZeroCount(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static int TrailingZeroCount(UInt128 value) => (int)UInt128.TrailingZeroCount(value);
+
+#endif // BCL_TYPE_INT128
+
         /// <summary>
         /// Count the number of trailing zero bits in a mask.
         /// Similar in behavior to the x86 instruction TZCNT.
@@ -775,6 +895,22 @@ namespace Zyl.VectorTraits.Numerics {
 #endif // BCL_TYPE_THIS
         }
 
+        /// <inheritdoc cref="RotateLeft(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static ExUInt128 RotateLeft(ExUInt128 value, int offset) {
+            return ExUInt128.RotateLeft(value, offset);
+        }
+
+#if BCL_TYPE_INT128
+        /// <inheritdoc cref="RotateLeft(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static UInt128 RotateLeft(UInt128 value, int offset) {
+            return UInt128.RotateLeft(value, offset);
+        }
+#endif // BCL_TYPE_INT128
+
         /// <summary>
         /// Rotates the specified value left by the specified number of bits.
         /// Similar in behavior to the x86 instruction ROL.
@@ -833,6 +969,22 @@ namespace Zyl.VectorTraits.Numerics {
             return (value >> offset) | (value << (64 - offset));
 #endif // BCL_TYPE_THIS
         }
+
+        /// <inheritdoc cref="RotateRight(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static ExUInt128 RotateRight(ExUInt128 value, int offset) {
+            return ExUInt128.RotateRight(value, offset);
+        }
+
+#if BCL_TYPE_INT128
+        /// <inheritdoc cref="RotateRight(uint)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static UInt128 RotateRight(UInt128 value, int offset) {
+            return UInt128.RotateRight(value, offset);
+        }
+#endif // BCL_TYPE_INT128
 
         /// <summary>
         /// Rotates the specified value right by the specified number of bits.
