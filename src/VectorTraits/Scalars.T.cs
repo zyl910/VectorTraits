@@ -1,6 +1,15 @@
-﻿using System;
+﻿#if NET5_0_OR_GREATER
+#define BCL_TYPE_HALF
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
@@ -274,6 +283,44 @@ namespace Zyl.VectorTraits {
                     NaN = V0;
                     NegativeInfinity = V0;
                     PositiveInfinity = V0;
+                } else if (typeof(T) == typeof(ExInt128)) {
+                    ByteSize = Unsafe.SizeOf<ExInt128>();
+                    ExponentBias = 0;
+                    SignBits = 1;
+                    ExponentBits = 0;
+                    MantissaBits = 127;
+                    SignMask = (T)(object)ExInt128.MinValue;
+                    ExponentMask = V0;
+                    MantissaMask = (T)(object)ExInt128.MaxValue;
+                    NonSignMask = MantissaMask;
+                    NonExponentMask = AllBitsSet;
+                    NonMantissaMask = SignMask;
+                    Epsilon = Scalars.GetByDouble<T>(1);
+                    MaxValue = (T)(object)ExInt128.MaxValue;
+                    MinValue = (T)(object)ExInt128.MinValue;
+                    NaN = V0;
+                    NegativeInfinity = V0;
+                    PositiveInfinity = V0;
+#if BCL_TYPE_INT128
+                } else if (typeof(T) == typeof(Int128)) {
+                    ByteSize = Unsafe.SizeOf<Int128>();
+                    ExponentBias = 0;
+                    SignBits = 1;
+                    ExponentBits = 0;
+                    MantissaBits = 127;
+                    SignMask = (T)(object)Int128.MinValue;
+                    ExponentMask = V0;
+                    MantissaMask = (T)(object)Int128.MaxValue;
+                    NonSignMask = MantissaMask;
+                    NonExponentMask = AllBitsSet;
+                    NonMantissaMask = SignMask;
+                    Epsilon = Scalars.GetByDouble<T>(1);
+                    MaxValue = (T)(object)Int128.MaxValue;
+                    MinValue = (T)(object)Int128.MinValue;
+                    NaN = V0;
+                    NegativeInfinity = V0;
+                    PositiveInfinity = V0;
+#endif // BCL_TYPE_INT128
                 } else if (typeof(T) == typeof(byte)) {
                     ByteSize = sizeof(byte);
                     ExponentBias = 0;
@@ -346,6 +393,44 @@ namespace Zyl.VectorTraits {
                     NaN = V0;
                     NegativeInfinity = V0;
                     PositiveInfinity = V0;
+                } else if (typeof(T) == typeof(ExUInt128)) {
+                    ByteSize = Unsafe.SizeOf<ExUInt128>();
+                    ExponentBias = 0;
+                    SignBits = 0;
+                    ExponentBits = 0;
+                    MantissaBits = 128;
+                    SignMask = V0;
+                    ExponentMask = V0;
+                    MantissaMask = (T)(object)ExUInt128.MaxValue;
+                    NonSignMask = AllBitsSet;
+                    NonExponentMask = AllBitsSet;
+                    NonMantissaMask = V0;
+                    Epsilon = Scalars.GetByDouble<T>(1);
+                    MaxValue = (T)(object)ExUInt128.MaxValue;
+                    MinValue = (T)(object)ExUInt128.MinValue;
+                    NaN = V0;
+                    NegativeInfinity = V0;
+                    PositiveInfinity = V0;
+#if BCL_TYPE_INT128
+                } else if (typeof(T) == typeof(UInt128)) {
+                    ByteSize = Unsafe.SizeOf<UInt128>();
+                    ExponentBias = 0;
+                    SignBits = 0;
+                    ExponentBits = 0;
+                    MantissaBits = 128;
+                    SignMask = V0;
+                    ExponentMask = V0;
+                    MantissaMask = (T)(object)UInt128.MaxValue;
+                    NonSignMask = AllBitsSet;
+                    NonExponentMask = AllBitsSet;
+                    NonMantissaMask = V0;
+                    Epsilon = Scalars.GetByDouble<T>(1);
+                    MaxValue = (T)(object)UInt128.MaxValue;
+                    MinValue = (T)(object)UInt128.MinValue;
+                    NaN = V0;
+                    NegativeInfinity = V0;
+                    PositiveInfinity = V0;
+#endif // BCL_TYPE_INT128
                 } else if (typeof(T) == typeof(IntPtr)) {
                     ByteSize = IntPtr.Size;
                     ExponentBias = 0;
@@ -410,7 +495,7 @@ namespace Zyl.VectorTraits {
                     NaN = V0;
                     NegativeInfinity = V0;
                     PositiveInfinity = V0;
-#if NET5_0_OR_GREATER
+#if BCL_TYPE_HALF
                 } else if (typeof(T) == typeof(Half)) {
                     ByteSize = 2; // sizeof(Half);
                     ExponentBias = 15;
@@ -430,7 +515,7 @@ namespace Zyl.VectorTraits {
                     NegativeInfinity = (T)(object)Half.NegativeInfinity;
                     PositiveInfinity = (T)(object)Half.PositiveInfinity;
                     NegativeZero = SignMask;
-#endif // NET5_0_OR_GREATER
+#endif // BCL_TYPE_HALF
                 }
             }
             BitSize = ByteSize * 8;
