@@ -1,14 +1,19 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits {
 
-    /// <summary>Specifies the type of an vector element. Reference from: https://learn.microsoft.com/en-us/dotnet/api/system.typecode </summary>
+    /// <summary>Specifies the type of an vector element (指定向量元素的类型). Reference from: https://learn.microsoft.com/en-us/dotnet/api/system.typecode </summary>
     public enum ElementTypeCode {
-        /// <summary>A null reference.</summary>
+        /// <summary>A null reference (空引用).</summary>
         Empty = 0,
         // /// <summary>A general type representing any reference or value type not explicitly represented by another TypeCode.</summary>
         // Object = 1,
@@ -18,25 +23,25 @@ namespace Zyl.VectorTraits {
         // Boolean = 3,
         // /// <summary>An integral type representing unsigned 16-bit integers with values between 0 and 65535. The set of possible values for the System.TypeCode.Char type corresponds to the Unicode character set.</summary>
         // Char = 4,
-        /// <summary>An integral type representing signed 8-bit integers with values between -128 and 127.</summary>
+        /// <summary>An integral type representing signed 8-bit integers with values between -128 and 127 (整型，表示值介于 -128 到 127 之间的 8 位有符号整数). Related types: <see cref="System.SByte"/>.</summary>
         SByte = 5,
-        /// <summary>An integral type representing unsigned 8-bit integers with values between 0 and 255.</summary>
+        /// <summary>An integral type representing unsigned 8-bit integers with values between 0 and 255 (整型，表示值介于 0 到 255 之间的无符号 8 位整数). Related types: <see cref="System.Byte"/>.</summary>
         Byte = 6,
-        /// <summary>An integral type representing signed 16-bit integers with values between -32768 and 32767.</summary>
+        /// <summary>An integral type representing signed 16-bit integers with values between -32768 and 32767 (整型，表示值介于 -32768 到 32767 之间的有符号 16 位整数). Related types: <see cref="System.Int16"/>.</summary>
         Int16 = 7,
-        /// <summary>An integral type representing unsigned 16-bit integers with values between 0 and 65535.</summary>
+        /// <summary>An integral type representing unsigned 16-bit integers with values between 0 and 65535 (整型，表示值介于 0 到 65535 之间的 16 位无符号整数). Related types: <see cref="System.UInt16"/>.</summary>
         UInt16 = 8,
-        /// <summary>An integral type representing signed 32-bit integers with values between -2147483648 and 2147483647.</summary>
+        /// <summary>An integral type representing signed 32-bit integers with values between -2147483648 and 2147483647 (整型，表示值介于 -2147483648 到 2147483647 之间的 32 位有符号整数). Related types: <see cref="System.Int32"/>.</summary>
         Int32 = 9,
-        /// <summary>An integral type representing unsigned 32-bit integers with values between 0 and 4294967295.</summary>
+        /// <summary>An integral type representing unsigned 32-bit integers with values between 0 and 4294967295 (整型，表示值介于 0 到 4294967295 之间的 32 位无符号整数). Related types: <see cref="System.UInt32"/>.</summary>
         UInt32 = 10,
-        /// <summary>An integral type representing signed 64-bit integers with values between -9223372036854775808 and 9223372036854775807.</summary>
+        /// <summary>An integral type representing signed 64-bit integers with values between -9223372036854775808 and 9223372036854775807 (整型，表示值介于-9223372036854775808 和 9223372036854775807 之间的 64 位有符号整数). Related types: <see cref="System.Int64"/>.</summary>
         Int64 = 11,
-        /// <summary>An integral type representing unsigned 64-bit integers with values between 0 and 18446744073709551615.</summary>
+        /// <summary>An integral type representing unsigned 64-bit integers with values between 0 and 18446744073709551615 (整型，表示值介于 0 到 18446744073709551615 之间的 64 位无符号整数). Related types: <see cref="System.UInt64"/>.</summary>
         UInt64 = 12,
-        /// <summary>A floating point type representing values ranging from approximately 1.5 x 10^-45 to 3.4 x 10^38 with a precision of 7 digits.</summary>
+        /// <summary>A floating point type representing values ranging from approximately 1.5 x 10^-45 to 3.4 x 10^38 with a precision of 7 digits (浮点型，表示从大约 1.5 x 10^-45 到 3.4 x 10^38 且精度为 7 位的值). Related types: <see cref="System.Single"/>.</summary>
         Single = 13,
-        /// <summary>A floating point type representing values ranging from approximately 5.0 x 10^-324 to 1.7 x 10^308 with a precision of 15-16 digits.</summary>
+        /// <summary>A floating point type representing values ranging from approximately 5.0 x 10^-324 to 1.7 x 10^308 with a precision of 15-16 digits (浮点型，表示从大约 5.0 x 10^-324 到 1.7 x 10^308 且精度为 15 到 16 位的值). Related types: <see cref="System.Double"/>.</summary>
         Double = 14,
         // /// <summary>A simple type representing values ranging from 1.0 x 10^-28 to approximately 7.9 x 10^28 with 28-29 significant digits.</summary>
         // Decimal = 15,
@@ -44,33 +49,41 @@ namespace Zyl.VectorTraits {
         // DateTime = 16,
         // /// <summary>A sealed class type representing Unicode character strings.</summary>
         // String = 18
+        /// <summary>An integral type representing signed 128-bit integers with values between -170141183460469231731687303715884105728 and 170141183460469231731687303715884105727 (整型，表示值介于-170141183460469231731687303715884105728 和 170141183460469231731687303715884105727 之间的 128 位有符号整数). Related types: <see cref="ExInt128"/>, <see cref="System.Int128"/>.</summary>
+        Int128 = 28,
+        /// <summary>An integral type representing unsigned 128-bit integers with values between 0 and 340282366920938463463374607431768211455 (整型，表示值介于 0 到 340282366920938463463374607431768211455 之间的 128 位无符号整数). Related types: <see cref="ExUInt128"/>, <see cref="System.UInt128"/>.</summary>
+        UInt128 = 29,
     }
 
     /// <summary><see cref="ElementTypeCode"/> bit flags (元素类型代码位标识).</summary>
     [Flags]
     public enum TypeCodeFlags : Int32 {
-        /// <summary>None.</summary>
+        /// <summary>None (无).</summary>
         None = 0,
-        /// <summary>An integral type representing signed 8-bit integers with values between -128 and 127.</summary>
+        /// <inheritdoc cref="ElementTypeCode.SByte"/>
         SByte = 1 << 5,
-        /// <summary>An integral type representing unsigned 8-bit integers with values between 0 and 255.</summary>
+        /// <inheritdoc cref="ElementTypeCode.Byte"/>
         Byte = 1 << 6,
-        /// <summary>An integral type representing signed 16-bit integers with values between -32768 and 32767.</summary>
+        /// <inheritdoc cref="ElementTypeCode.Int16"/>
         Int16 = 1 << 7,
-        /// <summary>An integral type representing unsigned 16-bit integers with values between 0 and 65535.</summary>
+        /// <inheritdoc cref="ElementTypeCode.UInt16"/>
         UInt16 = 1 << 8,
-        /// <summary>An integral type representing signed 32-bit integers with values between -2147483648 and 2147483647.</summary>
+        /// <inheritdoc cref="ElementTypeCode.Int32"/>
         Int32 = 1 << 9,
-        /// <summary>An integral type representing unsigned 32-bit integers with values between 0 and 4294967295.</summary>
+        /// <inheritdoc cref="ElementTypeCode.UInt32"/>
         UInt32 = 1 << 10,
-        /// <summary>An integral type representing signed 64-bit integers with values between -9223372036854775808 and 9223372036854775807.</summary>
+        /// <inheritdoc cref="ElementTypeCode.Int64"/>
         Int64 = 1 << 11,
-        /// <summary>An integral type representing unsigned 64-bit integers with values between 0 and 18446744073709551615.</summary>
+        /// <inheritdoc cref="ElementTypeCode.UInt64"/>
         UInt64 = 1 << 12,
-        /// <summary>A floating point type representing values ranging from approximately 1.5 x 10^-45 to 3.4 x 10^38 with a precision of 7 digits.</summary>
+        /// <inheritdoc cref="ElementTypeCode.Single"/>
         Single = 1 << 13,
-        /// <summary>A floating point type representing values ranging from approximately 5.0 x 10^-324 to 1.7 x 10^308 with a precision of 15-16 digits.</summary>
+        /// <inheritdoc cref="ElementTypeCode.Double"/>
         Double = 1 << 14,
+        /// <inheritdoc cref="ElementTypeCode.Int128"/>
+        Int128 = 1 << 28,
+        /// <inheritdoc cref="ElementTypeCode.UInt128"/>
+        UInt128 = 1 << 29,
     }
 
 
@@ -78,11 +91,24 @@ namespace Zyl.VectorTraits {
     /// <see cref="TypeCodeFlags"/> util (类型代码位标识工具).
     /// </summary>
     public static class TypeCodeFlagsUtil {
-        /// <summary>TypeCodeFlags of float types.</summary>
+        // -- n-Bit --
+        /// <summary>TypeCodeFlags of 8-bits types (8位的类型). <c>Bit8Types = TypeCodeFlags.SByte | TypeCodeFlags.Byte</c>.</summary>
+        public static TypeCodeFlags Bit8Types => TypeCodeFlags.SByte | TypeCodeFlags.Byte;
+        /// <summary>TypeCodeFlags of 16-bits types (16位的类型). <c>Bit16Types = TypeCodeFlags.Int16 | TypeCodeFlags.UInt16</c>.</summary>
+        public static TypeCodeFlags Bit16Types => TypeCodeFlags.Int16 | TypeCodeFlags.UInt16;
+        /// <summary>TypeCodeFlags of 32-bits types (32位的类型). <c>Bit32Types = TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Single</c>.</summary>
+        public static TypeCodeFlags Bit32Types => TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Single;
+        /// <summary>TypeCodeFlags of 64-bits types (64位的类型). <c>Bit64Types = TypeCodeFlags.Int64 | TypeCodeFlags.UInt64 | TypeCodeFlags.Double</c>.</summary>
+        public static TypeCodeFlags Bit64Types => TypeCodeFlags.Int64 | TypeCodeFlags.UInt64 | TypeCodeFlags.Double;
+        /// <summary>TypeCodeFlags of 128-bits types (128位的类型). <c>Bit128Types = TypeCodeFlags.Int128 | TypeCodeFlags.UInt128</c>.</summary>
+        public static TypeCodeFlags Bit128Types => TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+
+        // -- Standard --
+        /// <summary>TypeCodeFlags of Standard float types (标准浮点类型).</summary>
         public const TypeCodeFlags FloatTypes = TypeCodeFlags.Single | TypeCodeFlags.Double;
-        /// <summary>TypeCodeFlags of integer types.</summary>
+        /// <summary>TypeCodeFlags of Standard integer types (标准整数类型).</summary>
         public const TypeCodeFlags IntTypes = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64;
-        /// <summary>TypeCodeFlags of all types. <c>AllTypes = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64</c>.</summary>
+        /// <summary>TypeCodeFlags of Standard all types (标准所有类型). <c>AllTypes = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64</c>.</summary>
         public const TypeCodeFlags AllTypes = FloatTypes | IntTypes;
 
         /// <summary>TypeCodeFlags of most32 float types.</summary>
@@ -92,6 +118,23 @@ namespace Zyl.VectorTraits {
         /// <summary>TypeCodeFlags of most32 types. <c>Most32BaseTypes = TypeCodeFlags.Single | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32</c>.</summary>
         public const TypeCodeFlags Most32Types = Most32FloatTypes | Most32IntTypes;
 
+        // -- PureEx --
+        /// <summary>TypeCodeFlags of PureEx float types (纯扩展浮点类型). <c>PureExFloatTypes = TypeCodeFlags.None</c>.</summary>
+        public static TypeCodeFlags PureExFloatTypes => TypeCodeFlags.None;
+        /// <summary>TypeCodeFlags of PureEx integer types (纯扩展整数类型). <c>PureExIntTypes = TypeCodeFlags.Int128 | TypeCodeFlags.UInt128</c>.</summary>
+        public static TypeCodeFlags PureExIntTypes => TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+        /// <summary>TypeCodeFlags of PureEx all types (纯扩展所有类型). <c>PureExAllTypes = TypeCodeFlags.Int128 | TypeCodeFlags.UInt128</c>.</summary>
+        public static TypeCodeFlags PureExAllTypes => PureExFloatTypes | PureExIntTypes;
+
+        // -- Ex --
+        /// <summary>TypeCodeFlags of Ex float types (扩展浮点类型). <c>ExFloatTypes = TypeCodeFlags.Single | TypeCodeFlags.Double</c>.</summary>
+        public static TypeCodeFlags ExFloatTypes => FloatTypes | PureExFloatTypes;
+        /// <summary>TypeCodeFlags of Ex integer types (扩展整数类型). <c>ExIntTypes = TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64 | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128</c>.</summary>
+        public static TypeCodeFlags ExIntTypes => IntTypes | PureExIntTypes;
+        /// <summary>TypeCodeFlags of Ex all types (扩展所有类型). <c>ExAllTypes = TypeCodeFlags.Single | TypeCodeFlags.Double | TypeCodeFlags.SByte | TypeCodeFlags.Byte | TypeCodeFlags.Int16 | TypeCodeFlags.UInt16 | TypeCodeFlags.Int32 | TypeCodeFlags.UInt32 | TypeCodeFlags.Int64 | TypeCodeFlags.UInt64 | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128</c>.</summary>
+        public static TypeCodeFlags ExAllTypes => AllTypes | PureExAllTypes;
+
+        // -- IntPtr --
         /// <summary>ElementTypeCode of <see cref="IntPtr"/>.</summary>
         public static readonly ElementTypeCode IntPtrCode;
         /// <summary>ElementTypeCode of <see cref="UIntPtr"/>.</summary>
