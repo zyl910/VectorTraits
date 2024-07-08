@@ -7,9 +7,9 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.ExTypes;
 
-namespace Zyl.VectorTraits.Extensions {
+namespace Zyl.VectorTraits {
 
-    partial class Vector64Extensions {
+    partial class Vector64s {
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <summary>

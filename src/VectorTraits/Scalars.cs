@@ -100,7 +100,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Converts a 128-bits to the target type value (将128位整数位转换为目标类型值).
+        /// Converts a 128-bits integer to the target type value (将128位整数位转换为目标类型值).
         /// </summary>
         /// <typeparam name="T">Target type (目标类型).</typeparam>
         /// <param name="src">Source value (源值).</param>

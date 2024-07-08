@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -7,6 +11,7 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.Util;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits {
 
@@ -26,6 +31,8 @@ namespace Zyl.VectorTraits {
         private static readonly Vector<byte>[] MaskBitPosArray4B;
         /// <summary>Bit pos mask array - 8Byte (位偏移掩码的数组 - 8字节). e.g. 1, 2, 4, 8, 0x10 ...</summary>
         private static readonly Vector<byte>[] MaskBitPosArray8B;
+        /// <summary>Bit pos mask array - 8Byte (位偏移掩码的数组 - 16字节). e.g. 1, 2, 4, 8, 0x10 ...</summary>
+        private static readonly Vector<byte>[] MaskBitPosArray16B;
         /// <summary>Bits mask array - 1Byte (位集掩码的数组 - 1字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
         private static readonly Vector<byte>[] MaskBitsArray1B;
         /// <summary>Bits mask array - 2Byte (位集掩码的数组 - 2字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
@@ -34,56 +41,62 @@ namespace Zyl.VectorTraits {
         private static readonly Vector<byte>[] MaskBitsArray4B;
         /// <summary>Bits mask array - 8Byte (位集掩码的数组 - 8字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
         private static readonly Vector<byte>[] MaskBitsArray8B;
+        /// <summary>Bits mask array - 8Byte (位集掩码的数组 - 16字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
+        private static readonly Vector<byte>[] MaskBitsArray16B;
 
         /// <summary>
         /// Static constructor.
         /// </summary>
         static Vectors() {
-            long bitpos;
-            long bits;
-            int i;
-            MaskBitPosArray1B = new Vector<byte>[1 * 8];
-            MaskBitPosArray2B = new Vector<byte>[2 * 8];
-            MaskBitPosArray4B = new Vector<byte>[4 * 8];
-            MaskBitPosArray8B = new Vector<byte>[8 * 8];
-            MaskBitsArray1B = new Vector<byte>[1 * 8 + 1];
-            MaskBitsArray2B = new Vector<byte>[2 * 8 + 1];
-            MaskBitsArray4B = new Vector<byte>[4 * 8 + 1];
-            MaskBitsArray8B = new Vector<byte>[8 * 8 + 1];
-            MaskBitsArray1B[0] = Vector<byte>.Zero;
-            MaskBitsArray2B[0] = Vector<byte>.Zero;
-            MaskBitsArray4B[0] = Vector<byte>.Zero;
-            MaskBitsArray8B[0] = Vector<byte>.Zero;
-            bitpos = 1;
-            bits = 1;
-            for (i = 0; i < MaskBitPosArray8B.Length; ++i) {
-                if (i < MaskBitPosArray1B.Length) {
-                    MaskBitPosArray1B[i] = Vectors.Create(Scalars.GetByBits<byte>(bitpos));
-                    MaskBitsArray1B[1 + i] = Vectors.Create(Scalars.GetByBits<byte>(bits));
+            unchecked {
+                ExInt128 bitpos;
+                ExInt128 bits;
+                int i;
+                MaskBitPosArray1B = new Vector<byte>[1 * 8];
+                MaskBitPosArray2B = new Vector<byte>[2 * 8];
+                MaskBitPosArray4B = new Vector<byte>[4 * 8];
+                MaskBitPosArray8B = new Vector<byte>[8 * 8];
+                MaskBitPosArray16B = new Vector<byte>[16 * 8];
+                MaskBitsArray1B = new Vector<byte>[1 * 8 + 1];
+                MaskBitsArray2B = new Vector<byte>[2 * 8 + 1];
+                MaskBitsArray4B = new Vector<byte>[4 * 8 + 1];
+                MaskBitsArray8B = new Vector<byte>[8 * 8 + 1];
+                MaskBitsArray16B = new Vector<byte>[16 * 8 + 1];
+                MaskBitsArray1B[0] = Vector<byte>.Zero;
+                MaskBitsArray2B[0] = Vector<byte>.Zero;
+                MaskBitsArray4B[0] = Vector<byte>.Zero;
+                MaskBitsArray8B[0] = Vector<byte>.Zero;
+                MaskBitsArray16B[0] = Vector<byte>.Zero;
+                bitpos = 1;
+                bits = 1;
+                for (i = 0; i < MaskBitPosArray8B.Length; ++i) {
+                    if (i < MaskBitPosArray1B.Length) {
+                        MaskBitPosArray1B[i] = Vectors.Create(Scalars.GetBy128Bits<byte>(bitpos));
+                        MaskBitsArray1B[1 + i] = Vectors.Create(Scalars.GetBy128Bits<byte>(bits));
+                    }
+                    if (i < MaskBitPosArray2B.Length) {
+                        MaskBitPosArray2B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetBy128Bits<ushort>(bitpos)));
+                        MaskBitsArray2B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetBy128Bits<ushort>(bits)));
+                    }
+                    if (i < MaskBitPosArray4B.Length) {
+                        MaskBitPosArray4B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetBy128Bits<uint>(bitpos)));
+                        MaskBitsArray4B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetBy128Bits<uint>(bits)));
+                    }
+                    if (i < MaskBitPosArray8B.Length) {
+                        MaskBitPosArray8B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetBy128Bits<ulong>(bitpos)));
+                        MaskBitsArray8B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetBy128Bits<ulong>(bits)));
+                    }
+                    if (i < MaskBitPosArray16B.Length) {
+                        MaskBitPosArray16B[i] = Create(bitpos).ExAsByte();
+                        MaskBitsArray16B[1 + i] = Create(bits).ExAsByte();
+                    }
+                    // next.
+                    bitpos <<= 1;
+                    bits = bits << 1 | 1;
                 }
-                if (i < MaskBitPosArray2B.Length) {
-                    MaskBitPosArray2B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<ushort>(bitpos)));
-                    MaskBitsArray2B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<ushort>(bits)));
+                if (0 != bits) {
+                    // [Debug]
                 }
-                if (i < MaskBitPosArray4B.Length) {
-                    MaskBitPosArray4B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<uint>(bitpos)));
-                    MaskBitsArray4B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<uint>(bits)));
-                }
-                if (i < MaskBitPosArray8B.Length) {
-                    MaskBitPosArray8B[i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<ulong>(bitpos)));
-                    MaskBitsArray8B[1 + i] = Vector.AsVectorByte(Vectors.Create(Scalars.GetByBits<ulong>(bits)));
-                }
-                // next.
-                bitpos <<= 1;
-                bits = bits << 1 | 1;
-            }
-            // Vector128Constants
-#if NETCOREAPP3_0_OR_GREATER
-            //Trace.WriteLine(string.Format("YShuffleG4X2_UInt64_ByteIndices.Length: {0}", Vector128Constants.YShuffleG4X2_UInt64_ByteIndices.Length));
-#endif // NETCOREAPP3_0_OR_GREATER
-            // Done.
-            if (0 != bits) {
-                // [Debug]
             }
         }
 
@@ -99,8 +112,10 @@ namespace Zyl.VectorTraits {
                 return MaskBitPosArray2B;
             } else if (4 == byteSize) {
                 return MaskBitPosArray4B;
-            } else {
+            } else if (8 == byteSize) {
                 return MaskBitPosArray8B;
+            } else {
+                return MaskBitPosArray16B;
             }
         }
 
@@ -116,16 +131,19 @@ namespace Zyl.VectorTraits {
                 return MaskBitsArray2B;
             } else if (4 == byteSize) {
                 return MaskBitsArray4B;
-            } else {
+            } else if (8 == byteSize) {
                 return MaskBitsArray8B;
+            } else {
+                return MaskBitsArray16B;
             }
         }
+
 
         // == Vector as ==
 
 #if NETCOREAPP3_0_OR_GREATER
         ///// <summary>
-        ///// Reinterprets a <see cref="Vector64{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector64{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). No type checking (不进行类型检查).
+        ///// Reinterprets a <see cref="Vector64{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector64{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
         ///// </summary>
         ///// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         ///// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -137,7 +155,7 @@ namespace Zyl.VectorTraits {
         //}
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector128{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector128{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). No type checking (不进行类型检查).
+        /// Reinterprets a <see cref="Vector128{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector128{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -146,27 +164,25 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(Vector128<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-#if NET8_0_OR_GREATER
-            if (Vector<T>.Count == Vector512<T>.Count) {
-                var temp = value.ToVector256().ToVector512();
-                return Unsafe.As<Vector512<T>, Vector<T>>(ref temp);
+#if NET5_0_OR_GREATER
+            return value.ExAsUInt64().AsVector().ExAs<ulong, T>();
+#else
+            if (Vector<byte>.Count == Vector256<byte>.Count) {
+                var temp = value.ExAsByte().ToVector256();
+                return Unsafe.As<Vector256<byte>, Vector<T>>(ref temp);
             }
-#endif // NET8_0_OR_GREATER
-            if (Vector<T>.Count == Vector256<T>.Count) {
-                var temp = value.ToVector256();
-                return Unsafe.As<Vector256<T>, Vector<T>>(ref temp);
-            }
-            if (Vector128<T>.Count >= Vector<T>.Count) {
+            if (Vector128<byte>.Count >= Vector<byte>.Count) {
                 return Unsafe.As<Vector128<T>, Vector<T>>(ref value);
             } else {
-                Vector<T> source = default;
-                Unsafe.WriteUnaligned(ref Unsafe.As<Vector<T>, byte>(ref source), value);
-                return source;
+                Vector<byte> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector<byte>, byte>(ref source), value);
+                return source.ExAs<byte, T>();
             }
+#endif // NET5_0_OR_GREATER
         }
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector256{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector256{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). No type checking (不进行类型检查).
+        /// Reinterprets a <see cref="Vector256{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector256{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -175,24 +191,22 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(Vector256<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-#if NET8_0_OR_GREATER
-            if (Vector<T>.Count == Vector512<T>.Count) {
-                var temp = value.ToVector512();
-                return Unsafe.As<Vector512<T>, Vector<T>>(ref temp);
-            }
-#endif // NET8_0_OR_GREATER
-            if (Vector256<T>.Count >= Vector<T>.Count) {
+#if NET5_0_OR_GREATER
+            return value.ExAsUInt64().AsVector().ExAs<ulong, T>();
+#else
+            if (Vector256<byte>.Count >= Vector<byte>.Count) {
                 return Unsafe.As<Vector256<T>, Vector<T>>(ref value);
             } else {
-                Vector<T> source = default;
-                Unsafe.WriteUnaligned(ref Unsafe.As<Vector<T>, byte>(ref source), value);
-                return source;
+                Vector<byte> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector<byte>, byte>(ref source), value);
+                return source.ExAs<byte, T>();
             }
+#endif // NET5_0_OR_GREATER
         }
 
 #if NET8_0_OR_GREATER
         /// <summary>
-        /// Reinterprets a <see cref="Vector512{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector512{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). No type checking (不进行类型检查).
+        /// Reinterprets a <see cref="Vector512{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector512{T}"/> 重新解释为新的 <see cref="Vector{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -201,18 +215,12 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(Vector512<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-            if (Vector512<T>.Count >= Vector<T>.Count) {
-                return Unsafe.As<Vector512<T>, Vector<T>>(ref value);
-            } else {
-                Vector<T> source = default;
-                Unsafe.WriteUnaligned(ref Unsafe.As<Vector<T>, byte>(ref source), value);
-                return source;
-            }
+            return value.ExAsUInt64().AsVector().ExAs<ulong, T>();
         }
 #endif // NET8_0_OR_GREATER
 
         ///// <summary>
-        ///// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector64{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector64{T}"/>). No type checking (不进行类型检查).
+        ///// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector64{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector64{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
         ///// </summary>
         ///// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         ///// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -226,7 +234,7 @@ namespace Zyl.VectorTraits {
         //}
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector128{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector128{T}"/>). No type checking (不进行类型检查).
+        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector128{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector128{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -235,25 +243,24 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> AsVector128<T>(Vector<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-#if NET8_0_OR_GREATER
-            if (Vector<T>.Count == Vector512<T>.Count) {
-                return Unsafe.As<Vector<T>, Vector512<T>>(ref value).GetLower().GetLower();
-            }
-#endif // NET8_0_OR_GREATER
-            if (Vector<T>.Count == Vector256<T>.Count) {
+#if NET5_0_OR_GREATER
+            return value.ExAsUInt64().AsVector128().ExAs<ulong, T>();
+#else
+            if (Vector<byte>.Count == Vector256<byte>.Count) {
                 return Unsafe.As<Vector<T>, Vector256<T>>(ref value).GetLower();
             }
-            if (Vector<T>.Count >= Vector128<T>.Count) {
+            if (Vector<byte>.Count >= Vector128<byte>.Count) {
                 return Unsafe.As<Vector<T>, Vector128<T>>(ref value);
             } else {
-                Vector128<T> source = default;
-                Unsafe.WriteUnaligned(ref Unsafe.As<Vector128<T>, byte>(ref source), value);
-                return source;
+                Vector128<byte> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector128<byte>, byte>(ref source), value);
+                return source.ExAs<byte, T>();
             }
+#endif // NET5_0_OR_GREATER
         }
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector256{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector256{T}"/>). No type checking (不进行类型检查).
+        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector256{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector256{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -262,27 +269,27 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> AsVector256<T>(Vector<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-#if NET8_0_OR_GREATER
-            if (Vector<T>.Count == Vector512<T>.Count) {
-                return Unsafe.As<Vector<T>, Vector512<T>>(ref value).GetLower();
-            }
-#endif // NET8_0_OR_GREATER
-            if (Vector<T>.Count >= Vector256<T>.Count) {
+#if NET5_0_OR_GREATER
+            return value.ExAsUInt64().AsVector256().ExAs<ulong, T>();
+#else
+            if (Vector<byte>.Count >= Vector256<byte>.Count) {
                 return Unsafe.As<Vector<T>, Vector256<T>>(ref value);
             } else {
-                Vector256<T> source = default;
-                Unsafe.WriteUnaligned(ref Unsafe.As<Vector256<T>, byte>(ref source), value);
-                return source;
+                Vector256<byte> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector256<byte>, byte>(ref source), value);
+                return source.ExAs<byte, T>();
             }
+#endif // NET5_0_OR_GREATER
         }
 
         /// <summary>
-        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector256{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector256{T}"/>). No type checking (不进行类型检查).
+        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector256{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector256{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
         /// <returns>value reinterpreted as a new <see cref="Vector256{T}"/> (重新解释后新的 <see cref="Vector256{T}"/>)值.</returns>
         /// <seealso cref="Vector256.AsVector256{T}(Vector{T})"/>
+        [Obsolete("Only for test.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> AsVector256A<T>(Vector<T> value) where T : struct {
             return Unsafe.As<Vector<T>, Vector256<T>>(ref value);
@@ -290,7 +297,7 @@ namespace Zyl.VectorTraits {
 
 #if NET8_0_OR_GREATER
         /// <summary>
-        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector512{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector512{T}"/>). No type checking (不进行类型检查).
+        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector512{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector512{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
@@ -299,19 +306,23 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector512<T> AsVector512<T>(Vector<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-            if (Vector<T>.Count >= Vector512<T>.Count) {
-                return Unsafe.As<Vector<T>, Vector512<T>>(ref value);
-            } else {
-                Vector512<T> source = default;
-                Unsafe.WriteUnaligned(ref Unsafe.As<Vector512<T>, byte>(ref source), value);
-                return source;
-            }
+            return value.ExAsUInt64().AsVector512().ExAs<ulong, T>();
         }
 #endif // NET8_0_OR_GREATER
 
 #endif
 
         // == Vector methods ==
+
+        /// <summary>
+        /// Returns the number of elements stored in the vector (返回存储在向量中的元素数量).
+        /// </summary>
+        /// <typeparam name="T">The type of the input vector element (输入向量元素的类型).</typeparam>
+        /// <returns>The number of elements stored in the vector (存储在向量中的元素数量).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Count<T>() where T : struct {
+            return Vector<byte>.Count / Unsafe.SizeOf<T>();
+        }
 
         /// <summary>
         /// Creates a new <see cref="Vector{T}"/> instance with all elements initialized to the specified value (创建新的 <see cref="Vector{T}"/> 实例，其中所有元素已初始化为指定值).
@@ -322,7 +333,19 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Vector{T}(T)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> Create<T>(T value) where T : struct {
-            return new Vector<T>(value);
+            if (typeof(T) == typeof(ExInt128)) {
+                return (Vector<T>)(object)Vectors.Create((ExInt128)(object)value);
+            } else if (typeof(T) == typeof(ExUInt128)) {
+                return (Vector<T>)(object)Vectors.Create((ExUInt128)(object)value);
+#if BCL_TYPE_INT128
+            } else if (typeof(T) == typeof(Int128)) {
+                return (Vector<T>)(object)Vectors.Create((Int128)(object)value);
+            } else if (typeof(T) == typeof(UInt128)) {
+                return (Vector<T>)(object)Vectors.Create((UInt128)(object)value);
+#endif // BCL_TYPE_INT128
+            } else {
+                return new Vector<T>(value);
+            }
         }
 
         /// <summary>
@@ -334,7 +357,8 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Vector{T}(T[])"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> Create<T>(T[] values) where T : struct {
-            return new Vector<T>(values);
+            // return new Vector<T>(values); // But not support ExType.
+            return Create(values, 0);
         }
 
         /// <summary>
@@ -348,7 +372,13 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Vector{T}(T[], int)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> Create<T>(T[] values, int index) where T : struct {
-            return new Vector<T>(values, index);
+            // return new Vector<T>(values, index); // But not support ExType.
+            if (null == values) throw new ArgumentNullException(nameof(values));
+            int idxEnd = index + Count<T>();
+            if (index < 0 || idxEnd > values.Length) {
+                throw new IndexOutOfRangeException(string.Format("Index({0}) was outside the bounds{1} of the array!", index, values.Length));
+            }
+            return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref values[index]));
         }
 
         /// <summary>
@@ -361,14 +391,11 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Vector{T}(ReadOnlySpan{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> Create<T>(ReadOnlySpan<byte> values) where T : struct {
-#if NETCOREAPP3_0_OR_GREATER
-            return new Vector<T>(values);
-#else
+            // return new Vector<T>(values); // Need NETCOREAPP3_0_OR_GREATER. But not support ExType.
             if (values.Length < Vector<byte>.Count) {
                 throw new IndexOutOfRangeException(string.Format("Index was outside the bounds({0}) of the array!", values.Length));
             }
             return Unsafe.ReadUnaligned<Vector<T>>(ref UnsafeUtil.GetReference(values));
-#endif // NETCOREAPP3_0_OR_GREATER
         }
 
         /// <summary>
@@ -381,14 +408,11 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Vector{T}(ReadOnlySpan{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> Create<T>(ReadOnlySpan<T> values) where T : struct {
-#if NETCOREAPP3_0_OR_GREATER
-            return new Vector<T>(values);
-#else
-            if (values.Length < Vector<T>.Count) {
+            // return new Vector<T>(values); // Need NETCOREAPP3_0_OR_GREATER. But not support ExType.
+            if (values.Length < Count<T>()) {
                 throw new IndexOutOfRangeException(string.Format("Index was outside the bounds({0}) of the array!", values.Length));
             }
             return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref UnsafeUtil.GetReference(values)));
-#endif // NETCOREAPP3_0_OR_GREATER
         }
 
         /// <summary>
@@ -401,14 +425,11 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="Vector{T}(Span{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> Create<T>(Span<T> values) where T : struct {
-#if (NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER)
-            return new Vector<T>(values);
-#else
-            if (values.Length < Vector<T>.Count) {
+            // return new Vector<T>(values); // Need (NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER). But not support ExType.
+            if (values.Length < Count<T>()) {
                 throw new IndexOutOfRangeException(string.Format("Index was outside the bounds({0}) of the array!", values.Length));
             }
             return Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref UnsafeUtil.GetReference(values)));
-#endif // NETCOREAPP2_1_OR_GREATER || NETSTANDARD2_1_OR_GREATER
         }
 
         /// <summary>
@@ -442,7 +463,7 @@ namespace Zyl.VectorTraits {
             }
             Vector<T> temp = default;
             ref T p = ref Unsafe.As<Vector<T>, T>(ref temp);
-            int m = Math.Min(Vector<T>.Count, length);
+            int m = Math.Min(Count<T>(), length);
             for (int i = 0; i < m; ++i) {
                 p = values[idx];
                 ++idx;
@@ -502,7 +523,7 @@ namespace Zyl.VectorTraits {
             }
             UnsafeUtil.SkipInit(out Vector<T> temp);
             ref T p = ref Unsafe.As<Vector<T>, T>(ref temp);
-            for (int i = 0; i < Vector<T>.Count; ++i) {
+            for (int i = 0; i < Count<T>(); ++i) {
                 p = values[idx];
                 ++idx;
                 if (idx >= idxEnd) idx = index;
@@ -512,7 +533,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Rotate creates a new <see cref="Vector{T}"/> from a given span starting at a specified index position (于指定索引位置开始，从指定跨度旋转创建一个 <see cref="Vector{T}"/>).
+        /// Rotate creates a new <see cref="Vector{T}"/> from a given span (从指定跨度旋转创建一个 <see cref="Vector{T}"/>).
         /// </summary>
         /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
         /// <param name="values">The span from which the vector is created (用于创建向量的跨度).</param>
@@ -541,7 +562,7 @@ namespace Zyl.VectorTraits {
             if (null == func) throw new ArgumentNullException(nameof(func));
             UnsafeUtil.SkipInit(out Vector<T> temp);
             ref T p = ref Unsafe.As<Vector<T>, T>(ref temp);
-            for (int i = 0; i < Vector<T>.Count; ++i) {
+            for (int i = 0; i < Count<T>(); ++i) {
                 p = func(i);
                 p = ref Unsafe.Add(ref p, 1);
             }
@@ -560,7 +581,7 @@ namespace Zyl.VectorTraits {
             if (null == func) throw new ArgumentNullException(nameof(func));
             UnsafeUtil.SkipInit(out Vector<T> temp);
             ref T p = ref Unsafe.As<Vector<T>, T>(ref temp);
-            for (int i = 0; i < Vector<T>.Count; ++i) {
+            for (int i = 0; i < Count<T>(); ++i) {
                 p = func(i, userdata);
                 p = ref Unsafe.Add(ref p, 1);
             }
@@ -640,6 +661,16 @@ namespace Zyl.VectorTraits {
         /// <returns>A new <see cref="Vector{T}"/> with all elements initialized to <paramref name="src"/> (一个新的 <see cref="Vector{T}"/>，其中所有元素已初始化为 <paramref name="src"/> ).</returns>
         public static Vector<T> CreateByBits<T>(long src) where T : struct {
             return Create(Scalars.GetByBits<T>(src));
+        }
+
+        /// <summary>
+        /// Creates a <see cref="Vector{T}"/> whose components are of a specified 128-bits integer (创建一个 <see cref="Vector{T}"/>，其元素为指定的128位整数).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="src">Source value (源值).</param>
+        /// <returns>A new <see cref="Vector{T}"/> with all elements initialized to value (一个新的 <see cref="Vector{T}"/>，其中所有元素已初始化为 <paramref name="src"/> ).</returns>
+        public static Vector<T> CreateBy128Bits<T>(ExInt128 src) where T : struct {
+            return Create(Scalars.GetBy128Bits<T>(src));
         }
 
         /// <summary>

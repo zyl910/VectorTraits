@@ -11,9 +11,9 @@ using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.ExTypes;
 
-namespace Zyl.VectorTraits.Extensions {
+namespace Zyl.VectorTraits {
 
-    partial class Vector512Extensions {
+    partial class Vector512s {
 #if NET8_0_OR_GREATER
 
         /// <summary>

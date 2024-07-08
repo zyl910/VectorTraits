@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Intrinsics;
 #endif
 using Zyl.VectorTraits.Impl.Util;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits {
 
@@ -118,6 +119,16 @@ namespace Zyl.VectorTraits {
         }
 
         // == Vector64 methods ==
+
+        /// <summary>
+        /// Returns the number of elements stored in the vector (返回存储在向量中的元素数量).
+        /// </summary>
+        /// <typeparam name="T">The type of the input vector element (输入向量元素的类型).</typeparam>
+        /// <returns>The number of elements stored in the vector (存储在向量中的元素数量).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Count<T>() where T : struct {
+            return Vector64<byte>.Count / Unsafe.SizeOf<T>();
+        }
 
         /// <summary>
         /// Creates a new <see cref="Vector64{T}"/> instance with all elements initialized to the specified value (创建新的 <see cref="Vector64{T}"/> 实例，其中所有元素已初始化为指定值).
@@ -436,6 +447,16 @@ namespace Zyl.VectorTraits {
         /// <returns>A new <see cref="Vector64{T}"/> with all elements initialized to value (一个新的 <see cref="Vector64{T}"/>，其中所有元素已初始化为 <paramref name="src"/> ).</returns>
         public static Vector64<T> CreateByBits<T>(long src) where T : struct {
             return Create(Scalars.GetByBits<T>(src));
+        }
+
+        /// <summary>
+        /// Creates a <see cref="Vector64{T}"/> whose components are of a specified 128-bits integer (创建一个 <see cref="Vector64{T}"/>，其元素为指定的128位整数).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="src">Source value (源值).</param>
+        /// <returns>A new <see cref="Vector64{T}"/> with all elements initialized to value (一个新的 <see cref="Vector64{T}"/>，其中所有元素已初始化为 <paramref name="src"/> ).</returns>
+        public static Vector64<T> CreateBy128Bits<T>(ExInt128 src) where T : struct {
+            return Create(Scalars.GetBy128Bits<T>(src));
         }
 
         /// <summary>
