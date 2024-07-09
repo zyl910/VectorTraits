@@ -1,7 +1,10 @@
-﻿#if NET5_0_OR_GREATER
+﻿//#define FALLBACK_USE_T
+
+#if NET5_0_OR_GREATER
 #define USE_VECTOR_CREATE // .NET5+ has better performance (Without int64/uint64 on 32bit system) .
 #endif // NET5_0_OR_GREATER
 #if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
 #define USE_VECTOR_CREATE_INT64 // .NET7+ has better performance of int64/uint64 on 32bit system .
 #endif // NET7_0_OR_GREATER
 
@@ -13,6 +16,7 @@ using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.ExTypes;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits.Impl {
@@ -436,8 +440,22 @@ namespace Zyl.VectorTraits.Impl {
                 return (Vector512<T>)(object)GetMaskBits_Int64(index);
             } else if (typeof(ulong) == typeof(T)) {
                 return (Vector512<T>)(object)GetMaskBits_UInt64(index);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector512<T>)(object)GetMaskBits_ExInt128(index);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector512<T>)(object)GetMaskBits_ExUInt128(index);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector512<T>)(object)GetMaskBits_Int128(index);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector512<T>)(object)GetMaskBits_UInt128(index);
+#endif // BCL_TYPE_INT128
             } else {
+#if FALLBACK_USE_T
+                return Vector512s<T>.GetMaskBits(index);
+#else
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+#endif // FALLBACK_USE_T
             }
         }
 
@@ -581,6 +599,76 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE_BY_ARRAY
         }
 
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码) - ExInt128. The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
+        /// The equivalent of <c>Vector512s&lt;T&gt;.GetMaskBits(index)</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vector512s{T}.GetMaskBits(int)"/> when running net5+.
+        /// </remarks>
+        /// <seealso cref="Vector512s{T}.GetMaskBits(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ExInt128> GetMaskBits_ExInt128(int index) {
+            return GetMaskBits_ExUInt128(index).ExAsExInt128();
+        }
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码) - ExUInt128. The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
+        /// The equivalent of <c>Vector512s&lt;T&gt;.GetMaskBits(index)</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>sizeof(T)*8-1</c> (值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vector512s{T}.GetMaskBits(int)"/> when running net5+.
+        /// </remarks>
+        /// <seealso cref="Vector512s{T}.GetMaskBits(int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ExUInt128> GetMaskBits_ExUInt128(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
+            return Vector512s.Create((ExUInt128)(((ExUInt128)1UL << index) - 1));
+#else
+            return Vector512s<ExUInt128>.GetMaskBits(index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码) - Int128. The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
+        /// The equivalent of <c>Vector512s&lt;T&gt;.GetMaskBits(index)</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vector512s{T}.GetMaskBits(int)"/> when running net5+.
+        /// </remarks>
+        /// <seealso cref="Vector512s{T}.GetMaskBits(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> GetMaskBits_Int128(int index) {
+            return GetMaskBits_ExUInt128(index).ExAsInt128();
+        }
+
+        /// <summary>
+        /// Get bits mask by index (根据索引获取位集掩码) - UInt128. The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
+        /// The equivalent of <c>Vector512s&lt;T&gt;.GetMaskBits(index)</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>sizeof(T)*8-1</c> (值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vector512s{T}.GetMaskBits(int)"/> when running net5+.
+        /// </remarks>
+        /// <seealso cref="Vector512s{T}.GetMaskBits(int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> GetMaskBits_UInt128(int index) {
+            return GetMaskBits_ExUInt128(index).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
 
         /// <summary>
         /// Get residue bits mask by index (根据索引获取剩余的位集掩码). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
@@ -612,8 +700,22 @@ namespace Zyl.VectorTraits.Impl {
                 return (Vector512<T>)(object)GetResidueMaskBits_Int64(index);
             } else if (typeof(ulong) == typeof(T)) {
                 return (Vector512<T>)(object)GetResidueMaskBits_UInt64(index);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector512<T>)(object)GetResidueMaskBits_ExInt128(index);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector512<T>)(object)GetResidueMaskBits_ExUInt128(index);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector512<T>)(object)GetResidueMaskBits_Int128(index);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector512<T>)(object)GetResidueMaskBits_UInt128(index);
+#endif // BCL_TYPE_INT128
             } else {
+#if FALLBACK_USE_T
+                return Vector512s<T>.GetMaskBits(Scalars<T>.BitSize - index);
+#else
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+#endif // FALLBACK_USE_T
             }
         }
 
@@ -756,6 +858,76 @@ namespace Zyl.VectorTraits.Impl {
             return Vector512s<ulong>.GetMaskBits(64 - index);
 #endif // USE_VECTOR_CREATE_BY_ARRAY
         }
+
+        /// <summary>
+        /// Get residue bits mask by index (根据索引获取剩余的位集掩码) - ExInt128. The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
+        /// The equivalent of <c>Vector512s&lt;T&gt;.GetMaskBits(sizeof(T)*8 - index)</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vector512s{T}.GetMaskBits(int)"/> when running net5+.
+        /// </remarks>
+        /// <seealso cref="Vector512s{T}.GetMaskBits(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ExInt128> GetResidueMaskBits_ExInt128(int index) {
+            return GetResidueMaskBits_ExUInt128(index).ExAsExInt128();
+        }
+
+        /// <summary>
+        /// Get residue bits mask by index (根据索引获取剩余的位集掩码) - ExUInt128. The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
+        /// The equivalent of <c>Vector512s&lt;T&gt;.GetMaskBits(sizeof(T)*8 - index)</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>sizeof(T)*8-1</c> (值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vector512s{T}.GetMaskBits(int)"/> when running net5+.
+        /// </remarks>
+        /// <seealso cref="Vector512s{T}.GetMaskBits(int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ExUInt128> GetResidueMaskBits_ExUInt128(int index) {
+#if USE_VECTOR_CREATE_BY_ARRAY
+            return Vector512s.Create((ExUInt128)(ExUInt128.MaxValue >> index));
+#else
+            return Vector512s<ExUInt128>.GetMaskBits(64 - index);
+#endif // USE_VECTOR_CREATE_BY_ARRAY
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <summary>
+        /// Get residue bits mask by index (根据索引获取剩余的位集掩码) - Int128. The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
+        /// The equivalent of <c>Vector512s&lt;T&gt;.GetMaskBits(sizeof(T)*8 - index)</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vector512s{T}.GetMaskBits(int)"/> when running net5+.
+        /// </remarks>
+        /// <seealso cref="Vector512s{T}.GetMaskBits(int)"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> GetResidueMaskBits_Int128(int index) {
+            return GetResidueMaskBits_ExUInt128(index).ExAsInt128();
+        }
+
+        /// <summary>
+        /// Get residue bits mask by index (根据索引获取剩余的位集掩码) - UInt128. The index value ranges from 0 to <c>sizeof(T)*8-1</c> (索引值的范围是 0 ~ <c>sizeof(T)*8-1</c>).
+        /// The equivalent of <c>Vector512s&lt;T&gt;.GetMaskBits(sizeof(T)*8 - index)</c>.
+        /// </summary>
+        /// <param name="index">The index (索引). The value ranges from 0 to <c>sizeof(T)*8-1</c> (值的范围是 0 ~ <c>sizeof(T)*8-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
+        /// <returns>Returns bits mask mask (返回位集掩码).</returns>
+        /// <remarks>
+        /// It performs better than <see cref="Vector512s{T}.GetMaskBits(int)"/> when running net5+.
+        /// </remarks>
+        /// <seealso cref="Vector512s{T}.GetMaskBits(int)"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> GetResidueMaskBits_UInt128(int index) {
+            return GetResidueMaskBits_ExUInt128(index).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
 
         #endregion // Vectors_T
 

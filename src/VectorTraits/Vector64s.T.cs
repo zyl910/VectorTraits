@@ -116,6 +116,14 @@ namespace Zyl.VectorTraits {
         /// <summary>Reciprocal value: 1/4294967295 (uint.MaxValue). When the type is an integer, it is a fixed point number using the <see cref="AbstractVectors{T}.ElementFixedShift"/> convention (当类型为整数时, 是使用 <see cref="AbstractVectors{T}.ElementFixedShift"/> 约定的定点数).</summary>
         public static readonly Vector64<T> VReciprocalMaxUInt32;
         // -- Specified value --
+        /// <summary>The mask of the index (索引的掩码). All the elements have a value of <c>Count-1</c>.</summary>
+        public static readonly Vector64<T> IndexMask;
+        /// <summary>The mask of the index on Each128 (Each128上索引的掩码). All the elements have a value of <c>(16/sizeof(T))-1</c>.</summary>
+        public static readonly Vector64<T> IndexMaskEach128;
+        /// <summary>The mask of the index*2 (索引*2时的掩码). All the elements have a value of <c>Count*2-1</c>.</summary>
+        public static readonly Vector64<T> IndexX2Mask;
+        /// <summary>The mask of the index*4 (索引*4时的掩码). All the elements have a value of <c>Count*4-1</c>.</summary>
+        public static readonly Vector64<T> IndexX4Mask;
         /// <summary>Serial Value (顺序值). e.g. 0, 1, 2, 3 ...</summary>
         public static readonly Vector64<T> Serial;
         /// <summary>Serial Value descend (顺序值降序). e.g. (Count-1), (Count-2), ... 2, 1, 0</summary>
@@ -254,8 +262,12 @@ namespace Zyl.VectorTraits {
             VReciprocalMaxInt32 = Vector64s.Create<T>(ElementVReciprocalMaxInt32);
             VReciprocalMaxUInt32 = Vector64s.Create<T>(ElementVReciprocalMaxUInt32);
             // -- Specified value --
+            IndexMask = Vector64s.CreateByBits<T>(Vector64s.Count<T>() - 1);
+            IndexMaskEach128 = Vector64s.CreateByBits<T>((16 / Scalars<T>.ByteSize) - 1);
+            IndexX2Mask = Vector64s.CreateByBits<T>(Vector64s.Count<T>() * 2 - 1);
+            IndexX4Mask = Vector64s.CreateByBits<T>(Vector64s.Count<T>() * 4 - 1);
             Serial = Vector64s.CreateByDoubleLoop<T>(0, 1);
-            SerialDesc = Vector64s.CreateByDoubleLoop<T>(Vector64<T>.Count - 1, -1);
+            SerialDesc = Vector64s.CreateByDoubleLoop<T>(Vector64s.Count<T>() - 1, -1);
             SerialNegative = Vector64s.CreateByDoubleLoop<T>(0, -1);
             Demo = Vector64s.CreateByFunc<T>(Vectors.GenerateDemoElement<T>);
             DemoNaN = Vector64s.CreateRotate<T>(ElementNaN, ElementNegativeInfinity, ElementSignMask, ElementPositiveInfinity, ElementMaxValue, ElementMinValue, ElementV6, ElementV7);
@@ -334,6 +346,15 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
+        /// Returns the number of elements stored in the vector (返回存储在向量中的元素数量). It supports ExType (它支持扩展类型).
+        /// </summary>
+        public static int Count {
+            get {
+                return Vector64s.Count<T>();
+            }
+        }
+
+        /// <summary>
         /// Get bit pos mask by index (根据索引获取位偏移掩码). The equivalent of <c>Vector64s.Create(Scalars.GetByBits&lt;T&gt;(1L &lt;&lt; index))</c>.
         /// </summary>
         /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize-1</c> (值的范围是 0 ~ <c>ElementBitSize-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
@@ -374,10 +395,10 @@ namespace Zyl.VectorTraits {
 
         /// <summary>Zero (0).</summary>
         /// <seealso cref="Vector64{T}.Zero"/>
-        public static Vector64<T> Zero { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector64<T>.Zero; } }
+        public static Vector64<T> Zero { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector64<byte>.Zero.ExAs<byte, T>(); } }
         /// <summary>Value 0 (0的值).</summary>
         /// <seealso cref="Vector64{T}.Zero"/>
-        public static Vector64<T> V0 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector64<T>.Zero; } }
+        public static Vector64<T> V0 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector64<byte>.Zero.ExAs<byte, T>(); } }
         /// <summary>All bit is 1 (所有位都是1的值).</summary>
         /// <seealso cref="Vector64{T}.AllBitsSet"/>
         public static Vector64<T> AllBitsSet {

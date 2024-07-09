@@ -33,7 +33,7 @@ namespace Zyl.VectorTraits {
 #endif // NETCOREAPP3_0_OR_GREATER
             Unsafe.SkipInit(out Vector<ExInt128> rt);
             ref ExInt128 p = ref Unsafe.As<Vector<ExInt128>, ExInt128>(ref rt);
-            int cnt = Vector<ExInt128>.Count;
+            int cnt = Count<ExInt128>();
             for (int i = 0; i < cnt; ++i) {
                 p = value;
                 p = ref Unsafe.Add(ref p, i);
@@ -60,7 +60,7 @@ namespace Zyl.VectorTraits {
 #endif // NETCOREAPP3_0_OR_GREATER
             Unsafe.SkipInit(out Vector<ExUInt128> rt);
             ref ExUInt128 p = ref Unsafe.As<Vector<ExUInt128>, ExUInt128>(ref rt);
-            int cnt = Vector<ExUInt128>.Count;
+            int cnt = Count<ExUInt128>();
             for (int i = 0; i < cnt; ++i) {
                 p = value;
                 p = ref Unsafe.Add(ref p, i);

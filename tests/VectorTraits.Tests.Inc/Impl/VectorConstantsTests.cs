@@ -25,6 +25,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void GetMaskBitsTest<T>(T src) where T : struct {
             int BitSize = Scalars<T>.BitSize;
             int iMax = BitSize - 1;
@@ -34,7 +38,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
 #pragma warning disable CS0618 // Type or member is obsolete
                 Vector<T> dst = VectorConstants.GetMaskBits<T>(i);
 #pragma warning restore CS0618 // Type or member is obsolete
-                ClassicAssert.AreEqual(expected, dst, $"index={i}");
+                ClassicAssert.AreEqual(expected.ExAsInt64(), dst.ExAsInt64(), $"index={i}");
+                //if (!expected.ExAsInt64().Equals(dst.ExAsInt64())) {
+                //    Console.WriteLine(VectorTextUtil.Format("GetMaskBits({0}): {1} != {2}", i, expected, dst));
+                //}
             }
         }
 
@@ -46,6 +53,10 @@ namespace Zyl.VectorTraits.Tests.Impl {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void GetResidueMaskBitsTest<T>(T src) where T : struct {
             int BitSize = Scalars<T>.BitSize;
             int iMax = BitSize - 1;
@@ -55,7 +66,7 @@ namespace Zyl.VectorTraits.Tests.Impl {
 #pragma warning disable CS0618 // Type or member is obsolete
                 Vector<T> dst = VectorConstants.GetResidueMaskBits<T>(i);
 #pragma warning restore CS0618 // Type or member is obsolete
-                ClassicAssert.AreEqual(expected, dst, $"index={i}");
+                ClassicAssert.AreEqual(expected.ExAsInt64(), dst.ExAsInt64(), $"index={i}");
             }
         }
 

@@ -15,7 +15,7 @@ using Zyl.VectorTraits.ExTypes;
 namespace Zyl.VectorTraits {
 
     /// <summary>
-    /// Methods of <see cref="Vector256{T}"/> . It supports ExType,and the element type can also be (它支持扩展类型, 元素类型还可以为): <see cref="ExInt128"/>, <see cref="ExUInt128"/>, <see cref="Int128"/>, <see cref="UInt128"/>.
+    /// Methods of <see cref="Vector256{T}"/>. It supports ExType, and the element type can also be (它支持扩展类型, 元素类型还可以为): <see cref="ExInt128"/>, <see cref="ExUInt128"/>, <see cref="Int128"/>, <see cref="UInt128"/>.
     /// </summary>
     public static partial class Vector256s {
 #if NETCOREAPP3_0_OR_GREATER
@@ -69,7 +69,7 @@ namespace Zyl.VectorTraits {
                 MaskBitsArray16B[0] = Vector256<byte>.Zero;
                 bitpos = 1;
                 bits = 1;
-                for (i = 0; i < MaskBitPosArray8B.Length; ++i) {
+                for (i = 0; i < MaskBitPosArray16B.Length; ++i) {
                     if (i < MaskBitPosArray1B.Length) {
                         MaskBitPosArray1B[i] = Vector256.Create(Scalars.GetBy128Bits<byte>(bitpos));
                         MaskBitsArray1B[1 + i] = Vector256.Create(Scalars.GetBy128Bits<byte>(bits));

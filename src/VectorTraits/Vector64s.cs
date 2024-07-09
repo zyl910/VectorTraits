@@ -57,7 +57,7 @@ namespace Zyl.VectorTraits {
                 MaskBitsArray8B[0] = Vector64<byte>.Zero;
                 bitpos = 1;
                 bits = 1;
-                for (i = 0; i < MaskBitPosArray8B.Length; ++i) {
+                for (i = 0; i < MaskBitsArray8B.Length; ++i) {
                     if (i < MaskBitPosArray1B.Length) {
                         MaskBitPosArray1B[i] = Vector64.Create(Scalars.GetByBits<byte>(bitpos));
                         MaskBitsArray1B[1 + i] = Vector64.Create(Scalars.GetByBits<byte>(bits));

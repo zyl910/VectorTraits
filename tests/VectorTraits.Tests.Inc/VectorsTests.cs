@@ -26,30 +26,34 @@ namespace Zyl.VectorTraits.Tests {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
-        public void CreatePaddingTest<T>(T src) where T:struct {
-            Vector<T> vzero = Vector<T>.Zero;
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
+        public void CreatePaddingTest<T>(T src) where T : struct {
+            Vector<T> vzero = Vectors<T>.Zero;
             T zero = default;
             // params
             Vector<T> v1 = Vectors.CreatePadding(src);
             Vector<T> v2 = Vectors.CreatePadding(src, src);
-            ClassicAssert.AreNotEqual(vzero, v1);
-            ClassicAssert.AreNotEqual(vzero, v2);
+            ClassicAssert.AreNotEqual(vzero.ExAsByte(), v1.ExAsByte());
+            ClassicAssert.AreNotEqual(vzero.ExAsByte(), v2.ExAsByte());
             // []
-            int vcount = Vector<T>.Count;
+            int vcount = Vectors<T>.Count;
             T[] arr = new T[vcount + 1];
             VectorTextUtil.Fill(arr, src);
             v1 = Vectors.CreatePadding(arr);
-            ClassicAssert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero.ExAsByte(), v1.ExAsByte());
             // Use int index, int length
             for (int i = 0; i <= arr.Length; ++i) {
                 int srcCount = i;
                 if (srcCount > vcount) srcCount = vcount;
                 Vector<T> v = Vectors.CreatePadding(arr, 0, i);
                 for (int j = 0; j < srcCount; ++j) {
-                    ClassicAssert.AreEqual(src, v[j]);
+                    ClassicAssert.AreEqual(src, v.ExGetElement(j));
                 }
                 for (int j = srcCount; j < vcount; ++j) {
-                    ClassicAssert.AreEqual(zero, v[j]);
+                    ClassicAssert.AreEqual(zero, v.ExGetElement(j));
                 }
             }
         }
@@ -64,32 +68,36 @@ namespace Zyl.VectorTraits.Tests {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void CreateRotateTest<T>(T src) where T : struct {
-            Vector<T> vzero = Vector<T>.Zero;
+            Vector<T> vzero = Vectors<T>.Zero;
             // params
             Vector<T> v1 = Vectors.CreateRotate(src);
             Vector<T> v2 = Vectors.CreateRotate(src, src);
-            ClassicAssert.AreNotEqual(vzero, v1);
-            ClassicAssert.AreNotEqual(vzero, v2);
+            ClassicAssert.AreNotEqual(vzero.ExAsByte(), v1.ExAsByte());
+            ClassicAssert.AreNotEqual(vzero.ExAsByte(), v2.ExAsByte());
             // []
-            int vcount = Vector<T>.Count;
+            int vcount = Vectors<T>.Count;
             T[] arr = new T[vcount + 1];
             arr[0] = src;
             v1 = Vectors.CreateRotate(arr);
-            ClassicAssert.AreNotEqual(vzero, v1);
+            ClassicAssert.AreNotEqual(vzero.ExAsByte(), v1.ExAsByte());
             // Use int index, int length
             for (int i = 0; i <= arr.Length; ++i) {
                 int srcCount = i;
                 if (srcCount > vcount) srcCount = vcount;
                 Vector<T> v = Vectors.CreateRotate(arr, 0, i);
-                if (i>0) {
+                if (i > 0) {
                     for (int j = 0; j < srcCount; ++j) {
                         int pos = j % srcCount;
                         T cur = arr[pos];
-                        ClassicAssert.AreEqual(cur, v[j]);
+                        ClassicAssert.AreEqual(cur, v.ExGetElement(j));
                     }
                 } else {
-                    ClassicAssert.AreNotEqual(vzero, v);
+                    ClassicAssert.AreNotEqual(vzero.ExAsByte(), v.ExAsByte());
                 }
             }
         }

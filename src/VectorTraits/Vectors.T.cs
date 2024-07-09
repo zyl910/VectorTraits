@@ -4,6 +4,7 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits {
 
@@ -260,28 +261,28 @@ namespace Zyl.VectorTraits {
             VReciprocalMaxInt32 = Vectors.Create<T>(ElementVReciprocalMaxInt32);
             VReciprocalMaxUInt32 = Vectors.Create<T>(ElementVReciprocalMaxUInt32);
             // -- Specified value --
-            IndexMask = Vectors.CreateByBits<T>(Vector<T>.Count - 1);
+            IndexMask = Vectors.CreateByBits<T>(Vectors.Count<T>() - 1);
             IndexMaskEach128 = Vectors.CreateByBits<T>((16 / Scalars<T>.ByteSize) - 1);
-            IndexX2Mask = Vectors.CreateByBits<T>(Vector<T>.Count * 2 - 1);
-            IndexX4Mask = Vectors.CreateByBits<T>(Vector<T>.Count * 4 - 1);
+            IndexX2Mask = Vectors.CreateByBits<T>(Vectors.Count<T>() * 2 - 1);
+            IndexX4Mask = Vectors.CreateByBits<T>(Vectors.Count<T>() * 4 - 1);
             Serial = Vectors.CreateByDoubleLoop<T>(0, 1);
-            SerialDesc = Vectors.CreateByDoubleLoop<T>(Vector<T>.Count - 1, -1);
+            SerialDesc = Vectors.CreateByDoubleLoop<T>(Vectors.Count<T>() - 1, -1);
             SerialNegative = Vectors.CreateByDoubleLoop<T>(0, -1);
             Demo = Vectors.CreateByFunc<T>(Vectors.GenerateDemoElement<T>);
             DemoNaN = Vectors.CreateRotate<T>(ElementNaN, ElementNegativeInfinity, ElementSignMask, ElementPositiveInfinity, ElementMaxValue, ElementMinValue, ElementV6, ElementV7);
             DemoNaN2 = Vectors.CreateRotate<T>(ElementPositiveInfinity, ElementNaN, ElementNegativeInfinity, ElementSignMask, ElementV_4, ElementMaxValue, ElementMinValue, ElementV_7);
             int bitLen = ElementByteSize * 8;
             MaskBitPosSerial = Vectors.CreateByFunc<T>(delegate (int index) {
-                long n = 0;
+                ExInt128 n = 0;
                 if (index < bitLen) {
-                    n = 1L << index;
+                    n = ((ExInt128)1L) << index;
                 }
-                return Scalars.GetByBits<T>(n);
+                return Scalars.GetBy128Bits<T>(n);
             });
             MaskBitPosSerialRotate = Vectors.CreateByFunc<T>(delegate (int index) {
                 int m = index % bitLen;
-                long n = 1L << m;
-                return Scalars.GetByBits<T>(n);
+                ExInt128 n = ((ExInt128)1L) << m;
+                return Scalars.GetBy128Bits<T>(n);
             });
             MaskBitsSerial = Vectors.CreateByFunc<T>(delegate (int index) {
                 int m = Math.Min(index + 1, bitLen);
@@ -344,6 +345,15 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
+        /// Returns the number of elements stored in the vector (返回存储在向量中的元素数量). It supports ExType (它支持扩展类型).
+        /// </summary>
+        public static int Count {
+            get {
+                return Vectors.Count<T>();
+            }
+        }
+
+        /// <summary>
         /// Get bit pos mask by index (根据索引获取位偏移掩码). The equivalent of <c>Vectors.Create(Scalars.GetByBits&lt;T&gt;(1L &lt;&lt; index))</c>.
         /// </summary>
         /// <param name="index">The index (索引). The value ranges from 0 to <c>ElementBitSize-1</c> (值的范围是 0 ~ <c>ElementBitSize-1</c>). 为了性能, 本函数不做范围检查, 调用者请确保它的值在范围内 (For performance purposes, this function does not do range checking; the caller should ensure that its value is within the range).</param>
@@ -385,10 +395,10 @@ namespace Zyl.VectorTraits {
 
         /// <summary>Zero (0).</summary>
         /// <seealso cref="Vector{T}.Zero"/>
-        public static Vector<T> Zero { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector<T>.Zero; } }
+        public static Vector<T> Zero { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector<byte>.Zero.ExAs<byte, T>(); } }
         /// <summary>Value 0 (0的值).</summary>
         /// <seealso cref="Vector{T}.Zero"/>
-        public static Vector<T> V0 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector<T>.Zero; } }
+        public static Vector<T> V0 { [MethodImpl(MethodImplOptions.AggressiveInlining)] get { return Vector<byte>.Zero.ExAs<byte, T>(); } }
         /// <summary>All bit is 1 (所有位都是1的值).</summary>
         /// <seealso cref="Vector{T}.AllBitsSet"/>
         public static Vector<T> AllBitsSet {
