@@ -1,6 +1,7 @@
 # Traits method list
 
-## Vector traits method of official BCL library (官方BCL库的向量特性方法)
+## Arithmetic methods for vectors  (向量的算术方法)
+### Vector traits method of official BCL library (官方BCL库的向量特性方法)
 Types: Vector, Vector128, Vector256, Vector512 .
 
 Summary (概要):
@@ -48,10 +49,7 @@ List (列表):
 - `WidenUpper`: Widens the upper half of a Vector into a Vector (将向量的高半部分扩宽为一个向量).
   Mnemonic: `rt[i] := widen(source[i - Count/2])`.
 
-Remarks:
-- ①: It also works for Vector (它也适用于Vector).
-
-## Fixed width Vector supplement traits methods (固定宽度向量补充的特性方法)
+### Fixed width Vector supplement traits methods (固定宽度向量补充的特性方法)
 Types: Vector128, Vector256, Vector512 .
 
 List (列表):
@@ -118,14 +116,10 @@ List (列表):
 - `Xor`: Computes the exclusive-or of two vectors (计算两个向量的位异或).
   Mnemonic: `rt[i] := left[i] ^ right[i]`.
 
-Remarks:
-- ①: It also works for Vector (它也适用于Vector).
-
-
-## Vector traits method appended by this library (由本库追加的向量特性方法)
+### Vector traits method appended by this library (由本库追加的向量特性方法)
 Types: Vector, Vector128, Vector256, Vector512 .
 
-### Methods of group (组的方法)
+##### Methods of group (组的方法)
 Summary (概要):
 - Provides vector methods for de-interleave (提供解交织的向量方法): YGroup2Unzip, YGroup2UnzipEven, YGroup2UnzipOdd.
 - Provides vector methods for interleave (提供交织的向量方法): YGroup2Zip, YGroup2ZipHigh, YGroup2ZipLow.
@@ -143,7 +137,7 @@ Summary (概要):
 - `YGroup2ZipLow`: Interleave 2 vectors into 2-element groups and returns the data in the low position. (将2个向量交织为2-元素组, 并返回低位置的数据).
   Mnemonic: `rt[i] := (0==(i&1))?( x[i2] ):( y[i2] )`, `i2 := i/2`.
 
-### Methods of INumber (数字性接口的方法)
+##### Methods of INumber (数字性接口的方法)
 Summary (概要):
 - Provides the vector methods of clamp (提供限制的向量方法): YClamp, YMaxNumber, YMinNumber .
 - Provides the vector methods of check sign (提供符号判断的向量方法): YCopySign, YSign, YSignFloat .
@@ -162,7 +156,7 @@ List (列表):
 - `YSignFloat`: Determine the sign of each element and returns a floating point number (判断各个元素的符号并返回浮点数).
   Mnemonic: `rt[i] := signFloat(value[i])`.
 
-### Methods of INumberBase (数字基本性接口的方法)
+##### Methods of INumberBase (数字基本性接口的方法)
 Summary (概要):
 - Provides the vector methods of check floating number (提供浮点数判断的向量方法): YIsEvenInteger, YIsFinite, YIsInfinity, YIsInfinityOrNaN, YIsInteger, YIsNaN, YIsNegative, YIsNegativeZero, YIsNegativeInfinity, YIsNormal, YIsNotNaN, YIsOddInteger, YIsPositive, YIsPositiveInfinity, YIsSubnormal, YIsZero, YIsZeroOrSubnormal.
 
@@ -202,7 +196,7 @@ List (列表):
 - `YIsZeroOrSubnormal`: Determines if a element is zero or subnormal (确定元素是否为零或次正规数).
   Mnemonic: `rt[i] := to_mask(isZeroOrSubnormal(value[i]))` .
 
-### Methods of shuffle (换位的方法)
+##### Methods of shuffle (换位的方法)
 Summary (概要):
 - Provides vector methods for group-based shuffle (提供基于组的换位的向量方法): YShuffleG2, YShuffleG4, YShuffleG4X2. Also provides ShuffleControlG2/ShuffleControlG4 enum.
 - Provides vector methods for indices-based shuffle (提供基于索引的换位的向量方法): YShuffleInsert, YShuffleKernel, YShuffleX2Kernel.
@@ -233,7 +227,7 @@ List (列表):
 - `YShuffleX4Kernel[/_Args/_Core]`: Only shuffle on 4 vectors (在4个向量上进行仅换位). Creates a new vector by selecting values from an input vector using a set of indices (通过使用一组索引从输入向量中选择值，来创建一个新向量). If the index value is out of range, the result is undefined (若索引值超出范围, 结果是未定义的). You can use the IndexMask mask to constrain the parameters (可使用 IndexMask 掩码来约束参数).
   Mnemonic: `rt[i] := element_ref(indices[i], vector0, vector1, vector2, vector3)`. Conditions: `0<=indices[i] && indices[i]<(Count*4)`.
 
-### Others (其他)
+##### Others (其他)
 Summary (概要):
 - Provides the vector methods of bitwise operations (提供位运算的向量方法): YBitToByte, YBitToInt16, YBitToInt32, YBitToInt64, YOrNot.
 - Provides the vector methods of compare (提供比较的向量方法): YIsAllTrue, YIsAnyTrue, YIsNotEquals.
@@ -266,3 +260,100 @@ List (列表):
 - `YRoundToZero`: Computes the round to zero of each element in a vector (计算向量中每个元素的向零舍入). It is also known as truncate (它也被称作截断取整). See more: `MidpointRounding.ToZero`.
   Mnemonic: `rt[i] := round_to_zero(value[i])` .
 
+
+## Base methods for vectors  (向量的基本方法)
+Its supports ExType,and the element type can also be (它们支持扩展类型, 元素类型还可以为): ExInt128, ExUInt128, Int128, UInt128.
+
+### Static methods (静态方法)
+Types: Vectors, Vector128s, Vector256s, Vector512s .
+
+List of generic methods (泛型方法的列表):
+- `Count<T>(TVector<T>)`: Returns the number of elements stored in the vector (返回存储在向量中的元素数量).
+- `Create<T>(TVectorShorter<T>, TVectorShorter<T>)`②: Create a new vector instance from two shorter vector instances. (从两个更短的向量实例, 来创建新的向量实例).
+- `Create<T>(T)`: Creates a new vector instance with all elements initialized to the specified value (创建新的向量实例，其中所有元素已初始化为指定值).
+- `Create<T>(T[])`: Creates a new vector from a given array (从给定数组创建一个新的向量).
+- `Create<T>(T[], int)`: Creates a new vector from a given array starting at a specified index position (于指定索引位置开始，从指定数组创建一个向量).
+- `Create<T>(ReadOnlySpan<T>)`: Creates a new vector from a given read-only span of bytes (根据给定的只读跨度构造一个向量).
+- `Create<T>(Span<T>)`: Creates a new vector from a given span of bytes (根据给定的跨度构造一个向量).
+- `CreatePadding<T>(ReadOnlySpan<T>)`: Padding creates a new vector from a given span (从指定跨度补齐创建一个向量). The element after values is initialized to 0(values 之后的元素会初始化为0).
+- `CreatePadding<T>(T[], int, int)`: Padding creates a new vector from a given span starting at a specified index position (于指定索引位置开始，从指定跨度补齐创建一个向量). The element after values is initialized to 0(values 之后的元素会初始化为0).
+- `CreatePadding<T>(params T[])`: Padding creates a new vector from a given array (从给定数组补齐创建一个新的向量). The element after values is initialized to 0(values 之后的元素会初始化为0).
+- `CreateRotate<T>(ReadOnlySpan<T>)`: Rotate creates a new vector from a given span starting at a specified index position (于指定索引位置开始，从指定跨度旋转创建一个向量).
+- `CreateRotate<T>(T[], int, int)`: Rotate creates a new <see cref="Vector256{T}"/> from a given span starting at a specified index position (于指定索引位置开始，从指定跨度旋转创建一个向量).
+- `CreateRotate<T>(params T[])`: Padding creates a new vector from a given array (从给定数组旋转创建一个新的向量).
+- `CreateByFunc<T>(Func<int, T>)`: Creates a new vector from a from the given Func (从给定 Func 创建一个新的向量 ) .
+- `CreateByDouble<T>(double)`: Creates a vector whose components are of a specified double value (创建一个向量，其元素为指定的双精度浮点值).
+- `CreateByDoubleLoop<T>(double, double)`: Creates a vector from double value `for` loop (创建一个向量，其元素来自双精度浮点值的`for`循环).
+- `CreateByBits<T>(long)`: Creates a vector whose components are of a specified integer bits (创建一个向量，其元素为指定的整数位).
+- `CreateBy128Bits<T>(ExInt128)`: Creates a vector whose components are of a specified 128-bits integer (创建一个向量，其元素为指定的128位整数).
+- `IsNativeSupported<T>()`: Determines if this element type is native supported (判断是否原生支持这种元素类型).
+
+List of non-generic methods (非泛型方法的列表):
+- `Create(ExInt128)`: Creates a new vector instance of element type ExInt128 with all elements initialized to the specified value (创建新的元素类型为UInt128的向量实例，其中所有元素已初始化为指定值).
+- `Create(ExUInt128)`: Creates a new vector instance of element type ExUInt128 with all elements initialized to the specified value (创建新的元素类型为UInt128的向量实例，其中所有元素已初始化为指定值).
+- `Create(Int128)`: Creates a new vector instance of element type Int128 with all elements initialized to the specified value (创建新的元素类型为UInt128的向量实例，其中所有元素已初始化为指定值).
+- `Create(UInt128)`: Creates a new vector instance of element type UInt128 with all elements initialized to the specified value (创建新的元素类型为UInt128的向量实例，其中所有元素已初始化为指定值).
+- `CreateScalar(ExInt128)`: Creates a new vector instance of element type ExInt128 with the first element initialized to the specified value and the remaining elements initialized to zero (创建新的元素类型为UInt128的向量实例，其中首个元素已初始化为指定值并且其余元素已初始化为零).
+- `CreateScalar(ExUInt128)`: Creates a new vector instance of element type ExUInt128 with the first element initialized to the specified value and the remaining elements initialized to zero (创建新的元素类型为UInt128的向量实例，其中首个元素已初始化为指定值并且其余元素已初始化为零).
+- `CreateScalar(Int128)`: Creates a new vector instance of element type Int128 with the first element initialized to the specified value and the remaining elements initialized to zero (创建新的元素类型为UInt128的向量实例，其中首个元素已初始化为指定值并且其余元素已初始化为零).
+- `CreateScalar(UInt128)`: Creates a new vector instance of element type UInt128 with the first element initialized to the specified value and the remaining elements initialized to zero (创建新的元素类型为UInt128的向量实例，其中首个元素已初始化为指定值并且其余元素已初始化为零).
+- `CreateScalarUnsafe(ExInt128)`: Creates a new vector instance of element type ExInt128 with the first element initialized to the specified value and the remaining elements left uninitialized (创建新的元素类型为UInt128的向量实例，其中首个元素已初始化为指定值，而其余元素未初始化).
+- `CreateScalarUnsafe(ExUInt128)`: Creates a new vector instance of element type ExUInt128 with the first element initialized to the specified value and the remaining elements left uninitialized (创建新的元素类型为UInt128的向量实例，其中首个元素已初始化为指定值，而其余元素未初始化).
+- `CreateScalarUnsafe(Int128)`: Creates a new vector instance of element type Int128 with the first element initialized to the specified value and the remaining elements left uninitialized (创建新的元素类型为UInt128的向量实例，其中首个元素已初始化为指定值，而其余元素未初始化).
+- `CreateScalarUnsafe(UInt128)`: Creates a new vector instance of element type UInt128 with the first element initialized to the specified value and the remaining elements left uninitialized (创建新的元素类型为UInt128的向量实例，其中首个元素已初始化为指定值，而其余元素未初始化).
+
+### Extension methods (扩展方法)
+Types: Vector, Vector128, Vector256, Vector512 .
+Namespace: Zyl.VectorTraits
+
+List of generic methods (泛型方法的列表):
+- `BitEquals<T>(TVector<T>, TVector<T>)`: Returns a value that indicates whether this instance is binary equal to a specified vector (返回一个值，该值指示此实例是否与指定的向量二进制相等).
+- `ExAs<TFrom,TTo>(TVector<TFrom>)`: Reinterprets a vector of type  as a new vector of type TTo. It supports ExType, so there is no element type check (将 TFrom类型的向量 重新解释为 TTo类型的新向量. 它支持扩展类型, 故没有元素类型检查).
+- `ExAsVector<T>(TVector<T>)`③: Reinterprets a `Vector128<T>`(/`Vector256<T>`/`Vector512<T>`) as a new Vector (将 `Vector128<T>`(/`Vector256<T>`/`Vector512<T>`) 重新解释为新的 `Vector<T>`). It supports ExType, so there is no element type check (它支持扩展类型, 故没有元素类型检查).
+- `ExAsVector128<T>(TVector<T>)`③:  Reinterprets a  `Vector<T>` as a new `Vector128<T>` (将 Vector 重新解释为新的 `Vector128<T>`). It supports ExType, so there is no element type check (它支持扩展类型, 故没有元素类型检查).
+- `ExAsVector256<T>(TVector<T>)`③: Reinterprets a  `Vector<T>` as a new `Vector256<T>` (将 Vector 重新解释为新的 `Vector256<T>`). It supports ExType, so there is no element type check (它支持扩展类型, 故没有元素类型检查).
+- `ExAsVector512<T>(TVector<T>)`③:  Reinterprets a  `Vector<T>` as a new `Vector512<T>` (将 Vector 重新解释为新的 `Vector512<T>`). It supports ExType, so there is no element type check (它支持扩展类型, 故没有元素类型检查).
+- `ExGetElement<T>(TVector<T>, Int32)`: Gets the element at the specified index. It is unsafe method, it ignores the index range check (获取指定索引处的元素. 它是非安全的, 它忽略了索引的范围检查).
+- `ExGetLower<T>(TVector<T>)`: Gets the value of the lower bits as a new shorter vector (获取低位的值作为新的较短向量).
+- `ExGetUpper<T>(TVector<T>)`: Gets the value of the upper bits as a new shorter vector (获取高位的值作为新的较短向量).
+- `ExToScalar<T>(TVector<T>)`: Converts the given vector to a scalar containing the value of the first element (将给定向量转换为首个元素的值的标量).
+- `ExToVector128<T>(TVector<T>)`③: Converts the given vector to a new `Vector128<T>` with the lower 64-bits set to the value of the given vector and the upper 64-bits initialized to zero (将给定向量转换为新 `Vector128<T>` 向量，其中较低的 64 位设置为给定向量的值，并将高 64 位初始化为零).
+- `ExToVector128Unsafe<T>(TVector<T>)`③: Converts the given vector to a new `Vector128<T>` with the lower 64-bits set to the value of the given vector and the upper 64-bits left uninitialized (将给定向量转换为新 `Vector128<T>` 向量，其中低 64 位设置为给定向量的值，而高 64 位则未初始化).
+- `ExToVector256<T>(TVector<T>)`③: Converts the given vector to a new `Vector256<T>` with the lower 128-bits set to the value of the given vector and the upper 128-bits initialized to zero (将给定向量转换为新 `Vector256<T>` 向量，其中较低的 128 位设置为给定向量的值，并将高 128 位初始化为零).
+- `ExToVector256Unsafe<T>(TVector<T>)`③: Converts the given vector to a new `Vector256<T>` with the lower 128-bits set to the value of the given vector and the upper 128-bits left uninitialized (将给定向量转换为新 `Vector256<T>` 向量，其中低 128 位设置为给定向量的值，而高 128 位则未初始化).
+- `ExToVector512<T>(TVector<T>)`③: Converts the given vector to a new `Vector512<T>` with the lower 256-bits set to the value of the given vector and the upper 256-bits initialized to zero (将给定向量转换为新 `Vector512<T>` 向量，其中较低的 256 位设置为给定向量的值，并将高 256 位初始化为零).
+- `ExToVector512Unsafe<T>(TVector<T>)`③: Converts the given vector to a new `Vector512<T>` with the lower 256-bits set to the value of the given vector and the upper 256-bits left uninitialized (将给定向量转换为新 `Vector512<T>` 向量，其中低 256 位设置为给定向量的值，而高 256 位则未初始化).
+- `ExWithLower<T>(TVector<T>, TVectorShorter<T>)`③: Creates a new `Vector256<T>` with the lower 128-bits set to the specified value and the upper 128-bits set to the same value as that in the given vector (创建一个新的 <see cref="Vector256{T}" />，将低 128 位设置为指定值，并将高 128 位设置为与给定向量中的值相同的值).
+- `ExWithUpper<T>(TVector<T>, TVectorShorter<T>)`③: Creates a new `Vector256<T>` with the upper 128-bits set to the specified value and the lower 128-bits set to the same value as that in the given vector (创建一个新的 <see cref="Vector256{T}" />，将高 128 位设置为指定值，并将低 128 位设置为与给定向量中的值相同的值).
+
+List of non-generic methods (非泛型方法的列表):
+- `ExAsByte<T>(TVector<T>)`: Reinterprets a vector as a new vector of type Byte (将向量重新解释为 Byte类型的新向量).
+- `ExAsDouble<T>(TVector<T>)`: Reinterprets a vector as a new vector of type Double (将向量重新解释为 Double类型的新向量).
+- `ExAsExInt128<T>(TVector<T>)`③: Reinterprets a vector as a new vector of type ExInt128 (将向量重新解释为 ExInt128类型的新向量).
+- `ExAsExUInt128<T>(TVector<T>)`③: Reinterprets a vector as a new vector of type ExUInt128 (将向量重新解释为 ExUInt128类型的新向量).
+- `ExAsInt16<T>(TVector<T>)`: Reinterprets a vector as a new vector of type Int16 (将向量重新解释为 Int16类型的新向量).
+- `ExAsInt32<T>(TVector<T>)`: Reinterprets a vector as a new vector of type Int32 (将向量重新解释为 Int32类型的新向量).
+- `ExAsInt64<T>(TVector<T>)`: Reinterprets a vector as a new vector of type Int64 (将向量重新解释为 Int64类型的新向量).
+- `ExAsInt128<T>(TVector<T>)`③: Reinterprets a vector as a new vector of type Int128 (将向量重新解释为 Int128类型的新向量).
+- `ExAsSByte<T>(TVector<T>)`: Reinterprets a vector as a new vector of type SByte (将向量重新解释为 SByte类型的新向量).
+- `ExAsSingle<T>(TVector<T>)`: Reinterprets a vector as a new vector of type Single (将向量重新解释为 Single类型的新向量).
+- `ExAsUInt16<T>(TVector<T>)`: Reinterprets a vector as a new vector of type UInt16 (将向量重新解释为 UInt16类型的新向量).
+- `ExAsUInt32<T>(TVector<T>)`: Reinterprets a vector as a new vector of type UInt32 (将向量重新解释为 UInt32类型的新向量).
+- `ExAsUInt64<T>(TVector<T>)`: Reinterprets a vector as a new vector of type UInt64 (将向量重新解释为 UInt64类型的新向量).
+- `ExAsUInt128<T>(TVector<T>)`③: Reinterprets a vector as a new vector of type UInt128 (将向量重新解释为 UInt128类型的新向量).
+
+### Other extension methods (其他扩展方法)
+Types: Vector, Vector128, Vector256, Vector512 .
+Namespace:  Zyl.VectorTraits.Extensions
+
+List of generic methods (泛型方法的列表):
+- `AsSigned<T>(TVector<T>)`④: Reinterprets a unsigned integer vector as a new signed integer vector (将无符号整数向量, 重新解释为有符号整数向量).
+- `AsUnsigned<T>(TVector<T>)`④: Reinterprets a signed integer vector as a new unsigned integer vector (将有符号整数向量, 重新解释为无符号整数向量).
+
+## Endnote (尾注)
+
+Endnote (尾注):
+- ①: It also works for Vector (它也适用于Vector).
+- ②: (它仅适用于固定大小的向量).
+- ③: (它仅适用于特定大小的向量).
+- ④: (它支持不同元素类型的重载, 用 T 代表重载的类型).
