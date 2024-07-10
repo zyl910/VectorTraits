@@ -1,4 +1,8 @@
-﻿#if NETCOREAPP3_0_OR_GREATER
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+#if NETCOREAPP3_0_OR_GREATER
 #if NET5_0_OR_GREATER
 #else
 #define ALLOW_EXTENSION
@@ -17,6 +21,7 @@ using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits.Extensions {
     /// <summary>
@@ -25,23 +30,13 @@ namespace Zyl.VectorTraits.Extensions {
     public static partial class Vector256Extensions {
 #if NETCOREAPP3_0_OR_GREATER
 
-        /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector256{T}" />.</summary>
-        /// <typeparam name="T">The type of the vectors.</typeparam>
-        /// <param name="value">The vector to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector256{T}" />.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector256<T> AsVector256<T>(
-#if ALLOW_EXTENSION
-            this
-#endif
-                Vector<T> value) where T : struct {
-            return Vectors.AsVector256(value);
-        }
-
-        /// <summary>Reinterprets a <see cref="Vector256{T}" /> as a new <see cref="Vector{T}" />.</summary>
-        /// <typeparam name="T">The type of the vectors.</typeparam>
-        /// <param name="value">The vector to reinterpret.</param>
-        /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{T}" />.</returns>
+        /// <summary>
+        /// Reinterprets a <see cref="Vector256{T}"/> as a new <see cref="Vector{T}"/> (将 <see cref="Vector256{T}"/> 重新解释为新的 <see cref="Vector{T}"/>).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
+        /// <returns>value reinterpreted as a new <see cref="Vector{T}"/> (重新解释后新的 <see cref="Vector{T}"/>)值.</returns>
+        /// <seealso cref="Vector256.AsVector{T}(Vector256{T})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(
 #if ALLOW_EXTENSION
@@ -51,6 +46,21 @@ namespace Zyl.VectorTraits.Extensions {
             return Vectors.AsVector(value);
         }
 
+        /// <summary>
+        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector256{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector256{T}"/>).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
+        /// <returns>value reinterpreted as a new <see cref="Vector256{T}"/> (重新解释后新的 <see cref="Vector256{T}"/>)值.</returns>
+        /// <seealso cref="Vector256.AsVector256{T}(Vector{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<T> AsVector256<T>(
+#if ALLOW_EXTENSION
+            this
+#endif
+                Vector<T> value) where T : struct {
+            return Vectors.AsVector256(value);
+        }
 
         /// <summary>Reinterprets a unsigned integer vector as a new signed integer vector (将无符号整数向量, 重新解释为有符号整数向量).</summary>
         /// <param name="value">The vector to reinterpret (将被重新解释的向量).</param>
@@ -138,6 +148,54 @@ namespace Zyl.VectorTraits.Extensions {
                 Vector256<ulong> value) {
             return value.AsInt64();
         }
+
+        /// <inheritdoc cref="AsSigned(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ExInt128> AsSigned(
+#if ALLOW_EXTENSION_SIGNED
+            this
+#endif
+                Vector256<ExInt128> value) {
+            return value;
+        }
+
+        /// <inheritdoc cref="AsSigned(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ExInt128> AsSigned(
+#if ALLOW_EXTENSION_SIGNED
+            this
+#endif
+                Vector256<ExUInt128> value) {
+            return value.ExAsExInt128();
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="AsSigned(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<Int128> AsSigned(
+#if ALLOW_EXTENSION_SIGNED
+            this
+#endif
+                Vector256<Int128> value) {
+            return value;
+        }
+
+        /// <inheritdoc cref="AsSigned(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<Int128> AsSigned(
+#if ALLOW_EXTENSION_SIGNED
+            this
+#endif
+                Vector256<UInt128> value) {
+            return value.ExAsInt128();
+        }
+
+#endif // BCL_TYPE_INT128
 
         /// <summary>Reinterprets a signed integer vector as a new unsigned integer vector (将有符号整数向量, 重新解释为无符号整数向量).</summary>
         /// <param name="value">The vector to reinterpret (将被重新解释的向量).</param>
@@ -227,6 +285,54 @@ namespace Zyl.VectorTraits.Extensions {
                 Vector256<ulong> value) {
             return value;
         }
+
+        /// <inheritdoc cref="AsUnsigned(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ExUInt128> AsUnsigned(
+#if ALLOW_EXTENSION_SIGNED
+            this
+#endif
+                Vector256<ExInt128> value) {
+            return value.ExAsExUInt128();
+        }
+
+        /// <inheritdoc cref="AsUnsigned(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ExUInt128> AsUnsigned(
+#if ALLOW_EXTENSION_SIGNED
+            this
+#endif
+                Vector256<ExUInt128> value) {
+            return value;
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="AsUnsigned(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<UInt128> AsUnsigned(
+#if ALLOW_EXTENSION_SIGNED
+            this
+#endif
+                Vector256<Int128> value) {
+            return value.ExAsUInt128();
+        }
+
+        /// <inheritdoc cref="AsUnsigned(Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<UInt128> AsUnsigned(
+#if ALLOW_EXTENSION_SIGNED
+            this
+#endif
+                Vector256<UInt128> value) {
+            return value;
+        }
+
+#endif // BCL_TYPE_INT128
 
 #endif // NETCOREAPP3_0_OR_GREATER
     }

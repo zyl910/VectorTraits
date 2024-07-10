@@ -1,10 +1,15 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
-using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using System.Text;
 using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits {
@@ -13,7 +18,18 @@ namespace Zyl.VectorTraits {
 #if NETCOREAPP3_0_OR_GREATER
 
         /// <summary>
-        /// (ExType) Reinterprets a <see cref="Vector64{T}" /> of type <typeparamref name="TFrom"/> as a new <see cref="Vector64{T}" /> of type <typeparamref name="TTo"/>. It supports ExType, so there is no element type check (将 <typeparamref name="TFrom"/> 类型的 <see cref="Vector64{T}" /> 重新解释为 <typeparamref name="TTo"/> 类型的新 <see cref="Vector64{T}" />. 它支持 ExType, 故没有元素类型检查).
+        /// Returns a value that indicates whether this instance is binary equal to a specified vector (返回一个值，该值指示此实例是否与指定的向量二进制相等).
+        /// </summary>
+        /// <typeparam name="T">The type of the vector element (向量元素的类型).</typeparam>
+        /// <param name="vector">Current vector (当前的向量).</param>
+        /// <param name="other">Another vector (另一个向量).</param>
+        /// <returns><c>true</c> if <paramref name="other"/> has the same value as this instance; otherwise, <c>false</c> (当 <paramref name="other"/> 相等时返回 <c>true</c>, 否则为 <c>false</c>).</returns>
+        public static bool BitEquals<T>(this Vector64<T> vector, Vector64<T> other) where T : struct {
+            return vector.ExAsUInt64().Equals(other.ExAsUInt64());
+        }
+
+        /// <summary>
+        /// (ExType) Reinterprets a <see cref="Vector64{T}" /> of type <typeparamref name="TFrom"/> as a new <see cref="Vector64{T}" /> of type <typeparamref name="TTo"/>. It supports ExType, so there is no element type check (将 <typeparamref name="TFrom"/> 类型的 <see cref="Vector64{T}" /> 重新解释为 <typeparamref name="TTo"/> 类型的新 <see cref="Vector64{T}" />. 它支持扩展类型, 故没有元素类型检查).
         /// </summary>
         /// <typeparam name="TFrom">The type of the input vector element (输入向量元素的类型).</typeparam>
         /// <typeparam name="TTo">The type that the vector <paramref name="vector"/> should be reinterpreted as (向量 <paramref name="vector"/> 应重新解释为的类型).</typeparam>
@@ -159,6 +175,33 @@ namespace Zyl.VectorTraits {
         public static T ExGetElement<T>(in this Vector64<T> vector, int index) where T : struct {
             ref T address = ref Unsafe.As<Vector64<T>, T>(ref Unsafe.AsRef(in vector));
             return Unsafe.Add(ref address, index);
+        }
+
+        /// <summary>Converts the given vector to a scalar containing the value of the first element (将给定向量转换为首个元素的值的标量).</summary>
+        /// <typeparam name="T">The type of the input vector element (输入向量元素的类型).</typeparam>
+        /// <param name="vector">The vector to get the first element from.</param>
+        /// <returns>A scalar <typeparamref name="T" /> containing the value of the first element.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T ExToScalar<T>(this Vector64<T> vector) where T : struct {
+            return vector.ExGetElement(0);
+        }
+
+        /// <summary>Converts the given vector to a new <see cref="Vector128{T}" /> with the lower 64-bits set to the value of the given vector and the upper 64-bits initialized to zero (将给定向量转换为新 <see cref="Vector128{T}" /> 向量，其中较低的 64 位设置为给定向量的值，并将高 64 位初始化为零).</summary>
+        /// <typeparam name="T">The type of the input vector element (输入向量元素的类型).</typeparam>
+        /// <param name="vector">The vector to extend (要扩展的向量).</param>
+        /// <returns>A new <see cref="Vector128{T}" /> with the lower 64-bits set to the value of <paramref name="vector" /> and the upper 64-bits initialized to zero (一个新的 <see cref="Vector128{T}" />, 将较低的 64 位设置为 <paramref name="vector" />的值， 而高 64 位初始化为零).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> ExToVector128<T>(this Vector64<T> vector) where T : struct {
+            return vector.ExAsUInt64().ToVector128().ExAs<ulong, T>();
+        }
+
+        /// <summary>Converts the given vector to a new <see cref="Vector128{T}" /> with the lower 64-bits set to the value of the given vector and the upper 64-bits left uninitialized (将给定向量转换为新 <see cref="Vector128{T}" /> 向量，其中低 64 位设置为给定向量的值，而高 64 位则未初始化).</summary>
+        /// <typeparam name="T">The type of the input vector element (输入向量元素的类型).</typeparam>
+        /// <param name="vector">The vector to extend (要扩展的向量).</param>
+        /// <returns>A new <see cref="Vector128{T}" /> with the lower 64-bits set to the value of <paramref name="vector" /> and the upper 64-bits left uninitialized (一个新的 <see cref="Vector128{T}" />, 将较低的 64 位设置为 <paramref name="vector" />的值， 而高 64 位保留未初始化).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector128<T> ExToVector128Unsafe<T>(this Vector64<T> vector) where T : struct {
+            return vector.ExAsUInt64().ToVector128Unsafe().ExAs<ulong, T>();
         }
 
 #endif

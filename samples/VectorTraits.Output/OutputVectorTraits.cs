@@ -15,6 +15,7 @@ using System.Runtime.Intrinsics.X86;
 #endif // NETCOREAPP3_0_OR_GREATER
 using System.Text;
 using System.Threading.Tasks;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits.Output {
     internal class OutputVectorTraits {
@@ -203,6 +204,8 @@ namespace Zyl.VectorTraits.Output {
             RunInfoScalars<uint>(writer, indent);
             RunInfoScalars<long>(writer, indent);
             RunInfoScalars<ulong>(writer, indent);
+            RunInfoScalars<ExInt128>(writer, indent);
+            RunInfoScalars<ExUInt128>(writer, indent);
             RunInfoScalars<IntPtr>(writer, indent);
             RunInfoScalars<UIntPtr>(writer, indent);
 #if NET5_0_OR_GREATER
@@ -222,6 +225,8 @@ namespace Zyl.VectorTraits.Output {
             RunInfoVectors<uint>(writer, indent);
             RunInfoVectors<long>(writer, indent);
             RunInfoVectors<ulong>(writer, indent);
+            RunInfoVectors<ExInt128>(writer, indent);
+            RunInfoVectors<ExUInt128>(writer, indent);
 #if NET6_0_OR_GREATER
             RunInfoVectors<nint>(writer, indent);
             RunInfoVectors<nuint>(writer, indent);
@@ -267,6 +272,8 @@ namespace Zyl.VectorTraits.Output {
                 RunInfoVector128s<uint>(writer, indent);
                 RunInfoVector128s<long>(writer, indent);
                 RunInfoVector128s<ulong>(writer, indent);
+                RunInfoVector128s<ExInt128>(writer, indent);
+                RunInfoVector128s<ExUInt128>(writer, indent);
             } catch (Exception ex) {
                 writer.WriteLine("RunInfoVector128s fail! " + ex.ToString());
             }
@@ -284,6 +291,8 @@ namespace Zyl.VectorTraits.Output {
                 RunInfoVector256s<uint>(writer, indent);
                 RunInfoVector256s<long>(writer, indent);
                 RunInfoVector256s<ulong>(writer, indent);
+                RunInfoVector256s<ExInt128>(writer, indent);
+                RunInfoVector256s<ExUInt128>(writer, indent);
             } catch (Exception ex) {
                 writer.WriteLine("RunInfoVector256s fail! " + ex.ToString());
             }
@@ -302,6 +311,8 @@ namespace Zyl.VectorTraits.Output {
                 RunInfoVector512s<uint>(writer, indent);
                 RunInfoVector512s<long>(writer, indent);
                 RunInfoVector512s<ulong>(writer, indent);
+                RunInfoVector512s<ExInt128>(writer, indent);
+                RunInfoVector512s<ExUInt128>(writer, indent);
             } catch (Exception ex) {
                 writer.WriteLine("RunInfoVector512s fail! " + ex.ToString());
             }
@@ -380,7 +391,7 @@ namespace Zyl.VectorTraits.Output {
         /// <param name="indent">The indent.</param>
         /// <typeparam name="T">The vector element type. T can be any primitive numeric type.</typeparam>
         public static void RunInfoVectors<T>(TextWriter writer, string indent) where T : struct {
-            writer.WriteLine(indent + string.Format("-- Vectors<{0}> (Count={1}) --", typeof(T).Name, Vector<T>.Count));
+            writer.WriteLine(indent + string.Format("-- Vectors<{0}> (Count={1}) --", typeof(T).Name, Vectors<T>.Count));
             if (ShowFull) {
                 WriteLine(writer, indent, "ElementByteSize:\t{0}", Vectors<T>.ElementByteSize);
             }
@@ -471,7 +482,7 @@ namespace Zyl.VectorTraits.Output {
         /// <param name="indent">The indent.</param>
         /// <typeparam name="T">The vector element type. T can be any primitive numeric type.</typeparam>
         public static void RunInfoVector64s<T>(TextWriter writer, string indent) where T : struct {
-            writer.WriteLine(indent + string.Format("-- Vector64s<{0}> (Count={1}) --", typeof(T).Name, Vector64<T>.Count));
+            writer.WriteLine(indent + string.Format("-- Vector64s<{0}> (Count={1}) --", typeof(T).Name, Vector64s<T>.Count));
             if (ShowFull) {
                 WriteLine(writer, indent, "ElementByteSize:\t{0}", Vector64s<T>.ElementByteSize);
             }
@@ -562,7 +573,7 @@ namespace Zyl.VectorTraits.Output {
         /// <param name="indent">The indent.</param>
         /// <typeparam name="T">The vector element type. T can be any primitive numeric type.</typeparam>
         public static void RunInfoVector128s<T>(TextWriter writer, string indent) where T : struct {
-            writer.WriteLine(indent + string.Format("-- Vector128s<{0}> (Count={1}) --", typeof(T).Name, Vector128<T>.Count));
+            writer.WriteLine(indent + string.Format("-- Vector128s<{0}> (Count={1}) --", typeof(T).Name, Vector128s<T>.Count));
             if (ShowFull) {
                 WriteLine(writer, indent, "ElementByteSize:\t{0}", Vector128s<T>.ElementByteSize);
             }
@@ -653,7 +664,7 @@ namespace Zyl.VectorTraits.Output {
         /// <param name="indent">The indent.</param>
         /// <typeparam name="T">The vector element type. T can be any primitive numeric type.</typeparam>
         public static void RunInfoVector256s<T>(TextWriter writer, string indent) where T : struct {
-            writer.WriteLine(indent + string.Format("-- Vector256s<{0}> (Count={1}) --", typeof(T).Name, Vector256<T>.Count));
+            writer.WriteLine(indent + string.Format("-- Vector256s<{0}> (Count={1}) --", typeof(T).Name, Vector256s<T>.Count));
             if (ShowFull) {
                 WriteLine(writer, indent, "ElementByteSize:\t{0}", Vector256s<T>.ElementByteSize);
             }
@@ -745,7 +756,7 @@ namespace Zyl.VectorTraits.Output {
         /// <param name="indent">The indent.</param>
         /// <typeparam name="T">The vector element type. T can be any primitive numeric type.</typeparam>
         public static void RunInfoVector512s<T>(TextWriter writer, string indent) where T : struct {
-            writer.WriteLine(indent + string.Format("-- Vector512s<{0}> (Count={1}) --", typeof(T).Name, Vector512<T>.Count));
+            writer.WriteLine(indent + string.Format("-- Vector512s<{0}> (Count={1}) --", typeof(T).Name, Vector512s<T>.Count));
             if (ShowFull) {
                 WriteLine(writer, indent, "ElementByteSize:\t{0}", Vector512s<T>.ElementByteSize);
             }
