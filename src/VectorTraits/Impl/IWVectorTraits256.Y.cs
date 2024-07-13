@@ -12,6 +12,7 @@ using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics.Arm;
 #endif // NET5_0_OR_GREATER
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl {
@@ -297,6 +298,10 @@ namespace Zyl.VectorTraits.Impl {
         ///        <description>Result</description>
         ///    </listheader>
         ///    <item>
+        ///        <term>1</term>
+        ///        <description><c>f({x[0]}, {y[0]}) = ({x[0]}, {y[0]})</c>. (Fallback)</description>
+        ///    </item>
+        ///    <item>
         ///        <term>2</term>
         ///        <description><c>f({x[0], y[0]}, {x[1], y[1]}) = ({x[0], x[1]}, {y[0], y[1]})</c></description>
         ///    </item>
@@ -390,6 +395,12 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
         Vector256<ulong> YGroup2Unzip(Vector256<ulong> data0, Vector256<ulong> data1, out Vector256<ulong> y);
 
+        /// <inheritdoc cref="YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<ExInt128> YGroup2Unzip(Vector256<ExInt128> data0, Vector256<ExInt128> data1, out Vector256<ExInt128> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<ExUInt128> YGroup2Unzip(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1, out Vector256<ExUInt128> y);
+
 
         /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2UnzipEven</c> (运行 <c>YGroup2UnzipEven</c> 时具有硬件加速的类型).
@@ -436,6 +447,12 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
         Vector256<ulong> YGroup2UnzipEven(Vector256<ulong> data0, Vector256<ulong> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<ExInt128> YGroup2UnzipEven(Vector256<ExInt128> data0, Vector256<ExInt128> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
+        Vector256<ExUInt128> YGroup2UnzipEven(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1);
 
 
         /// <summary>
@@ -484,6 +501,12 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
         Vector256<ulong> YGroup2UnzipOdd(Vector256<ulong> data0, Vector256<ulong> data1);
 
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<ExInt128> YGroup2UnzipOdd(Vector256<ExInt128> data0, Vector256<ExInt128> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<ExUInt128> YGroup2UnzipOdd(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1);
+
 
         /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2Zip</c> (运行 <c>YGroup2Zip</c> 时具有硬件加速的类型).
@@ -496,6 +519,10 @@ namespace Zyl.VectorTraits.Impl {
         ///        <term>Elements</term>
         ///        <description>Result</description>
         ///    </listheader>
+        ///    <item>
+        ///        <term>1</term>
+        ///        <description><c>f({x[0]}, {y[0]}) = ({x[0]}, {y[0]})</c>. (Fallback)</description>
+        ///    </item>
         ///    <item>
         ///        <term>2</term>
         ///        <description><c>f({x[0], x[1]}, {y[0], y[1]}) = ({x[0], y[0]}, {x[1], y[1]})</c></description>
@@ -590,6 +617,12 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
         Vector256<ulong> YGroup2Zip(Vector256<ulong> x, Vector256<ulong> y, out Vector256<ulong> data1);
 
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<ExInt128> YGroup2Zip(Vector256<ExInt128> x, Vector256<ExInt128> y, out Vector256<ExInt128> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        Vector256<ExUInt128> YGroup2Zip(Vector256<ExUInt128> x, Vector256<ExUInt128> y, out Vector256<ExUInt128> data1);
+
 
         /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2ZipHigh</c> (运行 <c>YGroup2ZipHigh</c> 时具有硬件加速的类型).
@@ -637,6 +670,12 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
         Vector256<ulong> YGroup2ZipHigh(Vector256<ulong> x, Vector256<ulong> y);
 
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<ExInt128> YGroup2ZipHigh(Vector256<ExInt128> x, Vector256<ExInt128> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector256{float}, Vector256{float})"/>
+        Vector256<ExUInt128> YGroup2ZipHigh(Vector256<ExUInt128> x, Vector256<ExUInt128> y);
+
 
         /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2ZipLow</c> (运行 <c>YGroup2ZipLow</c> 时具有硬件加速的类型).
@@ -683,6 +722,12 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
         Vector256<ulong> YGroup2ZipLow(Vector256<ulong> x, Vector256<ulong> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<ExInt128> YGroup2ZipLow(Vector256<ExInt128> x, Vector256<ExInt128> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector256{float}, Vector256{float})"/>
+        Vector256<ExUInt128> YGroup2ZipLow(Vector256<ExUInt128> x, Vector256<ExUInt128> y);
 
 
         /// <summary>

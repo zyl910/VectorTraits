@@ -31,6 +31,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void YGroup2UnzipTest<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
@@ -56,7 +60,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = true;
-            bool isFloatType = Scalars<T>.ExponentBits > 0;
             for (int i = 0; i < samples.Length; i++) {
                 Vector256<T> data0 = samples[i];
                 for (int j = 0; j < samples.Length; j++) {
@@ -72,13 +75,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
                         (dst0, dst1) = instance.YGroup2Unzip(data0, data1);
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected0.AsByte(), dst0.AsByte(), VectorTextUtil.Format("Part 0 on {0}: {1}, {2}", funcName, data0, data1));
-                            ClassicAssert.AreEqual(expected1.AsByte(), dst1.AsByte(), VectorTextUtil.Format("Part 1 on {0}: {1}, {2}", funcName, data0, data1));
-                        } else {
-                            ClassicAssert.AreEqual(expected0, dst0, VectorTextUtil.Format("Part 0 on {0}: {1}, {2}", funcName, data0, data1));
-                            ClassicAssert.AreEqual(expected1, dst1, VectorTextUtil.Format("Part 1 on {0}: {1}, {2}", funcName, data0, data1));
-                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, data0, data1));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, data0, data1));
                     }
                     for (int f = 0; f < funcList.Count; f++) {
                         if (funcListUnsupported[f]) continue;
@@ -91,13 +89,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, data0, data1, ex.Message));
                             continue;
                         }
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected0.AsByte(), dst0.AsByte(), VectorTextUtil.Format("Part 0 on {0}: {1}, {2}", funcName, data0, data1));
-                            ClassicAssert.AreEqual(expected1.AsByte(), dst1.AsByte(), VectorTextUtil.Format("Part 1 on {0}: {1}, {2}", funcName, data0, data1));
-                        } else {
-                            ClassicAssert.AreEqual(expected0, dst0, VectorTextUtil.Format("Part 0 on {0}: {1}, {2}", funcName, data0, data1));
-                            ClassicAssert.AreEqual(expected1, dst1, VectorTextUtil.Format("Part 1 on {0}: {1}, {2}", funcName, data0, data1));
-                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, data0, data1));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, data0, data1));
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
@@ -114,6 +107,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void YGroup2UnzipEvenTest<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
@@ -139,7 +136,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = false;
-            bool isFloatType = Scalars<T>.ExponentBits > 0;
             for (int i = 0; i < samples.Length; i++) {
                 Vector256<T> data0 = samples[i];
                 for (int j = 0; j < samples.Length; j++) {
@@ -154,12 +150,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst = instance.YGroup2UnzipEven((dynamic)data0, (dynamic)data1);
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), VectorTextUtil.Format("{0}: {1}, {2}", funcName, data0, data1));
-                        } else {
-                            ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}: {1}, {2}", funcName, data0, data1));
-                        }
+                        dst = instance.YGroup2UnzipEven<T>(data0, data1);
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, data0, data1));
                     }
                     for (int f = 0; f < funcList.Count; f++) {
                         if (funcListUnsupported[f]) continue;
@@ -172,11 +164,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, data0, data1, ex.Message));
                             continue;
                         }
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), VectorTextUtil.Format("{0}: {1}, {2}", funcName, data0, data1));
-                        } else {
-                            ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}: {1}, {2}", funcName, data0, data1));
-                        }
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, data0, data1));
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
@@ -193,6 +181,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void YGroup2UnzipOddTest<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
@@ -218,7 +210,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = false;
-            bool isFloatType = Scalars<T>.ExponentBits > 0;
             for (int i = 0; i < samples.Length; i++) {
                 Vector256<T> data0 = samples[i];
                 for (int j = 0; j < samples.Length; j++) {
@@ -233,12 +224,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst = instance.YGroup2UnzipOdd((dynamic)data0, (dynamic)data1);
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), VectorTextUtil.Format("{0}: {1}, {2}", funcName, data0, data1));
-                        } else {
-                            ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}: {1}, {2}", funcName, data0, data1));
-                        }
+                        dst = instance.YGroup2UnzipOdd<T>(data0, data1);
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, data0, data1));
                     }
                     for (int f = 0; f < funcList.Count; f++) {
                         if (funcListUnsupported[f]) continue;
@@ -251,11 +238,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, data0, data1, ex.Message));
                             continue;
                         }
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), VectorTextUtil.Format("{0}: {1}, {2}", funcName, data0, data1));
-                        } else {
-                            ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}: {1}, {2}", funcName, data0, data1));
-                        }
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, data0, data1));
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
@@ -272,6 +255,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void YGroup2ZipTest<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
@@ -297,7 +284,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = false;
-            bool isFloatType = Scalars<T>.ExponentBits > 0;
             for (int i=0; i<samples.Length; i++) {
                 Vector256<T> x = samples[i];
                 for (int j = 0; j < samples.Length; j++) {
@@ -313,13 +299,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
                         (dst0, dst1) = instance.YGroup2Zip(x, y);
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected0.AsByte(), dst0.AsByte(), VectorTextUtil.Format("Part 0 on {0}: {1}, {2}", funcName, x, y));
-                            ClassicAssert.AreEqual(expected1.AsByte(), dst1.AsByte(), VectorTextUtil.Format("Part 1 on {0}: {1}, {2}", funcName, x, y));
-                        } else {
-                            ClassicAssert.AreEqual(expected0, dst0, VectorTextUtil.Format("Part 0 on {0}: {1}, {2}", funcName, x, y));
-                            ClassicAssert.AreEqual(expected1, dst1, VectorTextUtil.Format("Part 1 on {0}: {1}, {2}", funcName, x, y));
-                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, x, y));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, x, y));
                     }
                     for (int f = 0; f < funcList.Count; f++) {
                         if (funcListUnsupported[f]) continue;
@@ -332,13 +313,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, x, y, ex.Message));
                             continue;
                         }
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected0.AsByte(), dst0.AsByte(), VectorTextUtil.Format("Part 0 on {0}: {1}, {2}", funcName, x, y));
-                            ClassicAssert.AreEqual(expected1.AsByte(), dst1.AsByte(), VectorTextUtil.Format("Part 1 on {0}: {1}, {2}", funcName, x, y));
-                        } else {
-                            ClassicAssert.AreEqual(expected0, dst0, VectorTextUtil.Format("Part 0 on {0}: {1}, {2}", funcName, x, y));
-                            ClassicAssert.AreEqual(expected1, dst1, VectorTextUtil.Format("Part 1 on {0}: {1}, {2}", funcName, x, y));
-                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, x, y));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, x, y));
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
@@ -355,6 +331,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void YGroup2ZipHighTest<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
@@ -380,7 +360,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = false;
-            bool isFloatType = Scalars<T>.ExponentBits > 0;
             for (int i = 0; i < samples.Length; i++) {
                 Vector256<T> x = samples[i];
                 for (int j = 0; j < samples.Length; j++) {
@@ -395,12 +374,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst = instance.YGroup2ZipHigh((dynamic)x, (dynamic)y);
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), VectorTextUtil.Format("{0}: {1}, {2}", funcName, x, y));
-                        } else {
-                            ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}: {1}, {2}", funcName, x, y));
-                        }
+                        dst = instance.YGroup2ZipHigh<T>(x, y);
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, x, y));
                     }
                     for (int f = 0; f < funcList.Count; f++) {
                         if (funcListUnsupported[f]) continue;
@@ -413,11 +388,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, x, y, ex.Message));
                             continue;
                         }
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), VectorTextUtil.Format("{0}: {1}, {2}", funcName, x, y));
-                        } else {
-                            ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}: {1}, {2}", funcName, x, y));
-                        }
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, x, y));
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
@@ -434,6 +405,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseUInt128))]
         public void YGroup2ZipLowTest<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
@@ -459,7 +434,6 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = false;
-            bool isFloatType = Scalars<T>.ExponentBits > 0;
             for (int i = 0; i < samples.Length; i++) {
                 Vector256<T> x = samples[i];
                 for (int j = 0; j < samples.Length; j++) {
@@ -474,12 +448,8 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst = instance.YGroup2ZipLow((dynamic)x, (dynamic)y);
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), VectorTextUtil.Format("{0}: {1}, {2}", funcName, x, y));
-                        } else {
-                            ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}: {1}, {2}", funcName, x, y));
-                        }
+                        dst = instance.YGroup2ZipLow<T>(x, y);
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, x, y));
                     }
                     for (int f = 0; f < funcList.Count; f++) {
                         if (funcListUnsupported[f]) continue;
@@ -492,11 +462,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, x, y, ex.Message));
                             continue;
                         }
-                        if (isFloatType) {
-                            ClassicAssert.AreEqual(expected.AsByte(), dst.AsByte(), VectorTextUtil.Format("{0}: {1}, {2}", funcName, x, y));
-                        } else {
-                            ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}: {1}, {2}", funcName, x, y));
-                        }
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, x, y));
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }

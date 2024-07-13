@@ -7,6 +7,7 @@ using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 #endif
 using Zyl.VectorTraits.Collections;
+using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
@@ -21,7 +22,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -138,6 +139,24 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ExInt128}, Vector256{ExInt128}, out Vector256{ExInt128})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExInt128> YGroup2Unzip(Vector256<ExInt128> data0, Vector256<ExInt128> data1, out Vector256<ExInt128> y) {
+                var d0 = YGroup2Unzip(data0.ExAsExUInt128(), data1.ExAsExUInt128(), out var d1);
+                y = d1.ExAsExInt128();
+                return d0.ExAsExInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ExUInt128}, Vector256{ExUInt128}, out Vector256{ExUInt128})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExUInt128> YGroup2Unzip(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1, out Vector256<ExUInt128> y) {
+                var d0 = Avx.Permute2x128(data0.ExAsUInt64(), data1.ExAsUInt64(), (byte)ShuffleControl2X4Use4.XZ);
+                var d1 = Avx.Permute2x128(data0.ExAsUInt64(), data1.ExAsUInt64(), (byte)ShuffleControl2X4Use4.YW);
+                y = d1.ExAsExUInt128();
+                return d0.ExAsExUInt128();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
@@ -448,7 +467,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipEven_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -555,6 +574,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup2UnzipEven(Vector256<ulong> data0, Vector256<ulong> data1) {
                 return YGroup2UnzipEven_Unpack(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{ExInt128}, Vector256{ExInt128})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExInt128> YGroup2UnzipEven(Vector256<ExInt128> data0, Vector256<ExInt128> data1) {
+                return Avx.Permute2x128(data0.ExAsUInt64(), data1.ExAsUInt64(), (byte)ShuffleControl2X4Use4.XZ).ExAsExInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{ExUInt128}, Vector256{ExUInt128})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExUInt128> YGroup2UnzipEven(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1) {
+                return Avx.Permute2x128(data0.ExAsUInt64(), data1.ExAsUInt64(), (byte)ShuffleControl2X4Use4.XZ).ExAsExUInt128();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven(Vector256{float}, Vector256{float})"/>
@@ -795,7 +827,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipOdd_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -902,6 +934,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup2UnzipOdd(Vector256<ulong> data0, Vector256<ulong> data1) {
                 return YGroup2UnzipOdd_Unpack(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{ExInt128}, Vector256{ExInt128})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExInt128> YGroup2UnzipOdd(Vector256<ExInt128> data0, Vector256<ExInt128> data1) {
+                return Avx.Permute2x128(data0.ExAsUInt64(), data1.ExAsUInt64(), (byte)ShuffleControl2X4Use4.YW).ExAsExInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{ExUInt128}, Vector256{ExUInt128})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExUInt128> YGroup2UnzipOdd(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1) {
+                return Avx.Permute2x128(data0.ExAsUInt64(), data1.ExAsUInt64(), (byte)ShuffleControl2X4Use4.YW).ExAsExUInt128();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipOdd(Vector256{float}, Vector256{float})"/>
@@ -1151,7 +1196,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Zip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -1268,6 +1313,24 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup2Zip_Unpack(x, y, out data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip(Vector256{ExInt128}, Vector256{ExInt128}, out Vector256{ExInt128})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExInt128> YGroup2Zip(Vector256<ExInt128> x, Vector256<ExInt128> y, out Vector256<ExInt128> data1) {
+                var d0 = YGroup2Zip(x.ExAsExUInt128(), y.ExAsExUInt128(), out var d1);
+                data1 = d1.ExAsExInt128();
+                return d0.ExAsExInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip(Vector256{ExUInt128}, Vector256{ExUInt128}, out Vector256{ExUInt128})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExUInt128> YGroup2Zip(Vector256<ExUInt128> x, Vector256<ExUInt128> y, out Vector256<ExUInt128> data1) {
+                var d0 = Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.XZ);
+                var d1 = Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.YW);
+                data1 = d1.ExAsExUInt128();
+                return d0.ExAsExUInt128();
             }
 
 #if NET8_0_OR_GREATER
@@ -1568,7 +1631,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipHigh_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -1685,6 +1748,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup2ZipHigh_Unpack(x, y);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{ExInt128}, Vector256{ExInt128})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExInt128> YGroup2ZipHigh(Vector256<ExInt128> x, Vector256<ExInt128> y) {
+                return Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.YW).ExAsExInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{ExUInt128}, Vector256{ExUInt128})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExUInt128> YGroup2ZipHigh(Vector256<ExUInt128> x, Vector256<ExUInt128> y) {
+                return Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.YW).ExAsExUInt128();
             }
 
 #if NET8_0_OR_GREATER
@@ -1856,7 +1932,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipLow_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -1973,6 +2049,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup2ZipLow_Unpack(x, y);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{ExInt128}, Vector256{ExInt128})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExInt128> YGroup2ZipLow(Vector256<ExInt128> x, Vector256<ExInt128> y) {
+                return Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.XZ).ExAsExInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{ExUInt128}, Vector256{ExUInt128})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExUInt128> YGroup2ZipLow(Vector256<ExUInt128> x, Vector256<ExUInt128> y) {
+                return Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.XZ).ExAsExUInt128();
             }
 
 #if NET8_0_OR_GREATER

@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 #if !NET7_0_OR_GREATER
@@ -10,6 +14,7 @@ using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Impl;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 #if ALLOW_VECTOR_TUPLES
@@ -20,6 +25,27 @@ namespace Zyl.VectorTraits {
     static partial class Vector256s {
 
 #if NETCOREAPP3_0_OR_GREATER
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ExInt128}, Vector256{ExInt128}, out Vector256{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<Int128> YGroup2Unzip(Vector256<Int128> data0, Vector256<Int128> data1, out Vector256<Int128> y) {
+            var d0 = YGroup2Unzip(data0.ExAsExInt128(), data1.ExAsExInt128(), out var d1);
+            y = d1.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ExUInt128}, Vector256{ExUInt128}, out Vector256{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<UInt128> YGroup2Unzip(Vector256<UInt128> data0, Vector256<UInt128> data1, out Vector256<UInt128> y) {
+            var d0 = YGroup2Unzip(data0.ExAsExUInt128(), data1.ExAsExUInt128(), out var d1);
+            y = d1.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
 
         /// <inheritdoc cref="YGroup2Unzip(Vector256{float}, Vector256{float})"/>
         /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
@@ -55,6 +81,20 @@ namespace Zyl.VectorTraits {
             } else if (typeof(ulong) == typeof(T)) {
                 (var rt0, var rt1) = YGroup2Unzip((Vector256<ulong>)(object)data0, (Vector256<ulong>)(object)data1);
                 return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector256<ExInt128>)(object)data0, (Vector256<ExInt128>)(object)data1);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector256<ExUInt128>)(object)data0, (Vector256<ExUInt128>)(object)data1);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector256<Int128>)(object)data0, (Vector256<Int128>)(object)data1);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector256<UInt128>)(object)data0, (Vector256<UInt128>)(object)data1);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1);
+#endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -140,6 +180,86 @@ namespace Zyl.VectorTraits {
             return (rt0, rt1);
         }
 
+        /// <inheritdoc cref="YGroup2Unzip(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ExInt128> X, Vector256<ExInt128> Y) YGroup2Unzip(Vector256<ExInt128> data0, Vector256<ExInt128> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ExUInt128> X, Vector256<ExUInt128> Y) YGroup2Unzip(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<Int128> X, Vector256<Int128> Y) YGroup2Unzip(Vector256<Int128> data0, Vector256<Int128> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<UInt128> X, Vector256<UInt128> Y) YGroup2Unzip(Vector256<UInt128> data0, Vector256<UInt128> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{ExInt128}, Vector256{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<Int128> YGroup2UnzipEven(Vector256<Int128> data0, Vector256<Int128> data1) {
+            return YGroup2UnzipEven(data0.ExAsExInt128(), data1.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector256{ExUInt128}, Vector256{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<UInt128> YGroup2UnzipEven(Vector256<UInt128> data0, Vector256<UInt128> data1) {
+            return YGroup2UnzipEven(data0.ExAsExUInt128(), data1.ExAsExUInt128()).ExAsUInt128();
+        }
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{ExInt128}, Vector256{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<Int128> YGroup2UnzipOdd(Vector256<Int128> data0, Vector256<Int128> data1) {
+            return YGroup2UnzipOdd(data0.ExAsExInt128(), data1.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector256{ExUInt128}, Vector256{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<UInt128> YGroup2UnzipOdd(Vector256<UInt128> data0, Vector256<UInt128> data1) {
+            return YGroup2UnzipOdd(data0.ExAsExUInt128(), data1.ExAsExUInt128()).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{ExInt128}, Vector256{ExInt128}, out Vector256{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<Int128> YGroup2Zip(Vector256<Int128> x, Vector256<Int128> y, out Vector256<Int128> data1) {
+            var d0 = YGroup2Zip(x.ExAsExInt128(), y.ExAsExInt128(), out var d1);
+            data1 = d1.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{ExUInt128}, Vector256{ExUInt128}, out Vector256{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<UInt128> YGroup2Zip(Vector256<UInt128> x, Vector256<UInt128> y, out Vector256<UInt128> data1) {
+            var d0 = YGroup2Zip(x.ExAsExUInt128(), y.ExAsExUInt128(), out var d1);
+            data1 = d1.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
 
         /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
         /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
@@ -175,6 +295,20 @@ namespace Zyl.VectorTraits {
             } else if (typeof(ulong) == typeof(T)) {
                 (var data0, var data1) = YGroup2Zip((Vector256<ulong>)(object)x, (Vector256<ulong>)(object)y);
                 return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<ExInt128>)(object)x, (Vector256<ExInt128>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<ExUInt128>)(object)x, (Vector256<ExUInt128>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<Int128>)(object)x, (Vector256<Int128>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector256<UInt128>)(object)x, (Vector256<UInt128>)(object)y);
+                return ((Vector256<T>)(object)data0, (Vector256<T>)(object)data1);
+#endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -260,6 +394,66 @@ namespace Zyl.VectorTraits {
             return (data0, data1);
         }
 
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ExInt128> Data0, Vector256<ExInt128> Data1) YGroup2Zip(Vector256<ExInt128> x, Vector256<ExInt128> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ExUInt128> Data0, Vector256<ExUInt128> Data1) YGroup2Zip(Vector256<ExUInt128> x, Vector256<ExUInt128> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<Int128> Data0, Vector256<Int128> Data1) YGroup2Zip(Vector256<Int128> x, Vector256<Int128> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<UInt128> Data0, Vector256<UInt128> Data1) YGroup2Zip(Vector256<UInt128> x, Vector256<UInt128> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{ExInt128}, Vector256{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<Int128> YGroup2ZipHigh(Vector256<Int128> x, Vector256<Int128> y) {
+            return YGroup2ZipHigh(x.ExAsExInt128(), y.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipHigh(Vector256{ExUInt128}, Vector256{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<UInt128> YGroup2ZipHigh(Vector256<UInt128> x, Vector256<UInt128> y) {
+            return YGroup2ZipHigh(x.ExAsExUInt128(), y.ExAsExUInt128()).ExAsUInt128();
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{ExInt128}, Vector256{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<Int128> YGroup2ZipLow(Vector256<Int128> x, Vector256<Int128> y) {
+            return YGroup2ZipLow(x.ExAsExInt128(), y.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2ZipLow(Vector256{ExUInt128}, Vector256{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<UInt128> YGroup2ZipLow(Vector256<UInt128> x, Vector256<UInt128> y) {
+            return YGroup2ZipLow(x.ExAsExUInt128(), y.ExAsExUInt128()).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
 
         /// <summary>
         /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
@@ -318,6 +512,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<float> Result0, Vector256<float> Result1) YShuffleG4X2(Vector256<float> source0, Vector256<float> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -332,6 +527,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<double> Result0, Vector256<double> Result1) YShuffleG4X2(Vector256<double> source0, Vector256<double> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -347,6 +543,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<sbyte> Result0, Vector256<sbyte> Result1) YShuffleG4X2(Vector256<sbyte> source0, Vector256<sbyte> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -361,6 +558,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<byte> Result0, Vector256<byte> Result1) YShuffleG4X2(Vector256<byte> source0, Vector256<byte> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -375,6 +573,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<short> Result0, Vector256<short> Result1) YShuffleG4X2(Vector256<short> source0, Vector256<short> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -390,6 +589,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<ushort> Result0, Vector256<ushort> Result1) YShuffleG4X2(Vector256<ushort> source0, Vector256<ushort> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -404,6 +604,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<int> Result0, Vector256<int> Result1) YShuffleG4X2(Vector256<int> source0, Vector256<int> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -419,6 +620,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<uint> Result0, Vector256<uint> Result1) YShuffleG4X2(Vector256<uint> source0, Vector256<uint> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -433,6 +635,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<long> Result0, Vector256<long> Result1) YShuffleG4X2(Vector256<long> source0, Vector256<long> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -448,6 +651,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<ulong> Result0, Vector256<ulong> Result1) YShuffleG4X2(Vector256<ulong> source0, Vector256<ulong> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -511,6 +715,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<float> Result0, Vector256<float> Result1) YShuffleG4X2_Const(Vector256<float> source0, Vector256<float> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -525,6 +730,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<double> Result0, Vector256<double> Result1) YShuffleG4X2_Const(Vector256<double> source0, Vector256<double> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -540,6 +746,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<sbyte> Result0, Vector256<sbyte> Result1) YShuffleG4X2_Const(Vector256<sbyte> source0, Vector256<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -554,6 +761,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<byte> Result0, Vector256<byte> Result1) YShuffleG4X2_Const(Vector256<byte> source0, Vector256<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -568,6 +776,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<short> Result0, Vector256<short> Result1) YShuffleG4X2_Const(Vector256<short> source0, Vector256<short> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -583,6 +792,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<ushort> Result0, Vector256<ushort> Result1) YShuffleG4X2_Const(Vector256<ushort> source0, Vector256<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -597,6 +807,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<int> Result0, Vector256<int> Result1) YShuffleG4X2_Const(Vector256<int> source0, Vector256<int> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -612,6 +823,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<uint> Result0, Vector256<uint> Result1) YShuffleG4X2_Const(Vector256<uint> source0, Vector256<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -626,6 +838,7 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<long> Result0, Vector256<long> Result1) YShuffleG4X2_Const(Vector256<long> source0, Vector256<long> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -641,6 +854,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<ulong> Result0, Vector256<ulong> Result1) YShuffleG4X2_Const(Vector256<ulong> source0, Vector256<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
