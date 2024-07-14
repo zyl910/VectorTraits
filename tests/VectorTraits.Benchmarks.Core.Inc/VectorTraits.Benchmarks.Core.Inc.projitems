@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Double.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Double_Single.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int128.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int16_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_Int16_SByte.cs" />

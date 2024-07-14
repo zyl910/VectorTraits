@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits.Benchmarks {
     /// <summary>
@@ -25,6 +26,8 @@ namespace Zyl.VectorTraits.Benchmarks {
         protected static uint[] srcArrayUInt32 = { };
         protected static long[] srcArrayInt64 = { };
         protected static ulong[] srcArrayUInt64 = { };
+        protected static ExInt128[] srcArrayInt128 = { };
+        protected static ExUInt128[] srcArrayUInt128 = { };
         protected static float dstSingle, baselineSingle;
         protected static double dstDouble, baselineDouble;
         protected static sbyte dstSByte, baselineSByte;
@@ -35,6 +38,8 @@ namespace Zyl.VectorTraits.Benchmarks {
         protected static uint dstUInt32, baselineUInt32;
         protected static long dstInt64, baselineInt64;
         protected static ulong dstUInt64, baselineUInt64;
+        protected static ExInt128 dstInt128, baselineInt128;
+        protected static ExUInt128 dstUInt128, baselineUInt128;
 #pragma warning restore CA2211 // Non-constant fields should not be visible
 
         /// <inheritdoc cref="ILoopCountGetter.LoopCount" />
@@ -69,6 +74,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                 srcArrayUInt32 = new uint[N];
                 srcArrayInt64 = new long[N];
                 srcArrayUInt64 = new ulong[N];
+                srcArrayInt128 = new ExInt128[N];
+                srcArrayUInt128 = new ExUInt128[N];
                 dstArrayInt32 = new int[N];
                 baselinetArrayInt32 = new int[N];
                 random.NextBytes(srcArrayByte);
@@ -78,6 +85,8 @@ namespace Zyl.VectorTraits.Benchmarks {
                     int a = random.Next(int.MinValue, int.MaxValue);
                     int b = random.Next(int.MinValue, int.MaxValue);
                     long n64 = (((long)a) << 32) | (long)b;
+                    long n64hi = i >> 8;
+                    ExInt128 n128 = new ExInt128((ulong)n64hi, (ulong)n64);
                     double f = random.NextDouble();
                     //f = BitConverter.Int64BitsToDouble((BitConverter.DoubleToInt64Bits(f)&~lowbit_mask) | (a&lowbit_mask));
                     double fN = f - 0.5;
@@ -98,6 +107,10 @@ namespace Zyl.VectorTraits.Benchmarks {
                     srcArrayUInt32[i] = (uint)a;
                     srcArrayInt64[i] = n64;
                     srcArrayUInt64[i] = (ulong)n64;
+                    srcArrayInt64[i] = n64;
+                    srcArrayUInt64[i] = (ulong)n64;
+                    srcArrayInt128[i] = n128;
+                    srcArrayUInt128[i] = (ExUInt128)n128;
                 }
             }
         }
@@ -265,6 +278,24 @@ namespace Zyl.VectorTraits.Benchmarks {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void CheckResultUInt64(string name) {
             CheckResult_Report(name, dstUInt64 != baselineUInt64, dstUInt64, baselineUInt64);
+        }
+
+        /// <summary>
+        /// Check result - Int128.
+        /// </summary>
+        /// <param name="name">Method name.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected virtual void CheckResultInt128(string name) {
+            CheckResult_Report(name, dstInt128 != baselineInt128, dstInt128, baselineInt128);
+        }
+
+        /// <summary>
+        /// Check result - UInt128.
+        /// </summary>
+        /// <param name="name">Method name.</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected virtual void CheckResultUInt128(string name) {
+            CheckResult_Report(name, dstUInt128 != baselineUInt128, dstUInt128, baselineUInt128);
         }
 
         /// <summary>

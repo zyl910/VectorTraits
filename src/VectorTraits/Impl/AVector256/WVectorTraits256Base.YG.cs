@@ -291,7 +291,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 ref ExUInt128 py = ref Unsafe.As<Vector256<ExUInt128>, ExUInt128>(ref y1);
                 Span<ExUInt128> p = MemoryMarshal.Cast<Vector256<ExUInt128>, ExUInt128>(src);
                 int idx = 0;
-                for (int i = 0; i < Vector256<ExUInt128>.Count; ++i) {
+                for (int i = 0; i < Vector256s<ExUInt128>.Count; ++i) {
                     Unsafe.Add(ref px, i) = p[idx];
                     Unsafe.Add(ref py, i) = p[idx + 1];
                     idx += 2;
@@ -1297,7 +1297,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 ref ExUInt128 py = ref Unsafe.As<Vector256<ExUInt128>, ExUInt128>(ref y);
                 Span<ExUInt128> q = MemoryMarshal.Cast<Vector256<ExUInt128>, ExUInt128>(rt);
                 int idx = 0;
-                for (int i = 0; i < Vector256<ExUInt128>.Count; ++i) {
+                for (int i = 0; i < Vector256s<ExUInt128>.Count; ++i) {
                     q[idx] = Unsafe.Add(ref px, i);
                     q[idx + 1] = Unsafe.Add(ref py, i);
                     idx += 2;
