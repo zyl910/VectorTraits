@@ -81,6 +81,7 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine("[ExTypes]");
             var src = Vectors<long>.Serial;
             var temp = src.ExAsExInt128();
+            writer.WriteLine(ExVectorUtil.Format(src));
             VectorTextUtil.WriteLine(writer, "Source:\t{0}", src);
             VectorTextUtil.WriteLine(writer, "ExAsExInt128:\t{0}", temp);
             // InterpolatedString.

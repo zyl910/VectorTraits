@@ -14,6 +14,16 @@ namespace Zyl.VectorTraits {
     /// </remarks>
     public static class ExVectorUtil {
 
+        /// <summary>
+        /// Returns a string that represents the current object. It is used to replace the ToString method for vector types and no longer throws exceptions (返回表示当前对象的字符串. 用于替代向量类型的 ToString 方法. 它用于替换向量类型的 ToString 方法，不再抛出异常).
+        /// </summary>
+        /// <typeparam name="T">Type of parameter (参数的类型).</typeparam>
+        /// <param name="arg">The parameter (参数).</param>
+        /// <returns>A string that represents the current object (表示当前对象的字符串).</returns>
+        public static string Format<T>(T arg) {
+            return string.Format(ExVectorFormatter.Instance, "{0}", arg);
+        }
+
         /// <inheritdoc cref="string.Format(string, object?)"/>
         public static string Format(
 #if NET7_0_OR_GREATER
