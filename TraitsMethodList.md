@@ -355,6 +355,13 @@ List of generic methods (泛型方法的列表):
 - `AsSigned<T>(TVector<T>)`④: Reinterprets a unsigned integer vector as a new signed integer vector (将无符号整数向量, 重新解释为有符号整数向量).
 - `AsUnsigned<T>(TVector<T>)`④: Reinterprets a signed integer vector as a new unsigned integer vector (将有符号整数向量, 重新解释为无符号整数向量).
 
+### Utility methods (工具方法)
+
+- `ExVectorUtil.Format`: Safely Format or ToString function. It can safely format vector types as strings, or simply convert vector types to strings (安全地的 Format 或 ToString 函数. 它能安全的将向量类型 进行字符串格式化，或简单的将向量类型转为字符串).
+- `ExVectorUtil.ToString`: Safely convert interpolated string to String (安全地将内插字符串转为 String).
+- `VectorTextUtil.Format`: Format a string, append a hexadecimal string intelligently to the end of the line (格式化字符串，智能在行尾追加十六进制字符串).
+- `VectorTextUtil.WriteLine`: Writes formatted strings and hexadecimal values, new lines in the text stream (在文本流写入 已格式化的字符串和十六进制值、新行).
+
 ## Endnote (尾注)
 
 Endnote (尾注):

@@ -5,7 +5,6 @@ using System.IO;
 using System.Numerics;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
-using System.Runtime.Intrinsics.X86;
 #endif
 using System.Text;
 using Zyl.VectorTraits;
@@ -79,25 +78,45 @@ namespace Zyl.VectorTraits.Sample {
         /// </summary>
         private static void ShowExTypes() {
             writer.WriteLine("[ExTypes]");
-            var src = Vectors<long>.Serial;
-            var temp = src.ExAsExInt128();
-            writer.WriteLine(ExVectorUtil.Format(src));
-            VectorTextUtil.WriteLine(writer, "Source:\t{0}", src);
-            VectorTextUtil.WriteLine(writer, "ExAsExInt128:\t{0}", temp);
-            // InterpolatedString.
-            // Bug! - writer.WriteLine($"InterpolatedString:\t{temp}."); // System.NotSupportedException: Specified type is not supported
+            // -- Create (创建) --
+            //Vector<ExInt128> temp = new Vector<ExInt128>((ExInt128)0x102); // System.NotSupportedException: Specified type is not supported
+            Vector<ExInt128> temp = Vectors.Create((ExInt128)0x102);
+
+            // -- ToString (转字符串) --
+            //writer.WriteLine("ToString:\t" + temp.ToString()); // System.NotSupportedException: Specified type is not supported
+            //writer.WriteLine(string.Format("Format:\t{0}", temp)); // System.NotSupportedException: Specified type is not supported
+            //writer.WriteLine($"InterpolatedString:\t{temp}."); // System.NotSupportedException: Specified type is not supported
+            writer.WriteLine("ToString:\t" + ExVectorUtil.Format(temp));
+            writer.WriteLine(ExVectorUtil.Format("Format:\t{0}", temp));
 #if NETCOREAPP1_0_OR_GREATER || NET461_OR_GREATER
             writer.WriteLine(ExVectorUtil.ToString($"InterpolatedString:\t{temp}."));
 #endif
-#if NETCOREAPP1_0_OR_GREATER || NET46_OR_GREATER || NETSTANDARD1_3_OR_GREATER
-            writer.WriteLine(ToString($"this-InterpolatedString:\t{temp}."));
-#endif
+            VectorTextUtil.WriteLine(writer, "ValueWithHex:\t{0}", temp);
+
+            // -- Property (属性) --
+            //VectorTextUtil.WriteLine(writer, "Count:\t{0}", Vector<ExInt128>.Count); // System.NotSupportedException: Specified type is not supported
+            //VectorTextUtil.WriteLine(writer, "Zero:\t{0}", Vector<ExInt128>.Zero); // System.NotSupportedException: Specified type is not supported
+            VectorTextUtil.WriteLine(writer, "Count:\t{0}", Vectors<ExInt128>.Count);
+            VectorTextUtil.WriteLine(writer, "Zero:\t{0}", Vectors<ExInt128>.Zero);
+
+            // -- Equals (相等) --
+            //VectorTextUtil.WriteLine(writer, "Equals zero:\t{0}", Vectors<ExInt128>.Zero.Equals(temp)); // System.NotSupportedException: Specified type is not supported
+            VectorTextUtil.WriteLine(writer, "Equals zero:\t{0}", Vectors<ExInt128>.Zero.BitEquals(temp));
+
+            // -- Reinterprets (重新解释) --
+            VectorTextUtil.WriteLine(writer, "ExAsInt64:\t{0}", temp.ExAsInt64());
+
+            // -- Done --
             writer.WriteLine();
             // Output of 256-bit vectors on X86 architecture:
-            // Source: <0, 1, 2, 3>    # (0000000000000000 0000000000000001 0000000000000002 0000000000000003)
-            // ExAsExInt128:   <18446744073709551616, 55340232221128654850>    # (00000000000000010000000000000000 00000000000000030000000000000002)
-            // InterpolatedString:     <18446744073709551616, 55340232221128654850>.
-            // this-InterpolatedString:        <18446744073709551616, 55340232221128654850>.
+            // ToString:       <258, 258>
+            // Format: <258, 258>
+            // InterpolatedString:     <258, 258>.
+            // ValueWithHex:   <258, 258>      # (00000000000000000000000000000102 00000000000000000000000000000102)
+            // Count:  2       # (2)
+            // Zero:   <0, 0>  # (00000000000000000000000000000000 00000000000000000000000000000000)
+            // Equals zero:    False
+            // ExAsInt64:      <258, 0, 258, 0>        # (0000000000000102 0000000000000000 0000000000000102 0000000000000000)
         }
 
         /// <summary>
@@ -148,23 +167,6 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine();
         }
 
-#if NETCOREAPP1_0_OR_GREATER || NET46_OR_GREATER || NETSTANDARD1_3_OR_GREATER
-        // FormattableString: .NET Core 1.0+, .NET Framework 4.6+, .NET Standard 1.3+
-        public static string ToString(FormattableString message) {
-            return message.ToString(ExVectorFormatter.Instance);
-        }
-#endif
-
-#if NETCOREAPP3_0_OR_GREATER
-        public static Vector256<ExInt128> YGroup2Zip(Vector256<ExInt128> x, Vector256<ExInt128> y, out Vector256<ExInt128> data1) {
-            VectorMessageFormats.ThrowForUnsupported(Avx.IsSupported, "Avx");
-            // Unhandled exception. System.NotSupportedException: Specified type is not supported //var d0 = Avx.Permute2x128(x.AsUInt64(), y.AsUInt64(), (byte)ShuffleControl2X4Use4.XZ);
-            var d0 = Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.XZ);
-            var d1 = Avx.Permute2x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControl2X4Use4.YW);
-            data1 = d1.ExAsExInt128();
-            return d0.ExAsExInt128();
-        }
-#endif
     }
 
 }
