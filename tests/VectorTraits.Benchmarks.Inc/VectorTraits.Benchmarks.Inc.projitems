@@ -77,6 +77,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YC\YClampBenchmark_Single.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup2UnzipBenchmark_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup2UnzipBenchmark_Int128.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup2UnzipBenchmark_Int128_B.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup2UnzipBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup2UnzipBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup2UnzipBenchmark_Int64.cs" />
