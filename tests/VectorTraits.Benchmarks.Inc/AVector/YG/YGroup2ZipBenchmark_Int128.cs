@@ -150,10 +150,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 Volatile.Write(ref dstTMy, 0);
             }
             dstOn256 = StaticSum256Base_Move2(srcArray, srcArray.Length);
-            if (CheckMode) {
-                baselineOn256 = dstOn256;
-                BenchmarkUtil.WriteItem("# Sum256Base_Move2", string.Format("{0}", baselineOn256));
-            }
+            CheckResult256("Sum256Base_Move2");
         }
 
         /// <summary>

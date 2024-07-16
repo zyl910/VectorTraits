@@ -278,6 +278,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             return Statics.YGroup2Unzip(data0, data1, out y);
         }
 
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip_Int128"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<T> YGroup2Unzip_Int128<T>(Vector256<T> data0, Vector256<T> data1, out Vector256<T> y) where T : struct {
+            return Statics.YGroup2Unzip_Int128(data0, data1, out y);
+        }
+
 
         /// <inheritdoc cref="IWVectorTraits256.YGroup2UnzipEven_AcceleratedTypes"/>
         public override TypeCodeFlags YGroup2UnzipEven_AcceleratedTypes {
@@ -531,6 +537,12 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override Vector256<ExUInt128> YGroup2Zip(Vector256<ExUInt128> x, Vector256<ExUInt128> y, out Vector256<ExUInt128> data1) {
             return Statics.YGroup2Zip(x, y, out data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip_Int128"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<T> YGroup2Zip_Int128<T>(Vector256<T> x, Vector256<T> y, out Vector256<T> data1) where T : struct {
+            return Statics.YGroup2Zip_Int128(x, y, out data1);
         }
 
 

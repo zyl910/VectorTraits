@@ -144,6 +144,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 return YGroup2Unzip_Move(data0, data1, out y);
             }
 
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip_Int128"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> YGroup2Unzip_Int128<T>(Vector256<T> data0, Vector256<T> data1, out Vector256<T> y) where T : struct {
+                var d0 = YGroup2Unzip_Move(data0.ExAsExUInt128(), data1.ExAsExUInt128(), out var d1);
+                y = d1.ExAs<ExUInt128, T>();
+                return d0.ExAs<ExUInt128, T>();
+            }
+
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YGroup2Unzip_Basic(Vector256<float> data0, Vector256<float> data1, out Vector256<float> y) {
@@ -1178,6 +1186,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ExUInt128> YGroup2Zip(Vector256<ExUInt128> x, Vector256<ExUInt128> y, out Vector256<ExUInt128> data1) {
                 return YGroup2Zip_Move(x, y, out data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip_Int128"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> YGroup2Zip_Int128<T>(Vector256<T> x, Vector256<T> y, out Vector256<T> data1) where T : struct {
+                var d0 = YGroup2Zip_Move(x.ExAsExUInt128(), y.ExAsExUInt128(), out var d1);
+                data1 = d1.ExAs<ExUInt128, T>();
+                return d0.ExAs<ExUInt128, T>();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>

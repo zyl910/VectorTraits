@@ -401,6 +401,17 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
         Vector256<ExUInt128> YGroup2Unzip(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1, out Vector256<ExUInt128> y);
 
+        /// <summary>
+        /// De-Interleave 2-element groups into 2 vectors. It converts the 2-element groups AoS to SoA (将2-元素组解交织为2个向量. 它能将2元素组的 数组结构体 转为 结构体数组). Element size fixed to 128 bits (元素尺寸固定为128位).
+        /// Mnemonic: <c>x[i] =: element_ref(2*i, data0, data1)</c>, <c>y[i] =: element_ref(2*i+1, data0, data1)</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <param name="data0">A vector made of 2-element groups - Part 0 (由2元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 2-element groups - Part 1 (由2元素组所组成的向量 - 第1部分).</param>
+        /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
+        /// <seealso cref="YGroup2Unzip_AcceleratedTypes"/>
+        Vector256<T> YGroup2Unzip_Int128<T>(Vector256<T> data0, Vector256<T> data1, out Vector256<T> y) where T : struct;
 
         /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2UnzipEven</c> (运行 <c>YGroup2UnzipEven</c> 时具有硬件加速的类型).
@@ -623,6 +634,17 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
         Vector256<ExUInt128> YGroup2Zip(Vector256<ExUInt128> x, Vector256<ExUInt128> y, out Vector256<ExUInt128> data1);
 
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups. It converts the 2-element groups SoA to AoS (将2个向量交织为2-元素组. 它能将2元素组的 结构体数组 转为 数组结构体). Element size fixed to 128 bits (元素尺寸固定为128位).
+        /// Mnemonic: <c>element_ref(i, data0, data1) := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := i/2</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        /// <seealso cref="YGroup2Zip_AcceleratedTypes"/>
+        Vector256<T> YGroup2Zip_Int128<T>(Vector256<T> x, Vector256<T> y, out Vector256<T> data1) where T : struct;
 
         /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2ZipHigh</c> (运行 <c>YGroup2ZipHigh</c> 时具有硬件加速的类型).
