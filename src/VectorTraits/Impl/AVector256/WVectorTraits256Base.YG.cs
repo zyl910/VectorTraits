@@ -314,6 +314,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ExUInt128> YGroup2Unzip_Move(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1, out Vector256<ExUInt128> y) {
                 var a0 = data0.ExAsUInt64();
                 var a1 = data1.ExAsUInt64();
+                var c0 = a0.WithUpper(a1.GetLower());
+                var c1 = a1.WithLower(a0.GetUpper());
+                y = c1.ExAsExUInt128();
+                return c0.ExAsExUInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ExInt128}, Vector256{ExInt128}, out Vector256{ExInt128})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExInt128> YGroup2Unzip_Move2(Vector256<ExInt128> data0, Vector256<ExInt128> data1, out Vector256<ExInt128> y) {
+                var d0 = YGroup2Unzip_Move2(data0.ExAsExUInt128(), data1.ExAsExUInt128(), out var d1);
+                y = d1.ExAsExInt128();
+                return d0.ExAsExInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ExUInt128}, Vector256{ExUInt128}, out Vector256{ExUInt128})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExUInt128> YGroup2Unzip_Move2(Vector256<ExUInt128> data0, Vector256<ExUInt128> data1, out Vector256<ExUInt128> y) {
+                var a0 = data0.ExAsUInt64();
+                var a1 = data1.ExAsUInt64();
                 var b0 = a0.GetLower();
                 var b1 = a0.GetUpper();
                 var b2 = a1.GetLower();
@@ -1318,6 +1338,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ExUInt128> YGroup2Zip_Move(Vector256<ExUInt128> x, Vector256<ExUInt128> y, out Vector256<ExUInt128> data1) {
+                var a0 = x.ExAsUInt64();
+                var a1 = y.ExAsUInt64();
+                var c0 = a0.WithUpper(a1.GetLower());
+                var c1 = a1.WithLower(a0.GetUpper());
+                data1 = c1.ExAsExUInt128();
+                return c0.ExAsExUInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip(Vector256{ExInt128}, Vector256{ExInt128}, out Vector256{ExInt128})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExInt128> YGroup2Zip_Move2(Vector256<ExInt128> x, Vector256<ExInt128> y, out Vector256<ExInt128> data1) {
+                var d0 = YGroup2Zip_Move2(x.ExAsExUInt128(), y.ExAsExUInt128(), out var d1);
+                data1 = d1.ExAsExInt128();
+                return d0.ExAsExInt128();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip(Vector256{ExUInt128}, Vector256{ExUInt128}, out Vector256{ExUInt128})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ExUInt128> YGroup2Zip_Move2(Vector256<ExUInt128> x, Vector256<ExUInt128> y, out Vector256<ExUInt128> data1) {
                 var a0 = x.ExAsUInt64();
                 var a1 = y.ExAsUInt64();
                 var b0 = a0.GetLower();
