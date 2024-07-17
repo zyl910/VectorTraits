@@ -97,6 +97,51 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             }
         }
 
+        [TestCase((byte)4)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        public void YGroup2Unzip_Int128Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup2Unzip_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            writer.WriteLine();
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s<T>.Serial,
+                Vector256s<T>.SerialDesc,
+                Vector256s<T>.SerialNegative,
+                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector256<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector256<T> data1 = samples[j];
+                    Vector256<T> dst0, dst1;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector256<T> expected0 = Vector256s.YGroup2Unzip_Int128(data0, data1, out Vector256<T> expected1);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}, {3}", data0, data1, expected0, expected1));
+                    }
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst0 = instance.YGroup2Unzip_Int128(data0, data1, out dst1);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, data0, data1));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, data0, data1));
+                    }
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
         [TestCase((float)1)]
         [TestCase((double)2)]
         [TestCase((sbyte)3)]
@@ -316,6 +361,51 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, x, y));
                         ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, x, y));
                     } // funcList
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((byte)4)]
+        [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+        public void YGroup2Zip_Int128Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits256> instances = Vector256s.TraitsInstances;
+            foreach (IWVectorTraits256 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup2Zip_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            writer.WriteLine();
+            // run.
+            Vector256<T>[] samples = {
+                Vector256s<T>.Serial,
+                Vector256s<T>.SerialDesc,
+                Vector256s<T>.SerialNegative,
+                Vector256s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector256<T> x = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector256<T> y = samples[j];
+                    Vector256<T> dst0, dst1;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector256<T> expected0 = Vector256s.YGroup2Zip_Int128(x, y, out Vector256<T> expected1);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}, {3}", x, y, expected0, expected1));
+                    }
+                    foreach (IWVectorTraits256 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst0 = instance.YGroup2Zip_Int128(x, y, out dst1);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, x, y));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, x, y));
+                    }
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
             }

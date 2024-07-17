@@ -291,6 +291,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <remarks>
         /// <para><c>YGroup2UnzipEven + YGroup2UnzipOdd = YGroup2Unzip</c>.</para>
+        /// <para>Inverse function (逆函数): <see cref="YGroup2Zip_AcceleratedTypes">YGroup2Zip</see>.</para>
         /// <para>Sample (示例).</para>
         /// <list type="table">
         ///    <listheader>
@@ -524,6 +525,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <remarks>
         /// <para><c>YGroup2ZipLow + YGroup2ZipHigh = YGroup2Zip </c>.</para>
+        /// <para>Inverse function (逆函数): <see cref="YGroup2Unzip_AcceleratedTypes">YGroup2Unzip</see>.</para>
         /// <para>Sample (示例).</para>
         /// <list type="table">
         ///    <listheader>
