@@ -632,6 +632,205 @@ namespace Zyl.VectorTraits.Impl {
 #endif // BCL_TYPE_INT128
 
 
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{ExInt128}, Vector256{ExInt128}, Vector256{ExInt128}, Vector256{ExInt128}, out Vector256{ExInt128}, out Vector256{ExInt128}, out Vector256{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<Int128> YGroup4Unzip(this IWVectorTraits256 athis, Vector256<Int128> data0, Vector256<Int128> data1, Vector256<Int128> data2, Vector256<Int128> data3, out Vector256<Int128> y, out Vector256<Int128> z, out Vector256<Int128> w) {
+            var d0 = athis.YGroup4Unzip(data0.ExAsExInt128(), data1.ExAsExInt128(), data2.ExAsExInt128(), data3.ExAsExInt128(), out var d1, out var d2, out var d3);
+            y = d1.ExAsInt128();
+            z = d2.ExAsInt128();
+            w = d3.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{ExUInt128}, Vector256{ExUInt128}, Vector256{ExUInt128}, Vector256{ExUInt128}, out Vector256{ExUInt128}, out Vector256{ExUInt128}, out Vector256{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<UInt128> YGroup4Unzip(this IWVectorTraits256 athis, Vector256<UInt128> data0, Vector256<UInt128> data1, Vector256<UInt128> data2, Vector256<UInt128> data3, out Vector256<UInt128> y, out Vector256<UInt128> z, out Vector256<UInt128> w) {
+            var d0 = athis.YGroup4Unzip(data0.ExAsExUInt128(), data1.ExAsExUInt128(), data2.ExAsExUInt128(), data3.ExAsExUInt128(), out var d1, out var d2, out var d3);
+            y = d1.ExAsUInt128();
+            z = d2.ExAsUInt128();
+            w = d3.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip{T}(Vector256{T}, Vector256{T}, Vector256{T}, Vector256{T})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<T> X, Vector256<T> Y, Vector256<T> Z, Vector256<T> W) YGroup4Unzip<T>(this IWVectorTraits256 athis, Vector256<T> data0, Vector256<T> data1, Vector256<T> data2, Vector256<T> data3) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<float>)(object)data0, (Vector256<float>)(object)data1, (Vector256<float>)(object)data2, (Vector256<float>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<double>)(object)data0, (Vector256<double>)(object)data1, (Vector256<double>)(object)data2, (Vector256<double>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<sbyte>)(object)data0, (Vector256<sbyte>)(object)data1, (Vector256<sbyte>)(object)data2, (Vector256<sbyte>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<byte>)(object)data0, (Vector256<byte>)(object)data1, (Vector256<byte>)(object)data2, (Vector256<byte>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<short>)(object)data0, (Vector256<short>)(object)data1, (Vector256<short>)(object)data2, (Vector256<short>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<ushort>)(object)data0, (Vector256<ushort>)(object)data1, (Vector256<ushort>)(object)data2, (Vector256<ushort>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<int>)(object)data0, (Vector256<int>)(object)data1, (Vector256<int>)(object)data2, (Vector256<int>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<uint>)(object)data0, (Vector256<uint>)(object)data1, (Vector256<uint>)(object)data2, (Vector256<uint>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<long>)(object)data0, (Vector256<long>)(object)data1, (Vector256<long>)(object)data2, (Vector256<long>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<ulong>)(object)data0, (Vector256<ulong>)(object)data1, (Vector256<ulong>)(object)data2, (Vector256<ulong>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<ExInt128>)(object)data0, (Vector256<ExInt128>)(object)data1, (Vector256<ExInt128>)(object)data2, (Vector256<ExInt128>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<ExUInt128>)(object)data0, (Vector256<ExUInt128>)(object)data1, (Vector256<ExUInt128>)(object)data2, (Vector256<ExUInt128>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<Int128>)(object)data0, (Vector256<Int128>)(object)data1, (Vector256<Int128>)(object)data2, (Vector256<Int128>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector256<UInt128>)(object)data0, (Vector256<UInt128>)(object)data1, (Vector256<UInt128>)(object)data2, (Vector256<UInt128>)(object)data3);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<float> X, Vector256<float> Y, Vector256<float> Z, Vector256<float> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, Vector256<float> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<double> X, Vector256<double> Y, Vector256<double> Z, Vector256<double> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, Vector256<double> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> X, Vector256<sbyte> Y, Vector256<sbyte> Z, Vector256<sbyte> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, Vector256<sbyte> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> X, Vector256<byte> Y, Vector256<byte> Z, Vector256<byte> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, Vector256<byte> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> X, Vector256<short> Y, Vector256<short> Z, Vector256<short> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, Vector256<short> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> X, Vector256<ushort> Y, Vector256<ushort> Z, Vector256<ushort> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> X, Vector256<int> Y, Vector256<int> Z, Vector256<int> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, Vector256<int> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> X, Vector256<uint> Y, Vector256<uint> Z, Vector256<uint> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, Vector256<uint> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> X, Vector256<long> Y, Vector256<long> Z, Vector256<long> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, Vector256<long> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> X, Vector256<ulong> Y, Vector256<ulong> Z, Vector256<ulong> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, Vector256<ulong> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{ExInt128}, Vector256{ExInt128}, Vector256{ExInt128}, Vector256{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ExInt128> X, Vector256<ExInt128> Y, Vector256<ExInt128> Z, Vector256<ExInt128> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<ExInt128> data0, Vector256<ExInt128> data1, Vector256<ExInt128> data2, Vector256<ExInt128> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{ExUInt128}, Vector256{ExUInt128}, Vector256{ExUInt128}, Vector256{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ExUInt128> X, Vector256<ExUInt128> Y, Vector256<ExUInt128> Z, Vector256<ExUInt128> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<ExUInt128> data0, Vector256<ExUInt128> data1, Vector256<ExUInt128> data2, Vector256<ExUInt128> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{Int128}, Vector256{Int128}, Vector256{Int128}, Vector256{Int128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<Int128> X, Vector256<Int128> Y, Vector256<Int128> Z, Vector256<Int128> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<Int128> data0, Vector256<Int128> data1, Vector256<Int128> data2, Vector256<Int128> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{UInt128}, Vector256{UInt128}, Vector256{UInt128}, Vector256{UInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<UInt128> X, Vector256<UInt128> Y, Vector256<UInt128> Z, Vector256<UInt128> W) YGroup4Unzip(this IWVectorTraits256 athis, Vector256<UInt128> data0, Vector256<UInt128> data1, Vector256<UInt128> data2, Vector256<UInt128> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+#endif // BCL_TYPE_INT128
+
+
         /// <inheritdoc cref="Vector256s.YShuffleG4X2{T}(Vector256{T}, Vector256{T}, ShuffleControlG4)"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [CLSCompliant(false)]

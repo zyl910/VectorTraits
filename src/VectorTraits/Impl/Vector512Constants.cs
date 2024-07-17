@@ -1022,6 +1022,101 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE
 
 
+        /// <summary>YGroup4Unzip - ShuffleX2 Longer - Byte - The index of X/Y.</summary>
+        public static Vector512<byte> YGroup4Unzip_ShuffleX2Longer_Byte_XY {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, 65, 69, 73, 77, 81, 85, 89, 93, 97, 101, 105, 109, 113, 117, 121, 125);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61, 65, 69, 73, 77, 81, 85, 89, 93, 97, 101, 105, 109, 113, 117, 121, 125);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Unzip - ShuffleX2 Longer - Byte - The index of Z/W.</summary>
+        public static Vector512<byte> YGroup4Unzip_ShuffleX2Longer_Byte_ZW {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82, 86, 90, 94, 98, 102, 106, 110, 114, 118, 122, 126, 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63, 67, 71, 75, 79, 83, 87, 91, 95, 99, 103, 107, 111, 115, 119, 123, 127);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 66, 70, 74, 78, 82, 86, 90, 94, 98, 102, 106, 110, 114, 118, 122, 126, 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63, 67, 71, 75, 79, 83, 87, 91, 95, 99, 103, 107, 111, 115, 119, 123, 127);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Unzip - ShuffleX2 Longer - UInt16 - The index of X/Y.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup4Unzip_ShuffleX2Longer_UInt16_XY {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 1, 5, 9, 13, 17, 21, 25, 29, 33, 37, 41, 45, 49, 53, 57, 61);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Unzip - ShuffleX2 Longer - UInt16 - The index of Z/W.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup4Unzip_ShuffleX2Longer_UInt16_ZW {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)2, 6, 10, 14, 18, 22, 26, 30, 34, 38, 42, 46, 50, 54, 58, 62, 3, 7, 11, 15, 19, 23, 27, 31, 35, 39, 43, 47, 51, 55, 59, 63);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Unzip - ShuffleX2 Longer - UInt32 - The index of X/Y.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup4Unzip_ShuffleX2Longer_UInt32_XY {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)0, 4, 8, 12, 16, 20, 24, 28, 1, 5, 9, 13, 17, 21, 25, 29);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)0, 4, 8, 12, 16, 20, 24, 28, 1, 5, 9, 13, 17, 21, 25, 29);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Unzip - ShuffleX2 Longer - UInt32 - The index of Z/W.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup4Unzip_ShuffleX2Longer_UInt32_ZW {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)2, 6, 10, 14, 18, 22, 26, 30, 3, 7, 11, 15, 19, 23, 27, 31);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)2, 6, 10, 14, 18, 22, 26, 30, 3, 7, 11, 15, 19, 23, 27, 31);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Unzip - ShuffleX2 Longer - UInt64 - The index of X/Y.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup4Unzip_ShuffleX2Longer_UInt64_XY {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)0, 4, 8, 12, 1, 5, 9, 13);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)0, 4, 8, 12, 1, 5, 9, 13);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Unzip - ShuffleX2 Longer - UInt64 - The index of Z/W.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup4Unzip_ShuffleX2Longer_UInt64_ZW {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)2, 6, 10, 14, 3, 7, 11, 15);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)2, 6, 10, 14, 3, 7, 11, 15);
+#endif // USE_VECTOR_CREATE
+
+
         private static readonly Vector512<byte>[] m_YShuffleG2_Byte_Indices = {
             Vector512.Create((byte)0, 0, 2, 2, 4, 4, 6, 6, 8, 8, 10, 10, 12, 12, 14, 14, 16, 16, 18, 18, 20, 20, 22, 22, 24, 24, 26, 26, 28, 28, 30, 30, 32, 32, 34, 34, 36, 36, 38, 38, 40, 40, 42, 42, 44, 44, 46, 46, 48, 48, 50, 50, 52, 52, 54, 54, 56, 56, 58, 58, 60, 60, 62, 62), // XX
             Vector512.Create((byte)1, 0, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10, 13, 12, 15, 14, 17, 16, 19, 18, 21, 20, 23, 22, 25, 24, 27, 26, 29, 28, 31, 30, 33, 32, 35, 34, 37, 36, 39, 38, 41, 40, 43, 42, 45, 44, 47, 46, 49, 48, 51, 50, 53, 52, 55, 54, 57, 56, 59, 58, 61, 60, 63, 62), // YX
