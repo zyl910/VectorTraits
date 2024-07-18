@@ -628,7 +628,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                             dst0 = func(data0, data1, data2, data3, out dst1, out dst2, out dst3);
                         } catch (NotSupportedException ex) {
                             funcListUnsupported[f] = true;
-                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, data0, data1, ex.Message));
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {2}, {3}. {4}", funcName, data0, data1, data2, data3, ex.Message));
                             continue;
                         }
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));

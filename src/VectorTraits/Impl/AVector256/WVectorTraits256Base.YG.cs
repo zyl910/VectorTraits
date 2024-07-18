@@ -2547,7 +2547,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YGroup4Unzip_Narrow(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3, out Vector256<ushort> y, out Vector256<ushort> z, out Vector256<ushort> w) {
-                const int L = 8;
+                const int L = 16;
                 Vector256<ushort> rt0, rt1, rt2, rt3;
                 Vector256<ulong> temp0, temp1, temp2, temp3;
                 temp0 = data0.AsUInt64();
