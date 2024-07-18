@@ -2260,7 +2260,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<float> YGroup4Unzip(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, Vector256<float> data3, out Vector256<float> y, out Vector256<float> z, out Vector256<float> w) {
 #if NET8_0_OR_GREATER
                 if (Avx512F.IsSupported) {
-                    return YGroup4Unzip_PermuteLonger(data0, data1, data2, data3, out y, out z, out w);
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
@@ -2271,7 +2271,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<double> YGroup4Unzip(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, Vector256<double> data3, out Vector256<double> y, out Vector256<double> z, out Vector256<double> w) {
 #if NET8_0_OR_GREATER
                 if (Avx512F.IsSupported) {
-                    return YGroup4Unzip_PermuteLonger(data0, data1, data2, data3, out y, out z, out w);
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
@@ -2283,7 +2283,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<sbyte> YGroup4Unzip(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, Vector256<sbyte> data3, out Vector256<sbyte> y, out Vector256<sbyte> z, out Vector256<sbyte> w) {
 #if NET8_0_OR_GREATER
                 if (Avx512Vbmi.IsSupported) {
-                    return YGroup4Unzip_PermuteLonger(data0, data1, data2, data3, out y, out z, out w);
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Narrow(data0, data1, data2, data3, out y, out z, out w);
@@ -2292,12 +2292,13 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup4Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YGroup4Unzip(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, Vector256<byte> data3, out Vector256<byte> y, out Vector256<byte> z, out Vector256<byte> w) {
+                // None Avx512: _Unpack > _Unzip > _Narrow
+                // Have Avx512: _Unzip > _PermuteLonger > _Unpack > _Narrow
 #if NET8_0_OR_GREATER
                 if (Avx512Vbmi.IsSupported) {
-                    return YGroup4Unzip_PermuteLonger(data0, data1, data2, data3, out y, out z, out w);
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
                 }
 #endif // NET8_0_OR_GREATER
-                // YGroup4Unzip_Unpack > YGroup4Unzip_Unzip > YGroup4Unzip_Narrow
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
             }
 
@@ -2306,7 +2307,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<short> YGroup4Unzip(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, Vector256<short> data3, out Vector256<short> y, out Vector256<short> z, out Vector256<short> w) {
 #if NET8_0_OR_GREATER
                 if (Avx512BW.IsSupported) {
-                    return YGroup4Unzip_PermuteLonger(data0, data1, data2, data3, out y, out z, out w);
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
@@ -2318,7 +2319,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<ushort> YGroup4Unzip(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3, out Vector256<ushort> y, out Vector256<ushort> z, out Vector256<ushort> w) {
 #if NET8_0_OR_GREATER
                 if (Avx512BW.IsSupported) {
-                    return YGroup4Unzip_PermuteLonger(data0, data1, data2, data3, out y, out z, out w);
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
@@ -2329,7 +2330,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<int> YGroup4Unzip(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, Vector256<int> data3, out Vector256<int> y, out Vector256<int> z, out Vector256<int> w) {
 #if NET8_0_OR_GREATER
                 if (Avx512F.IsSupported) {
-                    return YGroup4Unzip_PermuteLonger(data0, data1, data2, data3, out y, out z, out w);
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
@@ -2341,7 +2342,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<uint> YGroup4Unzip(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, Vector256<uint> data3, out Vector256<uint> y, out Vector256<uint> z, out Vector256<uint> w) {
 #if NET8_0_OR_GREATER
                 if (Avx512F.IsSupported) {
-                    return YGroup4Unzip_PermuteLonger(data0, data1, data2, data3, out y, out z, out w);
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
@@ -2350,9 +2351,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup4Unzip(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup4Unzip(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, Vector256<long> data3, out Vector256<long> y, out Vector256<long> z, out Vector256<long> w) {
+                // None Avx512: _Unpack > _Unzip > _Narrow
+                // Have Avx512: _Unzip > _Unpack > _PermuteLonger > _Narrow
 #if NET8_0_OR_GREATER
                 if (Avx512F.IsSupported) {
-                    return YGroup4Unzip_PermuteLonger(data0, data1, data2, data3, out y, out z, out w);
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
