@@ -2140,7 +2140,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YGroup4Unzip(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, Vector256<sbyte> data3, out Vector256<sbyte> y, out Vector256<sbyte> z, out Vector256<sbyte> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Narrow(data0, data1, data2, data3, out y, out z, out w);
+                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
 #else
                 return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2150,7 +2150,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YGroup4Unzip(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, Vector256<byte> data3, out Vector256<byte> y, out Vector256<byte> z, out Vector256<byte> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Narrow(data0, data1, data2, data3, out y, out z, out w);
+                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
 #else
                 return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2160,7 +2160,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YGroup4Unzip(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, Vector256<short> data3, out Vector256<short> y, out Vector256<short> z, out Vector256<short> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Narrow(data0, data1, data2, data3, out y, out z, out w);
+                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
 #else
                 return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2171,7 +2171,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YGroup4Unzip(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3, out Vector256<ushort> y, out Vector256<ushort> z, out Vector256<ushort> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Narrow(data0, data1, data2, data3, out y, out z, out w);
+                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
 #else
                 return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
