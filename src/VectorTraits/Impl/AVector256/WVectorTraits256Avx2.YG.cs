@@ -2352,11 +2352,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup4Unzip(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, Vector256<long> data3, out Vector256<long> y, out Vector256<long> z, out Vector256<long> w) {
                 // None Avx512: _Unpack > _Unzip > _Narrow
-                // Have Avx512: _Unzip > _Unpack > _PermuteLonger > _Narrow
+                // Have Avx512: _Unpack > _Unzip > _PermuteLonger > _Narrow
 #if NET8_0_OR_GREATER
-                if (Avx512F.IsSupported) {
-                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
-                }
+                //if (Avx512F.IsSupported) {
+                //    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
+                //}
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
             }
@@ -2658,8 +2658,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // Zip layer by 128-bits unpack.
                 // 0: data0 x0 y0 z0 w0 x1 y1 z1 w1 x2 y2 z2 w2 x3 y3 z3 w3 x4 y4 z4 w4 x5 y5 z5 w5 x6 y6 z6 w6 x7 y7 z7 w7 data1 x8 y8 z8 w8 x9 y9 z9 w9 x10 y10 z10 w10 x11 y11 z11 w11 x12 y12 z12 w12 x13 y13 z13 w13 x14 y14 z14 w14 x15 y15 z15 w15 data2 x16 y16 z16 w16 x17 y17 z17 w17 x18 y18 z18 w18 x19 y19 z19 w19 x20 y20 z20 w20 x21 y21 z21 w21 x22 y22 z22 w22 x23 y23 z23 w23 data3 x24 y24 z24 w24 x25 y25 z25 w25 x26 y26 z26 w26 x27 y27 z27 w27 x28 y28 z28 w28 x29 y29 z29 w29 x30 y30 z30 w30 x31 y31 z31 w31
                 //0b: temp0 x0 y0 z0 w0 x1 y1 z1 w1 x2 y2 z2 w2 x3 y3 z3 w3 x16 y16 z16 w16 x17 y17 z17 w17 x18 y18 z18 w18 x19 y19 z19 w19 temp1 x4 y4 z4 w4 x5 y5 z5 w5 x6 y6 z6 w6 x7 y7 z7 w7 x20 y20 z20 w20 x21 y21 z21 w21 x22 y22 z22 w22 x23 y23 z23 w23 temp2 x8 y8 z8 w8 x9 y9 z9 w9 x10 y10 z10 w10 x11 y11 z11 w11 x24 y24 z24 w24 x25 y25 z25 w25 x26 y26 z26 w26 x27 y27 z27 w27 temp3 x12 y12 z12 w12 x13 y13 z13 w13 x14 y14 z14 w14 x15 y15 z15 w15 x28 y28 z28 w28 x29 y29 z29 w29 x30 y30 z30 w30 x31 y31 z31 w31
-                temp0 = YGroup2Zip_Int128(data0, data2, out temp1);
-                temp2 = YGroup2Zip_Int128(data1, data3, out temp3);
+                temp0 = YGroup4Unzip_Int128(data0, data1, data2, data3, out temp1, out temp2, out temp3);
                 // 1: a_0 x0 x8 y0 y8 z0 z8 w0 w8 x1 x9 y1 y9 z1 z9 w1 w9 x16 x24 y16 y24 z16 z24 w16 w24 x17 x25 y17 y25 z17 z25 w17 w25 a_1 x2 x10 y2 y10 z2 z10 w2 w10 x3 x11 y3 y11 z3 z11 w3 w11 x18 x26 y18 y26 z18 z26 w18 w26 x19 x27 y19 y27 z19 z27 w19 w27 a_2 x4 x12 y4 y12 z4 z12 w4 w12 x5 x13 y5 y13 z5 z13 w5 w13 x20 x28 y20 y28 z20 z28 w20 w28 x21 x29 y21 y29 z21 z29 w21 w29 a_3 x6 x14 y6 y14 z6 z14 w6 w14 x7 x15 y7 y15 z7 z15 w7 w15 x22 x30 y22 y30 z22 z30 w22 w30 x23 x31 y23 y31 z23 z31 w23 w31
                 a_0 = Avx2.UnpackLow(temp0, temp2);
                 a_1 = Avx2.UnpackHigh(temp0, temp2);
@@ -2705,8 +2704,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // Zip layer by 128-bits unpack.
                 // 0: data0 x0 y0 z0 w0 x1 y1 z1 w1 x2 y2 z2 w2 x3 y3 z3 w3 data1 x4 y4 z4 w4 x5 y5 z5 w5 x6 y6 z6 w6 x7 y7 z7 w7 data2 x8 y8 z8 w8 x9 y9 z9 w9 x10 y10 z10 w10 x11 y11 z11 w11 data3 x12 y12 z12 w12 x13 y13 z13 w13 x14 y14 z14 w14 x15 y15 z15 w15
                 //0b: temp0 x0 y0 z0 w0 x1 y1 z1 w1 x8 y8 z8 w8 x9 y9 z9 w9 temp1 x2 y2 z2 w2 x3 y3 z3 w3 x10 y10 z10 w10 x11 y11 z11 w11 temp2 x4 y4 z4 w4 x5 y5 z5 w5 x12 y12 z12 w12 x13 y13 z13 w13 temp3 x6 y6 z6 w6 x7 y7 z7 w7 x14 y14 z14 w14 x15 y15 z15 w15
-                temp0 = YGroup2Zip_Int128(data0, data2, out temp1);
-                temp2 = YGroup2Zip_Int128(data1, data3, out temp3);
+                temp0 = YGroup4Unzip_Int128(data0, data1, data2, data3, out temp1, out temp2, out temp3);
                 // 1: a_0 x0 x4 y0 y4 z0 z4 w0 w4 x8 x12 y8 y12 z8 z12 w8 w12 a_1 x1 x5 y1 y5 z1 z5 w1 w5 x9 x13 y9 y13 z9 z13 w9 w13 a_2 x2 x6 y2 y6 z2 z6 w2 w6 x10 x14 y10 y14 z10 z14 w10 w14 a_3 x3 x7 y3 y7 z3 z7 w3 w7 x11 x15 y11 y15 z11 z15 w11 w15
                 a_0 = Avx2.UnpackLow(temp0, temp2);
                 a_1 = Avx2.UnpackHigh(temp0, temp2);
@@ -2747,8 +2745,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // Zip layer by 128-bits unpack.
                 // 0: data0 x0 y0 z0 w0 x1 y1 z1 w1 data1 x2 y2 z2 w2 x3 y3 z3 w3 data2 x4 y4 z4 w4 x5 y5 z5 w5 data3 x6 y6 z6 w6 x7 y7 z7 w7
                 //0b: temp0 x0 y0 z0 w0 x4 y4 z4 w4 temp1 x1 y1 z1 w1 x5 y5 z5 w5 temp2 x2 y2 z2 w2 x6 y6 z6 w6 temp3 x3 y3 z3 w3 x7 y7 z7 w7
-                temp0 = YGroup2Zip_Int128(data0, data2, out temp1);
-                temp2 = YGroup2Zip_Int128(data1, data3, out temp3);
+                temp0 = YGroup4Unzip_Int128(data0, data1, data2, data3, out temp1, out temp2, out temp3);
                 // 1: a_0 x0 z0 x1 z1 x4 z4 x5 z5 a_1 x2 z2 x3 z3 x6 z6 x7 z7 a_2 y0 w0 y1 w1 y4 w4 y5 w5 a_3 y2 w2 y3 w3 y6 w6 y7 w7
                 a_0 = Avx2.UnpackLow(temp0, temp2);
                 a_1 = Avx2.UnpackHigh(temp0, temp2);
@@ -2784,8 +2781,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 // Zip layer by 128-bits unpack.
                 // 0: data0 x0 y0 z0 w0 data1 x1 y1 z1 w1 data2 x2 y2 z2 w2 data3 x3 y3 z3 w3
                 //0b: temp0 x0 y0 x2 y2 temp1 z0 w0 z2 w2 temp2 x1 y1 x3 y3 temp3 z1 w1 z3 w3
-                temp0 = YGroup2Zip_Int128(data0, data2, out temp1);
-                temp2 = YGroup2Zip_Int128(data1, data3, out temp3);
+                temp0 = YGroup4Unzip_Int128(data0, data1, data2, data3, out temp1, out temp2, out temp3);
                 // 1: a_0 x0 x1 x2 x3 a_1 y0 y1 y2 y3 a_2 z0 z1 z2 z3 a_3 w0 w1 w2 w3
                 a_0 = Avx2.UnpackLow(temp0, temp2);
                 a_1 = Avx2.UnpackHigh(temp0, temp2);
