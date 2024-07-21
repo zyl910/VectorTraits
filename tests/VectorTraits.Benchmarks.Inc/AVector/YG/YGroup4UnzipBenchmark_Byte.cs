@@ -1,4 +1,4 @@
-﻿#undef BENCHMARKS_OFF
+﻿//#undef BENCHMARKS_OFF
 
 #if NET7_0_OR_GREATER
 #define VECTOR_HAS_METHOD

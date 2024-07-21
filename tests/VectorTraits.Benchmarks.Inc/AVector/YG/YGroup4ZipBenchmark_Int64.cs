@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 #if NET7_0_OR_GREATER
 #define VECTOR_HAS_METHOD
@@ -32,12 +32,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
     using TMy = Int64;
 
     /// <summary>
-    /// YGroup4Unzip benchmark - Int64.
+    /// YGroup4Zip benchmark - Int64.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class YGroup4UnzipBenchmark_Int64 : AbstractSharedBenchmark_Int64 {
+    public partial class YGroup4ZipBenchmark_Int64 : AbstractSharedBenchmark_Int64 {
 
         // -- var --
         private static readonly Vector<TMy> vector1 = Vectors<TMy>.SerialNegative;
@@ -59,7 +59,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YGroup4Unzip - Vector256 - base - basic.
+        /// Sum YGroup4Zip - Vector256 - base - basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -83,7 +83,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup4Unzip_Basic(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup4Zip_Basic(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = WVectorTraits256Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Base.Statics.Add(vrt2, vtemp2);
@@ -116,8 +116,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             }
         }
 
+#if VECTOR_HAS_METHOD
+
+#endif // VECTOR_HAS_METHOD
+
         /// <summary>
-        /// Sum YGroup4Unzip - Vector256 - base.
+        /// Sum YGroup4Zip - Vector256 - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -141,7 +145,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup4Unzip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup4Zip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = WVectorTraits256Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Base.Statics.Add(vrt2, vtemp2);
@@ -173,7 +177,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 
 #if NET8_0_OR_GREATER
         /// <summary>
-        /// Sum YGroup4Unzip - Vector256 - Avx2 - Permute.
+        /// Sum YGroup4Zip - Vector256 - Avx2 - Permute.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -197,7 +201,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup4Unzip_PermuteLonger(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup4Zip_PermuteLonger(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Avx2.Statics.Add(vrt2, vtemp2);
@@ -230,7 +234,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 #endif // NET8_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4Unzip - Vector256 - Avx2 - Unpack.
+        /// Sum YGroup4Zip - Vector256 - Avx2 - Unpack.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -254,7 +258,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup4Unzip_Unpack(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup4Zip_Unpack(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Avx2.Statics.Add(vrt2, vtemp2);
@@ -286,12 +290,12 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4Unzip - Vector256 - Avx2 - Unzip.
+        /// Sum YGroup4Zip - Vector256 - Avx2 - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum256Avx2_Unzip(TMy[] src, int srcCount) {
+        private static TMy StaticSum256Avx2_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
@@ -310,7 +314,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup4Unzip_Unzip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup4Zip_Zip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Avx2.Statics.Add(vrt2, vtemp2);
@@ -331,21 +335,21 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void Sum256Avx2_Unzip() {
+        public void Sum256Avx2_Zip() {
             WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstOn256 = StaticSum256Avx2_Unzip(srcArray, srcArray.Length);
-            CheckResult256("Sum256Avx2_Unzip");
+            dstOn256 = StaticSum256Avx2_Zip(srcArray, srcArray.Length);
+            CheckResult256("Sum256Avx2_Zip");
         }
 
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YGroup4Unzip - Vector256 - Traits.
+        /// Sum YGroup4Zip - Vector256 - Traits.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -369,7 +373,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = Vector256s.YGroup4Unzip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector256<TMy> vtemp = Vector256s.YGroup4Zip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = Vector256s.Add(vrt, vtemp);
                 vrt1 = Vector256s.Add(vrt1, vtemp1);
                 vrt2 = Vector256s.Add(vrt2, vtemp2);
