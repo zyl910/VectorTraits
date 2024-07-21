@@ -1117,6 +1117,103 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE
 
 
+        /// <summary>YGroup4Zip - ShuffleX2 Longer - Byte - The index of data0/data1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<byte> YGroup4Zip_ShuffleX2Longer_Byte_Data01 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)0, 32, 64, 96, 1, 33, 65, 97, 2, 34, 66, 98, 3, 35, 67, 99, 4, 36, 68, 100, 5, 37, 69, 101, 6, 38, 70, 102, 7, 39, 71, 103, 8, 40, 72, 104, 9, 41, 73, 105, 10, 42, 74, 106, 11, 43, 75, 107, 12, 44, 76, 108, 13, 45, 77, 109, 14, 46, 78, 110, 15, 47, 79, 111);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)0, 32, 64, 96, 1, 33, 65, 97, 2, 34, 66, 98, 3, 35, 67, 99, 4, 36, 68, 100, 5, 37, 69, 101, 6, 38, 70, 102, 7, 39, 71, 103, 8, 40, 72, 104, 9, 41, 73, 105, 10, 42, 74, 106, 11, 43, 75, 107, 12, 44, 76, 108, 13, 45, 77, 109, 14, 46, 78, 110, 15, 47, 79, 111);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Zip - ShuffleX2 Longer - Byte - The index of data2/data3.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<byte> YGroup4Zip_ShuffleX2Longer_Byte_Data23 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)16, 48, 80, 112, 17, 49, 81, 113, 18, 50, 82, 114, 19, 51, 83, 115, 20, 52, 84, 116, 21, 53, 85, 117, 22, 54, 86, 118, 23, 55, 87, 119, 24, 56, 88, 120, 25, 57, 89, 121, 26, 58, 90, 122, 27, 59, 91, 123, 28, 60, 92, 124, 29, 61, 93, 125, 30, 62, 94, 126, 31, 63, 95, 127);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)16, 48, 80, 112, 17, 49, 81, 113, 18, 50, 82, 114, 19, 51, 83, 115, 20, 52, 84, 116, 21, 53, 85, 117, 22, 54, 86, 118, 23, 55, 87, 119, 24, 56, 88, 120, 25, 57, 89, 121, 26, 58, 90, 122, 27, 59, 91, 123, 28, 60, 92, 124, 29, 61, 93, 125, 30, 62, 94, 126, 31, 63, 95, 127);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Zip - ShuffleX2 Longer - UInt16 - The index of data0/data1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup4Zip_ShuffleX2Longer_UInt16_Data01 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)0, 16, 32, 48, 1, 17, 33, 49, 2, 18, 34, 50, 3, 19, 35, 51, 4, 20, 36, 52, 5, 21, 37, 53, 6, 22, 38, 54, 7, 23, 39, 55);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)0, 16, 32, 48, 1, 17, 33, 49, 2, 18, 34, 50, 3, 19, 35, 51, 4, 20, 36, 52, 5, 21, 37, 53, 6, 22, 38, 54, 7, 23, 39, 55);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Zip - ShuffleX2 Longer - UInt16 - The index of data2/data3.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup4Zip_ShuffleX2Longer_UInt16_Data23 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)8, 24, 40, 56, 9, 25, 41, 57, 10, 26, 42, 58, 11, 27, 43, 59, 12, 28, 44, 60, 13, 29, 45, 61, 14, 30, 46, 62, 15, 31, 47, 63);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)8, 24, 40, 56, 9, 25, 41, 57, 10, 26, 42, 58, 11, 27, 43, 59, 12, 28, 44, 60, 13, 29, 45, 61, 14, 30, 46, 62, 15, 31, 47, 63);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Zip - ShuffleX2 Longer - UInt32 - The index of data0/data1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup4Zip_ShuffleX2Longer_UInt32_Data01 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)0, 8, 16, 24, 1, 9, 17, 25, 2, 10, 18, 26, 3, 11, 19, 27);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)0, 8, 16, 24, 1, 9, 17, 25, 2, 10, 18, 26, 3, 11, 19, 27);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Zip - ShuffleX2 Longer - UInt32 - The index of data2/data3.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup4Zip_ShuffleX2Longer_UInt32_Data23 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)4, 12, 20, 28, 5, 13, 21, 29, 6, 14, 22, 30, 7, 15, 23, 31);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)4, 12, 20, 28, 5, 13, 21, 29, 6, 14, 22, 30, 7, 15, 23, 31);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Zip - ShuffleX2 Longer - UInt64 - The index of data0/data1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup4Zip_ShuffleX2Longer_UInt64_Data01 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)0, 4, 8, 12, 1, 5, 9, 13);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)0, 4, 8, 12, 1, 5, 9, 13);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup4Zip - ShuffleX2 Longer - UInt64 - The index of data2/data3.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup4Zip_ShuffleX2Longer_UInt64_Data23 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)2, 6, 10, 14, 3, 7, 11, 15);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)2, 6, 10, 14, 3, 7, 11, 15);
+#endif // USE_VECTOR_CREATE
+
+
         private static readonly Vector512<byte>[] m_YShuffleG2_Byte_Indices = {
             Vector512.Create((byte)0, 0, 2, 2, 4, 4, 6, 6, 8, 8, 10, 10, 12, 12, 14, 14, 16, 16, 18, 18, 20, 20, 22, 22, 24, 24, 26, 26, 28, 28, 30, 30, 32, 32, 34, 34, 36, 36, 38, 38, 40, 40, 42, 42, 44, 44, 46, 46, 48, 48, 50, 50, 52, 52, 54, 54, 56, 56, 58, 58, 60, 60, 62, 62), // XX
             Vector512.Create((byte)1, 0, 3, 2, 5, 4, 7, 6, 9, 8, 11, 10, 13, 12, 15, 14, 17, 16, 19, 18, 21, 20, 23, 22, 25, 24, 27, 26, 29, 28, 31, 30, 33, 32, 35, 34, 37, 36, 39, 38, 41, 40, 43, 42, 45, 44, 47, 46, 49, 48, 51, 50, 53, 52, 55, 54, 57, 56, 59, 58, 61, 60, 63, 62), // YX

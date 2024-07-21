@@ -860,6 +860,99 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup4Unzip</c> (运行 <c>YGroup4Unzip</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>Inverse function (逆函数): <see cref="YGroup4Unzip_AcceleratedTypes">YGroup4Unzip</see>.</para>
+        /// <para>Sample (示例).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Elements</term>
+        ///        <description>Result</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>1</term>
+        ///        <description><c>f({x[0]}, {y[0]}, {z[0]}, {w[0]}) = ({x[0]}, {y[0]}, {z[0]}, {w[0]})</c>. (Fallback)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>2</term>
+        ///        <description><c>f({x[0], x[1]}, {y[0], y[1]}, {z[0], z[1]}, {w[0], w[1]}) = ({x[0], y[0]}, {z[0], w[0]}, {x[1], y[1]}, {z[1], w[1]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>4</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3]}, {y[0], y[1], y[2], y[3]}, {z[0], z[1], z[2], z[3]}, {w[0], w[1], w[2], w[3]}) = ({x[0], y[0], z[0], w[0]}, {x[1], y[1], z[1], w[1]}, {x[2], y[2], z[2], w[2]}, {x[3], y[3], z[3], w[3]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>8</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7]}, {z[0], z[1], z[2], z[3], z[4], z[5], z[6], z[7]}, {w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7]}) = ({x[0], y[0], z[0], w[0], x[1], y[1], z[1], w[1]}, {x[2], y[2], z[2], w[2], x[3], y[3], z[3], w[3]}, {x[4], y[4], z[4], w[4], x[5], y[5], z[5], w[5]}, {x[6], y[6], z[6], w[6], x[7], y[7], z[7], w[7]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>16</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12], x[13], x[14], x[15]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7], y[8], y[9], y[10], y[11], y[12], y[13], y[14], y[15]}, {z[0], z[1], z[2], z[3], z[4], z[5], z[6], z[7], z[8], z[9], z[10], z[11], z[12], z[13], z[14], z[15]}, {w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10], w[11], w[12], w[13], w[14], w[15]}) = ({x[0], y[0], z[0], w[0], x[1], y[1], z[1], w[1], x[2], y[2], z[2], w[2], x[3], y[3], z[3], w[3]}, {x[4], y[4], z[4], w[4], x[5], y[5], z[5], w[5], x[6], y[6], z[6], w[6], x[7], y[7], z[7], w[7]}, {x[8], y[8], z[8], w[8], x[9], y[9], z[9], w[9], x[10], y[10], z[10], w[10], x[11], y[11], z[11], w[11]}, {x[12], y[12], z[12], w[12], x[13], y[13], z[13], w[13], x[14], y[14], z[14], w[14], x[15], y[15], z[15], w[15]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>...</term>
+        ///        <description>...</description>
+        ///    </item>
+        /// </list>
+        /// </remarks>
+        /// <seealso cref="YGroup4Zip(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+        /// <seealso cref="YGroup2Unzip_AcceleratedTypes"/>
+        TypeCodeFlags YGroup4Zip_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Interleave 4 vectors into 4-element groups. It converts the 4-element groups SoA to AoS. It can also interleave R,G,B,A planar data into packed RGBA pixel data (将4个向量交织为4-元素组. 它能将4元素组的 结构体数组 转为 数组结构体. 它还能将 R,G,B,A 平面数据, 交织为 已打包的RGBA像素数据).
+        /// Mnemonic: <c>element_ref(i, data0, data1, data2, data3) := (0==(i&amp;3))?( x[i2] ):( (1==(i&amp;3))?( y[i2] ):( (2==(i&amp;s3))?( z[i2] ):( w[i2] ) ) )</c>, <c>i2 := i/4</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <param name="z">A vector consisting purely of Z-components (纯由Z分量所组成的向量).</param>
+        /// <param name="w">A vector consisting purely of W-components (纯由W分量所组成的向量).</param>
+        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
+        /// <param name="data2">Returns part 2 of the interleaved data (返回交织后数据的第2部分).</param>
+        /// <param name="data3">Returns part 3 of the interleaved data (返回交织后数据的第3部分).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        Vector256<float> YGroup4Zip(Vector256<float> x, Vector256<float> y, Vector256<float> z, Vector256<float> w, out Vector256<float> data1, out Vector256<float> data2, out Vector256<float> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<double> YGroup4Zip(Vector256<double> x, Vector256<double> y, Vector256<double> z, Vector256<double> w, out Vector256<double> data1, out Vector256<double> data2, out Vector256<double> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<sbyte> YGroup4Zip(Vector256<sbyte> x, Vector256<sbyte> y, Vector256<sbyte> z, Vector256<sbyte> w, out Vector256<sbyte> data1, out Vector256<sbyte> data2, out Vector256<sbyte> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<byte> YGroup4Zip(Vector256<byte> x, Vector256<byte> y, Vector256<byte> z, Vector256<byte> w, out Vector256<byte> data1, out Vector256<byte> data2, out Vector256<byte> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<short> YGroup4Zip(Vector256<short> x, Vector256<short> y, Vector256<short> z, Vector256<short> w, out Vector256<short> data1, out Vector256<short> data2, out Vector256<short> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<ushort> YGroup4Zip(Vector256<ushort> x, Vector256<ushort> y, Vector256<ushort> z, Vector256<ushort> w, out Vector256<ushort> data1, out Vector256<ushort> data2, out Vector256<ushort> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<int> YGroup4Zip(Vector256<int> x, Vector256<int> y, Vector256<int> z, Vector256<int> w, out Vector256<int> data1, out Vector256<int> data2, out Vector256<int> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<uint> YGroup4Zip(Vector256<uint> x, Vector256<uint> y, Vector256<uint> z, Vector256<uint> w, out Vector256<uint> data1, out Vector256<uint> data2, out Vector256<uint> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<long> YGroup4Zip(Vector256<long> x, Vector256<long> y, Vector256<long> z, Vector256<long> w, out Vector256<long> data1, out Vector256<long> data2, out Vector256<long> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<ulong> YGroup4Zip(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z, Vector256<ulong> w, out Vector256<ulong> data1, out Vector256<ulong> data2, out Vector256<ulong> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<ExInt128> YGroup4Zip(Vector256<ExInt128> x, Vector256<ExInt128> y, Vector256<ExInt128> z, Vector256<ExInt128> w, out Vector256<ExInt128> data1, out Vector256<ExInt128> data2, out Vector256<ExInt128> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        Vector256<ExUInt128> YGroup4Zip(Vector256<ExUInt128> x, Vector256<ExUInt128> y, Vector256<ExUInt128> z, Vector256<ExUInt128> w, out Vector256<ExUInt128> data1, out Vector256<ExUInt128> data2, out Vector256<ExUInt128> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        Vector256<T> YGroup4Zip_Int128<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z, Vector256<T> w, out Vector256<T> data1, out Vector256<T> data2, out Vector256<T> data3) where T : struct;
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YIsAllTrue</c> (运行 <c>YIsAllTrue</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YIsAllTrue{T}(Vector256{T})"/>
