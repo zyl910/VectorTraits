@@ -95,6 +95,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_X.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YB.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YC.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YG.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YM.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits512Test\Vector512Tests_YN.cs" />

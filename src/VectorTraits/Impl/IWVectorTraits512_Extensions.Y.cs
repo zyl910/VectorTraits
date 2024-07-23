@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 #if !NET7_0_OR_GREATER
@@ -9,11 +13,1021 @@ using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.ExTypes;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits.Impl {
     partial class IWVectorTraits512_Extensions {
 #if NET8_0_OR_GREATER
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{ExInt128}, Vector512{ExInt128}, out Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> YGroup2Unzip(this IWVectorTraits512 athis, Vector512<Int128> data0, Vector512<Int128> data1, out Vector512<Int128> y) {
+            var d0 = athis.YGroup2Unzip(data0.ExAsExInt128(), data1.ExAsExInt128(), out var d1);
+            y = d1.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{ExUInt128}, Vector512{ExUInt128}, out Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> YGroup2Unzip(this IWVectorTraits512 athis, Vector512<UInt128> data0, Vector512<UInt128> data1, out Vector512<UInt128> y) {
+            var d0 = athis.YGroup2Unzip(data0.ExAsExUInt128(), data1.ExAsExUInt128(), out var d1);
+            y = d1.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip{T}(Vector512{T}, Vector512{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector512<T> X, Vector512<T> Y) YGroup2Unzip<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<float>)(object)data0, (Vector512<float>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<double>)(object)data0, (Vector512<double>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<short>)(object)data0, (Vector512<short>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<int>)(object)data0, (Vector512<int>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<long>)(object)data0, (Vector512<long>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<ExInt128>)(object)data0, (Vector512<ExInt128>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<ExUInt128>)(object)data0, (Vector512<ExUInt128>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<Int128>)(object)data0, (Vector512<Int128>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<UInt128>)(object)data0, (Vector512<UInt128>)(object)data1);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<float> X, Vector512<float> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<float> data0, Vector512<float> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{double}, Vector512{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<double> X, Vector512<double> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<double> data0, Vector512<double> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<sbyte> X, Vector512<sbyte> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<sbyte> data0, Vector512<sbyte> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{byte}, Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<byte> X, Vector512<byte> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<byte> data0, Vector512<byte> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{short}, Vector512{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<short> X, Vector512<short> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<short> data0, Vector512<short> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ushort> X, Vector512<ushort> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<ushort> data0, Vector512<ushort> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<int> X, Vector512<int> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<int> data0, Vector512<int> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<uint> X, Vector512<uint> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<uint> data0, Vector512<uint> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{long}, Vector512{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<long> X, Vector512<long> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<long> data0, Vector512<long> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ulong> X, Vector512<ulong> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<ulong> data0, Vector512<ulong> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{ExInt128}, Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ExInt128> X, Vector512<ExInt128> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<ExInt128> data0, Vector512<ExInt128> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{ExUInt128}, Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ExUInt128> X, Vector512<ExUInt128> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<ExUInt128> data0, Vector512<ExUInt128> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{Int128}, Vector512{Int128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<Int128> X, Vector512<Int128> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<Int128> data0, Vector512<Int128> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{UInt128}, Vector512{UInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<UInt128> X, Vector512<UInt128> Y) YGroup2Unzip(this IWVectorTraits512 athis, Vector512<UInt128> data0, Vector512<UInt128> data1) {
+            var rt0 = athis.YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2UnzipEven(Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static Vector512<T> YGroup2UnzipEven<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<float>)(object)data0, (Vector512<float>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<double>)(object)data0, (Vector512<double>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<short>)(object)data0, (Vector512<short>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<int>)(object)data0, (Vector512<int>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<long>)(object)data0, (Vector512<long>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<ExInt128>)(object)data0, (Vector512<ExInt128>)(object)data1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<ExUInt128>)(object)data0, (Vector512<ExUInt128>)(object)data1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<Int128>)(object)data0, (Vector512<Int128>)(object)data1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<UInt128>)(object)data0, (Vector512<UInt128>)(object)data1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2UnzipEven(Vector512{ExInt128}, Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> YGroup2UnzipEven(this IWVectorTraits512 athis, Vector512<Int128> data0, Vector512<Int128> data1) {
+            return athis.YGroup2UnzipEven(data0.ExAsExInt128(), data1.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2UnzipEven(Vector512{ExUInt128}, Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> YGroup2UnzipEven(this IWVectorTraits512 athis, Vector512<UInt128> data0, Vector512<UInt128> data1) {
+            return athis.YGroup2UnzipEven(data0.ExAsExUInt128(), data1.ExAsExUInt128()).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2UnzipOdd(Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static Vector512<T> YGroup2UnzipOdd<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<float>)(object)data0, (Vector512<float>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<double>)(object)data0, (Vector512<double>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<short>)(object)data0, (Vector512<short>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<int>)(object)data0, (Vector512<int>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<long>)(object)data0, (Vector512<long>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<ExInt128>)(object)data0, (Vector512<ExInt128>)(object)data1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<ExUInt128>)(object)data0, (Vector512<ExUInt128>)(object)data1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<Int128>)(object)data0, (Vector512<Int128>)(object)data1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<UInt128>)(object)data0, (Vector512<UInt128>)(object)data1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2UnzipOdd(Vector512{ExInt128}, Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> YGroup2UnzipOdd(this IWVectorTraits512 athis, Vector512<Int128> data0, Vector512<Int128> data1) {
+            return athis.YGroup2UnzipOdd(data0.ExAsExInt128(), data1.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2UnzipOdd(Vector512{ExUInt128}, Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> YGroup2UnzipOdd(this IWVectorTraits512 athis, Vector512<UInt128> data0, Vector512<UInt128> data1) {
+            return athis.YGroup2UnzipOdd(data0.ExAsExUInt128(), data1.ExAsExUInt128()).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{ExInt128}, Vector512{ExInt128}, out Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> YGroup2Zip(this IWVectorTraits512 athis, Vector512<Int128> x, Vector512<Int128> y, out Vector512<Int128> data1) {
+            var d0 = athis.YGroup2Zip(x.ExAsExInt128(), y.ExAsExInt128(), out var d1);
+            data1 = d1.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{ExUInt128}, Vector512{ExUInt128}, out Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> YGroup2Zip(this IWVectorTraits512 athis, Vector512<UInt128> x, Vector512<UInt128> y, out Vector512<UInt128> data1) {
+            var d0 = athis.YGroup2Zip(x.ExAsExUInt128(), y.ExAsExUInt128(), out var d1);
+            data1 = d1.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip{T}(Vector512{T}, Vector512{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector512<T> Data0, Vector512<T> Data1) YGroup2Zip<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> y) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<float>)(object)x, (Vector512<float>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<double>)(object)x, (Vector512<double>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<byte>)(object)x, (Vector512<byte>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<short>)(object)x, (Vector512<short>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<int>)(object)x, (Vector512<int>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<uint>)(object)x, (Vector512<uint>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<long>)(object)x, (Vector512<long>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<ExInt128>)(object)x, (Vector512<ExInt128>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<ExUInt128>)(object)x, (Vector512<ExUInt128>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<Int128>)(object)x, (Vector512<Int128>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var data0, var data1) = athis.YGroup2Zip((Vector512<UInt128>)(object)x, (Vector512<UInt128>)(object)y);
+                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<float> Data0, Vector512<float> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<float> x, Vector512<float> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{double}, Vector512{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<double> Data0, Vector512<double> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<double> x, Vector512<double> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<sbyte> Data0, Vector512<sbyte> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<sbyte> x, Vector512<sbyte> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{byte}, Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<byte> Data0, Vector512<byte> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<byte> x, Vector512<byte> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{short}, Vector512{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<short> Data0, Vector512<short> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<short> x, Vector512<short> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ushort> Data0, Vector512<ushort> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<ushort> x, Vector512<ushort> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<int> Data0, Vector512<int> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<int> x, Vector512<int> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<uint> Data0, Vector512<uint> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<uint> x, Vector512<uint> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{long}, Vector512{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<long> Data0, Vector512<long> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<long> x, Vector512<long> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ulong> Data0, Vector512<ulong> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<ulong> x, Vector512<ulong> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{ExInt128}, Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ExInt128> Data0, Vector512<ExInt128> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<ExInt128> x, Vector512<ExInt128> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{ExUInt128}, Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ExUInt128> Data0, Vector512<ExUInt128> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<ExUInt128> x, Vector512<ExUInt128> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{Int128}, Vector512{Int128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<Int128> Data0, Vector512<Int128> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<Int128> x, Vector512<Int128> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Zip(Vector512{UInt128}, Vector512{UInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<UInt128> Data0, Vector512<UInt128> Data1) YGroup2Zip(this IWVectorTraits512 athis, Vector512<UInt128> x, Vector512<UInt128> y) {
+            var data0 = athis.YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2ZipHigh(Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static Vector512<T> YGroup2ZipHigh<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> y) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<float>)(object)x, (Vector512<float>)(object)y);
+            } else if (typeof(double) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<double>)(object)x, (Vector512<double>)(object)y);
+            } else if (typeof(sbyte) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)y);
+            } else if (typeof(byte) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<byte>)(object)x, (Vector512<byte>)(object)y);
+            } else if (typeof(short) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<short>)(object)x, (Vector512<short>)(object)y);
+            } else if (typeof(ushort) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)y);
+            } else if (typeof(int) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<int>)(object)x, (Vector512<int>)(object)y);
+            } else if (typeof(uint) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<uint>)(object)x, (Vector512<uint>)(object)y);
+            } else if (typeof(long) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<long>)(object)x, (Vector512<long>)(object)y);
+            } else if (typeof(ulong) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)y);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<ExInt128>)(object)x, (Vector512<ExInt128>)(object)y);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<ExUInt128>)(object)x, (Vector512<ExUInt128>)(object)y);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<Int128>)(object)x, (Vector512<Int128>)(object)y);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<UInt128>)(object)x, (Vector512<UInt128>)(object)y);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2ZipHigh(Vector512{ExInt128}, Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> YGroup2ZipHigh(this IWVectorTraits512 athis, Vector512<Int128> x, Vector512<Int128> y) {
+            return athis.YGroup2ZipHigh(x.ExAsExInt128(), y.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2ZipHigh(Vector512{ExUInt128}, Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> YGroup2ZipHigh(this IWVectorTraits512 athis, Vector512<UInt128> x, Vector512<UInt128> y) {
+            return athis.YGroup2ZipHigh(x.ExAsExUInt128(), y.ExAsExUInt128()).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2ZipLow(Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static Vector512<T> YGroup2ZipLow<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> y) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<float>)(object)x, (Vector512<float>)(object)y);
+            } else if (typeof(double) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<double>)(object)x, (Vector512<double>)(object)y);
+            } else if (typeof(sbyte) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)y);
+            } else if (typeof(byte) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<byte>)(object)x, (Vector512<byte>)(object)y);
+            } else if (typeof(short) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<short>)(object)x, (Vector512<short>)(object)y);
+            } else if (typeof(ushort) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)y);
+            } else if (typeof(int) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<int>)(object)x, (Vector512<int>)(object)y);
+            } else if (typeof(uint) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<uint>)(object)x, (Vector512<uint>)(object)y);
+            } else if (typeof(long) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<long>)(object)x, (Vector512<long>)(object)y);
+            } else if (typeof(ulong) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)y);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<ExInt128>)(object)x, (Vector512<ExInt128>)(object)y);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<ExUInt128>)(object)x, (Vector512<ExUInt128>)(object)y);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<Int128>)(object)x, (Vector512<Int128>)(object)y);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<UInt128>)(object)x, (Vector512<UInt128>)(object)y);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup2ZipLow(Vector512{ExInt128}, Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> YGroup2ZipLow(this IWVectorTraits512 athis, Vector512<Int128> x, Vector512<Int128> y) {
+            return athis.YGroup2ZipLow(x.ExAsExInt128(), y.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2ZipLow(Vector512{ExUInt128}, Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> YGroup2ZipLow(this IWVectorTraits512 athis, Vector512<UInt128> x, Vector512<UInt128> y) {
+            return athis.YGroup2ZipLow(x.ExAsExUInt128(), y.ExAsExUInt128()).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128}, out Vector512{ExInt128}, out Vector512{ExInt128}, out Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> YGroup4Unzip(this IWVectorTraits512 athis, Vector512<Int128> data0, Vector512<Int128> data1, Vector512<Int128> data2, Vector512<Int128> data3, out Vector512<Int128> y, out Vector512<Int128> z, out Vector512<Int128> w) {
+            var d0 = athis.YGroup4Unzip(data0.ExAsExInt128(), data1.ExAsExInt128(), data2.ExAsExInt128(), data3.ExAsExInt128(), out var d1, out var d2, out var d3);
+            y = d1.ExAsInt128();
+            z = d2.ExAsInt128();
+            w = d3.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128}, out Vector512{ExUInt128}, out Vector512{ExUInt128}, out Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> YGroup4Unzip(this IWVectorTraits512 athis, Vector512<UInt128> data0, Vector512<UInt128> data1, Vector512<UInt128> data2, Vector512<UInt128> data3, out Vector512<UInt128> y, out Vector512<UInt128> z, out Vector512<UInt128> w) {
+            var d0 = athis.YGroup4Unzip(data0.ExAsExUInt128(), data1.ExAsExUInt128(), data2.ExAsExUInt128(), data3.ExAsExUInt128(), out var d1, out var d2, out var d3);
+            y = d1.ExAsUInt128();
+            z = d2.ExAsUInt128();
+            w = d3.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip{T}(Vector512{T}, Vector512{T}, Vector512{T}, Vector512{T})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<T> X, Vector512<T> Y, Vector512<T> Z, Vector512<T> W) YGroup4Unzip<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<float>)(object)data0, (Vector512<float>)(object)data1, (Vector512<float>)(object)data2, (Vector512<float>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<double>)(object)data0, (Vector512<double>)(object)data1, (Vector512<double>)(object)data2, (Vector512<double>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1, (Vector512<sbyte>)(object)data2, (Vector512<sbyte>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1, (Vector512<byte>)(object)data2, (Vector512<byte>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<short>)(object)data0, (Vector512<short>)(object)data1, (Vector512<short>)(object)data2, (Vector512<short>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1, (Vector512<ushort>)(object)data2, (Vector512<ushort>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<int>)(object)data0, (Vector512<int>)(object)data1, (Vector512<int>)(object)data2, (Vector512<int>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1, (Vector512<uint>)(object)data2, (Vector512<uint>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<long>)(object)data0, (Vector512<long>)(object)data1, (Vector512<long>)(object)data2, (Vector512<long>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1, (Vector512<ulong>)(object)data2, (Vector512<ulong>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<ExInt128>)(object)data0, (Vector512<ExInt128>)(object)data1, (Vector512<ExInt128>)(object)data2, (Vector512<ExInt128>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<ExUInt128>)(object)data0, (Vector512<ExUInt128>)(object)data1, (Vector512<ExUInt128>)(object)data2, (Vector512<ExUInt128>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<Int128>)(object)data0, (Vector512<Int128>)(object)data1, (Vector512<Int128>)(object)data2, (Vector512<Int128>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<UInt128>)(object)data0, (Vector512<UInt128>)(object)data1, (Vector512<UInt128>)(object)data2, (Vector512<UInt128>)(object)data3);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<float> X, Vector512<float> Y, Vector512<float> Z, Vector512<float> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<float> data0, Vector512<float> data1, Vector512<float> data2, Vector512<float> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<double> X, Vector512<double> Y, Vector512<double> Z, Vector512<double> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<double> data0, Vector512<double> data1, Vector512<double> data2, Vector512<double> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<sbyte> X, Vector512<sbyte> Y, Vector512<sbyte> Z, Vector512<sbyte> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<sbyte> data0, Vector512<sbyte> data1, Vector512<sbyte> data2, Vector512<sbyte> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<byte> X, Vector512<byte> Y, Vector512<byte> Z, Vector512<byte> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<byte> data0, Vector512<byte> data1, Vector512<byte> data2, Vector512<byte> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<short> X, Vector512<short> Y, Vector512<short> Z, Vector512<short> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<short> data0, Vector512<short> data1, Vector512<short> data2, Vector512<short> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ushort> X, Vector512<ushort> Y, Vector512<ushort> Z, Vector512<ushort> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<ushort> data0, Vector512<ushort> data1, Vector512<ushort> data2, Vector512<ushort> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<int> X, Vector512<int> Y, Vector512<int> Z, Vector512<int> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<int> data0, Vector512<int> data1, Vector512<int> data2, Vector512<int> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<uint> X, Vector512<uint> Y, Vector512<uint> Z, Vector512<uint> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<uint> data0, Vector512<uint> data1, Vector512<uint> data2, Vector512<uint> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<long> X, Vector512<long> Y, Vector512<long> Z, Vector512<long> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<long> data0, Vector512<long> data1, Vector512<long> data2, Vector512<long> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ulong> X, Vector512<ulong> Y, Vector512<ulong> Z, Vector512<ulong> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<ulong> data0, Vector512<ulong> data1, Vector512<ulong> data2, Vector512<ulong> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ExInt128> X, Vector512<ExInt128> Y, Vector512<ExInt128> Z, Vector512<ExInt128> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<ExInt128> data0, Vector512<ExInt128> data1, Vector512<ExInt128> data2, Vector512<ExInt128> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ExUInt128> X, Vector512<ExUInt128> Y, Vector512<ExUInt128> Z, Vector512<ExUInt128> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<ExUInt128> data0, Vector512<ExUInt128> data1, Vector512<ExUInt128> data2, Vector512<ExUInt128> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{Int128}, Vector512{Int128}, Vector512{Int128}, Vector512{Int128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<Int128> X, Vector512<Int128> Y, Vector512<Int128> Z, Vector512<Int128> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<Int128> data0, Vector512<Int128> data1, Vector512<Int128> data2, Vector512<Int128> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{UInt128}, Vector512{UInt128}, Vector512{UInt128}, Vector512{UInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<UInt128> X, Vector512<UInt128> Y, Vector512<UInt128> Z, Vector512<UInt128> W) YGroup4Unzip(this IWVectorTraits512 athis, Vector512<UInt128> data0, Vector512<UInt128> data1, Vector512<UInt128> data2, Vector512<UInt128> data3) {
+            var rt0 = athis.YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+#endif // BCL_TYPE_INT128
+
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128}, out Vector512{ExInt128}, out Vector512{ExInt128}, out Vector512{ExInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<Int128> YGroup4Zip(this IWVectorTraits512 athis, Vector512<Int128> x, Vector512<Int128> y, Vector512<Int128> z, Vector512<Int128> w, out Vector512<Int128> data1, out Vector512<Int128> data2, out Vector512<Int128> data3) {
+            var d0 = athis.YGroup4Zip(x.ExAsExInt128(), y.ExAsExInt128(), z.ExAsExInt128(), w.ExAsExInt128(), out var d1, out var d2, out var d3);
+            data1 = d1.ExAsInt128();
+            data2 = d2.ExAsInt128();
+            data3 = d3.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128}, out Vector512{ExUInt128}, out Vector512{ExUInt128}, out Vector512{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<UInt128> YGroup4Zip(this IWVectorTraits512 athis, Vector512<UInt128> x, Vector512<UInt128> y, Vector512<UInt128> z, Vector512<UInt128> w, out Vector512<UInt128> data1, out Vector512<UInt128> data2, out Vector512<UInt128> data3) {
+            var d0 = athis.YGroup4Zip(x.ExAsExUInt128(), y.ExAsExUInt128(), z.ExAsExUInt128(), w.ExAsExUInt128(), out var d1, out var d2, out var d3);
+            data1 = d1.ExAsUInt128();
+            data2 = d2.ExAsUInt128();
+            data3 = d3.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<T> Data0, Vector512<T> Data1, Vector512<T> Data2, Vector512<T> Data3) YGroup4Zip<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<float>)(object)x, (Vector512<float>)(object)y, (Vector512<float>)(object)z, (Vector512<float>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<double>)(object)x, (Vector512<double>)(object)y, (Vector512<double>)(object)z, (Vector512<double>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)y, (Vector512<sbyte>)(object)z, (Vector512<sbyte>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<byte>)(object)x, (Vector512<byte>)(object)y, (Vector512<byte>)(object)z, (Vector512<byte>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<short>)(object)x, (Vector512<short>)(object)y, (Vector512<short>)(object)z, (Vector512<short>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)y, (Vector512<ushort>)(object)z, (Vector512<ushort>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<int>)(object)x, (Vector512<int>)(object)y, (Vector512<int>)(object)z, (Vector512<int>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<uint>)(object)x, (Vector512<uint>)(object)y, (Vector512<uint>)(object)z, (Vector512<uint>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<long>)(object)x, (Vector512<long>)(object)y, (Vector512<long>)(object)z, (Vector512<long>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)y, (Vector512<ulong>)(object)z, (Vector512<ulong>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<ExInt128>)(object)x, (Vector512<ExInt128>)(object)y, (Vector512<ExInt128>)(object)z, (Vector512<ExInt128>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<ExUInt128>)(object)x, (Vector512<ExUInt128>)(object)y, (Vector512<ExUInt128>)(object)z, (Vector512<ExUInt128>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<Int128>)(object)x, (Vector512<Int128>)(object)y, (Vector512<Int128>)(object)z, (Vector512<Int128>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<UInt128>)(object)x, (Vector512<UInt128>)(object)y, (Vector512<UInt128>)(object)z, (Vector512<UInt128>)(object)w);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<float> Data0, Vector512<float> Data1, Vector512<float> Data2, Vector512<float> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<float> x, Vector512<float> y, Vector512<float> z, Vector512<float> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<double> Data0, Vector512<double> Data1, Vector512<double> Data2, Vector512<double> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<double> x, Vector512<double> y, Vector512<double> z, Vector512<double> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<sbyte> Data0, Vector512<sbyte> Data1, Vector512<sbyte> Data2, Vector512<sbyte> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<sbyte> x, Vector512<sbyte> y, Vector512<sbyte> z, Vector512<sbyte> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<byte> Data0, Vector512<byte> Data1, Vector512<byte> Data2, Vector512<byte> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<byte> x, Vector512<byte> y, Vector512<byte> z, Vector512<byte> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<short> Data0, Vector512<short> Data1, Vector512<short> Data2, Vector512<short> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<short> x, Vector512<short> y, Vector512<short> z, Vector512<short> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ushort> Data0, Vector512<ushort> Data1, Vector512<ushort> Data2, Vector512<ushort> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<ushort> x, Vector512<ushort> y, Vector512<ushort> z, Vector512<ushort> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<int> Data0, Vector512<int> Data1, Vector512<int> Data2, Vector512<int> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<int> x, Vector512<int> y, Vector512<int> z, Vector512<int> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<uint> Data0, Vector512<uint> Data1, Vector512<uint> Data2, Vector512<uint> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<uint> x, Vector512<uint> y, Vector512<uint> z, Vector512<uint> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<long> Data0, Vector512<long> Data1, Vector512<long> Data2, Vector512<long> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<long> x, Vector512<long> y, Vector512<long> z, Vector512<long> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ulong> Data0, Vector512<ulong> Data1, Vector512<ulong> Data2, Vector512<ulong> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<ulong> x, Vector512<ulong> y, Vector512<ulong> z, Vector512<ulong> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ExInt128> Data0, Vector512<ExInt128> Data1, Vector512<ExInt128> Data2, Vector512<ExInt128> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<ExInt128> x, Vector512<ExInt128> y, Vector512<ExInt128> z, Vector512<ExInt128> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ExUInt128> Data0, Vector512<ExUInt128> Data1, Vector512<ExUInt128> Data2, Vector512<ExUInt128> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<ExUInt128> x, Vector512<ExUInt128> y, Vector512<ExUInt128> z, Vector512<ExUInt128> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<Int128> Data0, Vector512<Int128> Data1, Vector512<Int128> Data2, Vector512<Int128> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<Int128> x, Vector512<Int128> y, Vector512<Int128> z, Vector512<Int128> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<UInt128> Data0, Vector512<UInt128> Data1, Vector512<UInt128> Data2, Vector512<UInt128> Data3) YGroup4Zip(this IWVectorTraits512 athis, Vector512<UInt128> x, Vector512<UInt128> y, Vector512<UInt128> z, Vector512<UInt128> w) {
+            var data0 = athis.YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+#endif // BCL_TYPE_INT128
+
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2{T}(Vector512{T}, Vector512{T}, ShuffleControlG4)"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
@@ -56,6 +1070,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{float}, Vector512{float}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<float> Result0, Vector512<float> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<float> source0, Vector512<float> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -63,6 +1078,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{double}, Vector512{double}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<double> Result0, Vector512<double> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<double> source0, Vector512<double> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -70,6 +1086,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{sbyte}, Vector512{sbyte}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<sbyte> Result0, Vector512<sbyte> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<sbyte> source0, Vector512<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -77,6 +1094,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{byte}, Vector512{byte}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<byte> Result0, Vector512<byte> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<byte> source0, Vector512<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -84,6 +1102,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{short}, Vector512{short}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<short> Result0, Vector512<short> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<short> source0, Vector512<short> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -91,6 +1110,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{ushort}, Vector512{ushort}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<ushort> Result0, Vector512<ushort> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<ushort> source0, Vector512<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -98,6 +1118,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{int}, Vector512{int}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<int> Result0, Vector512<int> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<int> source0, Vector512<int> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -105,6 +1126,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{uint}, Vector512{uint}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<uint> Result0, Vector512<uint> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<uint> source0, Vector512<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -112,6 +1134,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{long}, Vector512{long}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<long> Result0, Vector512<long> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<long> source0, Vector512<long> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -119,6 +1142,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2(Vector512{ulong}, Vector512{ulong}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<ulong> Result0, Vector512<ulong> Result1) YShuffleG4X2(this IWVectorTraits512 athis, Vector512<ulong> source0, Vector512<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
@@ -165,6 +1189,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{float}, Vector512{float}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<float> Result0, Vector512<float> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<float> source0, Vector512<float> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -172,6 +1197,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{double}, Vector512{double}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<double> Result0, Vector512<double> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<double> source0, Vector512<double> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -179,6 +1205,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{sbyte}, Vector512{sbyte}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<sbyte> Result0, Vector512<sbyte> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<sbyte> source0, Vector512<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -186,6 +1213,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{byte}, Vector512{byte}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<byte> Result0, Vector512<byte> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<byte> source0, Vector512<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -193,6 +1221,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{short}, Vector512{short}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<short> Result0, Vector512<short> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<short> source0, Vector512<short> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -200,6 +1229,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{ushort}, Vector512{ushort}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<ushort> Result0, Vector512<ushort> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<ushort> source0, Vector512<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -207,6 +1237,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{int}, Vector512{int}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<int> Result0, Vector512<int> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<int> source0, Vector512<int> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -214,6 +1245,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{uint}, Vector512{uint}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<uint> Result0, Vector512<uint> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<uint> source0, Vector512<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -221,6 +1253,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{long}, Vector512{long}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<long> Result0, Vector512<long> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<long> source0, Vector512<long> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
@@ -228,6 +1261,7 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc cref="Vector512s.YShuffleG4X2_Const(Vector512{ulong}, Vector512{ulong}, ShuffleControlG4)"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<ulong> Result0, Vector512<ulong> Result1) YShuffleG4X2_Const(this IWVectorTraits512 athis, Vector512<ulong> source0, Vector512<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = athis.YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
