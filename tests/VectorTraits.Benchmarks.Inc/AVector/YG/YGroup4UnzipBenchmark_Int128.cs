@@ -374,6 +374,122 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
+        /// Sum YGroup4Unzip - Vector512 - base - Move.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum512Base_Move(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyEx> vector1Used = vector1.AsVector512().ExAs<TMy, TMyEx>();
+            Vector512<TMyEx> vector2Used = vector2.AsVector512().ExAs<TMy, TMyEx>();
+            Vector512<TMyEx> vector3Used = vector3.AsVector512().ExAs<TMy, TMyEx>();
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector512 result.
+            Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
+            Vector512<TMy> vrt2 = Vector512<TMy>.Zero;
+            Vector512<TMy> vrt3 = Vector512<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector512<TMyEx> p0 = ref Unsafe.As<TMy, Vector512<TMyEx>>(ref src[0]);
+            // a) Vector512 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup4Unzip_Move(p0, vector1Used, vector2Used, vector3Used, out var v1, out var v2, out var v3).ExAs<TMyEx, TMy>();
+                var vtemp1 = v1.ExAs<TMyEx, TMy>();
+                var vtemp2 = v2.ExAs<TMyEx, TMy>();
+                var vtemp3 = v3.ExAs<TMyEx, TMy>();
+                vrt = WVectorTraits512Base.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits512Base.Statics.Add(vrt1, vtemp1);
+                vrt2 = WVectorTraits512Base.Statics.Add(vrt2, vtemp2);
+                vrt3 = WVectorTraits512Base.Statics.Add(vrt3, vtemp3);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits512Base.Statics.Add(vrt, vrt1);
+            vrt2 = WVectorTraits512Base.Statics.Add(vrt2, vrt3);
+            vrt = WVectorTraits512Base.Statics.Add(vrt, vrt2);
+            rt = WVectorTraits512Base.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Base_Move() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn512 = StaticSum512Base_Move(srcArray, srcArray.Length);
+            CheckResult512("Sum512Base_Move");
+        }
+
+        /// <summary>
+        /// Sum YGroup4Unzip - Vector512 - base - Unzip.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum512Base_Unzip(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMyEx> vector1Used = vector1.AsVector512().ExAs<TMy, TMyEx>();
+            Vector512<TMyEx> vector2Used = vector2.AsVector512().ExAs<TMy, TMyEx>();
+            Vector512<TMyEx> vector3Used = vector3.AsVector512().ExAs<TMy, TMyEx>();
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector512 result.
+            Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
+            Vector512<TMy> vrt2 = Vector512<TMy>.Zero;
+            Vector512<TMy> vrt3 = Vector512<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector512<TMyEx> p0 = ref Unsafe.As<TMy, Vector512<TMyEx>>(ref src[0]);
+            // a) Vector512 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup4Unzip_Unzip(p0, vector1Used, vector2Used, vector3Used, out var v1, out var v2, out var v3).ExAs<TMyEx, TMy>();
+                var vtemp1 = v1.ExAs<TMyEx, TMy>();
+                var vtemp2 = v2.ExAs<TMyEx, TMy>();
+                var vtemp3 = v3.ExAs<TMyEx, TMy>();
+                vrt = WVectorTraits512Base.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits512Base.Statics.Add(vrt1, vtemp1);
+                vrt2 = WVectorTraits512Base.Statics.Add(vrt2, vtemp2);
+                vrt3 = WVectorTraits512Base.Statics.Add(vrt3, vtemp3);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits512Base.Statics.Add(vrt, vrt1);
+            vrt2 = WVectorTraits512Base.Statics.Add(vrt2, vrt3);
+            vrt = WVectorTraits512Base.Statics.Add(vrt, vrt2);
+            rt = WVectorTraits512Base.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Base_Unzip() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn512 = StaticSum512Base_Unzip(srcArray, srcArray.Length);
+            CheckResult512("Sum512Base_Unzip");
+        }
+
+        /// <summary>
         /// Sum YGroup4Unzip - Vector512 - base.
         /// </summary>
         /// <param name="src">Source array.</param>

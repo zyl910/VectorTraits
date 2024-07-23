@@ -370,54 +370,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup2Zip - Vector512 - base - Move2.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum512Base_Move2(TMy[] src, int srcCount) {
-            TMy rt = 0; // Result.
-            const int GroupSize = 1;
-            int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector512<TMy> vector1Used = vector1.AsVector512();
-            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector512 result.
-            Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
-            int i;
-            // Body.
-            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
-            // a) Vector512 processs.
-            for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup2Zip_Move2(p0.ExAs<TMy, TMyEx>(), vector1Used.ExAs<TMy, TMyEx>(), out var v1).ExAs<TMyEx, TMy>();
-                var vtemp1 = v1.ExAs<TMyEx, TMy>();
-                vrt = WVectorTraits512Base.Statics.Add(vrt, vtemp);
-                vrt1 = WVectorTraits512Base.Statics.Add(vrt1, vtemp1);
-                p0 = ref Unsafe.Add(ref p0, GroupSize);
-            }
-            // b) Remainder processs.
-            // ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
-            // for (i = 0; i < cntRem; ++i) {
-            //     // Ignore
-            // }
-            // Reduce.
-            vrt = WVectorTraits512Base.Statics.Add(vrt, vrt1);
-            rt = WVectorTraits512Base.Statics.Sum(vrt);
-            return rt;
-        }
-
-        [Benchmark]
-        public void Sum512Base_Move2() {
-            if (BenchmarkUtil.IsLastRun) {
-                //Debugger.Break();
-                Volatile.Write(ref dstTMy, 0);
-            }
-            dstOn512 = StaticSum512Base_Move2(srcArray, srcArray.Length);
-            CheckResult512("Sum512Base_Move2");
-        }
-
-        /// <summary>
         /// Sum YGroup2Zip - Vector512 - base.
         /// </summary>
         /// <param name="src">Source array.</param>
@@ -512,6 +464,55 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             }
             dstOn512 = StaticSum512Avx512(srcArray, srcArray.Length);
             CheckResult512("Sum512Avx512");
+        }
+
+        /// <summary>
+        /// Sum YGroup2Zip - Vector512 - Avx512 - Imm.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum512Avx512_Imm(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector512<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector512<TMy> vector1Used = vector1.AsVector512();
+            Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector512 result.
+            Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
+            // a) Vector512 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector512<TMy> vtemp = WVectorTraits512Avx512.Statics.YGroup2Zip_Int128_Imm(p0.ExAs<TMy, TMyEx>(), vector1Used.ExAs<TMy, TMyEx>(), out var v1).ExAs<TMyEx, TMy>();
+                var vtemp1 = v1.ExAs<TMyEx, TMy>();
+                vrt = WVectorTraits512Avx512.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits512Avx512.Statics.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector512<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits512Avx512.Statics.Add(vrt, vrt1);
+            rt = WVectorTraits512Avx512.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum512Avx512_Imm() {
+            WVectorTraits512Avx512.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn512 = StaticSum512Avx512_Imm(srcArray, srcArray.Length);
+            CheckResult512("Sum512Avx512_Imm");
         }
 
 #endif // BENCHMARKS_ALGORITHM
