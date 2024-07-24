@@ -1408,7 +1408,7 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<ulong> YGroup4Zip_ShuffleX2Longer_UInt64_Data01 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
-            get => Vector256.Create((ulong)0, 4, 1, 5);
+            get => Vector256.Create((ulong)0, 2, 4, 6);
         }
 #else
             get;
@@ -1420,7 +1420,7 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<ulong> YGroup4Zip_ShuffleX2Longer_UInt64_Data23 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
-            get => Vector256.Create((ulong)2, 6, 3, 7);
+            get => Vector256.Create((ulong)1, 3, 5, 7);
         }
 #else
             get;
