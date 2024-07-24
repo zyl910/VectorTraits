@@ -54,6 +54,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YR.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits128Test\Vector128Tests_YG.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_A.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\IWVectorTraits256Test\Vector256Tests_B.cs" />

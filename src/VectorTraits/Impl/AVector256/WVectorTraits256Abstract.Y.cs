@@ -8,8 +8,6 @@ using System.Text;
 using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
-using System.Numerics;
-using System.Runtime.InteropServices;
 #endif
 using Zyl.VectorTraits.ExTypes;
 

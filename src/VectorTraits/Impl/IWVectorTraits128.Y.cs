@@ -15,6 +15,7 @@ using System.Runtime.Intrinsics.Arm;
 #if NET8_0_OR_GREATER
 using System.Runtime.Intrinsics.Wasm;
 #endif // NET8_0_OR_GREATER
+using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Numerics;
 
 namespace Zyl.VectorTraits.Impl {
@@ -286,6 +287,672 @@ namespace Zyl.VectorTraits.Impl {
         /// <inheritdoc cref="YCopySign(Vector128{float}, Vector128{float})"/>
         /// <seealso cref="MathINumber.CopySign(long, long)"/>
         Vector128<long> YCopySign(Vector128<long> value, Vector128<long> sign);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2Unzip</c> (运行 <c>YGroup2Unzip</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2UnzipEven + YGroup2UnzipOdd = YGroup2Unzip</c>.</para>
+        /// <para>Inverse function (逆函数): <see cref="YGroup2Zip_AcceleratedTypes">YGroup2Zip</see>.</para>
+        /// <para>Sample (示例).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Elements</term>
+        ///        <description>Result</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>1</term>
+        ///        <description><c>f({x[0]}, {y[0]}) = ({x[0]}, {y[0]})</c>. (Fallback)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>2</term>
+        ///        <description><c>f({x[0], y[0]}, {x[1], y[1]}) = ({x[0], x[1]}, {y[0], y[1]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>4</term>
+        ///        <description><c>f({x[0], y[0], x[1], y[1]}, {x[2], y[2], x[3], y[3]}) = ({x[0], x[1], x[2], x[3]}, {y[0], y[1], y[2], y[3]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>8</term>
+        ///        <description><c>f({x[0], y[0], x[1], y[1], x[2], y[2], x[3], y[3]}, {x[4], y[4], x[5], y[5], x[6], y[6], x[7], y[7]}) = ({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>16</term>
+        ///        <description><c>f({x[0], y[0], x[1], y[1], x[2], y[2], x[3], y[3], x[4], y[4], x[5], y[5], x[6], y[6], x[7], y[7]}, {x[8], y[8], x[9], y[9], x[10], y[10], x[11], y[11], x[12], y[12], x[13], y[13], x[14], y[14], x[15], y[15]}) = ({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12], x[13], x[14], x[15]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7], y[8], y[9], y[10], y[11], y[12], y[13], y[14], y[15]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>...</term>
+        ///        <description>...</description>
+        ///    </item>
+        /// </list>
+        /// <para>Related hardware instructions (相关的硬件指令).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{byte}, Vector128{byte})">UZP1(vuzp1q_u8)</see>/<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{byte}, Vector128{byte})">UZP2(vuzp2q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{ushort}, Vector128{ushort})">UZP1(vuzp1q_u16)</see>/<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{ushort}, Vector128{ushort})">UZP2(vuzp2q_u16)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{uint}, Vector128{uint})">UZP1(vuzp1q_u32)</see>/<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{uint}, Vector128{uint})">UZP2(vuzp2q_u32)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{ulong}, Vector128{ulong})">UZP1(vuzp1q_u64)</see>/<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{ulong}, Vector128{ulong})">UZP2(vuzp2q_u64)</see></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        /// </list>
+        /// </remarks>
+        /// <seealso cref="YGroup2Unzip(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
+        TypeCodeFlags YGroup2Unzip_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// De-Interleave 2-element groups into 2 vectors. It converts the 2-element groups AoS to SoA (将2-元素组解交织为2个向量. 它能将2元素组的 数组结构体 转为 结构体数组).
+        /// Mnemonic: <c>x[i] =: element_ref(2*i, data0, data1)</c>, <c>y[i] =: element_ref(2*i+1, data0, data1)</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 2-element groups - Part 0 (由2元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 2-element groups - Part 1 (由2元素组所组成的向量 - 第1部分).</param>
+        /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
+        /// <seealso cref="YGroup2Unzip_AcceleratedTypes"/>
+        Vector128<float> YGroup2Unzip(Vector128<float> data0, Vector128<float> data1, out Vector128<float> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<double> YGroup2Unzip(Vector128<double> data0, Vector128<double> data1, out Vector128<double> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<sbyte> YGroup2Unzip(Vector128<sbyte> data0, Vector128<sbyte> data1, out Vector128<sbyte> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<byte> YGroup2Unzip(Vector128<byte> data0, Vector128<byte> data1, out Vector128<byte> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<short> YGroup2Unzip(Vector128<short> data0, Vector128<short> data1, out Vector128<short> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<ushort> YGroup2Unzip(Vector128<ushort> data0, Vector128<ushort> data1, out Vector128<ushort> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<int> YGroup2Unzip(Vector128<int> data0, Vector128<int> data1, out Vector128<int> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<uint> YGroup2Unzip(Vector128<uint> data0, Vector128<uint> data1, out Vector128<uint> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<long> YGroup2Unzip(Vector128<long> data0, Vector128<long> data1, out Vector128<long> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<ulong> YGroup2Unzip(Vector128<ulong> data0, Vector128<ulong> data1, out Vector128<ulong> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<ExInt128> YGroup2Unzip(Vector128<ExInt128> data0, Vector128<ExInt128> data1, out Vector128<ExInt128> y);
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<ExUInt128> YGroup2Unzip(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1, out Vector128<ExUInt128> y);
+
+        /// <summary>
+        /// De-Interleave 2-element groups into 2 vectors. It converts the 2-element groups AoS to SoA (将2-元素组解交织为2个向量. 它能将2元素组的 数组结构体 转为 结构体数组). Element size fixed to 128 bits (元素尺寸固定为128位).
+        /// Mnemonic: <c>x[i] =: element_ref(2*i, data0, data1)</c>, <c>y[i] =: element_ref(2*i+1, data0, data1)</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <param name="data0">A vector made of 2-element groups - Part 0 (由2元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 2-element groups - Part 1 (由2元素组所组成的向量 - 第1部分).</param>
+        /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
+        /// <seealso cref="YGroup2Unzip_AcceleratedTypes"/>
+        Vector128<T> YGroup2Unzip_Int128<T>(Vector128<T> data0, Vector128<T> data1, out Vector128<T> y) where T : struct;
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2UnzipEven</c> (运行 <c>YGroup2UnzipEven</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2UnzipEven + YGroup2UnzipOdd = YGroup2Unzip</c>. See more: <see cref="YGroup2Unzip_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2UnzipEven(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags YGroup2UnzipEven_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// De-Interleave the 2-element groups into 2 vectors, and return the vector of even positions (将2-元素组解交织为2个向量, 并返回偶数位置的数据).
+        /// Mnemonic: <c>rt[i] =: element_ref(2*i, data0, data1)</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 2-element groups - Part 0 (由2元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 2-element groups - Part 1 (由2元素组所组成的向量 - 第1部分).</param>
+        /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
+        /// <seealso cref="YGroup2UnzipEven_AcceleratedTypes"/>
+        Vector128<float> YGroup2UnzipEven(Vector128<float> data0, Vector128<float> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<double> YGroup2UnzipEven(Vector128<double> data0, Vector128<double> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<sbyte> YGroup2UnzipEven(Vector128<sbyte> data0, Vector128<sbyte> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<byte> YGroup2UnzipEven(Vector128<byte> data0, Vector128<byte> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<short> YGroup2UnzipEven(Vector128<short> data0, Vector128<short> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<ushort> YGroup2UnzipEven(Vector128<ushort> data0, Vector128<ushort> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<int> YGroup2UnzipEven(Vector128<int> data0, Vector128<int> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<uint> YGroup2UnzipEven(Vector128<uint> data0, Vector128<uint> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<long> YGroup2UnzipEven(Vector128<long> data0, Vector128<long> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<ulong> YGroup2UnzipEven(Vector128<ulong> data0, Vector128<ulong> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<ExInt128> YGroup2UnzipEven(Vector128<ExInt128> data0, Vector128<ExInt128> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
+        Vector128<ExUInt128> YGroup2UnzipEven(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2UnzipOdd</c> (运行 <c>YGroup2UnzipOdd</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2UnzipEven + YGroup2UnzipOdd = YGroup2Unzip</c>. See more: <see cref="YGroup2Unzip_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2UnzipOdd(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags YGroup2UnzipOdd_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// De-Interleave the 2-element groups into 2 vectors, and return the vector of odd positions (将2-元素组解交织为2个向量, 并返回奇数位置的数据).
+        /// Mnemonic: <c>rt[i] =: element_ref(2*i+1, data0, data1)</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 2-element groups - Part 0 (由2元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 2-element groups - Part 1 (由2元素组所组成的向量 - 第1部分).</param>
+        /// <returns>Returns the vector made of the Y-components (返回Y分量所组成的向量).</returns>
+        /// <seealso cref="YGroup2UnzipOdd_AcceleratedTypes"/>
+        Vector128<float> YGroup2UnzipOdd(Vector128<float> data0, Vector128<float> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<double> YGroup2UnzipOdd(Vector128<double> data0, Vector128<double> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<sbyte> YGroup2UnzipOdd(Vector128<sbyte> data0, Vector128<sbyte> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<byte> YGroup2UnzipOdd(Vector128<byte> data0, Vector128<byte> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<short> YGroup2UnzipOdd(Vector128<short> data0, Vector128<short> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<ushort> YGroup2UnzipOdd(Vector128<ushort> data0, Vector128<ushort> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<int> YGroup2UnzipOdd(Vector128<int> data0, Vector128<int> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<uint> YGroup2UnzipOdd(Vector128<uint> data0, Vector128<uint> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<long> YGroup2UnzipOdd(Vector128<long> data0, Vector128<long> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<ulong> YGroup2UnzipOdd(Vector128<ulong> data0, Vector128<ulong> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<ExInt128> YGroup2UnzipOdd(Vector128<ExInt128> data0, Vector128<ExInt128> data1);
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
+        Vector128<ExUInt128> YGroup2UnzipOdd(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2Zip</c> (运行 <c>YGroup2Zip</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2ZipLow + YGroup2ZipHigh = YGroup2Zip </c>.</para>
+        /// <para>Inverse function (逆函数): <see cref="YGroup2Unzip_AcceleratedTypes">YGroup2Unzip</see>.</para>
+        /// <para>Sample (示例).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Elements</term>
+        ///        <description>Result</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>1</term>
+        ///        <description><c>f({x[0]}, {y[0]}) = ({x[0]}, {y[0]})</c>. (Fallback)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>2</term>
+        ///        <description><c>f({x[0], x[1]}, {y[0], y[1]}) = ({x[0], y[0]}, {x[1], y[1]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>4</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3]}, {y[0], y[1], y[2], y[3]}) = ({x[0], y[0], x[1], y[1]}, {x[2], y[2], x[3], y[3]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>8</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7]}) = ({x[0], y[0], x[1], y[1], x[2], y[2], x[3], y[3]}, {x[4], y[4], x[5], y[5], x[6], y[6], x[7], y[7]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>16</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12], x[13], x[14], x[15]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7], y[8], y[9], y[10], y[11], y[12], y[13], y[14], y[15]}) = ({x[0], y[0], x[1], y[1], x[2], y[2], x[3], y[3], x[4], y[4], x[5], y[5], x[6], y[6], x[7], y[7]}, {x[8], y[8], x[9], y[9], x[10], y[10], x[11], y[11], x[12], y[12], x[13], y[13], x[14], y[14], x[15], y[15]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>...</term>
+        ///        <description>...</description>
+        ///    </item>
+        /// </list>
+        /// <para>Related hardware instructions (相关的硬件指令).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{byte}, Vector128{byte})">ZIP1(vzip1q_u8)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{byte}, Vector128{byte})">ZIP2(vzip2q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{ushort}, Vector128{ushort})">ZIP1(vzip1q_u16)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{ushort}, Vector128{ushort})">ZIP2(vzip2q_u16)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{uint}, Vector128{uint})">ZIP1(vzip1q_u32)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{uint}, Vector128{uint})">ZIP2(vzip2q_u32)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{ulong}, Vector128{ulong})">ZIP1(vzip1q_u64)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{ulong}, Vector128{ulong})">ZIP2(vzip2q_u64)</see></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{byte}, Vector128{byte})">PUNPCKLBW(_mm_unpacklo_epi8)</see>/<see cref="Sse2.UnpackHigh(Vector128{byte}, Vector128{byte})">PUNPCKHBW(_mm_unpackhi_epi8)</see></description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{ushort}, Vector128{ushort})">PUNPCKLWD(_mm_unpacklo_epi16)</see>/<see cref="Sse2.UnpackHigh(Vector128{ushort}, Vector128{ushort})">PUNPCKHWD(_mm_unpackhi_epi16)</see></description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{uint}, Vector128{uint})">PUNPCKLDQ(_mm_unpacklo_epi32)</see>/<see cref="Sse2.UnpackHigh(Vector128{uint}, Vector128{uint})">PUNPCKHDQ(_mm_unpackhi_epi32)</see></description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{ulong}, Vector128{ulong})">PUNPCKLQDQ(_mm_unpacklo_epi64)</see>/<see cref="Sse2.UnpackHigh(Vector128{ulong}, Vector128{ulong})">PUNPCKHQDQ(_mm_unpackhi_epi64)</see></description>
+        ///    </item>
+        /// </list>
+        /// </remarks>
+        /// <seealso cref="YGroup2Zip(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
+        TypeCodeFlags YGroup2Zip_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups. It converts the 2-element groups SoA to AoS (将2个向量交织为2-元素组. 它能将2元素组的 结构体数组 转为 数组结构体).
+        /// Mnemonic: <c>element_ref(i, data0, data1) := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := i/2</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        /// <seealso cref="YGroup2Zip_AcceleratedTypes"/>
+        Vector128<float> YGroup2Zip(Vector128<float> x, Vector128<float> y, out Vector128<float> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<double> YGroup2Zip(Vector128<double> x, Vector128<double> y, out Vector128<double> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<sbyte> YGroup2Zip(Vector128<sbyte> x, Vector128<sbyte> y, out Vector128<sbyte> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<byte> YGroup2Zip(Vector128<byte> x, Vector128<byte> y, out Vector128<byte> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<short> YGroup2Zip(Vector128<short> x, Vector128<short> y, out Vector128<short> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<ushort> YGroup2Zip(Vector128<ushort> x, Vector128<ushort> y, out Vector128<ushort> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<int> YGroup2Zip(Vector128<int> x, Vector128<int> y, out Vector128<int> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<uint> YGroup2Zip(Vector128<uint> x, Vector128<uint> y, out Vector128<uint> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<long> YGroup2Zip(Vector128<long> x, Vector128<long> y, out Vector128<long> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<ulong> YGroup2Zip(Vector128<ulong> x, Vector128<ulong> y, out Vector128<ulong> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<ExInt128> YGroup2Zip(Vector128<ExInt128> x, Vector128<ExInt128> y, out Vector128<ExInt128> data1);
+
+        /// <inheritdoc cref="YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+        Vector128<ExUInt128> YGroup2Zip(Vector128<ExUInt128> x, Vector128<ExUInt128> y, out Vector128<ExUInt128> data1);
+
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups. It converts the 2-element groups SoA to AoS (将2个向量交织为2-元素组. 它能将2元素组的 结构体数组 转为 数组结构体). Element size fixed to 128 bits (元素尺寸固定为128位).
+        /// Mnemonic: <c>element_ref(i, data0, data1) := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := i/2</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        /// <seealso cref="YGroup2Zip_AcceleratedTypes"/>
+        Vector128<T> YGroup2Zip_Int128<T>(Vector128<T> x, Vector128<T> y, out Vector128<T> data1) where T : struct;
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2ZipHigh</c> (运行 <c>YGroup2ZipHigh</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2ZipLow + YGroup2ZipHigh = YGroup2Zip </c>. See more: <see cref="YGroup2Zip_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2ZipHigh(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags YGroup2ZipHigh_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups and returns the data in the high position. (将2个向量交织为2-元素组, 并返回高位置的数据).
+        /// Mnemonic: <c>rt[i] := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := (i+T.Count)/2</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <returns>Returns part 1 of the interleaved data (返回交织后数据的第1部分).</returns>
+        /// <seealso cref="YGroup2ZipHigh_AcceleratedTypes"/>
+        Vector128<float> YGroup2ZipHigh(Vector128<float> x, Vector128<float> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<double> YGroup2ZipHigh(Vector128<double> x, Vector128<double> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<sbyte> YGroup2ZipHigh(Vector128<sbyte> x, Vector128<sbyte> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<byte> YGroup2ZipHigh(Vector128<byte> x, Vector128<byte> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<short> YGroup2ZipHigh(Vector128<short> x, Vector128<short> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<ushort> YGroup2ZipHigh(Vector128<ushort> x, Vector128<ushort> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<int> YGroup2ZipHigh(Vector128<int> x, Vector128<int> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<uint> YGroup2ZipHigh(Vector128<uint> x, Vector128<uint> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<long> YGroup2ZipHigh(Vector128<long> x, Vector128<long> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<ulong> YGroup2ZipHigh(Vector128<ulong> x, Vector128<ulong> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<ExInt128> YGroup2ZipHigh(Vector128<ExInt128> x, Vector128<ExInt128> y);
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
+        Vector128<ExUInt128> YGroup2ZipHigh(Vector128<ExUInt128> x, Vector128<ExUInt128> y);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2ZipLow</c> (运行 <c>YGroup2ZipLow</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2ZipLow + YGroup2ZipHigh = YGroup2Zip </c>. See more: <see cref="YGroup2Zip_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2ZipLow(Vector128{byte}, Vector128{byte})"/>
+        TypeCodeFlags YGroup2ZipLow_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups and returns the data in the low position. (将2个向量交织为2-元素组, 并返回低位置的数据).
+        /// Mnemonic: <c>rt[i] := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := i/2</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        /// <seealso cref="YGroup2ZipLow_AcceleratedTypes"/>
+        Vector128<float> YGroup2ZipLow(Vector128<float> x, Vector128<float> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<double> YGroup2ZipLow(Vector128<double> x, Vector128<double> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<sbyte> YGroup2ZipLow(Vector128<sbyte> x, Vector128<sbyte> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<byte> YGroup2ZipLow(Vector128<byte> x, Vector128<byte> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<short> YGroup2ZipLow(Vector128<short> x, Vector128<short> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<ushort> YGroup2ZipLow(Vector128<ushort> x, Vector128<ushort> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<int> YGroup2ZipLow(Vector128<int> x, Vector128<int> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<uint> YGroup2ZipLow(Vector128<uint> x, Vector128<uint> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<long> YGroup2ZipLow(Vector128<long> x, Vector128<long> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<ulong> YGroup2ZipLow(Vector128<ulong> x, Vector128<ulong> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<ExInt128> YGroup2ZipLow(Vector128<ExInt128> x, Vector128<ExInt128> y);
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
+        Vector128<ExUInt128> YGroup2ZipLow(Vector128<ExUInt128> x, Vector128<ExUInt128> y);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup4Unzip</c> (运行 <c>YGroup4Unzip</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>Inverse function (逆函数): <see cref="YGroup4Zip_AcceleratedTypes">YGroup4Zip</see>.</para>
+        /// <para>Sample (示例).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Elements</term>
+        ///        <description>Result</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>1</term>
+        ///        <description><c>f({x[0]}, {y[0]}, {z[0]}, {w[0]}) = ({x[0]}, {y[0]}, {z[0]}, {w[0]})</c>. (Fallback)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>2</term>
+        ///        <description><c>f({x[0], y[0]}, {z[0], w[0]}, {x[1], y[1]}, {z[1], w[1]}) = ({x[0], x[1]}, {y[0], y[1]}, {z[0], z[1]}, {w[0], w[1]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>4</term>
+        ///        <description><c>f({x[0], y[0], z[0], w[0]}, {x[1], y[1], z[1], w[1]}, {x[2], y[2], z[2], w[2]}, {x[3], y[3], z[3], w[3]}) = ({x[0], x[1], x[2], x[3]}, {y[0], y[1], y[2], y[3]}, {z[0], z[1], z[2], z[3]}, {w[0], w[1], w[2], w[3]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>8</term>
+        ///        <description><c>f({x[0], y[0], z[0], w[0], x[1], y[1], z[1], w[1]}, {x[2], y[2], z[2], w[2], x[3], y[3], z[3], w[3]}, {x[4], y[4], z[4], w[4], x[5], y[5], z[5], w[5]}, {x[6], y[6], z[6], w[6], x[7], y[7], z[7], w[7]}) = ({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7]}, {z[0], z[1], z[2], z[3], z[4], z[5], z[6], z[7]}, {w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>16</term>
+        ///        <description><c>f({x[0], y[0], z[0], w[0], x[1], y[1], z[1], w[1], x[2], y[2], z[2], w[2], x[3], y[3], z[3], w[3]}, {x[4], y[4], z[4], w[4], x[5], y[5], z[5], w[5], x[6], y[6], z[6], w[6], x[7], y[7], z[7], w[7]}, {x[8], y[8], z[8], w[8], x[9], y[9], z[9], w[9], x[10], y[10], z[10], w[10], x[11], y[11], z[11], w[11]}, {x[12], y[12], z[12], w[12], x[13], y[13], z[13], w[13], x[14], y[14], z[14], w[14], x[15], y[15], z[15], w[15]}) = ({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12], x[13], x[14], x[15]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7], y[8], y[9], y[10], y[11], y[12], y[13], y[14], y[15]}, {z[0], z[1], z[2], z[3], z[4], z[5], z[6], z[7], z[8], z[9], z[10], z[11], z[12], z[13], z[14], z[15]}, {w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10], w[11], w[12], w[13], w[14], w[15]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>...</term>
+        ///        <description>...</description>
+        ///    </item>
+        /// </list>
+        /// </remarks>
+        /// <seealso cref="YGroup4Unzip(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+        /// <seealso cref="YGroup2Zip_AcceleratedTypes"/>
+        TypeCodeFlags YGroup4Unzip_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// De-Interleave 4-element groups into 4 vectors. It converts the 4-element groups AoS to SoA. It can also deinterleave packed RGBA pixel data into R,G,B,A planar data (将4-元素组解交织为4个向量. 它能将4元素组的 数组结构体 转为 结构体数组. 它还能将 已打包的RGBA像素数据, 解交织为 R,G,B,A 平面数据).
+        /// Mnemonic: <c>x[i] =: element_ref(4*i, data0, data1, data2, data3)</c>, <c>y[i] =: element_ref(4*i+1, data0, data1, data2, data3)</c>, <c>z[i] =: element_ref(4*i+2, data0, data1, data2, data3)</c>, <c>w[i] =: element_ref(4*i+3, data0, data1, data2, data3)</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 4-element groups - Part 0 (由4元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 4-element groups - Part 1 (由4元素组所组成的向量 - 第1部分).</param>
+        /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
+        /// <param name="data3">A vector made of 4-element groups - Part 3 (由4元素组所组成的向量 - 第3部分).</param>
+        /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <param name="z">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <param name="w">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
+        /// <seealso cref="YGroup4Unzip_AcceleratedTypes"/>
+        Vector128<float> YGroup4Unzip(Vector128<float> data0, Vector128<float> data1, Vector128<float> data2, Vector128<float> data3, out Vector128<float> y, out Vector128<float> z, out Vector128<float> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<double> YGroup4Unzip(Vector128<double> data0, Vector128<double> data1, Vector128<double> data2, Vector128<double> data3, out Vector128<double> y, out Vector128<double> z, out Vector128<double> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<sbyte> YGroup4Unzip(Vector128<sbyte> data0, Vector128<sbyte> data1, Vector128<sbyte> data2, Vector128<sbyte> data3, out Vector128<sbyte> y, out Vector128<sbyte> z, out Vector128<sbyte> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<byte> YGroup4Unzip(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, Vector128<byte> data3, out Vector128<byte> y, out Vector128<byte> z, out Vector128<byte> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<short> YGroup4Unzip(Vector128<short> data0, Vector128<short> data1, Vector128<short> data2, Vector128<short> data3, out Vector128<short> y, out Vector128<short> z, out Vector128<short> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<ushort> YGroup4Unzip(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, Vector128<ushort> data3, out Vector128<ushort> y, out Vector128<ushort> z, out Vector128<ushort> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<int> YGroup4Unzip(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, Vector128<int> data3, out Vector128<int> y, out Vector128<int> z, out Vector128<int> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<uint> YGroup4Unzip(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, Vector128<uint> data3, out Vector128<uint> y, out Vector128<uint> z, out Vector128<uint> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<long> YGroup4Unzip(Vector128<long> data0, Vector128<long> data1, Vector128<long> data2, Vector128<long> data3, out Vector128<long> y, out Vector128<long> z, out Vector128<long> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<ulong> YGroup4Unzip(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, Vector128<ulong> data3, out Vector128<ulong> y, out Vector128<ulong> z, out Vector128<ulong> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<ExInt128> YGroup4Unzip(Vector128<ExInt128> data0, Vector128<ExInt128> data1, Vector128<ExInt128> data2, Vector128<ExInt128> data3, out Vector128<ExInt128> y, out Vector128<ExInt128> z, out Vector128<ExInt128> w);
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<ExUInt128> YGroup4Unzip(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1, Vector128<ExUInt128> data2, Vector128<ExUInt128> data3, out Vector128<ExUInt128> y, out Vector128<ExUInt128> z, out Vector128<ExUInt128> w);
+
+        /// <summary>
+        /// De-Interleave 4-element groups into 4 vectors. It converts the 4-element groups AoS to SoA. It can also deinterleave packed RGBA pixel data into R,G,B,A planar data (将4-元素组解交织为4个向量. 它能将4元素组的 数组结构体 转为 结构体数组. 它还能将 已打包的RGBA像素数据, 解交织为 R,G,B,A 平面数据). Element size fixed to 128 bits (元素尺寸固定为128位).
+        /// Mnemonic: <c>x[i] =: element_ref(4*i, data0, data1, data2, data3)</c>, <c>y[i] =: element_ref(4*i+1, data0, data1, data2, data3)</c>, <c>z[i] =: element_ref(4*i+2, data0, data1, data2, data3)</c>, <c>w[i] =: element_ref(4*i+3, data0, data1, data2, data3)</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <param name="data0">A vector made of 4-element groups - Part 0 (由4元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 4-element groups - Part 1 (由4元素组所组成的向量 - 第1部分).</param>
+        /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
+        /// <param name="data3">A vector made of 4-element groups - Part 3 (由4元素组所组成的向量 - 第3部分).</param>
+        /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <param name="z">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <param name="w">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
+        Vector128<T> YGroup4Unzip_Int128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, Vector128<T> data3, out Vector128<T> y, out Vector128<T> z, out Vector128<T> w) where T : struct;
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup4Unzip</c> (运行 <c>YGroup4Unzip</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>Inverse function (逆函数): <see cref="YGroup4Unzip_AcceleratedTypes">YGroup4Unzip</see>.</para>
+        /// <para>Sample (示例).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Elements</term>
+        ///        <description>Result</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>1</term>
+        ///        <description><c>f({x[0]}, {y[0]}, {z[0]}, {w[0]}) = ({x[0]}, {y[0]}, {z[0]}, {w[0]})</c>. (Fallback)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>2</term>
+        ///        <description><c>f({x[0], x[1]}, {y[0], y[1]}, {z[0], z[1]}, {w[0], w[1]}) = ({x[0], y[0]}, {z[0], w[0]}, {x[1], y[1]}, {z[1], w[1]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>4</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3]}, {y[0], y[1], y[2], y[3]}, {z[0], z[1], z[2], z[3]}, {w[0], w[1], w[2], w[3]}) = ({x[0], y[0], z[0], w[0]}, {x[1], y[1], z[1], w[1]}, {x[2], y[2], z[2], w[2]}, {x[3], y[3], z[3], w[3]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>8</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7]}, {z[0], z[1], z[2], z[3], z[4], z[5], z[6], z[7]}, {w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7]}) = ({x[0], y[0], z[0], w[0], x[1], y[1], z[1], w[1]}, {x[2], y[2], z[2], w[2], x[3], y[3], z[3], w[3]}, {x[4], y[4], z[4], w[4], x[5], y[5], z[5], w[5]}, {x[6], y[6], z[6], w[6], x[7], y[7], z[7], w[7]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>16</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12], x[13], x[14], x[15]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7], y[8], y[9], y[10], y[11], y[12], y[13], y[14], y[15]}, {z[0], z[1], z[2], z[3], z[4], z[5], z[6], z[7], z[8], z[9], z[10], z[11], z[12], z[13], z[14], z[15]}, {w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7], w[8], w[9], w[10], w[11], w[12], w[13], w[14], w[15]}) = ({x[0], y[0], z[0], w[0], x[1], y[1], z[1], w[1], x[2], y[2], z[2], w[2], x[3], y[3], z[3], w[3]}, {x[4], y[4], z[4], w[4], x[5], y[5], z[5], w[5], x[6], y[6], z[6], w[6], x[7], y[7], z[7], w[7]}, {x[8], y[8], z[8], w[8], x[9], y[9], z[9], w[9], x[10], y[10], z[10], w[10], x[11], y[11], z[11], w[11]}, {x[12], y[12], z[12], w[12], x[13], y[13], z[13], w[13], x[14], y[14], z[14], w[14], x[15], y[15], z[15], w[15]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>...</term>
+        ///        <description>...</description>
+        ///    </item>
+        /// </list>
+        /// </remarks>
+        /// <seealso cref="YGroup4Zip(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+        /// <seealso cref="YGroup2Unzip_AcceleratedTypes"/>
+        TypeCodeFlags YGroup4Zip_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Interleave 4 vectors into 4-element groups. It converts the 4-element groups SoA to AoS. It can also interleave R,G,B,A planar data into packed RGBA pixel data (将4个向量交织为4-元素组. 它能将4元素组的 结构体数组 转为 数组结构体. 它还能将 R,G,B,A 平面数据, 交织为 已打包的RGBA像素数据).
+        /// Mnemonic: <c>element_ref(i, data0, data1, data2, data3) := (0==(i&amp;3))?( x[i2] ):( (1==(i&amp;3))?( y[i2] ):( (2==(i&amp;s3))?( z[i2] ):( w[i2] ) ) )</c>, <c>i2 := i/4</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <param name="z">A vector consisting purely of Z-components (纯由Z分量所组成的向量).</param>
+        /// <param name="w">A vector consisting purely of W-components (纯由W分量所组成的向量).</param>
+        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
+        /// <param name="data2">Returns part 2 of the interleaved data (返回交织后数据的第2部分).</param>
+        /// <param name="data3">Returns part 3 of the interleaved data (返回交织后数据的第3部分).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        Vector128<float> YGroup4Zip(Vector128<float> x, Vector128<float> y, Vector128<float> z, Vector128<float> w, out Vector128<float> data1, out Vector128<float> data2, out Vector128<float> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<double> YGroup4Zip(Vector128<double> x, Vector128<double> y, Vector128<double> z, Vector128<double> w, out Vector128<double> data1, out Vector128<double> data2, out Vector128<double> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<sbyte> YGroup4Zip(Vector128<sbyte> x, Vector128<sbyte> y, Vector128<sbyte> z, Vector128<sbyte> w, out Vector128<sbyte> data1, out Vector128<sbyte> data2, out Vector128<sbyte> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<byte> YGroup4Zip(Vector128<byte> x, Vector128<byte> y, Vector128<byte> z, Vector128<byte> w, out Vector128<byte> data1, out Vector128<byte> data2, out Vector128<byte> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<short> YGroup4Zip(Vector128<short> x, Vector128<short> y, Vector128<short> z, Vector128<short> w, out Vector128<short> data1, out Vector128<short> data2, out Vector128<short> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<ushort> YGroup4Zip(Vector128<ushort> x, Vector128<ushort> y, Vector128<ushort> z, Vector128<ushort> w, out Vector128<ushort> data1, out Vector128<ushort> data2, out Vector128<ushort> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<int> YGroup4Zip(Vector128<int> x, Vector128<int> y, Vector128<int> z, Vector128<int> w, out Vector128<int> data1, out Vector128<int> data2, out Vector128<int> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<uint> YGroup4Zip(Vector128<uint> x, Vector128<uint> y, Vector128<uint> z, Vector128<uint> w, out Vector128<uint> data1, out Vector128<uint> data2, out Vector128<uint> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<long> YGroup4Zip(Vector128<long> x, Vector128<long> y, Vector128<long> z, Vector128<long> w, out Vector128<long> data1, out Vector128<long> data2, out Vector128<long> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<ulong> YGroup4Zip(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z, Vector128<ulong> w, out Vector128<ulong> data1, out Vector128<ulong> data2, out Vector128<ulong> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<ExInt128> YGroup4Zip(Vector128<ExInt128> x, Vector128<ExInt128> y, Vector128<ExInt128> z, Vector128<ExInt128> w, out Vector128<ExInt128> data1, out Vector128<ExInt128> data2, out Vector128<ExInt128> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        Vector128<ExUInt128> YGroup4Zip(Vector128<ExUInt128> x, Vector128<ExUInt128> y, Vector128<ExUInt128> z, Vector128<ExUInt128> w, out Vector128<ExUInt128> data1, out Vector128<ExUInt128> data2, out Vector128<ExUInt128> data3);
+
+        /// <inheritdoc cref="YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        Vector128<T> YGroup4Zip_Int128<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z, Vector128<T> w, out Vector128<T> data1, out Vector128<T> data2, out Vector128<T> data3) where T : struct;
 
 
         /// <summary>
