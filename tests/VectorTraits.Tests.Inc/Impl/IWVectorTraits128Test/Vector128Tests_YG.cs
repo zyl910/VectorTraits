@@ -583,7 +583,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector128s.GetSupportedMethodList<FuncIn4Out3<Vector128<T>>>("YGroup4Unzip_Basic", "YGroup4Zip_Move", "YGroup4Unzip_Narrow", "YGroup4Unzip_Permute", "YGroup4Unzip_PermuteLonger", "YGroup4Unzip_Unpack", "YGroup4Unzip_Unzip");
+            var funcList = Vector128s.GetSupportedMethodList<FuncIn4Out3<Vector128<T>>>("YGroup4Unzip_Basic", "YGroup4Unzip_Move", "YGroup4Unzip_Narrow", "YGroup4Unzip_Permute", "YGroup4Unzip_PermuteLonger", "YGroup4Unzip_Unpack", "YGroup4Unzip_Unzip");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
