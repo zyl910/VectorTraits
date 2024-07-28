@@ -149,6 +149,204 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             CheckResult128("Sum128Base");
         }
 
+#if NET5_0_OR_GREATER
+
+        /// <summary>
+        /// Sum YGroup2Zip - Vector128 - AdvSimd - Shuffle.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128AdvSimd_Shuffle(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YGroup2Zip_Shuffle(p0, vector1Used, out var vtemp1);
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vrt1);
+            rt = WVectorTraits128AdvSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128AdvSimd_Shuffle() {
+            WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128AdvSimd_Shuffle(srcArray, srcArray.Length);
+            CheckResult128("Sum128AdvSimd_Shuffle");
+        }
+
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Sum YGroup2Zip - Vector128 - AdvSimd - ShuffleX.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128AdvSimd_ShuffleX(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YGroup2Zip_ShuffleX(p0, vector1Used, out var vtemp1);
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vrt1);
+            rt = WVectorTraits128AdvSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128AdvSimd_ShuffleX() {
+            WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128AdvSimd_ShuffleX(srcArray, srcArray.Length);
+            CheckResult128("Sum128AdvSimd_ShuffleX");
+        }
+#endif // NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Sum YGroup2Zip - Vector128 - AdvSimd - Widen.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128AdvSimd_Widen(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YGroup2Zip_Widen(p0, vector1Used, out var vtemp1);
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vrt1);
+            rt = WVectorTraits128AdvSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128AdvSimd_Widen() {
+            WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128AdvSimd_Widen(srcArray, srcArray.Length);
+            CheckResult128("Sum128AdvSimd_Widen");
+        }
+
+        /// <summary>
+        /// Sum YGroup2Zip - Vector128 - AdvSimdB64.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128AdvSimdB64(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128AdvSimdB64.Statics.YGroup2Zip(p0, vector1Used, out var vtemp1);
+                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vrt1);
+            rt = WVectorTraits128AdvSimdB64.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128AdvSimdB64() {
+            WVectorTraits128AdvSimdB64.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128AdvSimdB64(srcArray, srcArray.Length);
+            CheckResult128("Sum128AdvSimdB64");
+        }
+
+#endif // NET5_0_OR_GREATER
+
 #if NET8_0_OR_GREATER
         /// <summary>
         /// Sum YGroup2Zip - Vector128 - Sse - Permute.
