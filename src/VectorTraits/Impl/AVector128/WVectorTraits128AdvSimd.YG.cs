@@ -30,7 +30,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -173,7 +173,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 Vector128<ushort> rt0, rt1;
                 Vector128<uint> temp0 = data0.AsUInt32();
                 Vector128<uint> temp1 = data1.AsUInt32();
-                // Format: Code; //Latency, Throughput(references IceLake)
                 rt0 = Narrow(temp0, temp1);
                 temp0 = AdvSimd.ShiftRightLogical(temp0, L);
                 temp1 = AdvSimd.ShiftRightLogical(temp1, L);
@@ -407,7 +406,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipEven_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -644,7 +643,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipOdd_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -881,7 +880,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Zip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -1321,7 +1320,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipHigh_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -1581,7 +1580,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipLow_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -1841,7 +1840,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Unzip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
@@ -2329,7 +2328,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Zip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
                     return rt;
                 }
             }
