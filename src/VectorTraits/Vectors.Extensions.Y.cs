@@ -1,4 +1,8 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 #if !NET7_0_OR_GREATER
@@ -7,14 +11,837 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Impl;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits {
     static partial class Vectors {
 
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{ExInt128}, Vector{ExInt128}, out Vector{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<Int128> YGroup2Unzip(Vector<Int128> data0, Vector<Int128> data1, out Vector<Int128> y) {
+            var d0 = YGroup2Unzip(data0.ExAsExInt128(), data1.ExAsExInt128(), out var d1);
+            y = d1.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{ExUInt128}, Vector{ExUInt128}, out Vector{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<UInt128> YGroup2Unzip(Vector<UInt128> data0, Vector<UInt128> data1, out Vector<UInt128> y) {
+            var d0 = YGroup2Unzip(data0.ExAsExUInt128(), data1.ExAsExUInt128(), out var d1);
+            y = d1.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector<T> X, Vector<T> Y) YGroup2Unzip<T>(Vector<T> data0, Vector<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<float>)(object)data0, (Vector<float>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<double>)(object)data0, (Vector<double>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<sbyte>)(object)data0, (Vector<sbyte>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<byte>)(object)data0, (Vector<byte>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<short>)(object)data0, (Vector<short>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<ushort>)(object)data0, (Vector<ushort>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<int>)(object)data0, (Vector<int>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<uint>)(object)data0, (Vector<uint>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<long>)(object)data0, (Vector<long>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<ulong>)(object)data0, (Vector<ulong>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<ExInt128>)(object)data0, (Vector<ExInt128>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<ExUInt128>)(object)data0, (Vector<ExUInt128>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<Int128>)(object)data0, (Vector<Int128>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Unzip((Vector<UInt128>)(object)data0, (Vector<UInt128>)(object)data1);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// De-Interleave 2-element groups into 2 vectors. It converts the 2-element groups AoS to SoA (将2-元素组解交织为2个向量. 它能将2元素组的 数组结构体 转为 结构体数组).
+        /// Mnemonic: <c>x[i] =: element_ref(2*i, data0, data1)</c>, <c>y[i] =: element_ref(2*i+1, data0, data1)</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 2-element groups - Part 0 (由2元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 2-element groups - Part 1 (由2元素组所组成的向量 - 第1部分).</param>
+        /// <returns>Returns the de-interleaved data. They are the X,Y vectors (返回解交织后数据. 它们分别是 X,Y 向量).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<float> X, Vector<float> Y) YGroup2Unzip(Vector<float> data0, Vector<float> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<double> X, Vector<double> Y) YGroup2Unzip(Vector<double> data0, Vector<double> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> X, Vector<sbyte> Y) YGroup2Unzip(Vector<sbyte> data0, Vector<sbyte> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> X, Vector<byte> Y) YGroup2Unzip(Vector<byte> data0, Vector<byte> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> X, Vector<short> Y) YGroup2Unzip(Vector<short> data0, Vector<short> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> X, Vector<ushort> Y) YGroup2Unzip(Vector<ushort> data0, Vector<ushort> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> X, Vector<int> Y) YGroup2Unzip(Vector<int> data0, Vector<int> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> X, Vector<uint> Y) YGroup2Unzip(Vector<uint> data0, Vector<uint> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> X, Vector<long> Y) YGroup2Unzip(Vector<long> data0, Vector<long> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> X, Vector<ulong> Y) YGroup2Unzip(Vector<ulong> data0, Vector<ulong> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ExInt128> X, Vector<ExInt128> Y) YGroup2Unzip(Vector<ExInt128> data0, Vector<ExInt128> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ExUInt128> X, Vector<ExUInt128> Y) YGroup2Unzip(Vector<ExUInt128> data0, Vector<ExUInt128> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<Int128> X, Vector<Int128> Y) YGroup2Unzip(Vector<Int128> data0, Vector<Int128> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Unzip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<UInt128> X, Vector<UInt128> Y) YGroup2Unzip(Vector<UInt128> data0, Vector<UInt128> data1) {
+            var rt0 = YGroup2Unzip(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector{ExInt128}, Vector{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<Int128> YGroup2UnzipEven(Vector<Int128> data0, Vector<Int128> data1) {
+            return YGroup2UnzipEven(data0.ExAsExInt128(), data1.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="YGroup2UnzipEven(Vector{ExUInt128}, Vector{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<UInt128> YGroup2UnzipEven(Vector<UInt128> data0, Vector<UInt128> data1) {
+            return YGroup2UnzipEven(data0.ExAsExUInt128(), data1.ExAsExUInt128()).ExAsUInt128();
+        }
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector{ExInt128}, Vector{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<Int128> YGroup2UnzipOdd(Vector<Int128> data0, Vector<Int128> data1) {
+            return YGroup2UnzipOdd(data0.ExAsExInt128(), data1.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="YGroup2UnzipOdd(Vector{ExUInt128}, Vector{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<UInt128> YGroup2UnzipOdd(Vector<UInt128> data0, Vector<UInt128> data1) {
+            return YGroup2UnzipOdd(data0.ExAsExUInt128(), data1.ExAsExUInt128()).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{ExInt128}, Vector{ExInt128}, out Vector{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<Int128> YGroup2Zip(Vector<Int128> x, Vector<Int128> y, out Vector<Int128> data1) {
+            var d0 = YGroup2Zip(x.ExAsExInt128(), y.ExAsExInt128(), out var d1);
+            data1 = d1.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{ExUInt128}, Vector{ExUInt128}, out Vector{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<UInt128> YGroup2Zip(Vector<UInt128> x, Vector<UInt128> y, out Vector<UInt128> data1) {
+            var d0 = YGroup2Zip(x.ExAsExUInt128(), y.ExAsExUInt128(), out var d1);
+            data1 = d1.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector<T> Data0, Vector<T> Data1) YGroup2Zip<T>(Vector<T> x, Vector<T> y) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<float>)(object)x, (Vector<float>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<double>)(object)x, (Vector<double>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<sbyte>)(object)x, (Vector<sbyte>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<byte>)(object)x, (Vector<byte>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<short>)(object)x, (Vector<short>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<ushort>)(object)x, (Vector<ushort>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<int>)(object)x, (Vector<int>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<uint>)(object)x, (Vector<uint>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<long>)(object)x, (Vector<long>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<ulong>)(object)x, (Vector<ulong>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<ExInt128>)(object)x, (Vector<ExInt128>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<ExUInt128>)(object)x, (Vector<ExUInt128>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<Int128>)(object)x, (Vector<Int128>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var data0, var data1) = YGroup2Zip((Vector<UInt128>)(object)x, (Vector<UInt128>)(object)y);
+                return ((Vector<T>)(object)data0, (Vector<T>)(object)data1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <summary>
+        /// Interleave 2 vectors into 2-element groups. It converts the 2-element groups SoA to AoS (将2个向量交织为2-元素组. 它能将2元素组的 结构体数组 转为 数组结构体).
+        /// Mnemonic: <c>element_ref(i, data0, data1) := (0==(i&amp;1))?( x[i2] ):( y[i2] )</c>, <c>i2 := i/2</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <returns>Returns the interleaved data (返回交织后数据).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<float> Data0, Vector<float> Data1) YGroup2Zip(Vector<float> x, Vector<float> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<double> Data0, Vector<double> Data1) YGroup2Zip(Vector<double> x, Vector<double> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> Data0, Vector<sbyte> Data1) YGroup2Zip(Vector<sbyte> x, Vector<sbyte> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> Data0, Vector<byte> Data1) YGroup2Zip(Vector<byte> x, Vector<byte> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> Data0, Vector<short> Data1) YGroup2Zip(Vector<short> x, Vector<short> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> Data0, Vector<ushort> Data1) YGroup2Zip(Vector<ushort> x, Vector<ushort> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> Data0, Vector<int> Data1) YGroup2Zip(Vector<int> x, Vector<int> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> Data0, Vector<uint> Data1) YGroup2Zip(Vector<uint> x, Vector<uint> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> Data0, Vector<long> Data1) YGroup2Zip(Vector<long> x, Vector<long> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> Data0, Vector<ulong> Data1) YGroup2Zip(Vector<ulong> x, Vector<ulong> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ExInt128> Data0, Vector<ExInt128> Data1) YGroup2Zip(Vector<ExInt128> x, Vector<ExInt128> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ExUInt128> Data0, Vector<ExUInt128> Data1) YGroup2Zip(Vector<ExUInt128> x, Vector<ExUInt128> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<Int128> Data0, Vector<Int128> Data1) YGroup2Zip(Vector<Int128> x, Vector<Int128> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="YGroup2Zip(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<UInt128> Data0, Vector<UInt128> Data1) YGroup2Zip(Vector<UInt128> x, Vector<UInt128> y) {
+            var data0 = YGroup2Zip(x, y, out var data1);
+            return (data0, data1);
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YGroup2ZipHigh(Vector{ExInt128}, Vector{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<Int128> YGroup2ZipHigh(Vector<Int128> x, Vector<Int128> y) {
+            return YGroup2ZipHigh(x.ExAsExInt128(), y.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YGroup2ZipHigh(Vector{ExUInt128}, Vector{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<UInt128> YGroup2ZipHigh(Vector<UInt128> x, Vector<UInt128> y) {
+            return YGroup2ZipHigh(x.ExAsExUInt128(), y.ExAsExUInt128()).ExAsUInt128();
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YGroup2ZipLow(Vector{ExInt128}, Vector{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<Int128> YGroup2ZipLow(Vector<Int128> x, Vector<Int128> y) {
+            return YGroup2ZipLow(x.ExAsExInt128(), y.ExAsExInt128()).ExAsInt128();
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YGroup2ZipLow(Vector{ExUInt128}, Vector{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<UInt128> YGroup2ZipLow(Vector<UInt128> x, Vector<UInt128> y) {
+            return YGroup2ZipLow(x.ExAsExUInt128(), y.ExAsExUInt128()).ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="IVectorTraits.YGroup4Unzip(Vector{ExInt128}, Vector{ExInt128}, Vector{ExInt128}, Vector{ExInt128}, out Vector{ExInt128}, out Vector{ExInt128}, out Vector{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<Int128> YGroup4Unzip(Vector<Int128> data0, Vector<Int128> data1, Vector<Int128> data2, Vector<Int128> data3, out Vector<Int128> y, out Vector<Int128> z, out Vector<Int128> w) {
+            var d0 = YGroup4Unzip(data0.ExAsExInt128(), data1.ExAsExInt128(), data2.ExAsExInt128(), data3.ExAsExInt128(), out var d1, out var d2, out var d3);
+            y = d1.ExAsInt128();
+            z = d2.ExAsInt128();
+            w = d3.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YGroup4Unzip(Vector{ExUInt128}, Vector{ExUInt128}, Vector{ExUInt128}, Vector{ExUInt128}, out Vector{ExUInt128}, out Vector{ExUInt128}, out Vector{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<UInt128> YGroup4Unzip(Vector<UInt128> data0, Vector<UInt128> data1, Vector<UInt128> data2, Vector<UInt128> data3, out Vector<UInt128> y, out Vector<UInt128> z, out Vector<UInt128> w) {
+            var d0 = YGroup4Unzip(data0.ExAsExUInt128(), data1.ExAsExUInt128(), data2.ExAsExUInt128(), data3.ExAsExUInt128(), out var d1, out var d2, out var d3);
+            y = d1.ExAsUInt128();
+            z = d2.ExAsUInt128();
+            w = d3.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<T> X, Vector<T> Y, Vector<T> Z, Vector<T> W) YGroup4Unzip<T>(Vector<T> data0, Vector<T> data1, Vector<T> data2, Vector<T> data3) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<float>)(object)data0, (Vector<float>)(object)data1, (Vector<float>)(object)data2, (Vector<float>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<double>)(object)data0, (Vector<double>)(object)data1, (Vector<double>)(object)data2, (Vector<double>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<sbyte>)(object)data0, (Vector<sbyte>)(object)data1, (Vector<sbyte>)(object)data2, (Vector<sbyte>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<byte>)(object)data0, (Vector<byte>)(object)data1, (Vector<byte>)(object)data2, (Vector<byte>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<short>)(object)data0, (Vector<short>)(object)data1, (Vector<short>)(object)data2, (Vector<short>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<ushort>)(object)data0, (Vector<ushort>)(object)data1, (Vector<ushort>)(object)data2, (Vector<ushort>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<int>)(object)data0, (Vector<int>)(object)data1, (Vector<int>)(object)data2, (Vector<int>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<uint>)(object)data0, (Vector<uint>)(object)data1, (Vector<uint>)(object)data2, (Vector<uint>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<long>)(object)data0, (Vector<long>)(object)data1, (Vector<long>)(object)data2, (Vector<long>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<ulong>)(object)data0, (Vector<ulong>)(object)data1, (Vector<ulong>)(object)data2, (Vector<ulong>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<ExInt128>)(object)data0, (Vector<ExInt128>)(object)data1, (Vector<ExInt128>)(object)data2, (Vector<ExInt128>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<ExUInt128>)(object)data0, (Vector<ExUInt128>)(object)data1, (Vector<ExUInt128>)(object)data2, (Vector<ExUInt128>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<Int128>)(object)data0, (Vector<Int128>)(object)data1, (Vector<Int128>)(object)data2, (Vector<Int128>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Unzip((Vector<UInt128>)(object)data0, (Vector<UInt128>)(object)data1, (Vector<UInt128>)(object)data2, (Vector<UInt128>)(object)data3);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <summary>
+        /// De-Interleave 4-element groups into 4 vectors. It converts the 4-element groups AoS to SoA. It can also deinterleave packed RGBA pixel data into R,G,B,A planar data (将4-元素组解交织为4个向量. 它能将4元素组的 数组结构体 转为 结构体数组. 它还能将 已打包的RGBA像素数据, 解交织为 R,G,B,A 平面数据).
+        /// Mnemonic: <c>x[i] =: element_ref(4*i, data0, data1, data2, data3)</c>, <c>y[i] =: element_ref(4*i+1, data0, data1, data2, data3)</c>, <c>z[i] =: element_ref(4*i+2, data0, data1, data2, data3)</c>, <c>w[i] =: element_ref(4*i+3, data0, data1, data2, data3)</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 4-element groups - Part 0 (由4元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 4-element groups - Part 1 (由4元素组所组成的向量 - 第1部分).</param>
+        /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
+        /// <param name="data3">A vector made of 4-element groups - Part 3 (由4元素组所组成的向量 - 第3部分).</param>
+        /// <returns>Returns the de-interleaved data. They are the X,Y,Z,W vectors (返回解交织后数据. 它们分别是 X,Y,Z,W 向量).</returns>
+        /// <seealso cref="YGroup4Unzip_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<float> X, Vector<float> Y, Vector<float> Z, Vector<float> W) YGroup4Unzip(Vector<float> data0, Vector<float> data1, Vector<float> data2, Vector<float> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<double> X, Vector<double> Y, Vector<double> Z, Vector<double> W) YGroup4Unzip(Vector<double> data0, Vector<double> data1, Vector<double> data2, Vector<double> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> X, Vector<sbyte> Y, Vector<sbyte> Z, Vector<sbyte> W) YGroup4Unzip(Vector<sbyte> data0, Vector<sbyte> data1, Vector<sbyte> data2, Vector<sbyte> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> X, Vector<byte> Y, Vector<byte> Z, Vector<byte> W) YGroup4Unzip(Vector<byte> data0, Vector<byte> data1, Vector<byte> data2, Vector<byte> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> X, Vector<short> Y, Vector<short> Z, Vector<short> W) YGroup4Unzip(Vector<short> data0, Vector<short> data1, Vector<short> data2, Vector<short> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static (Vector<ushort> X, Vector<ushort> Y, Vector<ushort> Z, Vector<ushort> W) YGroup4Unzip(Vector<ushort> data0, Vector<ushort> data1, Vector<ushort> data2, Vector<ushort> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> X, Vector<int> Y, Vector<int> Z, Vector<int> W) YGroup4Unzip(Vector<int> data0, Vector<int> data1, Vector<int> data2, Vector<int> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static (Vector<uint> X, Vector<uint> Y, Vector<uint> Z, Vector<uint> W) YGroup4Unzip(Vector<uint> data0, Vector<uint> data1, Vector<uint> data2, Vector<uint> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> X, Vector<long> Y, Vector<long> Z, Vector<long> W) YGroup4Unzip(Vector<long> data0, Vector<long> data1, Vector<long> data2, Vector<long> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [CLSCompliant(false)]
+        public static (Vector<ulong> X, Vector<ulong> Y, Vector<ulong> Z, Vector<ulong> W) YGroup4Unzip(Vector<ulong> data0, Vector<ulong> data1, Vector<ulong> data2, Vector<ulong> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ExInt128> X, Vector<ExInt128> Y, Vector<ExInt128> Z, Vector<ExInt128> W) YGroup4Unzip(Vector<ExInt128> data0, Vector<ExInt128> data1, Vector<ExInt128> data2, Vector<ExInt128> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ExUInt128> X, Vector<ExUInt128> Y, Vector<ExUInt128> Z, Vector<ExUInt128> W) YGroup4Unzip(Vector<ExUInt128> data0, Vector<ExUInt128> data1, Vector<ExUInt128> data2, Vector<ExUInt128> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<Int128> X, Vector<Int128> Y, Vector<Int128> Z, Vector<Int128> W) YGroup4Unzip(Vector<Int128> data0, Vector<Int128> data1, Vector<Int128> data2, Vector<Int128> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup4Unzip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<UInt128> X, Vector<UInt128> Y, Vector<UInt128> Z, Vector<UInt128> W) YGroup4Unzip(Vector<UInt128> data0, Vector<UInt128> data1, Vector<UInt128> data2, Vector<UInt128> data3) {
+            var rt0 = YGroup4Unzip(data0, data1, data2, data3, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+#endif // BCL_TYPE_INT128
+
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="IVectorTraits.YGroup4Zip(Vector{ExInt128}, Vector{ExInt128}, Vector{ExInt128}, Vector{ExInt128}, out Vector{ExInt128}, out Vector{ExInt128}, out Vector{ExInt128})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<Int128> YGroup4Zip(Vector<Int128> x, Vector<Int128> y, Vector<Int128> z, Vector<Int128> w, out Vector<Int128> data1, out Vector<Int128> data2, out Vector<Int128> data3) {
+            var d0 = YGroup4Zip(x.ExAsExInt128(), y.ExAsExInt128(), z.ExAsExInt128(), w.ExAsExInt128(), out var d1, out var d2, out var d3);
+            data1 = d1.ExAsInt128();
+            data2 = d2.ExAsInt128();
+            data3 = d3.ExAsInt128();
+            return d0.ExAsInt128();
+        }
+
+        /// <inheritdoc cref="IVectorTraits.YGroup4Zip(Vector{ExUInt128}, Vector{ExUInt128}, Vector{ExUInt128}, Vector{ExUInt128}, out Vector{ExUInt128}, out Vector{ExUInt128}, out Vector{ExUInt128})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<UInt128> YGroup4Zip(Vector<UInt128> x, Vector<UInt128> y, Vector<UInt128> z, Vector<UInt128> w, out Vector<UInt128> data1, out Vector<UInt128> data2, out Vector<UInt128> data3) {
+            var d0 = YGroup4Zip(x.ExAsExUInt128(), y.ExAsExUInt128(), z.ExAsExUInt128(), w.ExAsExUInt128(), out var d1, out var d2, out var d3);
+            data1 = d1.ExAsUInt128();
+            data2 = d2.ExAsUInt128();
+            data3 = d3.ExAsUInt128();
+            return d0.ExAsUInt128();
+        }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<T> Data0, Vector<T> Data1, Vector<T> Data2, Vector<T> Data3) YGroup4Zip<T>(Vector<T> x, Vector<T> y, Vector<T> z, Vector<T> w) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<float>)(object)x, (Vector<float>)(object)y, (Vector<float>)(object)z, (Vector<float>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<double>)(object)x, (Vector<double>)(object)y, (Vector<double>)(object)z, (Vector<double>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<sbyte>)(object)x, (Vector<sbyte>)(object)y, (Vector<sbyte>)(object)z, (Vector<sbyte>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<byte>)(object)x, (Vector<byte>)(object)y, (Vector<byte>)(object)z, (Vector<byte>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<short>)(object)x, (Vector<short>)(object)y, (Vector<short>)(object)z, (Vector<short>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<ushort>)(object)x, (Vector<ushort>)(object)y, (Vector<ushort>)(object)z, (Vector<ushort>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<int>)(object)x, (Vector<int>)(object)y, (Vector<int>)(object)z, (Vector<int>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<uint>)(object)x, (Vector<uint>)(object)y, (Vector<uint>)(object)z, (Vector<uint>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<long>)(object)x, (Vector<long>)(object)y, (Vector<long>)(object)z, (Vector<long>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<ulong>)(object)x, (Vector<ulong>)(object)y, (Vector<ulong>)(object)z, (Vector<ulong>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<ExInt128>)(object)x, (Vector<ExInt128>)(object)y, (Vector<ExInt128>)(object)z, (Vector<ExInt128>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<ExUInt128>)(object)x, (Vector<ExUInt128>)(object)y, (Vector<ExUInt128>)(object)z, (Vector<ExUInt128>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<Int128>)(object)x, (Vector<Int128>)(object)y, (Vector<Int128>)(object)z, (Vector<Int128>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(UInt128) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup4Zip((Vector<UInt128>)(object)x, (Vector<UInt128>)(object)y, (Vector<UInt128>)(object)z, (Vector<UInt128>)(object)w);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <summary>
+        /// Interleave 4 vectors into 4-element groups. It converts the 4-element groups SoA to AoS. It can also interleave R,G,B,A planar data into packed RGBA pixel data (将4个向量交织为4-元素组. 它能将4元素组的 结构体数组 转为 数组结构体. 它还能将 R,G,B,A 平面数据, 交织为 已打包的RGBA像素数据).
+        /// Mnemonic: <c>element_ref(i, data0, data1, data2, data3) := (0==(i&amp;3))?( x[i2] ):( (1==(i&amp;3))?( y[i2] ):( (2==(i&amp;s3))?( z[i2] ):( w[i2] ) ) )</c>, <c>i2 := i/4</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <param name="z">A vector consisting purely of Z-components (纯由Z分量所组成的向量).</param>
+        /// <param name="w">A vector consisting purely of W-components (纯由W分量所组成的向量).</param>
+        /// <returns>Returns the interleaved data (返回交织后数据).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<float> Data0, Vector<float> Data1, Vector<float> Data2, Vector<float> Data3) YGroup4Zip(Vector<float> x, Vector<float> y, Vector<float> z, Vector<float> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<double> Data0, Vector<double> Data1, Vector<double> Data2, Vector<double> Data3) YGroup4Zip(Vector<double> x, Vector<double> y, Vector<double> z, Vector<double> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> Data0, Vector<sbyte> Data1, Vector<sbyte> Data2, Vector<sbyte> Data3) YGroup4Zip(Vector<sbyte> x, Vector<sbyte> y, Vector<sbyte> z, Vector<sbyte> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> Data0, Vector<byte> Data1, Vector<byte> Data2, Vector<byte> Data3) YGroup4Zip(Vector<byte> x, Vector<byte> y, Vector<byte> z, Vector<byte> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> Data0, Vector<short> Data1, Vector<short> Data2, Vector<short> Data3) YGroup4Zip(Vector<short> x, Vector<short> y, Vector<short> z, Vector<short> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> Data0, Vector<ushort> Data1, Vector<ushort> Data2, Vector<ushort> Data3) YGroup4Zip(Vector<ushort> x, Vector<ushort> y, Vector<ushort> z, Vector<ushort> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> Data0, Vector<int> Data1, Vector<int> Data2, Vector<int> Data3) YGroup4Zip(Vector<int> x, Vector<int> y, Vector<int> z, Vector<int> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> Data0, Vector<uint> Data1, Vector<uint> Data2, Vector<uint> Data3) YGroup4Zip(Vector<uint> x, Vector<uint> y, Vector<uint> z, Vector<uint> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> Data0, Vector<long> Data1, Vector<long> Data2, Vector<long> Data3) YGroup4Zip(Vector<long> x, Vector<long> y, Vector<long> z, Vector<long> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> Data0, Vector<ulong> Data1, Vector<ulong> Data2, Vector<ulong> Data3) YGroup4Zip(Vector<ulong> x, Vector<ulong> y, Vector<ulong> z, Vector<ulong> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ExInt128> Data0, Vector<ExInt128> Data1, Vector<ExInt128> Data2, Vector<ExInt128> Data3) YGroup4Zip(Vector<ExInt128> x, Vector<ExInt128> y, Vector<ExInt128> z, Vector<ExInt128> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ExUInt128> Data0, Vector<ExUInt128> Data1, Vector<ExUInt128> Data2, Vector<ExUInt128> Data3) YGroup4Zip(Vector<ExUInt128> x, Vector<ExUInt128> y, Vector<ExUInt128> z, Vector<ExUInt128> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+#if BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<Int128> Data0, Vector<Int128> Data1, Vector<Int128> Data2, Vector<Int128> Data3) YGroup4Zip(Vector<Int128> x, Vector<Int128> y, Vector<Int128> z, Vector<Int128> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+        /// <inheritdoc cref="YGroup4Zip(Vector{float}, Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<UInt128> Data0, Vector<UInt128> Data1, Vector<UInt128> Data2, Vector<UInt128> Data3) YGroup4Zip(Vector<UInt128> x, Vector<UInt128> y, Vector<UInt128> z, Vector<UInt128> w) {
+            var data0 = YGroup4Zip(x, y, z, w, out var data1, out var data2, out var data3);
+            return (data0, data1, data2, data3);
+        }
+
+#endif // BCL_TYPE_INT128
+
+
+        /// <summary>
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
@@ -62,7 +889,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -70,13 +897,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<float> Result0, Vector<float> Result1) YShuffleG4X2(Vector<float> source0, Vector<float> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -84,13 +912,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<double> Result0, Vector<double> Result1) YShuffleG4X2(Vector<double> source0, Vector<double> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -99,13 +928,14 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<sbyte> Result0, Vector<sbyte> Result1) YShuffleG4X2(Vector<sbyte> source0, Vector<sbyte> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -113,13 +943,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<byte> Result0, Vector<byte> Result1) YShuffleG4X2(Vector<byte> source0, Vector<byte> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -127,13 +958,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<short> Result0, Vector<short> Result1) YShuffleG4X2(Vector<short> source0, Vector<short> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -142,13 +974,14 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ushort> Result0, Vector<ushort> Result1) YShuffleG4X2(Vector<ushort> source0, Vector<ushort> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -156,13 +989,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<int> Result0, Vector<int> Result1) YShuffleG4X2(Vector<int> source0, Vector<int> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -171,13 +1005,14 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<uint> Result0, Vector<uint> Result1) YShuffleG4X2(Vector<uint> source0, Vector<uint> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -185,13 +1020,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<long> Result0, Vector<long> Result1) YShuffleG4X2(Vector<long> source0, Vector<long> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
+        /// For each 4-element groups in two vector, shuffle is performed (对于两个向量中的每个 4-元素组, 进行换位).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -200,13 +1036,14 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ulong> Result0, Vector<ulong> Result1) YShuffleG4X2(Vector<ulong> source0, Vector<ulong> source1, ShuffleControlG4 control) {
             var result0 = YShuffleG4X2(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
@@ -217,7 +1054,7 @@ namespace Zyl.VectorTraits {
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         /// <seealso cref="YShuffleG4X2_Const(Vector{int}, Vector{int}, ShuffleControlG4, out Vector{int})"/>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
-        public static (Vector<T> Result0, Vector<T> Result1) YShuffleG4X2_Const<T>(Vector<T> source0, Vector<T> source1, ShuffleControlG4 control) where T : struct {
+        public static (Vector<T> Result0, Vector<T> Result1) YShuffleG4X2_Const<T>(Vector<T> source0, Vector<T> source1, [ConstantExpected] ShuffleControlG4 control) where T : struct {
             if (typeof(float) == typeof(T)) {
                 (var result0, var result1) = YShuffleG4X2_Const((Vector<float>)(object)source0, (Vector<float>)(object)source1, control);
                 return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
@@ -255,7 +1092,7 @@ namespace Zyl.VectorTraits {
 
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -263,13 +1100,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<float> Result0, Vector<float> Result1) YShuffleG4X2_Const(Vector<float> source0, Vector<float> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -277,13 +1115,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<double> Result0, Vector<double> Result1) YShuffleG4X2_Const(Vector<double> source0, Vector<double> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -292,13 +1131,14 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<sbyte> Result0, Vector<sbyte> Result1) YShuffleG4X2_Const(Vector<sbyte> source0, Vector<sbyte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -306,13 +1146,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<byte> Result0, Vector<byte> Result1) YShuffleG4X2_Const(Vector<byte> source0, Vector<byte> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -320,13 +1161,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<short> Result0, Vector<short> Result1) YShuffleG4X2_Const(Vector<short> source0, Vector<short> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -335,13 +1177,14 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ushort> Result0, Vector<ushort> Result1) YShuffleG4X2_Const(Vector<ushort> source0, Vector<ushort> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -349,13 +1192,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<int> Result0, Vector<int> Result1) YShuffleG4X2_Const(Vector<int> source0, Vector<int> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -364,13 +1208,14 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<uint> Result0, Vector<uint> Result1) YShuffleG4X2_Const(Vector<uint> source0, Vector<uint> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -378,13 +1223,14 @@ namespace Zyl.VectorTraits {
         /// <param name="control">Shuffle control code (换位控制码).</param>
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<long> Result0, Vector<long> Result1) YShuffleG4X2_Const(Vector<long> source0, Vector<long> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);
         }
 
         /// <summary>
-        /// For each 4-element group in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
+        /// For each 4-element groups in two vector, shuffle is performed - Constant version (对于两个向量中的每个 4-元素组, 进行换位 - 常量版).
         /// Mnemonic: View for group: <c>rt.xyzw = shuffleG4_ref(control, source0, source1)</c>. View for element: <c>element_ref(i, result0, result1) := element_ref((i&amp;(~3)) | ((control &gt;&gt; ((i&amp;3)*2)) &amp; 3), source0, source1)</c>.
         /// </summary>
         /// <param name="source0">The input source 0 from which values are selected (从中选择值的输入源0).</param>
@@ -393,6 +1239,7 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the two vectors after shuffle (返回换位后的两个向量).</returns>
         /// <seealso cref="YShuffleG4X2_AcceleratedTypes"/>
         [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<ulong> Result0, Vector<ulong> Result1) YShuffleG4X2_Const(Vector<ulong> source0, Vector<ulong> source1, [ConstantExpected] ShuffleControlG4 control) {
             var result0 = YShuffleG4X2_Const(source0, source1, control, out var result1);
             return (result0, result1);

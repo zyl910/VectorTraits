@@ -45,7 +45,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector512s.GetSupportedMethodList<FuncIn2Out1<Vector512<T>>>("YGroup2Unzip_Basic", "YGroup2Unzip_Narrow", "YGroup2Unzip_Permute", "YGroup2Unzip_Unpack");
+            var funcList = Vector512s.GetSupportedMethodList<FuncIn2Out1<Vector512<T>>>("YGroup2Unzip_Basic", "YGroup2Unzip_Narrow", "YGroup2Unzip_Permute", "YGroup2Unzip_Shuffle", "YGroup2Unzip_ShuffleX", "YGroup2Unzip_Unpack");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -314,7 +314,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector512s.GetSupportedMethodList<FuncIn2Out1<Vector512<T>>>("YGroup2Zip_Basic", "YGroup2Zip_Permute", "YGroup2Zip_Unpack", "YGroup2Zip_Widen");
+            var funcList = Vector512s.GetSupportedMethodList<FuncIn2Out1<Vector512<T>>>("YGroup2Zip_Basic", "YGroup2Zip_Permute", "YGroup2Zip_Shuffle", "YGroup2Zip_ShuffleX", "YGroup2Zip_Unpack", "YGroup2Zip_Widen");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -583,7 +583,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector512s.GetSupportedMethodList<FuncIn4Out3<Vector512<T>>>("YGroup4Unzip_Basic", "YGroup4Zip_Move", "YGroup4Unzip_Narrow", "YGroup4Unzip_Permute", "YGroup4Unzip_PermuteLonger", "YGroup4Unzip_Unpack", "YGroup4Unzip_Unzip");
+            var funcList = Vector512s.GetSupportedMethodList<FuncIn4Out3<Vector512<T>>>("YGroup4Unzip_Basic", "YGroup4Zip_Move", "YGroup4Unzip_Narrow", "YGroup4Unzip_Permute", "YGroup4Unzip_PermuteLonger", "YGroup4Unzip_Shuffle", "YGroup4Unzip_ShuffleX", "YGroup4Unzip_Unpack", "YGroup4Unzip_Unzip");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -714,7 +714,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector512s.GetSupportedMethodList<FuncIn4Out3<Vector512<T>>>("YGroup4Zip_Basic", "YGroup4Zip_Move", "YGroup4Zip_Narrow", "YGroup4Zip_Permute", "YGroup4Zip_PermuteLonger", "YGroup4Zip_Unpack", "YGroup4Zip_Unzip");
+            var funcList = Vector512s.GetSupportedMethodList<FuncIn4Out3<Vector512<T>>>("YGroup4Zip_Basic", "YGroup4Zip_Move", "YGroup4Zip_Narrow", "YGroup4Zip_Permute", "YGroup4Zip_PermuteLonger", "YGroup4Zip_Shuffle", "YGroup4Zip_ShuffleX", "YGroup4Zip_Unpack", "YGroup4Zip_Unzip");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }

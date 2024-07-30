@@ -712,6 +712,30 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
+            /// <inheritdoc cref="IVectorTraits.Floor(Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> Floor_Positive(Vector<float> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
+                return Vector.Floor(value);
+#elif SOFTWARE_OPTIMIZATION
+                return YRoundToZero_ClearBit(value);
+#else
+                return Floor_Basic(value);
+#endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
+            }
+
+            /// <inheritdoc cref="IVectorTraits.Floor(Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> Floor_Positive(Vector<double> value) {
+#if BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
+                return Vector.Floor(value);
+#elif SOFTWARE_OPTIMIZATION
+                return YRoundToZero_ClearBit(value);
+#else
+                return Floor_Basic(value);
+#endif // BCL_OVERRIDE_BASE_VAR && NET5_0_OR_GREATER
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.Narrow_AcceleratedTypes"/>
             public static TypeCodeFlags Narrow_AcceleratedTypes {
