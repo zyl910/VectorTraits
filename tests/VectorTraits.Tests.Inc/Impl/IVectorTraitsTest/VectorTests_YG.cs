@@ -185,7 +185,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Vector<T> data1 = samples[j];
                     Vector<T> dst;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector<T> expected = Vectors.YGroup2UnzipEven((dynamic)data0, (dynamic)data1);
+                    Vector<T> expected = Vectors.YGroup2UnzipEven<T>(data0, data1);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}", data0, data1, expected));
                     }
@@ -259,7 +259,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Vector<T> data1 = samples[j];
                     Vector<T> dst;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector<T> expected = Vectors.YGroup2UnzipOdd((dynamic)data0, (dynamic)data1);
+                    Vector<T> expected = Vectors.YGroup2UnzipOdd<T>(data0, data1);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}", data0, data1, expected));
                     }
@@ -454,7 +454,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Vector<T> y = samples[j];
                     Vector<T> dst;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector<T> expected = Vectors.YGroup2ZipHigh((dynamic)x, (dynamic)y);
+                    Vector<T> expected = Vectors.YGroup2ZipHigh<T>(x, y);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}", x, y, expected));
                     }
@@ -528,7 +528,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Vector<T> y = samples[j];
                     Vector<T> dst;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector<T> expected = Vectors.YGroup2ZipLow((dynamic)x, (dynamic)y);
+                    Vector<T> expected = Vectors.YGroup2ZipLow<T>(x, y);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}", x, y, expected));
                     }

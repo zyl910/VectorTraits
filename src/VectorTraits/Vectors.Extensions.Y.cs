@@ -204,6 +204,49 @@ namespace Zyl.VectorTraits {
             return (rt0, rt1);
         }
 
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vectors.YGroup2UnzipEven(Vector{int}, Vector{int})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static Vector<T> YGroup2UnzipEven<T>(Vector<T> data0, Vector<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<float>)(object)data0, (Vector<float>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<double>)(object)data0, (Vector<double>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<sbyte>)(object)data0, (Vector<sbyte>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<byte>)(object)data0, (Vector<byte>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<short>)(object)data0, (Vector<short>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<ushort>)(object)data0, (Vector<ushort>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<int>)(object)data0, (Vector<int>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<uint>)(object)data0, (Vector<uint>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<long>)(object)data0, (Vector<long>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<ulong>)(object)data0, (Vector<ulong>)(object)data1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<ExInt128>)(object)data0, (Vector<ExInt128>)(object)data1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<ExUInt128>)(object)data0, (Vector<ExUInt128>)(object)data1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<Int128>)(object)data0, (Vector<Int128>)(object)data1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipEven((Vector<UInt128>)(object)data0, (Vector<UInt128>)(object)data1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+#if BCL_TYPE_INT128
+
         /// <inheritdoc cref="YGroup2UnzipEven(Vector{ExInt128}, Vector{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<Int128> YGroup2UnzipEven(Vector<Int128> data0, Vector<Int128> data1) {
@@ -216,6 +259,49 @@ namespace Zyl.VectorTraits {
         public static Vector<UInt128> YGroup2UnzipEven(Vector<UInt128> data0, Vector<UInt128> data1) {
             return YGroup2UnzipEven(data0.ExAsExUInt128(), data1.ExAsExUInt128()).ExAsUInt128();
         }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="Vectors.YGroup2UnzipOdd(Vector{int}, Vector{int})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static Vector<T> YGroup2UnzipOdd<T>(Vector<T> data0, Vector<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<float>)(object)data0, (Vector<float>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<double>)(object)data0, (Vector<double>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<sbyte>)(object)data0, (Vector<sbyte>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<byte>)(object)data0, (Vector<byte>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<short>)(object)data0, (Vector<short>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<ushort>)(object)data0, (Vector<ushort>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<int>)(object)data0, (Vector<int>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<uint>)(object)data0, (Vector<uint>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<long>)(object)data0, (Vector<long>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<ulong>)(object)data0, (Vector<ulong>)(object)data1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<ExInt128>)(object)data0, (Vector<ExInt128>)(object)data1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<ExUInt128>)(object)data0, (Vector<ExUInt128>)(object)data1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<Int128>)(object)data0, (Vector<Int128>)(object)data1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2UnzipOdd((Vector<UInt128>)(object)data0, (Vector<UInt128>)(object)data1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+#if BCL_TYPE_INT128
 
         /// <inheritdoc cref="YGroup2UnzipOdd(Vector{ExInt128}, Vector{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -418,9 +504,53 @@ namespace Zyl.VectorTraits {
             return (data0, data1);
         }
 
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2ZipHigh(Vector{float}, Vector{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static Vector<T> YGroup2ZipHigh<T>(Vector<T> data0, Vector<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<float>)(object)data0, (Vector<float>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<double>)(object)data0, (Vector<double>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<sbyte>)(object)data0, (Vector<sbyte>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<byte>)(object)data0, (Vector<byte>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<short>)(object)data0, (Vector<short>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<ushort>)(object)data0, (Vector<ushort>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<int>)(object)data0, (Vector<int>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<uint>)(object)data0, (Vector<uint>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<long>)(object)data0, (Vector<long>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<ulong>)(object)data0, (Vector<ulong>)(object)data1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<ExInt128>)(object)data0, (Vector<ExInt128>)(object)data1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<ExUInt128>)(object)data0, (Vector<ExUInt128>)(object)data1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<Int128>)(object)data0, (Vector<Int128>)(object)data1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipHigh((Vector<UInt128>)(object)data0, (Vector<UInt128>)(object)data1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+#if BCL_TYPE_INT128
+
         /// <inheritdoc cref="IVectorTraits.YGroup2ZipHigh(Vector{ExInt128}, Vector{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<Int128> YGroup2ZipHigh(Vector<Int128> x, Vector<Int128> y) {
+            //Console.WriteLine(VectorTextUtil.Format("Vectors-Ext: x={0}, y={1}", x, y));
             return YGroup2ZipHigh(x.ExAsExInt128(), y.ExAsExInt128()).ExAsInt128();
         }
 
@@ -430,6 +560,49 @@ namespace Zyl.VectorTraits {
         public static Vector<UInt128> YGroup2ZipHigh(Vector<UInt128> x, Vector<UInt128> y) {
             return YGroup2ZipHigh(x.ExAsExUInt128(), y.ExAsExUInt128()).ExAsUInt128();
         }
+
+#endif // BCL_TYPE_INT128
+
+        /// <inheritdoc cref="YGroup2ZipLow(Vector{float}, Vector{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static Vector<T> YGroup2ZipLow<T>(Vector<T> data0, Vector<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<float>)(object)data0, (Vector<float>)(object)data1);
+            } else if (typeof(double) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<double>)(object)data0, (Vector<double>)(object)data1);
+            } else if (typeof(sbyte) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<sbyte>)(object)data0, (Vector<sbyte>)(object)data1);
+            } else if (typeof(byte) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<byte>)(object)data0, (Vector<byte>)(object)data1);
+            } else if (typeof(short) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<short>)(object)data0, (Vector<short>)(object)data1);
+            } else if (typeof(ushort) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<ushort>)(object)data0, (Vector<ushort>)(object)data1);
+            } else if (typeof(int) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<int>)(object)data0, (Vector<int>)(object)data1);
+            } else if (typeof(uint) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<uint>)(object)data0, (Vector<uint>)(object)data1);
+            } else if (typeof(long) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<long>)(object)data0, (Vector<long>)(object)data1);
+            } else if (typeof(ulong) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<ulong>)(object)data0, (Vector<ulong>)(object)data1);
+            } else if (typeof(ExInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<ExInt128>)(object)data0, (Vector<ExInt128>)(object)data1);
+            } else if (typeof(ExUInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<ExUInt128>)(object)data0, (Vector<ExUInt128>)(object)data1);
+#if BCL_TYPE_INT128
+            } else if (typeof(Int128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<Int128>)(object)data0, (Vector<Int128>)(object)data1);
+            } else if (typeof(UInt128) == typeof(T)) {
+                return (Vector<T>)(object)YGroup2ZipLow((Vector<UInt128>)(object)data0, (Vector<UInt128>)(object)data1);
+#endif // BCL_TYPE_INT128
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+#if BCL_TYPE_INT128
 
         /// <inheritdoc cref="IVectorTraits.YGroup2ZipLow(Vector{ExInt128}, Vector{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

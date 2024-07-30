@@ -1118,6 +1118,8 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IVectorTraits.YGroup2ZipHigh(Vector{ExInt128}, Vector{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ExInt128> YGroup2ZipHigh(Vector<ExInt128> x, Vector<ExInt128> y) {
+#if NETSTANDARD1_3_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET20_OR_GREATER
+            //Console.WriteLine(VectorTextUtil.Format("Vectors: x={0}, y={1}", x, y));
 #endif
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup2ZipHigh(x, y);
