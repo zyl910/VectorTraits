@@ -38,6 +38,252 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         // -- var --
         private static readonly Vector<TMy> vector1 = Vectors<TMy>.SerialNegative;
 
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector - base - basic.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumBase_Basic(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vector1Used = vector1;
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup2Unzip_Basic(p0, vector1Used, out var vtemp1);
+                vrt = Vector.Add(vrt, vtemp);
+                vrt1 = Vector.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = Vector.Add(vrt, vrt1);
+            rt = VectorTraitsBase.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark(Baseline = true)]
+        public void SumBase_Basic() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumBase_Basic(srcArray, srcArray.Length);
+            if (CheckMode) {
+                baselineTMy = dstTMy;
+                BenchmarkUtil.WriteItem("# SumBase_Basic", string.Format("{0}", baselineTMy));
+            }
+        }
+
+        #region BENCHMARKS_ALGORITHM
+#if BENCHMARKS_ALGORITHM
+
+#if NET7_0_OR_GREATER
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector - base - Narrow.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumBase_Narrow(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vector1Used = vector1;
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup2Unzip_Narrow(p0, vector1Used, out var vtemp1);
+                vrt = Vector.Add(vrt, vtemp);
+                vrt1 = Vector.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = Vector.Add(vrt, vrt1);
+            rt = VectorTraitsBase.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumBase_Narrow() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumBase(srcArray, srcArray.Length);
+            CheckResult("SumBase_Narrow");
+        }
+#endif // NET7_0_OR_GREATER
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector - base - NarrowMul.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumBase_NarrowMul(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vector1Used = vector1;
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup2Unzip_NarrowMul(p0, vector1Used, out var vtemp1);
+                vrt = Vector.Add(vrt, vtemp);
+                vrt1 = Vector.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = Vector.Add(vrt, vrt1);
+            rt = VectorTraitsBase.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumBase_NarrowMul() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumBase(srcArray, srcArray.Length);
+            CheckResult("SumBase_NarrowMul");
+        }
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector - base.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumBase(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vector1Used = vector1;
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup2Unzip(p0, vector1Used, out var vtemp1);
+                vrt = Vector.Add(vrt, vtemp);
+                vrt1 = Vector.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = Vector.Add(vrt, vrt1);
+            rt = VectorTraitsBase.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumBase() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumBase(srcArray, srcArray.Length);
+            CheckResult("SumBase");
+        }
+
+#endif // BENCHMARKS_ALGORITHM
+        #endregion // BENCHMARKS_ALGORITHM
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector - Traits.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumTraits(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vector1Used = vector1;
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vectors.YGroup2Unzip(p0, vector1Used, out var vtemp1);
+                vrt = Vector.Add(vrt, vtemp);
+                vrt1 = Vector.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = Vector.Add(vrt, vrt1);
+            rt = Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumTraits() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumTraits(srcArray, srcArray.Length);
+            CheckResult("SumTraits");
+        }
+
 
         #region BENCHMARKS_128
 #if BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
@@ -89,7 +335,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             return rt;
         }
 
-        [Benchmark(Baseline = true)]
+        [Benchmark]
         public void Sum128Base_Basic() {
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
