@@ -1,4 +1,7 @@
-﻿#if NET7_0_OR_GREATER
+﻿#if NETCOREAPP3_0_OR_GREATER
+#define SHORT_CIRCUIT_GENERIC
+#endif // NETCOREAPP3_0_OR_GREATER
+#if NET7_0_OR_GREATER
 #define BCL_TYPE_INT128
 #endif // NET7_0_OR_GREATER
 
@@ -12,6 +15,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 #endif
 using Zyl.VectorTraits.ExTypes;
 using Zyl.VectorTraits.Impl;
@@ -445,6 +449,12 @@ namespace Zyl.VectorTraits {
         public static Vector256<T> YGroup2Unzip_Int128<T>(Vector256<T> data0, Vector256<T> data1, out Vector256<T> y) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup2Unzip_Int128(data0, data1, out y);
+#elif SHORT_CIRCUIT_GENERIC
+            if (Avx.IsSupported && Avx2.IsSupported) {
+                return WVectorTraits256Avx2.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+            } else {
+                return BaseStatics.YGroup2Unzip_Int128(data0, data1, out y);
+            }
 #else
             return _instance.YGroup2Unzip_Int128(data0, data1, out y);
 #endif // BCL_BASE_OVERRIDE_STATIC

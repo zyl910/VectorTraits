@@ -1,4 +1,7 @@
-﻿#if NET8_0_OR_GREATER
+﻿#if NETCOREAPP3_0_OR_GREATER
+#define SHORT_CIRCUIT_GENERIC
+#endif // NETCOREAPP3_0_OR_GREATER
+#if NET8_0_OR_GREATER
 #define SHORT_CIRCUIT_WASM
 #endif // NET8_0_OR_GREATER
 
@@ -574,7 +577,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip_Int128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> YGroup2Unzip_Int128<T>(Vector128<T> data0, Vector128<T> data1, out Vector128<T> y) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2Unzip_Int128(data0, data1, out y);
 #else
             return _instance.YGroup2Unzip_Int128(data0, data1, out y);

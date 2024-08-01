@@ -11,6 +11,10 @@ namespace Zyl.VectorTraits.Benchmarks {
     /// Abstract shared array benchmark.
     /// </summary>
     public abstract class AbstractSharedBenchmark : AbstractBenchmark, ILoopCountGetter {
+
+        /// <summary>Output item count.</summary>
+        public const int OutputItemCount = 0x10;
+
         protected static long dstDummy = 0;
 #pragma warning disable CA2211 // Non-constant fields should not be visible
         protected static float[] srcArraySingle = { };

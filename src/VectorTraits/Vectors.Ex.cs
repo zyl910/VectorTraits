@@ -1,6 +1,9 @@
 ﻿#if NET7_0_OR_GREATER
 #define BCL_TYPE_INT128
 #endif // NET7_0_OR_GREATER
+#if NET8_0_OR_GREATER
+//#define UNSAFE_HAS_BITCAST // It didn't solve the problem..
+#endif // NET8_0_OR_GREATER
 
 using System;
 using System.Collections.Generic;
@@ -33,7 +36,11 @@ namespace Zyl.VectorTraits {
         /// <returns>vector reinterpreted as a <see cref="Vector{T}" /> of type <typeparamref name="TTo"/> (重新解释为 <typeparamref name="TTo"/> 类型的 <see cref="Vector{T}" /> 向量).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<TTo> ExAs<TFrom, TTo>(this Vector<TFrom> vector) where TFrom : struct where TTo : struct {
+#if UNSAFE_HAS_BITCAST
+            return Unsafe.BitCast<Vector<TFrom>, Vector<TTo>>(vector);
+#else
             return Unsafe.As<Vector<TFrom>, Vector<TTo>>(ref vector);
+#endif
         }
 
         /// <summary>
@@ -158,6 +165,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<ulong> ExAsUInt64<T>(this Vector<T> vector) where T : struct {
             return ExAs<T, ulong>(vector);
+            //return Unsafe.As<Vector<T>, Vector<ulong>>(ref vector);
         }
 
 #if BCL_TYPE_INT128

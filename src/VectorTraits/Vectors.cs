@@ -1,4 +1,6 @@
-﻿#if NET7_0_OR_GREATER
+﻿#define USE_BCL_ASVECTOR
+
+#if NET7_0_OR_GREATER
 #define BCL_TYPE_INT128
 #endif // NET7_0_OR_GREATER
 
@@ -164,7 +166,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(Vector128<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-#if NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER && USE_BCL_ASVECTOR
             return value.ExAsUInt64().AsVector().ExAs<ulong, T>();
 #else
             if (Vector<byte>.Count == Vector256<byte>.Count) {
@@ -191,7 +193,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(Vector256<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-#if NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER && USE_BCL_ASVECTOR
             return value.ExAsUInt64().AsVector().ExAs<ulong, T>();
 #else
             if (Vector256<byte>.Count >= Vector<byte>.Count) {
@@ -215,35 +217,45 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> AsVector<T>(Vector512<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
+#if USE_BCL_ASVECTOR
             return value.ExAsUInt64().AsVector().ExAs<ulong, T>();
+#else
+            if (Vector512<byte>.Count >= Vector<byte>.Count) {
+                return Unsafe.As<Vector512<T>, Vector<T>>(ref value);
+            } else {
+                Vector<byte> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector<byte>, byte>(ref source), value);
+                return source.ExAs<byte, T>();
+            }
+#endif // USE_BCL_ASVECTOR
         }
 #endif // NET8_0_OR_GREATER
 
-        ///// <summary>
-        ///// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector64{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector64{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
-        ///// </summary>
-        ///// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
-        ///// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
-        ///// <returns>value reinterpreted as a new <see cref="Vector64{T}"/> (重新解释后新的 <see cref="Vector64{T}"/>)值.</returns>
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static Vector64<T> AsVector64<T>(Vector<T> value) where T : struct {
-        //    //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-        //    Vector64<T> source = default(Vector64<T>);
-        //    Unsafe.WriteUnaligned(ref Unsafe.As<Vector64<T>, byte>(ref source), value);
-        //    return source;
-        //}
+            ///// <summary>
+            ///// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector64{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector64{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
+            ///// </summary>
+            ///// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+            ///// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
+            ///// <returns>value reinterpreted as a new <see cref="Vector64{T}"/> (重新解释后新的 <see cref="Vector64{T}"/>)值.</returns>
+            //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+            //public static Vector64<T> AsVector64<T>(Vector<T> value) where T : struct {
+            //    //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
+            //    Vector64<T> source = default(Vector64<T>);
+            //    Unsafe.WriteUnaligned(ref Unsafe.As<Vector64<T>, byte>(ref source), value);
+            //    return source;
+            //}
 
-        /// <summary>
-        /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector128{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector128{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
-        /// </summary>
-        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
-        /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
-        /// <returns>value reinterpreted as a new <see cref="Vector128{T}"/> (重新解释后新的 <see cref="Vector128{T}"/>)值.</returns>
-        /// <seealso cref="Vector128.AsVector128{T}(Vector{T})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            /// <summary>
+            /// Reinterprets a <see cref="Vector{T}"/> as a new <see cref="Vector128{T}"/> (将 <see cref="Vector{T}"/> 重新解释为新的 <see cref="Vector128{T}"/>). It supports ExType, so there is no element type check (它支持 ExType, 故没有元素类型检查).
+            /// </summary>
+            /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+            /// <param name="value">The vector to reinterpret (要重新解释的向量).</param>
+            /// <returns>value reinterpreted as a new <see cref="Vector128{T}"/> (重新解释后新的 <see cref="Vector128{T}"/>)值.</returns>
+            /// <seealso cref="Vector128.AsVector128{T}(Vector{T})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> AsVector128<T>(Vector<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-#if NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER && USE_BCL_ASVECTOR
             return value.ExAsUInt64().AsVector128().ExAs<ulong, T>();
 #else
             if (Vector<byte>.Count == Vector256<byte>.Count) {
@@ -269,7 +281,7 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> AsVector256<T>(Vector<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
-#if NET5_0_OR_GREATER
+#if NET5_0_OR_GREATER && USE_BCL_ASVECTOR
             return value.ExAsUInt64().AsVector256().ExAs<ulong, T>();
 #else
             if (Vector<byte>.Count >= Vector256<byte>.Count) {
@@ -306,20 +318,30 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector512<T> AsVector512<T>(Vector<T> value) where T : struct {
             //ThrowHelper.ThrowForUnsupportedVectorBaseType<T>();
+#if USE_BCL_ASVECTOR
             return value.ExAsUInt64().AsVector512().ExAs<ulong, T>();
+#else
+            if (Vector<byte>.Count >= Vector512<byte>.Count) {
+                return Unsafe.As<Vector<T>, Vector512<T>>(ref value);
+            } else {
+                Vector512<byte> source = default;
+                Unsafe.WriteUnaligned(ref Unsafe.As<Vector512<byte>, byte>(ref source), value);
+                return source.ExAs<byte, T>();
+            }
+#endif
         }
 #endif // NET8_0_OR_GREATER
 
 #endif
 
-        // == Vector methods ==
+            // == Vector methods ==
 
-        /// <summary>
-        /// Returns the number of elements stored in the vector (返回存储在向量中的元素数量).
-        /// </summary>
-        /// <typeparam name="T">The type of the input vector element (输入向量元素的类型).</typeparam>
-        /// <returns>The number of elements stored in the vector (存储在向量中的元素数量).</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            /// <summary>
+            /// Returns the number of elements stored in the vector (返回存储在向量中的元素数量).
+            /// </summary>
+            /// <typeparam name="T">The type of the input vector element (输入向量元素的类型).</typeparam>
+            /// <returns>The number of elements stored in the vector (存储在向量中的元素数量).</returns>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Count<T>() where T : struct {
             return Vector<byte>.Count / Unsafe.SizeOf<T>();
         }
