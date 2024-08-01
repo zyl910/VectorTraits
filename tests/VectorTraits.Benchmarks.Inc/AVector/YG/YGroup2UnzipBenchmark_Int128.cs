@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -191,6 +191,53 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             }
             dstTMy = StaticSumTraits(srcArray, srcArray.Length);
             CheckResult("SumTraits");
+        }
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector - Traits - Int128.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSumTraits_Int128(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector<TMy> vector1Used = vector1;
+            Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
+            Vector<TMy> vrt1 = Vector<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector<TMy> vtemp = Vectors.YGroup2Unzip_Int128(p0, vector1Used, out var vtemp1);
+                vrt = Vector.Add(vrt, vtemp);
+                vrt1 = Vector.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = Vector.Add(vrt, vrt1);
+            rt = Vectors.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void SumTraits_Int128() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstTMy = StaticSumTraits_Int128(srcArray, srcArray.Length);
+            CheckResult("SumTraits_Int128");
         }
 
 
@@ -404,6 +451,53 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             }
             dstOn128 = StaticSum128Traits(srcArray, srcArray.Length);
             CheckResult128("Sum128Traits");
+        }
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector128 - Traits - Int128.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128Traits_Int128(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = Vector128s.YGroup2Unzip_Int128(p0, vector1Used, out var vtemp1);
+                vrt = Vector128s.Add(vrt, vtemp);
+                vrt1 = Vector128s.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = Vector128s.Add(vrt, vrt1);
+            rt = Vector128s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128Traits_Int128() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128Traits_Int128(srcArray, srcArray.Length);
+            CheckResult128("Sum128Traits_Int128");
         }
 
 #endif // BENCHMARKS_128 && NETCOREAPP3_0_OR_GREATER
@@ -668,6 +762,53 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             }
             dstOn256 = StaticSum256Traits(srcArray, srcArray.Length);
             CheckResult256("Sum256Traits");
+        }
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector256 - Traits - Int128.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum256Traits_Int128(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector256<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector256<TMy> vector1Used = vector1.AsVector256();
+            Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector256 result.
+            Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
+            // a) Vector256 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector256<TMy> vtemp = Vector256s.YGroup2Unzip_Int128(p0, vector1Used, out var vtemp1);
+                vrt = Vector256s.Add(vrt, vtemp);
+                vrt1 = Vector256s.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector256<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = Vector256s.Add(vrt, vrt1);
+            rt = Vector256s.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum256Traits_Int128() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn256 = StaticSum256Traits_Int128(srcArray, srcArray.Length);
+            CheckResult256("Sum256Traits_Int128");
         }
 
 #endif // BENCHMARKS_256 && NETCOREAPP3_0_OR_GREATER

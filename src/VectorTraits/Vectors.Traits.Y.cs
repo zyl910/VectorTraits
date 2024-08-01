@@ -1,4 +1,7 @@
-﻿#if NET8_0_OR_GREATER
+﻿#if NETCOREAPP3_0_OR_GREATER
+#define SHORT_CIRCUIT_GENERIC
+#endif // NETCOREAPP3_0_OR_GREATER
+#if NET8_0_OR_GREATER
 #define SHORT_CIRCUIT_WASM
 #endif // NET8_0_OR_GREATER
 
@@ -10,6 +13,13 @@ using Zyl.VectorTraits.Fake.Diagnostics.CodeAnalysis;
 #endif // !NET7_0_OR_GREATER
 using System.Numerics;
 using System.Runtime.CompilerServices;
+#if NETCOREAPP3_0_OR_GREATER
+using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
+#endif // NETCOREAPP3_0_OR_GREATER
+#if NET5_0_OR_GREATER
+using System.Runtime.Intrinsics.Arm;
+#endif // NET5_0_OR_GREATER
 #if NET8_0_OR_GREATER
 using System.Runtime.Intrinsics.Wasm;
 #endif // NET8_0_OR_GREATER
@@ -574,6 +584,33 @@ namespace Zyl.VectorTraits {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup2Unzip_Int128(data0, data1, out y);
 #else
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return VectorTraits128PackedSimd.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+            }
+#endif // SHORT_CIRCUIT_WASM
+#if SHORT_CIRCUIT_GENERIC
+#if NET8_0_OR_GREATER
+            if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Vector512<byte>.Count== Vector<byte>.Count) {
+                return VectorTraits512Avx512.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+            }
+#endif // NET8_0_OR_GREATER
+            if (Vector256<byte>.Count == Vector<byte>.Count) {
+                if (Avx.IsSupported && Avx2.IsSupported) {
+                    return VectorTraits256Avx2.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+                }
+            } else if (Vector128<byte>.Count == Vector<byte>.Count) {
+                if (Sse.IsSupported && Sse2.IsSupported) {
+                    return VectorTraits128Sse.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+#if NET5_0_OR_GREATER
+                } else if (AdvSimd.Arm64.IsSupported) {
+                    return VectorTraits128AdvSimdB64.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+                } else if (AdvSimd.IsSupported) {
+                    return VectorTraits128AdvSimd.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+#endif // NET5_0_OR_GREATER
+                }
+            }
+#endif // SHORT_CIRCUIT_GENERIC
             return _instance.YGroup2Unzip_Int128(data0, data1, out y);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
