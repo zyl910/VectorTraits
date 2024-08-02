@@ -876,6 +876,12 @@ namespace Zyl.VectorTraits {
         public static Vector512<T> YGroup2Zip_Int128<T>(Vector512<T> x, Vector512<T> y, out Vector512<T> data1) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup2Zip_Int128(x, y, out data1);
+#elif SHORT_CIRCUIT_GENERIC
+            if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported) {
+                return WVectorTraits512Avx512.Statics.YGroup2Zip_Int128(x, y, out data1);
+            } else {
+                return BaseStatics.YGroup2Zip_Int128(x, y, out data1);
+            }
 #else
             return _instance.YGroup2Zip_Int128(x, y, out data1);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -1297,6 +1303,12 @@ namespace Zyl.VectorTraits {
         public static Vector512<T> YGroup4Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+#elif SHORT_CIRCUIT_GENERIC
+            if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported) {
+                return WVectorTraits512Avx512.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            } else {
+                return BaseStatics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            }
 #else
             return _instance.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -1442,6 +1454,12 @@ namespace Zyl.VectorTraits {
         public static Vector512<T> YGroup4Zip_Int128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+#elif SHORT_CIRCUIT_GENERIC
+            if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported) {
+                return WVectorTraits512Avx512.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            } else {
+                return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            }
 #else
             return _instance.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
 #endif // BCL_BASE_OVERRIDE_STATIC

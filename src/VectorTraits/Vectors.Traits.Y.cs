@@ -1032,6 +1032,33 @@ namespace Zyl.VectorTraits {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup2Zip_Int128(x, y, out data1);
 #else
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return VectorTraits128PackedSimd.Statics.YGroup2Zip_Int128(x, y, out data1);
+            }
+#endif // SHORT_CIRCUIT_WASM
+#if SHORT_CIRCUIT_GENERIC
+#if NET8_0_OR_GREATER
+            if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Vector512<byte>.Count == Vector<byte>.Count) {
+                return VectorTraits512Avx512.Statics.YGroup2Zip_Int128(x, y, out data1);
+            }
+#endif // NET8_0_OR_GREATER
+            if (Vector256<byte>.Count == Vector<byte>.Count) {
+                if (Avx.IsSupported && Avx2.IsSupported) {
+                    return VectorTraits256Avx2.Statics.YGroup2Zip_Int128(x, y, out data1);
+                }
+            } else if (Vector128<byte>.Count == Vector<byte>.Count) {
+                if (Sse.IsSupported && Sse2.IsSupported) {
+                    return VectorTraits128Sse.Statics.YGroup2Zip_Int128(x, y, out data1);
+#if NET5_0_OR_GREATER
+                } else if (AdvSimd.Arm64.IsSupported) {
+                    return VectorTraits128AdvSimdB64.Statics.YGroup2Zip_Int128(x, y, out data1);
+                } else if (AdvSimd.IsSupported) {
+                    return VectorTraits128AdvSimd.Statics.YGroup2Zip_Int128(x, y, out data1);
+#endif // NET5_0_OR_GREATER
+                }
+            }
+#endif // SHORT_CIRCUIT_GENERIC
             return _instance.YGroup2Zip_Int128(x, y, out data1);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
@@ -1456,6 +1483,33 @@ namespace Zyl.VectorTraits {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
 #else
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return VectorTraits128PackedSimd.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            }
+#endif // SHORT_CIRCUIT_WASM
+#if SHORT_CIRCUIT_GENERIC
+#if NET8_0_OR_GREATER
+            if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Vector512<byte>.Count == Vector<byte>.Count) {
+                return VectorTraits512Avx512.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            }
+#endif // NET8_0_OR_GREATER
+            if (Vector256<byte>.Count == Vector<byte>.Count) {
+                if (Avx.IsSupported && Avx2.IsSupported) {
+                    return VectorTraits256Avx2.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+                }
+            } else if (Vector128<byte>.Count == Vector<byte>.Count) {
+                if (Sse.IsSupported && Sse2.IsSupported) {
+                    return VectorTraits128Sse.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+#if NET5_0_OR_GREATER
+                } else if (AdvSimd.Arm64.IsSupported) {
+                    return VectorTraits128AdvSimdB64.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+                } else if (AdvSimd.IsSupported) {
+                    return VectorTraits128AdvSimd.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+#endif // NET5_0_OR_GREATER
+                }
+            }
+#endif // SHORT_CIRCUIT_GENERIC
             return _instance.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
@@ -1601,6 +1655,33 @@ namespace Zyl.VectorTraits {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
 #else
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return VectorTraits128PackedSimd.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            }
+#endif // SHORT_CIRCUIT_WASM
+#if SHORT_CIRCUIT_GENERIC
+#if NET8_0_OR_GREATER
+            if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Vector512<byte>.Count == Vector<byte>.Count) {
+                return VectorTraits512Avx512.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            }
+#endif // NET8_0_OR_GREATER
+            if (Vector256<byte>.Count == Vector<byte>.Count) {
+                if (Avx.IsSupported && Avx2.IsSupported) {
+                    return VectorTraits256Avx2.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+                }
+            } else if (Vector128<byte>.Count == Vector<byte>.Count) {
+                if (Sse.IsSupported && Sse2.IsSupported) {
+                    return VectorTraits128Sse.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+#if NET5_0_OR_GREATER
+                } else if (AdvSimd.Arm64.IsSupported) {
+                    return VectorTraits128AdvSimdB64.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+                } else if (AdvSimd.IsSupported) {
+                    return VectorTraits128AdvSimd.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+#endif // NET5_0_OR_GREATER
+                }
+            }
+#endif // SHORT_CIRCUIT_GENERIC
             return _instance.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }

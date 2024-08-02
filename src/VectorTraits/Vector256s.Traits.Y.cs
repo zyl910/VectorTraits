@@ -876,6 +876,12 @@ namespace Zyl.VectorTraits {
         public static Vector256<T> YGroup2Zip_Int128<T>(Vector256<T> x, Vector256<T> y, out Vector256<T> data1) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup2Zip_Int128(x, y, out data1);
+#elif SHORT_CIRCUIT_GENERIC
+            if (Avx.IsSupported && Avx2.IsSupported) {
+                return WVectorTraits256Avx2.Statics.YGroup2Zip_Int128(x, y, out data1);
+            } else {
+                return BaseStatics.YGroup2Zip_Int128(x, y, out data1);
+            }
 #else
             return _instance.YGroup2Zip_Int128(x, y, out data1);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -1297,6 +1303,12 @@ namespace Zyl.VectorTraits {
         public static Vector256<T> YGroup4Unzip_Int128<T>(Vector256<T> data0, Vector256<T> data1, Vector256<T> data2, Vector256<T> data3, out Vector256<T> y, out Vector256<T> z, out Vector256<T> w) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+#elif SHORT_CIRCUIT_GENERIC
+            if (Avx.IsSupported && Avx2.IsSupported) {
+                return WVectorTraits256Avx2.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            } else {
+                return BaseStatics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            }
 #else
             return _instance.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
 #endif // BCL_BASE_OVERRIDE_STATIC
@@ -1442,6 +1454,12 @@ namespace Zyl.VectorTraits {
         public static Vector256<T> YGroup4Zip_Int128<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z, Vector256<T> w, out Vector256<T> data1, out Vector256<T> data2, out Vector256<T> data3) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+#elif SHORT_CIRCUIT_GENERIC
+            if (Avx.IsSupported && Avx2.IsSupported) {
+                return WVectorTraits256Avx2.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            } else {
+                return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            }
 #else
             return _instance.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
 #endif // BCL_BASE_OVERRIDE_STATIC

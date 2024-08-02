@@ -998,7 +998,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip_Int128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> YGroup2Zip_Int128<T>(Vector128<T> x, Vector128<T> y, out Vector128<T> data1) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2Zip_Int128(x, y, out data1);
 #else
             return _instance.YGroup2Zip_Int128(x, y, out data1);
@@ -1419,7 +1419,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip_Int128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> YGroup4Unzip_Int128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, Vector128<T> data3, out Vector128<T> y, out Vector128<T> z, out Vector128<T> w) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
 #else
             return _instance.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
@@ -1564,7 +1564,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip_Int128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<T> YGroup4Zip_Int128<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z, Vector128<T> w, out Vector128<T> data1, out Vector128<T> data2, out Vector128<T> data3) where T : struct {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
 #else
             return _instance.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
