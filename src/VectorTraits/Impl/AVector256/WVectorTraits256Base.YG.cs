@@ -147,9 +147,16 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> YGroup2Unzip_Int128<T>(Vector256<T> data0, Vector256<T> data1, out Vector256<T> y) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = YGroup2Unzip_Move(data0.ExAsExUInt128(), data1.ExAsExUInt128(), out var d1);
                 y = d1.ExAs<ExUInt128, T>();
                 return d0.ExAs<ExUInt128, T>();
+#else
+                var c0 = data0.WithUpper(data1.GetLower());
+                var c1 = data1.WithLower(data0.GetUpper());
+                y = c1;
+                return c0;
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
@@ -1191,9 +1198,16 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> YGroup2Zip_Int128<T>(Vector256<T> x, Vector256<T> y, out Vector256<T> data1) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = YGroup2Zip_Move(x.ExAsExUInt128(), y.ExAsExUInt128(), out var d1);
                 data1 = d1.ExAs<ExUInt128, T>();
                 return d0.ExAs<ExUInt128, T>();
+#else
+                var c0 = x.WithUpper(y.GetLower());
+                var c1 = y.WithLower(x.GetUpper());
+                data1 = c1;
+                return c0;
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Zip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
@@ -2227,11 +2241,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup4Unzip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> YGroup4Unzip_Int128<T>(Vector256<T> data0, Vector256<T> data1, Vector256<T> data2, Vector256<T> data3, out Vector256<T> y, out Vector256<T> z, out Vector256<T> w) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = YGroup4Unzip(data0.ExAs<T, ExUInt128>(), data1.ExAs<T, ExUInt128>(), data2.ExAs<T, ExUInt128>(), data3.ExAs<T, ExUInt128>(), out var d1, out var d2, out var d3);
                 y = d1.ExAs<ExUInt128, T>();
                 z = d2.ExAs<ExUInt128, T>();
                 w = d3.ExAs<ExUInt128, T>();
                 return d0.ExAs<ExUInt128, T>();
+#else
+                var a0 = data0;
+                var a1 = data1;
+                var a2 = data2;
+                var a3 = data3;
+                var c0 = a0.WithUpper(a2.GetLower());
+                var c1 = a0.GetUpper().ToVector256Unsafe().WithUpper(a2.GetUpper());
+                var c2 = a1.WithUpper(a3.GetLower());
+                var c3 = a1.GetUpper().ToVector256Unsafe().WithUpper(a3.GetUpper());
+                y = c1;
+                z = c2;
+                w = c3;
+                return c0;
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup4Unzip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
@@ -2792,11 +2821,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup4Zip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<T> YGroup4Zip_Int128<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z, Vector256<T> w, out Vector256<T> data1, out Vector256<T> data2, out Vector256<T> data3) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = YGroup4Zip(x.ExAs<T, ExUInt128>(), y.ExAs<T, ExUInt128>(), z.ExAs<T, ExUInt128>(), w.ExAs<T, ExUInt128>(), out var d1, out var d2, out var d3);
                 data1 = d1.ExAs<ExUInt128, T>();
                 data2 = d2.ExAs<ExUInt128, T>();
                 data3 = d3.ExAs<ExUInt128, T>();
                 return d0.ExAs<ExUInt128, T>();
+#else
+                var a0 = x;
+                var a1 = y;
+                var a2 = z;
+                var a3 = w;
+                var c0 = a0.WithUpper(a1.GetLower());
+                var c1 = a2.WithUpper(a3.GetLower());
+                var c2 = a0.GetUpper().ToVector256Unsafe().WithUpper(a1.GetUpper());
+                var c3 = a2.GetUpper().ToVector256Unsafe().WithUpper(a3.GetUpper());
+                data1 = c1;
+                data2 = c2;
+                data3 = c3;
+                return c0;
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup4Zip(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>

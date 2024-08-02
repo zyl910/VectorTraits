@@ -55,7 +55,7 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;BCL_VER_OVERRIDE_STATIC;USE_VECTOR_CREATE_BY_ARRAY;REDUCE_MEMORY_USAGE</DefineConstants>
+    <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;BCL_VER_OVERRIDE_STATIC;EX_APPLY_GENERIC;USE_VECTOR_CREATE_BY_ARRAY;REDUCE_MEMORY_USAGE</DefineConstants>
 
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Title>VectorTraits</Title>

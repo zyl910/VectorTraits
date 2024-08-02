@@ -94,23 +94,42 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{ExInt128}, Vector512{ExInt128}, out Vector512{ExInt128})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ExInt128> YGroup2Unzip(Vector512<ExInt128> data0, Vector512<ExInt128> data1, out Vector512<ExInt128> y) {
+#if EX_APPLY_GENERIC
                 return YGroup2Unzip_Int128(data0, data1, out y);
+#else
+                var d0 = YGroup2Unzip_Int128(data0.ExAsUInt64(), data1.ExAsUInt64(), out var d1);
+                y = d1.ExAsExInt128();
+                return d0.ExAsExInt128();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{ExUInt128}, Vector512{ExUInt128}, out Vector512{ExUInt128})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ExUInt128> YGroup2Unzip(Vector512<ExUInt128> data0, Vector512<ExUInt128> data1, out Vector512<ExUInt128> y) {
+#if EX_APPLY_GENERIC
                 return YGroup2Unzip_Int128(data0, data1, out y);
+#else
+                var d0 = YGroup2Unzip_Int128(data0.ExAsUInt64(), data1.ExAsUInt64(), out var d1);
+                y = d1.ExAsExUInt128();
+                return d0.ExAsExUInt128();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YGroup2Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, out Vector512<T> y) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = Avx512F.Shuffle4x128(data0.ExAsUInt64(), data1.ExAsUInt64(), (byte)ShuffleControlG4.XZXZ); // x0 x1 x2 x3
                 var d1 = Avx512F.Shuffle4x128(data0.ExAsUInt64(), data1.ExAsUInt64(), (byte)ShuffleControlG4.YWYW); // y0 y1 y2 y3
                 y = d1.ExAs<ulong, T>();
                 return d0.ExAs<ulong, T>();
+#else
+                var d0 = Avx512F.Shuffle4x128(data0.AsUInt64(), data1.AsUInt64(), (byte)ShuffleControlG4.XZXZ); // x0 x1 x2 x3
+                var d1 = Avx512F.Shuffle4x128(data0.AsUInt64(), data1.AsUInt64(), (byte)ShuffleControlG4.YWYW); // y0 y1 y2 y3
+                y = d1.As<ulong, T>();
+                return d0.As<ulong, T>();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{float}, Vector512{float}, out Vector512{float})"/>
@@ -1196,34 +1215,62 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{ExInt128}, Vector512{ExInt128}, out Vector512{ExInt128})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ExInt128> YGroup2Zip(Vector512<ExInt128> x, Vector512<ExInt128> y, out Vector512<ExInt128> data1) {
+#if EX_APPLY_GENERIC
                 return YGroup2Zip_Int128(x, y, out data1);
+#else
+                var d0 = YGroup2Zip_Int128(x.ExAsUInt64(), y.ExAsUInt64(), out var d1);
+                data1 = d1.ExAsExInt128();
+                return d0.ExAsExInt128();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{ExUInt128}, Vector512{ExUInt128}, out Vector512{ExUInt128})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ExUInt128> YGroup2Zip(Vector512<ExUInt128> x, Vector512<ExUInt128> y, out Vector512<ExUInt128> data1) {
+#if EX_APPLY_GENERIC
                 return YGroup2Zip_Int128(x, y, out data1);
+#else
+                var d0 = YGroup2Zip_Int128(x.ExAsUInt64(), y.ExAsUInt64(), out var d1);
+                data1 = d1.ExAsExUInt128();
+                return d0.ExAsExUInt128();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YGroup2Zip_Int128<T>(Vector512<T> x, Vector512<T> y, out Vector512<T> data1) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = Avx512F.PermuteVar8x64x2(x.ExAsUInt64(), Vector512Constants.YGroup2Zip_ShuffleX2_UInt128_On64_Data0, y.ExAsUInt64());
                 var d1 = Avx512F.PermuteVar8x64x2(x.ExAsUInt64(), Vector512Constants.YGroup2Zip_ShuffleX2_UInt128_On64_Data1, y.ExAsUInt64());
                 data1 = d1.ExAs<ulong, T>();
                 return d0.ExAs<ulong, T>();
+#else
+                var d0 = Avx512F.PermuteVar8x64x2(x.AsUInt64(), Vector512Constants.YGroup2Zip_ShuffleX2_UInt128_On64_Data0, y.AsUInt64());
+                var d1 = Avx512F.PermuteVar8x64x2(x.AsUInt64(), Vector512Constants.YGroup2Zip_ShuffleX2_UInt128_On64_Data1, y.AsUInt64());
+                data1 = d1.As<ulong, T>();
+                return d0.As<ulong, T>();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YGroup2Zip_Int128_Imm<T>(Vector512<T> x, Vector512<T> y, out Vector512<T> data1) where T : struct {
+#if EX_APPLY_GENERIC
                 var b0 = Avx512F.Shuffle4x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControlG4.XYXY); // x0 x1 y0 y1
                 var b1 = Avx512F.Shuffle4x128(x.ExAsUInt64(), y.ExAsUInt64(), (byte)ShuffleControlG4.ZWZW); // x2 x3 y2 y3
                 var d0 = Avx512F.Shuffle4x128(b0, b0, (byte)ShuffleControlG4.XZYW); // x0 y0 x1 y1
                 var d1 = Avx512F.Shuffle4x128(b1, b1, (byte)ShuffleControlG4.XZYW); // x2 y2 x3 y3
                 data1 = d1.ExAs<ulong, T>();
                 return d0.ExAs<ulong, T>();
+#else
+                var b0 = Avx512F.Shuffle4x128(x.AsUInt64(), y.AsUInt64(), (byte)ShuffleControlG4.XYXY); // x0 x1 y0 y1
+                var b1 = Avx512F.Shuffle4x128(x.AsUInt64(), y.AsUInt64(), (byte)ShuffleControlG4.ZWZW); // x2 x3 y2 y3
+                var d0 = Avx512F.Shuffle4x128(b0, b0, (byte)ShuffleControlG4.XZYW); // x0 y0 x1 y1
+                var d1 = Avx512F.Shuffle4x128(b1, b1, (byte)ShuffleControlG4.XZYW); // x2 y2 x3 y3
+                data1 = d1.As<ulong, T>();
+                return d0.As<ulong, T>();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{float}, Vector512{float}, out Vector512{float})"/>
@@ -2115,14 +2162,30 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128}, out Vector512{ExInt128}, out Vector512{ExInt128}, out Vector512{ExInt128})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ExInt128> YGroup4Unzip(Vector512<ExInt128> data0, Vector512<ExInt128> data1, Vector512<ExInt128> data2, Vector512<ExInt128> data3, out Vector512<ExInt128> y, out Vector512<ExInt128> z, out Vector512<ExInt128> w) {
+#if EX_APPLY_GENERIC
                 return YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+#else
+                var d0 = YGroup4Unzip_Int128(data0.ExAsUInt64(), data1.ExAsUInt64(), data2.ExAsUInt64(), data3.ExAsUInt64(), out var d1, out var d2, out var d3);
+                y = d1.ExAsExInt128();
+                z = d2.ExAsExInt128();
+                w = d3.ExAsExInt128();
+                return d0.ExAsExInt128();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128}, out Vector512{ExUInt128}, out Vector512{ExUInt128}, out Vector512{ExUInt128})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ExUInt128> YGroup4Unzip(Vector512<ExUInt128> data0, Vector512<ExUInt128> data1, Vector512<ExUInt128> data2, Vector512<ExUInt128> data3, out Vector512<ExUInt128> y, out Vector512<ExUInt128> z, out Vector512<ExUInt128> w) {
+#if EX_APPLY_GENERIC
                 return YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+#else
+                var d0 = YGroup4Unzip_Int128(data0.ExAsUInt64(), data1.ExAsUInt64(), data2.ExAsUInt64(), data3.ExAsUInt64(), out var d1, out var d2, out var d3);
+                y = d1.ExAsExUInt128();
+                z = d2.ExAsExUInt128();
+                w = d3.ExAsExUInt128();
+                return d0.ExAsExUInt128();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip_Int128"/>
@@ -2741,14 +2804,30 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128}, Vector512{ExInt128}, out Vector512{ExInt128}, out Vector512{ExInt128}, out Vector512{ExInt128})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ExInt128> YGroup4Zip(Vector512<ExInt128> x, Vector512<ExInt128> y, Vector512<ExInt128> z, Vector512<ExInt128> w, out Vector512<ExInt128> data1, out Vector512<ExInt128> data2, out Vector512<ExInt128> data3) {
+#if EX_APPLY_GENERIC
                 return YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+#else
+                var d0 = YGroup4Zip_Int128(x.ExAsUInt64(), y.ExAsUInt64(), z.ExAsUInt64(), w.ExAsUInt64(), out var d1, out var d2, out var d3);
+                data1 = d1.ExAsExInt128();
+                data2 = d2.ExAsExInt128();
+                data3 = d3.ExAsExInt128();
+                return d0.ExAsExInt128();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128}, Vector512{ExUInt128}, out Vector512{ExUInt128}, out Vector512{ExUInt128}, out Vector512{ExUInt128})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ExUInt128> YGroup4Zip(Vector512<ExUInt128> x, Vector512<ExUInt128> y, Vector512<ExUInt128> z, Vector512<ExUInt128> w, out Vector512<ExUInt128> data1, out Vector512<ExUInt128> data2, out Vector512<ExUInt128> data3) {
+#if EX_APPLY_GENERIC
                 return YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+#else
+                var d0 = YGroup4Zip_Int128(x.ExAsUInt64(), y.ExAsUInt64(), z.ExAsUInt64(), w.ExAsUInt64(), out var d1, out var d2, out var d3);
+                data1 = d1.ExAsExUInt128();
+                data2 = d2.ExAsExUInt128();
+                data3 = d3.ExAsExUInt128();
+                return d0.ExAsExUInt128();
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip_Int128"/>

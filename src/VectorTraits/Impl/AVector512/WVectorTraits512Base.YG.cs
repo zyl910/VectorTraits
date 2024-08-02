@@ -147,9 +147,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YGroup2Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, out Vector512<T> y) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = YGroup2Unzip_Move(data0.ExAsExUInt128(), data1.ExAsExUInt128(), out var d1);
                 y = d1.ExAs<ExUInt128, T>();
                 return d0.ExAs<ExUInt128, T>();
+#else
+                var a0 = data0;
+                var a1 = data1;
+                var b0 = a0.GetLower();
+                var b1 = a0.GetUpper();
+                var b2 = a1.GetLower();
+                var b3 = a1.GetUpper();
+                var c0 = b0.WithUpper(b1.GetLower()).ToVector512Unsafe().WithUpper(b2.WithUpper(b3.GetLower()));
+                var c1 = b0.GetUpper().ToVector256Unsafe().WithUpper(b1.GetUpper()).ToVector512Unsafe().WithUpper(b2.GetUpper().ToVector256Unsafe().WithUpper(b3.GetUpper()));
+                y = c1;
+                return c0;
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{float}, Vector512{float}, out Vector512{float})"/>
@@ -1199,9 +1212,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YGroup2Zip_Int128<T>(Vector512<T> x, Vector512<T> y, out Vector512<T> data1) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = YGroup2Zip_Move(x.ExAsExUInt128(), y.ExAsExUInt128(), out var d1);
                 data1 = d1.ExAs<ExUInt128, T>();
                 return d0.ExAs<ExUInt128, T>();
+#else
+                var a0 = x;
+                var a1 = y;
+                var b0 = a0.GetLower();
+                var b1 = a0.GetUpper();
+                var b2 = a1.GetLower();
+                var b3 = a1.GetUpper();
+                var c0 = b0.WithUpper(b2.GetLower()).ToVector512Unsafe().WithUpper(b0.GetUpper().ToVector256Unsafe().WithUpper(b2.GetUpper()));
+                var c1 = b1.WithUpper(b3.GetLower()).ToVector512Unsafe().WithUpper(b1.GetUpper().ToVector256Unsafe().WithUpper(b3.GetUpper()));
+                data1 = c1;
+                return c0;
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{float}, Vector512{float}, out Vector512{float})"/>
@@ -2219,11 +2245,34 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YGroup4Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = YGroup4Unzip_Move(data0.ExAs<T, ExUInt128>(), data1.ExAs<T, ExUInt128>(), data2.ExAs<T, ExUInt128>(), data3.ExAs<T, ExUInt128>(), out var d1, out var d2, out var d3);
                 y = d1.ExAs<ExUInt128, T>();
                 z = d2.ExAs<ExUInt128, T>();
                 w = d3.ExAs<ExUInt128, T>();
                 return d0.ExAs<ExUInt128, T>();
+#else
+                var a0 = data0;
+                var a1 = data1;
+                var a2 = data2;
+                var a3 = data3;
+                var a0l = a0.GetLower();
+                var a0u = a0.GetUpper();
+                var a1l = a1.GetLower();
+                var a1u = a1.GetUpper();
+                var a2l = a2.GetLower();
+                var a2u = a2.GetUpper();
+                var a3l = a3.GetLower();
+                var a3u = a3.GetUpper();
+                var c0 = a0l.WithUpper(a1l.GetLower()).ToVector512Unsafe().WithUpper(a2l.WithUpper(a3l.GetLower()));
+                var c1 = a0l.GetUpper().ToVector256Unsafe().WithUpper(a1l.GetUpper()).ToVector512Unsafe().WithUpper(a2l.GetUpper().ToVector256Unsafe().WithUpper(a3l.GetUpper()));
+                var c2 = a0u.WithUpper(a1u.GetLower()).ToVector512Unsafe().WithUpper(a2u.WithUpper(a3u.GetLower()));
+                var c3 = a0u.GetUpper().ToVector256Unsafe().WithUpper(a1u.GetUpper()).ToVector512Unsafe().WithUpper(a2u.GetUpper().ToVector256Unsafe().WithUpper(a3u.GetUpper()));
+                y = c1;
+                z = c2;
+                w = c3;
+                return c0;
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
@@ -2820,11 +2869,34 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip_Int128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YGroup4Zip_Int128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3) where T : struct {
+#if EX_APPLY_GENERIC
                 var d0 = YGroup4Zip_Move(x.ExAs<T, ExUInt128>(), y.ExAs<T, ExUInt128>(), z.ExAs<T, ExUInt128>(), w.ExAs<T, ExUInt128>(), out var d1, out var d2, out var d3);
                 data1 = d1.ExAs<ExUInt128, T>();
                 data2 = d2.ExAs<ExUInt128, T>();
                 data3 = d3.ExAs<ExUInt128, T>();
                 return d0.ExAs<ExUInt128, T>();
+#else
+                var a0 = x;
+                var a1 = y;
+                var a2 = z;
+                var a3 = w;
+                var a0l = a0.GetLower();
+                var a0u = a0.GetUpper();
+                var a1l = a1.GetLower();
+                var a1u = a1.GetUpper();
+                var a2l = a2.GetLower();
+                var a2u = a2.GetUpper();
+                var a3l = a3.GetLower();
+                var a3u = a3.GetUpper();
+                var c0 = a0l.WithUpper(a1l.GetLower()).ToVector512Unsafe().WithUpper(a2l.WithUpper(a3l.GetLower()));
+                var c1 = a0l.GetUpper().ToVector256Unsafe().WithUpper(a1l.GetUpper()).ToVector512Unsafe().WithUpper(a2l.GetUpper().ToVector256Unsafe().WithUpper(a3l.GetUpper()));
+                var c2 = a0u.WithUpper(a1u.GetLower()).ToVector512Unsafe().WithUpper(a2u.WithUpper(a3u.GetLower()));
+                var c3 = a0u.GetUpper().ToVector256Unsafe().WithUpper(a1u.GetUpper()).ToVector512Unsafe().WithUpper(a2u.GetUpper().ToVector256Unsafe().WithUpper(a3u.GetUpper()));
+                data1 = c1;
+                data2 = c2;
+                data3 = c3;
+                return c0;
+#endif // EX_APPLY_GENERIC
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
