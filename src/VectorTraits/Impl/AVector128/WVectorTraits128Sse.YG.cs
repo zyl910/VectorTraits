@@ -22,7 +22,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -140,26 +140,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 //}
 #endif // NET8_0_OR_GREATER
                 return YGroup2Unzip_Unpack(data0, data1, out y);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{ExInt128}, Vector128{ExInt128}, out Vector128{ExInt128})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExInt128> YGroup2Unzip(Vector128<ExInt128> data0, Vector128<ExInt128> data1, out Vector128<ExInt128> y) {
-                return YGroup2Unzip_Int128(data0, data1, out y);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{ExUInt128}, Vector128{ExUInt128}, out Vector128{ExUInt128})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExUInt128> YGroup2Unzip(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1, out Vector128<ExUInt128> y) {
-                return YGroup2Unzip_Int128(data0, data1, out y);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip_Int128"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup2Unzip_Int128<T>(Vector128<T> data0, Vector128<T> data1, out Vector128<T> y) where T : struct {
-                y = data1;
-                return data0;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
@@ -452,7 +432,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipEven_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -559,21 +539,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2UnzipEven(Vector128<ulong> data0, Vector128<ulong> data1) {
                 return YGroup2UnzipEven_Unpack(data0, data1);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven(Vector128{ExInt128}, Vector128{ExInt128})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExInt128> YGroup2UnzipEven(Vector128<ExInt128> data0, Vector128<ExInt128> data1) {
-                _ = data1;
-                return data0;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven(Vector128{ExUInt128}, Vector128{ExUInt128})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExUInt128> YGroup2UnzipEven(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1) {
-                _ = data1;
-                return data0;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
@@ -802,7 +767,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipOdd_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -909,21 +874,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2UnzipOdd(Vector128<ulong> data0, Vector128<ulong> data1) {
                 return YGroup2UnzipOdd_Unpack(data0, data1);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd(Vector128{ExInt128}, Vector128{ExInt128})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExInt128> YGroup2UnzipOdd(Vector128<ExInt128> data0, Vector128<ExInt128> data1) {
-                _ = data0;
-                return data1;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd(Vector128{ExUInt128}, Vector128{ExUInt128})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExUInt128> YGroup2UnzipOdd(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1) {
-                _ = data0;
-                return data1;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
@@ -1161,7 +1111,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Zip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -1228,26 +1178,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2Zip(Vector128<ulong> x, Vector128<ulong> y, out Vector128<ulong> data1) {
                 return YGroup2Zip_Unpack(x, y, out data1);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{ExInt128}, Vector128{ExInt128}, out Vector128{ExInt128})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExInt128> YGroup2Zip(Vector128<ExInt128> x, Vector128<ExInt128> y, out Vector128<ExInt128> data1) {
-                return YGroup2Zip_Int128(x, y, out data1);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{ExUInt128}, Vector128{ExUInt128}, out Vector128{ExUInt128})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExUInt128> YGroup2Zip(Vector128<ExUInt128> x, Vector128<ExUInt128> y, out Vector128<ExUInt128> data1) {
-                return YGroup2Zip_Int128(x, y, out data1);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip_Int128"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup2Zip_Int128<T>(Vector128<T> x, Vector128<T> y, out Vector128<T> data1) where T : struct {
-                data1 = y;
-                return x;
             }
 
 #if NET8_0_OR_GREATER
@@ -1524,7 +1454,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipHigh_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -1641,21 +1571,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup2ZipHigh_Unpack(x, y);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{ExInt128}, Vector128{ExInt128})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExInt128> YGroup2ZipHigh(Vector128<ExInt128> x, Vector128<ExInt128> y) {
-                _ = x;
-                return y;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{ExUInt128}, Vector128{ExUInt128})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExUInt128> YGroup2ZipHigh(Vector128<ExUInt128> x, Vector128<ExUInt128> y) {
-                _ = x;
-                return y;
             }
 
 #if NET8_0_OR_GREATER
@@ -1801,7 +1716,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipLow_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -1918,21 +1833,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 }
 #endif // NET8_0_OR_GREATER
                 return YGroup2ZipLow_Unpack(x, y);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{ExInt128}, Vector128{ExInt128})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExInt128> YGroup2ZipLow(Vector128<ExInt128> x, Vector128<ExInt128> y) {
-                _ = y;
-                return x;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{ExUInt128}, Vector128{ExUInt128})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExUInt128> YGroup2ZipLow(Vector128<ExUInt128> x, Vector128<ExUInt128> y) {
-                _ = y;
-                return x;
             }
 
 #if NET8_0_OR_GREATER
@@ -2079,7 +1979,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Unzip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -2202,28 +2102,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 //}
 #endif // NET8_0_OR_GREATER
                 return YGroup4Unzip_Unpack(data0, data1, data2, data3, out y, out z, out w);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip(Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExInt128> YGroup4Unzip(Vector128<ExInt128> data0, Vector128<ExInt128> data1, Vector128<ExInt128> data2, Vector128<ExInt128> data3, out Vector128<ExInt128> y, out Vector128<ExInt128> z, out Vector128<ExInt128> w) {
-                return YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip(Vector128{ExUInt128}, Vector128{ExUInt128}, Vector128{ExUInt128}, Vector128{ExUInt128}, out Vector128{ExUInt128}, out Vector128{ExUInt128}, out Vector128{ExUInt128})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExUInt128> YGroup4Unzip(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1, Vector128<ExUInt128> data2, Vector128<ExUInt128> data3, out Vector128<ExUInt128> y, out Vector128<ExUInt128> z, out Vector128<ExUInt128> w) {
-                return YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip_Int128"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup4Unzip_Int128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, Vector128<T> data3, out Vector128<T> y, out Vector128<T> z, out Vector128<T> w) where T : struct {
-                y = data1;
-                z = data2;
-                w = data3;
-                return data0;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
@@ -2727,7 +2605,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Zip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes | TypeCodeFlags.Int128 | TypeCodeFlags.UInt128;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -2793,28 +2671,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup4Zip(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z, Vector128<ulong> w, out Vector128<ulong> data1, out Vector128<ulong> data2, out Vector128<ulong> data3) {
                 return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip(Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExInt128> YGroup4Zip(Vector128<ExInt128> x, Vector128<ExInt128> y, Vector128<ExInt128> z, Vector128<ExInt128> w, out Vector128<ExInt128> data1, out Vector128<ExInt128> data2, out Vector128<ExInt128> data3) {
-                return YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip(Vector128{ExUInt128}, Vector128{ExUInt128}, Vector128{ExUInt128}, Vector128{ExUInt128}, out Vector128{ExUInt128}, out Vector128{ExUInt128}, out Vector128{ExUInt128})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ExUInt128> YGroup4Zip(Vector128<ExUInt128> x, Vector128<ExUInt128> y, Vector128<ExUInt128> z, Vector128<ExUInt128> w, out Vector128<ExUInt128> data1, out Vector128<ExUInt128> data2, out Vector128<ExUInt128> data3) {
-                return YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip_Int128"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup4Zip_Int128<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z, Vector128<T> w, out Vector128<T> data1, out Vector128<T> data2, out Vector128<T> data3) where T : struct {
-                data1 = y;
-                data2 = z;
-                data3 = w;
-                return x;
             }
 
 #if NET8_0_OR_GREATER

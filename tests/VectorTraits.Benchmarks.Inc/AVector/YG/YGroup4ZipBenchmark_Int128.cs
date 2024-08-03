@@ -413,65 +413,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             CheckResult128("Sum128Base");
         }
 
-        /// <summary>
-        /// Sum YGroup4Zip - Vector128 - Sse.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum128Sse(TMy[] src, int srcCount) {
-            TMy rt = 0; // Result.
-            const int GroupSize = 1;
-            int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMyEx> vector1Used = vector1.AsVector128().ExAs<TMy, TMyEx>();
-            Vector128<TMyEx> vector2Used = vector2.AsVector128().ExAs<TMy, TMyEx>();
-            Vector128<TMyEx> vector3Used = vector3.AsVector128().ExAs<TMy, TMyEx>();
-            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
-            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
-            Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
-            Vector128<TMy> vrt3 = Vector128<TMy>.Zero;
-            int i;
-            // Body.
-            ref Vector128<TMyEx> p0 = ref Unsafe.As<TMy, Vector128<TMyEx>>(ref src[0]);
-            // a) Vector128 processs.
-            for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128Sse.Statics.YGroup4Zip(p0, vector1Used, vector2Used, vector3Used, out var v1, out var v2, out var v3).ExAs<TMyEx, TMy>();
-                var vtemp1 = v1.ExAs<TMyEx, TMy>();
-                var vtemp2 = v2.ExAs<TMyEx, TMy>();
-                var vtemp3 = v3.ExAs<TMyEx, TMy>();
-                vrt = WVectorTraits128Sse.Statics.Add(vrt, vtemp);
-                vrt1 = WVectorTraits128Sse.Statics.Add(vrt1, vtemp1);
-                vrt2 = WVectorTraits128Sse.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits128Sse.Statics.Add(vrt3, vtemp3);
-                p0 = ref Unsafe.Add(ref p0, GroupSize);
-            }
-            // b) Remainder processs.
-            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
-            // for (i = 0; i < cntRem; ++i) {
-            //     // Ignore
-            // }
-            // Reduce.
-            vrt = WVectorTraits128Sse.Statics.Add(vrt, vrt1);
-            vrt2 = WVectorTraits128Sse.Statics.Add(vrt2, vrt3);
-            vrt = WVectorTraits128Sse.Statics.Add(vrt, vrt2);
-            rt = WVectorTraits128Sse.Statics.Sum(vrt);
-            return rt;
-        }
-
-        [Benchmark]
-        public void Sum128Sse() {
-            WVectorTraits128Sse.Statics.ThrowForUnsupported(true);
-            if (BenchmarkUtil.IsLastRun) {
-                //Debugger.Break();
-                Volatile.Write(ref dstTMy, 0);
-            }
-            dstOn128 = StaticSum128Sse(srcArray, srcArray.Length);
-            CheckResult128("Sum128Sse");
-        }
-
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 

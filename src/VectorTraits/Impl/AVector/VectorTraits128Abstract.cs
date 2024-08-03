@@ -15,7 +15,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
     /// <summary>
     /// <see cref="Vector{T}"/> traits 128 - abstract.
     /// </summary>
-    public abstract class VectorTraits128Abstract : VectorTraitsAbstract {
+    public abstract partial class VectorTraits128Abstract : VectorTraitsAbstract {
 
         /// <summary>
         /// Get best instance.

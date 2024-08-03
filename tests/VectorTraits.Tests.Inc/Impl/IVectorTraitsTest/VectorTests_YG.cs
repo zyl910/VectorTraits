@@ -95,7 +95,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         }
 
         [TestCase((byte)4)]
+#if EX_APPLY_GENERIC
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+#endif // EX_APPLY_GENERIC
         public void YGroup2Unzip_Int128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
@@ -364,7 +366,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         }
 
         [TestCase((byte)4)]
+#if EX_APPLY_GENERIC
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+#endif // EX_APPLY_GENERIC
         public void YGroup2Zip_Int128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
@@ -639,7 +643,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         }
 
         [TestCase((byte)4)]
+#if EX_APPLY_GENERIC
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+#endif // EX_APPLY_GENERIC
         public void YGroup4Unzip_Int128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
@@ -770,7 +776,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         }
 
         [TestCase((byte)4)]
+#if EX_APPLY_GENERIC
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
+#endif // EX_APPLY_GENERIC
         public void YGroup4Zip_Int128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
