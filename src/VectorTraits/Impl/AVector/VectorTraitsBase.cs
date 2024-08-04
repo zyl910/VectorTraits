@@ -212,8 +212,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 } else {
                     return Vector.ConvertToDouble(value);
                 }
-#else
+#elif NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                 return Vector.ConvertToDouble(value);
+#else
+                return ConvertToDouble_Range52_Impl(value);
 #endif // NET5_0_OR_GREATER
             }
 
@@ -227,8 +229,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 } else {
                     return Vector.ConvertToDouble(value);
                 }
-#else
+#elif NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
                 return Vector.ConvertToDouble(value);
+#else
+                return ConvertToDouble_Range52_Impl(value);
 #endif // NET5_0_OR_GREATER
             }
 

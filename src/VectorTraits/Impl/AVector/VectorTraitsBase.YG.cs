@@ -2290,7 +2290,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup4Unzip(Vector{short}, Vector{short}, Vector{short}, Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> YGroup4Unzip(Vector<short> data0, Vector<short> data1, Vector<short> data2, Vector<short> data3, out Vector<short> y, out Vector<short> z, out Vector<short> w) {
-#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD && BCL_HAS_SHIFT
                 return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
 #else
                 return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
