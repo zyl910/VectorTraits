@@ -43,6 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64_Double.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AbstractSharedBenchmark_UInt64_UInt32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)BenchmarkUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DisableBenchmarkAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FakeBenchmarkAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBenchmarkWriter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ILoopCountGetter.cs" />

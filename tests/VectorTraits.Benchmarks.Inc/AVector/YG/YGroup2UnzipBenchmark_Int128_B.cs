@@ -1,5 +1,5 @@
-﻿#define BENCHMARKS_OFF
-//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
+#define BENCHMARKS_DISABLE
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -21,7 +21,9 @@ using Zyl.VectorTraits.Impl.AVector256;
 using Zyl.VectorTraits.Impl.AVector512;
 
 namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
-#if BENCHMARKS_OFF
+#if BENCHMARKS_DISABLE
+    using BenchmarkAttribute = DisableBenchmarkAttribute;
+#elif BENCHMARKS_OFF
     using BenchmarkAttribute = FakeBenchmarkAttribute;
 #else
 #endif // BENCHMARKS_OFF
