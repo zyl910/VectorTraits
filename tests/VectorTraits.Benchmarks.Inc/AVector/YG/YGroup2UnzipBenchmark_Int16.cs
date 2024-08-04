@@ -135,7 +135,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumBase(srcArray, srcArray.Length);
+            dstTMy = StaticSumBase_Narrow(srcArray, srcArray.Length);
             CheckResult("SumBase_Narrow");
         }
 #endif // NET7_0_OR_GREATER
@@ -183,7 +183,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumBase(srcArray, srcArray.Length);
+            dstTMy = StaticSumBase_NarrowMul(srcArray, srcArray.Length);
             CheckResult("SumBase_NarrowMul");
         }
 
