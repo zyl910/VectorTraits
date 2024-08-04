@@ -411,33 +411,6 @@ namespace Zyl.VectorTraits {
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue_AcceleratedTypes"/>
-        public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
-            get {
-#if BCL_BASE_OVERRIDE_STATIC
-                return BaseStatics.YIsAllTrue_AcceleratedTypes;
-#else
-                return _instance.YIsAllTrue_AcceleratedTypes;
-#endif // BCL_BASE_OVERRIDE_STATIC
-            }
-        }
-
-        /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue{T}(Vector128{T})"/>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool YIsAllTrue<T>(Vector128<T> value) where T : struct {
-#if SHORT_CIRCUIT_WASM
-            if (PackedSimd.IsSupported) {
-                return WasmStatics.YIsAllTrue(value);
-            }
-#endif // SHORT_CIRCUIT_WASM
-#if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YIsAllTrue(value);
-#else
-            return _instance.YIsAllTrue(value);
-#endif // BCL_BASE_OVERRIDE_STATIC
-        }
-
-
         /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip_AcceleratedTypes"/>
         public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
             get {
@@ -556,7 +529,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{ExInt128}, Vector128{ExInt128}, out Vector128{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExInt128> YGroup2Unzip(Vector128<ExInt128> data0, Vector128<ExInt128> data1, out Vector128<ExInt128> y) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2Unzip(data0, data1, out y);
 #else
             return _instance.YGroup2Unzip(data0, data1, out y);
@@ -567,7 +540,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExUInt128> YGroup2Unzip(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1, out Vector128<ExUInt128> y) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2Unzip(data0, data1, out y);
 #else
             return _instance.YGroup2Unzip(data0, data1, out y);
@@ -703,7 +676,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven(Vector128{ExInt128}, Vector128{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExInt128> YGroup2UnzipEven(Vector128<ExInt128> data0, Vector128<ExInt128> data1) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2UnzipEven(data0, data1);
 #else
             return _instance.YGroup2UnzipEven(data0, data1);
@@ -714,7 +687,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExUInt128> YGroup2UnzipEven(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2UnzipEven(data0, data1);
 #else
             return _instance.YGroup2UnzipEven(data0, data1);
@@ -840,7 +813,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd(Vector128{ExInt128}, Vector128{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExInt128> YGroup2UnzipOdd(Vector128<ExInt128> data0, Vector128<ExInt128> data1) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2UnzipOdd(data0, data1);
 #else
             return _instance.YGroup2UnzipOdd(data0, data1);
@@ -851,7 +824,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExUInt128> YGroup2UnzipOdd(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2UnzipOdd(data0, data1);
 #else
             return _instance.YGroup2UnzipOdd(data0, data1);
@@ -977,7 +950,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{ExInt128}, Vector128{ExInt128}, out Vector128{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExInt128> YGroup2Zip(Vector128<ExInt128> x, Vector128<ExInt128> y, out Vector128<ExInt128> data1) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2Zip(x, y, out data1);
 #else
             return _instance.YGroup2Zip(x, y, out data1);
@@ -988,7 +961,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExUInt128> YGroup2Zip(Vector128<ExUInt128> x, Vector128<ExUInt128> y, out Vector128<ExUInt128> data1) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2Zip(x, y, out data1);
 #else
             return _instance.YGroup2Zip(x, y, out data1);
@@ -1124,7 +1097,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{ExInt128}, Vector128{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExInt128> YGroup2ZipHigh(Vector128<ExInt128> x, Vector128<ExInt128> y) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2ZipHigh(x, y);
 #else
             return _instance.YGroup2ZipHigh(x, y);
@@ -1135,7 +1108,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExUInt128> YGroup2ZipHigh(Vector128<ExUInt128> x, Vector128<ExUInt128> y) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2ZipHigh(x, y);
 #else
             return _instance.YGroup2ZipHigh(x, y);
@@ -1261,7 +1234,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{ExInt128}, Vector128{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExInt128> YGroup2ZipLow(Vector128<ExInt128> x, Vector128<ExInt128> y) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2ZipLow(x, y);
 #else
             return _instance.YGroup2ZipLow(x, y);
@@ -1272,7 +1245,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExUInt128> YGroup2ZipLow(Vector128<ExUInt128> x, Vector128<ExUInt128> y) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup2ZipLow(x, y);
 #else
             return _instance.YGroup2ZipLow(x, y);
@@ -1398,7 +1371,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip(Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExInt128> YGroup4Unzip(Vector128<ExInt128> data0, Vector128<ExInt128> data1, Vector128<ExInt128> data2, Vector128<ExInt128> data3, out Vector128<ExInt128> y, out Vector128<ExInt128> z, out Vector128<ExInt128> w) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup4Unzip(data0, data1, data2, data3, out y, out z, out w);
 #else
             return _instance.YGroup4Unzip(data0, data1, data2, data3, out y, out z, out w);
@@ -1409,7 +1382,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExUInt128> YGroup4Unzip(Vector128<ExUInt128> data0, Vector128<ExUInt128> data1, Vector128<ExUInt128> data2, Vector128<ExUInt128> data3, out Vector128<ExUInt128> y, out Vector128<ExUInt128> z, out Vector128<ExUInt128> w) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup4Unzip(data0, data1, data2, data3, out y, out z, out w);
 #else
             return _instance.YGroup4Unzip(data0, data1, data2, data3, out y, out z, out w);
@@ -1543,7 +1516,7 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip(Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExInt128> YGroup4Zip(Vector128<ExInt128> x, Vector128<ExInt128> y, Vector128<ExInt128> z, Vector128<ExInt128> w, out Vector128<ExInt128> data1, out Vector128<ExInt128> data2, out Vector128<ExInt128> data3) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup4Zip(x, y, z, w, out data1, out data2, out data3);
 #else
             return _instance.YGroup4Zip(x, y, z, w, out data1, out data2, out data3);
@@ -1554,7 +1527,7 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ExUInt128> YGroup4Zip(Vector128<ExUInt128> x, Vector128<ExUInt128> y, Vector128<ExUInt128> z, Vector128<ExUInt128> w, out Vector128<ExUInt128> data1, out Vector128<ExUInt128> data2, out Vector128<ExUInt128> data3) {
-#if BCL_BASE_OVERRIDE_STATIC
+#if BCL_BASE_OVERRIDE_STATIC || SHORT_CIRCUIT_GENERIC
             return BaseStatics.YGroup4Zip(x, y, z, w, out data1, out data2, out data3);
 #else
             return _instance.YGroup4Zip(x, y, z, w, out data1, out data2, out data3);
@@ -1568,6 +1541,33 @@ namespace Zyl.VectorTraits {
             return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
 #else
             return _instance.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue_AcceleratedTypes"/>
+        public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YIsAllTrue_AcceleratedTypes;
+#else
+                return _instance.YIsAllTrue_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue{T}(Vector128{T})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool YIsAllTrue<T>(Vector128<T> value) where T : struct {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YIsAllTrue(value);
+            }
+#endif // SHORT_CIRCUIT_WASM
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YIsAllTrue(value);
+#else
+            return _instance.YIsAllTrue(value);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
