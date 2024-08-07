@@ -6,7 +6,7 @@
     <SharedGUID>be768355-83f8-4ab1-af0e-b19025bcf6c7</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>VectorTraits.Tests</Import_RootNamespace>
+    <Import_RootNamespace>Zyl.VectorTraits.Tests</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BitMathTests.cs" />
@@ -111,6 +111,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Impl\VectorConstantsTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Impl\VectorGenericTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MathTests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyTestUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Numerics\BitMathCoreTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Numerics\MathBinaryPrimitivesTests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Numerics\MathBitConverterTests.cs" />

@@ -46,6 +46,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.
@@ -317,6 +318,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.
@@ -588,6 +590,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.
@@ -721,6 +724,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.

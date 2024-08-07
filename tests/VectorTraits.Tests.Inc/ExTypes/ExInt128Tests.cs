@@ -12,7 +12,7 @@ using System.Text;
 using Zyl.VectorTraits;
 using Zyl.VectorTraits.ExTypes;
 
-namespace VectorTraits.Tests.ExTypes {
+namespace Zyl.VectorTraits.Tests.ExTypes {
 #if USED_NUNIT3
     using ClassicAssert = Assert;
 #endif
