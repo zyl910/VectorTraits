@@ -807,8 +807,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
         /// <param name="data3">A vector made of 4-element groups - Part 3 (由4元素组所组成的向量 - 第3部分).</param>
         /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
-        /// <param name="z">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
-        /// <param name="w">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <param name="z">Returns the vector made of the Z-components (返回Z分量所组成的向量).</param>
+        /// <param name="w">Returns the vector made of the W-components (返回W分量所组成的向量).</param>
         /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
         /// <seealso cref="YGroup4Unzip_AcceleratedTypes"/>
         Vector<float> YGroup4Unzip(Vector<float> data0, Vector<float> data1, Vector<float> data2, Vector<float> data3, out Vector<float> y, out Vector<float> z, out Vector<float> w);
@@ -856,8 +856,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
         /// <param name="data3">A vector made of 4-element groups - Part 3 (由4元素组所组成的向量 - 第3部分).</param>
         /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
-        /// <param name="z">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
-        /// <param name="w">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <param name="z">Returns the vector made of the Z-components (返回Z分量所组成的向量).</param>
+        /// <param name="w">Returns the vector made of the W-components (返回W分量所组成的向量).</param>
         /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
         Vector<T> YGroup4Unzip_Int128<T>(Vector<T> data0, Vector<T> data1, Vector<T> data2, Vector<T> data3, out Vector<T> y, out Vector<T> z, out Vector<T> w) where T : struct;
 

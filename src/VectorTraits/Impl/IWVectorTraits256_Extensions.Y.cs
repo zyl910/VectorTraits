@@ -632,6 +632,248 @@ namespace Zyl.VectorTraits.Impl {
 #endif // BCL_TYPE_INT128
 
 
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip{T}(Vector256{T}, Vector256{T}, Vector256{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<T> X, Vector256<T> Y, Vector256<T> Z) YGroup3Unzip<T>(this IWVectorTraits256 athis, Vector256<T> data0, Vector256<T> data1, Vector256<T> data2) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<float>)(object)data0, (Vector256<float>)(object)data1, (Vector256<float>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<double>)(object)data0, (Vector256<double>)(object)data1, (Vector256<double>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<sbyte>)(object)data0, (Vector256<sbyte>)(object)data1, (Vector256<sbyte>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<byte>)(object)data0, (Vector256<byte>)(object)data1, (Vector256<byte>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<short>)(object)data0, (Vector256<short>)(object)data1, (Vector256<short>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<ushort>)(object)data0, (Vector256<ushort>)(object)data1, (Vector256<ushort>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<int>)(object)data0, (Vector256<int>)(object)data1, (Vector256<int>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<uint>)(object)data0, (Vector256<uint>)(object)data1, (Vector256<uint>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<long>)(object)data0, (Vector256<long>)(object)data1, (Vector256<long>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector256<ulong>)(object)data0, (Vector256<ulong>)(object)data1, (Vector256<ulong>)(object)data2);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{float}, Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<float> X, Vector256<float> Y, Vector256<float> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<float> data0, Vector256<float> data1, Vector256<float> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{double}, Vector256{double}, Vector256{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<double> X, Vector256<double> Y, Vector256<double> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<double> data0, Vector256<double> data1, Vector256<double> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> X, Vector256<sbyte> Y, Vector256<sbyte> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> X, Vector256<byte> Y, Vector256<byte> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> X, Vector256<short> Y, Vector256<short> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<short> data0, Vector256<short> data1, Vector256<short> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> X, Vector256<ushort> Y, Vector256<ushort> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> X, Vector256<int> Y, Vector256<int> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<int> data0, Vector256<int> data1, Vector256<int> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> X, Vector256<uint> Y, Vector256<uint> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> X, Vector256<long> Y, Vector256<long> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<long> data0, Vector256<long> data1, Vector256<long> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> X, Vector256<ulong> Y, Vector256<ulong> Z) YGroup3Unzip(this IWVectorTraits256 athis, Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2{T}(Vector256{T}, Vector256{T}, Vector256{T}, Vector256{T}, Vector256{T}, Vector256{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<T> X, Vector256<T> XB, Vector256<T> Y, Vector256<T> YB, Vector256<T> Z, Vector256<T> ZB) YGroup3UnzipX2<T>(this IWVectorTraits256 athis, Vector256<T> data0, Vector256<T> data1, Vector256<T> data2, Vector256<T> data3, Vector256<T> data4, Vector256<T> data5) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<float>)(object)data0, (Vector256<float>)(object)data1, (Vector256<float>)(object)data2, (Vector256<float>)(object)data3, (Vector256<float>)(object)data4, (Vector256<float>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<double>)(object)data0, (Vector256<double>)(object)data1, (Vector256<double>)(object)data2, (Vector256<double>)(object)data3, (Vector256<double>)(object)data4, (Vector256<double>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<sbyte>)(object)data0, (Vector256<sbyte>)(object)data1, (Vector256<sbyte>)(object)data2, (Vector256<sbyte>)(object)data3, (Vector256<sbyte>)(object)data4, (Vector256<sbyte>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<byte>)(object)data0, (Vector256<byte>)(object)data1, (Vector256<byte>)(object)data2, (Vector256<byte>)(object)data3, (Vector256<byte>)(object)data4, (Vector256<byte>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<short>)(object)data0, (Vector256<short>)(object)data1, (Vector256<short>)(object)data2, (Vector256<short>)(object)data3, (Vector256<short>)(object)data4, (Vector256<short>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<ushort>)(object)data0, (Vector256<ushort>)(object)data1, (Vector256<ushort>)(object)data2, (Vector256<ushort>)(object)data3, (Vector256<ushort>)(object)data4, (Vector256<ushort>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<int>)(object)data0, (Vector256<int>)(object)data1, (Vector256<int>)(object)data2, (Vector256<int>)(object)data3, (Vector256<int>)(object)data4, (Vector256<int>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<uint>)(object)data0, (Vector256<uint>)(object)data1, (Vector256<uint>)(object)data2, (Vector256<uint>)(object)data3, (Vector256<uint>)(object)data4, (Vector256<uint>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<long>)(object)data0, (Vector256<long>)(object)data1, (Vector256<long>)(object)data2, (Vector256<long>)(object)data3, (Vector256<long>)(object)data4, (Vector256<long>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector256<ulong>)(object)data0, (Vector256<ulong>)(object)data1, (Vector256<ulong>)(object)data2, (Vector256<ulong>)(object)data3, (Vector256<ulong>)(object)data4, (Vector256<ulong>)(object)data5);
+                return ((Vector256<T>)(object)rt0, (Vector256<T>)(object)rt1, (Vector256<T>)(object)rt2, (Vector256<T>)(object)rt3, (Vector256<T>)(object)rt4, (Vector256<T>)(object)rt5);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<float> X, Vector256<float> XB, Vector256<float> Y, Vector256<float> YB, Vector256<float> Z, Vector256<float> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, Vector256<float> data3, Vector256<float> data4, Vector256<float> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<double> X, Vector256<double> XB, Vector256<double> Y, Vector256<double> YB, Vector256<double> Z, Vector256<double> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, Vector256<double> data3, Vector256<double> data4, Vector256<double> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> X, Vector256<sbyte> XB, Vector256<sbyte> Y, Vector256<sbyte> YB, Vector256<sbyte> Z, Vector256<sbyte> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, Vector256<sbyte> data3, Vector256<sbyte> data4, Vector256<sbyte> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> X, Vector256<byte> XB, Vector256<byte> Y, Vector256<byte> YB, Vector256<byte> Z, Vector256<byte> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, Vector256<byte> data3, Vector256<byte> data4, Vector256<byte> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> X, Vector256<short> XB, Vector256<short> Y, Vector256<short> YB, Vector256<short> Z, Vector256<short> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, Vector256<short> data3, Vector256<short> data4, Vector256<short> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> X, Vector256<ushort> XB, Vector256<ushort> Y, Vector256<ushort> YB, Vector256<ushort> Z, Vector256<ushort> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3, Vector256<ushort> data4, Vector256<ushort> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> X, Vector256<int> XB, Vector256<int> Y, Vector256<int> YB, Vector256<int> Z, Vector256<int> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, Vector256<int> data3, Vector256<int> data4, Vector256<int> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> X, Vector256<uint> XB, Vector256<uint> Y, Vector256<uint> YB, Vector256<uint> Z, Vector256<uint> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, Vector256<uint> data3, Vector256<uint> data4, Vector256<uint> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> X, Vector256<long> XB, Vector256<long> Y, Vector256<long> YB, Vector256<long> Z, Vector256<long> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, Vector256<long> data3, Vector256<long> data4, Vector256<long> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup3UnzipX2(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> X, Vector256<ulong> XB, Vector256<ulong> Y, Vector256<ulong> YB, Vector256<ulong> Z, Vector256<ulong> ZB) YGroup3UnzipX2(this IWVectorTraits256 athis, Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, Vector256<ulong> data3, Vector256<ulong> data4, Vector256<ulong> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+
 #if BCL_TYPE_INT128
 
         /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{ExInt128}, Vector256{ExInt128}, Vector256{ExInt128}, Vector256{ExInt128}, out Vector256{ExInt128}, out Vector256{ExInt128}, out Vector256{ExInt128})"/>

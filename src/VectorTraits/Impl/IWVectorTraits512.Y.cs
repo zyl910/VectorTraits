@@ -766,8 +766,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
         /// <param name="data3">A vector made of 4-element groups - Part 3 (由4元素组所组成的向量 - 第3部分).</param>
         /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
-        /// <param name="z">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
-        /// <param name="w">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <param name="z">Returns the vector made of the Z-components (返回Z分量所组成的向量).</param>
+        /// <param name="w">Returns the vector made of the W-components (返回W分量所组成的向量).</param>
         /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
         /// <seealso cref="YGroup4Unzip_AcceleratedTypes"/>
         Vector512<float> YGroup4Unzip(Vector512<float> data0, Vector512<float> data1, Vector512<float> data2, Vector512<float> data3, out Vector512<float> y, out Vector512<float> z, out Vector512<float> w);
@@ -815,8 +815,8 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
         /// <param name="data3">A vector made of 4-element groups - Part 3 (由4元素组所组成的向量 - 第3部分).</param>
         /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
-        /// <param name="z">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
-        /// <param name="w">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <param name="z">Returns the vector made of the Z-components (返回Z分量所组成的向量).</param>
+        /// <param name="w">Returns the vector made of the W-components (返回W分量所组成的向量).</param>
         /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
         Vector512<T> YGroup4Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w) where T : struct;
 
