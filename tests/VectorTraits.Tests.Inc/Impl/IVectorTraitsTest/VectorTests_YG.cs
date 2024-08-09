@@ -620,9 +620,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         string funcName = instance.GetType().Name;
                         (dst0, dst1, dst2, dst3) = instance.YGroup4Unzip(data0, data1, data2, data3);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
                     }
                     for (int f = 0; f < funcList.Count; f++) {
                         if (funcListUnsupported[f]) continue;
@@ -632,13 +632,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                             dst0 = func(data0, data1, data2, data3, out dst1, out dst2, out dst3);
                         } catch (NotSupportedException ex) {
                             funcListUnsupported[f] = true;
-                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {2}, {3}. {4}", funcName, data0, data1, data2, data3, ex.Message));
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {3}, {4}. {5}", funcName, data0, data1, data2, data3, ex.Message));
                             continue;
                         }
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
@@ -687,9 +687,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         string funcName = instance.GetType().Name;
                         dst0 = instance.YGroup4Unzip_Int128(data0, data1, data2, data3, out dst1, out dst2, out dst3);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
                     }
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
@@ -754,9 +754,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         string funcName = instance.GetType().Name;
                         (dst0, dst1, dst2, dst3) = instance.YGroup4Zip(data0, data1, data2, data3);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
                     }
                     for (int f = 0; f < funcList.Count; f++) {
                         if (funcListUnsupported[f]) continue;
@@ -766,13 +766,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                             dst0 = func(data0, data1, data2, data3, out dst1, out dst2, out dst3);
                         } catch (NotSupportedException ex) {
                             funcListUnsupported[f] = true;
-                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {2}, {3}. {4}", funcName, data0, data1, data2, data3, ex.Message));
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {3}, {4}. {5}", funcName, data0, data1, data2, data3, ex.Message));
                             continue;
                         }
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
@@ -821,9 +821,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         string funcName = instance.GetType().Name;
                         dst0 = instance.YGroup4Zip_Int128(data0, data1, data2, data3, out dst1, out dst2, out dst3);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
-                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}", expected3, dst3, funcName, data0, data1, data2, data3));
                     }
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
