@@ -173,6 +173,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.
@@ -247,6 +248,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.
@@ -445,6 +447,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.
@@ -519,6 +522,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.

@@ -639,6 +639,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     Unsafe.Add(ref px, i) = p[idx];
                     idx += 2;
                 }
+                //Console.WriteLine(VectorTextUtil.Format("WVectorTraits128Base.YGroup2UnzipEven_Basic({0}, {1}): {2}", data0, data1, x1));
                 return x1;
             }
 

@@ -70,7 +70,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         break;
                     }
  
-                    Debug.Assert(char.IsAsciiDigit((char)digit), $"Unexpected character found in Number: {digit}");
+                    Debug.Assert(IsAsciiDigit((char)digit), $"Unexpected character found in Number: {digit}");
                 }
  
                 Debug.Assert(numDigits == DigitsCount, "Null terminator found in unexpected location in Number");

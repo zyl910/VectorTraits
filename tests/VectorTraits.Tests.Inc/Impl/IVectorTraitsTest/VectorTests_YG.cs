@@ -170,6 +170,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.
@@ -189,6 +190,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                     Vector<T> dst;
 #pragma warning disable CS0618 // Type or member is obsolete
                     Vector<T> expected = Vectors.YGroup2UnzipEven<T>(data0, data1);
+                    //if (Scalars<T>.BitSize >= 64) {
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}", data0, data1, expected));
                     }
@@ -198,12 +200,21 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         dst = instance.YGroup2UnzipEven<T>(data0, data1);
                         ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, data0, data1));
                     }
+                    if (0 == i && 1 == j && funcList.Count > 0) {
+                        //System.Diagnostics.Debugger.Break();
+                    }
                     for (int f = 0; f < funcList.Count; f++) {
                         if (funcListUnsupported[f]) continue;
                         var func = funcList[f];
                         string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                         try {
+                            //if (Scalars<T>.BitSize >= 64) {
+                            //    writer.WriteLine(VectorTextUtil.Format("{0}({1}, {2})-0", funcName, data0, data1));
+                            //}
                             dst = func(data0, data1);
+                            //if (Scalars<T>.BitSize >= 64) {
+                            //    writer.WriteLine(VectorTextUtil.Format("{0}({1}, {2})-1: {3}", funcName, data0, data1, dst));
+                            //}
                         } catch (NotSupportedException ex) {
                             funcListUnsupported[f] = true;
                             writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, data0, data1, ex.Message));
@@ -244,6 +255,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.
@@ -442,6 +454,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.
@@ -516,6 +529,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
             bool[] funcListUnsupported = new bool[funcList.Count];
             writer.WriteLine();
             // run.

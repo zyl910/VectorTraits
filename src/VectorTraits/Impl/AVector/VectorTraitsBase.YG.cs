@@ -745,6 +745,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YGroup2UnzipEven_Basic(Vector<ulong> data0, Vector<ulong> data1) {
+#if NETSTANDARD1_3_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET40_OR_GREATER
+                //Console.WriteLine(VectorTextUtil.Format("VectorTraitsBase.YGroup2UnzipEven_Basic-0({0}, {1})", data0, data1));
+#endif
                 UnsafeUtil.SkipInit(out Vector<ulong> x1);
                 Span<Vector<ulong>> src = [data0, data1];
                 ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref x1);
@@ -754,6 +757,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
                     Unsafe.Add(ref px, i) = p[idx];
                     idx += 2;
                 }
+#if NETSTANDARD1_3_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET40_OR_GREATER
+                //Console.WriteLine(VectorTextUtil.Format("VectorTraitsBase.YGroup2UnzipEven_Basic({0}, {1}): {2}", data0, data1, x1));
+#endif
                 return x1;
             }
 

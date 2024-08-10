@@ -71,6 +71,9 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         ClassicAssert.AreEqual(expected, dst, $"{instance.GetType().Name}, lower={lower}, upper={upper}");
                     }
                 }
+                if (0 == i && funcList.Count > 0) {
+                    //System.Diagnostics.Debugger.Break();
+                }
                 foreach (var func in funcList) {
                     string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
                     Vector<TOut> dst = func(lower, upper);
