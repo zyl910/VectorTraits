@@ -739,6 +739,202 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             CheckResult128("Sum128Sse_Unpack");
         }
 
+#if NET8_0_OR_GREATER
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector128 - PackedSimd - Narrow.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128PackedSimd_Narrow(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128PackedSimd.Statics.YGroup2Unzip_Narrow(p0, vector1Used, out var vtemp1);
+                vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128PackedSimd.Statics.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vrt1);
+            rt = WVectorTraits128PackedSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128PackedSimd_Narrow() {
+            WVectorTraits128PackedSimd.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128PackedSimd_Narrow(srcArray, srcArray.Length);
+            CheckResult128("Sum128PackedSimd_Narrow");
+        }
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector128 - PackedSimd - Shuffle.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128PackedSimd_Shuffle(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128PackedSimd.Statics.YGroup2Unzip_Shuffle(p0, vector1Used, out var vtemp1);
+                vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128PackedSimd.Statics.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vrt1);
+            rt = WVectorTraits128PackedSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128PackedSimd_Shuffle() {
+            WVectorTraits128PackedSimd.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128PackedSimd_Shuffle(srcArray, srcArray.Length);
+            CheckResult128("Sum128PackedSimd_Shuffle");
+        }
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector128 - PackedSimd - ValueTuple Narrow.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128PackedSimd_TupleNarrow(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                (Vector128<TMy> vtemp, Vector128<TMy> vtemp1) = WVectorTraits128PackedSimd.Statics.YGroup2Unzip_Narrow(p0, vector1Used);
+                vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128PackedSimd.Statics.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vrt1);
+            rt = WVectorTraits128PackedSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128PackedSimd_TupleNarrow() {
+            WVectorTraits128PackedSimd.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128PackedSimd_TupleNarrow(srcArray, srcArray.Length);
+            CheckResult128("Sum128PackedSimd_TupleNarrow");
+        }
+
+        /// <summary>
+        /// Sum YGroup2Unzip - Vector128 - PackedSimd - ValueTuple Shuffle.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128PackedSimd_TupleShuffle(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector128 result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector128 processs.
+            for (i = 0; i < cntBlock; ++i) {
+                (Vector128<TMy> vtemp, Vector128<TMy> vtemp1) = WVectorTraits128PackedSimd.Statics.YGroup2Unzip_Shuffle(p0, vector1Used);
+                vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128PackedSimd.Statics.Add(vrt1, vtemp1);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vrt1);
+            rt = WVectorTraits128PackedSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128PackedSimd_TupleShuffle() {
+            WVectorTraits128PackedSimd.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128PackedSimd_TupleShuffle(srcArray, srcArray.Length);
+            CheckResult128("Sum128PackedSimd_TupleShuffle");
+        }
+
+#endif // NET8_0_OR_GREATER
+
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
