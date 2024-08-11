@@ -482,8 +482,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipEven_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
-                    return rt;
+                    return YGroup2Unzip_AcceleratedTypes;
                 }
             }
 
@@ -708,8 +707,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipOdd_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
-                    return rt;
+                    return YGroup2Unzip_AcceleratedTypes;
                 }
             }
 
@@ -934,7 +932,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Zip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -942,66 +940,65 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2Zip(Vector128<float> x, Vector128<float> y, out Vector128<float> data1) {
-                return YGroup2Zip_Widen(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{double}, Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2Zip(Vector128<double> x, Vector128<double> y, out Vector128<double> data1) {
-                return SuperStatics.YGroup2Zip(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YGroup2Zip(Vector128<sbyte> x, Vector128<sbyte> y, out Vector128<sbyte> data1) {
-                return YGroup2Zip_Widen(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2Zip(Vector128<byte> x, Vector128<byte> y, out Vector128<byte> data1) {
-                // Base = _Widen >= _ShuffleX > _Shuffle
-                return YGroup2Zip_Widen(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{short}, Vector128{short}, out Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YGroup2Zip(Vector128<short> x, Vector128<short> y, out Vector128<short> data1) {
-                return YGroup2Zip_Widen(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{ushort}, Vector128{ushort}, out Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2Zip(Vector128<ushort> x, Vector128<ushort> y, out Vector128<ushort> data1) {
-                return YGroup2Zip_Widen(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{int}, Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YGroup2Zip(Vector128<int> x, Vector128<int> y, out Vector128<int> data1) {
-                return YGroup2Zip_Widen(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{uint}, Vector128{uint}, out Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2Zip(Vector128<uint> x, Vector128<uint> y, out Vector128<uint> data1) {
-                return YGroup2Zip_Widen(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{long}, Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup2Zip(Vector128<long> x, Vector128<long> y, out Vector128<long> data1) {
-                return SuperStatics.YGroup2Zip(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{ulong}, Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2Zip(Vector128<ulong> x, Vector128<ulong> y, out Vector128<ulong> data1) {
-                return SuperStatics.YGroup2Zip(x, y, out data1);
+                return YGroup2Zip_Shuffle(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
@@ -1099,150 +1096,268 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return a0.AsUInt32();
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YGroup2Zip_Shuffle(Vector128<float> x, Vector128<float> y, out Vector128<float> data1) {
+                var d0 = YGroup2Zip_Shuffle(x.AsUInt32(), y.AsUInt32(), out var d1);
+                data1 = d1.AsSingle();
+                return d0.AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{double}, Vector128{double}, out Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YGroup2Zip_Shuffle(Vector128<double> x, Vector128<double> y, out Vector128<double> data1) {
+                var d0 = YGroup2Zip_Shuffle(x.AsUInt64(), y.AsUInt64(), out var d1);
+                data1 = d1.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YGroup2Zip_Shuffle(Vector128<sbyte> x, Vector128<sbyte> y, out Vector128<sbyte> data1) {
+                var d0 = YGroup2Zip_Shuffle(x.AsByte(), y.AsByte(), out var d1);
+                data1 = d1.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YGroup2Zip_Shuffle(Vector128<byte> x, Vector128<byte> y, out Vector128<byte> data1) {
+                var f0 = Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data0;
+                var f0B = Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data0_Part1;
+                var f1 = Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data1;
+                var f1B = Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data1_Part1;
+                var a0 = PackedSimd.Or(PackedSimd.Swizzle(x, f0), PackedSimd.Swizzle(y, f0B));
+                var a1 = PackedSimd.Or(PackedSimd.Swizzle(x, f1), PackedSimd.Swizzle(y, f1B));
+                data1 = a1;
+                return a0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{short}, Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YGroup2Zip_Shuffle(Vector128<short> x, Vector128<short> y, out Vector128<short> data1) {
+                var d0 = YGroup2Zip_Shuffle(x.AsUInt16(), y.AsUInt16(), out var d1);
+                data1 = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{ushort}, Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YGroup2Zip_Shuffle(Vector128<ushort> x, Vector128<ushort> y, out Vector128<ushort> data1) {
+                var f0 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt16_Data0;
+                var f0B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt16_Data0_Part1;
+                var f1 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt16_Data1;
+                var f1B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt16_Data1_Part1;
+                var a0 = PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f0), PackedSimd.Swizzle(y.AsByte(), f0B)).AsUInt16();
+                var a1 = PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f1), PackedSimd.Swizzle(y.AsByte(), f1B)).AsUInt16();
+                data1 = a1;
+                return a0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{int}, Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YGroup2Zip_Shuffle(Vector128<int> x, Vector128<int> y, out Vector128<int> data1) {
+                var d0 = YGroup2Zip_Shuffle(x.AsUInt32(), y.AsUInt32(), out var d1);
+                data1 = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{uint}, Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YGroup2Zip_Shuffle(Vector128<uint> x, Vector128<uint> y, out Vector128<uint> data1) {
+                var f0 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt32_Data0;
+                var f0B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt32_Data0_Part1;
+                var f1 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt32_Data1;
+                var f1B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt32_Data1_Part1;
+                var a0 = PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f0), PackedSimd.Swizzle(y.AsByte(), f0B)).AsUInt32();
+                var a1 = PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f1), PackedSimd.Swizzle(y.AsByte(), f1B)).AsUInt32();
+                data1 = a1;
+                return a0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{long}, Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup2Zip_Shuffle(Vector128<long> x, Vector128<long> y, out Vector128<long> data1) {
+                var d0 = YGroup2Zip_Shuffle(x.AsUInt64(), y.AsUInt64(), out var d1);
+                data1 = d1.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{ulong}, Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup2Zip_Shuffle(Vector128<ulong> x, Vector128<ulong> y, out Vector128<ulong> data1) {
+                var f0 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt64_Data0;
+                var f0B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt64_Data0_Part1;
+                var f1 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt64_Data1;
+                var f1B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt64_Data1_Part1;
+                var a0 = PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f0), PackedSimd.Swizzle(y.AsByte(), f0B)).AsUInt64();
+                var a1 = PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f1), PackedSimd.Swizzle(y.AsByte(), f1B)).AsUInt64();
+                data1 = a1;
+                return a0;
+            }
+
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipHigh_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
-                    return rt;
+                    return YGroup2Zip_AcceleratedTypes;
                 }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2ZipHigh(Vector128<float> x, Vector128<float> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                return YGroup2ZipHigh(x.AsUInt32(), y.AsUInt32()).AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2ZipHigh(Vector128<double> x, Vector128<double> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                return YGroup2ZipHigh(x.AsUInt64(), y.AsUInt64()).AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YGroup2ZipHigh(Vector128<sbyte> x, Vector128<sbyte> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                return YGroup2ZipHigh(x.AsByte(), y.AsByte()).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2ZipHigh(Vector128<byte> x, Vector128<byte> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                var f1 = Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data1;
+                var f1B = Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data1_Part1;
+                return PackedSimd.Or(PackedSimd.Swizzle(x, f1), PackedSimd.Swizzle(y, f1B));
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YGroup2ZipHigh(Vector128<short> x, Vector128<short> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                return YGroup2ZipHigh(x.AsUInt16(), y.AsUInt16()).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2ZipHigh(Vector128<ushort> x, Vector128<ushort> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                var f1 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt16_Data1;
+                var f1B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt16_Data1_Part1;
+                return PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f1), PackedSimd.Swizzle(y.AsByte(), f1B)).AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YGroup2ZipHigh(Vector128<int> x, Vector128<int> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                return YGroup2ZipHigh(x.AsUInt32(), y.AsUInt32()).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2ZipHigh(Vector128<uint> x, Vector128<uint> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                var f1 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt32_Data1;
+                var f1B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt32_Data1_Part1;
+                return PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f1), PackedSimd.Swizzle(y.AsByte(), f1B)).AsUInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup2ZipHigh(Vector128<long> x, Vector128<long> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                return YGroup2ZipHigh(x.AsUInt64(), y.AsUInt64()).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2ZipHigh(Vector128<ulong> x, Vector128<ulong> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+                var f1 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt64_Data1;
+                var f1B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt64_Data1_Part1;
+                return PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f1), PackedSimd.Swizzle(y.AsByte(), f1B)).AsUInt64();
             }
 
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipLow_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
-                    return rt;
+                    return YGroup2Zip_AcceleratedTypes;
                 }
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2ZipLow(Vector128<float> x, Vector128<float> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                return YGroup2ZipLow(x.AsUInt32(), y.AsUInt32()).AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2ZipLow(Vector128<double> x, Vector128<double> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                return YGroup2ZipLow(x.AsUInt64(), y.AsUInt64()).AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YGroup2ZipLow(Vector128<sbyte> x, Vector128<sbyte> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                return YGroup2ZipLow(x.AsByte(), y.AsByte()).AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2ZipLow(Vector128<byte> x, Vector128<byte> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                var f0 = Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data0;
+                var f0B = Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data0_Part1;
+                return PackedSimd.Or(PackedSimd.Swizzle(x, f0), PackedSimd.Swizzle(y, f0B));
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YGroup2ZipLow(Vector128<short> x, Vector128<short> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                return YGroup2ZipLow(x.AsUInt16(), y.AsUInt16()).AsInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2ZipLow(Vector128<ushort> x, Vector128<ushort> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                var f0 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt16_Data0;
+                var f0B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt16_Data0_Part1;
+                return PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f0), PackedSimd.Swizzle(y.AsByte(), f0B)).AsUInt16();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YGroup2ZipLow(Vector128<int> x, Vector128<int> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                return YGroup2ZipLow(x.AsUInt32(), y.AsUInt32()).AsInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2ZipLow(Vector128<uint> x, Vector128<uint> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                var f0 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt32_Data0;
+                var f0B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt32_Data0_Part1;
+                return PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f0), PackedSimd.Swizzle(y.AsByte(), f0B)).AsUInt32();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup2ZipLow(Vector128<long> x, Vector128<long> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                return YGroup2ZipLow(x.AsUInt64(), y.AsUInt64()).AsInt64();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2ZipLow(Vector128<ulong> x, Vector128<ulong> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+                var f0 = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt64_Data0;
+                var f0B = Vector128Constants.YGroup2Zip_ShuffleX2OnByte_UInt64_Data0_Part1;
+                return PackedSimd.Or(PackedSimd.Swizzle(x.AsByte(), f0), PackedSimd.Swizzle(y.AsByte(), f0B)).AsUInt64();
             }
 
 
