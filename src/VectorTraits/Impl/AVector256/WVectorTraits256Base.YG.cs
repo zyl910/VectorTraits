@@ -2123,7 +2123,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup3Unzip_AcceleratedTypes {
                 get {
-                    return YGroup2Unzip_AcceleratedTypes;
+                    return YGroup2Zip_AcceleratedTypes;
                 }
             }
 
