@@ -2048,7 +2048,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup3Unzip(Vector128<float> data0, Vector128<float> data1, Vector128<float> data2, out Vector128<float> y, out Vector128<float> z) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Unzip_X2(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
 #else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2065,7 +2065,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YGroup3Unzip(Vector128<sbyte> data0, Vector128<sbyte> data1, Vector128<sbyte> data2, out Vector128<sbyte> y, out Vector128<sbyte> z) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Unzip_X2(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
 #else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2075,7 +2075,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup3Unzip(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, out Vector128<byte> y, out Vector128<byte> z) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Unzip_X2(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
 #else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2085,7 +2085,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YGroup3Unzip(Vector128<short> data0, Vector128<short> data1, Vector128<short> data2, out Vector128<short> y, out Vector128<short> z) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Unzip_X2(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
 #else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2096,7 +2096,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup3Unzip(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, out Vector128<ushort> y, out Vector128<ushort> z) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Unzip_X2(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
 #else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2106,7 +2106,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YGroup3Unzip(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, out Vector128<int> y, out Vector128<int> z) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Unzip_X2(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
 #else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2117,7 +2117,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup3Unzip(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> y, out Vector128<uint> z) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Unzip_X2(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
 #else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
@@ -2328,47 +2328,47 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<float> YGroup3Unzip_X2(Vector128<float> data0, Vector128<float> data1, Vector128<float> data2, out Vector128<float> y, out Vector128<float> z) {
-                return YGroup3UnzipX2(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            public static Vector128<float> YGroup3Unzip_ByX2Zip(Vector128<float> data0, Vector128<float> data1, Vector128<float> data2, out Vector128<float> y, out Vector128<float> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<sbyte> YGroup3Unzip_X2(Vector128<sbyte> data0, Vector128<sbyte> data1, Vector128<sbyte> data2, out Vector128<sbyte> y, out Vector128<sbyte> z) {
-                return YGroup3UnzipX2(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            public static Vector128<sbyte> YGroup3Unzip_ByX2Zip(Vector128<sbyte> data0, Vector128<sbyte> data1, Vector128<sbyte> data2, out Vector128<sbyte> y, out Vector128<sbyte> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<byte> YGroup3Unzip_X2(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, out Vector128<byte> y, out Vector128<byte> z) {
-                return YGroup3UnzipX2(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            public static Vector128<byte> YGroup3Unzip_ByX2Zip(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, out Vector128<byte> y, out Vector128<byte> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{short}, Vector128{short}, Vector128{short}, out Vector128{short}, out Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<short> YGroup3Unzip_X2(Vector128<short> data0, Vector128<short> data1, Vector128<short> data2, out Vector128<short> y, out Vector128<short> z) {
-                return YGroup3UnzipX2(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            public static Vector128<short> YGroup3Unzip_ByX2Zip(Vector128<short> data0, Vector128<short> data1, Vector128<short> data2, out Vector128<short> y, out Vector128<short> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ushort> YGroup3Unzip_X2(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, out Vector128<ushort> y, out Vector128<ushort> z) {
-                return YGroup3UnzipX2(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            public static Vector128<ushort> YGroup3Unzip_ByX2Zip(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, out Vector128<ushort> y, out Vector128<ushort> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{int}, Vector128{int}, Vector128{int}, out Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<int> YGroup3Unzip_X2(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, out Vector128<int> y, out Vector128<int> z) {
-                return YGroup3UnzipX2(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            public static Vector128<int> YGroup3Unzip_ByX2Zip(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, out Vector128<int> y, out Vector128<int> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{uint}, Vector128{uint}, Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<uint> YGroup3Unzip_X2(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> y, out Vector128<uint> z) {
-                return YGroup3UnzipX2(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            public static Vector128<uint> YGroup3Unzip_ByX2Zip(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> y, out Vector128<uint> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
             }
 
 #endif // VECTOR_HAS_METHOD
