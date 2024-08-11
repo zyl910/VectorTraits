@@ -1364,8 +1364,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Unzip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
-                    return rt;
+                    return YGroup2Unzip_AcceleratedTypes;
                 }
             }
 
@@ -1666,8 +1665,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Zip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
-                    return rt;
+                    return YGroup2Zip_AcceleratedTypes;
                 }
             }
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
