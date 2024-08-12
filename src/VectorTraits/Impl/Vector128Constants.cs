@@ -1956,11 +1956,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector128<ulong> YGroup3Unzip_Shuffle_UInt64_Y_On02 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
-            get => Vector128.Create((ulong)1, 1);
+            get => Vector128.Create((ulong)1, 2);
         }
 #else
             get;
-        } = Vector128.Create((ulong)1, 1);
+        } = Vector128.Create((ulong)1, 2);
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup3Unzip - Shuffle - UInt64 - The index of Z.</summary>
