@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Zyl.VectorTraits.ExTypes;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Numerics {
     using static MathBitConverter;
@@ -584,6 +585,53 @@ namespace Zyl.VectorTraits.Numerics {
         }
 
 #endif // BCL_TYPE_HALF
+
+        /// <summary>
+        /// Get the byte made by the 2*1-bit value - reversed (获取由2*1位值构成的字节 - 逆序). Generally used to make shuffle control codes, like <see cref="_MM_SHUFFLE2"/> (一般用于制作 shuffle 控制码, 类似 <see cref="_MM_SHUFFLE2"/>).
+        /// </summary>
+        /// <param name="n0">The 0th 1-bit value (第0个1位值).</param>
+        /// <param name="n1">The 1st 1-bit value (第1个1位值).</param>
+        /// <returns>Return the byte of made (返回所构成的字节).</returns>
+        /// <seealso cref="_MM_SHUFFLE2"/>
+        /// <seealso cref="ShuffleControlG2"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte GetByteBy2XBitR(byte n0, byte n1) {
+            return (byte)(n0 | (n1 << 1));
+        }
+
+        /// <summary>
+        /// Get the byte made by the 4*1-bit value - reversed (获取由4*1位值构成的字节 - 逆序).
+        /// </summary>
+        /// <param name="n0">The 0th 1-bit value (第0个1位值).</param>
+        /// <param name="n1">The 1st 1-bit value (第1个1位值).</param>
+        /// <param name="n2">The 2nd 1-bit value (第2个1位值).</param>
+        /// <param name="n3">The 3rd 1-bit value (第3个1位值).</param>
+        /// <returns>Return the byte of made (返回所构成的字节).</returns>
+        /// <seealso cref="_MM_SHUFFLE2"/>
+        /// <seealso cref="ShuffleControlG2On256"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte GetByteBy4XBitR(byte n0, byte n1, byte n2, byte n3) {
+            return (byte)(n0 | (n1 << 1) | (n2 << 2) | (n3 << 3));
+        }
+
+        /// <summary>
+        /// Get the byte made by the 8*1-bit value - reversed (获取由8*1位值构成的字节 - 逆序).
+        /// </summary>
+        /// <param name="n0">The 0th 1-bit value (第0个1位值).</param>
+        /// <param name="n1">The 1st 1-bit value (第1个1位值).</param>
+        /// <param name="n2">The 2nd 1-bit value (第2个1位值).</param>
+        /// <param name="n3">The 3rd 1-bit value (第3个1位值).</param>
+        /// <param name="n4">The 4th 1-bit value (第4个1位值).</param>
+        /// <param name="n5">The 5th 1-bit value (第5个1位值).</param>
+        /// <param name="n6">The 6th 1-bit value (第6个1位值).</param>
+        /// <param name="n7">The 7th 1-bit value (第7个1位值).</param>
+        /// <returns>Return the byte of made (返回所构成的字节).</returns>
+        /// <seealso cref="_MM_SHUFFLE2"/>
+        /// <seealso cref="ShuffleControlG2On512"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte GetByteBy8XBitR(byte n0, byte n1, byte n2, byte n3, byte n4, byte n5, byte n6, byte n7) {
+            return (byte)(n0 | (n1 << 1) | (n2 << 2) | (n3 << 3) | (n4 << 4) | (n5 << 5) | (n6 << 6) | (n7 << 7));
+        }
 
         /// <summary>
         /// Get the byte made by the 2-bit value (获取由2位值构成的字节). Generally used to make shuffle control codes, like <see cref="_MM_SHUFFLE"/> (一般用于制作 shuffle 控制码, 类似 <see cref="_MM_SHUFFLE"/>).
