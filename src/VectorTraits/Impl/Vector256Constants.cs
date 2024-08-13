@@ -1562,11 +1562,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<ulong> YGroup3Unzip_Shuffle_UInt64_X_Part2Combine {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
-            get => Vector256.Create((ulong)8, 9, 10, 1);
+            get => Vector256.Create((ulong)4, 5, 6, 1);
         }
 #else
             get;
-        } = Vector256.Create((ulong)8, 9, 10, 1);
+        } = Vector256.Create((ulong)4, 5, 6, 1);
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup3Unzip - Shuffle - UInt64 - The index of Y.</summary>
@@ -1586,11 +1586,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<ulong> YGroup3Unzip_Shuffle_UInt64_Y_Part2Combine {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
-            get => Vector256.Create((ulong)8, 9, 10, 2);
+            get => Vector256.Create((ulong)4, 5, 6, 2);
         }
 #else
             get;
-        } = Vector256.Create((ulong)8, 9, 10, 2);
+        } = Vector256.Create((ulong)4, 5, 6, 2);
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup3Unzip - Shuffle - UInt64 - The index of Z.</summary>
@@ -1610,11 +1610,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector256<ulong> YGroup3Unzip_Shuffle_UInt64_Z_Part2Combine {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
-            get => Vector256.Create((ulong)8, 9, 0, 3);
+            get => Vector256.Create((ulong)4, 5, 0, 3);
         }
 #else
             get;
-        } = Vector256.Create((ulong)8, 9, 0, 3);
+        } = Vector256.Create((ulong)4, 5, 0, 3);
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup3Unzip - Shuffle on byte - UInt16 - The index of X.</summary>

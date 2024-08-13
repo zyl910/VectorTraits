@@ -2293,11 +2293,8 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup3Unzip_ShuffleX(data0, data1, data2, out y, out z);
                 }
 #endif // NET8_0_OR_GREATER
-#if NET7_0_OR_GREATER
                 return YGroup3Unzip_Shuffle(data0, data1, data2, out y, out z);
-#else
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
-#endif // NET7_0_OR_GREATER
+                //return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
@@ -2308,11 +2305,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup3Unzip_ShuffleX(data0, data1, data2, out y, out z);
                 }
 #endif // NET8_0_OR_GREATER
-#if NET7_0_OR_GREATER
                 return YGroup3Unzip_Shuffle(data0, data1, data2, out y, out z);
-#else
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
-#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short})"/>
@@ -2323,11 +2316,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup3Unzip_ShuffleX(data0, data1, data2, out y, out z);
                 }
 #endif // NET8_0_OR_GREATER
-#if NET7_0_OR_GREATER
                 return YGroup3Unzip_Shuffle(data0, data1, data2, out y, out z);
-#else
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
-#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
@@ -2339,11 +2328,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup3Unzip_ShuffleX(data0, data1, data2, out y, out z);
                 }
 #endif // NET8_0_OR_GREATER
-#if NET7_0_OR_GREATER
                 return YGroup3Unzip_Shuffle(data0, data1, data2, out y, out z);
-#else
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
-#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
@@ -3018,24 +3003,46 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YGroup3UnzipX2(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, Vector256<sbyte> data3, Vector256<sbyte> data4, Vector256<sbyte> data5, out Vector256<sbyte> xB, out Vector256<sbyte> y, out Vector256<sbyte> yB, out Vector256<sbyte> z, out Vector256<sbyte> zB) {
+#if NET8_0_OR_GREATER
+                //if (Avx512Vbmi.VL.IsSupported) {
+                //    return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                //}
+#endif // NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#else
                 return YGroup3UnzipX2_Unpack(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YGroup3UnzipX2(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, Vector256<byte> data3, Vector256<byte> data4, Vector256<byte> data5, out Vector256<byte> xB, out Vector256<byte> y, out Vector256<byte> yB, out Vector256<byte> z, out Vector256<byte> zB) {
+#if NET8_0_OR_GREATER
+                //if (Avx512Vbmi.VL.IsSupported) {
+                //    return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                //}
+#endif // NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#else
                 return YGroup3UnzipX2_Unpack(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YGroup3UnzipX2(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, Vector256<short> data3, Vector256<short> data4, Vector256<short> data5, out Vector256<short> xB, out Vector256<short> y, out Vector256<short> yB, out Vector256<short> z, out Vector256<short> zB) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
-                    return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
-                }
+                //if (Avx512BW.VL.IsSupported) {
+                //    return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                //}
 #endif // NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#else
                 return YGroup3UnzipX2_Unpack(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
@@ -3043,11 +3050,15 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YGroup3UnzipX2(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3, Vector256<ushort> data4, Vector256<ushort> data5, out Vector256<ushort> xB, out Vector256<ushort> y, out Vector256<ushort> yB, out Vector256<ushort> z, out Vector256<ushort> zB) {
 #if NET8_0_OR_GREATER
-                if (Avx512BW.VL.IsSupported) {
-                    return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
-                }
+                //if (Avx512BW.VL.IsSupported) {
+                //    return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                //}
 #endif // NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#else
                 return YGroup3UnzipX2_Unpack(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
