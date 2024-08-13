@@ -8,9 +8,11 @@ using System.Runtime.Intrinsics.X86;
 #endif
 using Zyl.VectorTraits.Collections;
 using Zyl.VectorTraits.ExTypes;
+using Zyl.VectorTraits.Impl.AVector128;
 using Zyl.VectorTraits.Impl.Util;
 
 namespace Zyl.VectorTraits.Impl.AVector256 {
+    using ShorterStatics = WVectorTraits128Sse.Statics;
     using SuperStatics = WVectorTraits256Base.Statics;
 
     partial class WVectorTraits256Avx2 {
@@ -2273,65 +2275,101 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YGroup3Unzip(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, out Vector256<float> y, out Vector256<float> z) {
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ShuffleXImm(data0, data1, data2, out y, out z);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YGroup3Unzip(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, out Vector256<double> y, out Vector256<double> z) {
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ShuffleXImm(data0, data1, data2, out y, out z);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YGroup3Unzip(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, out Vector256<sbyte> y, out Vector256<sbyte> z) {
+#if NET8_0_OR_GREATER
+                if (Avx512Vbmi.VL.IsSupported) {
+                    return YGroup3Unzip_ShuffleX(data0, data1, data2, out y, out z);
+                }
+#endif // NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
+                return YGroup3Unzip_Shuffle(data0, data1, data2, out y, out z);
+#else
                 return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YGroup3Unzip(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, out Vector256<byte> y, out Vector256<byte> z) {
+#if NET8_0_OR_GREATER
+                if (Avx512Vbmi.VL.IsSupported) {
+                    return YGroup3Unzip_ShuffleX(data0, data1, data2, out y, out z);
+                }
+#endif // NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
+                return YGroup3Unzip_Shuffle(data0, data1, data2, out y, out z);
+#else
                 return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YGroup3Unzip(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, out Vector256<short> y, out Vector256<short> z) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return YGroup3Unzip_ShuffleX(data0, data1, data2, out y, out z);
+                }
+#endif // NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
+                return YGroup3Unzip_Shuffle(data0, data1, data2, out y, out z);
+#else
                 return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YGroup3Unzip(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, out Vector256<ushort> y, out Vector256<ushort> z) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return YGroup3Unzip_ShuffleX(data0, data1, data2, out y, out z);
+                }
+#endif // NET8_0_OR_GREATER
+#if NET7_0_OR_GREATER
+                return YGroup3Unzip_Shuffle(data0, data1, data2, out y, out z);
+#else
                 return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YGroup3Unzip(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> y, out Vector256<int> z) {
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ShuffleXImm(data0, data1, data2, out y, out z);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YGroup3Unzip(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> y, out Vector256<uint> z) {
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ShuffleXImm(data0, data1, data2, out y, out z);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup3Unzip(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> y, out Vector256<long> z) {
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ShuffleXImm(data0, data1, data2, out y, out z);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup3Unzip(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> y, out Vector256<ulong> z) {
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_ShuffleXImm(data0, data1, data2, out y, out z);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip_Int128"/>
@@ -2349,66 +2387,611 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YGroup3Unzip_ByShorter(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, out Vector256<float> y, out Vector256<float> z) {
-                // TODO: Implements YGroup3Unzip_ByShorter
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YGroup3Unzip_ByShorter(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, out Vector256<double> y, out Vector256<double> z) {
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YGroup3Unzip_ByShorter(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, out Vector256<sbyte> y, out Vector256<sbyte> z) {
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YGroup3Unzip_ByShorter(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, out Vector256<byte> y, out Vector256<byte> z) {
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YGroup3Unzip_ByShorter(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, out Vector256<short> y, out Vector256<short> z) {
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YGroup3Unzip_ByShorter(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, out Vector256<ushort> y, out Vector256<ushort> z) {
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YGroup3Unzip_ByShorter(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> y, out Vector256<int> z) {
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YGroup3Unzip_ByShorter(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> y, out Vector256<uint> z) {
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup3Unzip_ByShorter(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> y, out Vector256<long> z) {
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup3Unzip_ByShorter(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> y, out Vector256<ulong> z) {
-                return SuperStatics.YGroup3Unzip(data0, data1, data2, out y, out z);
+                var b0 = ShorterStatics.YGroup3UnzipX2(data0.GetLower(), data0.GetUpper(), data1.GetLower(), data1.GetUpper(), data2.GetLower(), data2.GetUpper(), out var b1, out var b2, out var b3, out var b4, out var b5);
+                var c0 = b0.ToVector256Unsafe().WithUpper(b1);
+                var c1 = b2.ToVector256Unsafe().WithUpper(b3);
+                var c2 = b4.ToVector256Unsafe().WithUpper(b5);
+                y = c1;
+                z = c2;
+                return c0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup3Unzip_ByX2Unpack(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, out Vector256<float> y, out Vector256<float> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup3Unzip_ByX2Unpack(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, out Vector256<double> y, out Vector256<double> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup3Unzip_ByX2Unpack(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, out Vector256<sbyte> y, out Vector256<sbyte> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup3Unzip_ByX2Unpack(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, out Vector256<byte> y, out Vector256<byte> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup3Unzip_ByX2Unpack(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, out Vector256<short> y, out Vector256<short> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup3Unzip_ByX2Unpack(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, out Vector256<ushort> y, out Vector256<ushort> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3Unzip_ByX2Unpack(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> y, out Vector256<int> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3Unzip_ByX2Unpack(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> y, out Vector256<uint> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3Unzip_ByX2Unpack(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> y, out Vector256<long> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3Unzip_ByX2Unpack(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> y, out Vector256<ulong> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup3Unzip_ByX2Zip(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, out Vector256<float> y, out Vector256<float> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup3Unzip_ByX2Zip(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, out Vector256<double> y, out Vector256<double> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup3Unzip_ByX2Zip(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, out Vector256<sbyte> y, out Vector256<sbyte> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup3Unzip_ByX2Zip(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, out Vector256<byte> y, out Vector256<byte> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup3Unzip_ByX2Zip(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, out Vector256<short> y, out Vector256<short> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup3Unzip_ByX2Zip(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, out Vector256<ushort> y, out Vector256<ushort> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3Unzip_ByX2Zip(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> y, out Vector256<int> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3Unzip_ByX2Zip(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> y, out Vector256<uint> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3Unzip_ByX2Zip(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> y, out Vector256<long> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3Unzip_ByX2Zip(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> y, out Vector256<ulong> z) {
+                return YGroup3UnzipX2_Zip(data0, data1, data2, data0, data1, data2, out _, out y, out _, out z, out _);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup3Unzip_Shuffle(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, out Vector256<float> y, out Vector256<float> z) {
+                var d0 = YGroup3Unzip_Shuffle(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2);
+                y = d1.AsSingle();
+                z = d2.AsSingle();
+                return d0.AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup3Unzip_Shuffle(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, out Vector256<double> y, out Vector256<double> z) {
+                var d0 = YGroup3Unzip_Shuffle(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2);
+                y = d1.AsDouble();
+                z = d2.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup3Unzip_Shuffle(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, out Vector256<sbyte> y, out Vector256<sbyte> z) {
+                var d0 = YGroup3Unzip_Shuffle(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var d1, out var d2);
+                y = d1.AsSByte();
+                z = d2.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup3Unzip_Shuffle(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, out Vector256<byte> y, out Vector256<byte> z) {
+                var f0A = Vector256Constants.YGroup3Unzip_Shuffle_Byte_X_Each128Part0;
+                var f0B = Vector256Constants.YGroup3Unzip_Shuffle_Byte_X_Each128Part1;
+                var f0C = Vector256Constants.YGroup3Unzip_Shuffle_Byte_X_Each128Part2;
+                var f1A = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Y_Each128Part0;
+                var f1B = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Y_Each128Part1;
+                var f1C = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Y_Each128Part2;
+                var f2A = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Z_Each128Part0;
+                var f2B = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Z_Each128Part1;
+                var f2C = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Z_Each128Part2;
+                var s0 = YGroup3Unzip_Int128(data0, data1, data2, out var s1, out var s2);
+                var rt0 = Avx2.Or(Avx2.Or(Avx2.Shuffle(s0, f0A), Avx2.Shuffle(s1, f0B)), Avx2.Shuffle(s2, f0C));
+                var rt1 = Avx2.Or(Avx2.Or(Avx2.Shuffle(s0, f1A), Avx2.Shuffle(s1, f1B)), Avx2.Shuffle(s2, f1C));
+                var rt2 = Avx2.Or(Avx2.Or(Avx2.Shuffle(s0, f2A), Avx2.Shuffle(s1, f2B)), Avx2.Shuffle(s2, f2C));
+                y = rt1;
+                z = rt2;
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup3Unzip_Shuffle(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, out Vector256<short> y, out Vector256<short> z) {
+                var d0 = YGroup3Unzip_Shuffle(data0.AsUInt16(), data1.AsUInt16(), data2.AsUInt16(), out var d1, out var d2);
+                //Console.WriteLine(VectorTextUtil.Format("YGroup3Unzip_Shuffle<short>({0}, {1}, {2}) = {3}, {4}, {5}", data0, data1, data2, d0, d1, d2));
+                y = d1.AsInt16();
+                z = d2.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup3Unzip_Shuffle(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, out Vector256<ushort> y, out Vector256<ushort> z) {
+                var f0A = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt16_X_Each128Part0;
+                var f0B = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt16_X_Each128Part1;
+                var f0C = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt16_X_Each128Part2;
+                var f1A = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt16_Y_Each128Part0;
+                var f1B = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt16_Y_Each128Part1;
+                var f1C = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt16_Y_Each128Part2;
+                var f2A = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt16_Z_Each128Part0;
+                var f2B = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt16_Z_Each128Part1;
+                var f2C = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt16_Z_Each128Part2;
+                var s0 = YGroup3Unzip_Int128(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var s1, out var s2);
+                var rt0 = Avx2.Or(Avx2.Or(Avx2.Shuffle(s0, f0A), Avx2.Shuffle(s1, f0B)), Avx2.Shuffle(s2, f0C)).AsUInt16();
+                var rt1 = Avx2.Or(Avx2.Or(Avx2.Shuffle(s0, f1A), Avx2.Shuffle(s1, f1B)), Avx2.Shuffle(s2, f1C)).AsUInt16();
+                var rt2 = Avx2.Or(Avx2.Or(Avx2.Shuffle(s0, f2A), Avx2.Shuffle(s1, f2B)), Avx2.Shuffle(s2, f2C)).AsUInt16();
+                y = rt1;
+                z = rt2;
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3Unzip_Shuffle(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> y, out Vector256<int> z) {
+                var d0 = YGroup3Unzip_Shuffle(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2);
+                y = d1.AsInt32();
+                z = d2.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3Unzip_Shuffle(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> y, out Vector256<uint> z) {
+                var f0A = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt32_X_Each128Part0;
+                var f0B = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt32_X_Each128Part1;
+                var f0C = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt32_X_Each128Part2;
+                var f1A = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt32_Y_Each128Part0;
+                var f1B = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt32_Y_Each128Part1;
+                var f1C = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt32_Y_Each128Part2;
+                var f2A = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt32_Z_Each128Part0;
+                var f2B = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt32_Z_Each128Part1;
+                var f2C = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt32_Z_Each128Part2;
+                var s0 = YGroup3Unzip_Int128(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var s1, out var s2);
+                var rt0 = Avx2.Or(Avx2.Or(Avx2.Shuffle(s0, f0A), Avx2.Shuffle(s1, f0B)), Avx2.Shuffle(s2, f0C)).AsUInt32();
+                var rt1 = Avx2.Or(Avx2.Or(Avx2.Shuffle(s0, f1A), Avx2.Shuffle(s1, f1B)), Avx2.Shuffle(s2, f1C)).AsUInt32();
+                var rt2 = Avx2.Or(Avx2.Or(Avx2.Shuffle(s0, f2A), Avx2.Shuffle(s1, f2B)), Avx2.Shuffle(s2, f2C)).AsUInt32();
+                y = rt1;
+                z = rt2;
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3Unzip_Shuffle(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> y, out Vector256<long> z) {
+                var d0 = YGroup3Unzip_Shuffle(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2);
+                y = d1.AsInt64();
+                z = d2.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3Unzip_Shuffle(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> y, out Vector256<ulong> z) {
+                var f0A = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt64_X_Each128Part0;
+                var f0B = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt64_X_Each128Part1;
+                var f1A = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt64_Y_Each128Part0;
+                var f1C = Vector256Constants.YGroup3Unzip_ShuffleOnByte_UInt64_Y_Each128Part2;
+                var f2B = f0A;
+                var f2C = f0B;
+                var s0 = YGroup3Unzip_Int128(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var s1, out var s2);
+                var rt0 = Avx2.Or(Avx2.Shuffle(s0, f0A), Avx2.Shuffle(s1, f0B)).AsUInt64();
+                var rt1 = Avx2.Or(Avx2.Shuffle(s0, f1A), Avx2.Shuffle(s2, f1C)).AsUInt64();
+                var rt2 = Avx2.Or(Avx2.Shuffle(s1, f2B), Avx2.Shuffle(s2, f2C)).AsUInt64();
+                y = rt1;
+                z = rt2;
+                return rt0;
+            }
+
+#if NET8_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup3Unzip_ShuffleX(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, out Vector256<float> y, out Vector256<float> z) {
+                var d0 = YGroup3Unzip_ShuffleX(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2);
+                y = d1.AsSingle();
+                z = d2.AsSingle();
+                return d0.AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup3Unzip_ShuffleX(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, out Vector256<double> y, out Vector256<double> z) {
+                var d0 = YGroup3Unzip_ShuffleX(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2);
+                y = d1.AsDouble();
+                z = d2.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup3Unzip_ShuffleX(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, out Vector256<sbyte> y, out Vector256<sbyte> z) {
+                var d0 = YGroup3Unzip_ShuffleX(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var d1, out var d2);
+                y = d1.AsSByte();
+                z = d2.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup3Unzip_ShuffleX(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, out Vector256<byte> y, out Vector256<byte> z) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                var f0 = Vector256Constants.YGroup3Unzip_Shuffle_Byte_X;
+                var f0C = Vector256Constants.YGroup3Unzip_Shuffle_Byte_X_Part2Combine;
+                var f1 = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Y;
+                var f1C = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Y_Part2Combine;
+                var f2 = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Z;
+                var f2C = Vector256Constants.YGroup3Unzip_Shuffle_Byte_Z_Part2Combine;
+                var rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(data0, f0, data1);
+                var rt1 = Avx512Vbmi.VL.PermuteVar32x8x2(data0, f1, data1);
+                var rt2 = Avx512Vbmi.VL.PermuteVar32x8x2(data0, f2, data1);
+                rt0 = Avx512Vbmi.VL.PermuteVar32x8x2(data2, f0C, rt0);
+                rt1 = Avx512Vbmi.VL.PermuteVar32x8x2(data2, f1C, rt1);
+                rt2 = Avx512Vbmi.VL.PermuteVar32x8x2(data2, f2C, rt2);
+                y = rt1;
+                z = rt2;
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup3Unzip_ShuffleX(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, out Vector256<short> y, out Vector256<short> z) {
+                var d0 = YGroup3Unzip_ShuffleX(data0.AsUInt16(), data1.AsUInt16(), data2.AsUInt16(), out var d1, out var d2);
+                y = d1.AsInt16();
+                z = d2.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup3Unzip_ShuffleX(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, out Vector256<ushort> y, out Vector256<ushort> z) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                var f0 = Vector256Constants.YGroup3Unzip_Shuffle_UInt16_X;
+                var f0C = Vector256Constants.YGroup3Unzip_Shuffle_UInt16_X_Part2Combine;
+                var f1 = Vector256Constants.YGroup3Unzip_Shuffle_UInt16_Y;
+                var f1C = Vector256Constants.YGroup3Unzip_Shuffle_UInt16_Y_Part2Combine;
+                var f2 = Vector256Constants.YGroup3Unzip_Shuffle_UInt16_Z;
+                var f2C = Vector256Constants.YGroup3Unzip_Shuffle_UInt16_Z_Part2Combine;
+                var rt0 = Avx512BW.VL.PermuteVar16x16x2(data0, f0, data1);
+                var rt1 = Avx512BW.VL.PermuteVar16x16x2(data0, f1, data1);
+                var rt2 = Avx512BW.VL.PermuteVar16x16x2(data0, f2, data1);
+                rt0 = Avx512BW.VL.PermuteVar16x16x2(data2, f0C, rt0);
+                rt1 = Avx512BW.VL.PermuteVar16x16x2(data2, f1C, rt1);
+                rt2 = Avx512BW.VL.PermuteVar16x16x2(data2, f2C, rt2);
+                y = rt1;
+                z = rt2;
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3Unzip_ShuffleX(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> y, out Vector256<int> z) {
+                var d0 = YGroup3Unzip_ShuffleX(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2);
+                y = d1.AsInt32();
+                z = d2.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3Unzip_ShuffleX(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> y, out Vector256<uint> z) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                var f0 = Vector256Constants.YGroup3Unzip_Shuffle_UInt32_X;
+                var f0C = Vector256Constants.YGroup3Unzip_Shuffle_UInt32_X_Part2Combine;
+                var f1 = Vector256Constants.YGroup3Unzip_Shuffle_UInt32_Y;
+                var f1C = Vector256Constants.YGroup3Unzip_Shuffle_UInt32_Y_Part2Combine;
+                var f2 = Vector256Constants.YGroup3Unzip_Shuffle_UInt32_Z;
+                var f2C = Vector256Constants.YGroup3Unzip_Shuffle_UInt32_Z_Part2Combine;
+                var rt0 = Avx512F.VL.PermuteVar8x32x2(data0, f0, data1);
+                var rt1 = Avx512F.VL.PermuteVar8x32x2(data0, f1, data1);
+                var rt2 = Avx512F.VL.PermuteVar8x32x2(data0, f2, data1);
+                rt0 = Avx512F.VL.PermuteVar8x32x2(data2, f0C, rt0);
+                rt1 = Avx512F.VL.PermuteVar8x32x2(data2, f1C, rt1);
+                rt2 = Avx512F.VL.PermuteVar8x32x2(data2, f2C, rt2);
+                y = rt1;
+                z = rt2;
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3Unzip_ShuffleX(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> y, out Vector256<long> z) {
+                var d0 = YGroup3Unzip_ShuffleX(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2);
+                y = d1.AsInt64();
+                z = d2.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3Unzip_ShuffleX(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> y, out Vector256<ulong> z) {
+                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                var f0 = Vector256Constants.YGroup3Unzip_Shuffle_UInt64_X;
+                var f0C = Vector256Constants.YGroup3Unzip_Shuffle_UInt64_X_Part2Combine;
+                var f1 = Vector256Constants.YGroup3Unzip_Shuffle_UInt64_Y;
+                var f1C = Vector256Constants.YGroup3Unzip_Shuffle_UInt64_Y_Part2Combine;
+                var f2 = Vector256Constants.YGroup3Unzip_Shuffle_UInt64_Z;
+                var f2C = Vector256Constants.YGroup3Unzip_Shuffle_UInt64_Z_Part2Combine;
+                var rt0 = Avx512F.VL.PermuteVar4x64x2(data0, f0, data1);
+                var rt1 = Avx512F.VL.PermuteVar4x64x2(data0, f1, data1);
+                var rt2 = Avx512F.VL.PermuteVar4x64x2(data0, f2, data1);
+                rt0 = Avx512F.VL.PermuteVar4x64x2(data2, f0C, rt0);
+                rt1 = Avx512F.VL.PermuteVar4x64x2(data2, f1C, rt1);
+                rt2 = Avx512F.VL.PermuteVar4x64x2(data2, f2C, rt2);
+                y = rt1;
+                z = rt2;
+                return rt0;
+            }
+
+#endif // NET8_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup3Unzip_ShuffleXImm(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, out Vector256<float> y, out Vector256<float> z) {
+                Vector256<float> a_0, a_1, b_0, b_1, b_2;
+                // 0 data0 x0 y0 z0 x1 y1 z1 x2 y2 data1 z2 x3 y3 z3 x4 y4 z4 x5 data2 y5 z5 x6 y6 z6 x7 y7 z7
+                //0b temp0 x0 y0 z0 x1 x4 y4 z4 x5 temp1 y1 z1 x2 y2 y5 z5 x6 y6 temp2 z2 x3 y3 z3 z6 x7 y7 z7
+                var temp0 = YGroup3Unzip_Int128(data0, data1, data2, out var temp1, out var temp2);
+                // 1 a_0 x2 y2 x3 y3 x6 y6 x7 y7 a_1 y0 z0 y1 z1 y4 z4 y5 z5
+                a_0 = Avx.Shuffle(temp1, temp2, (byte)ShuffleControlG4.ZWYZ);
+                a_1 = Avx.Shuffle(temp0, temp1, (byte)ShuffleControlG4.YZXY);
+                // 2 b_0 x0 x1 x2 x3 x4 x5 x6 x7 b_1 y0 y1 y2 y3 y4 y5 y6 y7 b_2 z0 z1 z2 z3 z4 z5 z6 z7
+                b_0 = Avx.Shuffle(temp0, a_0, (byte)ShuffleControlG4.XWXZ);
+                b_1 = Avx.Shuffle(a_1, a_0, (byte)ShuffleControlG4.XZYW);
+                b_2 = Avx.Shuffle(a_1, temp2, (byte)ShuffleControlG4.YWXW);
+                y = b_1;
+                z = b_2;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup3Unzip_ShuffleXImm(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, out Vector256<double> y, out Vector256<double> z) {
+                // 0 data0 x0 y0 z0 x1 data1 y1 z1 x2 y2 data2 z2 x3 y3 z3
+                //0b temp0 x0 y0 x2 y2 temp1 z0 x1 z2 x3 temp2 y1 z1 y3 z3
+                var temp0 = YGroup3Unzip_Int128(data0, data1, data2, out var temp1, out var temp2);
+                // 1 a_0 x0 x1 x2 x3 a_1 y0 y1 y2 y3 a_2 z0 z1 z2 z3
+                var a_0 = Avx.Shuffle(temp0, temp1, (byte)ShuffleControlG2On256.XYXY);
+                var a_1 = Avx.Shuffle(temp0, temp2, (byte)ShuffleControlG2On256.YXYX);
+                var a_2 = Avx.Shuffle(temp1, temp2, (byte)ShuffleControlG2On256.XYXY);
+                y = a_1;
+                z = a_2;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3Unzip_ShuffleXImm(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> y, out Vector256<int> z) {
+                var d0 = YGroup3Unzip_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), data2.AsSingle(), out var d1, out var d2);
+                y = d1.AsInt32();
+                z = d2.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3Unzip_ShuffleXImm(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> y, out Vector256<uint> z) {
+                var d0 = YGroup3Unzip_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), data2.AsSingle(), out var d1, out var d2);
+                y = d1.AsUInt32();
+                z = d2.AsUInt32();
+                return d0.AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3Unzip_ShuffleXImm(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> y, out Vector256<long> z) {
+                var d0 = YGroup3Unzip_ShuffleXImm(data0.AsDouble(), data1.AsDouble(), data2.AsDouble(), out var d1, out var d2);
+                y = d1.AsInt64();
+                z = d2.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3Unzip_ShuffleXImm(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> y, out Vector256<ulong> z) {
+                var d0 = YGroup3Unzip_ShuffleXImm(data0.AsDouble(), data1.AsDouble(), data2.AsDouble(), out var d1, out var d2);
+                y = d1.AsUInt64();
+                z = d2.AsUInt64();
+                return d0.AsUInt64();
             }
 
 
@@ -2422,65 +3005,75 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YGroup3UnzipX2(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, Vector256<float> data3, Vector256<float> data4, Vector256<float> data5, out Vector256<float> xB, out Vector256<float> y, out Vector256<float> yB, out Vector256<float> z, out Vector256<float> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YGroup3UnzipX2(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, Vector256<double> data3, Vector256<double> data4, Vector256<double> data5, out Vector256<double> xB, out Vector256<double> y, out Vector256<double> yB, out Vector256<double> z, out Vector256<double> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YGroup3UnzipX2(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, Vector256<sbyte> data3, Vector256<sbyte> data4, Vector256<sbyte> data5, out Vector256<sbyte> xB, out Vector256<sbyte> y, out Vector256<sbyte> yB, out Vector256<sbyte> z, out Vector256<sbyte> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_Unpack(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YGroup3UnzipX2(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, Vector256<byte> data3, Vector256<byte> data4, Vector256<byte> data5, out Vector256<byte> xB, out Vector256<byte> y, out Vector256<byte> yB, out Vector256<byte> z, out Vector256<byte> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_Unpack(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YGroup3UnzipX2(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, Vector256<short> data3, Vector256<short> data4, Vector256<short> data5, out Vector256<short> xB, out Vector256<short> y, out Vector256<short> yB, out Vector256<short> z, out Vector256<short> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                }
+#endif // NET8_0_OR_GREATER
+                return YGroup3UnzipX2_Unpack(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YGroup3UnzipX2(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3, Vector256<ushort> data4, Vector256<ushort> data5, out Vector256<ushort> xB, out Vector256<ushort> y, out Vector256<ushort> yB, out Vector256<ushort> z, out Vector256<ushort> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                }
+#endif // NET8_0_OR_GREATER
+                return YGroup3UnzipX2_Unpack(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YGroup3UnzipX2(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, Vector256<int> data3, Vector256<int> data4, Vector256<int> data5, out Vector256<int> xB, out Vector256<int> y, out Vector256<int> yB, out Vector256<int> z, out Vector256<int> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YGroup3UnzipX2(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, Vector256<uint> data3, Vector256<uint> data4, Vector256<uint> data5, out Vector256<uint> xB, out Vector256<uint> y, out Vector256<uint> yB, out Vector256<uint> z, out Vector256<uint> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup3UnzipX2(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, Vector256<long> data3, Vector256<long> data4, Vector256<long> data5, out Vector256<long> xB, out Vector256<long> y, out Vector256<long> yB, out Vector256<long> z, out Vector256<long> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup3UnzipX2(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, Vector256<ulong> data3, Vector256<ulong> data4, Vector256<ulong> data5, out Vector256<ulong> xB, out Vector256<ulong> y, out Vector256<ulong> yB, out Vector256<ulong> z, out Vector256<ulong> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2_Int128"/>
@@ -2488,6 +3081,359 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             public static Vector256<T> YGroup3UnzipX2_Int128<T>(Vector256<T> data0, Vector256<T> data1, Vector256<T> data2, Vector256<T> data3, Vector256<T> data4, Vector256<T> data5, out Vector256<T> xB, out Vector256<T> y, out Vector256<T> yB, out Vector256<T> z, out Vector256<T> zB) where T : struct {
                 var x = YGroup3Unzip_Int128(data0, data1, data2, out y, out z);
                 xB = YGroup3Unzip_Int128(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup3UnzipX2_Unpack(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, Vector256<float> data3, Vector256<float> data4, Vector256<float> data5, out Vector256<float> xB, out Vector256<float> y, out Vector256<float> yB, out Vector256<float> z, out Vector256<float> zB) {
+                Vector256<float> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
+                // 0 data0 x0 y0 z0 x1 y1 z1 x2 y2 data1 z2 x3 y3 z3 x4 y4 z4 x5 data2 y5 z5 x6 y6 z6 x7 y7 z7 data3 x8 y8 z8 x9 y9 z9 x10 y10 data4 z10 x11 y11 z11 x12 y12 z12 x13 data5 y13 z13 x14 y14 z14 x15 y15 z15
+                //0b temp0 x0 y0 z0 x1 x8 y8 z8 x9 temp1 y1 z1 x2 y2 y9 z9 x10 y10 temp2 z2 x3 y3 z3 z10 x11 y11 z11 temp3 x4 y4 z4 x5 x12 y12 z12 x13 temp4 y5 z5 x6 y6 y13 z13 x14 y14 temp5 z6 x7 y7 z7 z14 x15 y15 z15
+                var temp0 = YGroup2Unzip_Int128(data0, data3, out var temp1);
+                var temp2 = YGroup2Unzip_Int128(data1, data4, out var temp3);
+                var temp4 = YGroup2Unzip_Int128(data2, data5, out var temp5);
+                // 1 a_0 x0 x4 y0 y4 x8 x12 y8 y12 a_1 z0 z4 x1 x5 z8 z12 x9 x13 a_2 y1 y5 z1 z5 y9 y13 z9 z13 a_3 x2 x6 y2 y6 x10 x14 y10 y14 a_4 z2 z6 x3 x7 z10 z14 x11 x15 a_5 y3 y7 z3 z7 y11 y15 z11 z15
+                a_0 = Avx2.UnpackLow(temp0, temp3);
+                a_1 = Avx2.UnpackHigh(temp0, temp3);
+                a_2 = Avx2.UnpackLow(temp1, temp4);
+                a_3 = Avx2.UnpackHigh(temp1, temp4);
+                a_4 = Avx2.UnpackLow(temp2, temp5);
+                a_5 = Avx2.UnpackHigh(temp2, temp5);
+                // 2 b_0 x0 x2 x4 x6 x8 x10 x12 x14 b_1 y0 y2 y4 y6 y8 y10 y12 y14 b_2 z0 z2 z4 z6 z8 z10 z12 z14 b_3 x1 x3 x5 x7 x9 x11 x13 x15 b_4 y1 y3 y5 y7 y9 y11 y13 y15 b_5 z1 z3 z5 z7 z9 z11 z13 z15
+                b_0 = Avx2.UnpackLow(a_0, a_3);
+                b_1 = Avx2.UnpackHigh(a_0, a_3);
+                b_2 = Avx2.UnpackLow(a_1, a_4);
+                b_3 = Avx2.UnpackHigh(a_1, a_4);
+                b_4 = Avx2.UnpackLow(a_2, a_5);
+                b_5 = Avx2.UnpackHigh(a_2, a_5);
+                // 3 a_0 x0 x1 x2 x3 x4 x5 x6 x7 a_1 x8 x9 x10 x11 x12 x13 x14 x15 a_2 y0 y1 y2 y3 y4 y5 y6 y7 a_3 y8 y9 y10 y11 y12 y13 y14 y15 a_4 z0 z1 z2 z3 z4 z5 z6 z7 a_5 z8 z9 z10 z11 z12 z13 z14 z15
+                a_0 = YGroup2Zip(b_0, b_3, out a_1);
+                a_2 = YGroup2Zip(b_1, b_4, out a_3);
+                a_4 = YGroup2Zip(b_2, b_5, out a_5);
+                xB = a_1;
+                y = a_2;
+                yB = a_3;
+                z = a_4;
+                zB = a_5;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup3UnzipX2_Unpack(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, Vector256<double> data3, Vector256<double> data4, Vector256<double> data5, out Vector256<double> xB, out Vector256<double> y, out Vector256<double> yB, out Vector256<double> z, out Vector256<double> zB) {
+                Vector256<double> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
+                // 0 data0 x0 y0 z0 x1 data1 y1 z1 x2 y2 data2 z2 x3 y3 z3 data3 x4 y4 z4 x5 data4 y5 z5 x6 y6 data5 z6 x7 y7 z7
+                //0b temp0 x0 y0 x4 y4 temp1 z0 x1 z4 x5 temp2 y1 z1 y5 z5 temp3 x2 y2 x6 y6 temp4 z2 x3 z6 x7 temp5 y3 z3 y7 z7
+                var temp0 = YGroup2Unzip_Int128(data0, data3, out var temp1);
+                var temp2 = YGroup2Unzip_Int128(data1, data4, out var temp3);
+                var temp4 = YGroup2Unzip_Int128(data2, data5, out var temp5);
+                // 1 a_0 x0 x2 x4 x6 a_1 y0 y2 y4 y6 a_2 z0 z2 z4 z6 a_3 x1 x3 x5 x7 a_4 y1 y3 y5 y7 a_5 z1 z3 z5 z7
+                a_0 = Avx2.UnpackLow(temp0, temp3);
+                a_1 = Avx2.UnpackHigh(temp0, temp3);
+                a_2 = Avx2.UnpackLow(temp1, temp4);
+                a_3 = Avx2.UnpackHigh(temp1, temp4);
+                a_4 = Avx2.UnpackLow(temp2, temp5);
+                a_5 = Avx2.UnpackHigh(temp2, temp5);
+                // 2 b_0 x0 x1 x2 x3 b_1 x4 x5 x6 x7 b_2 y0 y1 y2 y3 b_3 y4 y5 y6 y7 b_4 z0 z1 z2 z3 b_5 z4 z5 z6 z7
+                b_0 = YGroup2Zip(a_0, a_3, out b_1);
+                b_2 = YGroup2Zip(a_1, a_4, out b_3);
+                b_4 = YGroup2Zip(a_2, a_5, out b_5);
+                xB = b_1;
+                y = b_2;
+                yB = b_3;
+                z = b_4;
+                zB = b_5;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup3UnzipX2_Unpack(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, Vector256<sbyte> data3, Vector256<sbyte> data4, Vector256<sbyte> data5, out Vector256<sbyte> xB, out Vector256<sbyte> y, out Vector256<sbyte> yB, out Vector256<sbyte> z, out Vector256<sbyte> zB) {
+                var d0 = YGroup3UnzipX2_Unpack(data0.AsByte(), data1.AsByte(), data2.AsByte(), data3.AsByte(), data4.AsByte(), data5.AsByte(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                xB = d1.AsSByte();
+                y = d2.AsSByte();
+                yB = d3.AsSByte();
+                z = d4.AsSByte();
+                zB = d5.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup3UnzipX2_Unpack(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, Vector256<byte> data3, Vector256<byte> data4, Vector256<byte> data5, out Vector256<byte> xB, out Vector256<byte> y, out Vector256<byte> yB, out Vector256<byte> z, out Vector256<byte> zB) {
+                Vector256<byte> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
+                // 0 data0 x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3 x4 y4 z4 x5 y5 z5 x6 y6 z6 x7 y7 z7 x8 y8 z8 x9 y9 z9 x10 y10 data1 z10 x11 y11 z11 x12 y12 z12 x13 y13 z13 x14 y14 z14 x15 y15 z15 x16 y16 z16 x17 y17 z17 x18 y18 z18 x19 y19 z19 x20 y20 z20 x21 data2 y21 z21 x22 y22 z22 x23 y23 z23 x24 y24 z24 x25 y25 z25 x26 y26 z26 x27 y27 z27 x28 y28 z28 x29 y29 z29 x30 y30 z30 x31 y31 z31 data3 x32 y32 z32 x33 y33 z33 x34 y34 z34 x35 y35 z35 x36 y36 z36 x37 y37 z37 x38 y38 z38 x39 y39 z39 x40 y40 z40 x41 y41 z41 x42 y42 data4 z42 x43 y43 z43 x44 y44 z44 x45 y45 z45 x46 y46 z46 x47 y47 z47 x48 y48 z48 x49 y49 z49 x50 y50 z50 x51 y51 z51 x52 y52 z52 x53 data5 y53 z53 x54 y54 z54 x55 y55 z55 x56 y56 z56 x57 y57 z57 x58 y58 z58 x59 y59 z59 x60 y60 z60 x61 y61 z61 x62 y62 z62 x63 y63 z63
+                //0b temp0 x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3 x4 y4 z4 x5 x32 y32 z32 x33 y33 z33 x34 y34 z34 x35 y35 z35 x36 y36 z36 x37 temp1 y5 z5 x6 y6 z6 x7 y7 z7 x8 y8 z8 x9 y9 z9 x10 y10 y37 z37 x38 y38 z38 x39 y39 z39 x40 y40 z40 x41 y41 z41 x42 y42 temp2 z10 x11 y11 z11 x12 y12 z12 x13 y13 z13 x14 y14 z14 x15 y15 z15 z42 x43 y43 z43 x44 y44 z44 x45 y45 z45 x46 y46 z46 x47 y47 z47 temp3 x16 y16 z16 x17 y17 z17 x18 y18 z18 x19 y19 z19 x20 y20 z20 x21 x48 y48 z48 x49 y49 z49 x50 y50 z50 x51 y51 z51 x52 y52 z52 x53 temp4 y21 z21 x22 y22 z22 x23 y23 z23 x24 y24 z24 x25 y25 z25 x26 y26 y53 z53 x54 y54 z54 x55 y55 z55 x56 y56 z56 x57 y57 z57 x58 y58 temp5 z26 x27 y27 z27 x28 y28 z28 x29 y29 z29 x30 y30 z30 x31 y31 z31 z58 x59 y59 z59 x60 y60 z60 x61 y61 z61 x62 y62 z62 x63 y63 z63
+                var temp0 = YGroup2Unzip_Int128(data0, data3, out var temp1);
+                var temp2 = YGroup2Unzip_Int128(data1, data4, out var temp3);
+                var temp4 = YGroup2Unzip_Int128(data2, data5, out var temp5);
+                // 1 a_0 x0 x16 y0 y16 z0 z16 x1 x17 y1 y17 z1 z17 x2 x18 y2 y18 x32 x48 y32 y48 z32 z48 x33 x49 y33 y49 z33 z49 x34 x50 y34 y50 a_1 z2 z18 x3 x19 y3 y19 z3 z19 x4 x20 y4 y20 z4 z20 x5 x21 z34 z50 x35 x51 y35 y51 z35 z51 x36 x52 y36 y52 z36 z52 x37 x53 a_2 y5 y21 z5 z21 x6 x22 y6 y22 z6 z22 x7 x23 y7 y23 z7 z23 y37 y53 z37 z53 x38 x54 y38 y54 z38 z54 x39 x55 y39 y55 z39 z55 a_3 x8 x24 y8 y24 z8 z24 x9 x25 y9 y25 z9 z25 x10 x26 y10 y26 x40 x56 y40 y56 z40 z56 x41 x57 y41 y57 z41 z57 x42 x58 y42 y58 a_4 z10 z26 x11 x27 y11 y27 z11 z27 x12 x28 y12 y28 z12 z28 x13 x29 z42 z58 x43 x59 y43 y59 z43 z59 x44 x60 y44 y60 z44 z60 x45 x61 a_5 y13 y29 z13 z29 x14 x30 y14 y30 z14 z30 x15 x31 y15 y31 z15 z31 y45 y61 z45 z61 x46 x62 y46 y62 z46 z62 x47 x63 y47 y63 z47 z63
+                a_0 = Avx2.UnpackLow(temp0, temp3);
+                a_1 = Avx2.UnpackHigh(temp0, temp3);
+                a_2 = Avx2.UnpackLow(temp1, temp4);
+                a_3 = Avx2.UnpackHigh(temp1, temp4);
+                a_4 = Avx2.UnpackLow(temp2, temp5);
+                a_5 = Avx2.UnpackHigh(temp2, temp5);
+                // 2 b_0 x0 x8 x16 x24 y0 y8 y16 y24 z0 z8 z16 z24 x1 x9 x17 x25 x32 x40 x48 x56 y32 y40 y48 y56 z32 z40 z48 z56 x33 x41 x49 x57 b_1 y1 y9 y17 y25 z1 z9 z17 z25 x2 x10 x18 x26 y2 y10 y18 y26 y33 y41 y49 y57 z33 z41 z49 z57 x34 x42 x50 x58 y34 y42 y50 y58 b_2 z2 z10 z18 z26 x3 x11 x19 x27 y3 y11 y19 y27 z3 z11 z19 z27 z34 z42 z50 z58 x35 x43 x51 x59 y35 y43 y51 y59 z35 z43 z51 z59 b_3 x4 x12 x20 x28 y4 y12 y20 y28 z4 z12 z20 z28 x5 x13 x21 x29 x36 x44 x52 x60 y36 y44 y52 y60 z36 z44 z52 z60 x37 x45 x53 x61 b_4 y5 y13 y21 y29 z5 z13 z21 z29 x6 x14 x22 x30 y6 y14 y22 y30 y37 y45 y53 y61 z37 z45 z53 z61 x38 x46 x54 x62 y38 y46 y54 y62 b_5 z6 z14 z22 z30 x7 x15 x23 x31 y7 y15 y23 y31 z7 z15 z23 z31 z38 z46 z54 z62 x39 x47 x55 x63 y39 y47 y55 y63 z39 z47 z55 z63
+                b_0 = Avx2.UnpackLow(a_0, a_3);
+                b_1 = Avx2.UnpackHigh(a_0, a_3);
+                b_2 = Avx2.UnpackLow(a_1, a_4);
+                b_3 = Avx2.UnpackHigh(a_1, a_4);
+                b_4 = Avx2.UnpackLow(a_2, a_5);
+                b_5 = Avx2.UnpackHigh(a_2, a_5);
+                // 3 a_0 x0 x4 x8 x12 x16 x20 x24 x28 y0 y4 y8 y12 y16 y20 y24 y28 x32 x36 x40 x44 x48 x52 x56 x60 y32 y36 y40 y44 y48 y52 y56 y60 a_1 z0 z4 z8 z12 z16 z20 z24 z28 x1 x5 x9 x13 x17 x21 x25 x29 z32 z36 z40 z44 z48 z52 z56 z60 x33 x37 x41 x45 x49 x53 x57 x61 a_2 y1 y5 y9 y13 y17 y21 y25 y29 z1 z5 z9 z13 z17 z21 z25 z29 y33 y37 y41 y45 y49 y53 y57 y61 z33 z37 z41 z45 z49 z53 z57 z61 a_3 x2 x6 x10 x14 x18 x22 x26 x30 y2 y6 y10 y14 y18 y22 y26 y30 x34 x38 x42 x46 x50 x54 x58 x62 y34 y38 y42 y46 y50 y54 y58 y62 a_4 z2 z6 z10 z14 z18 z22 z26 z30 x3 x7 x11 x15 x19 x23 x27 x31 z34 z38 z42 z46 z50 z54 z58 z62 x35 x39 x43 x47 x51 x55 x59 x63 a_5 y3 y7 y11 y15 y19 y23 y27 y31 z3 z7 z11 z15 z19 z23 z27 z31 y35 y39 y43 y47 y51 y55 y59 y63 z35 z39 z43 z47 z51 z55 z59 z63
+                a_0 = Avx2.UnpackLow(b_0, b_3);
+                a_1 = Avx2.UnpackHigh(b_0, b_3);
+                a_2 = Avx2.UnpackLow(b_1, b_4);
+                a_3 = Avx2.UnpackHigh(b_1, b_4);
+                a_4 = Avx2.UnpackLow(b_2, b_5);
+                a_5 = Avx2.UnpackHigh(b_2, b_5);
+                // 4 b_0 x0 x2 x4 x6 x8 x10 x12 x14 x16 x18 x20 x22 x24 x26 x28 x30 x32 x34 x36 x38 x40 x42 x44 x46 x48 x50 x52 x54 x56 x58 x60 x62 b_1 y0 y2 y4 y6 y8 y10 y12 y14 y16 y18 y20 y22 y24 y26 y28 y30 y32 y34 y36 y38 y40 y42 y44 y46 y48 y50 y52 y54 y56 y58 y60 y62 b_2 z0 z2 z4 z6 z8 z10 z12 z14 z16 z18 z20 z22 z24 z26 z28 z30 z32 z34 z36 z38 z40 z42 z44 z46 z48 z50 z52 z54 z56 z58 z60 z62 b_3 x1 x3 x5 x7 x9 x11 x13 x15 x17 x19 x21 x23 x25 x27 x29 x31 x33 x35 x37 x39 x41 x43 x45 x47 x49 x51 x53 x55 x57 x59 x61 x63 b_4 y1 y3 y5 y7 y9 y11 y13 y15 y17 y19 y21 y23 y25 y27 y29 y31 y33 y35 y37 y39 y41 y43 y45 y47 y49 y51 y53 y55 y57 y59 y61 y63 b_5 z1 z3 z5 z7 z9 z11 z13 z15 z17 z19 z21 z23 z25 z27 z29 z31 z33 z35 z37 z39 z41 z43 z45 z47 z49 z51 z53 z55 z57 z59 z61 z63
+                b_0 = Avx2.UnpackLow(a_0, a_3);
+                b_1 = Avx2.UnpackHigh(a_0, a_3);
+                b_2 = Avx2.UnpackLow(a_1, a_4);
+                b_3 = Avx2.UnpackHigh(a_1, a_4);
+                b_4 = Avx2.UnpackLow(a_2, a_5);
+                b_5 = Avx2.UnpackHigh(a_2, a_5);
+                // 5 a_0 x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 x31 a_1 x32 x33 x34 x35 x36 x37 x38 x39 x40 x41 x42 x43 x44 x45 x46 x47 x48 x49 x50 x51 x52 x53 x54 x55 x56 x57 x58 x59 x60 x61 x62 x63 a_2 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 y13 y14 y15 y16 y17 y18 y19 y20 y21 y22 y23 y24 y25 y26 y27 y28 y29 y30 y31 a_3 y32 y33 y34 y35 y36 y37 y38 y39 y40 y41 y42 y43 y44 y45 y46 y47 y48 y49 y50 y51 y52 y53 y54 y55 y56 y57 y58 y59 y60 y61 y62 y63 a_4 z0 z1 z2 z3 z4 z5 z6 z7 z8 z9 z10 z11 z12 z13 z14 z15 z16 z17 z18 z19 z20 z21 z22 z23 z24 z25 z26 z27 z28 z29 z30 z31 a_5 z32 z33 z34 z35 z36 z37 z38 z39 z40 z41 z42 z43 z44 z45 z46 z47 z48 z49 z50 z51 z52 z53 z54 z55 z56 z57 z58 z59 z60 z61 z62 z63
+                a_0 = YGroup2Zip(b_0, b_3, out a_1);
+                a_2 = YGroup2Zip(b_1, b_4, out a_3);
+                a_4 = YGroup2Zip(b_2, b_5, out a_5);
+                xB = a_1;
+                y = a_2;
+                yB = a_3;
+                z = a_4;
+                zB = a_5;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup3UnzipX2_Unpack(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, Vector256<short> data3, Vector256<short> data4, Vector256<short> data5, out Vector256<short> xB, out Vector256<short> y, out Vector256<short> yB, out Vector256<short> z, out Vector256<short> zB) {
+                var d0 = YGroup3UnzipX2_Unpack(data0.AsUInt16(), data1.AsUInt16(), data2.AsUInt16(), data3.AsUInt16(), data4.AsUInt16(), data5.AsUInt16(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                xB = d1.AsInt16();
+                y = d2.AsInt16();
+                yB = d3.AsInt16();
+                z = d4.AsInt16();
+                zB = d5.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup3UnzipX2_Unpack(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3, Vector256<ushort> data4, Vector256<ushort> data5, out Vector256<ushort> xB, out Vector256<ushort> y, out Vector256<ushort> yB, out Vector256<ushort> z, out Vector256<ushort> zB) {
+                Vector256<ushort> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
+                // 0 data0 x0 y0 z0 x1 y1 z1 x2 y2 z2 x3 y3 z3 x4 y4 z4 x5 data1 y5 z5 x6 y6 z6 x7 y7 z7 x8 y8 z8 x9 y9 z9 x10 y10 data2 z10 x11 y11 z11 x12 y12 z12 x13 y13 z13 x14 y14 z14 x15 y15 z15 data3 x16 y16 z16 x17 y17 z17 x18 y18 z18 x19 y19 z19 x20 y20 z20 x21 data4 y21 z21 x22 y22 z22 x23 y23 z23 x24 y24 z24 x25 y25 z25 x26 y26 data5 z26 x27 y27 z27 x28 y28 z28 x29 y29 z29 x30 y30 z30 x31 y31 z31
+                //0b temp0 x0 y0 z0 x1 y1 z1 x2 y2 x16 y16 z16 x17 y17 z17 x18 y18 temp1 z2 x3 y3 z3 x4 y4 z4 x5 z18 x19 y19 z19 x20 y20 z20 x21 temp2 y5 z5 x6 y6 z6 x7 y7 z7 y21 z21 x22 y22 z22 x23 y23 z23 temp3 x8 y8 z8 x9 y9 z9 x10 y10 x24 y24 z24 x25 y25 z25 x26 y26 temp4 z10 x11 y11 z11 x12 y12 z12 x13 z26 x27 y27 z27 x28 y28 z28 x29 temp5 y13 z13 x14 y14 z14 x15 y15 z15 y29 z29 x30 y30 z30 x31 y31 z31
+                var temp0 = YGroup2Unzip_Int128(data0, data3, out var temp1);
+                var temp2 = YGroup2Unzip_Int128(data1, data4, out var temp3);
+                var temp4 = YGroup2Unzip_Int128(data2, data5, out var temp5);
+                // 1 a_0 x0 x8 y0 y8 z0 z8 x1 x9 x16 x24 y16 y24 z16 z24 x17 x25 a_1 y1 y9 z1 z9 x2 x10 y2 y10 y17 y25 z17 z25 x18 x26 y18 y26 a_2 z2 z10 x3 x11 y3 y11 z3 z11 z18 z26 x19 x27 y19 y27 z19 z27 a_3 x4 x12 y4 y12 z4 z12 x5 x13 x20 x28 y20 y28 z20 z28 x21 x29 a_4 y5 y13 z5 z13 x6 x14 y6 y14 y21 y29 z21 z29 x22 x30 y22 y30 a_5 z6 z14 x7 x15 y7 y15 z7 z15 z22 z30 x23 x31 y23 y31 z23 z31
+                a_0 = Avx2.UnpackLow(temp0, temp3);
+                a_1 = Avx2.UnpackHigh(temp0, temp3);
+                a_2 = Avx2.UnpackLow(temp1, temp4);
+                a_3 = Avx2.UnpackHigh(temp1, temp4);
+                a_4 = Avx2.UnpackLow(temp2, temp5);
+                a_5 = Avx2.UnpackHigh(temp2, temp5);
+                // 2 b_0 x0 x4 x8 x12 y0 y4 y8 y12 x16 x20 x24 x28 y16 y20 y24 y28 b_1 z0 z4 z8 z12 x1 x5 x9 x13 z16 z20 z24 z28 x17 x21 x25 x29 b_2 y1 y5 y9 y13 z1 z5 z9 z13 y17 y21 y25 y29 z17 z21 z25 z29 b_3 x2 x6 x10 x14 y2 y6 y10 y14 x18 x22 x26 x30 y18 y22 y26 y30 b_4 z2 z6 z10 z14 x3 x7 x11 x15 z18 z22 z26 z30 x19 x23 x27 x31 b_5 y3 y7 y11 y15 z3 z7 z11 z15 y19 y23 y27 y31 z19 z23 z27 z31
+                b_0 = Avx2.UnpackLow(a_0, a_3);
+                b_1 = Avx2.UnpackHigh(a_0, a_3);
+                b_2 = Avx2.UnpackLow(a_1, a_4);
+                b_3 = Avx2.UnpackHigh(a_1, a_4);
+                b_4 = Avx2.UnpackLow(a_2, a_5);
+                b_5 = Avx2.UnpackHigh(a_2, a_5);
+                // 3 a_0 x0 x2 x4 x6 x8 x10 x12 x14 x16 x18 x20 x22 x24 x26 x28 x30 a_1 y0 y2 y4 y6 y8 y10 y12 y14 y16 y18 y20 y22 y24 y26 y28 y30 a_2 z0 z2 z4 z6 z8 z10 z12 z14 z16 z18 z20 z22 z24 z26 z28 z30 a_3 x1 x3 x5 x7 x9 x11 x13 x15 x17 x19 x21 x23 x25 x27 x29 x31 a_4 y1 y3 y5 y7 y9 y11 y13 y15 y17 y19 y21 y23 y25 y27 y29 y31 a_5 z1 z3 z5 z7 z9 z11 z13 z15 z17 z19 z21 z23 z25 z27 z29 z31
+                a_0 = Avx2.UnpackLow(b_0, b_3);
+                a_1 = Avx2.UnpackHigh(b_0, b_3);
+                a_2 = Avx2.UnpackLow(b_1, b_4);
+                a_3 = Avx2.UnpackHigh(b_1, b_4);
+                a_4 = Avx2.UnpackLow(b_2, b_5);
+                a_5 = Avx2.UnpackHigh(b_2, b_5);
+                // 4 b_0 x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 b_1 x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 x31 b_2 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 y13 y14 y15 b_3 y16 y17 y18 y19 y20 y21 y22 y23 y24 y25 y26 y27 y28 y29 y30 y31 b_4 z0 z1 z2 z3 z4 z5 z6 z7 z8 z9 z10 z11 z12 z13 z14 z15 b_5 z16 z17 z18 z19 z20 z21 z22 z23 z24 z25 z26 z27 z28 z29 z30 z31
+                b_0 = YGroup2Zip(a_0, a_3, out b_1);
+                b_2 = YGroup2Zip(a_1, a_4, out b_3);
+                b_4 = YGroup2Zip(a_2, a_5, out b_5);
+                xB = b_1;
+                y = b_2;
+                yB = b_3;
+                z = b_4;
+                zB = b_5;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3UnzipX2_Unpack(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, Vector256<int> data3, Vector256<int> data4, Vector256<int> data5, out Vector256<int> xB, out Vector256<int> y, out Vector256<int> yB, out Vector256<int> z, out Vector256<int> zB) {
+                var d0 = YGroup3UnzipX2_Unpack(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), data3.AsUInt32(), data4.AsUInt32(), data5.AsUInt32(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                xB = d1.AsInt32();
+                y = d2.AsInt32();
+                yB = d3.AsInt32();
+                z = d4.AsInt32();
+                zB = d5.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3UnzipX2_Unpack(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, Vector256<uint> data3, Vector256<uint> data4, Vector256<uint> data5, out Vector256<uint> xB, out Vector256<uint> y, out Vector256<uint> yB, out Vector256<uint> z, out Vector256<uint> zB) {
+                Vector256<uint> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
+                // 0 data0 x0 y0 z0 x1 y1 z1 x2 y2 data1 z2 x3 y3 z3 x4 y4 z4 x5 data2 y5 z5 x6 y6 z6 x7 y7 z7 data3 x8 y8 z8 x9 y9 z9 x10 y10 data4 z10 x11 y11 z11 x12 y12 z12 x13 data5 y13 z13 x14 y14 z14 x15 y15 z15
+                //0b temp0 x0 y0 z0 x1 x8 y8 z8 x9 temp1 y1 z1 x2 y2 y9 z9 x10 y10 temp2 z2 x3 y3 z3 z10 x11 y11 z11 temp3 x4 y4 z4 x5 x12 y12 z12 x13 temp4 y5 z5 x6 y6 y13 z13 x14 y14 temp5 z6 x7 y7 z7 z14 x15 y15 z15
+                var temp0 = YGroup2Unzip_Int128(data0, data3, out var temp1);
+                var temp2 = YGroup2Unzip_Int128(data1, data4, out var temp3);
+                var temp4 = YGroup2Unzip_Int128(data2, data5, out var temp5);
+                // 1 a_0 x0 x4 y0 y4 x8 x12 y8 y12 a_1 z0 z4 x1 x5 z8 z12 x9 x13 a_2 y1 y5 z1 z5 y9 y13 z9 z13 a_3 x2 x6 y2 y6 x10 x14 y10 y14 a_4 z2 z6 x3 x7 z10 z14 x11 x15 a_5 y3 y7 z3 z7 y11 y15 z11 z15
+                a_0 = Avx2.UnpackLow(temp0, temp3);
+                a_1 = Avx2.UnpackHigh(temp0, temp3);
+                a_2 = Avx2.UnpackLow(temp1, temp4);
+                a_3 = Avx2.UnpackHigh(temp1, temp4);
+                a_4 = Avx2.UnpackLow(temp2, temp5);
+                a_5 = Avx2.UnpackHigh(temp2, temp5);
+                // 2 b_0 x0 x2 x4 x6 x8 x10 x12 x14 b_1 y0 y2 y4 y6 y8 y10 y12 y14 b_2 z0 z2 z4 z6 z8 z10 z12 z14 b_3 x1 x3 x5 x7 x9 x11 x13 x15 b_4 y1 y3 y5 y7 y9 y11 y13 y15 b_5 z1 z3 z5 z7 z9 z11 z13 z15
+                b_0 = Avx2.UnpackLow(a_0, a_3);
+                b_1 = Avx2.UnpackHigh(a_0, a_3);
+                b_2 = Avx2.UnpackLow(a_1, a_4);
+                b_3 = Avx2.UnpackHigh(a_1, a_4);
+                b_4 = Avx2.UnpackLow(a_2, a_5);
+                b_5 = Avx2.UnpackHigh(a_2, a_5);
+                // 3 a_0 x0 x1 x2 x3 x4 x5 x6 x7 a_1 x8 x9 x10 x11 x12 x13 x14 x15 a_2 y0 y1 y2 y3 y4 y5 y6 y7 a_3 y8 y9 y10 y11 y12 y13 y14 y15 a_4 z0 z1 z2 z3 z4 z5 z6 z7 a_5 z8 z9 z10 z11 z12 z13 z14 z15
+                a_0 = YGroup2Zip(b_0, b_3, out a_1);
+                a_2 = YGroup2Zip(b_1, b_4, out a_3);
+                a_4 = YGroup2Zip(b_2, b_5, out a_5);
+                xB = a_1;
+                y = a_2;
+                yB = a_3;
+                z = a_4;
+                zB = a_5;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3UnzipX2_Unpack(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, Vector256<long> data3, Vector256<long> data4, Vector256<long> data5, out Vector256<long> xB, out Vector256<long> y, out Vector256<long> yB, out Vector256<long> z, out Vector256<long> zB) {
+                var d0 = YGroup3UnzipX2_Unpack(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), data3.AsUInt64(), data4.AsUInt64(), data5.AsUInt64(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                xB = d1.AsInt64();
+                y = d2.AsInt64();
+                yB = d3.AsInt64();
+                z = d4.AsInt64();
+                zB = d5.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3UnzipX2(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3UnzipX2_Unpack(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, Vector256<ulong> data3, Vector256<ulong> data4, Vector256<ulong> data5, out Vector256<ulong> xB, out Vector256<ulong> y, out Vector256<ulong> yB, out Vector256<ulong> z, out Vector256<ulong> zB) {
+                Vector256<ulong> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
+                // 0 data0 x0 y0 z0 x1 data1 y1 z1 x2 y2 data2 z2 x3 y3 z3 data3 x4 y4 z4 x5 data4 y5 z5 x6 y6 data5 z6 x7 y7 z7
+                //0b temp0 x0 y0 x4 y4 temp1 z0 x1 z4 x5 temp2 y1 z1 y5 z5 temp3 x2 y2 x6 y6 temp4 z2 x3 z6 x7 temp5 y3 z3 y7 z7
+                var temp0 = YGroup2Unzip_Int128(data0, data3, out var temp1);
+                var temp2 = YGroup2Unzip_Int128(data1, data4, out var temp3);
+                var temp4 = YGroup2Unzip_Int128(data2, data5, out var temp5);
+                // 1 a_0 x0 x2 x4 x6 a_1 y0 y2 y4 y6 a_2 z0 z2 z4 z6 a_3 x1 x3 x5 x7 a_4 y1 y3 y5 y7 a_5 z1 z3 z5 z7
+                a_0 = Avx2.UnpackLow(temp0, temp3);
+                a_1 = Avx2.UnpackHigh(temp0, temp3);
+                a_2 = Avx2.UnpackLow(temp1, temp4);
+                a_3 = Avx2.UnpackHigh(temp1, temp4);
+                a_4 = Avx2.UnpackLow(temp2, temp5);
+                a_5 = Avx2.UnpackHigh(temp2, temp5);
+                // 2 b_0 x0 x1 x2 x3 b_1 x4 x5 x6 x7 b_2 y0 y1 y2 y3 b_3 y4 y5 y6 y7 b_4 z0 z1 z2 z3 b_5 z4 z5 z6 z7
+                b_0 = YGroup2Zip(a_0, a_3, out b_1);
+                b_2 = YGroup2Zip(a_1, a_4, out b_3);
+                b_4 = YGroup2Zip(a_2, a_5, out b_5);
+                xB = b_1;
+                y = b_2;
+                yB = b_3;
+                z = b_4;
+                zB = b_5;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup3UnzipX2_X2(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, Vector256<float> data3, Vector256<float> data4, Vector256<float> data5, out Vector256<float> xB, out Vector256<float> y, out Vector256<float> yB, out Vector256<float> z, out Vector256<float> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup3UnzipX2_X2(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, Vector256<double> data3, Vector256<double> data4, Vector256<double> data5, out Vector256<double> xB, out Vector256<double> y, out Vector256<double> yB, out Vector256<double> z, out Vector256<double> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup3UnzipX2_X2(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, Vector256<sbyte> data3, Vector256<sbyte> data4, Vector256<sbyte> data5, out Vector256<sbyte> xB, out Vector256<sbyte> y, out Vector256<sbyte> yB, out Vector256<sbyte> z, out Vector256<sbyte> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup3UnzipX2_X2(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, Vector256<byte> data3, Vector256<byte> data4, Vector256<byte> data5, out Vector256<byte> xB, out Vector256<byte> y, out Vector256<byte> yB, out Vector256<byte> z, out Vector256<byte> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup3UnzipX2_X2(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, Vector256<short> data3, Vector256<short> data4, Vector256<short> data5, out Vector256<short> xB, out Vector256<short> y, out Vector256<short> yB, out Vector256<short> z, out Vector256<short> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup3UnzipX2_X2(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3, Vector256<ushort> data4, Vector256<ushort> data5, out Vector256<ushort> xB, out Vector256<ushort> y, out Vector256<ushort> yB, out Vector256<ushort> z, out Vector256<ushort> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3UnzipX2_X2(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, Vector256<int> data3, Vector256<int> data4, Vector256<int> data5, out Vector256<int> xB, out Vector256<int> y, out Vector256<int> yB, out Vector256<int> z, out Vector256<int> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3UnzipX2_X2(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, Vector256<uint> data3, Vector256<uint> data4, Vector256<uint> data5, out Vector256<uint> xB, out Vector256<uint> y, out Vector256<uint> yB, out Vector256<uint> z, out Vector256<uint> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3UnzipX2_X2(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, Vector256<long> data3, Vector256<long> data4, Vector256<long> data5, out Vector256<long> xB, out Vector256<long> y, out Vector256<long> yB, out Vector256<long> z, out Vector256<long> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
+                return x;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3UnzipX2_X2(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, Vector256<ulong> data3, Vector256<ulong> data4, Vector256<ulong> data5, out Vector256<ulong> xB, out Vector256<ulong> y, out Vector256<ulong> yB, out Vector256<ulong> z, out Vector256<ulong> zB) {
+                var x = YGroup3Unzip(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip(data3, data4, data5, out yB, out zB);
                 return x;
             }
 
