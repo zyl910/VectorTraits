@@ -810,6 +810,248 @@ namespace Zyl.VectorTraits.Impl {
             return (rt0, rt1, rt2, rt3);
         }
 
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip{T}(Vector512{T}, Vector512{T}, Vector512{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<T> X, Vector512<T> Y, Vector512<T> Z) YGroup3Unzip<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1, Vector512<T> data2) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<float>)(object)data0, (Vector512<float>)(object)data1, (Vector512<float>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<double>)(object)data0, (Vector512<double>)(object)data1, (Vector512<double>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1, (Vector512<sbyte>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1, (Vector512<byte>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<short>)(object)data0, (Vector512<short>)(object)data1, (Vector512<short>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1, (Vector512<ushort>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<int>)(object)data0, (Vector512<int>)(object)data1, (Vector512<int>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1, (Vector512<uint>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<long>)(object)data0, (Vector512<long>)(object)data1, (Vector512<long>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1, (Vector512<ulong>)(object)data2);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<float> X, Vector512<float> Y, Vector512<float> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<float> data0, Vector512<float> data1, Vector512<float> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{double}, Vector512{double}, Vector512{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<double> X, Vector512<double> Y, Vector512<double> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<double> data0, Vector512<double> data1, Vector512<double> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<sbyte> X, Vector512<sbyte> Y, Vector512<sbyte> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<sbyte> data0, Vector512<sbyte> data1, Vector512<sbyte> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<byte> X, Vector512<byte> Y, Vector512<byte> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<byte> data0, Vector512<byte> data1, Vector512<byte> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{short}, Vector512{short}, Vector512{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<short> X, Vector512<short> Y, Vector512<short> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<short> data0, Vector512<short> data1, Vector512<short> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{ushort}, Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ushort> X, Vector512<ushort> Y, Vector512<ushort> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<ushort> data0, Vector512<ushort> data1, Vector512<ushort> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{int}, Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<int> X, Vector512<int> Y, Vector512<int> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<int> data0, Vector512<int> data1, Vector512<int> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{uint}, Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<uint> X, Vector512<uint> Y, Vector512<uint> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<uint> data0, Vector512<uint> data1, Vector512<uint> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{long}, Vector512{long}, Vector512{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<long> X, Vector512<long> Y, Vector512<long> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<long> data0, Vector512<long> data1, Vector512<long> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3Unzip(Vector512{ulong}, Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ulong> X, Vector512<ulong> Y, Vector512<ulong> Z) YGroup3Unzip(this IWVectorTraits512 athis, Vector512<ulong> data0, Vector512<ulong> data1, Vector512<ulong> data2) {
+            var rt0 = athis.YGroup3Unzip(data0, data1, data2, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2{T}(Vector512{T}, Vector512{T}, Vector512{T}, Vector512{T}, Vector512{T}, Vector512{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<T> X, Vector512<T> XB, Vector512<T> Y, Vector512<T> YB, Vector512<T> Z, Vector512<T> ZB) YGroup3UnzipX2<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<float>)(object)data0, (Vector512<float>)(object)data1, (Vector512<float>)(object)data2, (Vector512<float>)(object)data3, (Vector512<float>)(object)data4, (Vector512<float>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<double>)(object)data0, (Vector512<double>)(object)data1, (Vector512<double>)(object)data2, (Vector512<double>)(object)data3, (Vector512<double>)(object)data4, (Vector512<double>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1, (Vector512<sbyte>)(object)data2, (Vector512<sbyte>)(object)data3, (Vector512<sbyte>)(object)data4, (Vector512<sbyte>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1, (Vector512<byte>)(object)data2, (Vector512<byte>)(object)data3, (Vector512<byte>)(object)data4, (Vector512<byte>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<short>)(object)data0, (Vector512<short>)(object)data1, (Vector512<short>)(object)data2, (Vector512<short>)(object)data3, (Vector512<short>)(object)data4, (Vector512<short>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1, (Vector512<ushort>)(object)data2, (Vector512<ushort>)(object)data3, (Vector512<ushort>)(object)data4, (Vector512<ushort>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<int>)(object)data0, (Vector512<int>)(object)data1, (Vector512<int>)(object)data2, (Vector512<int>)(object)data3, (Vector512<int>)(object)data4, (Vector512<int>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1, (Vector512<uint>)(object)data2, (Vector512<uint>)(object)data3, (Vector512<uint>)(object)data4, (Vector512<uint>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<long>)(object)data0, (Vector512<long>)(object)data1, (Vector512<long>)(object)data2, (Vector512<long>)(object)data3, (Vector512<long>)(object)data4, (Vector512<long>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1, (Vector512<ulong>)(object)data2, (Vector512<ulong>)(object)data3, (Vector512<ulong>)(object)data4, (Vector512<ulong>)(object)data5);
+                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<float> X, Vector512<float> XB, Vector512<float> Y, Vector512<float> YB, Vector512<float> Z, Vector512<float> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<float> data0, Vector512<float> data1, Vector512<float> data2, Vector512<float> data3, Vector512<float> data4, Vector512<float> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<double> X, Vector512<double> XB, Vector512<double> Y, Vector512<double> YB, Vector512<double> Z, Vector512<double> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<double> data0, Vector512<double> data1, Vector512<double> data2, Vector512<double> data3, Vector512<double> data4, Vector512<double> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<sbyte> X, Vector512<sbyte> XB, Vector512<sbyte> Y, Vector512<sbyte> YB, Vector512<sbyte> Z, Vector512<sbyte> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<sbyte> data0, Vector512<sbyte> data1, Vector512<sbyte> data2, Vector512<sbyte> data3, Vector512<sbyte> data4, Vector512<sbyte> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<byte> X, Vector512<byte> XB, Vector512<byte> Y, Vector512<byte> YB, Vector512<byte> Z, Vector512<byte> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<byte> data0, Vector512<byte> data1, Vector512<byte> data2, Vector512<byte> data3, Vector512<byte> data4, Vector512<byte> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<short> X, Vector512<short> XB, Vector512<short> Y, Vector512<short> YB, Vector512<short> Z, Vector512<short> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<short> data0, Vector512<short> data1, Vector512<short> data2, Vector512<short> data3, Vector512<short> data4, Vector512<short> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ushort> X, Vector512<ushort> XB, Vector512<ushort> Y, Vector512<ushort> YB, Vector512<ushort> Z, Vector512<ushort> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<ushort> data0, Vector512<ushort> data1, Vector512<ushort> data2, Vector512<ushort> data3, Vector512<ushort> data4, Vector512<ushort> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<int> X, Vector512<int> XB, Vector512<int> Y, Vector512<int> YB, Vector512<int> Z, Vector512<int> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<int> data0, Vector512<int> data1, Vector512<int> data2, Vector512<int> data3, Vector512<int> data4, Vector512<int> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<uint> X, Vector512<uint> XB, Vector512<uint> Y, Vector512<uint> YB, Vector512<uint> Z, Vector512<uint> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<uint> data0, Vector512<uint> data1, Vector512<uint> data2, Vector512<uint> data3, Vector512<uint> data4, Vector512<uint> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<long> X, Vector512<long> XB, Vector512<long> Y, Vector512<long> YB, Vector512<long> Z, Vector512<long> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<long> data0, Vector512<long> data1, Vector512<long> data2, Vector512<long> data3, Vector512<long> data4, Vector512<long> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup3UnzipX2(Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ulong> X, Vector512<ulong> XB, Vector512<ulong> Y, Vector512<ulong> YB, Vector512<ulong> Z, Vector512<ulong> ZB) YGroup3UnzipX2(this IWVectorTraits512 athis, Vector512<ulong> data0, Vector512<ulong> data1, Vector512<ulong> data2, Vector512<ulong> data3, Vector512<ulong> data4, Vector512<ulong> data5) {
+            var rt0 = athis.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out var rt1, out var rt2, out var rt3, out var rt4, out var rt5);
+            return (rt0, rt1, rt2, rt3, rt4, rt5);
+        }
+
 #if BCL_TYPE_INT128
 
         /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{Int128}, Vector512{Int128}, Vector512{Int128}, Vector512{Int128})"/>
