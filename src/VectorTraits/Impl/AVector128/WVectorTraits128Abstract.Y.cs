@@ -1053,6 +1053,20 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits128.YGroup6Unzip_Bit128"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<T> YGroup6Unzip_Bit128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, Vector128<T> data3, Vector128<T> data4, Vector128<T> data5, out Vector128<T> y, out Vector128<T> z, out Vector128<T> w, out Vector128<T> u, out Vector128<T> v) where T : struct {
+            return Statics.YGroup6Unzip_Bit128(data0, data1, data2, data3, data4, data5, out y, out z, out w, out u, out v);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits128.YGroup6Zip_Bit128"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector128<T> YGroup6Zip_Bit128<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z, Vector128<T> w, Vector128<T> u, Vector128<T> v, out Vector128<T> data1, out Vector128<T> data2, out Vector128<T> data3, out Vector128<T> data4, out Vector128<T> data5) where T : struct {
+            return Statics.YGroup6Zip_Bit128(x, y, z, w, u, v, out data1, out data2, out data3, out data4, out data5);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits128.YIsAllTrue_AcceleratedTypes"/>
         public virtual TypeCodeFlags YIsAllTrue_AcceleratedTypes {
             get {

@@ -1142,6 +1142,48 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// De-Interleave 6-element groups into 6 vectors. It converts the 6-element groups AoS to SoA. (将6-元素组解交织为6个向量. 它能将6元素组的 数组结构体 转为 结构体数组). It is specialized for process 128-bit element (它专门用于处理128位元素).
+        /// Mnemonic: <c>x[i] =: element_ref(6*i, data0, data1, data2, data3, data4, data5)</c>, <c>y[i] =: element_ref(6*i+1, data0, data1, data2, data3, data4, data5)</c>, <c>z[i] =: element_ref(6*i+2, data0, data1, data2, data3, data4, data5)</c>, <c>w[i] =: element_ref(6*i+3, data0, data1, data2, data3, data4, data5)</c>, <c>u[i] =: element_ref(6*i+4, data0, data1, data2, data3, data4, data5)</c>, <c>v[i] =: element_ref(6*i+5, data0, data1, data2, data3, data4, data5)</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <param name="data0">A vector made of 6-element groups - Part 0 (由元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 6-element groups - Part 1 (由6元素组所组成的向量 - 第1部分).</param>
+        /// <param name="data2">A vector made of 6-element groups - Part 2 (由6元素组所组成的向量 - 第2部分).</param>
+        /// <param name="data3">A vector made of 6-element groups - Part 3 (由6元素组所组成的向量 - 第3部分).</param>
+        /// <param name="data4">A vector made of 6-element groups - Part 4 (由6元素组所组成的向量 - 第4部分).</param>
+        /// <param name="data5">A vector made of 6-element groups - Part 5 (由6元素组所组成的向量 - 第5部分).</param>
+        /// <param name="y">Returns the vector made of the Y-components (返回Y分量所组成的向量).</param>
+        /// <param name="z">Returns the vector made of the Z-components (返回Z分量所组成的向量).</param>
+        /// <param name="w">Returns the vector made of the W-components (返回W分量所组成的向量).</param>
+        /// <param name="u">Returns the vector made of the U-components (返回U分量所组成的向量).</param>
+        /// <param name="v">Returns the vector made of the V-components (返回V分量所组成的向量).</param>
+        /// <returns>Returns the vector made of the X-components (返回X分量所组成的向量).</returns>
+        /// <seealso cref="YGroup6Zip_Bit128"/>
+        Vector128<T> YGroup6Unzip_Bit128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, Vector128<T> data3, Vector128<T> data4, Vector128<T> data5, out Vector128<T> y, out Vector128<T> z, out Vector128<T> w, out Vector128<T> u, out Vector128<T> v) where T : struct;
+
+
+        /// <summary>
+        /// Interleave 6 vectors into 6-element groups. It converts the 6-element groups SoA to AoS (将6个向量交织为6-元素组. 它能将6元素组的 结构体数组 转为 数组结构体. It is specialized for process 128-bit element (它专门用于处理128位元素).
+        /// Mnemonic: <c>element_ref(i, data0, data1, data2, data3, data4, data5) := (0==(i%6))?( x[i2] ):( (1==(i%6))?( y[i2] ):( (2==(i%6))?( z[i2] ):( (3==(i%6))?( w[i2] ):( (4==(i%6))?( u[i2] ):( v[i2] ) ) ) ) )</c>, <c>i2 := i/6</c>.
+        /// </summary>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <param name="z">A vector consisting purely of Z-components (纯由Z分量所组成的向量).</param>
+        /// <param name="w">A vector consisting purely of W-components (纯由W分量所组成的向量).</param>
+        /// <param name="u">A vector consisting purely of U-components (纯由U分量所组成的向量).</param>
+        /// <param name="v">A vector consisting purely of V-components (纯由V分量所组成的向量).</param>
+        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
+        /// <param name="data2">Returns part 2 of the interleaved data (返回交织后数据的第2部分).</param>
+        /// <param name="data3">Returns part 3 of the interleaved data (返回交织后数据的第3部分).</param>
+        /// <param name="data4">Returns part 4 of the interleaved data (返回交织后数据的第4部分).</param>
+        /// <param name="data5">Returns part 5 of the interleaved data (返回交织后数据的第5部分).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        /// <seealso cref="YGroup6Unzip_Bit128"/>
+        Vector128<T> YGroup6Zip_Bit128<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z, Vector128<T> w, Vector128<T> u, Vector128<T> v, out Vector128<T> data1, out Vector128<T> data2, out Vector128<T> data3, out Vector128<T> data4, out Vector128<T> data5) where T : struct;
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YIsAllTrue</c> (运行 <c>YIsAllTrue</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YIsAllTrue{T}(Vector128{T})"/>
