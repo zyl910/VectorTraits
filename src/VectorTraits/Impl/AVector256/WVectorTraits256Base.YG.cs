@@ -4191,6 +4191,40 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
 
 #endif // VECTOR_HAS_METHOD
 
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup6Unzip_Bit128"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> YGroup6Unzip_Bit128<T>(Vector256<T> data0, Vector256<T> data1, Vector256<T> data2, Vector256<T> data3, Vector256<T> data4, Vector256<T> data5, out Vector256<T> y, out Vector256<T> z, out Vector256<T> w, out Vector256<T> u, out Vector256<T> v) where T : struct {
+                // 0 data0 x0 y0 data1 z0 w0 data2 u0 v0 data3 x1 y1 data4 z1 w1 data5 u1 v1
+                // 1 a_0 x0 x1 a_1 y0 y1 a_2 z0 z1 a_3 w0 w1 a_4 u0 u1 a_5 v0 v1
+                var a_0 = YGroup2Unzip_Bit128(data0, data3, out var a_1);
+                var a_2 = YGroup2Unzip_Bit128(data1, data4, out var a_3);
+                var a_4 = YGroup2Unzip_Bit128(data2, data5, out var a_5);
+                y = a_1;
+                z = a_2;
+                w = a_3;
+                u = a_4;
+                v = a_5;
+                return a_0;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup6Zip_Bit128"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<T> YGroup6Zip_Bit128<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z, Vector256<T> w, Vector256<T> u, Vector256<T> v, out Vector256<T> data1, out Vector256<T> data2, out Vector256<T> data3, out Vector256<T> data4, out Vector256<T> data5) where T : struct {
+                // 0 _x_ x0 x1 _y_ y0 y1 _z_ z0 z1 _w_ w0 w1 _u_ u0 u1 _v_ v0 v1
+                // 1 a_0 x0 y0 a_1 z0 w0 a_2 u0 v0 a_3 x1 y1 a_4 z1 w1 a_5 u1 v1
+                var a_0 = YGroup2Zip_Bit128(x, y, out var a_3);
+                var a_1 = YGroup2Zip_Bit128(z, w, out var a_4);
+                var a_2 = YGroup2Zip_Bit128(u, v, out var a_5);
+                data1 = a_1;
+                data2 = a_2;
+                data3 = a_3;
+                data4 = a_4;
+                data5 = a_5;
+                return a_0;
+            }
+
 #endif // NETCOREAPP3_0_OR_GREATER
         }
     }
