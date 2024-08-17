@@ -1098,6 +1098,110 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
             }
         }
 
+        [TestCase((byte)4)]
+        public void YGroup6Unzip_Int128Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
+            foreach (IWVectorTraits512 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK."); //  {instance.YGroup6Unzip_AcceleratedTypes}
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            writer.WriteLine();
+            // run.
+            Vector512<T>[] samples = {
+                Vector512s<T>.Serial,
+                Vector512s<T>.SerialDesc,
+                Vector512s<T>.SerialNegative,
+                Vector512s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vector512s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            Vector512<T> data2 = Vector512s<T>.SerialDesc;
+            Vector512<T> data3 = Vector512s<T>.SerialNegative;
+            Vector512<T> data4 = data3;
+            Vector512<T> data5 = data2;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector512<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector512<T> data1 = samples[j];
+                    Vector512<T> dst0, dst1, dst2, dst3, dst4, dst5;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector512<T> expected0 = Vector512s.YGroup6Unzip_Int128(data0, data1, data2, data3, data4, data5, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3, out Vector512<T> expected4, out Vector512<T> expected5);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
+                    }
+                    foreach (IWVectorTraits512 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst0 = instance.YGroup6Unzip_Int128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected3, dst3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected4.BitEquals(dst4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected4, dst4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected5.BitEquals(dst5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected5, dst5, funcName, data0, data1, data2, data3, data4, data5));
+                    }
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((byte)4)]
+        public void YGroup6Zip_Int128Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
+            foreach (IWVectorTraits512 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK."); //  {instance.YGroup6Zip_AcceleratedTypes}
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            writer.WriteLine();
+            // run.
+            Vector512<T>[] samples = {
+                Vector512s<T>.Serial,
+                Vector512s<T>.SerialDesc,
+                Vector512s<T>.SerialNegative,
+                Vector512s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vector512s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            Vector512<T> data2 = Vector512s<T>.SerialDesc;
+            Vector512<T> data3 = Vector512s<T>.SerialNegative;
+            Vector512<T> data4 = data3;
+            Vector512<T> data5 = data2;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector512<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector512<T> data1 = samples[j];
+                    Vector512<T> dst0, dst1, dst2, dst3, dst4, dst5;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector512<T> expected0 = Vector512s.YGroup6Zip_Int128(data0, data1, data2, data3, data4, data5, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3, out Vector512<T> expected4, out Vector512<T> expected5);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
+                    }
+                    foreach (IWVectorTraits512 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst0 = instance.YGroup6Zip_Int128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected3, dst3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected4.BitEquals(dst4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected4, dst4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected5.BitEquals(dst5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected5, dst5, funcName, data0, data1, data2, data3, data4, data5));
+                    }
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
 #endif
     }
 }

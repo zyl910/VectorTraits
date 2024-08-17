@@ -145,6 +145,10 @@ List (列表):
   Mnemonic: `x[i] =: element_ref(4*i, data0, data1, data2, data3)`, `y[i] =: element_ref(4*i+1, data0, data1, data2, data3)`, `z[i] =: element_ref(4*i+2, data0, data1, data2, data3)`, `w[i] =: element_ref(4*i+3, data0, data1, data2, data3)`.
 - `YGroup4Zip[/_Int128]`: Interleave 4 vectors into 4-element groups. It converts the 4-element groups SoA to AoS. It can also interleave R,G,B,A planar data into packed RGBA pixel data (将4个向量交织为4-元素组. 它能将4元素组的 结构体数组 转为 数组结构体. 它还能将 R,G,B,A 平面数据, 交织为 已打包的RGBA像素数据).
   Mnemonic: `element_ref(i, data0, data1, data2, data3) := (0==(i&3))?( x[i2] ):( (1==(i&3))?( y[i2] ):( (2==(i&3))?( z[i2] ):( w[i2] ) ) )`, `i2 := i/4`.
+- `YGroup6Unzip_Int128`: De-Interleave 6-element groups into 6 vectors. It converts the 6-element groups AoS to SoA  (将6-元素组解交织为6个向量. 它能将6元素组的 数组结构体 转为 结构体数组). It is specialized for process 128-bit element (它专门用于处理128位元素).
+  Mnemonic: `x[i] =: element_ref(6*i, data0, data1, data2, data3, data4, data5)`, `y[i] =: element_ref(6*i+1, data0, data1, data2, data3, data4, data5)`, `z[i] =: element_ref(6*i+2, data0, data1, data2, data3, data4, data5)`, `w[i] =: element_ref(6*i+3, data0, data1, data2, data3, data4, data5)`, `u[i] =: element_ref(6*i+4, data0, data1, data2, data3, data4, data5)`, `v[i] =: element_ref(6*i+5, data0, data1, data2, data3, data4, data5)`.
+- `YGroup6Zip_Int128`: Interleave 6 vectors into 6-element groups. It converts the 6-element groups SoA to AoS (将6个向量交织为6-元素组. 它能将6元素组的 结构体数组 转为 数组结构体). It is specialized for process 128-bit element (它专门用于处理128位元素).
+  Mnemonic: `element_ref(i, data0, data1, data2, data3, data4, data5) := (0==(i%6))?( x[i2] ):( (1==(i%6))?( y[i2] ):( (2==(i%6))?( z[i2] ):( (3==(i%6))?( w[i2] ):( (4==(i%6))?( u[i2] ):( v[i2] ) ) ) ) )`, `i2 := i/6`.
 
 ##### Methods of INumber (数字性接口的方法)
 Summary (概要):

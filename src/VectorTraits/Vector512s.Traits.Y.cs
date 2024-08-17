@@ -1718,6 +1718,28 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits512.YGroup6Unzip_Int128"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<T> YGroup6Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w, out Vector512<T> u, out Vector512<T> v) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup6Unzip_Int128(data0, data1, data2, data3, data4, data5, out y, out z, out w, out u, out v);
+#else
+            return _instance.YGroup6Unzip_Int128(data0, data1, data2, data3, data4, data5, out y, out z, out w, out u, out v);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup6Zip_Int128"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<T> YGroup6Zip_Int128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, Vector512<T> u, Vector512<T> v, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3, out Vector512<T> data4, out Vector512<T> data5) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup6Zip_Int128(x, y, z, w, u, v, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup6Zip_Int128(x, y, z, w, u, v, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits512.YIsAllTrue_AcceleratedTypes"/>
         public static TypeCodeFlags YIsAllTrue_AcceleratedTypes {
             get {

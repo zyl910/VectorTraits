@@ -4302,6 +4302,50 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 return b_0;
             }
 
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup6Unzip_Int128"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<T> YGroup6Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w, out Vector512<T> u, out Vector512<T> v) where T : struct {
+                Vector512<T> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
+                // 0 data0 x0 y0 z0 w0 data1 u0 v0 x1 y1 data2 z1 w1 u1 v1 data3 x2 y2 z2 w2 data4 u2 v2 x3 y3 data5 z3 w3 u3 v3
+                // 1 a_0 x0 x2 y0 y2 a_1 z0 z2 w0 w2 a_2 u0 u2 v0 v2 a_3 x1 x3 y1 y3 a_4 z1 z3 w1 w3 a_5 u1 u3 v1 v3
+                a_0 = YGroup2Zip_Int128(data0, data3, out a_1);
+                a_2 = YGroup2Zip_Int128(data1, data4, out a_3);
+                a_4 = YGroup2Zip_Int128(data2, data5, out a_5);
+                // 2 b_0 x0 x1 x2 x3 b_1 y0 y1 y2 y3 b_2 z0 z1 z2 z3 b_3 w0 w1 w2 w3 b_4 u0 u1 u2 u3 b_5 v0 v1 v2 v3
+                b_0 = YGroup2Zip_Int128(a_0, a_3, out b_1);
+                b_2 = YGroup2Zip_Int128(a_1, a_4, out b_3);
+                b_4 = YGroup2Zip_Int128(a_2, a_5, out b_5);
+                y = b_1;
+                z = b_2;
+                w = b_3;
+                u = b_4;
+                v = b_5;
+                return b_0;
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup6Zip_Int128"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<T> YGroup6Zip_Int128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, Vector512<T> u, Vector512<T> v, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3, out Vector512<T> data4, out Vector512<T> data5) where T : struct {
+                Vector512<T> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
+                // 0 _x_ x0 x1 x2 x3 _y_ y0 y1 y2 y3 _z_ z0 z1 z2 z3 _w_ w0 w1 w2 w3 _u_ u0 u1 u2 u3 _v_ v0 v1 v2 v3
+                // 1 a_0 x0 x2 y0 y2 a_1 z0 z2 w0 w2 a_2 u0 u2 v0 v2 a_3 x1 x3 y1 y3 a_4 z1 z3 w1 w3 a_5 u1 u3 v1 v3
+                a_0 = YGroup2Unzip_Int128(x, y, out a_3);
+                a_1 = YGroup2Unzip_Int128(z, w, out a_4);
+                a_2 = YGroup2Unzip_Int128(u, v, out a_5);
+                // 2 b_0 x0 y0 z0 w0 b_1 u0 v0 x1 y1 b_2 z1 w1 u1 v1 b_3 x2 y2 z2 w2 b_4 u2 v2 x3 y3 b_5 z3 w3 u3 v3
+                b_0 = YGroup2Unzip_Int128(a_0, a_1, out b_3);
+                b_1 = YGroup2Unzip_Int128(a_2, a_3, out b_4);
+                b_2 = YGroup2Unzip_Int128(a_4, a_5, out b_5);
+                data1 = b_1;
+                data2 = b_2;
+                data3 = b_3;
+                data4 = b_4;
+                data5 = b_5;
+                return b_0;
+            }
+
 #endif // NET8_0_OR_GREATER
         }
     }
