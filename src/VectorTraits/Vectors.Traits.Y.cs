@@ -628,27 +628,27 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IVectorTraits.YGroup2Unzip_Int128"/>
+        /// <inheritdoc cref="IVectorTraits.YGroup2Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<T> YGroup2Unzip_Int128<T>(Vector<T> data0, Vector<T> data1, out Vector<T> y) where T : struct {
+        public static Vector<T> YGroup2Unzip_Bit128<T>(Vector<T> data0, Vector<T> data1, out Vector<T> y) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup2Unzip_Int128(data0, data1, out y);
+            return BaseStatics.YGroup2Unzip_Bit128(data0, data1, out y);
 #else
 #if SHORT_CIRCUIT_GENERIC
 #if NET8_0_OR_GREATER
             if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Vector512<byte>.Count== Vector<byte>.Count) {
-                return VectorTraits512Avx512.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+                return VectorTraits512Avx512.Statics.YGroup2Unzip_Bit128(data0, data1, out y);
             }
 #endif // NET8_0_OR_GREATER
             if (Vector256<byte>.Count == Vector<byte>.Count) {
                 if (Avx.IsSupported && Avx2.IsSupported) {
-                    return VectorTraits256Avx2.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+                    return VectorTraits256Avx2.Statics.YGroup2Unzip_Bit128(data0, data1, out y);
                 }
             } else if (Vector128<byte>.Count == Vector<byte>.Count) {
-                return VectorTraits128Base.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+                return VectorTraits128Base.Statics.YGroup2Unzip_Bit128(data0, data1, out y);
             }
 #endif // SHORT_CIRCUIT_GENERIC
-            return _instance.YGroup2Unzip_Int128(data0, data1, out y);
+            return _instance.YGroup2Unzip_Bit128(data0, data1, out y);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -1213,27 +1213,27 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IVectorTraits.YGroup2Zip_Int128"/>
+        /// <inheritdoc cref="IVectorTraits.YGroup2Zip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<T> YGroup2Zip_Int128<T>(Vector<T> x, Vector<T> y, out Vector<T> data1) where T : struct {
+        public static Vector<T> YGroup2Zip_Bit128<T>(Vector<T> x, Vector<T> y, out Vector<T> data1) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup2Zip_Int128(x, y, out data1);
+            return BaseStatics.YGroup2Zip_Bit128(x, y, out data1);
 #else
 #if SHORT_CIRCUIT_GENERIC
 #if NET8_0_OR_GREATER
             if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Vector512<byte>.Count == Vector<byte>.Count) {
-                return VectorTraits512Avx512.Statics.YGroup2Zip_Int128(x, y, out data1);
+                return VectorTraits512Avx512.Statics.YGroup2Zip_Bit128(x, y, out data1);
             }
 #endif // NET8_0_OR_GREATER
             if (Vector256<byte>.Count == Vector<byte>.Count) {
                 if (Avx.IsSupported && Avx2.IsSupported) {
-                    return VectorTraits256Avx2.Statics.YGroup2Zip_Int128(x, y, out data1);
+                    return VectorTraits256Avx2.Statics.YGroup2Zip_Bit128(x, y, out data1);
                 }
             } else if (Vector128<byte>.Count == Vector<byte>.Count) {
-                return VectorTraits128Base.Statics.YGroup2Zip_Int128(x, y, out data1);
+                return VectorTraits128Base.Statics.YGroup2Zip_Bit128(x, y, out data1);
             }
 #endif // SHORT_CIRCUIT_GENERIC
-            return _instance.YGroup2Zip_Int128(x, y, out data1);
+            return _instance.YGroup2Zip_Bit128(x, y, out data1);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -1801,27 +1801,27 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IVectorTraits.YGroup4Unzip_Int128"/>
+        /// <inheritdoc cref="IVectorTraits.YGroup4Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<T> YGroup4Unzip_Int128<T>(Vector<T> data0, Vector<T> data1, Vector<T> data2, Vector<T> data3, out Vector<T> y, out Vector<T> z, out Vector<T> w) where T : struct {
+        public static Vector<T> YGroup4Unzip_Bit128<T>(Vector<T> data0, Vector<T> data1, Vector<T> data2, Vector<T> data3, out Vector<T> y, out Vector<T> z, out Vector<T> w) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            return BaseStatics.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
 #else
 #if SHORT_CIRCUIT_GENERIC
 #if NET8_0_OR_GREATER
             if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Vector512<byte>.Count == Vector<byte>.Count) {
-                return VectorTraits512Avx512.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+                return VectorTraits512Avx512.Statics.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
             }
 #endif // NET8_0_OR_GREATER
             if (Vector256<byte>.Count == Vector<byte>.Count) {
                 if (Avx.IsSupported && Avx2.IsSupported) {
-                    return VectorTraits256Avx2.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+                    return VectorTraits256Avx2.Statics.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
                 }
             } else if (Vector128<byte>.Count == Vector<byte>.Count) {
-                return VectorTraits128Base.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+                return VectorTraits128Base.Statics.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
             }
 #endif // SHORT_CIRCUIT_GENERIC
-            return _instance.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            return _instance.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -2010,27 +2010,27 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IVectorTraits.YGroup4Zip_Int128"/>
+        /// <inheritdoc cref="IVectorTraits.YGroup4Zip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<T> YGroup4Zip_Int128<T>(Vector<T> x, Vector<T> y, Vector<T> z, Vector<T> w, out Vector<T> data1, out Vector<T> data2, out Vector<T> data3) where T : struct {
+        public static Vector<T> YGroup4Zip_Bit128<T>(Vector<T> x, Vector<T> y, Vector<T> z, Vector<T> w, out Vector<T> data1, out Vector<T> data2, out Vector<T> data3) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            return BaseStatics.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
 #else
 #if SHORT_CIRCUIT_GENERIC
 #if NET8_0_OR_GREATER
             if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported && Vector512<byte>.Count == Vector<byte>.Count) {
-                return VectorTraits512Avx512.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+                return VectorTraits512Avx512.Statics.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
             }
 #endif // NET8_0_OR_GREATER
             if (Vector256<byte>.Count == Vector<byte>.Count) {
                 if (Avx.IsSupported && Avx2.IsSupported) {
-                    return VectorTraits256Avx2.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+                    return VectorTraits256Avx2.Statics.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
                 }
             } else if (Vector128<byte>.Count == Vector<byte>.Count) {
-                return VectorTraits128Base.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+                return VectorTraits128Base.Statics.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
             }
 #endif // SHORT_CIRCUIT_GENERIC
-            return _instance.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            return _instance.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

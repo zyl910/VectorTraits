@@ -102,7 +102,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
 #if EX_APPLY_GENERIC
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
 #endif // EX_APPLY_GENERIC
-        public void YGroup2Unzip_Int128Test<T>(T src) where T : struct {
+        public void YGroup2Unzip_Bit128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
             foreach (IWVectorTraits512 instance in instances) {
@@ -129,14 +129,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     Vector512<T> data1 = samples[j];
                     Vector512<T> dst0, dst1;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector512<T> expected0 = Vector512s.YGroup2Unzip_Int128(data0, data1, out Vector512<T> expected1);
+                    Vector512<T> expected0 = Vector512s.YGroup2Unzip_Bit128(data0, data1, out Vector512<T> expected1);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}, {3}", data0, data1, expected0, expected1));
                     }
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst0 = instance.YGroup2Unzip_Int128(data0, data1, out dst1);
+                        dst0 = instance.YGroup2Unzip_Bit128(data0, data1, out dst1);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, data0, data1));
                         ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, data0, data1));
                     }
@@ -376,7 +376,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
 #if EX_APPLY_GENERIC
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
 #endif // EX_APPLY_GENERIC
-        public void YGroup2Zip_Int128Test<T>(T src) where T : struct {
+        public void YGroup2Zip_Bit128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
             foreach (IWVectorTraits512 instance in instances) {
@@ -403,14 +403,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     Vector512<T> y = samples[j];
                     Vector512<T> dst0, dst1;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector512<T> expected0 = Vector512s.YGroup2Zip_Int128(x, y, out Vector512<T> expected1);
+                    Vector512<T> expected0 = Vector512s.YGroup2Zip_Bit128(x, y, out Vector512<T> expected1);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}, {3}", x, y, expected0, expected1));
                     }
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst0 = instance.YGroup2Zip_Int128(x, y, out dst1);
+                        dst0 = instance.YGroup2Zip_Bit128(x, y, out dst1);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, x, y));
                         ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, x, y));
                     }
@@ -646,7 +646,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
         }
 
         [TestCase((byte)4)]
-        public void YGroup3Unzip_Int128Test<T>(T src) where T : struct {
+        public void YGroup3Unzip_Bit128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
             foreach (IWVectorTraits512 instance in instances) {
@@ -674,14 +674,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     Vector512<T> data1 = samples[j];
                     Vector512<T> dst0, dst1, dst2;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector512<T> expected0 = Vector512s.YGroup3Unzip_Int128(data0, data1, data2, out Vector512<T> expected1, out Vector512<T> expected2);
+                    Vector512<T> expected0 = Vector512s.YGroup3Unzip_Bit128(data0, data1, data2, out Vector512<T> expected1, out Vector512<T> expected2);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}): {3}, {4}, {5}", data0, data1, data2, expected0, expected1, expected2));
                     }
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst0 = instance.YGroup3Unzip_Int128(data0, data1, data2, out dst1, out dst2);
+                        dst0 = instance.YGroup3Unzip_Bit128(data0, data1, data2, out dst1, out dst2);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", expected0, dst0, funcName, data0, data1, data2));
                         ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", expected1, dst1, funcName, data0, data1, data2));
                         ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", expected2, dst2, funcName, data0, data1, data2));
@@ -778,7 +778,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
         }
 
         [TestCase((byte)4)]
-        public void YGroup3UnzipX2_Int128Test<T>(T src) where T : struct {
+        public void YGroup3UnzipX2_Bit128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
             foreach (IWVectorTraits512 instance in instances) {
@@ -809,14 +809,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     Vector512<T> data1 = samples[j];
                     Vector512<T> dst0, dst1, dst2, dst3, dst4, dst5;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector512<T> expected0 = Vector512s.YGroup3UnzipX2_Int128(data0, data1, data2, data3, data4, data5, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3, out Vector512<T> expected4, out Vector512<T> expected5);
+                    Vector512<T> expected0 = Vector512s.YGroup3UnzipX2_Bit128(data0, data1, data2, data3, data4, data5, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3, out Vector512<T> expected4, out Vector512<T> expected5);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
                     }
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst0 = instance.YGroup3UnzipX2_Int128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
+                        dst0 = instance.YGroup3UnzipX2_Bit128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
                         ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
                         ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
@@ -917,7 +917,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
 #if EX_APPLY_GENERIC
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
 #endif // EX_APPLY_GENERIC
-        public void YGroup4Unzip_Int128Test<T>(T src) where T : struct {
+        public void YGroup4Unzip_Bit128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
             foreach (IWVectorTraits512 instance in instances) {
@@ -946,14 +946,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     Vector512<T> data1 = samples[j];
                     Vector512<T> dst0, dst1, dst2, dst3;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector512<T> expected0 = Vector512s.YGroup4Unzip_Int128(data0, data1, data2, data3, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3);
+                    Vector512<T> expected0 = Vector512s.YGroup4Unzip_Bit128(data0, data1, data2, data3, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}): {4}, {5}, {6}, {7}", data0, data1, data2, data3, expected0, expected1, expected2, expected3));
                     }
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst0 = instance.YGroup4Unzip_Int128(data0, data1, data2, data3, out dst1, out dst2, out dst3);
+                        dst0 = instance.YGroup4Unzip_Bit128(data0, data1, data2, data3, out dst1, out dst2, out dst3);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
                         ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
                         ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
@@ -1051,7 +1051,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
 #if EX_APPLY_GENERIC
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
 #endif // EX_APPLY_GENERIC
-        public void YGroup4Zip_Int128Test<T>(T src) where T : struct {
+        public void YGroup4Zip_Bit128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
             foreach (IWVectorTraits512 instance in instances) {
@@ -1080,14 +1080,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     Vector512<T> data1 = samples[j];
                     Vector512<T> dst0, dst1, dst2, dst3;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector512<T> expected0 = Vector512s.YGroup4Zip_Int128(data0, data1, data2, data3, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3);
+                    Vector512<T> expected0 = Vector512s.YGroup4Zip_Bit128(data0, data1, data2, data3, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}): {4}, {5}, {6}, {7}", data0, data1, data2, data3, expected0, expected1, expected2, expected3));
                     }
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst0 = instance.YGroup4Zip_Int128(data0, data1, data2, data3, out dst1, out dst2, out dst3);
+                        dst0 = instance.YGroup4Zip_Bit128(data0, data1, data2, data3, out dst1, out dst2, out dst3);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
                         ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
                         ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
@@ -1099,7 +1099,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
         }
 
         [TestCase((byte)4)]
-        public void YGroup6Unzip_Int128Test<T>(T src) where T : struct {
+        public void YGroup6Unzip_Bit128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
             foreach (IWVectorTraits512 instance in instances) {
@@ -1130,14 +1130,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     Vector512<T> data1 = samples[j];
                     Vector512<T> dst0, dst1, dst2, dst3, dst4, dst5;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector512<T> expected0 = Vector512s.YGroup6Unzip_Int128(data0, data1, data2, data3, data4, data5, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3, out Vector512<T> expected4, out Vector512<T> expected5);
+                    Vector512<T> expected0 = Vector512s.YGroup6Unzip_Bit128(data0, data1, data2, data3, data4, data5, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3, out Vector512<T> expected4, out Vector512<T> expected5);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
                     }
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst0 = instance.YGroup6Unzip_Int128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
+                        dst0 = instance.YGroup6Unzip_Bit128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
                         ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
                         ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
@@ -1151,7 +1151,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
         }
 
         [TestCase((byte)4)]
-        public void YGroup6Zip_Int128Test<T>(T src) where T : struct {
+        public void YGroup6Zip_Bit128Test<T>(T src) where T : struct {
             TextWriter writer = Console.Out;
             IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
             foreach (IWVectorTraits512 instance in instances) {
@@ -1182,14 +1182,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     Vector512<T> data1 = samples[j];
                     Vector512<T> dst0, dst1, dst2, dst3, dst4, dst5;
 #pragma warning disable CS0618 // Type or member is obsolete
-                    Vector512<T> expected0 = Vector512s.YGroup6Zip_Int128(data0, data1, data2, data3, data4, data5, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3, out Vector512<T> expected4, out Vector512<T> expected5);
+                    Vector512<T> expected0 = Vector512s.YGroup6Zip_Bit128(data0, data1, data2, data3, data4, data5, out Vector512<T> expected1, out Vector512<T> expected2, out Vector512<T> expected3, out Vector512<T> expected4, out Vector512<T> expected5);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
                     }
                     foreach (IWVectorTraits512 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
                         string funcName = instance.GetType().Name;
-                        dst0 = instance.YGroup6Zip_Int128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
+                        dst0 = instance.YGroup6Zip_Bit128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
                         ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
                         ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
                         ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));

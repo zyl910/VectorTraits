@@ -444,19 +444,19 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<T> YGroup2Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, out Vector512<T> y) where T : struct {
+        public static Vector512<T> YGroup2Unzip_Bit128<T>(Vector512<T> data0, Vector512<T> data1, out Vector512<T> y) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup2Unzip_Int128(data0, data1, out y);
+            return BaseStatics.YGroup2Unzip_Bit128(data0, data1, out y);
 #elif SHORT_CIRCUIT_GENERIC
             if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported) {
-                return WVectorTraits512Avx512.Statics.YGroup2Unzip_Int128(data0, data1, out y);
+                return WVectorTraits512Avx512.Statics.YGroup2Unzip_Bit128(data0, data1, out y);
             } else {
-                return BaseStatics.YGroup2Unzip_Int128(data0, data1, out y);
+                return BaseStatics.YGroup2Unzip_Bit128(data0, data1, out y);
             }
 #else
-            return _instance.YGroup2Unzip_Int128(data0, data1, out y);
+            return _instance.YGroup2Unzip_Bit128(data0, data1, out y);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -871,19 +871,19 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<T> YGroup2Zip_Int128<T>(Vector512<T> x, Vector512<T> y, out Vector512<T> data1) where T : struct {
+        public static Vector512<T> YGroup2Zip_Bit128<T>(Vector512<T> x, Vector512<T> y, out Vector512<T> data1) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup2Zip_Int128(x, y, out data1);
+            return BaseStatics.YGroup2Zip_Bit128(x, y, out data1);
 #elif SHORT_CIRCUIT_GENERIC
             if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported) {
-                return WVectorTraits512Avx512.Statics.YGroup2Zip_Int128(x, y, out data1);
+                return WVectorTraits512Avx512.Statics.YGroup2Zip_Bit128(x, y, out data1);
             } else {
-                return BaseStatics.YGroup2Zip_Int128(x, y, out data1);
+                return BaseStatics.YGroup2Zip_Bit128(x, y, out data1);
             }
 #else
-            return _instance.YGroup2Zip_Int128(x, y, out data1);
+            return _instance.YGroup2Zip_Bit128(x, y, out data1);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -1277,13 +1277,13 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup3Unzip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<T> YGroup3Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, out Vector512<T> y, out Vector512<T> z) where T : struct {
+        public static Vector512<T> YGroup3Unzip_Bit128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, out Vector512<T> y, out Vector512<T> z) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup3Unzip_Int128(data0, data1, data2, out y, out z);
+            return BaseStatics.YGroup3Unzip_Bit128(data0, data1, data2, out y, out z);
 #else
-            return _instance.YGroup3Unzip_Int128(data0, data1, data2, out y, out z);
+            return _instance.YGroup3Unzip_Bit128(data0, data1, data2, out y, out z);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -1403,13 +1403,13 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<T> YGroup3UnzipX2_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> xB, out Vector512<T> y, out Vector512<T> yB, out Vector512<T> z, out Vector512<T> zB) where T : struct {
+        public static Vector512<T> YGroup3UnzipX2_Bit128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> xB, out Vector512<T> y, out Vector512<T> yB, out Vector512<T> z, out Vector512<T> zB) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup3UnzipX2_Int128(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+            return BaseStatics.YGroup3UnzipX2_Bit128(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
 #else
-            return _instance.YGroup3UnzipX2_Int128(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+            return _instance.YGroup3UnzipX2_Bit128(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -1550,19 +1550,19 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<T> YGroup4Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w) where T : struct {
+        public static Vector512<T> YGroup4Unzip_Bit128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            return BaseStatics.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
 #elif SHORT_CIRCUIT_GENERIC
             if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported) {
-                return WVectorTraits512Avx512.Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+                return WVectorTraits512Avx512.Statics.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
             } else {
-                return BaseStatics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+                return BaseStatics.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
             }
 #else
-            return _instance.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+            return _instance.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
@@ -1701,41 +1701,41 @@ namespace Zyl.VectorTraits {
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<T> YGroup4Zip_Int128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3) where T : struct {
+        public static Vector512<T> YGroup4Zip_Bit128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            return BaseStatics.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
 #elif SHORT_CIRCUIT_GENERIC
             if (Avx512BW.IsSupported && Avx512DQ.IsSupported & Avx512F.IsSupported && Avx512Vbmi.IsSupported) {
-                return WVectorTraits512Avx512.Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+                return WVectorTraits512Avx512.Statics.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
             } else {
-                return BaseStatics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+                return BaseStatics.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
             }
 #else
-            return _instance.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+            return _instance.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup6Unzip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup6Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<T> YGroup6Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w, out Vector512<T> u, out Vector512<T> v) where T : struct {
+        public static Vector512<T> YGroup6Unzip_Bit128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w, out Vector512<T> u, out Vector512<T> v) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup6Unzip_Int128(data0, data1, data2, data3, data4, data5, out y, out z, out w, out u, out v);
+            return BaseStatics.YGroup6Unzip_Bit128(data0, data1, data2, data3, data4, data5, out y, out z, out w, out u, out v);
 #else
-            return _instance.YGroup6Unzip_Int128(data0, data1, data2, data3, data4, data5, out y, out z, out w, out u, out v);
+            return _instance.YGroup6Unzip_Bit128(data0, data1, data2, data3, data4, data5, out y, out z, out w, out u, out v);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup6Zip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup6Zip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector512<T> YGroup6Zip_Int128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, Vector512<T> u, Vector512<T> v, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3, out Vector512<T> data4, out Vector512<T> data5) where T : struct {
+        public static Vector512<T> YGroup6Zip_Bit128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, Vector512<T> u, Vector512<T> v, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3, out Vector512<T> data4, out Vector512<T> data5) where T : struct {
 #if BCL_BASE_OVERRIDE_STATIC
-            return BaseStatics.YGroup6Zip_Int128(x, y, z, w, u, v, out data1, out data2, out data3, out data4, out data5);
+            return BaseStatics.YGroup6Zip_Bit128(x, y, z, w, u, v, out data1, out data2, out data3, out data4, out data5);
 #else
-            return _instance.YGroup6Zip_Int128(x, y, z, w, u, v, out data1, out data2, out data3, out data4, out data5);
+            return _instance.YGroup6Zip_Bit128(x, y, z, w, u, v, out data1, out data2, out data3, out data4, out data5);
 #endif // BCL_BASE_OVERRIDE_STATIC
         }
 

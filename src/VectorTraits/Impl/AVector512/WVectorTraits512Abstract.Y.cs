@@ -278,10 +278,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YGroup2Unzip(data0, data1, out y);
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<T> YGroup2Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, out Vector512<T> y) where T : struct {
-            return Statics.YGroup2Unzip_Int128(data0, data1, out y);
+        public virtual Vector512<T> YGroup2Unzip_Bit128<T>(Vector512<T> data0, Vector512<T> data1, out Vector512<T> y) where T : struct {
+            return Statics.YGroup2Unzip_Bit128(data0, data1, out y);
         }
 
 
@@ -539,10 +539,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YGroup2Zip(x, y, out data1);
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<T> YGroup2Zip_Int128<T>(Vector512<T> x, Vector512<T> y, out Vector512<T> data1) where T : struct {
-            return Statics.YGroup2Zip_Int128(x, y, out data1);
+        public virtual Vector512<T> YGroup2Zip_Bit128<T>(Vector512<T> x, Vector512<T> y, out Vector512<T> data1) where T : struct {
+            return Statics.YGroup2Zip_Bit128(x, y, out data1);
         }
 
 
@@ -787,10 +787,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YGroup3Unzip(data0, data1, data2, out y, out z);
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup3Unzip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<T> YGroup3Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, out Vector512<T> y, out Vector512<T> z) where T : struct {
-            return Statics.YGroup3Unzip_Int128(data0, data1, data2, out y, out z);
+        public virtual Vector512<T> YGroup3Unzip_Bit128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, out Vector512<T> y, out Vector512<T> z) where T : struct {
+            return Statics.YGroup3Unzip_Bit128(data0, data1, data2, out y, out z);
         }
 
 
@@ -865,10 +865,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<T> YGroup3UnzipX2_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> xB, out Vector512<T> y, out Vector512<T> yB, out Vector512<T> z, out Vector512<T> zB) where T : struct {
-            return Statics.YGroup3UnzipX2_Int128(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+        public virtual Vector512<T> YGroup3UnzipX2_Bit128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> xB, out Vector512<T> y, out Vector512<T> yB, out Vector512<T> z, out Vector512<T> zB) where T : struct {
+            return Statics.YGroup3UnzipX2_Bit128(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
         }
 
 
@@ -956,10 +956,10 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YGroup4Unzip(data0, data1, data2, data3, out y, out z, out w);
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<T> YGroup4Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w) where T : struct {
-            return Statics.YGroup4Unzip_Int128(data0, data1, data2, data3, out y, out z, out w);
+        public virtual Vector512<T> YGroup4Unzip_Bit128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w) where T : struct {
+            return Statics.YGroup4Unzip_Bit128(data0, data1, data2, data3, out y, out z, out w);
         }
 
 
@@ -1046,24 +1046,24 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             return Statics.YGroup4Zip(x, y, z, w, out data1, out data2, out data3);
         }
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<T> YGroup4Zip_Int128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3) where T : struct {
-            return Statics.YGroup4Zip_Int128(x, y, z, w, out data1, out data2, out data3);
+        public virtual Vector512<T> YGroup4Zip_Bit128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3) where T : struct {
+            return Statics.YGroup4Zip_Bit128(x, y, z, w, out data1, out data2, out data3);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup6Unzip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup6Unzip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<T> YGroup6Unzip_Int128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w, out Vector512<T> u, out Vector512<T> v) where T : struct {
-            return Statics.YGroup6Unzip_Int128(data0, data1, data2, data3, data4, data5, out y, out z, out w, out u, out v);
+        public virtual Vector512<T> YGroup6Unzip_Bit128<T>(Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5, out Vector512<T> y, out Vector512<T> z, out Vector512<T> w, out Vector512<T> u, out Vector512<T> v) where T : struct {
+            return Statics.YGroup6Unzip_Bit128(data0, data1, data2, data3, data4, data5, out y, out z, out w, out u, out v);
         }
 
 
-        /// <inheritdoc cref="IWVectorTraits512.YGroup6Zip_Int128"/>
+        /// <inheritdoc cref="IWVectorTraits512.YGroup6Zip_Bit128"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public virtual Vector512<T> YGroup6Zip_Int128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, Vector512<T> u, Vector512<T> v, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3, out Vector512<T> data4, out Vector512<T> data5) where T : struct {
-            return Statics.YGroup6Zip_Int128(x, y, z, w, u, v, out data1, out data2, out data3, out data4, out data5);
+        public virtual Vector512<T> YGroup6Zip_Bit128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w, Vector512<T> u, Vector512<T> v, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3, out Vector512<T> data4, out Vector512<T> data5) where T : struct {
+            return Statics.YGroup6Zip_Bit128(x, y, z, w, u, v, out data1, out data2, out data3, out data4, out data5);
         }
 
 

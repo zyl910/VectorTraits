@@ -146,9 +146,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return data0;
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip_Int128"/>
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup2Unzip_Int128<T>(Vector128<T> data0, Vector128<T> data1, out Vector128<T> y) where T : struct {
+            public static Vector128<T> YGroup2Unzip_Bit128<T>(Vector128<T> data0, Vector128<T> data1, out Vector128<T> y) where T : struct {
                 y = data1;
                 return data0;
             }
@@ -1155,9 +1155,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return x;
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip_Int128"/>
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup2Zip_Int128<T>(Vector128<T> x, Vector128<T> y, out Vector128<T> data1) where T : struct {
+            public static Vector128<T> YGroup2Zip_Bit128<T>(Vector128<T> x, Vector128<T> y, out Vector128<T> data1) where T : struct {
                 data1 = y;
                 return x;
             }
@@ -2146,9 +2146,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip_Int128"/>
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup3Unzip_Int128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, out Vector128<T> y, out Vector128<T> z) where T : struct {
+            public static Vector128<T> YGroup3Unzip_Bit128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, out Vector128<T> y, out Vector128<T> z) where T : struct {
                 y = data1;
                 z = data2;
                 return data0;
@@ -2483,11 +2483,11 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2_Int128"/>
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup3UnzipX2_Int128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, Vector128<T> data3, Vector128<T> data4, Vector128<T> data5, out Vector128<T> xB, out Vector128<T> y, out Vector128<T> yB, out Vector128<T> z, out Vector128<T> zB) where T : struct {
-                var x = YGroup3Unzip_Int128(data0, data1, data2, out y, out z);
-                xB = YGroup3Unzip_Int128(data3, data4, data5, out yB, out zB);
+            public static Vector128<T> YGroup3UnzipX2_Bit128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, Vector128<T> data3, Vector128<T> data4, Vector128<T> data5, out Vector128<T> xB, out Vector128<T> y, out Vector128<T> yB, out Vector128<T> z, out Vector128<T> zB) where T : struct {
+                var x = YGroup3Unzip_Bit128(data0, data1, data2, out y, out z);
+                xB = YGroup3Unzip_Bit128(data3, data4, data5, out yB, out zB);
                 return x;
             }
 
@@ -2926,9 +2926,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return data0;
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip_Int128"/>
+            /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup4Unzip_Int128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, Vector128<T> data3, out Vector128<T> y, out Vector128<T> z, out Vector128<T> w) where T : struct {
+            public static Vector128<T> YGroup4Unzip_Bit128<T>(Vector128<T> data0, Vector128<T> data1, Vector128<T> data2, Vector128<T> data3, out Vector128<T> y, out Vector128<T> z, out Vector128<T> w) where T : struct {
                 y = data1;
                 z = data2;
                 w = data3;
@@ -3517,9 +3517,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return x;
             }
 
-            /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip_Int128"/>
+            /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<T> YGroup4Zip_Int128<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z, Vector128<T> w, out Vector128<T> data1, out Vector128<T> data2, out Vector128<T> data3) where T : struct {
+            public static Vector128<T> YGroup4Zip_Bit128<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z, Vector128<T> w, out Vector128<T> data1, out Vector128<T> data2, out Vector128<T> data3) where T : struct {
                 data1 = y;
                 data2 = z;
                 data3 = w;

@@ -231,7 +231,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.YGroup2Unzip_Int128(p0, vector1Used, out var vtemp1);
+                Vector<TMy> vtemp = Vectors.YGroup2Unzip_Bit128(p0, vector1Used, out var vtemp1);
 #if OUTPUT_ITEM
                 if (BenchmarkUtil.IsLastRun && i < OutputItemCount) {
                     VectorTextUtil.WriteLine(Console.Out, "Item[{0}]: f({1}, {2}) = ({3}, {4})", i, p0, vector1Used, vtemp, vtemp1);
@@ -447,7 +447,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector128 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = Vector128s.YGroup2Unzip_Int128(p0, vector1Used, out var vtemp1);
+                Vector128<TMy> vtemp = Vector128s.YGroup2Unzip_Bit128(p0, vector1Used, out var vtemp1);
                 vrt = Vector128s.Add(vrt, vtemp);
                 vrt1 = Vector128s.Add(vrt1, vtemp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -758,7 +758,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = Vector256s.YGroup2Unzip_Int128(p0, vector1Used, out var vtemp1);
+                Vector256<TMy> vtemp = Vector256s.YGroup2Unzip_Bit128(p0, vector1Used, out var vtemp1);
                 vrt = Vector256s.Add(vrt, vtemp);
                 vrt1 = Vector256s.Add(vrt1, vtemp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
@@ -1021,7 +1021,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
             // a) Vector512 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = Vector512s.YGroup2Unzip_Int128(p0, vector1Used, out var vtemp1);
+                Vector512<TMy> vtemp = Vector512s.YGroup2Unzip_Bit128(p0, vector1Used, out var vtemp1);
                 vrt = Vector512s.Add(vrt, vtemp);
                 vrt1 = Vector512s.Add(vrt1, vtemp1);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);

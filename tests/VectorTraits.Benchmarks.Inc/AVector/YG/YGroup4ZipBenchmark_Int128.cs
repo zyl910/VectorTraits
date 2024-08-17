@@ -250,7 +250,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.YGroup4Zip_Int128(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector<TMy> vtemp = Vectors.YGroup4Zip_Bit128(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = Vector.Add(vrt, vtemp);
                 vrt1 = Vector.Add(vrt1, vtemp1);
                 vrt2 = Vector.Add(vrt2, vtemp2);
@@ -499,7 +499,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector128 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = Vector128s.YGroup4Zip_Int128(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector128<TMy> vtemp = Vector128s.YGroup4Zip_Bit128(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = Vector128s.Add(vrt, vtemp);
                 vrt1 = Vector128s.Add(vrt1, vtemp1);
                 vrt2 = Vector128s.Add(vrt2, vtemp2);
@@ -810,7 +810,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector256 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = Vector256s.YGroup4Zip_Int128(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector256<TMy> vtemp = Vector256s.YGroup4Zip_Bit128(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = Vector256s.Add(vrt, vtemp);
                 vrt1 = Vector256s.Add(vrt1, vtemp1);
                 vrt2 = Vector256s.Add(vrt2, vtemp2);
@@ -1237,7 +1237,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
             // a) Vector512 processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = Vector512s.YGroup4Zip_Int128(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
+                Vector512<TMy> vtemp = Vector512s.YGroup4Zip_Bit128(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2, out var vtemp3);
                 vrt = Vector512s.Add(vrt, vtemp);
                 vrt1 = Vector512s.Add(vrt1, vtemp1);
                 vrt2 = Vector512s.Add(vrt2, vtemp2);
