@@ -2722,11 +2722,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector128<ulong> YGroup3Zip_Shuffle_UInt64_Y_On20 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
-            get => Vector128.Create((ulong)0, 1);
+            get => Vector128.Create((ulong)0, 3);
         }
 #else
             get;
-        } = Vector128.Create((ulong)0, 1);
+        } = Vector128.Create((ulong)0, 3);
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup3Zip - Shuffle - UInt64 - The index of Z.</summary>
