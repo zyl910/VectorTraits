@@ -1035,7 +1035,7 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
-        /// Types with hardware acceleration when running <c>YGroup4Unzip</c> (运行 <c>YGroup4Unzip</c> 时具有硬件加速的类型).
+        /// Types with hardware acceleration when running <c>YGroup4Zip</c> (运行 <c>YGroup4Zip</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
         /// <para>Inverse function (逆函数): <see cref="YGroup4Unzip_AcceleratedTypes">YGroup4Unzip</see>.</para>

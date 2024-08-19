@@ -709,6 +709,253 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<T> Data0, Vector128<T> Data1, Vector128<T> Data2) YGroup3Zip<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<float>)(object)x, (Vector128<float>)(object)y, (Vector128<float>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<double>)(object)x, (Vector128<double>)(object)y, (Vector128<double>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<sbyte>)(object)x, (Vector128<sbyte>)(object)y, (Vector128<sbyte>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<byte>)(object)x, (Vector128<byte>)(object)y, (Vector128<byte>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<short>)(object)x, (Vector128<short>)(object)y, (Vector128<short>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<ushort>)(object)x, (Vector128<ushort>)(object)y, (Vector128<ushort>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<int>)(object)x, (Vector128<int>)(object)y, (Vector128<int>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<uint>)(object)x, (Vector128<uint>)(object)y, (Vector128<uint>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<long>)(object)x, (Vector128<long>)(object)y, (Vector128<long>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = YGroup3Zip((Vector128<ulong>)(object)x, (Vector128<ulong>)(object)y, (Vector128<ulong>)(object)z);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <summary>
+        ///  Interleave 3 vectors into 3-element groups. It converts the 3-element groups SoA to AoS. It can also interleave R,G,B planar data into packed RGB pixel data (将3-元素组解交织为3个向量. 它能将3元素组的 结构体数组 转为 数组结构体. 它还能将 R,G,B 平面数据, 交织为 已打包的RGB像素数据).
+        /// Mnemonic: <c>element_ref(i, data0, data1, data2) := (0==(i%3))?( x[i2] ):( (1==(i%3))?( y[i2] ):( z[i2] ) )</c>, <c>i2 := i/3</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="y">A vector consisting purely of Y-components (纯由Y分量所组成的向量).</param>
+        /// <param name="z">A vector consisting purely of Z-components (纯由Z分量所组成的向量).</param>
+        /// <returns>Returns the interleaved data (返回交织后数据).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<float> Data0, Vector128<float> Data1, Vector128<float> Data2) YGroup3Zip(Vector128<float> x, Vector128<float> y, Vector128<float> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<double> Data0, Vector128<double> Data1, Vector128<double> Data2) YGroup3Zip(Vector128<double> x, Vector128<double> y, Vector128<double> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<sbyte> Data0, Vector128<sbyte> Data1, Vector128<sbyte> Data2) YGroup3Zip(Vector128<sbyte> x, Vector128<sbyte> y, Vector128<sbyte> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<byte> Data0, Vector128<byte> Data1, Vector128<byte> Data2) YGroup3Zip(Vector128<byte> x, Vector128<byte> y, Vector128<byte> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<short> Data0, Vector128<short> Data1, Vector128<short> Data2) YGroup3Zip(Vector128<short> x, Vector128<short> y, Vector128<short> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<ushort> Data0, Vector128<ushort> Data1, Vector128<ushort> Data2) YGroup3Zip(Vector128<ushort> x, Vector128<ushort> y, Vector128<ushort> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<int> Data0, Vector128<int> Data1, Vector128<int> Data2) YGroup3Zip(Vector128<int> x, Vector128<int> y, Vector128<int> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<uint> Data0, Vector128<uint> Data1, Vector128<uint> Data2) YGroup3Zip(Vector128<uint> x, Vector128<uint> y, Vector128<uint> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<long> Data0, Vector128<long> Data1, Vector128<long> Data2) YGroup3Zip(Vector128<long> x, Vector128<long> y, Vector128<long> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+        /// <inheritdoc cref="YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<ulong> Data0, Vector128<ulong> Data1, Vector128<ulong> Data2) YGroup3Zip(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z) {
+            var data0 = YGroup3Zip(x, y, z, out var data1, out var data2);
+            return (data0, data1, data2);
+        }
+
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<T> Data0, Vector128<T> Data1, Vector128<T> Data2, Vector128<T> Data3, Vector128<T> Data4, Vector128<T> Data5) YGroup3ZipX2<T>(Vector128<T> x, Vector128<T> xB, Vector128<T> y, Vector128<T> yB, Vector128<T> z, Vector128<T> zB) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<float>)(object)x, (Vector128<float>)(object)xB, (Vector128<float>)(object)y, (Vector128<float>)(object)yB, (Vector128<float>)(object)z, (Vector128<float>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<double>)(object)x, (Vector128<double>)(object)xB, (Vector128<double>)(object)y, (Vector128<double>)(object)yB, (Vector128<double>)(object)z, (Vector128<double>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<sbyte>)(object)x, (Vector128<sbyte>)(object)xB, (Vector128<sbyte>)(object)y, (Vector128<sbyte>)(object)yB, (Vector128<sbyte>)(object)z, (Vector128<sbyte>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<byte>)(object)x, (Vector128<byte>)(object)xB, (Vector128<byte>)(object)y, (Vector128<byte>)(object)yB, (Vector128<byte>)(object)z, (Vector128<byte>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<short>)(object)x, (Vector128<short>)(object)xB, (Vector128<short>)(object)y, (Vector128<short>)(object)yB, (Vector128<short>)(object)z, (Vector128<short>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<ushort>)(object)x, (Vector128<ushort>)(object)xB, (Vector128<ushort>)(object)y, (Vector128<ushort>)(object)yB, (Vector128<ushort>)(object)z, (Vector128<ushort>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<int>)(object)x, (Vector128<int>)(object)xB, (Vector128<int>)(object)y, (Vector128<int>)(object)yB, (Vector128<int>)(object)z, (Vector128<int>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<uint>)(object)x, (Vector128<uint>)(object)xB, (Vector128<uint>)(object)y, (Vector128<uint>)(object)yB, (Vector128<uint>)(object)z, (Vector128<uint>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<long>)(object)x, (Vector128<long>)(object)xB, (Vector128<long>)(object)y, (Vector128<long>)(object)yB, (Vector128<long>)(object)z, (Vector128<long>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = YGroup3ZipX2((Vector128<ulong>)(object)x, (Vector128<ulong>)(object)xB, (Vector128<ulong>)(object)y, (Vector128<ulong>)(object)yB, (Vector128<ulong>)(object)z, (Vector128<ulong>)(object)zB);
+                return ((Vector128<T>)(object)rt0, (Vector128<T>)(object)rt1, (Vector128<T>)(object)rt2, (Vector128<T>)(object)rt3, (Vector128<T>)(object)rt4, (Vector128<T>)(object)rt5);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <summary>
+        /// Interleave 3 vectors into 3-element groups and process 2x data (将3-元素组解交织为3个向量, 且处理2倍数据).
+        /// Mnemonic: <c>(data0, data1, data2) = YGroup3Zip(x, y, z)</c>, <c>(data3, data4, data5) = YGroup3Zip(xB, yB, zB)</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components - Part 0 (纯由X分量所组成的向量 - 第0部分).</param>
+        /// <param name="xB">A vector consisting purely of X-components - Part 1 (纯由X分量所组成的向量 - 第1部分).</param>
+        /// <param name="y">A vector consisting purely of Y-components - Part 0 (纯由Y分量所组成的向量 - 第0部分).</param>
+        /// <param name="yB">A vector consisting purely of Y-components - Part 1 (纯由Y分量所组成的向量 - 第1部分).</param>
+        /// <param name="z">A vector consisting purely of Z-components - Part 0 (纯由Z分量所组成的向量 - 第0部分).</param>
+        /// <param name="zB">A vector consisting purely of Z-components - Part 1 (纯由Z分量所组成的向量 - 第1部分).</param>
+        /// <returns>Returns the interleaved data (返回交织后数据).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<float> Data0, Vector128<float> Data1, Vector128<float> Data2, Vector128<float> Data3, Vector128<float> Data4, Vector128<float> Data5) YGroup3ZipX2(Vector128<float> x, Vector128<float> xB, Vector128<float> y, Vector128<float> yB, Vector128<float> z, Vector128<float> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<double> Data0, Vector128<double> Data1, Vector128<double> Data2, Vector128<double> Data3, Vector128<double> Data4, Vector128<double> Data5) YGroup3ZipX2(Vector128<double> x, Vector128<double> xB, Vector128<double> y, Vector128<double> yB, Vector128<double> z, Vector128<double> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<sbyte> Data0, Vector128<sbyte> Data1, Vector128<sbyte> Data2, Vector128<sbyte> Data3, Vector128<sbyte> Data4, Vector128<sbyte> Data5) YGroup3ZipX2(Vector128<sbyte> x, Vector128<sbyte> xB, Vector128<sbyte> y, Vector128<sbyte> yB, Vector128<sbyte> z, Vector128<sbyte> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<byte> Data0, Vector128<byte> Data1, Vector128<byte> Data2, Vector128<byte> Data3, Vector128<byte> Data4, Vector128<byte> Data5) YGroup3ZipX2(Vector128<byte> x, Vector128<byte> xB, Vector128<byte> y, Vector128<byte> yB, Vector128<byte> z, Vector128<byte> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<short> Data0, Vector128<short> Data1, Vector128<short> Data2, Vector128<short> Data3, Vector128<short> Data4, Vector128<short> Data5) YGroup3ZipX2(Vector128<short> x, Vector128<short> xB, Vector128<short> y, Vector128<short> yB, Vector128<short> z, Vector128<short> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<ushort> Data0, Vector128<ushort> Data1, Vector128<ushort> Data2, Vector128<ushort> Data3, Vector128<ushort> Data4, Vector128<ushort> Data5) YGroup3ZipX2(Vector128<ushort> x, Vector128<ushort> xB, Vector128<ushort> y, Vector128<ushort> yB, Vector128<ushort> z, Vector128<ushort> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<int> Data0, Vector128<int> Data1, Vector128<int> Data2, Vector128<int> Data3, Vector128<int> Data4, Vector128<int> Data5) YGroup3ZipX2(Vector128<int> x, Vector128<int> xB, Vector128<int> y, Vector128<int> yB, Vector128<int> z, Vector128<int> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<uint> Data0, Vector128<uint> Data1, Vector128<uint> Data2, Vector128<uint> Data3, Vector128<uint> Data4, Vector128<uint> Data5) YGroup3ZipX2(Vector128<uint> x, Vector128<uint> xB, Vector128<uint> y, Vector128<uint> yB, Vector128<uint> z, Vector128<uint> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<long> Data0, Vector128<long> Data1, Vector128<long> Data2, Vector128<long> Data3, Vector128<long> Data4, Vector128<long> Data5) YGroup3ZipX2(Vector128<long> x, Vector128<long> xB, Vector128<long> y, Vector128<long> yB, Vector128<long> z, Vector128<long> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+        /// <inheritdoc cref="YGroup3ZipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector128<ulong> Data0, Vector128<ulong> Data1, Vector128<ulong> Data2, Vector128<ulong> Data3, Vector128<ulong> Data4, Vector128<ulong> Data5) YGroup3ZipX2(Vector128<ulong> x, Vector128<ulong> xB, Vector128<ulong> y, Vector128<ulong> yB, Vector128<ulong> z, Vector128<ulong> zB) {
+            var data0 = YGroup3ZipX2(x, xB, y, yB, z, zB, out var data1, out var data2, out var data3, out var data4, out var data5);
+            return (data0, data1, data2, data3, data4, data5);
+        }
+
+
 #if BCL_TYPE_INT128
 
         /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip(Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128}, out Vector128{ExInt128})"/>
