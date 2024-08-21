@@ -865,6 +865,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = true;
+            bool checkUnzip = true;
             Vector256<T> data2 = Vector256s<T>.SerialDesc;
             for (int i = 0; i < samples.Length; i++) {
                 Vector256<T> data0 = samples[i];
@@ -876,6 +877,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     (Vector256<T> expected0, Vector256<T> expected1, Vector256<T> expected2) = Vector256s.YGroup3Zip(data0, data1, data2);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}): {3}, {4}, {5}", data0, data1, data2, expected0, expected1, expected2));
+                    }
+                    if (checkUnzip) {
+                        Vector256<T> chk0, chk1, chk2;
+                        (chk0, chk1, chk2) = Vector256s.YGroup3Unzip(expected0, expected1, expected2);
+                        string funcName = "Unzip";
+                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", data0, chk0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", data1, chk1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", data2, chk2, funcName, data0, data1, data2));
                     }
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
@@ -926,6 +935,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = true;
+            bool checkUnzip = true;
             Vector256<T> data2 = Vector256s<T>.SerialDesc;
             for (int i = 0; i < samples.Length; i++) {
                 Vector256<T> data0 = samples[i];
@@ -937,6 +947,14 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Vector256<T> expected0 = Vector256s.YGroup3Zip_Bit128(data0, data1, data2, out Vector256<T> expected1, out Vector256<T> expected2);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}): {3}, {4}, {5}", data0, data1, data2, expected0, expected1, expected2));
+                    }
+                    if (checkUnzip) {
+                        Vector256<T> chk0, chk1, chk2;
+                        chk0 = Vector256s.YGroup3Unzip_Bit128(expected0, expected1, expected2, out chk1, out chk2);
+                        string funcName = "Unzip";
+                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", data0, chk0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", data1, chk1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", data2, chk2, funcName, data0, data1, data2));
                     }
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
@@ -987,6 +1005,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = true;
+            bool checkUnzip = true;
             Vector256<T> data2 = Vector256s<T>.SerialDesc;
             Vector256<T> data3 = Vector256s<T>.SerialNegative;
             Vector256<T> data4 = data3;
@@ -1002,6 +1021,17 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         = Vector256s.YGroup3ZipX2(data0, data1, data2, data3, data4, data5);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
+                    }
+                    if (checkUnzip) {
+                        Vector256<T> chk0, chk1, chk2, chk3, chk4, chk5;
+                        (chk0, chk1, chk2, chk3, chk4, chk5) = Vector256s.YGroup3UnzipX2(expected0, expected1, expected2, expected3, expected4, expected5);
+                        string funcName = "Unzip";
+                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data0, chk0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data1, chk1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data2, chk2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data3.BitEquals(chk3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data3, chk3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data4.BitEquals(chk4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data4, chk4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data5.BitEquals(chk5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data5, chk5, funcName, data0, data1, data2, data3, data4, data5));
                     }
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
@@ -1058,6 +1088,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                 Vector256s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
             };
             bool allowLog = true;
+            bool checkUnzip = true;
             Vector256<T> data2 = Vector256s<T>.SerialDesc;
             Vector256<T> data3 = Vector256s<T>.SerialNegative;
             Vector256<T> data4 = data3;
@@ -1072,6 +1103,17 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     Vector256<T> expected0 = Vector256s.YGroup3ZipX2_Bit128(data0, data1, data2, data3, data4, data5, out Vector256<T> expected1, out Vector256<T> expected2, out Vector256<T> expected3, out Vector256<T> expected4, out Vector256<T> expected5);
                     if (allowLog && 0 == i && 1 == j) {
                         writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
+                    }
+                    if (checkUnzip) {
+                        Vector256<T> chk0, chk1, chk2, chk3, chk4, chk5;
+                        chk0 = Vector256s.YGroup3UnzipX2_Bit128(expected0, expected1, expected2, expected3, expected4, expected5, out chk1, out chk2, out chk3, out chk4, out chk5);
+                        string funcName = "Unzip";
+                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data0, chk0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data1, chk1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data2, chk2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data3.BitEquals(chk3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data3, chk3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data4.BitEquals(chk4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data4, chk4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data5.BitEquals(chk5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data5, chk5, funcName, data0, data1, data2, data3, data4, data5));
                     }
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
