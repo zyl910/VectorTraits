@@ -142,7 +142,7 @@ List (列表):
 - `YGroup3UnzipX2[/_Bit128]`: De-Interleave 3-element groups into 3 vectors and process 2x data (将3-元素组解交织为3个向量, 且处理2倍数据).
   Mnemonic: `(x, y, z) = YGroup3Unzip(data0, data1, data2)`, `(xB, yB, zB) = YGroup3Unzip(data3, data4, data5)`.
 - `YGroup3Zip[/_Bit128]`: Interleave 3 vectors into 3-element groups. It converts the 3-element groups SoA to AoS. It can also interleave R,G,B planar data into packed RGB pixel data (将3-元素组解交织为3个向量. 它能将3元素组的 结构体数组 转为 数组结构体. 它还能将 R,G,B 平面数据, 交织为 已打包的RGB像素数据).
-  Mnemonic: `element_ref(i, data0, data1, data2) := (0==(i%3))?( x[i2] ):( (1==(i%3))?( y[i2] ):( z[i2] ) )`, `i2 := i/4`.
+  Mnemonic: `element_ref(i, data0, data1, data2) := (0==(i%3))?( x[i2] ):( (1==(i%3))?( y[i2] ):( z[i2] ) )`, `i2 := i/3`.
 - `YGroup3ZipX2[/_Bit128]`: Interleave 3 vectors into 3-element groups and process 2x data (将3-元素组解交织为3个向量, 且处理2倍数据).
   Mnemonic: `(data0, data1, data2) = YGroup3Zip(x, y, z)`, `(data3, data4, data5) = YGroup3Zip(xB, yB, zB)`.
 - `YGroup4Unzip[/_Bit128]`: De-Interleave 4-element groups into 4 vectors. It converts the 4-element groups AoS to SoA. It can also deinterleave packed RGBA pixel data into R,G,B,A planar data (将4-元素组解交织为4个向量. 它能将4元素组的 数组结构体 转为 结构体数组. 它还能将 已打包的RGBA像素数据, 解交织为 R,G,B,A 平面数据).

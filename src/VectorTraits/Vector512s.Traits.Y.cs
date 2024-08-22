@@ -1414,6 +1414,258 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip_AcceleratedTypes"/>
+        public static TypeCodeFlags YGroup3Zip_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YGroup3Zip_AcceleratedTypes;
+#else
+                return _instance.YGroup3Zip_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YGroup3Zip(Vector512<float> x, Vector512<float> y, Vector512<float> z, out Vector512<float> data1, out Vector512<float> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{double}, Vector512{double}, Vector512{double}, out Vector512{double}, out Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YGroup3Zip(Vector512<double> x, Vector512<double> y, Vector512<double> z, out Vector512<double> data1, out Vector512<double> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YGroup3Zip(Vector512<sbyte> x, Vector512<sbyte> y, Vector512<sbyte> z, out Vector512<sbyte> data1, out Vector512<sbyte> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YGroup3Zip(Vector512<byte> x, Vector512<byte> y, Vector512<byte> z, out Vector512<byte> data1, out Vector512<byte> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{short}, Vector512{short}, Vector512{short}, out Vector512{short}, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YGroup3Zip(Vector512<short> x, Vector512<short> y, Vector512<short> z, out Vector512<short> data1, out Vector512<short> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YGroup3Zip(Vector512<ushort> x, Vector512<ushort> y, Vector512<ushort> z, out Vector512<ushort> data1, out Vector512<ushort> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{int}, Vector512{int}, Vector512{int}, out Vector512{int}, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YGroup3Zip(Vector512<int> x, Vector512<int> y, Vector512<int> z, out Vector512<int> data1, out Vector512<int> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{uint}, Vector512{uint}, Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YGroup3Zip(Vector512<uint> x, Vector512<uint> y, Vector512<uint> z, out Vector512<uint> data1, out Vector512<uint> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{long}, Vector512{long}, Vector512{long}, out Vector512{long}, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YGroup3Zip(Vector512<long> x, Vector512<long> y, Vector512<long> z, out Vector512<long> data1, out Vector512<long> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip(Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YGroup3Zip(Vector512<ulong> x, Vector512<ulong> y, Vector512<ulong> z, out Vector512<ulong> data1, out Vector512<ulong> data2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3Zip_Bit128"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<T> YGroup3Zip_Bit128<T>(Vector512<T> x, Vector512<T> y, Vector512<T> z, out Vector512<T> data1, out Vector512<T> data2) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3Zip_Bit128(x, y, z, out data1, out data2);
+#else
+            return _instance.YGroup3Zip_Bit128(x, y, z, out data1, out data2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2_AcceleratedTypes"/>
+        public static TypeCodeFlags YGroup3ZipX2_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YGroup3ZipX2_AcceleratedTypes;
+#else
+                return _instance.YGroup3ZipX2_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YGroup3ZipX2(Vector512<float> x, Vector512<float> xB, Vector512<float> y, Vector512<float> yB, Vector512<float> z, Vector512<float> zB, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3, out Vector512<float> data4, out Vector512<float> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YGroup3ZipX2(Vector512<double> x, Vector512<double> xB, Vector512<double> y, Vector512<double> yB, Vector512<double> z, Vector512<double> zB, out Vector512<double> data1, out Vector512<double> data2, out Vector512<double> data3, out Vector512<double> data4, out Vector512<double> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YGroup3ZipX2(Vector512<sbyte> x, Vector512<sbyte> xB, Vector512<sbyte> y, Vector512<sbyte> yB, Vector512<sbyte> z, Vector512<sbyte> zB, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3, out Vector512<sbyte> data4, out Vector512<sbyte> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YGroup3ZipX2(Vector512<byte> x, Vector512<byte> xB, Vector512<byte> y, Vector512<byte> yB, Vector512<byte> z, Vector512<byte> zB, out Vector512<byte> data1, out Vector512<byte> data2, out Vector512<byte> data3, out Vector512<byte> data4, out Vector512<byte> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YGroup3ZipX2(Vector512<short> x, Vector512<short> xB, Vector512<short> y, Vector512<short> yB, Vector512<short> z, Vector512<short> zB, out Vector512<short> data1, out Vector512<short> data2, out Vector512<short> data3, out Vector512<short> data4, out Vector512<short> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YGroup3ZipX2(Vector512<ushort> x, Vector512<ushort> xB, Vector512<ushort> y, Vector512<ushort> yB, Vector512<ushort> z, Vector512<ushort> zB, out Vector512<ushort> data1, out Vector512<ushort> data2, out Vector512<ushort> data3, out Vector512<ushort> data4, out Vector512<ushort> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YGroup3ZipX2(Vector512<int> x, Vector512<int> xB, Vector512<int> y, Vector512<int> yB, Vector512<int> z, Vector512<int> zB, out Vector512<int> data1, out Vector512<int> data2, out Vector512<int> data3, out Vector512<int> data4, out Vector512<int> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YGroup3ZipX2(Vector512<uint> x, Vector512<uint> xB, Vector512<uint> y, Vector512<uint> yB, Vector512<uint> z, Vector512<uint> zB, out Vector512<uint> data1, out Vector512<uint> data2, out Vector512<uint> data3, out Vector512<uint> data4, out Vector512<uint> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YGroup3ZipX2(Vector512<long> x, Vector512<long> xB, Vector512<long> y, Vector512<long> yB, Vector512<long> z, Vector512<long> zB, out Vector512<long> data1, out Vector512<long> data2, out Vector512<long> data3, out Vector512<long> data4, out Vector512<long> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YGroup3ZipX2(Vector512<ulong> x, Vector512<ulong> xB, Vector512<ulong> y, Vector512<ulong> yB, Vector512<ulong> z, Vector512<ulong> zB, out Vector512<ulong> data1, out Vector512<ulong> data2, out Vector512<ulong> data3, out Vector512<ulong> data4, out Vector512<ulong> data5) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2_Bit128"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<T> YGroup3ZipX2_Bit128<T>(Vector512<T> x, Vector512<T> xB, Vector512<T> y, Vector512<T> yB, Vector512<T> z, Vector512<T> zB, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3, out Vector512<T> data4, out Vector512<T> data5) where T : struct {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup3ZipX2_Bit128(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#else
+            return _instance.YGroup3ZipX2_Bit128(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip_AcceleratedTypes"/>
         public static TypeCodeFlags YGroup4Unzip_AcceleratedTypes {
             get {

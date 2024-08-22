@@ -1400,6 +1400,289 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE
 
 
+        /// <summary>YGroup3Zip - Shuffle - Byte - The index of X.</summary>
+        public static Vector512<byte> YGroup3Zip_Shuffle_Byte_X {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)0, 64, 128, 1, 65, 129, 2, 66, 130, 3, 67, 131, 4, 68, 132, 5, 69, 133, 6, 70, 134, 7, 71, 135, 8, 72, 136, 9, 73, 137, 10, 74, 138, 11, 75, 139, 12, 76, 140, 13, 77, 141, 14, 78, 142, 15, 79, 143, 16, 80, 144, 17, 81, 145, 18, 82, 146, 19, 83, 147, 20, 84, 148, 21);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)0, 64, 128, 1, 65, 129, 2, 66, 130, 3, 67, 131, 4, 68, 132, 5, 69, 133, 6, 70, 134, 7, 71, 135, 8, 72, 136, 9, 73, 137, 10, 74, 138, 11, 75, 139, 12, 76, 140, 13, 77, 141, 14, 78, 142, 15, 79, 143, 16, 80, 144, 17, 81, 145, 18, 82, 146, 19, 83, 147, 20, 84, 148, 21);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - Byte - The index of X - Sub part2 combine 0|1.</summary>
+        public static Vector512<byte> YGroup3Zip_Shuffle_Byte_X_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)64, 65, 0, 67, 68, 1, 70, 71, 2, 73, 74, 3, 76, 77, 4, 79, 80, 5, 82, 83, 6, 85, 86, 7, 88, 89, 8, 91, 92, 9, 94, 95, 10, 97, 98, 11, 100, 101, 12, 103, 104, 13, 106, 107, 14, 109, 110, 15, 112, 113, 16, 115, 116, 17, 118, 119, 18, 121, 122, 19, 124, 125, 20, 127);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)64, 65, 0, 67, 68, 1, 70, 71, 2, 73, 74, 3, 76, 77, 4, 79, 80, 5, 82, 83, 6, 85, 86, 7, 88, 89, 8, 91, 92, 9, 94, 95, 10, 97, 98, 11, 100, 101, 12, 103, 104, 13, 106, 107, 14, 109, 110, 15, 112, 113, 16, 115, 116, 17, 118, 119, 18, 121, 122, 19, 124, 125, 20, 127);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - Byte - The index of Y.</summary>
+        public static Vector512<byte> YGroup3Zip_Shuffle_Byte_Y {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)85, 149, 22, 86, 150, 23, 87, 151, 24, 88, 152, 25, 89, 153, 26, 90, 154, 27, 91, 155, 28, 92, 156, 29, 93, 157, 30, 94, 158, 31, 95, 159, 32, 96, 160, 33, 97, 161, 34, 98, 162, 35, 99, 163, 36, 100, 164, 37, 101, 165, 38, 102, 166, 39, 103, 167, 40, 104, 168, 41, 105, 169, 42, 106);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)85, 149, 22, 86, 150, 23, 87, 151, 24, 88, 152, 25, 89, 153, 26, 90, 154, 27, 91, 155, 28, 92, 156, 29, 93, 157, 30, 94, 158, 31, 95, 159, 32, 96, 160, 33, 97, 161, 34, 98, 162, 35, 99, 163, 36, 100, 164, 37, 101, 165, 38, 102, 166, 39, 103, 167, 40, 104, 168, 41, 105, 169, 42, 106);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - Byte - The index of Y - Sub part2 combine 0|1.</summary>
+        public static Vector512<byte> YGroup3Zip_Shuffle_Byte_Y_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)64, 21, 66, 67, 22, 69, 70, 23, 72, 73, 24, 75, 76, 25, 78, 79, 26, 81, 82, 27, 84, 85, 28, 87, 88, 29, 90, 91, 30, 93, 94, 31, 96, 97, 32, 99, 100, 33, 102, 103, 34, 105, 106, 35, 108, 109, 36, 111, 112, 37, 114, 115, 38, 117, 118, 39, 120, 121, 40, 123, 124, 41, 126, 127);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)64, 21, 66, 67, 22, 69, 70, 23, 72, 73, 24, 75, 76, 25, 78, 79, 26, 81, 82, 27, 84, 85, 28, 87, 88, 29, 90, 91, 30, 93, 94, 31, 96, 97, 32, 99, 100, 33, 102, 103, 34, 105, 106, 35, 108, 109, 36, 111, 112, 37, 114, 115, 38, 117, 118, 39, 120, 121, 40, 123, 124, 41, 126, 127);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - Byte - The index of Z.</summary>
+        public static Vector512<byte> YGroup3Zip_Shuffle_Byte_Z {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)170, 43, 107, 171, 44, 108, 172, 45, 109, 173, 46, 110, 174, 47, 111, 175, 48, 112, 176, 49, 113, 177, 50, 114, 178, 51, 115, 179, 52, 116, 180, 53, 117, 181, 54, 118, 182, 55, 119, 183, 56, 120, 184, 57, 121, 185, 58, 122, 186, 59, 123, 187, 60, 124, 188, 61, 125, 189, 62, 126, 190, 63, 127, 191);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)170, 43, 107, 171, 44, 108, 172, 45, 109, 173, 46, 110, 174, 47, 111, 175, 48, 112, 176, 49, 113, 177, 50, 114, 178, 51, 115, 179, 52, 116, 180, 53, 117, 181, 54, 118, 182, 55, 119, 183, 56, 120, 184, 57, 121, 185, 58, 122, 186, 59, 123, 187, 60, 124, 188, 61, 125, 189, 62, 126, 190, 63, 127, 191);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - Byte - The index of Z - Sub part2 combine 0|1.</summary>
+        public static Vector512<byte> YGroup3Zip_Shuffle_Byte_Z_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)42, 65, 66, 43, 68, 69, 44, 71, 72, 45, 74, 75, 46, 77, 78, 47, 80, 81, 48, 83, 84, 49, 86, 87, 50, 89, 90, 51, 92, 93, 52, 95, 96, 53, 98, 99, 54, 101, 102, 55, 104, 105, 56, 107, 108, 57, 110, 111, 58, 113, 114, 59, 116, 117, 60, 119, 120, 61, 122, 123, 62, 125, 126, 63);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)42, 65, 66, 43, 68, 69, 44, 71, 72, 45, 74, 75, 46, 77, 78, 47, 80, 81, 48, 83, 84, 49, 86, 87, 50, 89, 90, 51, 92, 93, 52, 95, 96, 53, 98, 99, 54, 101, 102, 55, 104, 105, 56, 107, 108, 57, 110, 111, 58, 113, 114, 59, 116, 117, 60, 119, 120, 61, 122, 123, 62, 125, 126, 63);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt16 - The index of X.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup3Zip_Shuffle_UInt16_X {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)0, 32, 64, 1, 33, 65, 2, 34, 66, 3, 35, 67, 4, 36, 68, 5, 37, 69, 6, 38, 70, 7, 39, 71, 8, 40, 72, 9, 41, 73, 10, 42);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)0, 32, 64, 1, 33, 65, 2, 34, 66, 3, 35, 67, 4, 36, 68, 5, 37, 69, 6, 38, 70, 7, 39, 71, 8, 40, 72, 9, 41, 73, 10, 42);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt16 - The index of X - Sub part2 combine 0|1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup3Zip_Shuffle_UInt16_X_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)32, 33, 0, 35, 36, 1, 38, 39, 2, 41, 42, 3, 44, 45, 4, 47, 48, 5, 50, 51, 6, 53, 54, 7, 56, 57, 8, 59, 60, 9, 62, 63);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)32, 33, 0, 35, 36, 1, 38, 39, 2, 41, 42, 3, 44, 45, 4, 47, 48, 5, 50, 51, 6, 53, 54, 7, 56, 57, 8, 59, 60, 9, 62, 63);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt16 - The index of Y.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup3Zip_Shuffle_UInt16_Y {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)74, 11, 43, 75, 12, 44, 76, 13, 45, 77, 14, 46, 78, 15, 47, 79, 16, 48, 80, 17, 49, 81, 18, 50, 82, 19, 51, 83, 20, 52, 84, 21);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)74, 11, 43, 75, 12, 44, 76, 13, 45, 77, 14, 46, 78, 15, 47, 79, 16, 48, 80, 17, 49, 81, 18, 50, 82, 19, 51, 83, 20, 52, 84, 21);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt16 - The index of Y - Sub part2 combine 0|1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup3Zip_Shuffle_UInt16_Y_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)10, 33, 34, 11, 36, 37, 12, 39, 40, 13, 42, 43, 14, 45, 46, 15, 48, 49, 16, 51, 52, 17, 54, 55, 18, 57, 58, 19, 60, 61, 20, 63);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)10, 33, 34, 11, 36, 37, 12, 39, 40, 13, 42, 43, 14, 45, 46, 15, 48, 49, 16, 51, 52, 17, 54, 55, 18, 57, 58, 19, 60, 61, 20, 63);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt16 - The index of Z.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup3Zip_Shuffle_UInt16_Z {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)53, 85, 22, 54, 86, 23, 55, 87, 24, 56, 88, 25, 57, 89, 26, 58, 90, 27, 59, 91, 28, 60, 92, 29, 61, 93, 30, 62, 94, 31, 63, 95);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)53, 85, 22, 54, 86, 23, 55, 87, 24, 56, 88, 25, 57, 89, 26, 58, 90, 27, 59, 91, 28, 60, 92, 29, 61, 93, 30, 62, 94, 31, 63, 95);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt16 - The index of Z - Sub part2 combine 0|1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup3Zip_Shuffle_UInt16_Z_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)32, 21, 34, 35, 22, 37, 38, 23, 40, 41, 24, 43, 44, 25, 46, 47, 26, 49, 50, 27, 52, 53, 28, 55, 56, 29, 58, 59, 30, 61, 62, 31);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)32, 21, 34, 35, 22, 37, 38, 23, 40, 41, 24, 43, 44, 25, 46, 47, 26, 49, 50, 27, 52, 53, 28, 55, 56, 29, 58, 59, 30, 61, 62, 31);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt32 - The index of X.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup3Zip_Shuffle_UInt32_X {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)0, 16, 32, 1, 17, 33, 2, 18, 34, 3, 19, 35, 4, 20, 36, 5);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)0, 16, 32, 1, 17, 33, 2, 18, 34, 3, 19, 35, 4, 20, 36, 5);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt32 - The index of X - Sub part2 combine 0|1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup3Zip_Shuffle_UInt32_X_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)16, 17, 0, 19, 20, 1, 22, 23, 2, 25, 26, 3, 28, 29, 4, 31);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)16, 17, 0, 19, 20, 1, 22, 23, 2, 25, 26, 3, 28, 29, 4, 31);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt32 - The index of Y.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup3Zip_Shuffle_UInt32_Y {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)21, 37, 6, 22, 38, 7, 23, 39, 8, 24, 40, 9, 25, 41, 10, 26);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)21, 37, 6, 22, 38, 7, 23, 39, 8, 24, 40, 9, 25, 41, 10, 26);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt32 - The index of Y - Sub part2 combine 0|1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup3Zip_Shuffle_UInt32_Y_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)16, 5, 18, 19, 6, 21, 22, 7, 24, 25, 8, 27, 28, 9, 30, 31);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)16, 5, 18, 19, 6, 21, 22, 7, 24, 25, 8, 27, 28, 9, 30, 31);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt32 - The index of Z.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup3Zip_Shuffle_UInt32_Z {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)42, 11, 27, 43, 12, 28, 44, 13, 29, 45, 14, 30, 46, 15, 31, 47);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)42, 11, 27, 43, 12, 28, 44, 13, 29, 45, 14, 30, 46, 15, 31, 47);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt32 - The index of Z - Sub part2 combine 0|1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup3Zip_Shuffle_UInt32_Z_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)10, 17, 18, 11, 20, 21, 12, 23, 24, 13, 26, 27, 14, 29, 30, 15);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)10, 17, 18, 11, 20, 21, 12, 23, 24, 13, 26, 27, 14, 29, 30, 15);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt64 - The index of X.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup3Zip_Shuffle_UInt64_X {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)0, 8, 16, 1, 9, 17, 2, 10);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)0, 8, 16, 1, 9, 17, 2, 10);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt64 - The index of X - Sub part2 combine 0|1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup3Zip_Shuffle_UInt64_X_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)8, 9, 0, 11, 12, 1, 14, 15);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)8, 9, 0, 11, 12, 1, 14, 15);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt64 - The index of Y.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup3Zip_Shuffle_UInt64_Y {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)18, 3, 11, 19, 4, 12, 20, 5);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)18, 3, 11, 19, 4, 12, 20, 5);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt64 - The index of Y - Sub part2 combine 0|1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup3Zip_Shuffle_UInt64_Y_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)2, 9, 10, 3, 12, 13, 4, 15);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)2, 9, 10, 3, 12, 13, 4, 15);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt64 - The index of Z.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup3Zip_Shuffle_UInt64_Z {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)13, 21, 6, 14, 22, 7, 15, 23);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)13, 21, 6, 14, 22, 7, 15, 23);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle - UInt64 - The index of Z - Sub part2 combine 0|1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup3Zip_Shuffle_UInt64_Z_Part2Combine {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)8, 5, 10, 11, 6, 13, 14, 7);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)8, 5, 10, 11, 6, 13, 14, 7);
+#endif // USE_VECTOR_CREATE
+
+
         /// <summary>YGroup4Unzip - ShuffleX2 - Byte - The index of X.</summary>
         public static Vector512<byte> YGroup4Unzip_ShuffleX2_Byte_X {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
