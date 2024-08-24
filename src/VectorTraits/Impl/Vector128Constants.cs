@@ -2339,6 +2339,17 @@ namespace Zyl.VectorTraits.Impl {
         } = Vector128.Create((sbyte)-1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7).AsByte();
 #endif // USE_VECTOR_CREATE
 
+        /// <summary>YGroup3Unzip - Shuffle on byte - UInt64 - The index of Y - On 0|2.</summary>
+        public static Vector128<byte> YGroup3Unzip_ShuffleOnByte_UInt64_Y_On02 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23);
+#endif // USE_VECTOR_CREATE
+
         /// <summary>YGroup3Unzip - Shuffle on byte - UInt64 - The index of Z.</summary>
         public static Vector128<byte> YGroup3Unzip_ShuffleOnByte_UInt64_Z {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -3105,6 +3116,17 @@ namespace Zyl.VectorTraits.Impl {
         } = Vector128.Create((sbyte)0, 1, 2, 3, 4, 5, 6, 7, -1, -1, -1, -1, -1, -1, -1, -1).AsByte();
 #endif // USE_VECTOR_CREATE
 
+        /// <summary>YGroup3Zip - Shuffle on byte - UInt64 - The index of Y - On 2|0.</summary>
+        public static Vector128<byte> YGroup3Zip_ShuffleOnByte_UInt64_Y_On20 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 24, 25, 26, 27, 28, 29, 30, 31);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 24, 25, 26, 27, 28, 29, 30, 31);
+#endif // USE_VECTOR_CREATE
+
         /// <summary>YGroup3Zip - Shuffle on byte - UInt64 - The index of Z.</summary>
         public static Vector128<byte> YGroup3Zip_ShuffleOnByte_UInt64_Z {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -3147,6 +3169,17 @@ namespace Zyl.VectorTraits.Impl {
 #else
             get;
         } = Vector128.Create((sbyte)-1, -1, -1, -1, -1, -1, -1, -1, 8, 9, 10, 11, 12, 13, 14, 15).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup3Zip - Shuffle on byte - UInt64 - The index of Z - On 1|2.</summary>
+        public static Vector128<byte> YGroup3Zip_ShuffleOnByte_UInt64_Z_On12 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31);
 #endif // USE_VECTOR_CREATE
 
 
