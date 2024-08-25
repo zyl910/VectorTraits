@@ -1104,47 +1104,25 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup3UnzipX2_Zip(Vector128<float> data0, Vector128<float> data1, Vector128<float> data2, Vector128<float> data3, Vector128<float> data4, Vector128<float> data5, out Vector128<float> xB, out Vector128<float> y, out Vector128<float> yB, out Vector128<float> z, out Vector128<float> zB) {
-                Vector128<float> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
-                // 0 data0 x0 y0 z0 x1 data1 y1 z1 x2 y2 data2 z2 x3 y3 z3 data3 x4 y4 z4 x5 data4 y5 z5 x6 y6 data5 z6 x7 y7 z7
-                // 1 a_0 x0 x4 y0 y4 a_1 z0 z4 x1 x5 a_2 y1 y5 z1 z5 a_3 x2 x6 y2 y6 a_4 z2 z6 x3 x7 a_5 y3 y7 z3 z7
-                a_0 = YGroup2Zip(data0, data3, out a_1);
-                a_2 = YGroup2Zip(data1, data4, out a_3);
-                a_4 = YGroup2Zip(data2, data5, out a_5);
-                // 2 b_0 x0 x2 x4 x6 b_1 y0 y2 y4 y6 b_2 z0 z2 z4 z6 b_3 x1 x3 x5 x7 b_4 y1 y3 y5 y7 b_5 z1 z3 z5 z7
-                b_0 = YGroup2Zip(a_0, a_3, out b_1);
-                b_2 = YGroup2Zip(a_1, a_4, out b_3);
-                b_4 = YGroup2Zip(a_2, a_5, out b_5);
-                // 3 a_0 x0 x1 x2 x3 a_1 x4 x5 x6 x7 a_2 y0 y1 y2 y3 a_3 y4 y5 y6 y7 a_4 z0 z1 z2 z3 a_5 z4 z5 z6 z7
-                a_0 = YGroup2Zip(b_0, b_3, out a_1);
-                a_2 = YGroup2Zip(b_1, b_4, out a_3);
-                a_4 = YGroup2Zip(b_2, b_5, out a_5);
-                xB = a_1;
-                y = a_2;
-                yB = a_3;
-                z = a_4;
-                zB = a_5;
-                return a_0;
+                var d0 = YGroup3UnzipX2_Zip(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), data3.AsUInt32(), data4.AsUInt32(), data5.AsUInt32(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                xB = d1.AsSingle();
+                y = d2.AsSingle();
+                yB = d3.AsSingle();
+                z = d4.AsSingle();
+                zB = d5.AsSingle();
+                return d0.AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup3UnzipX2_Zip(Vector128<double> data0, Vector128<double> data1, Vector128<double> data2, Vector128<double> data3, Vector128<double> data4, Vector128<double> data5, out Vector128<double> xB, out Vector128<double> y, out Vector128<double> yB, out Vector128<double> z, out Vector128<double> zB) {
-                Vector128<double> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
-                // 0 data0 x0 y0 data1 z0 x1 data2 y1 z1 data3 x2 y2 data4 z2 x3 data5 y3 z3
-                // 1 a_0 x0 x2 a_1 y0 y2 a_2 z0 z2 a_3 x1 x3 a_4 y1 y3 a_5 z1 z3
-                a_0 = YGroup2Zip(data0, data3, out a_1);
-                a_2 = YGroup2Zip(data1, data4, out a_3);
-                a_4 = YGroup2Zip(data2, data5, out a_5);
-                // 2 b_0 x0 x1 b_1 x2 x3 b_2 y0 y1 b_3 y2 y3 b_4 z0 z1 b_5 z2 z3
-                b_0 = YGroup2Zip(a_0, a_3, out b_1);
-                b_2 = YGroup2Zip(a_1, a_4, out b_3);
-                b_4 = YGroup2Zip(a_2, a_5, out b_5);
-                xB = b_1;
-                y = b_2;
-                yB = b_3;
-                z = b_4;
-                zB = b_5;
-                return b_0;
+                var d0 = YGroup3UnzipX2_Zip(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), data3.AsUInt64(), data4.AsUInt64(), data5.AsUInt64(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                xB = d1.AsDouble();
+                y = d2.AsDouble();
+                yB = d3.AsDouble();
+                z = d4.AsDouble();
+                zB = d5.AsDouble();
+                return d0.AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
@@ -1822,47 +1800,25 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3ZipX2_Unzip(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup3ZipX2_Unzip(Vector128<float> x, Vector128<float> xB, Vector128<float> y, Vector128<float> yB, Vector128<float> z, Vector128<float> zB, out Vector128<float> data1, out Vector128<float> data2, out Vector128<float> data3, out Vector128<float> data4, out Vector128<float> data5) {
-                Vector128<float> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
-                // 0 _x_ x0 x1 x2 x3 _xB x4 x5 x6 x7 _y_ y0 y1 y2 y3 _yB y4 y5 y6 y7 _z_ z0 z1 z2 z3 _zB z4 z5 z6 z7
-                // 1 a_0 x0 x2 x4 x6 a_1 y0 y2 y4 y6 a_2 z0 z2 z4 z6 a_3 x1 x3 x5 x7 a_4 y1 y3 y5 y7 a_5 z1 z3 z5 z7
-                a_0 = YGroup2Unzip(x, xB, out a_3);
-                a_1 = YGroup2Unzip(y, yB, out a_4);
-                a_2 = YGroup2Unzip(z, zB, out a_5);
-                // 2 b_0 x0 x4 y0 y4 b_1 z0 z4 x1 x5 b_2 y1 y5 z1 z5 b_3 x2 x6 y2 y6 b_4 z2 z6 x3 x7 b_5 y3 y7 z3 z7
-                b_0 = YGroup2Unzip(a_0, a_1, out b_3);
-                b_1 = YGroup2Unzip(a_2, a_3, out b_4);
-                b_2 = YGroup2Unzip(a_4, a_5, out b_5);
-                // 3 a_0 x0 y0 z0 x1 a_1 y1 z1 x2 y2 a_2 z2 x3 y3 z3 a_3 x4 y4 z4 x5 a_4 y5 z5 x6 y6 a_5 z6 x7 y7 z7
-                a_0 = YGroup2Unzip(b_0, b_1, out a_3);
-                a_1 = YGroup2Unzip(b_2, b_3, out a_4);
-                a_2 = YGroup2Unzip(b_4, b_5, out a_5);
-                data1 = a_1;
-                data2 = a_2;
-                data3 = a_3;
-                data4 = a_4;
-                data5 = a_5;
-                return a_0;
+                var d0 = YGroup3ZipX2_Unzip(x.AsUInt32(), xB.AsUInt32(), y.AsUInt32(), yB.AsUInt32(), z.AsUInt32(), zB.AsUInt32(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                data1 = d1.AsSingle();
+                data2 = d2.AsSingle();
+                data3 = d3.AsSingle();
+                data4 = d4.AsSingle();
+                data5 = d5.AsSingle();
+                return d0.AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3ZipX2_Unzip(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup3ZipX2_Unzip(Vector128<double> x, Vector128<double> xB, Vector128<double> y, Vector128<double> yB, Vector128<double> z, Vector128<double> zB, out Vector128<double> data1, out Vector128<double> data2, out Vector128<double> data3, out Vector128<double> data4, out Vector128<double> data5) {
-                Vector128<double> a_0, a_1, a_2, a_3, a_4, a_5, b_0, b_1, b_2, b_3, b_4, b_5;
-                // 0 _x_ x0 x1 _xB x2 x3 _y_ y0 y1 _yB y2 y3 _z_ z0 z1 _zB z2 z3
-                // 1 a_0 x0 x2 a_1 y0 y2 a_2 z0 z2 a_3 x1 x3 a_4 y1 y3 a_5 z1 z3
-                a_0 = YGroup2Unzip(x, xB, out a_3);
-                a_1 = YGroup2Unzip(y, yB, out a_4);
-                a_2 = YGroup2Unzip(z, zB, out a_5);
-                // 2 b_0 x0 y0 b_1 z0 x1 b_2 y1 z1 b_3 x2 y2 b_4 z2 x3 b_5 y3 z3
-                b_0 = YGroup2Unzip(a_0, a_1, out b_3);
-                b_1 = YGroup2Unzip(a_2, a_3, out b_4);
-                b_2 = YGroup2Unzip(a_4, a_5, out b_5);
-                data1 = b_1;
-                data2 = b_2;
-                data3 = b_3;
-                data4 = b_4;
-                data5 = b_5;
-                return b_0;
+                var d0 = YGroup3ZipX2_Unzip(x.AsUInt64(), xB.AsUInt64(), y.AsUInt64(), yB.AsUInt64(), z.AsUInt64(), zB.AsUInt64(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                data1 = d1.AsDouble();
+                data2 = d2.AsDouble();
+                data3 = d3.AsDouble();
+                data4 = d4.AsDouble();
+                data5 = d5.AsDouble();
+                return d0.AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3ZipX2_Unzip(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>

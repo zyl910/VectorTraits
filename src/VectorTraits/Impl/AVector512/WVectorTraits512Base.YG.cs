@@ -3659,18 +3659,26 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2_Unzip(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup3ZipX2_Unzip(Vector512<float> x, Vector512<float> xB, Vector512<float> y, Vector512<float> yB, Vector512<float> z, Vector512<float> zB, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3, out Vector512<float> data4, out Vector512<float> data5) {
-                var data0 = YGroup3Zip(x, y, z, out data1, out data2);
-                data3 = YGroup3Zip(xB, yB, zB, out data4, out data5);
-                return data0;
+                var d0 = YGroup3ZipX2_Unzip(x.AsUInt32(), xB.AsUInt32(), y.AsUInt32(), yB.AsUInt32(), z.AsUInt32(), zB.AsUInt32(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                data1 = d1.AsSingle();
+                data2 = d2.AsSingle();
+                data3 = d3.AsSingle();
+                data4 = d4.AsSingle();
+                data5 = d5.AsSingle();
+                return d0.AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2_Unzip(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup3ZipX2_Unzip(Vector512<sbyte> x, Vector512<sbyte> xB, Vector512<sbyte> y, Vector512<sbyte> yB, Vector512<sbyte> z, Vector512<sbyte> zB, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3, out Vector512<sbyte> data4, out Vector512<sbyte> data5) {
-                var data0 = YGroup3Zip(x, y, z, out data1, out data2);
-                data3 = YGroup3Zip(xB, yB, zB, out data4, out data5);
-                return data0;
+                var d0 = YGroup3ZipX2_Unzip(x.AsByte(), xB.AsByte(), y.AsByte(), yB.AsByte(), z.AsByte(), zB.AsByte(), out var d1, out var d2, out var d3, out var d4, out var d5);
+                data1 = d1.AsSByte();
+                data2 = d2.AsSByte();
+                data3 = d3.AsSByte();
+                data4 = d4.AsSByte();
+                data5 = d5.AsSByte();
+                return d0.AsSByte();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2_Unzip(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
