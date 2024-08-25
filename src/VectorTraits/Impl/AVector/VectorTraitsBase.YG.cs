@@ -513,9 +513,12 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<ushort> rt0, rt1;
                 Vector<uint> temp0 = data0.AsUInt32();
                 Vector<uint> temp1 = data1.AsUInt32();
+                Vector<uint> mask = Vectors<ushort>.XyYMask.AsUInt32();
                 rt0 = Vector.Narrow(temp0, temp1);
                 //temp0 = Vector.ShiftRightLogical(temp0, L);
                 //temp1 = Vector.ShiftRightLogical(temp1, L);
+                temp0 = Vector.BitwiseAnd(temp0, mask);
+                temp1 = Vector.BitwiseAnd(temp1, mask);
                 Vector.Widen(temp0, out e0, out e1);
                 Vector.Widen(temp1, out e2, out e3);
                 f0 = ConvertToDouble_Range52(e0);
@@ -526,10 +529,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 f1 = Vector.Multiply(f1, vscale);
                 f2 = Vector.Multiply(f2, vscale);
                 f3 = Vector.Multiply(f3, vscale);
-                e0 = ConvertToUInt64_Range52(f0);
-                e1 = ConvertToUInt64_Range52(f1);
-                e2 = ConvertToUInt64_Range52(f2);
-                e3 = ConvertToUInt64_Range52(f3);
+                e0 = ConvertToUInt64_Range52RoundToEven(f0);
+                e1 = ConvertToUInt64_Range52RoundToEven(f1);
+                e2 = ConvertToUInt64_Range52RoundToEven(f2);
+                e3 = ConvertToUInt64_Range52RoundToEven(f3);
                 temp0 = Vector.Narrow(e0, e1);
                 temp1 = Vector.Narrow(e2, e3);
                 rt1 = Vector.Narrow(temp0, temp1);
