@@ -586,6 +586,568 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        public void YGroup3UnzipTest<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup3Unzip_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<FuncIn3Out2<Vector<T>>>("YGroup3Unzip_Basic", "YGroup3Unzip_ByShorter", "YGroup3Unzip_ByX2Unpack", "YGroup3Unzip_ByX2Zip", "YGroup3Unzip_Move", "YGroup3Unzip_Shuffle", "YGroup3Unzip_ShuffleX", "YGroup3Unzip_ShuffleXImm");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
+            bool[] funcListUnsupported = new bool[funcList.Count];
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            Vector<T> data2 = Vectors<T>.SerialDesc;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst0, dst1, dst2;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (Vector<T> expected0, Vector<T> expected1, Vector<T> expected2) = Vectors.YGroup3Unzip(data0, data1, data2);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}): {3}, {4}, {5}", data0, data1, data2, expected0, expected1, expected2));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        (dst0, dst1, dst2) = instance.YGroup3Unzip(data0, data1, data2);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", expected0, dst0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", expected1, dst1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", expected2, dst2, funcName, data0, data1, data2));
+                    }
+                    for (int f = 0; f < funcList.Count; f++) {
+                        if (funcListUnsupported[f]) continue;
+                        var func = funcList[f];
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        try {
+                            dst0 = func(data0, data1, data2, out dst1, out dst2);
+                        } catch (NotSupportedException ex) {
+                            funcListUnsupported[f] = true;
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {3}. {4}", funcName, data0, data1, data2, ex.Message));
+                            continue;
+                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", expected0, dst0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", expected1, dst1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", expected2, dst2, funcName, data0, data1, data2));
+                    } // funcList
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((byte)4)]
+        public void YGroup3Unzip_Bit128Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup3Unzip_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            Vector<T> data2 = Vectors<T>.SerialDesc;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst0, dst1, dst2;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector<T> expected0 = Vectors.YGroup3Unzip_Bit128(data0, data1, data2, out Vector<T> expected1, out Vector<T> expected2);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}): {3}, {4}, {5}", data0, data1, data2, expected0, expected1, expected2));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst0 = instance.YGroup3Unzip_Bit128(data0, data1, data2, out dst1, out dst2);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", expected0, dst0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", expected1, dst1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", expected2, dst2, funcName, data0, data1, data2));
+                    }
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YGroup3UnzipX2Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup3UnzipX2_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<FuncIn6Out5<Vector<T>>>("YGroup3UnzipX2_Basic", "YGroup3UnzipX2_Move", "YGroup3UnzipX2_Unpack", "YGroup3UnzipX2_X2", "YGroup3UnzipX2_Zip");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
+            bool[] funcListUnsupported = new bool[funcList.Count];
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            Vector<T> data2 = Vectors<T>.SerialDesc;
+            Vector<T> data3 = Vectors<T>.SerialNegative;
+            Vector<T> data4 = data3;
+            Vector<T> data5 = data2;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst0, dst1, dst2, dst3, dst4, dst5;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (Vector<T> expected0, Vector<T> expected1, Vector<T> expected2, Vector<T> expected3, Vector<T> expected4, Vector<T> expected5)
+                        = Vectors.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        (dst0, dst1, dst2, dst3, dst4, dst5) = instance.YGroup3UnzipX2(data0, data1, data2, data3, data4, data5);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected3, dst3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected4.BitEquals(dst4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected4, dst4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected5.BitEquals(dst5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected5, dst5, funcName, data0, data1, data2, data3, data4, data5));
+                    }
+                    for (int f = 0; f < funcList.Count; f++) {
+                        if (funcListUnsupported[f]) continue;
+                        var func = funcList[f];
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        try {
+                            dst0 = func(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
+                        } catch (NotSupportedException ex) {
+                            funcListUnsupported[f] = true;
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {3}, {4}. {5}, {6}. {7}", funcName, data0, data1, data2, data3, data4, data5, ex.Message));
+                            continue;
+                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected3, dst3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected4.BitEquals(dst4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected4, dst4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected5.BitEquals(dst5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected5, dst5, funcName, data0, data1, data2, data3, data4, data5));
+                    } // funcList
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((byte)4)]
+        public void YGroup3UnzipX2_Bit128Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup3UnzipX2_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            Vector<T> data2 = Vectors<T>.SerialDesc;
+            Vector<T> data3 = Vectors<T>.SerialNegative;
+            Vector<T> data4 = data3;
+            Vector<T> data5 = data2;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst0, dst1, dst2, dst3, dst4, dst5;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector<T> expected0 = Vectors.YGroup3UnzipX2_Bit128(data0, data1, data2, data3, data4, data5, out Vector<T> expected1, out Vector<T> expected2, out Vector<T> expected3, out Vector<T> expected4, out Vector<T> expected5);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst0 = instance.YGroup3UnzipX2_Bit128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected3, dst3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected4.BitEquals(dst4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected4, dst4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected5.BitEquals(dst5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected5, dst5, funcName, data0, data1, data2, data3, data4, data5));
+                    }
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YGroup3ZipTest<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup3Zip_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<FuncIn3Out2<Vector<T>>>("YGroup3Zip_Basic", "YGroup3Zip_ByShorter", "YGroup3Zip_ByX2Unpack", "YGroup3Zip_ByX2Unzip", "YGroup3Zip_Move", "YGroup3Zip_Shuffle", "YGroup3Zip_ShuffleX", "YGroup3Zip_ShuffleXImm");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
+            bool[] funcListUnsupported = new bool[funcList.Count];
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            bool checkUnzip = true;
+            Vector<T> data2 = Vectors<T>.SerialDesc;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst0, dst1, dst2;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (Vector<T> expected0, Vector<T> expected1, Vector<T> expected2) = Vectors.YGroup3Zip(data0, data1, data2);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}): {3}, {4}, {5}", data0, data1, data2, expected0, expected1, expected2));
+                    }
+                    if (checkUnzip) {
+                        Vector<T> chk0, chk1, chk2;
+                        (chk0, chk1, chk2) = Vectors.YGroup3Unzip(expected0, expected1, expected2);
+                        string funcName = "Unzip";
+                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", data0, chk0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", data1, chk1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", data2, chk2, funcName, data0, data1, data2));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        (dst0, dst1, dst2) = instance.YGroup3Zip(data0, data1, data2);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", expected0, dst0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", expected1, dst1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", expected2, dst2, funcName, data0, data1, data2));
+                    }
+                    for (int f = 0; f < funcList.Count; f++) {
+                        if (funcListUnsupported[f]) continue;
+                        var func = funcList[f];
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        try {
+                            dst0 = func(data0, data1, data2, out dst1, out dst2);
+                        } catch (NotSupportedException ex) {
+                            funcListUnsupported[f] = true;
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {3}. {4}", funcName, data0, data1, data2, ex.Message));
+                            continue;
+                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", expected0, dst0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", expected1, dst1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", expected2, dst2, funcName, data0, data1, data2));
+                    } // funcList
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((byte)4)]
+        public void YGroup3Zip_Bit128Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup3Zip_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            bool checkUnzip = true;
+            Vector<T> data2 = Vectors<T>.SerialDesc;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst0, dst1, dst2;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector<T> expected0 = Vectors.YGroup3Zip_Bit128(data0, data1, data2, out Vector<T> expected1, out Vector<T> expected2);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}): {3}, {4}, {5}", data0, data1, data2, expected0, expected1, expected2));
+                    }
+                    if (checkUnzip) {
+                        Vector<T> chk0, chk1, chk2;
+                        chk0 = Vectors.YGroup3Unzip_Bit128(expected0, expected1, expected2, out chk1, out chk2);
+                        string funcName = "Unzip";
+                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", data0, chk0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", data1, chk1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", data2, chk2, funcName, data0, data1, data2));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst0 = instance.YGroup3Zip_Bit128(data0, data1, data2, out dst1, out dst2);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", expected0, dst0, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", expected1, dst1, funcName, data0, data1, data2));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", expected2, dst2, funcName, data0, data1, data2));
+                    }
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YGroup3ZipX2Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup3ZipX2_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<FuncIn6Out5<Vector<T>>>("YGroup3ZipX2_Basic", "YGroup3ZipX2_Move", "YGroup3ZipX2_Unpack", "YGroup3ZipX2_X2", "YGroup3ZipX2_Unzip");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
+            bool[] funcListUnsupported = new bool[funcList.Count];
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            bool checkUnzip = true;
+            Vector<T> data2 = Vectors<T>.SerialDesc;
+            Vector<T> data3 = Vectors<T>.SerialNegative;
+            Vector<T> data4 = data3;
+            Vector<T> data5 = data2;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst0, dst1, dst2, dst3, dst4, dst5;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (Vector<T> expected0, Vector<T> expected1, Vector<T> expected2, Vector<T> expected3, Vector<T> expected4, Vector<T> expected5)
+                        = Vectors.YGroup3ZipX2(data0, data1, data2, data3, data4, data5);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
+                    }
+                    if (checkUnzip) {
+                        Vector<T> chk0, chk1, chk2, chk3, chk4, chk5;
+                        (chk0, chk1, chk2, chk3, chk4, chk5) = Vectors.YGroup3UnzipX2(expected0, expected1, expected2, expected3, expected4, expected5);
+                        string funcName = "Unzip";
+                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data0, chk0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data1, chk1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data2, chk2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data3.BitEquals(chk3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data3, chk3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data4.BitEquals(chk4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data4, chk4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data5.BitEquals(chk5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data5, chk5, funcName, data0, data1, data2, data3, data4, data5));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        (dst0, dst1, dst2, dst3, dst4, dst5) = instance.YGroup3ZipX2(data0, data1, data2, data3, data4, data5);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected3, dst3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected4.BitEquals(dst4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected4, dst4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected5.BitEquals(dst5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected5, dst5, funcName, data0, data1, data2, data3, data4, data5));
+                    }
+                    for (int f = 0; f < funcList.Count; f++) {
+                        if (funcListUnsupported[f]) continue;
+                        var func = funcList[f];
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        try {
+                            dst0 = func(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
+                        } catch (NotSupportedException ex) {
+                            funcListUnsupported[f] = true;
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {3}, {4}. {5}, {6}. {7}", funcName, data0, data1, data2, data3, data4, data5, ex.Message));
+                            continue;
+                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected3, dst3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected4.BitEquals(dst4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected4, dst4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected5.BitEquals(dst5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected5, dst5, funcName, data0, data1, data2, data3, data4, data5));
+                    } // funcList
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((byte)4)]
+        public void YGroup3ZipX2_Bit128Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup3ZipX2_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            bool checkUnzip = true;
+            Vector<T> data2 = Vectors<T>.SerialDesc;
+            Vector<T> data3 = Vectors<T>.SerialNegative;
+            Vector<T> data4 = data3;
+            Vector<T> data5 = data2;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst0, dst1, dst2, dst3, dst4, dst5;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector<T> expected0 = Vectors.YGroup3ZipX2_Bit128(data0, data1, data2, data3, data4, data5, out Vector<T> expected1, out Vector<T> expected2, out Vector<T> expected3, out Vector<T> expected4, out Vector<T> expected5);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}, {4}, {5}): {6}, {7}, {8}, {9}, {10}, {11}", data0, data1, data2, data3, data4, data5, expected0, expected1, expected2, expected3, expected4, expected5));
+                    }
+                    if (checkUnzip) {
+                        Vector<T> chk0, chk1, chk2, chk3, chk4, chk5;
+                        chk0 = Vectors.YGroup3UnzipX2_Bit128(expected0, expected1, expected2, expected3, expected4, expected5, out chk1, out chk2, out chk3, out chk4, out chk5);
+                        string funcName = "Unzip";
+                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data0, chk0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data1, chk1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data2, chk2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data3.BitEquals(chk3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data3, chk3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data4.BitEquals(chk4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data4, chk4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(data5.BitEquals(chk5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data5, chk5, funcName, data0, data1, data2, data3, data4, data5));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst0 = instance.YGroup3ZipX2_Bit128(data0, data1, data2, data3, data4, data5, out dst1, out dst2, out dst3, out dst4, out dst5);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected0, dst0, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected1, dst1, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected2, dst2, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected3.BitEquals(dst3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected3, dst3, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected4.BitEquals(dst4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected4, dst4, funcName, data0, data1, data2, data3, data4, data5));
+                        ClassicAssert.IsTrue(expected5.BitEquals(dst5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", expected5, dst5, funcName, data0, data1, data2, data3, data4, data5));
+                    }
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
