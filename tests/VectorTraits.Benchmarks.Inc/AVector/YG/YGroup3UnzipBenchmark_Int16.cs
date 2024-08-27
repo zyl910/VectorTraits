@@ -50,7 +50,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vector1Used = vector1;
@@ -107,7 +107,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vector1Used = vector1;
@@ -159,7 +159,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vector1Used = vector1;
@@ -214,7 +214,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vector1Used = vector1;
@@ -265,7 +265,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vector1Used = vector1;
@@ -333,7 +333,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vector1Used = vector1;
@@ -396,7 +396,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vector1Used = vector1;
@@ -459,7 +459,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vector1Used = vector1;
@@ -525,7 +525,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector<TMy> vector1Used = vector1;
@@ -599,7 +599,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -658,7 +658,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -712,7 +712,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -766,7 +766,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -818,7 +818,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -871,7 +871,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -924,7 +924,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -976,7 +976,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1029,7 +1029,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1086,7 +1086,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1138,7 +1138,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1192,7 +1192,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1244,7 +1244,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1297,7 +1297,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1353,7 +1353,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1404,7 +1404,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1472,7 +1472,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1537,7 +1537,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1602,7 +1602,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1667,7 +1667,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1731,7 +1731,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1795,7 +1795,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1859,7 +1859,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1927,7 +1927,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -1991,7 +1991,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -2057,7 +2057,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -2121,7 +2121,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -2188,7 +2188,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector128<TMy> vector1Used = vector1.AsVector128();
@@ -2265,7 +2265,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2324,7 +2324,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2376,7 +2376,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2430,7 +2430,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2482,7 +2482,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2534,7 +2534,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2586,7 +2586,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2638,7 +2638,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2691,7 +2691,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2747,7 +2747,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2798,7 +2798,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2866,7 +2866,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2931,7 +2931,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -2996,7 +2996,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -3059,7 +3059,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -3123,7 +3123,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -3187,7 +3187,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -3254,7 +3254,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector256<TMy> vector1Used = vector1.AsVector256();
@@ -3331,7 +3331,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3390,7 +3390,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3442,7 +3442,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3496,7 +3496,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3548,7 +3548,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3600,7 +3600,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3652,7 +3652,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3704,7 +3704,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3759,7 +3759,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3810,7 +3810,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3878,7 +3878,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -3943,7 +3943,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -4008,7 +4008,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -4071,7 +4071,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -4135,7 +4135,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -4199,7 +4199,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
@@ -4266,7 +4266,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             TMy rt = 0; // Result.
             const int GroupSize = 2;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
             Vector512<TMy> vector1Used = vector1.AsVector512();
