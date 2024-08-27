@@ -4353,42 +4353,26 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<sbyte> YGroup3ZipX2(Vector256<sbyte> x, Vector256<sbyte> xB, Vector256<sbyte> y, Vector256<sbyte> yB, Vector256<sbyte> z, Vector256<sbyte> zB, out Vector256<sbyte> data1, out Vector256<sbyte> data2, out Vector256<sbyte> data3, out Vector256<sbyte> data4, out Vector256<sbyte> data5) {
-#if NET7_0_OR_GREATER
                 return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#else
-                return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3ZipX2(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<byte> YGroup3ZipX2(Vector256<byte> x, Vector256<byte> xB, Vector256<byte> y, Vector256<byte> yB, Vector256<byte> z, Vector256<byte> zB, out Vector256<byte> data1, out Vector256<byte> data2, out Vector256<byte> data3, out Vector256<byte> data4, out Vector256<byte> data5) {
-#if NET7_0_OR_GREATER
                 return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#else
-                return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3ZipX2(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<short> YGroup3ZipX2(Vector256<short> x, Vector256<short> xB, Vector256<short> y, Vector256<short> yB, Vector256<short> z, Vector256<short> zB, out Vector256<short> data1, out Vector256<short> data2, out Vector256<short> data3, out Vector256<short> data4, out Vector256<short> data5) {
-#if NET7_0_OR_GREATER
                 return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#else
-                return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3ZipX2(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ushort> YGroup3ZipX2(Vector256<ushort> x, Vector256<ushort> xB, Vector256<ushort> y, Vector256<ushort> yB, Vector256<ushort> z, Vector256<ushort> zB, out Vector256<ushort> data1, out Vector256<ushort> data2, out Vector256<ushort> data3, out Vector256<ushort> data4, out Vector256<ushort> data5) {
-#if NET7_0_OR_GREATER
                 return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#else
-                return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#endif // NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3ZipX2(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>

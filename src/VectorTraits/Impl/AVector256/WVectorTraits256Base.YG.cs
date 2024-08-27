@@ -2216,22 +2216,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup3Unzip(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> y, out Vector256<long> z) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
-#else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup3Unzip(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> y, out Vector256<ulong> z) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Unzip_ByShorter(data0, data1, data2, out y, out z);
-#else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip_Bit128"/>
@@ -3092,22 +3084,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Zip(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup3Zip(Vector256<long> x, Vector256<long> y, Vector256<long> z, out Vector256<long> data1, out Vector256<long> data2) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Zip_ByShorter(x, y, z, out data1, out data2);
-#else
                 return YGroup3Zip_Basic(x, y, z, out data1, out data2);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Zip(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup3Zip(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z, out Vector256<ulong> data1, out Vector256<ulong> data2) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3Zip_ByShorter(x, y, z, out data1, out data2);
-#else
                 return YGroup3Zip_Basic(x, y, z, out data1, out data2);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Zip_Bit128"/>
@@ -3522,14 +3506,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup3ZipX2(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup3ZipX2(Vector256<long> x, Vector256<long> xB, Vector256<long> y, Vector256<long> yB, Vector256<long> z, Vector256<long> zB, out Vector256<long> data1, out Vector256<long> data2, out Vector256<long> data3, out Vector256<long> data4, out Vector256<long> data5) {
-                return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                return YGroup3ZipX2_Basic(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3ZipX2(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup3ZipX2(Vector256<ulong> x, Vector256<ulong> xB, Vector256<ulong> y, Vector256<ulong> yB, Vector256<ulong> z, Vector256<ulong> zB, out Vector256<ulong> data1, out Vector256<ulong> data2, out Vector256<ulong> data3, out Vector256<ulong> data4, out Vector256<ulong> data5) {
-                return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                return YGroup3ZipX2_Basic(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup3ZipX2_Bit128"/>
