@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
@@ -35,14 +36,24 @@ namespace Zyl.VectorTraits.Impl {
 		/// </summary>
 		public static readonly string FORMAT_REQUIRES_HARDWARE_SUPPORTED_1 = "Requires hardware support {0}!";
 
-		/// <summary>
-		/// Throw exception when hardware unsupported. (当硬件不支持时抛出异常).
-		/// </summary>
-		/// <param name="isSupported">Is supported (是否支持).</param>
-		/// <param name="title">The title (标题).</param>
-		/// <exception cref="NotSupportedException">Thrown when isSupported is false (当 isSupported 为false时抛出此异常).</exception>
-		public static void ThrowForUnsupported(bool isSupported, string title) {
+        /// <summary>
+        /// Throw exception when hardware unsupported. (当硬件不支持时抛出异常).
+        /// </summary>
+        /// <param name="isSupported">Is supported (是否支持).</param>
+        /// <param name="title">The title (标题).</param>
+        /// <exception cref="NotSupportedException">Thrown when isSupported is false (当 isSupported 为false时抛出此异常).</exception>
+        [Obsolete("Please use ThrowNewUnsupported instead.")]
+        public static void ThrowForUnsupported(bool isSupported, string title) {
             if (isSupported) return;
+            ThrowNewUnsupported(title);
+        }
+
+        /// <summary>
+        /// Throw new <see cref="NotSupportedException"/> exception. (抛出新的 <see cref="NotSupportedException"/> 异常).
+        /// </summary>
+        /// <param name="title">The title (标题).</param>
+        /// <exception cref="NotSupportedException">Alway thrown exception (总是抛出此异常).</exception>
+        public static void ThrowNewUnsupported(string title) {
             string msg = string.Format(FORMAT_REQUIRES_HARDWARE_SUPPORTED_1, title);
             throw new NotSupportedException(msg);
         }

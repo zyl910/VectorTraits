@@ -228,7 +228,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2Unzip_Permute(Vector128<float> data0, Vector128<float> data1, out Vector128<float> rt1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var rt0 = Avx512F.VL.PermuteVar4x32x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt32_X.AsInt32(), data1);
                 rt1 = Avx512F.VL.PermuteVar4x32x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt32_Y.AsInt32(), data1);
                 return rt0;
@@ -237,7 +237,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{double}, Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2Unzip_Permute(Vector128<double> data0, Vector128<double> data1, out Vector128<double> rt1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var rt0 = Avx512F.VL.PermuteVar2x64x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt64_X.AsInt64(), data1);
                 rt1 = Avx512F.VL.PermuteVar2x64x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt64_Y.AsInt64(), data1);
                 return rt0;
@@ -255,7 +255,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2Unzip_Permute(Vector128<byte> data0, Vector128<byte> data1, out Vector128<byte> rt1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 var rt0 = Avx512Vbmi.VL.PermuteVar16x8x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_Byte_X, data1);
                 rt1 = Avx512Vbmi.VL.PermuteVar16x8x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_Byte_Y, data1);
                 return rt0;
@@ -273,7 +273,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2Unzip_Permute(Vector128<ushort> data0, Vector128<ushort> data1, out Vector128<ushort> rt1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 var rt0 = Avx512BW.VL.PermuteVar8x16x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt16_X, data1);
                 rt1 = Avx512BW.VL.PermuteVar8x16x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt16_Y, data1);
                 return rt0;
@@ -291,7 +291,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2Unzip_Permute(Vector128<uint> data0, Vector128<uint> data1, out Vector128<uint> rt1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var rt0 = Avx512F.VL.PermuteVar4x32x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt32_X, data1);
                 rt1 = Avx512F.VL.PermuteVar4x32x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt32_Y, data1);
                 return rt0;
@@ -309,7 +309,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2Unzip_Permute(Vector128<ulong> data0, Vector128<ulong> data1, out Vector128<ulong> rt1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var rt0 = Avx512F.VL.PermuteVar2x64x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt64_X, data1);
                 rt1 = Avx512F.VL.PermuteVar2x64x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt64_Y, data1);
                 return rt0;
@@ -603,14 +603,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2UnzipEven_Permute(Vector128<float> data0, Vector128<float> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar4x32x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt32_X.AsInt32(), data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2UnzipEven_Permute(Vector128<double> data0, Vector128<double> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar2x64x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt64_X.AsInt64(), data1);
             }
 
@@ -624,7 +624,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2UnzipEven_Permute(Vector128<byte> data0, Vector128<byte> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 return Avx512Vbmi.VL.PermuteVar16x8x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_Byte_X, data1);
             }
 
@@ -638,7 +638,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2UnzipEven_Permute(Vector128<ushort> data0, Vector128<ushort> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 return Avx512BW.VL.PermuteVar8x16x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt16_X, data1);
             }
 
@@ -652,7 +652,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2UnzipEven_Permute(Vector128<uint> data0, Vector128<uint> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar4x32x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt32_X, data1);
             }
 
@@ -666,7 +666,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2UnzipEven_Permute(Vector128<ulong> data0, Vector128<ulong> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar2x64x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt64_X, data1);
             }
 
@@ -947,14 +947,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2UnzipOdd_Permute(Vector128<float> data0, Vector128<float> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar4x32x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt32_Y.AsInt32(), data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2UnzipOdd_Permute(Vector128<double> data0, Vector128<double> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar2x64x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt64_Y.AsInt64(), data1);
             }
 
@@ -968,7 +968,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2UnzipOdd_Permute(Vector128<byte> data0, Vector128<byte> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 return Avx512Vbmi.VL.PermuteVar16x8x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_Byte_Y, data1);
             }
 
@@ -982,7 +982,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2UnzipOdd_Permute(Vector128<ushort> data0, Vector128<ushort> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 return Avx512BW.VL.PermuteVar8x16x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt16_Y, data1);
             }
 
@@ -996,7 +996,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2UnzipOdd_Permute(Vector128<uint> data0, Vector128<uint> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar4x32x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt32_Y, data1);
             }
 
@@ -1010,7 +1010,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2UnzipOdd_Permute(Vector128<ulong> data0, Vector128<ulong> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar2x64x2(data0, Vector128Constants.YGroup2Unzip_ShuffleX2_UInt64_Y, data1);
             }
 
@@ -1185,7 +1185,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2Zip_Permute(Vector128<float> x, Vector128<float> y, out Vector128<float> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var data0 = Avx512F.VL.PermuteVar4x32x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt32_Data0.AsInt32(), y);
                 data1 = Avx512F.VL.PermuteVar4x32x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt32_Data1.AsInt32(), y);
                 return data0;
@@ -1194,7 +1194,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{double}, Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2Zip_Permute(Vector128<double> x, Vector128<double> y, out Vector128<double> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var data0 = Avx512F.VL.PermuteVar2x64x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt64_Data0.AsInt64(), y);
                 data1 = Avx512F.VL.PermuteVar2x64x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt64_Data1.AsInt64(), y);
                 return data0;
@@ -1212,7 +1212,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2Zip_Permute(Vector128<byte> x, Vector128<byte> y, out Vector128<byte> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 var data0 = Avx512Vbmi.VL.PermuteVar16x8x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data0, y);
                 data1 = Avx512Vbmi.VL.PermuteVar16x8x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data1, y);
                 return data0;
@@ -1230,7 +1230,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2Zip_Permute(Vector128<ushort> x, Vector128<ushort> y, out Vector128<ushort> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 var data0 = Avx512BW.VL.PermuteVar8x16x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt16_Data0, y);
                 data1 = Avx512BW.VL.PermuteVar8x16x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt16_Data1, y);
                 return data0;
@@ -1248,7 +1248,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2Zip_Permute(Vector128<uint> x, Vector128<uint> y, out Vector128<uint> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var data0 = Avx512F.VL.PermuteVar4x32x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt32_Data0, y);
                 data1 = Avx512F.VL.PermuteVar4x32x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt32_Data1, y);
                 return data0;
@@ -1266,7 +1266,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2Zip_Permute(Vector128<ulong> x, Vector128<ulong> y, out Vector128<ulong> data1) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var data0 = Avx512F.VL.PermuteVar2x64x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt64_Data0, y);
                 data1 = Avx512F.VL.PermuteVar2x64x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt64_Data1, y);
                 return data0;
@@ -1579,7 +1579,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2ZipHigh_Permute(Vector128<float> x, Vector128<float> y) {
                 //return YGroup2ZipHigh_Permute(x.AsUInt32(), y.AsUInt32()).AsSingle();
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar4x32x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt32_Data1.AsInt32(), y);
             }
 
@@ -1587,7 +1587,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2ZipHigh_Permute(Vector128<double> x, Vector128<double> y) {
                 //return YGroup2ZipHigh_Permute(x.AsUInt64(), y.AsUInt64()).AsDouble();
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar2x64x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt64_Data1.AsInt64(), y);
             }
 
@@ -1601,7 +1601,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2ZipHigh_Permute(Vector128<byte> x, Vector128<byte> y) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 return Avx512Vbmi.VL.PermuteVar16x8x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data1, y);
             }
 
@@ -1615,7 +1615,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2ZipHigh_Permute(Vector128<ushort> x, Vector128<ushort> y) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 return Avx512BW.VL.PermuteVar8x16x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt16_Data1, y);
             }
 
@@ -1629,7 +1629,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2ZipHigh_Permute(Vector128<uint> x, Vector128<uint> y) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar4x32x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt32_Data1, y);
             }
 
@@ -1643,7 +1643,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2ZipHigh_Permute(Vector128<ulong> x, Vector128<ulong> y) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar2x64x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt64_Data1, y);
             }
 
@@ -1841,7 +1841,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2ZipLow_Permute(Vector128<float> x, Vector128<float> y) {
                 //return YGroup2ZipLow_Permute(x.AsUInt32(), y.AsUInt32()).AsSingle();
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar4x32x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt32_Data0.AsInt32(), y);
             }
 
@@ -1849,7 +1849,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2ZipLow_Permute(Vector128<double> x, Vector128<double> y) {
                 //return YGroup2ZipLow_Permute(x.AsUInt64(), y.AsUInt64()).AsDouble();
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar2x64x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt64_Data0.AsInt64(), y);
             }
 
@@ -1863,7 +1863,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2ZipLow_Permute(Vector128<byte> x, Vector128<byte> y) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 return Avx512Vbmi.VL.PermuteVar16x8x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_Byte_Data0, y);
             }
 
@@ -1877,7 +1877,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2ZipLow_Permute(Vector128<ushort> x, Vector128<ushort> y) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 return Avx512BW.VL.PermuteVar8x16x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt16_Data0, y);
             }
 
@@ -1891,7 +1891,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2ZipLow_Permute(Vector128<uint> x, Vector128<uint> y) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar4x32x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt32_Data0, y);
             }
 
@@ -1905,7 +1905,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2ZipLow_Permute(Vector128<ulong> x, Vector128<ulong> y) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 return Avx512F.VL.PermuteVar2x64x2(x, Vector128Constants.YGroup2Zip_ShuffleX2_UInt64_Data0, y);
             }
 
@@ -2182,7 +2182,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup3Unzip_Shuffle(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, out Vector128<byte> y, out Vector128<byte> z) {
-                VectorMessageFormats.ThrowForUnsupported(Ssse3.IsSupported, "Ssse3");
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup3Unzip_Shuffle_Byte_X_Part0;
                 var f0B = Vector128Constants.YGroup3Unzip_Shuffle_Byte_X_Part1;
                 var f0C = Vector128Constants.YGroup3Unzip_Shuffle_Byte_X_Part2;
@@ -2214,7 +2214,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup3Unzip_Shuffle(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, out Vector128<ushort> y, out Vector128<ushort> z) {
-                VectorMessageFormats.ThrowForUnsupported(Ssse3.IsSupported, "Ssse3");
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup3Unzip_ShuffleOnByte_UInt16_X_Part0;
                 var f0B = Vector128Constants.YGroup3Unzip_ShuffleOnByte_UInt16_X_Part1;
                 var f0C = Vector128Constants.YGroup3Unzip_ShuffleOnByte_UInt16_X_Part2;
@@ -2249,7 +2249,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup3Unzip_Shuffle(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> y, out Vector128<uint> z) {
-                VectorMessageFormats.ThrowForUnsupported(Ssse3.IsSupported, "Ssse3");
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup3Unzip_ShuffleOnByte_UInt32_X_Part0;
                 var f0B = Vector128Constants.YGroup3Unzip_ShuffleOnByte_UInt32_X_Part1;
                 var f0C = Vector128Constants.YGroup3Unzip_ShuffleOnByte_UInt32_X_Part2;
@@ -2283,7 +2283,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup3Unzip_Shuffle(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, out Vector128<ulong> y, out Vector128<ulong> z) {
-                VectorMessageFormats.ThrowForUnsupported(Ssse3.IsSupported, "Ssse3");
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup3Unzip_ShuffleOnByte_UInt64_X_Part0;
                 var f0B = Vector128Constants.YGroup3Unzip_ShuffleOnByte_UInt64_X_Part1;
                 var f1A = Vector128Constants.YGroup3Unzip_ShuffleOnByte_UInt64_Y_Part0;
@@ -2334,7 +2334,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup3Unzip_ShuffleX(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, out Vector128<byte> y, out Vector128<byte> z) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 var f0 = Vector128Constants.YGroup3Unzip_Shuffle_Byte_X;
                 var f0C = Vector128Constants.YGroup3Unzip_Shuffle_Byte_X_Part2Combine;
                 var f1 = Vector128Constants.YGroup3Unzip_Shuffle_Byte_Y;
@@ -2365,7 +2365,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup3Unzip_ShuffleX(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, out Vector128<ushort> y, out Vector128<ushort> z) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 var f0 = Vector128Constants.YGroup3Unzip_Shuffle_UInt16_X;
                 var f0C = Vector128Constants.YGroup3Unzip_Shuffle_UInt16_X_Part2Combine;
                 var f1 = Vector128Constants.YGroup3Unzip_Shuffle_UInt16_Y;
@@ -2396,7 +2396,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup3Unzip_ShuffleX(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> y, out Vector128<uint> z) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var f0 = Vector128Constants.YGroup3Unzip_Shuffle_UInt32_X;
                 var f0C = Vector128Constants.YGroup3Unzip_Shuffle_UInt32_X_Part2Combine;
                 var f1 = Vector128Constants.YGroup3Unzip_Shuffle_UInt32_Y;
@@ -2427,7 +2427,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup3Unzip_ShuffleX(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, out Vector128<ulong> y, out Vector128<ulong> z) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var f0 = Vector128Constants.YGroup3Unzip_Shuffle_UInt64_X;
                 var f1 = Vector128Constants.YGroup3Unzip_Shuffle_UInt64_Y_On02;
                 var f2 = f0; // YGroup3Unzip_Shuffle_UInt64_Z_On12
@@ -3094,7 +3094,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup3Zip_Shuffle(Vector128<byte> x, Vector128<byte> y, Vector128<byte> z, out Vector128<byte> data1, out Vector128<byte> data2) {
-                VectorMessageFormats.ThrowForUnsupported(Ssse3.IsSupported, "Ssse3");
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup3Zip_Shuffle_Byte_X_Part0;
                 var f0B = Vector128Constants.YGroup3Zip_Shuffle_Byte_X_Part1;
                 var f0C = Vector128Constants.YGroup3Zip_Shuffle_Byte_X_Part2;
@@ -3125,7 +3125,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup3Zip_Shuffle(Vector128<ushort> x, Vector128<ushort> y, Vector128<ushort> z, out Vector128<ushort> data1, out Vector128<ushort> data2) {
-                VectorMessageFormats.ThrowForUnsupported(Ssse3.IsSupported, "Ssse3");
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup3Zip_ShuffleOnByte_UInt16_X_Part0;
                 var f0B = Vector128Constants.YGroup3Zip_ShuffleOnByte_UInt16_X_Part1;
                 var f0C = Vector128Constants.YGroup3Zip_ShuffleOnByte_UInt16_X_Part2;
@@ -3159,7 +3159,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup3Zip_Shuffle(Vector128<uint> x, Vector128<uint> y, Vector128<uint> z, out Vector128<uint> data1, out Vector128<uint> data2) {
-                VectorMessageFormats.ThrowForUnsupported(Ssse3.IsSupported, "Ssse3");
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup3Zip_ShuffleOnByte_UInt32_X_Part0;
                 var f0B = Vector128Constants.YGroup3Zip_ShuffleOnByte_UInt32_X_Part1;
                 var f0C = Vector128Constants.YGroup3Zip_ShuffleOnByte_UInt32_X_Part2;
@@ -3193,7 +3193,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup3Zip_Shuffle(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z, out Vector128<ulong> data1, out Vector128<ulong> data2) {
-                VectorMessageFormats.ThrowForUnsupported(Ssse3.IsSupported, "Ssse3");
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup3Zip_ShuffleOnByte_UInt64_X_Part0;
                 var f0B = Vector128Constants.YGroup3Zip_ShuffleOnByte_UInt64_X_Part1;
                 var f1A = Vector128Constants.YGroup3Zip_ShuffleOnByte_UInt64_Y_Part0;
@@ -3244,7 +3244,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup3Zip_ShuffleX(Vector128<byte> x, Vector128<byte> y, Vector128<byte> z, out Vector128<byte> data1, out Vector128<byte> data2) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 var f0 = Vector128Constants.YGroup3Zip_Shuffle_Byte_X;
                 var f0C = Vector128Constants.YGroup3Zip_Shuffle_Byte_X_Part2Combine;
                 var f1 = Vector128Constants.YGroup3Zip_Shuffle_Byte_Y;
@@ -3275,7 +3275,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup3Zip_ShuffleX(Vector128<ushort> x, Vector128<ushort> y, Vector128<ushort> z, out Vector128<ushort> data1, out Vector128<ushort> data2) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 var f0 = Vector128Constants.YGroup3Zip_Shuffle_UInt16_X;
                 var f0C = Vector128Constants.YGroup3Zip_Shuffle_UInt16_X_Part2Combine;
                 var f1 = Vector128Constants.YGroup3Zip_Shuffle_UInt16_Y;
@@ -3306,7 +3306,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup3Zip_ShuffleX(Vector128<uint> x, Vector128<uint> y, Vector128<uint> z, out Vector128<uint> data1, out Vector128<uint> data2) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var f0 = Vector128Constants.YGroup3Zip_Shuffle_UInt32_X;
                 var f0C = Vector128Constants.YGroup3Zip_Shuffle_UInt32_X_Part2Combine;
                 var f1 = Vector128Constants.YGroup3Zip_Shuffle_UInt32_Y;
@@ -3337,7 +3337,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup3Zip_ShuffleX(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z, out Vector128<ulong> data1, out Vector128<ulong> data2) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var f0 = Vector128Constants.YGroup3Zip_Shuffle_UInt64_X;
                 var f1 = Vector128Constants.YGroup3Zip_Shuffle_UInt64_Y_On20;
                 var f2 = Vector128Constants.YGroup3Zip_Shuffle_UInt64_Z_On12;
@@ -4053,7 +4053,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup4Unzip_PermuteLonger(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, Vector128<byte> data3, out Vector128<byte> y, out Vector128<byte> z, out Vector128<byte> w) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 var a0 = data0.ToVector256Unsafe().WithUpper(data1);
                 var a1 = data2.ToVector256Unsafe().WithUpper(data3);
                 var b0 = Avx512Vbmi.VL.PermuteVar32x8x2(a0, Vector256Constants.YGroup4Unzip_ShuffleX2Longer_Byte_XY, a1);
@@ -4078,7 +4078,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup4Unzip_PermuteLonger(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, Vector128<ushort> data3, out Vector128<ushort> y, out Vector128<ushort> z, out Vector128<ushort> w) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 var a0 = data0.ToVector256Unsafe().WithUpper(data1);
                 var a1 = data2.ToVector256Unsafe().WithUpper(data3);
                 var b0 = Avx512BW.VL.PermuteVar16x16x2(a0, Vector256Constants.YGroup4Unzip_ShuffleX2Longer_UInt16_XY, a1);
@@ -4103,7 +4103,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup4Unzip_PermuteLonger(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, Vector128<uint> data3, out Vector128<uint> y, out Vector128<uint> z, out Vector128<uint> w) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var a0 = data0.ToVector256Unsafe().WithUpper(data1);
                 var a1 = data2.ToVector256Unsafe().WithUpper(data3);
                 var b0 = Avx512F.VL.PermuteVar8x32x2(a0, Vector256Constants.YGroup4Unzip_ShuffleX2Longer_UInt32_XY, a1);
@@ -4128,7 +4128,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup4Unzip_PermuteLonger(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, Vector128<ulong> data3, out Vector128<ulong> y, out Vector128<ulong> z, out Vector128<ulong> w) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var a0 = data0.ToVector256Unsafe().WithUpper(data1);
                 var a1 = data2.ToVector256Unsafe().WithUpper(data3);
                 var b0 = Avx512F.VL.PermuteVar4x64x2(a0, Vector256Constants.YGroup4Unzip_ShuffleX2Longer_UInt64_XY, a1);
@@ -4536,7 +4536,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup4Zip_PermuteLonger(Vector128<byte> x, Vector128<byte> y, Vector128<byte> z, Vector128<byte> w, out Vector128<byte> data1, out Vector128<byte> data2, out Vector128<byte> data3) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512Vbmi.VL.IsSupported, "Avx512Vbmi, Avx512VL");
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
                 var a0 = x.ToVector256Unsafe().WithUpper(y);
                 var a1 = z.ToVector256Unsafe().WithUpper(w);
                 var b0 = Avx512Vbmi.VL.PermuteVar32x8x2(a0, Vector256Constants.YGroup4Zip_ShuffleX2Longer_Byte_Data01, a1);
@@ -4561,7 +4561,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup4Zip_PermuteLonger(Vector128<ushort> x, Vector128<ushort> y, Vector128<ushort> z, Vector128<ushort> w, out Vector128<ushort> data1, out Vector128<ushort> data2, out Vector128<ushort> data3) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512BW.VL.IsSupported, "Avx512BW, Avx512VL");
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
                 var a0 = x.ToVector256Unsafe().WithUpper(y);
                 var a1 = z.ToVector256Unsafe().WithUpper(w);
                 var b0 = Avx512BW.VL.PermuteVar16x16x2(a0, Vector256Constants.YGroup4Zip_ShuffleX2Longer_UInt16_Data01, a1);
@@ -4586,7 +4586,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup4Zip_PermuteLonger(Vector128<uint> x, Vector128<uint> y, Vector128<uint> z, Vector128<uint> w, out Vector128<uint> data1, out Vector128<uint> data2, out Vector128<uint> data3) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var a0 = x.ToVector256Unsafe().WithUpper(y);
                 var a1 = z.ToVector256Unsafe().WithUpper(w);
                 var b0 = Avx512F.VL.PermuteVar8x32x2(a0, Vector256Constants.YGroup4Zip_ShuffleX2Longer_UInt32_Data01, a1);
@@ -4611,7 +4611,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup4Zip_PermuteLonger(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z, Vector128<ulong> w, out Vector128<ulong> data1, out Vector128<ulong> data2, out Vector128<ulong> data3) {
-                VectorMessageFormats.ThrowForUnsupported(Avx512F.VL.IsSupported, "Avx512F, Avx512VL");
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
                 var a0 = x.ToVector256Unsafe().WithUpper(y);
                 var a1 = z.ToVector256Unsafe().WithUpper(w);
                 var b0 = Avx512F.VL.PermuteVar4x64x2(a0, Vector256Constants.YGroup4Zip_ShuffleX2Longer_UInt64_Data01, a1);
