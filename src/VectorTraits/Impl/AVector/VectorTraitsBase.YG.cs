@@ -2326,8 +2326,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                     return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
                 }
 #endif // NET8_0_OR_GREATER
-                // X86: YGroup3Unzip_ByX2Zip > YGroup3Unzip_Basic
-#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD && BCL_HAS_SHIFT
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
 #else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
@@ -2343,7 +2342,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                     return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
                 }
 #endif // NET8_0_OR_GREATER
-#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD && BCL_HAS_SHIFT
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
 #else
                 return YGroup3Unzip_Basic(data0, data1, data2, out y, out z);
@@ -2710,7 +2709,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                     return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
                 }
 #endif // NET8_0_OR_GREATER
-#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD && BCL_HAS_SHIFT
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
 #else
                 return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);

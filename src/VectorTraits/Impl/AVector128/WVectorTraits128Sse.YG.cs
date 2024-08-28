@@ -2920,11 +2920,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return YGroup3Zip_ShuffleX(x, y, z, out data1, out data2);
                 }
 #endif // NET8_0_OR_GREATER
-#if NET5_0_OR_GREATER
                 if (Ssse3.IsSupported) {
                     return YGroup3Zip_Shuffle(x, y, z, out data1, out data2);
                 }
-#endif // NET5_0_OR_GREATER
                 return YGroup3Zip_ByX2Unzip(x, y, z, out data1, out data2);
             }
 
@@ -2936,11 +2934,9 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                     return YGroup3Zip_ShuffleX(x, y, z, out data1, out data2);
                 }
 #endif // NET8_0_OR_GREATER
-#if NET5_0_OR_GREATER
                 if (Ssse3.IsSupported) {
                     return YGroup3Zip_Shuffle(x, y, z, out data1, out data2);
                 }
-#endif // NET5_0_OR_GREATER
                 return YGroup3Zip_ByX2Unzip(x, y, z, out data1, out data2);
             }
 
