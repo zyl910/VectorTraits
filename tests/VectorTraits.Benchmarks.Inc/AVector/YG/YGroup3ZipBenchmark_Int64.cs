@@ -576,10 +576,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 Volatile.Write(ref dstTMy, 0);
             }
             dstOn128 = StaticSum128Base_Move(srcArray, srcArray.Length);
-            if (CheckMode) {
-                baselineOn128 = dstOn128;
-                BenchmarkUtil.WriteItem("# Sum128Base_Move", string.Format("{0}", baselineOn128));
-            }
+            CheckResult128("Sum128Base_Move");
         }
 
         #region BENCHMARKS_ALGORITHM
