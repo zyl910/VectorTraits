@@ -528,6 +528,60 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             }
         }
 
+        /// <summary>
+        /// Sum YGroup3Zip - Vector128 - base - Move.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128Base_Move(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vector1Used = vector1.AsVector128();
+            Vector128<TMy> vector2Used = vector2.AsVector128();
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YGroup3Zip_Move(p0, vector1Used, vector2Used, out var vtemp1, out var vtemp2);
+                vrt = WVectorTraits128Base.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128Base.Statics.Add(vrt1, vtemp1);
+                vrt2 = WVectorTraits128Base.Statics.Add(vrt2, vtemp2);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128Base.Statics.Add(vrt, vrt1);
+            vrt = WVectorTraits128Base.Statics.Add(vrt, vrt2);
+            rt = WVectorTraits128Base.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128Base_Move() {
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128Base_Move(srcArray, srcArray.Length);
+            if (CheckMode) {
+                baselineOn128 = dstOn128;
+                BenchmarkUtil.WriteItem("# Sum128Base_Move", string.Format("{0}", baselineOn128));
+            }
+        }
+
         #region BENCHMARKS_ALGORITHM
 #if BENCHMARKS_ALGORITHM
 
