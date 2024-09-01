@@ -46,10 +46,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup2Unzip(Vector512<float> data0, Vector512<float> data1, out Vector512<float> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Unzip_Narrow(data0, data1, out y);
-#else
-                return YGroup2Unzip_Basic(data0, data1, out y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Unzip_Narrow(data0, data1, out y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Unzip_Basic(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{double}, Vector512{double}, out Vector512{double})"/>
@@ -63,30 +64,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup2Unzip(Vector512<sbyte> data0, Vector512<sbyte> data1, out Vector512<sbyte> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Unzip_Narrow(data0, data1, out y);
-#else
-                return YGroup2Unzip_Basic(data0, data1, out y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Unzip_Narrow(data0, data1, out y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Unzip_Basic(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{byte}, Vector512{byte}, out Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup2Unzip(Vector512<byte> data0, Vector512<byte> data1, out Vector512<byte> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Unzip_Narrow(data0, data1, out y);
-#else
-                return YGroup2Unzip_Basic(data0, data1, out y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Unzip_Narrow(data0, data1, out y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Unzip_Basic(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{short}, Vector512{short}, out Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup2Unzip(Vector512<short> data0, Vector512<short> data1, out Vector512<short> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Unzip_Narrow(data0, data1, out y);
-#else
-                return YGroup2Unzip_Basic(data0, data1, out y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Unzip_Narrow(data0, data1, out y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Unzip_Basic(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{ushort}, Vector512{ushort}, out Vector512{ushort})"/>
@@ -94,20 +98,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup2Unzip(Vector512<ushort> data0, Vector512<ushort> data1, out Vector512<ushort> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Unzip_Narrow(data0, data1, out y);
-#else
-                return YGroup2Unzip_Basic(data0, data1, out y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Unzip_Narrow(data0, data1, out y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Unzip_Basic(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{int}, Vector512{int}, out Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup2Unzip(Vector512<int> data0, Vector512<int> data1, out Vector512<int> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Unzip_Narrow(data0, data1, out y);
-#else
-                return YGroup2Unzip_Basic(data0, data1, out y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Unzip_Narrow(data0, data1, out y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Unzip_Basic(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{uint}, Vector512{uint}, out Vector512{uint})"/>
@@ -115,10 +121,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup2Unzip(Vector512<uint> data0, Vector512<uint> data1, out Vector512<uint> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Unzip_Narrow(data0, data1, out y);
-#else
-                return YGroup2Unzip_Basic(data0, data1, out y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Unzip_Narrow(data0, data1, out y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Unzip_Basic(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{long}, Vector512{long}, out Vector512{long})"/>
@@ -489,10 +496,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup2UnzipEven(Vector512<float> data0, Vector512<float> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipEven_Narrow(data0, data1);
-#else
-                return YGroup2UnzipEven_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipEven_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipEven_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipEven(Vector512{double}, Vector512{double})"/>
@@ -506,30 +514,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup2UnzipEven(Vector512<sbyte> data0, Vector512<sbyte> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipEven_Narrow(data0, data1);
-#else
-                return YGroup2UnzipEven_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipEven_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipEven_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipEven(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup2UnzipEven(Vector512<byte> data0, Vector512<byte> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipEven_Narrow(data0, data1);
-#else
-                return YGroup2UnzipEven_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipEven_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipEven_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipEven(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup2UnzipEven(Vector512<short> data0, Vector512<short> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipEven_Narrow(data0, data1);
-#else
-                return YGroup2UnzipEven_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipEven_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipEven_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipEven(Vector512{ushort}, Vector512{ushort})"/>
@@ -537,20 +548,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup2UnzipEven(Vector512<ushort> data0, Vector512<ushort> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipEven_Narrow(data0, data1);
-#else
-                return YGroup2UnzipEven_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipEven_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipEven_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipEven(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup2UnzipEven(Vector512<int> data0, Vector512<int> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipEven_Narrow(data0, data1);
-#else
-                return YGroup2UnzipEven_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipEven_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipEven_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipEven(Vector512{uint}, Vector512{uint})"/>
@@ -558,10 +571,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup2UnzipEven(Vector512<uint> data0, Vector512<uint> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipEven_Narrow(data0, data1);
-#else
-                return YGroup2UnzipEven_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipEven_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipEven_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipEven(Vector512{long}, Vector512{long})"/>
@@ -800,10 +814,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup2UnzipOdd(Vector512<float> data0, Vector512<float> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipOdd_Narrow(data0, data1);
-#else
-                return YGroup2UnzipOdd_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipOdd_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipOdd_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{double}, Vector512{double})"/>
@@ -817,30 +832,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup2UnzipOdd(Vector512<sbyte> data0, Vector512<sbyte> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipOdd_Narrow(data0, data1);
-#else
-                return YGroup2UnzipOdd_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipOdd_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipOdd_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup2UnzipOdd(Vector512<byte> data0, Vector512<byte> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipOdd_Narrow(data0, data1);
-#else
-                return YGroup2UnzipOdd_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipOdd_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipOdd_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup2UnzipOdd(Vector512<short> data0, Vector512<short> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipOdd_Narrow(data0, data1);
-#else
-                return YGroup2UnzipOdd_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipOdd_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipOdd_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{ushort}, Vector512{ushort})"/>
@@ -848,20 +866,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup2UnzipOdd(Vector512<ushort> data0, Vector512<ushort> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipOdd_Narrow(data0, data1);
-#else
-                return YGroup2UnzipOdd_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipOdd_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipOdd_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup2UnzipOdd(Vector512<int> data0, Vector512<int> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipOdd_Narrow(data0, data1);
-#else
-                return YGroup2UnzipOdd_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipOdd_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipOdd_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{uint}, Vector512{uint})"/>
@@ -869,10 +889,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup2UnzipOdd(Vector512<uint> data0, Vector512<uint> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2UnzipOdd_Narrow(data0, data1);
-#else
-                return YGroup2UnzipOdd_Basic(data0, data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2UnzipOdd_Narrow(data0, data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2UnzipOdd_Basic(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{long}, Vector512{long})"/>
@@ -1111,10 +1132,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup2Zip(Vector512<float> x, Vector512<float> y, out Vector512<float> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Zip_Widen(x, y, out data1);
-#else
-                return YGroup2Zip_Basic(x, y, out data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Zip_Widen(x, y, out data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Zip_Basic(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{double}, Vector512{double}, out Vector512{double})"/>
@@ -1128,30 +1150,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup2Zip(Vector512<sbyte> x, Vector512<sbyte> y, out Vector512<sbyte> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Zip_Widen(x, y, out data1);
-#else
-                return YGroup2Zip_Basic(x, y, out data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Zip_Widen(x, y, out data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Zip_Basic(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{byte}, Vector512{byte}, out Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup2Zip(Vector512<byte> x, Vector512<byte> y, out Vector512<byte> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Zip_Widen(x, y, out data1);
-#else
-                return YGroup2Zip_Basic(x, y, out data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Zip_Widen(x, y, out data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Zip_Basic(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{short}, Vector512{short}, out Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup2Zip(Vector512<short> x, Vector512<short> y, out Vector512<short> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Zip_Widen(x, y, out data1);
-#else
-                return YGroup2Zip_Basic(x, y, out data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Zip_Widen(x, y, out data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Zip_Basic(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{ushort}, Vector512{ushort}, out Vector512{ushort})"/>
@@ -1159,20 +1184,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup2Zip(Vector512<ushort> x, Vector512<ushort> y, out Vector512<ushort> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Zip_Widen(x, y, out data1);
-#else
-                return YGroup2Zip_Basic(x, y, out data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Zip_Widen(x, y, out data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Zip_Basic(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{int}, Vector512{int}, out Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup2Zip(Vector512<int> x, Vector512<int> y, out Vector512<int> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Zip_Widen(x, y, out data1);
-#else
-                return YGroup2Zip_Basic(x, y, out data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Zip_Widen(x, y, out data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Zip_Basic(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{uint}, Vector512{uint}, out Vector512{uint})"/>
@@ -1180,10 +1207,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup2Zip(Vector512<uint> x, Vector512<uint> y, out Vector512<uint> data1) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Zip_Widen(x, y, out data1);
-#else
-                return YGroup2Zip_Basic(x, y, out data1);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2Zip_Widen(x, y, out data1);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Zip_Basic(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Zip(Vector512{long}, Vector512{long}, out Vector512{long})"/>
@@ -1520,10 +1548,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup2ZipHigh(Vector512<float> x, Vector512<float> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipHigh_Widen(x, y);
-#else
-                return YGroup2ZipHigh_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipHigh_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipHigh_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipHigh(Vector512{double}, Vector512{double})"/>
@@ -1537,30 +1566,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup2ZipHigh(Vector512<sbyte> x, Vector512<sbyte> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipHigh_Widen(x, y);
-#else
-                return YGroup2ZipHigh_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipHigh_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipHigh_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipHigh(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup2ZipHigh(Vector512<byte> x, Vector512<byte> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipHigh_Widen(x, y);
-#else
-                return YGroup2ZipHigh_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipHigh_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipHigh_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipHigh(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup2ZipHigh(Vector512<short> x, Vector512<short> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipHigh_Widen(x, y);
-#else
-                return YGroup2ZipHigh_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipHigh_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipHigh_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipHigh(Vector512{ushort}, Vector512{ushort})"/>
@@ -1568,20 +1600,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup2ZipHigh(Vector512<ushort> x, Vector512<ushort> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipHigh_Widen(x, y);
-#else
-                return YGroup2ZipHigh_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipHigh_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipHigh_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipHigh(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup2ZipHigh(Vector512<int> x, Vector512<int> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipHigh_Widen(x, y);
-#else
-                return YGroup2ZipHigh_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipHigh_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipHigh_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipHigh(Vector512{uint}, Vector512{uint})"/>
@@ -1589,10 +1623,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup2ZipHigh(Vector512<uint> x, Vector512<uint> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipHigh_Widen(x, y);
-#else
-                return YGroup2ZipHigh_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipHigh_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipHigh_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipHigh(Vector512{long}, Vector512{long})"/>
@@ -1832,10 +1867,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup2ZipLow(Vector512<float> x, Vector512<float> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipLow_Widen(x, y);
-#else
-                return YGroup2ZipLow_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipLow_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipLow_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipLow(Vector512{double}, Vector512{double})"/>
@@ -1849,30 +1885,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup2ZipLow(Vector512<sbyte> x, Vector512<sbyte> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipLow_Widen(x, y);
-#else
-                return YGroup2ZipLow_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipLow_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipLow_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipLow(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup2ZipLow(Vector512<byte> x, Vector512<byte> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipLow_Widen(x, y);
-#else
-                return YGroup2ZipLow_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipLow_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipLow_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipLow(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup2ZipLow(Vector512<short> x, Vector512<short> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipLow_Widen(x, y);
-#else
-                return YGroup2ZipLow_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipLow_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipLow_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipLow(Vector512{ushort}, Vector512{ushort})"/>
@@ -1880,20 +1919,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup2ZipLow(Vector512<ushort> x, Vector512<ushort> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipLow_Widen(x, y);
-#else
-                return YGroup2ZipLow_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipLow_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipLow_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipLow(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup2ZipLow(Vector512<int> x, Vector512<int> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipLow_Widen(x, y);
-#else
-                return YGroup2ZipLow_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipLow_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipLow_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipLow(Vector512{uint}, Vector512{uint})"/>
@@ -1901,10 +1942,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup2ZipLow(Vector512<uint> x, Vector512<uint> y) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2ZipLow_Widen(x, y);
-#else
-                return YGroup2ZipLow_Basic(x, y);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup2ZipLow_Widen(x, y);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2ZipLow_Basic(x, y);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2ZipLow(Vector512{long}, Vector512{long})"/>
@@ -2583,16 +2625,17 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup3UnzipX2(Vector512<float> data0, Vector512<float> data1, Vector512<float> data2, Vector512<float> data3, Vector512<float> data4, Vector512<float> data5, out Vector512<float> xB, out Vector512<float> y, out Vector512<float> yB, out Vector512<float> z, out Vector512<float> zB) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
-#else
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2(Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YGroup3UnzipX2(Vector512<double> data0, Vector512<double> data1, Vector512<double> data2, Vector512<double> data3, Vector512<double> data4, Vector512<double> data5, out Vector512<double> xB, out Vector512<double> y, out Vector512<double> yB, out Vector512<double> z, out Vector512<double> zB) {
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
@@ -2600,30 +2643,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup3UnzipX2(Vector512<sbyte> data0, Vector512<sbyte> data1, Vector512<sbyte> data2, Vector512<sbyte> data3, Vector512<sbyte> data4, Vector512<sbyte> data5, out Vector512<sbyte> xB, out Vector512<sbyte> y, out Vector512<sbyte> yB, out Vector512<sbyte> z, out Vector512<sbyte> zB) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
-#else
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup3UnzipX2(Vector512<byte> data0, Vector512<byte> data1, Vector512<byte> data2, Vector512<byte> data3, Vector512<byte> data4, Vector512<byte> data5, out Vector512<byte> xB, out Vector512<byte> y, out Vector512<byte> yB, out Vector512<byte> z, out Vector512<byte> zB) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
-#else
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2(Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup3UnzipX2(Vector512<short> data0, Vector512<short> data1, Vector512<short> data2, Vector512<short> data3, Vector512<short> data4, Vector512<short> data5, out Vector512<short> xB, out Vector512<short> y, out Vector512<short> yB, out Vector512<short> z, out Vector512<short> zB) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
-#else
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
@@ -2631,20 +2677,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup3UnzipX2(Vector512<ushort> data0, Vector512<ushort> data1, Vector512<ushort> data2, Vector512<ushort> data3, Vector512<ushort> data4, Vector512<ushort> data5, out Vector512<ushort> xB, out Vector512<ushort> y, out Vector512<ushort> yB, out Vector512<ushort> z, out Vector512<ushort> zB) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
-#else
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2(Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup3UnzipX2(Vector512<int> data0, Vector512<int> data1, Vector512<int> data2, Vector512<int> data3, Vector512<int> data4, Vector512<int> data5, out Vector512<int> xB, out Vector512<int> y, out Vector512<int> yB, out Vector512<int> z, out Vector512<int> zB) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
-#else
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2(Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
@@ -2652,23 +2700,24 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup3UnzipX2(Vector512<uint> data0, Vector512<uint> data1, Vector512<uint> data2, Vector512<uint> data3, Vector512<uint> data4, Vector512<uint> data5, out Vector512<uint> xB, out Vector512<uint> y, out Vector512<uint> yB, out Vector512<uint> z, out Vector512<uint> zB) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
-#else
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2(Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YGroup3UnzipX2(Vector512<long> data0, Vector512<long> data1, Vector512<long> data2, Vector512<long> data3, Vector512<long> data4, Vector512<long> data5, out Vector512<long> xB, out Vector512<long> y, out Vector512<long> yB, out Vector512<long> z, out Vector512<long> zB) {
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2(Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YGroup3UnzipX2(Vector512<ulong> data0, Vector512<ulong> data1, Vector512<ulong> data2, Vector512<ulong> data3, Vector512<ulong> data4, Vector512<ulong> data5, out Vector512<ulong> xB, out Vector512<ulong> y, out Vector512<ulong> yB, out Vector512<ulong> z, out Vector512<ulong> zB) {
-                return YGroup3UnzipX2_Basic(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3UnzipX2_Bit128"/>
@@ -3458,10 +3507,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup3ZipX2(Vector512<float> x, Vector512<float> xB, Vector512<float> y, Vector512<float> yB, Vector512<float> z, Vector512<float> zB, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3, out Vector512<float> data4, out Vector512<float> data5) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#else
-                return YGroup3ZipX2_Basic(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double})"/>
@@ -3475,30 +3525,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup3ZipX2(Vector512<sbyte> x, Vector512<sbyte> xB, Vector512<sbyte> y, Vector512<sbyte> yB, Vector512<sbyte> z, Vector512<sbyte> zB, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3, out Vector512<sbyte> data4, out Vector512<sbyte> data5) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#else
-                return YGroup3ZipX2_Basic(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup3ZipX2(Vector512<byte> x, Vector512<byte> xB, Vector512<byte> y, Vector512<byte> yB, Vector512<byte> z, Vector512<byte> zB, out Vector512<byte> data1, out Vector512<byte> data2, out Vector512<byte> data3, out Vector512<byte> data4, out Vector512<byte> data5) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#else
-                return YGroup3ZipX2_Basic(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup3ZipX2(Vector512<short> x, Vector512<short> xB, Vector512<short> y, Vector512<short> yB, Vector512<short> z, Vector512<short> zB, out Vector512<short> data1, out Vector512<short> data2, out Vector512<short> data3, out Vector512<short> data4, out Vector512<short> data5) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#else
-                return YGroup3ZipX2_Basic(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
@@ -3506,10 +3559,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup3ZipX2(Vector512<ushort> x, Vector512<ushort> xB, Vector512<ushort> y, Vector512<ushort> yB, Vector512<ushort> z, Vector512<ushort> zB, out Vector512<ushort> data1, out Vector512<ushort> data2, out Vector512<ushort> data3, out Vector512<ushort> data4, out Vector512<ushort> data5) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
-#else
-                return YGroup3ZipX2_Basic(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup3ZipX2_Unzip(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup3ZipX2_X2(x, xB, y, yB, z, zB, out data1, out data2, out data3, out data4, out data5);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ZipX2(Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
@@ -3898,10 +3952,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup4Unzip(Vector512<float> data0, Vector512<float> data1, Vector512<float> data2, Vector512<float> data3, out Vector512<float> y, out Vector512<float> z, out Vector512<float> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
-#else
-                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double})"/>
@@ -3915,30 +3970,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup4Unzip(Vector512<sbyte> data0, Vector512<sbyte> data1, Vector512<sbyte> data2, Vector512<sbyte> data3, out Vector512<sbyte> y, out Vector512<sbyte> z, out Vector512<sbyte> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
-#else
-                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup4Unzip(Vector512<byte> data0, Vector512<byte> data1, Vector512<byte> data2, Vector512<byte> data3, out Vector512<byte> y, out Vector512<byte> z, out Vector512<byte> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
-#else
-                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup4Unzip(Vector512<short> data0, Vector512<short> data1, Vector512<short> data2, Vector512<short> data3, out Vector512<short> y, out Vector512<short> z, out Vector512<short> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
-#else
-                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
@@ -3946,20 +4004,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup4Unzip(Vector512<ushort> data0, Vector512<ushort> data1, Vector512<ushort> data2, Vector512<ushort> data3, out Vector512<ushort> y, out Vector512<ushort> z, out Vector512<ushort> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
-#else
-                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup4Unzip(Vector512<int> data0, Vector512<int> data1, Vector512<int> data2, Vector512<int> data3, out Vector512<int> y, out Vector512<int> z, out Vector512<int> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
-#else
-                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
@@ -3967,10 +4027,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup4Unzip(Vector512<uint> data0, Vector512<uint> data1, Vector512<uint> data2, Vector512<uint> data3, out Vector512<uint> y, out Vector512<uint> z, out Vector512<uint> w) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
-#else
-                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Unzip_Unzip(data0, data1, data2, data3, out y, out z, out w);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Unzip_Basic(data0, data1, data2, data3, out y, out z, out w);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip(Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
@@ -4522,10 +4583,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup4Zip(Vector512<float> x, Vector512<float> y, Vector512<float> z, Vector512<float> w, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
-#else
-                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double})"/>
@@ -4539,30 +4601,33 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YGroup4Zip(Vector512<sbyte> x, Vector512<sbyte> y, Vector512<sbyte> z, Vector512<sbyte> w, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
-#else
-                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YGroup4Zip(Vector512<byte> x, Vector512<byte> y, Vector512<byte> z, Vector512<byte> w, out Vector512<byte> data1, out Vector512<byte> data2, out Vector512<byte> data3) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
-#else
-                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YGroup4Zip(Vector512<short> x, Vector512<short> y, Vector512<short> z, Vector512<short> w, out Vector512<short> data1, out Vector512<short> data2, out Vector512<short> data3) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
-#else
-                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
@@ -4570,20 +4635,22 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YGroup4Zip(Vector512<ushort> x, Vector512<ushort> y, Vector512<ushort> z, Vector512<ushort> w, out Vector512<ushort> data1, out Vector512<ushort> data2, out Vector512<ushort> data3) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
-#else
-                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup4Zip(Vector512<int> x, Vector512<int> y, Vector512<int> z, Vector512<int> w, out Vector512<int> data1, out Vector512<int> data2, out Vector512<int> data3) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
-#else
-                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
@@ -4591,10 +4658,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup4Zip(Vector512<uint> x, Vector512<uint> y, Vector512<uint> z, Vector512<uint> w, out Vector512<uint> data1, out Vector512<uint> data2, out Vector512<uint> data3) {
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
-#else
-                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
+                if (Vector512.IsHardwareAccelerated) {
+                    return YGroup4Zip_Zip(x, y, z, w, out data1, out data2, out data3);
+                }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4Zip_Basic(x, y, z, w, out data1, out data2, out data3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup4Zip(Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
