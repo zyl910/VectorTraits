@@ -2265,6 +2265,451 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup3ToGroup4_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup3ToGroup4(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, out Vector256<float> result1, out Vector256<float> result2, out Vector256<float> result3) {
+                //var d0 = YGroup3ToGroup4(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2, out var d3);
+                //result1 = d1.AsSingle();
+                //result2 = d2.AsSingle();
+                //result3 = d3.AsSingle();
+                //return d0.AsSingle();
+                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup3ToGroup4(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, out Vector256<double> result1, out Vector256<double> result2, out Vector256<double> result3) {
+                //var d0 = YGroup3ToGroup4(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2, out var d3);
+                //result1 = d1.AsDouble();
+                //result2 = d2.AsDouble();
+                //result3 = d3.AsDouble();
+                //return d0.AsDouble();
+                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup3ToGroup4(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, out Vector256<sbyte> result1, out Vector256<sbyte> result2, out Vector256<sbyte> result3) {
+#if NET8_0_OR_GREATER
+                if (Avx512Vbmi.VL.IsSupported) {
+                    return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
+                }
+#endif // NET8_0_OR_GREATER
+                return YGroup3ToGroup4_Shuffle(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup3ToGroup4(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, out Vector256<byte> result1, out Vector256<byte> result2, out Vector256<byte> result3) {
+#if NET8_0_OR_GREATER
+                if (Avx512Vbmi.VL.IsSupported) {
+                    return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
+                }
+#endif // NET8_0_OR_GREATER
+                return YGroup3ToGroup4_Shuffle(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup3ToGroup4(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, out Vector256<short> result1, out Vector256<short> result2, out Vector256<short> result3) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
+                }
+#endif // NET8_0_OR_GREATER
+                return YGroup3ToGroup4_Shuffle(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup3ToGroup4(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, out Vector256<ushort> result1, out Vector256<ushort> result2, out Vector256<ushort> result3) {
+#if NET8_0_OR_GREATER
+                if (Avx512BW.VL.IsSupported) {
+                    return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
+                }
+#endif // NET8_0_OR_GREATER
+                return YGroup3ToGroup4_Shuffle(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3ToGroup4(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> result1, out Vector256<int> result2, out Vector256<int> result3) {
+                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3ToGroup4(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> result1, out Vector256<uint> result2, out Vector256<uint> result3) {
+                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3ToGroup4(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> result1, out Vector256<long> result2, out Vector256<long> result3) {
+                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3ToGroup4(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> result1, out Vector256<ulong> result2, out Vector256<ulong> result3) {
+                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup3ToGroup4_Shuffle(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, out Vector256<sbyte> result1, out Vector256<sbyte> result2, out Vector256<sbyte> result3) {
+                var d0 = YGroup3ToGroup4_Shuffle(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var d1, out var d2, out var d3);
+                result1 = d1.AsSByte();
+                result2 = d2.AsSByte();
+                result3 = d3.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup3ToGroup4_Shuffle(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, out Vector256<byte> result1, out Vector256<byte> result2, out Vector256<byte> result3) {
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_Byte;
+                var f0 = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_0_Each128;
+                var f1A = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_1A_Each128;
+                var f1B = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_1B_Each128;
+                var f2A = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_2A_Each128;
+                var f2B = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_2B_Each128;
+                var f3 = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_3_Each128;
+                var s0 = YGroup3Unzip_Bit128(data0, data1, data2, out var s1, out var s2);
+                var a_0 = Avx2.And(Avx2.Shuffle(s0, f0), maskXYZ);
+                var a_1 = Avx2.And(Avx2.Or(Avx2.Shuffle(s0, f1A), Avx2.Shuffle(s1, f1B)), maskXYZ);
+                var a_2 = Avx2.And(Avx2.Or(Avx2.Shuffle(s1, f2A), Avx2.Shuffle(s2, f2B)), maskXYZ);
+                var a_3 = Avx2.And(Avx2.Shuffle(s2, f3), maskXYZ);
+                var b_0 = YGroup4Zip_Bit128(a_0, a_1, a_2, a_3, out var b_1, out var b_2, out var b_3);
+                result1 = b_1;
+                result2 = b_2;
+                result3 = b_3;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup3ToGroup4_Shuffle(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, out Vector256<short> result1, out Vector256<short> result2, out Vector256<short> result3) {
+                var d0 = YGroup3ToGroup4_Shuffle(data0.AsUInt16(), data1.AsUInt16(), data2.AsUInt16(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt16();
+                result2 = d2.AsInt16();
+                result3 = d3.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup3ToGroup4_Shuffle(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, out Vector256<ushort> result1, out Vector256<ushort> result2, out Vector256<ushort> result3) {
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_UInt16;
+                var f0 = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_0_Each128;
+                var f1A = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_1A_Each128;
+                var f1B = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_1B_Each128;
+                var f2A = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_2A_Each128;
+                var f2B = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_2B_Each128;
+                var f3 = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_3_Each128;
+                var s0 = YGroup3Unzip_Bit128(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var s1, out var s2);
+                var a_0 = Avx2.And(Avx2.Shuffle(s0, f0).AsUInt16(), maskXYZ);
+                var a_1 = Avx2.And(Avx2.Or(Avx2.Shuffle(s0, f1A), Avx2.Shuffle(s1, f1B)).AsUInt16(), maskXYZ);
+                var a_2 = Avx2.And(Avx2.Or(Avx2.Shuffle(s1, f2A), Avx2.Shuffle(s2, f2B)).AsUInt16(), maskXYZ);
+                var a_3 = Avx2.And(Avx2.Shuffle(s2, f3).AsUInt16(), maskXYZ);
+                var b_0 = YGroup4Zip_Bit128(a_0, a_1, a_2, a_3, out var b_1, out var b_2, out var b_3);
+                result1 = b_1;
+                result2 = b_2;
+                result3 = b_3;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3ToGroup4_Shuffle(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> result1, out Vector256<int> result2, out Vector256<int> result3) {
+                var d0 = YGroup3ToGroup4_Shuffle(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt32();
+                result2 = d2.AsInt32();
+                result3 = d3.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3ToGroup4_Shuffle(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> result1, out Vector256<uint> result2, out Vector256<uint> result3) {
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_UInt32;
+                var f0 = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_0_Each128;
+                var f1A = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_1A_Each128;
+                var f1B = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_1B_Each128;
+                var f2A = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_2A_Each128;
+                var f2B = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_2B_Each128;
+                var f3 = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_3_Each128;
+                var s0 = YGroup3Unzip_Bit128(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var s1, out var s2);
+                var a_0 = Avx2.And(Avx2.Shuffle(s0, f0).AsUInt32(), maskXYZ);
+                var a_1 = Avx2.And(Avx2.Or(Avx2.Shuffle(s0, f1A), Avx2.Shuffle(s1, f1B)).AsUInt32(), maskXYZ);
+                var a_2 = Avx2.And(Avx2.Or(Avx2.Shuffle(s1, f2A), Avx2.Shuffle(s2, f2B)).AsUInt32(), maskXYZ);
+                var a_3 = Avx2.And(Avx2.Shuffle(s2, f3).AsUInt32(), maskXYZ);
+                var b_0 = YGroup4Zip_Bit128(a_0, a_1, a_2, a_3, out var b_1, out var b_2, out var b_3);
+                result1 = b_1;
+                result2 = b_2;
+                result3 = b_3;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3ToGroup4_Shuffle(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> result1, out Vector256<long> result2, out Vector256<long> result3) {
+                var d0 = YGroup3ToGroup4_Shuffle(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt64();
+                result2 = d2.AsInt64();
+                result3 = d3.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3ToGroup4_Shuffle(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> result1, out Vector256<ulong> result2, out Vector256<ulong> result3) {
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_UInt64_1_Each128;
+                var f2A = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt64_2A_Each128;
+                var f2B = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt64_2B_Each128;
+                var f3 = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt64_3_Each128;
+                var s0 = YGroup3Unzip_Bit128(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var s1, out var s2);
+                var a_0 = s0.AsUInt64();
+                var a_1 = Avx2.And(s1.AsUInt64(), maskXYZ);
+                var a_2 = Avx2.Or(Avx2.Shuffle(s1, f2A), Avx2.Shuffle(s2, f2B)).AsUInt64();
+                var a_3 = Avx2.And(Avx2.Shuffle(s2, f3).AsUInt64(), maskXYZ);
+                var b_0 = YGroup4Zip_Bit128(a_0, a_1, a_2, a_3, out var b_1, out var b_2, out var b_3);
+                result1 = b_1;
+                result2 = b_2;
+                result3 = b_3;
+                return b_0;
+            }
+
+#if NET8_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup3ToGroup4_ShuffleX(Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, out Vector256<sbyte> result1, out Vector256<sbyte> result2, out Vector256<sbyte> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleX(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var d1, out var d2, out var d3);
+                result1 = d1.AsSByte();
+                result2 = d2.AsSByte();
+                result3 = d3.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup3ToGroup4_ShuffleX(Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, out Vector256<byte> result1, out Vector256<byte> result2, out Vector256<byte> result3) {
+                if (!Avx512Vbmi.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512Vbmi, Avx512VL");
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_Byte;
+                var f0 = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_0;
+                var f1 = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_1;
+                var f2 = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_2;
+                var f3 = Vector256Constants.YGroup3ToGroup4_Shuffle_Byte_3;
+                var a_0 = Avx2.And(Avx512Vbmi.VL.PermuteVar32x8(data0, f0), maskXYZ);
+                var a_1 = Avx2.And(Avx512Vbmi.VL.PermuteVar32x8x2(data0, f1, data1), maskXYZ);
+                var a_2 = Avx2.And(Avx512Vbmi.VL.PermuteVar32x8x2(data1, f2, data2), maskXYZ);
+                var a_3 = Avx2.And(Avx512Vbmi.VL.PermuteVar32x8(data2, f3), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{short}, Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup3ToGroup4_ShuffleX(Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, out Vector256<short> result1, out Vector256<short> result2, out Vector256<short> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleX(data0.AsUInt16(), data1.AsUInt16(), data2.AsUInt16(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt16();
+                result2 = d2.AsInt16();
+                result3 = d3.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup3ToGroup4_ShuffleX(Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, out Vector256<ushort> result1, out Vector256<ushort> result2, out Vector256<ushort> result3) {
+                if (!Avx512BW.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512BW, Avx512VL");
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_UInt16;
+                var f0 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt16_0;
+                var f1 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt16_1;
+                var f2 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt16_2;
+                var f3 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt16_3;
+                var a_0 = Avx2.And(Avx512BW.VL.PermuteVar16x16(data0, f0), maskXYZ);
+                var a_1 = Avx2.And(Avx512BW.VL.PermuteVar16x16x2(data0, f1, data1), maskXYZ);
+                var a_2 = Avx2.And(Avx512BW.VL.PermuteVar16x16x2(data1, f2, data2), maskXYZ);
+                var a_3 = Avx2.And(Avx512BW.VL.PermuteVar16x16(data2, f3), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3ToGroup4_ShuffleX(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> result1, out Vector256<int> result2, out Vector256<int> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleX(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt32();
+                result2 = d2.AsInt32();
+                result3 = d3.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3ToGroup4_ShuffleX(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> result1, out Vector256<uint> result2, out Vector256<uint> result3) {
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_UInt32;
+                var f0 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt32_0;
+                var f1 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt32_1;
+                var f2 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt32_2;
+                var f3 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt32_3;
+                var a_0 = Avx2.And(Avx2.PermuteVar8x32(data0, f0), maskXYZ);
+                var a_1 = Avx2.And(Avx512F.VL.PermuteVar8x32x2(data0, f1, data1), maskXYZ);
+                var a_2 = Avx2.And(Avx512F.VL.PermuteVar8x32x2(data1, f2, data2), maskXYZ);
+                var a_3 = Avx2.And(Avx2.PermuteVar8x32(data2, f3), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3ToGroup4_ShuffleX(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> result1, out Vector256<long> result2, out Vector256<long> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleX(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt64();
+                result2 = d2.AsInt64();
+                result3 = d3.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3ToGroup4_ShuffleX(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> result1, out Vector256<ulong> result2, out Vector256<ulong> result3) {
+                if (!Avx512F.VL.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Avx512F, Avx512VL");
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_UInt64;
+                var f0 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt64_0;
+                var f1 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt64_1;
+                var f2 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt64_2;
+                var f3 = Vector256Constants.YGroup3ToGroup4_Shuffle_UInt64_3;
+                var a_0 = Avx2.And(Avx512F.VL.PermuteVar4x64(data0, f0), maskXYZ);
+                var a_1 = Avx2.And(Avx512F.VL.PermuteVar4x64x2(data0, f1, data1), maskXYZ);
+                var a_2 = Avx2.And(Avx512F.VL.PermuteVar4x64x2(data1, f2, data2), maskXYZ);
+                var a_3 = Avx2.And(Avx512F.VL.PermuteVar4x64(data2, f3), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+#endif // NET8_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup3ToGroup4_ShuffleXImm(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, out Vector256<float> result1, out Vector256<float> result2, out Vector256<float> result3) {
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_UInt32.AsSingle();
+                Vector256<float> a_0, a_1, a_2, a_3, b_0, b_1, b_2, b_3;
+                // 0 data0 x0 y0 z0 x1 y1 z1 x2 y2 data1 z2 x3 y3 z3 x4 y4 z4 x5 data2 y5 z5 x6 y6 z6 x7 y7 z7
+                //0b temp0 x0 y0 z0 x1 x4 y4 z4 x5 temp1 y1 z1 x2 y2 y5 z5 x6 y6 temp2 z2 x3 y3 z3 z6 x7 y7 z7
+                var temp0 = YGroup3Unzip_Bit128(data0, data1, data2, out var temp1, out var temp2);
+                // 1 a_0 x0 y0 z0 x1 x4 y4 z4 x5 a_1 x1 y1 z1 x2 x5 y5 z5 x6 a_2 x2 y2 z2 z2 x6 y6 z6 z6 a_3 x3 y3 z3 z2 x7 y7 z7 z6
+                a_0 = data0;
+                a_1 = Avx2.AlignRight(data1.AsByte(), data0.AsByte(), 12).AsSingle();
+                a_2 = Avx.Shuffle(data1, data2, (byte)ShuffleControlG4.ZWXY);
+                a_3 = Avx.Shuffle(data2, data2, (byte)ShuffleControlG4.YZWX);
+                // 2 b_0 x0 y0 z0 _0 x4 y4 z4 _0 b_1 x1 y1 z1 _0 x5 y5 z5 _0 b_2 x2 y2 z2 _0 x6 y6 z6 _0 b_3 x3 y3 z3 _0 x7 y7 z7 _0
+                b_0 = Avx.And(a_0, maskXYZ);
+                b_1 = Avx.And(a_1, maskXYZ);
+                b_2 = Avx.And(a_2, maskXYZ);
+                b_3 = Avx.And(a_3, maskXYZ);
+                // 3 a_0 x0 y0 z0 _0 x1 y1 z1 _0 a_1 x2 y2 z2 _0 x3 y3 z3 _0 a_2 x4 y4 z4 _0 x5 y5 z5 _0 a_3 x6 y6 z6 _0 x7 y7 z7 _0
+                a_0 = YGroup4Zip_Bit128(b_0, b_1, b_2, b_3, out a_1, out a_2, out a_3);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup3ToGroup4_ShuffleXImm(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, out Vector256<double> result1, out Vector256<double> result2, out Vector256<double> result3) {
+                var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_UInt64_1_Each128.AsDouble();
+                Vector256<double> a_0, a_1, a_2, a_3, b_0, b_1, b_2, b_3;
+                // 0 data0 x0 y0 z0 x1 data1 y1 z1 x2 y2 data2 z2 x3 y3 z3
+                //0b temp0 x0 y0 x2 y2 temp1 z0 x1 z2 x3 temp2 y1 z1 y3 z3
+                var temp0 = YGroup3Unzip_Bit128(data0, data1, data2, out var temp1, out var temp2);
+                // 1 a_0 x0 y0 x2 y2 a_1 z0 _0 z2 _0 a_2 x1 y1 x3 y3 a_3 z1 _0 z3 _0
+                a_0 = temp0;
+                a_1 = Avx.And(temp1, maskXYZ);
+                a_2 = Avx.Shuffle(temp1, temp2, (byte)ShuffleControlG2On256.YXYX);
+                a_3 = Avx.Shuffle(temp2, maskXYZ, (byte)ShuffleControlG2On256.YYYY);
+                // 2 b_0 x0 y0 z0 _0 b_1 x1 y1 z1 _0 b_2 x2 y2 z2 _0 b_3 x3 y3 z3 _0
+                b_0 = YGroup4Zip_Bit128(a_0, a_1, a_2, a_3, out b_1, out b_2, out b_3);
+                result1 = b_1;
+                result2 = b_2;
+                result3 = b_3;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup3ToGroup4_ShuffleXImm(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, out Vector256<int> result1, out Vector256<int> result2, out Vector256<int> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), data2.AsSingle(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt32();
+                result2 = d2.AsInt32();
+                result3 = d3.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{uint}, Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup3ToGroup4_ShuffleXImm(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> result1, out Vector256<uint> result2, out Vector256<uint> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), data2.AsSingle(), out var d1, out var d2, out var d3);
+                result1 = d1.AsUInt32();
+                result2 = d2.AsUInt32();
+                result3 = d3.AsUInt32();
+                return d0.AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup3ToGroup4_ShuffleXImm(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, out Vector256<long> result1, out Vector256<long> result2, out Vector256<long> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleXImm(data0.AsDouble(), data1.AsDouble(), data2.AsDouble(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt64();
+                result2 = d2.AsInt64();
+                result3 = d3.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup3ToGroup4(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup3ToGroup4_ShuffleXImm(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, out Vector256<ulong> result1, out Vector256<ulong> result2, out Vector256<ulong> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleXImm(data0.AsDouble(), data1.AsDouble(), data2.AsDouble(), out var d1, out var d2, out var d3);
+                result1 = d1.AsUInt64();
+                result2 = d2.AsUInt64();
+                result3 = d3.AsUInt64();
+                return d0.AsUInt64();
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits256.YGroup3Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup3Unzip_AcceleratedTypes {
                 get {
