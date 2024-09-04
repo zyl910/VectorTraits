@@ -733,6 +733,7 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<uint> Result0, Vector256<uint> Result1, Vector256<uint> Result2, Vector256<uint> Result3) YGroup3ToGroup4(this IWVectorTraits256 athis, Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2) {
             var rt0 = athis.YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            //Console.WriteLine(VectorTextUtil.Format("athis f({0}, {1}, {2}): {3}, {4}, {5}, {6}", data0, data1, data2, rt0, rt1, rt2, rt3));
             return (rt0, rt1, rt2, rt3);
         }
 

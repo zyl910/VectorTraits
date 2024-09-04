@@ -628,7 +628,7 @@ namespace Zyl.VectorTraits.Impl {
         }
 #else
             get;
-        } = Vector256.Create((sbyte)8, 9, 10, 11, 12, 13, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1).AsByte();
+        } = Vector256.Create((sbyte)8, 9, 10, 11, 12, 13, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, 8, 9, 10, 11, 12, 13, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1).AsByte();
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup3ToGroup4 - Shuffle on byte - UInt16 - The index of item 2 - Sub part1 - Each 128 bits.</summary>
@@ -639,7 +639,7 @@ namespace Zyl.VectorTraits.Impl {
         }
 #else
             get;
-        } = Vector256.Create((sbyte)-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 2, 3).AsByte();
+        } = Vector256.Create((sbyte)-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 2, 3, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 2, 3).AsByte();
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup3ToGroup4 - Shuffle on byte - UInt16 - The index of item 3.</summary>

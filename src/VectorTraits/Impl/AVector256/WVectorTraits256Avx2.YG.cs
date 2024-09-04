@@ -2629,10 +2629,10 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 //0b temp0 x0 y0 z0 x1 x4 y4 z4 x5 temp1 y1 z1 x2 y2 y5 z5 x6 y6 temp2 z2 x3 y3 z3 z6 x7 y7 z7
                 var temp0 = YGroup3Unzip_Bit128(data0, data1, data2, out var temp1, out var temp2);
                 // 1 a_0 x0 y0 z0 x1 x4 y4 z4 x5 a_1 x1 y1 z1 x2 x5 y5 z5 x6 a_2 x2 y2 z2 z2 x6 y6 z6 z6 a_3 x3 y3 z3 z2 x7 y7 z7 z6
-                a_0 = data0;
-                a_1 = Avx2.AlignRight(data1.AsByte(), data0.AsByte(), 12).AsSingle();
-                a_2 = Avx.Shuffle(data1, data2, (byte)ShuffleControlG4.ZWXY);
-                a_3 = Avx.Shuffle(data2, data2, (byte)ShuffleControlG4.YZWX);
+                a_0 = temp0;
+                a_1 = Avx2.AlignRight(temp1.AsByte(), temp0.AsByte(), 12).AsSingle();
+                a_2 = Avx.Shuffle(temp1, temp2, (byte)ShuffleControlG4.ZWXY);
+                a_3 = Avx.Shuffle(temp2, temp2, (byte)ShuffleControlG4.YZWX);
                 // 2 b_0 x0 y0 z0 _0 x4 y4 z4 _0 b_1 x1 y1 z1 _0 x5 y5 z5 _0 b_2 x2 y2 z2 _0 x6 y6 z6 _0 b_3 x3 y3 z3 _0 x7 y7 z7 _0
                 b_0 = Avx.And(a_0, maskXYZ);
                 b_1 = Avx.And(a_1, maskXYZ);

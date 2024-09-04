@@ -2356,6 +2356,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 result1 = dst[1];
                 result2 = dst[2];
                 result3 = dst[3];
+                //Console.WriteLine(VectorTextUtil.Format("Basic f({0}, {1}, {2}): {3}, {4}, {5}, {6}", data0, data1, data2, dst[0], result1, result2, result3));
                 return dst[0];
             }
 
@@ -2474,6 +2475,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YGroup3ToGroup4_Shuffle(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, out Vector256<uint> result1, out Vector256<uint> result2, out Vector256<uint> result3) {
                 var maskXYZ = Vector256Constants.YGroup4_MaskXYZ_UInt32;
+                var f0 = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_0;
                 var f1A = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_1A;
                 var f1B = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_1B;
                 var f2A = Vector256Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_2A;
@@ -2482,7 +2484,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 var s0 = data0.AsByte();
                 var s1 = data1.AsByte();
                 var s2 = data2.AsByte();
-                var a_0 = Vector256.BitwiseAnd(data0, maskXYZ);
+                var a_0 = Vector256.BitwiseAnd(Vector256.Shuffle(s0, f0).AsUInt32(), maskXYZ);
                 var a_1 = Vector256.BitwiseAnd(Vector256.BitwiseOr(Vector256.Shuffle(s0, f1A), Vector256.Shuffle(s1, f1B)).AsUInt32(), maskXYZ);
                 var a_2 = Vector256.BitwiseAnd(Vector256.BitwiseOr(Vector256.Shuffle(s1, f2A), Vector256.Shuffle(s2, f2B)).AsUInt32(), maskXYZ);
                 var a_3 = Vector256.BitwiseAnd(Vector256.Shuffle(s2, f3).AsUInt32(), maskXYZ);
