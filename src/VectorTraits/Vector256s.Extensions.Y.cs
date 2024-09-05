@@ -502,7 +502,7 @@ namespace Zyl.VectorTraits {
         /// <param name="data0">A vector made of 4-element groups - Part 0 (由4元素组所组成的向量 - 第0部分).</param>
         /// <param name="data1">A vector made of 4-element groups - Part 1 (由4元素组所组成的向量 - 第1部分).</param>
         /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
-        /// <returns>Returns the converted data. (返回装换后数据).</returns>
+        /// <returns>Returns the converted data. (返回转换后数据).</returns>
         /// <seealso cref="YGroup3ToGroup4_AcceleratedTypes"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector256<float> Result0, Vector256<float> Result1, Vector256<float> Result2, Vector256<float> Result3) YGroup3ToGroup4(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2) {

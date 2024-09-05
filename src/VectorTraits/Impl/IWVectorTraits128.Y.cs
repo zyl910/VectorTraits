@@ -805,10 +805,10 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="data0">A vector made of 4-element groups - Part 0 (由4元素组所组成的向量 - 第0部分).</param>
         /// <param name="data1">A vector made of 4-element groups - Part 1 (由4元素组所组成的向量 - 第1部分).</param>
         /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
-        /// <param name="result1">Returns part 1 of the converted data (返回装换后数据的第1部分).</param>
-        /// <param name="result2">Returns part 2 of the converted data (返回装换后数据的第2部分).</param>
-        /// <param name="result3">Returns part 3 of the converted data (返回装换后数据的第3部分).</param>
-        /// <returns>Returns part 0 of the converted data (返回装换后数据的第0部分).</returns>
+        /// <param name="result1">Returns part 1 of the converted data (返回转换后数据的第1部分).</param>
+        /// <param name="result2">Returns part 2 of the converted data (返回转换后数据的第2部分).</param>
+        /// <param name="result3">Returns part 3 of the converted data (返回转换后数据的第3部分).</param>
+        /// <returns>Returns part 0 of the converted data (返回转换后数据的第0部分).</returns>
         /// <seealso cref="YGroup3ToGroup4_AcceleratedTypes"/>
         Vector128<float> YGroup3ToGroup4(Vector128<float> data0, Vector128<float> data1, Vector128<float> data2, out Vector128<float> result1, out Vector128<float> result2, out Vector128<float> result3);
 
