@@ -620,6 +620,129 @@ namespace Zyl.VectorTraits {
 #endif // BCL_TYPE_INT128
 
 
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<T> Result0, Vector<T> Result1, Vector<T> Result2, Vector<T> Result3) YGroup3ToGroup4<T>(Vector<T> data0, Vector<T> data1, Vector<T> data2) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<float>)(object)data0, (Vector<float>)(object)data1, (Vector<float>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<double>)(object)data0, (Vector<double>)(object)data1, (Vector<double>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<sbyte>)(object)data0, (Vector<sbyte>)(object)data1, (Vector<sbyte>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<byte>)(object)data0, (Vector<byte>)(object)data1, (Vector<byte>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<short>)(object)data0, (Vector<short>)(object)data1, (Vector<short>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<ushort>)(object)data0, (Vector<ushort>)(object)data1, (Vector<ushort>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<int>)(object)data0, (Vector<int>)(object)data1, (Vector<int>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<uint>)(object)data0, (Vector<uint>)(object)data1, (Vector<uint>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<long>)(object)data0, (Vector<long>)(object)data1, (Vector<long>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = YGroup3ToGroup4((Vector<ulong>)(object)data0, (Vector<ulong>)(object)data1, (Vector<ulong>)(object)data2);
+                return ((Vector<T>)(object)rt0, (Vector<T>)(object)rt1, (Vector<T>)(object)rt2, (Vector<T>)(object)rt3);
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <summary>
+        /// Convert a 3-element group, to a 4-element group. It also converts packed RGB pixel data to packed RGBA pixel data (将3-元素组, 转为4-元素组. 它还能将 已打包的RGB像素数据, 转换为 已打包的RGBA像素数据).
+        /// Mnemonic: View for group: <c>(result0, result1, result2, result3) = YGroup4Zip(YGroup3Unzip(data0, data1, data2), Vector.Zero))</c>. View for element: <c>element_ref(i, result0, result1, result2, result3) := (3!=(i%4))?element_ref((i/4)*3+(i%4), data0, data1, data2):0</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 4-element groups - Part 0 (由4元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 4-element groups - Part 1 (由4元素组所组成的向量 - 第1部分).</param>
+        /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
+        /// <returns>Returns the converted data. (返回转换后数据).</returns>
+        /// <seealso cref="YGroup3ToGroup4_AcceleratedTypes"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<float> Result0, Vector<float> Result1, Vector<float> Result2, Vector<float> Result3) YGroup3ToGroup4(Vector<float> data0, Vector<float> data1, Vector<float> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<double> Result0, Vector<double> Result1, Vector<double> Result2, Vector<double> Result3) YGroup3ToGroup4(Vector<double> data0, Vector<double> data1, Vector<double> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> Result0, Vector<sbyte> Result1, Vector<sbyte> Result2, Vector<sbyte> Result3) YGroup3ToGroup4(Vector<sbyte> data0, Vector<sbyte> data1, Vector<sbyte> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> Result0, Vector<byte> Result1, Vector<byte> Result2, Vector<byte> Result3) YGroup3ToGroup4(Vector<byte> data0, Vector<byte> data1, Vector<byte> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> Result0, Vector<short> Result1, Vector<short> Result2, Vector<short> Result3) YGroup3ToGroup4(Vector<short> data0, Vector<short> data1, Vector<short> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> Result0, Vector<ushort> Result1, Vector<ushort> Result2, Vector<ushort> Result3) YGroup3ToGroup4(Vector<ushort> data0, Vector<ushort> data1, Vector<ushort> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> Result0, Vector<int> Result1, Vector<int> Result2, Vector<int> Result3) YGroup3ToGroup4(Vector<int> data0, Vector<int> data1, Vector<int> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> Result0, Vector<uint> Result1, Vector<uint> Result2, Vector<uint> Result3) YGroup3ToGroup4(Vector<uint> data0, Vector<uint> data1, Vector<uint> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> Result0, Vector<long> Result1, Vector<long> Result2, Vector<long> Result3) YGroup3ToGroup4(Vector<long> data0, Vector<long> data1, Vector<long> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="YGroup3ToGroup4(Vector{float}, Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> Result0, Vector<ulong> Result1, Vector<ulong> Result2, Vector<ulong> Result3) YGroup3ToGroup4(Vector<ulong> data0, Vector<ulong> data1, Vector<ulong> data2) {
+            var rt0 = YGroup3ToGroup4(data0, data1, data2, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+
         /// <inheritdoc cref="YGroup3Unzip(Vector{float}, Vector{float}, Vector{float})"/>
         /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
