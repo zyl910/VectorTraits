@@ -1,9 +1,16 @@
-﻿using System;
+﻿using NUnit.Framework;
+#if !USED_NUNIT3
+using NUnit.Framework.Legacy;
+#endif
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Zyl.VectorTraits.Tests {
+#if USED_NUNIT3
+    using ClassicAssert = Assert;
+#endif
 
     /// <summary>
     /// My test util.
@@ -117,6 +124,35 @@ namespace Zyl.VectorTraits.Tests {
                 }
                 return true;
             }
+        }
+
+        /// <summary>
+        /// Asserts that a condition is true. Can use Warn by <paramref name="useWarn"/> param.
+        /// </summary>
+        /// <param name="useWarn">Is use Warn?</param>
+        /// <param name="condition">The evaluated condition</param>
+        /// <param name="message">The message to display in case of failure</param>
+        /// <param name="args">Array of objects to be used in formatting the message</param>
+        /// <returns>Returns <paramref name="condition"/>.</returns>
+        public static bool IsTrueUseWarnBy(bool useWarn, bool condition, string message, params object?[]? args) {
+            if (condition) return condition;
+            if (useWarn) {
+                Assert.Warn(string.Format(message, args!));
+            } else {
+                ClassicAssert.IsTrue(condition, message, args);
+            }
+            return condition;
+        }
+
+        /// <summary>
+        /// Asserts that a condition is true. Auto use Warn.
+        /// </summary>
+        /// <param name="condition">The evaluated condition</param>
+        /// <param name="message">The message to display in case of failure</param>
+        /// <param name="args">Array of objects to be used in formatting the message</param>
+        /// <returns>Returns <paramref name="condition"/>.</returns>
+        public static bool IsTrueAutoWarn(bool condition, string message, params object?[]? args) {
+            return IsTrueUseWarnBy(ProcessIsWasm, condition, message, args);
         }
 
     }

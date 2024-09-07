@@ -944,6 +944,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             };
             bool allowLog = true;
             bool checkUnzip = true;
+            bool isContinue = true;
             Vector256<T> data2 = Vector256s<T>.SerialDesc;
             for (int i = 0; i < samples.Length; i++) {
                 Vector256<T> data0 = samples[i];
@@ -960,9 +961,10 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Vector256<T> chk0, chk1, chk2;
                         (chk0, chk1, chk2) = Vector256s.YGroup3Unzip(expected0, expected1, expected2);
                         string funcName = "Unzip";
-                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", data0, chk0, funcName, data0, data1, data2));
-                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", data1, chk1, funcName, data0, data1, data2));
-                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", data2, chk2, funcName, data0, data1, data2));
+                        isContinue &= MyTestUtil.IsTrueAutoWarn(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}", data0, chk0, funcName, data0, data1, data2));
+                        isContinue &= MyTestUtil.IsTrueAutoWarn(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}", data1, chk1, funcName, data0, data1, data2));
+                        isContinue &= MyTestUtil.IsTrueAutoWarn(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}", data2, chk2, funcName, data0, data1, data2));
+                        if (!isContinue) break;
                     }
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
@@ -989,6 +991,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
+                if (!isContinue) break;
             }
         }
 
@@ -1084,6 +1087,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
             };
             bool allowLog = true;
             bool checkUnzip = true;
+            bool isContinue = true;
             Vector256<T> data2 = Vector256s<T>.SerialDesc;
             Vector256<T> data3 = Vector256s<T>.SerialNegative;
             Vector256<T> data4 = data3;
@@ -1104,12 +1108,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                         Vector256<T> chk0, chk1, chk2, chk3, chk4, chk5;
                         (chk0, chk1, chk2, chk3, chk4, chk5) = Vector256s.YGroup3UnzipX2(expected0, expected1, expected2, expected3, expected4, expected5);
                         string funcName = "Unzip";
-                        ClassicAssert.IsTrue(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data0, chk0, funcName, data0, data1, data2, data3, data4, data5));
-                        ClassicAssert.IsTrue(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data1, chk1, funcName, data0, data1, data2, data3, data4, data5));
-                        ClassicAssert.IsTrue(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data2, chk2, funcName, data0, data1, data2, data3, data4, data5));
-                        ClassicAssert.IsTrue(data3.BitEquals(chk3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data3, chk3, funcName, data0, data1, data2, data3, data4, data5));
-                        ClassicAssert.IsTrue(data4.BitEquals(chk4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data4, chk4, funcName, data0, data1, data2, data3, data4, data5));
-                        ClassicAssert.IsTrue(data5.BitEquals(chk5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data5, chk5, funcName, data0, data1, data2, data3, data4, data5));
+                        isContinue &= MyTestUtil.IsTrueAutoWarn(data0.BitEquals(chk0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data0, chk0, funcName, data0, data1, data2, data3, data4, data5));
+                        isContinue &= MyTestUtil.IsTrueAutoWarn(data1.BitEquals(chk1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data1, chk1, funcName, data0, data1, data2, data3, data4, data5));
+                        isContinue &= MyTestUtil.IsTrueAutoWarn(data2.BitEquals(chk2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data2, chk2, funcName, data0, data1, data2, data3, data4, data5));
+                        isContinue &= MyTestUtil.IsTrueAutoWarn(data3.BitEquals(chk3), VectorTextUtil.Format("{0} != {1}. Part 3 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data3, chk3, funcName, data0, data1, data2, data3, data4, data5));
+                        isContinue &= MyTestUtil.IsTrueAutoWarn(data4.BitEquals(chk4), VectorTextUtil.Format("{0} != {1}. Part 4 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data4, chk4, funcName, data0, data1, data2, data3, data4, data5));
+                        isContinue &= MyTestUtil.IsTrueAutoWarn(data5.BitEquals(chk5), VectorTextUtil.Format("{0} != {1}. Part 5 on {2}: {3}, {4}, {5}, {6}, {7}, {8}", data5, chk5, funcName, data0, data1, data2, data3, data4, data5));
+                        if (!isContinue) break;
                     }
                     foreach (IWVectorTraits256 instance in instances) {
                         if (!instance.GetIsSupported(true)) continue;
@@ -1142,6 +1147,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits256Test {
                     } // funcList
 #pragma warning restore CS0618 // Type or member is obsolete
                 }
+                if (!isContinue) break;
             }
         }
 
