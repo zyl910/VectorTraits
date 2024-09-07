@@ -1567,6 +1567,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<float> YGroup3ToGroup4(Vector128<float> data0, Vector128<float> data1, Vector128<float> data2, out Vector128<float> result1, out Vector128<float> result2, out Vector128<float> result3) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
 #else
@@ -1577,6 +1582,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{double}, Vector128{double}, Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<double> YGroup3ToGroup4(Vector128<double> data0, Vector128<double> data1, Vector128<double> data2, out Vector128<double> result1, out Vector128<double> result2, out Vector128<double> result3) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
 #else
@@ -1588,6 +1598,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<sbyte> YGroup3ToGroup4(Vector128<sbyte> data0, Vector128<sbyte> data1, Vector128<sbyte> data2, out Vector128<sbyte> result1, out Vector128<sbyte> result2, out Vector128<sbyte> result3) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
 #else
@@ -1598,6 +1613,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<byte> YGroup3ToGroup4(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, out Vector128<byte> result1, out Vector128<byte> result2, out Vector128<byte> result3) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
 #else
@@ -1608,6 +1628,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{short}, Vector128{short}, Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<short> YGroup3ToGroup4(Vector128<short> data0, Vector128<short> data1, Vector128<short> data2, out Vector128<short> result1, out Vector128<short> result2, out Vector128<short> result3) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
 #else
@@ -1619,6 +1644,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ushort> YGroup3ToGroup4(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, out Vector128<ushort> result1, out Vector128<ushort> result2, out Vector128<ushort> result3) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
 #else
@@ -1629,6 +1659,11 @@ namespace Zyl.VectorTraits {
         /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{int}, Vector128{int}, Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<int> YGroup3ToGroup4(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, out Vector128<int> result1, out Vector128<int> result2, out Vector128<int> result3) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
 #else
@@ -1640,6 +1675,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<uint> YGroup3ToGroup4(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> result1, out Vector128<uint> result2, out Vector128<uint> result3) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
 #else
@@ -1661,6 +1701,11 @@ namespace Zyl.VectorTraits {
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> YGroup3ToGroup4(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, out Vector128<ulong> result1, out Vector128<ulong> result2, out Vector128<ulong> result3) {
+#if SHORT_CIRCUIT_WASM
+            if (PackedSimd.IsSupported) {
+                return WasmStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
+            }
+#endif // SHORT_CIRCUIT_WASM
 #if BCL_BASE_OVERRIDE_STATIC
             return BaseStatics.YGroup3ToGroup4(data0, data1, data2, out result1, out result2, out result3);
 #else
