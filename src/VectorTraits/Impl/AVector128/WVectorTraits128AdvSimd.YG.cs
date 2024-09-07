@@ -1852,8 +1852,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // 0 data0 x0 y0 z0 x1 data1 y1 z1 x2 y2 data2 z2 x3 y3 z3
                 // 1 a_0 x0 y0 z0 x1 a_1 x1 y1 z1 x2 a_2 x2 y2 z2 x3 a_3 x3 y3 z3 x3
                 a_0 = data0;
-                a_1 = AdvSimd.ExtractVector128(data1, data0, 3);
-                a_2 = AdvSimd.ExtractVector128(data2, data1, 2);
+                a_1 = AdvSimd.ExtractVector128(data0, data1, 3);
+                a_2 = AdvSimd.ExtractVector128(data1, data2, 2);
                 a_3 = AdvSimd.ExtractVector128(data2, data2, 1);
                 // 2 b_0 x0 y0 z0 _0 b_1 x1 y1 z1 _0 b_2 x2 y2 z2 _0 b_3 x3 y3 z3 _0
                 b_0 = AdvSimd.And(a_0, maskXYZ);
