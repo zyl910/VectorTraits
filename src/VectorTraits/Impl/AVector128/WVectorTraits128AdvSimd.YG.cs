@@ -1737,6 +1737,417 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 #endif // ARM_ALLOW_LOOKUP_X
 
 
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup3ToGroup4_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YGroup3ToGroup4(Vector128<float> data0, Vector128<float> data1, Vector128<float> data2, out Vector128<float> result1, out Vector128<float> result2, out Vector128<float> result3) {
+                var d0 = YGroup3ToGroup4(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2, out var d3);
+                result1 = d1.AsSingle();
+                result2 = d2.AsSingle();
+                result3 = d3.AsSingle();
+                return d0.AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{double}, Vector128{double}, Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YGroup3ToGroup4(Vector128<double> data0, Vector128<double> data1, Vector128<double> data2, out Vector128<double> result1, out Vector128<double> result2, out Vector128<double> result3) {
+                var d0 = YGroup3ToGroup4(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2, out var d3);
+                result1 = d1.AsDouble();
+                result2 = d2.AsDouble();
+                result3 = d3.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YGroup3ToGroup4(Vector128<sbyte> data0, Vector128<sbyte> data1, Vector128<sbyte> data2, out Vector128<sbyte> result1, out Vector128<sbyte> result2, out Vector128<sbyte> result3) {
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
+#else
+                return YGroup3ToGroup4_Shuffle(data0, data1, data2, out result1, out result2, out result3);
+#endif // ARM_ALLOW_LOOKUP_X
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YGroup3ToGroup4(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, out Vector128<byte> result1, out Vector128<byte> result2, out Vector128<byte> result3) {
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
+#else
+                return YGroup3ToGroup4_Shuffle(data0, data1, data2, out result1, out result2, out result3);
+#endif // ARM_ALLOW_LOOKUP_X
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{short}, Vector128{short}, Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YGroup3ToGroup4(Vector128<short> data0, Vector128<short> data1, Vector128<short> data2, out Vector128<short> result1, out Vector128<short> result2, out Vector128<short> result3) {
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
+#else
+                return YGroup3ToGroup4_Shuffle(data0, data1, data2, out result1, out result2, out result3);
+#endif // ARM_ALLOW_LOOKUP_X
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YGroup3ToGroup4(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, out Vector128<ushort> result1, out Vector128<ushort> result2, out Vector128<ushort> result3) {
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
+#else
+                return YGroup3ToGroup4_Shuffle(data0, data1, data2, out result1, out result2, out result3);
+#endif // ARM_ALLOW_LOOKUP_X
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{int}, Vector128{int}, Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YGroup3ToGroup4(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, out Vector128<int> result1, out Vector128<int> result2, out Vector128<int> result3) {
+                return YGroup3ToGroup4_AlignRight(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{uint}, Vector128{uint}, Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YGroup3ToGroup4(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> result1, out Vector128<uint> result2, out Vector128<uint> result3) {
+                return YGroup3ToGroup4_AlignRight(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup3ToGroup4(Vector128<long> data0, Vector128<long> data1, Vector128<long> data2, out Vector128<long> result1, out Vector128<long> result2, out Vector128<long> result3) {
+                return YGroup3ToGroup4_AlignRight(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup3ToGroup4(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, out Vector128<ulong> result1, out Vector128<ulong> result2, out Vector128<ulong> result3) {
+                return YGroup3ToGroup4_AlignRight(data0, data1, data2, out result1, out result2, out result3);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{int}, Vector128{int}, Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YGroup3ToGroup4_AlignRight(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, out Vector128<int> result1, out Vector128<int> result2, out Vector128<int> result3) {
+                var d0 = YGroup3ToGroup4_AlignRight(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt32();
+                result2 = d2.AsInt32();
+                result3 = d3.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{uint}, Vector128{uint}, Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YGroup3ToGroup4_AlignRight(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> result1, out Vector128<uint> result2, out Vector128<uint> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_UInt32;
+                Vector128<uint> a_0, a_1, a_2, a_3, b_0, b_1, b_2, b_3;
+                // 0 data0 x0 y0 z0 x1 data1 y1 z1 x2 y2 data2 z2 x3 y3 z3
+                // 1 a_0 x0 y0 z0 x1 a_1 x1 y1 z1 x2 a_2 x2 y2 z2 x3 a_3 x3 y3 z3 x3
+                a_0 = data0;
+                a_1 = AdvSimd.ExtractVector128(data1, data0, 3);
+                a_2 = AdvSimd.ExtractVector128(data2, data1, 2);
+                a_3 = AdvSimd.ExtractVector128(data2, data2, 1);
+                // 2 b_0 x0 y0 z0 _0 b_1 x1 y1 z1 _0 b_2 x2 y2 z2 _0 b_3 x3 y3 z3 _0
+                b_0 = AdvSimd.And(a_0, maskXYZ);
+                b_1 = AdvSimd.And(a_1, maskXYZ);
+                b_2 = AdvSimd.And(a_2, maskXYZ);
+                b_3 = AdvSimd.And(a_3, maskXYZ);
+                result1 = b_1;
+                result2 = b_2;
+                result3 = b_3;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup3ToGroup4_AlignRight(Vector128<long> data0, Vector128<long> data1, Vector128<long> data2, out Vector128<long> result1, out Vector128<long> result2, out Vector128<long> result3) {
+                var d0 = YGroup3ToGroup4_AlignRight(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt64();
+                result2 = d2.AsInt64();
+                result3 = d3.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup3ToGroup4_AlignRight(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, out Vector128<ulong> result1, out Vector128<ulong> result2, out Vector128<ulong> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_UInt64_1;
+                var zero = Vector128<ulong>.Zero;
+                // 0 data0 x0 y0 data1 z0 x1 data2 y1 z1   
+                // 1 a_0 x0 y0 a_1 z0 _0 a_2 x1 y1 a_3 z1 _0
+                var a_0 = data0;
+                var a_1 = AdvSimd.And(data1, maskXYZ);
+                var a_2 = AdvSimd.ExtractVector128(data1, data2, 1);
+                var a_3 = AdvSimd.ExtractVector128(data2, zero, 1);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YGroup3ToGroup4_Shuffle(Vector128<sbyte> data0, Vector128<sbyte> data1, Vector128<sbyte> data2, out Vector128<sbyte> result1, out Vector128<sbyte> result2, out Vector128<sbyte> result3) {
+                var d0 = YGroup3ToGroup4_Shuffle(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var d1, out var d2, out var d3);
+                result1 = d1.AsSByte();
+                result2 = d2.AsSByte();
+                result3 = d3.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YGroup3ToGroup4_Shuffle(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, out Vector128<byte> result1, out Vector128<byte> result2, out Vector128<byte> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_Byte;
+                var f0 = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_0;
+                var f1A = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_1A;
+                var f1B = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_1B;
+                var f2A = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_2A;
+                var f2B = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_2B;
+                var f3 = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_3;
+                var a_0 = AdvSimd.And(YShuffleKernel(data0, f0), maskXYZ);
+                var a_1 = AdvSimd.And(AdvSimd.Or(YShuffleKernel(data0, f1A), YShuffleKernel(data1, f1B)), maskXYZ);
+                var a_2 = AdvSimd.And(AdvSimd.Or(YShuffleKernel(data1, f2A), YShuffleKernel(data2, f2B)), maskXYZ);
+                var a_3 = AdvSimd.And(YShuffleKernel(data2, f3), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{short}, Vector128{short}, Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YGroup3ToGroup4_Shuffle(Vector128<short> data0, Vector128<short> data1, Vector128<short> data2, out Vector128<short> result1, out Vector128<short> result2, out Vector128<short> result3) {
+                var d0 = YGroup3ToGroup4_Shuffle(data0.AsUInt16(), data1.AsUInt16(), data2.AsUInt16(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt16();
+                result2 = d2.AsInt16();
+                result3 = d3.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YGroup3ToGroup4_Shuffle(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, out Vector128<ushort> result1, out Vector128<ushort> result2, out Vector128<ushort> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_UInt16;
+                var f0 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_0;
+                var f1A = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_1A;
+                var f1B = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_1B;
+                var f2A = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_2A;
+                var f2B = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_2B;
+                var f3 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_3;
+                var s0 = data0.AsByte();
+                var s1 = data1.AsByte();
+                var s2 = data2.AsByte();
+                var a_0 = AdvSimd.And(YShuffleKernel(s0, f0).AsUInt16(), maskXYZ);
+                var a_1 = AdvSimd.And(AdvSimd.Or(YShuffleKernel(s0, f1A), YShuffleKernel(s1, f1B)).AsUInt16(), maskXYZ);
+                var a_2 = AdvSimd.And(AdvSimd.Or(YShuffleKernel(s1, f2A), YShuffleKernel(s2, f2B)).AsUInt16(), maskXYZ);
+                var a_3 = AdvSimd.And(YShuffleKernel(s2, f3).AsUInt16(), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{int}, Vector128{int}, Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YGroup3ToGroup4_Shuffle(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, out Vector128<int> result1, out Vector128<int> result2, out Vector128<int> result3) {
+                var d0 = YGroup3ToGroup4_Shuffle(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt32();
+                result2 = d2.AsInt32();
+                result3 = d3.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{uint}, Vector128{uint}, Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YGroup3ToGroup4_Shuffle(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> result1, out Vector128<uint> result2, out Vector128<uint> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_UInt32;
+                var f1A = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_1A;
+                var f1B = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_1B;
+                var f2A = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_2A;
+                var f2B = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_2B;
+                var f3 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_3;
+                var s0 = data0.AsByte();
+                var s1 = data1.AsByte();
+                var s2 = data2.AsByte();
+                var a_0 = AdvSimd.And(data0, maskXYZ);
+                var a_1 = AdvSimd.And(AdvSimd.Or(YShuffleKernel(s0, f1A), YShuffleKernel(s1, f1B)).AsUInt32(), maskXYZ);
+                var a_2 = AdvSimd.And(AdvSimd.Or(YShuffleKernel(s1, f2A), YShuffleKernel(s2, f2B)).AsUInt32(), maskXYZ);
+                var a_3 = AdvSimd.And(YShuffleKernel(s2, f3).AsUInt32(), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup3ToGroup4_Shuffle(Vector128<long> data0, Vector128<long> data1, Vector128<long> data2, out Vector128<long> result1, out Vector128<long> result2, out Vector128<long> result3) {
+                var d0 = YGroup3ToGroup4_Shuffle(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt64();
+                result2 = d2.AsInt64();
+                result3 = d3.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup3ToGroup4_Shuffle(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, out Vector128<ulong> result1, out Vector128<ulong> result2, out Vector128<ulong> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_UInt64_1;
+                var f2A = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt64_2A;
+                var f2B = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt64_2B;
+                var f3 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt64_3;
+                var s1 = data1.AsByte();
+                var s2 = data2.AsByte();
+                var a_0 = data0;
+                var a_1 = AdvSimd.And(data1, maskXYZ);
+                var a_2 = AdvSimd.Or(YShuffleKernel(s1, f2A), YShuffleKernel(s2, f2B)).AsUInt64();
+                var a_3 = AdvSimd.And(YShuffleKernel(s2, f3).AsUInt64(), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+#if ARM_ALLOW_LOOKUP_X
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YGroup3ToGroup4_ShuffleX(Vector128<sbyte> data0, Vector128<sbyte> data1, Vector128<sbyte> data2, out Vector128<sbyte> result1, out Vector128<sbyte> result2, out Vector128<sbyte> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleX(data0.AsByte(), data1.AsByte(), data2.AsByte(), out var d1, out var d2, out var d3);
+                result1 = d1.AsSByte();
+                result2 = d2.AsSByte();
+                result3 = d3.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YGroup3ToGroup4_ShuffleX(Vector128<byte> data0, Vector128<byte> data1, Vector128<byte> data2, out Vector128<byte> result1, out Vector128<byte> result2, out Vector128<byte> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_Byte;
+                var f0 = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_0;
+                var f1 = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_1;
+                var f2 = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_2;
+                var f3 = Vector128Constants.YGroup3ToGroup4_Shuffle_Byte_3;
+                var a_0 = AdvSimd.And(YShuffleKernel(data0, f0), maskXYZ);
+                var a_1 = AdvSimd.And(YShuffleX2Kernel(data0, data1, f1), maskXYZ);
+                var a_2 = AdvSimd.And(YShuffleX2Kernel(data1, data2, f2), maskXYZ);
+                var a_3 = AdvSimd.And(YShuffleKernel(data2, f3), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{short}, Vector128{short}, Vector128{short}, out Vector128{short}, out Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YGroup3ToGroup4_ShuffleX(Vector128<short> data0, Vector128<short> data1, Vector128<short> data2, out Vector128<short> result1, out Vector128<short> result2, out Vector128<short> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleX(data0.AsUInt16(), data1.AsUInt16(), data2.AsUInt16(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt16();
+                result2 = d2.AsInt16();
+                result3 = d3.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{ushort}, Vector128{ushort}, Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YGroup3ToGroup4_ShuffleX(Vector128<ushort> data0, Vector128<ushort> data1, Vector128<ushort> data2, out Vector128<ushort> result1, out Vector128<ushort> result2, out Vector128<ushort> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_UInt16;
+                var f0 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_0;
+                var f1 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_1;
+                var f2 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_2;
+                var f3 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt16_3;
+                var s0 = data0.AsByte();
+                var s1 = data1.AsByte();
+                var s2 = data2.AsByte();
+                var a_0 = AdvSimd.And(YShuffleKernel(s0, f0).AsUInt16(), maskXYZ);
+                var a_1 = AdvSimd.And(YShuffleX2Kernel(s0, s1, f1).AsUInt16(), maskXYZ);
+                var a_2 = AdvSimd.And(YShuffleX2Kernel(s1, s2, f2).AsUInt16(), maskXYZ);
+                var a_3 = AdvSimd.And(YShuffleKernel(s2, f3).AsUInt16(), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{int}, Vector128{int}, Vector128{int}, out Vector128{int}, out Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YGroup3ToGroup4_ShuffleX(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, out Vector128<int> result1, out Vector128<int> result2, out Vector128<int> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleX(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt32();
+                result2 = d2.AsInt32();
+                result3 = d3.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{uint}, Vector128{uint}, Vector128{uint}, out Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YGroup3ToGroup4_ShuffleX(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, out Vector128<uint> result1, out Vector128<uint> result2, out Vector128<uint> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_UInt32;
+                var f1 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_1;
+                var f2 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_2;
+                var f3 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt32_3;
+                var s0 = data0.AsByte();
+                var s1 = data1.AsByte();
+                var s2 = data2.AsByte();
+                var a_0 = AdvSimd.And(data0, maskXYZ);
+                var a_1 = AdvSimd.And(YShuffleX2Kernel(s0, s1, f1).AsUInt32(), maskXYZ);
+                var a_2 = AdvSimd.And(YShuffleX2Kernel(s1, s2, f2).AsUInt32(), maskXYZ);
+                var a_3 = AdvSimd.And(YShuffleKernel(s2, f3).AsUInt32(), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup3ToGroup4_ShuffleX(Vector128<long> data0, Vector128<long> data1, Vector128<long> data2, out Vector128<long> result1, out Vector128<long> result2, out Vector128<long> result3) {
+                var d0 = YGroup3ToGroup4_ShuffleX(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2, out var d3);
+                result1 = d1.AsInt64();
+                result2 = d2.AsInt64();
+                result3 = d3.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3ToGroup4(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup3ToGroup4_ShuffleX(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, out Vector128<ulong> result1, out Vector128<ulong> result2, out Vector128<ulong> result3) {
+                var maskXYZ = Vector128Constants.YGroup4_MaskXYZ_UInt64_1;
+                var f2 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt64_2;
+                var f3 = Vector128Constants.YGroup3ToGroup4_ShuffleOnByte_UInt64_3;
+                var s1 = data1.AsByte();
+                var s2 = data2.AsByte();
+                var a_0 = data0;
+                var a_1 = AdvSimd.And(data1, maskXYZ);
+                var a_2 = YShuffleX2Kernel(s1, s2, f2).AsUInt64();
+                var a_3 = AdvSimd.And(YShuffleKernel(s2, f3).AsUInt64(), maskXYZ);
+                result1 = a_1;
+                result2 = a_2;
+                result3 = a_3;
+                return a_0;
+            }
+
+#endif // ARM_ALLOW_LOOKUP_X
+
+
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup3Unzip_AcceleratedTypes {
                 get {
