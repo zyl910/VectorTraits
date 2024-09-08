@@ -30,7 +30,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -44,7 +44,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{double}, Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2Unzip(Vector128<double> data0, Vector128<double> data1, out Vector128<double> y) {
-                return YGroup2Unzip_Shuffle(data0, data1, out y);
+                return YGroup2Unzip_AlignRight(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte})"/>
@@ -90,14 +90,45 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{long}, Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup2Unzip(Vector128<long> data0, Vector128<long> data1, out Vector128<long> y) {
-                return YGroup2Unzip_Shuffle(data0, data1, out y);
+                return YGroup2Unzip_AlignRight(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{ulong}, Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2Unzip(Vector128<ulong> data0, Vector128<ulong> data1, out Vector128<ulong> y) {
-                return YGroup2Unzip_Shuffle(data0, data1, out y);
+                return YGroup2Unzip_AlignRight(data0, data1, out y);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{double}, Vector128{double}, out Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YGroup2Unzip_AlignRight(Vector128<double> data0, Vector128<double> data1, out Vector128<double> y) {
+                var d0 = YGroup2Unzip_AlignRight(data0.AsUInt64(), data1.AsUInt64(), out var d1);
+                y = d1.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{long}, Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup2Unzip_AlignRight(Vector128<long> data0, Vector128<long> data1, out Vector128<long> y) {
+                var d0 = YGroup2Unzip_AlignRight(data0.AsUInt64(), data1.AsUInt64(), out var d1);
+                y = d1.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{ulong}, Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup2Unzip_AlignRight(Vector128<ulong> data0, Vector128<ulong> data1, out Vector128<ulong> y) {
+                Vector128<ulong> a_0, b_0, b_1;
+                // 0 data0 x0 y0 data1 x1 y1
+                // 1 a_0 y1 x0
+                a_0 = AdvSimd.ExtractVector128(data1, data0, 1);
+                // 2 b_0 x0 x1 b_1 y0 y1
+                b_0 = AdvSimd.ExtractVector128(a_0, data1, 1);
+                b_1 = AdvSimd.ExtractVector128(data0, a_0, 1);
+                y = b_0;
+                return b_1;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
@@ -386,7 +417,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipEven_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipEven_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -608,7 +639,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2UnzipOdd_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2UnzipOdd_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -830,7 +861,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Zip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -844,7 +875,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{double}, Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2Zip(Vector128<double> x, Vector128<double> y, out Vector128<double> data1) {
-                return SuperStatics.YGroup2Zip(x, y, out data1);
+                return YGroup2Zip_AlignRight(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte})"/>
@@ -890,14 +921,37 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{long}, Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup2Zip(Vector128<long> x, Vector128<long> y, out Vector128<long> data1) {
-                return SuperStatics.YGroup2Zip(x, y, out data1);
+                return YGroup2Zip_AlignRight(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{ulong}, Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2Zip(Vector128<ulong> x, Vector128<ulong> y, out Vector128<ulong> data1) {
-                return SuperStatics.YGroup2Zip(x, y, out data1);
+                return YGroup2Zip_AlignRight(x, y, out data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{double}, Vector128{double}, out Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YGroup2Zip_AlignRight(Vector128<double> x, Vector128<double> y, out Vector128<double> data1) {
+                var d0 = YGroup2Zip_AlignRight(x.AsUInt64(), y.AsUInt64(), out var d1);
+                data1 = d1.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{long}, Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup2Zip_AlignRight(Vector128<long> x, Vector128<long> y, out Vector128<long> data1) {
+                var d0 = YGroup2Zip_AlignRight(x.AsUInt64(), y.AsUInt64(), out var d1);
+                data1 = d1.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{ulong}, Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup2Zip_AlignRight(Vector128<ulong> x, Vector128<ulong> y, out Vector128<ulong> data1) {
+                return YGroup2Unzip_AlignRight(x, y, out data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Zip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
@@ -1250,7 +1304,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipHigh_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -1258,65 +1312,105 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2ZipHigh(Vector128<float> x, Vector128<float> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2ZipHigh(Vector128<double> x, Vector128<double> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YGroup2ZipHigh(Vector128<sbyte> x, Vector128<sbyte> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2ZipHigh(Vector128<byte> x, Vector128<byte> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YGroup2ZipHigh(Vector128<short> x, Vector128<short> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2ZipHigh(Vector128<ushort> x, Vector128<ushort> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YGroup2ZipHigh(Vector128<int> x, Vector128<int> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2ZipHigh(Vector128<uint> x, Vector128<uint> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup2ZipHigh(Vector128<long> x, Vector128<long> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2ZipHigh(Vector128<ulong> x, Vector128<ulong> y) {
-                return SuperStatics.YGroup2ZipHigh(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipHigh_ShuffleX(x, y);
+#else
+                return YGroup2ZipHigh_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipHigh(Vector128{float}, Vector128{float})"/>
@@ -1495,7 +1589,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2ZipLow_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -1503,65 +1597,105 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2ZipLow(Vector128<float> x, Vector128<float> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2ZipLow(Vector128<double> x, Vector128<double> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{sbyte}, Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YGroup2ZipLow(Vector128<sbyte> x, Vector128<sbyte> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2ZipLow(Vector128<byte> x, Vector128<byte> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YGroup2ZipLow(Vector128<short> x, Vector128<short> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{ushort}, Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2ZipLow(Vector128<ushort> x, Vector128<ushort> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YGroup2ZipLow(Vector128<int> x, Vector128<int> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{uint}, Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2ZipLow(Vector128<uint> x, Vector128<uint> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup2ZipLow(Vector128<long> x, Vector128<long> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{ulong}, Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2ZipLow(Vector128<ulong> x, Vector128<ulong> y) {
-                return SuperStatics.YGroup2ZipLow(x, y);
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup2ZipLow_ShuffleX(x, y);
+#else
+                return YGroup2ZipLow_Shuffle(x, y);
+#endif
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2ZipLow(Vector128{float}, Vector128{float})"/>
@@ -2169,7 +2303,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup3Unzip(Vector128<double> data0, Vector128<double> data1, Vector128<double> data2, out Vector128<double> y, out Vector128<double> z) {
                 // ByX2Zip > ShuffleX > Shuffle
-                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_AlignRight(data0, data1, data2, out y, out z);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
@@ -2238,14 +2372,50 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup3Unzip(Vector128<long> data0, Vector128<long> data1, Vector128<long> data2, out Vector128<long> y, out Vector128<long> z) {
-                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_AlignRight(data0, data1, data2, out y, out z);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup3Unzip(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, out Vector128<ulong> y, out Vector128<ulong> z) {
-                return YGroup3Unzip_ByX2Zip(data0, data1, data2, out y, out z);
+                return YGroup3Unzip_AlignRight(data0, data1, data2, out y, out z);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{double}, Vector128{double}, Vector128{double}, out Vector128{double}, out Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YGroup3Unzip_AlignRight(Vector128<double> data0, Vector128<double> data1, Vector128<double> data2, out Vector128<double> y, out Vector128<double> z) {
+                var d0 = YGroup3Unzip_AlignRight(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2);
+                y = d1.AsDouble();
+                z = d2.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup3Unzip_AlignRight(Vector128<long> data0, Vector128<long> data1, Vector128<long> data2, out Vector128<long> y, out Vector128<long> z) {
+                var d0 = YGroup3Unzip_AlignRight(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2);
+                y = d1.AsInt64();
+                z = d2.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup3Unzip_AlignRight(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, out Vector128<ulong> y, out Vector128<ulong> z) {
+                Vector128<ulong> a_0, a_1, b_0, b_1, b_2;
+                // 1 data0 x0 y0 data1 z0 x1 data2 y1 z1
+                // 2 a0 x1 x0 a1 z1 z0
+                a_0 = AdvSimd.ExtractVector128(data1, data0, 1);
+                a_1 = AdvSimd.ExtractVector128(data2, data1, 1);
+                // 3 b0 x0 x1 b1 y0 y1 b2 z0 z1
+                b_0 = AdvSimd.ExtractVector128(a_0, a_0, 1);
+                b_1 = AdvSimd.ExtractVector128(data0, data2, 1);
+                b_2 = AdvSimd.ExtractVector128(a_1, a_1, 1);
+                y = b_1;
+                z = b_2;
+                return b_0;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Unzip(Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float})"/>
@@ -2593,7 +2763,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup3UnzipX2(Vector128<double> data0, Vector128<double> data1, Vector128<double> data2, Vector128<double> data3, Vector128<double> data4, Vector128<double> data5, out Vector128<double> xB, out Vector128<double> y, out Vector128<double> yB, out Vector128<double> z, out Vector128<double> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
@@ -2639,14 +2809,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup3UnzipX2(Vector128<long> data0, Vector128<long> data1, Vector128<long> data2, Vector128<long> data3, Vector128<long> data4, Vector128<long> data5, out Vector128<long> xB, out Vector128<long> y, out Vector128<long> yB, out Vector128<long> z, out Vector128<long> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup3UnzipX2(Vector128<ulong> data0, Vector128<ulong> data1, Vector128<ulong> data2, Vector128<ulong> data3, Vector128<ulong> data4, Vector128<ulong> data5, out Vector128<ulong> xB, out Vector128<ulong> y, out Vector128<ulong> yB, out Vector128<ulong> z, out Vector128<ulong> zB) {
-                return YGroup3UnzipX2_Zip(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
+                return YGroup3UnzipX2_X2(data0, data1, data2, data3, data4, data5, out xB, out y, out yB, out z, out zB);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3UnzipX2(Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float}, out Vector128{float})"/>
@@ -2938,11 +3108,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{double}, Vector128{double}, Vector128{double}, out Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup3Zip(Vector128<double> x, Vector128<double> y, Vector128<double> z, out Vector128<double> data1, out Vector128<double> data2) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup3Zip_ShuffleX(x, y, z, out data1, out data2);
-#else
-                return YGroup3Zip_ByX2Unzip(x, y, z, out data1, out data2);
-#endif // ARM_ALLOW_LOOKUP_X
+                return YGroup3Zip_AlignRight(x, y, z, out data1, out data2);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{sbyte}, Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
@@ -3012,22 +3178,50 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup3Zip(Vector128<long> x, Vector128<long> y, Vector128<long> z, out Vector128<long> data1, out Vector128<long> data2) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup3Zip_ShuffleX(x, y, z, out data1, out data2);
-#else
-                return YGroup3Zip_ByX2Unzip(x, y, z, out data1, out data2);
-#endif // ARM_ALLOW_LOOKUP_X
+                return YGroup3Zip_AlignRight(x, y, z, out data1, out data2);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup3Zip(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z, out Vector128<ulong> data1, out Vector128<ulong> data2) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup3Zip_ShuffleX(x, y, z, out data1, out data2);
-#else
-                return YGroup3Zip_ByX2Unzip(x, y, z, out data1, out data2);
-#endif // ARM_ALLOW_LOOKUP_X
+                return YGroup3Zip_AlignRight(x, y, z, out data1, out data2);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{double}, Vector128{double}, Vector128{double}, out Vector128{double}, out Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YGroup3Zip_AlignRight(Vector128<double> x, Vector128<double> y, Vector128<double> z, out Vector128<double> data1, out Vector128<double> data2) {
+                var d0 = YGroup3Zip_AlignRight(x.AsUInt64(), y.AsUInt64(), z.AsUInt64(), out var d1, out var d2);
+                data1 = d1.AsDouble();
+                data2 = d2.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup3Zip_AlignRight(Vector128<long> x, Vector128<long> y, Vector128<long> z, out Vector128<long> data1, out Vector128<long> data2) {
+                var d0 = YGroup3Zip_AlignRight(x.AsUInt64(), y.AsUInt64(), z.AsUInt64(), out var d1, out var d2);
+                data1 = d1.AsInt64();
+                data2 = d2.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{ulong}, Vector128{ulong}, Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup3Zip_AlignRight(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z, out Vector128<ulong> data1, out Vector128<ulong> data2) {
+                Vector128<ulong> a_0, a_1, b_0, b_1, b_2;
+                // 1 _x_ x0 x1 _y_ y0 y1 _z_ z0 z1
+                // 2 a_0 x1 x0 a_1 z1 z0
+                a_0 = AdvSimd.ExtractVector128(x, x, 1);
+                a_1 = AdvSimd.ExtractVector128(z, z, 1);
+                // 3 b_0 x0 y0 b_1 z0 x1 b_2 y1 z1
+                b_0 = AdvSimd.ExtractVector128(a_0, y, 1);
+                b_1 = AdvSimd.ExtractVector128(a_1, a_0, 1);
+                b_2 = AdvSimd.ExtractVector128(y, a_1, 1);
+                data1 = b_1;
+                data2 = b_2;
+                return b_0;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup3Zip(Vector128{float}, Vector128{float}, Vector128{float}, out Vector128{float}, out Vector128{float})"/>
@@ -3700,7 +3894,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Unzip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -4166,7 +4360,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Zip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Zip_AcceleratedTypes {
                 get {
-                    TypeCodeFlags rt = TypeCodeFlagsUtil.Most32Types;
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
                     return rt;
                 }
             }
@@ -4680,6 +4874,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 #endif // NET5_0_OR_GREATER
-        }
+            }
     }
 }

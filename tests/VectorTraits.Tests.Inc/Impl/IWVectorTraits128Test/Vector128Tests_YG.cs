@@ -45,7 +45,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector128s.GetSupportedMethodList<FuncIn2Out1<Vector128<T>>>("YGroup2Unzip_Basic", "YGroup2Unzip_Narrow", "YGroup2Unzip_Permute", "YGroup2Unzip_Shuffle", "YGroup2Unzip_ShuffleX", "YGroup2Unzip_Unpack");
+            var funcList = Vector128s.GetSupportedMethodList<FuncIn2Out1<Vector128<T>>>("YGroup2Unzip_AlignRight", "YGroup2Unzip_Basic", "YGroup2Unzip_Narrow", "YGroup2Unzip_Permute", "YGroup2Unzip_Shuffle", "YGroup2Unzip_ShuffleX", "YGroup2Unzip_Unpack");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -319,7 +319,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector128s.GetSupportedMethodList<FuncIn2Out1<Vector128<T>>>("YGroup2Zip_Basic", "YGroup2Zip_Permute", "YGroup2Zip_Shuffle", "YGroup2Zip_ShuffleX", "YGroup2Zip_Unpack", "YGroup2Zip_Widen");
+            var funcList = Vector128s.GetSupportedMethodList<FuncIn2Out1<Vector128<T>>>("YGroup2Zip_AlignRight", "YGroup2Zip_Basic", "YGroup2Zip_Permute", "YGroup2Zip_Shuffle", "YGroup2Zip_ShuffleX", "YGroup2Zip_Unpack", "YGroup2Zip_Widen");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -667,7 +667,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector128s.GetSupportedMethodList<FuncIn3Out2<Vector128<T>>>("YGroup3Unzip_Basic", "YGroup3Unzip_ByShorter", "YGroup3Unzip_ByX2Unpack", "YGroup3Unzip_ByX2Zip", "YGroup3Unzip_Move", "YGroup3Unzip_Shuffle", "YGroup3Unzip_ShuffleX", "YGroup3Unzip_ShuffleXImm");
+            var funcList = Vector128s.GetSupportedMethodList<FuncIn3Out2<Vector128<T>>>("YGroup3Unzip_AlignRight", "YGroup3Unzip_Basic", "YGroup3Unzip_ByShorter", "YGroup3Unzip_ByX2Unpack", "YGroup3Unzip_ByX2Zip", "YGroup3Unzip_Move", "YGroup3Unzip_Shuffle", "YGroup3Unzip_ShuffleX", "YGroup3Unzip_ShuffleXImm");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
@@ -927,7 +927,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector128s.GetSupportedMethodList<FuncIn3Out2<Vector128<T>>>("YGroup3Zip_Basic", "YGroup3Zip_ByShorter", "YGroup3Zip_ByX2Unpack", "YGroup3Zip_ByX2Unzip", "YGroup3Zip_Move", "YGroup3Zip_Shuffle", "YGroup3Zip_ShuffleX", "YGroup3Zip_ShuffleXImm");
+            var funcList = Vector128s.GetSupportedMethodList<FuncIn3Out2<Vector128<T>>>("YGroup3Zip_AlignRight", "YGroup3Zip_Basic", "YGroup3Zip_ByShorter", "YGroup3Zip_ByX2Unpack", "YGroup3Zip_ByX2Unzip", "YGroup3Zip_Move", "YGroup3Zip_Shuffle", "YGroup3Zip_ShuffleX", "YGroup3Zip_ShuffleXImm");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
