@@ -127,8 +127,8 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 // 2 b_0 x0 x1 b_1 y0 y1
                 b_0 = AdvSimd.ExtractVector128(a_0, data1, 1);
                 b_1 = AdvSimd.ExtractVector128(data0, a_0, 1);
-                y = b_0;
-                return b_1;
+                y = b_1;
+                return b_0;
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
