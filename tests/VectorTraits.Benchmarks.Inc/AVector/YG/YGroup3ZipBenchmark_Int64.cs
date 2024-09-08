@@ -681,6 +681,17 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             return rt;
         }
 
+        [Benchmark]
+        public void Sum128AdvSimd_AlignRight() {
+            WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128AdvSimd_AlignRight(srcArray, srcArray.Length);
+            CheckResult128("Sum128AdvSimd_AlignRight");
+        }
+
         /// <summary>
         /// Sum YGroup3Zip - Vector128 - AdvSimd - ByX2Unzip.
         /// </summary>
