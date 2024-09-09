@@ -532,7 +532,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128AdvSimd.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits128Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits128AdvSimd.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -588,7 +588,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128AdvSimd.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits128Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits128AdvSimd.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -644,7 +644,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128AdvSimd.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits128Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits128AdvSimd.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -700,7 +700,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128AdvSimd.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits128Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits128AdvSimd.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -760,7 +760,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128PackedSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128PackedSimd.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits128Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits128PackedSimd.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -817,7 +817,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits128Sse.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128Sse.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128Sse.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits128Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits128Sse.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -873,7 +873,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits128Sse.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128Sse.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128Sse.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits128Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits128Sse.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -1226,7 +1226,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Avx2.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits256Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits256Avx2.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -1282,7 +1282,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Avx2.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits256Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits256Avx2.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
@@ -1635,7 +1635,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 vrt = WVectorTraits512Avx512.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits512Avx512.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits512Avx512.Statics.Add(vrt2, vtemp2);
-                vrt3 = WVectorTraits512Base.Statics.Add(vrt3, vtemp3);
+                vrt3 = WVectorTraits512Avx512.Statics.Add(vrt3, vtemp3);
                 p0 = ref Unsafe.Add(ref p0, GroupSize);
             }
             // b) Remainder processs.
