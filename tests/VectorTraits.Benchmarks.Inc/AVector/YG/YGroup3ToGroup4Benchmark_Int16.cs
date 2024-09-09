@@ -78,7 +78,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             // }
             // Reduce.
             vrt = Vector.Add(vrt, vrt1);
-            vrt = Vector.Add(vrt2, vrt3);
+            vrt2 = Vector.Add(vrt2, vrt3);
             vrt = Vector.Add(vrt, vrt2);
             rt = VectorTraitsBase.Statics.Sum(vrt);
             return rt;
@@ -138,7 +138,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             // }
             // Reduce.
             vrt = Vector.Add(vrt, vrt1);
-            vrt = Vector.Add(vrt2, vrt3);
+            vrt2 = Vector.Add(vrt2, vrt3);
             vrt = Vector.Add(vrt, vrt2);
             rt = VectorTraitsBase.Statics.Sum(vrt);
             return rt;
@@ -192,7 +192,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             // }
             // Reduce.
             vrt = Vector.Add(vrt, vrt1);
-            vrt = Vector.Add(vrt2, vrt3);
+            vrt2 = Vector.Add(vrt2, vrt3);
             vrt = Vector.Add(vrt, vrt2);
             rt = VectorTraitsBase.Statics.Sum(vrt);
             return rt;
@@ -249,7 +249,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             // }
             // Reduce.
             vrt = Vector.Add(vrt, vrt1);
-            vrt = Vector.Add(vrt2, vrt3);
+            vrt2 = Vector.Add(vrt2, vrt3);
             vrt = Vector.Add(vrt, vrt2);
             rt = VectorTraitsBase.Statics.Sum(vrt);
             return rt;
