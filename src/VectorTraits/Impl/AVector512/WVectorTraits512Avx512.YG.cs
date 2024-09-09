@@ -2100,23 +2100,21 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ToGroup4(Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup3ToGroup4(Vector512<float> data0, Vector512<float> data1, Vector512<float> data2, out Vector512<float> result1, out Vector512<float> result2, out Vector512<float> result3) {
-                //var d0 = YGroup3ToGroup4(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2, out var d3);
-                //result1 = d1.AsSingle();
-                //result2 = d2.AsSingle();
-                //result3 = d3.AsSingle();
-                //return d0.AsSingle();
-                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+                var d0 = YGroup3ToGroup4(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), out var d1, out var d2, out var d3);
+                result1 = d1.AsSingle();
+                result2 = d2.AsSingle();
+                result3 = d3.AsSingle();
+                return d0.AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ToGroup4(Vector512{double}, Vector512{double}, Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YGroup3ToGroup4(Vector512<double> data0, Vector512<double> data1, Vector512<double> data2, out Vector512<double> result1, out Vector512<double> result2, out Vector512<double> result3) {
-                //var d0 = YGroup3ToGroup4(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2, out var d3);
-                //result1 = d1.AsDouble();
-                //result2 = d2.AsDouble();
-                //result3 = d3.AsDouble();
-                //return d0.AsDouble();
-                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+                var d0 = YGroup3ToGroup4(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), out var d1, out var d2, out var d3);
+                result1 = d1.AsDouble();
+                result2 = d2.AsDouble();
+                result3 = d3.AsDouble();
+                return d0.AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ToGroup4(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
@@ -2148,27 +2146,27 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ToGroup4(Vector512{int}, Vector512{int}, Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YGroup3ToGroup4(Vector512<int> data0, Vector512<int> data1, Vector512<int> data2, out Vector512<int> result1, out Vector512<int> result2, out Vector512<int> result3) {
-                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+                return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ToGroup4(Vector512{uint}, Vector512{uint}, Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YGroup3ToGroup4(Vector512<uint> data0, Vector512<uint> data1, Vector512<uint> data2, out Vector512<uint> result1, out Vector512<uint> result2, out Vector512<uint> result3) {
-                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+                return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ToGroup4(Vector512{long}, Vector512{long}, Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YGroup3ToGroup4(Vector512<long> data0, Vector512<long> data1, Vector512<long> data2, out Vector512<long> result1, out Vector512<long> result2, out Vector512<long> result3) {
-                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+                return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ToGroup4(Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YGroup3ToGroup4(Vector512<ulong> data0, Vector512<ulong> data1, Vector512<ulong> data2, out Vector512<ulong> result1, out Vector512<ulong> result2, out Vector512<ulong> result3) {
-                return YGroup3ToGroup4_ShuffleXImm(data0, data1, data2, out result1, out result2, out result3);
+                return YGroup3ToGroup4_ShuffleX(data0, data1, data2, out result1, out result2, out result3);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup3ToGroup4(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
