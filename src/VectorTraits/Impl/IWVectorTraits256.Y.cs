@@ -758,7 +758,7 @@ namespace Zyl.VectorTraits.Impl {
         /// Types with hardware acceleration when running <c>YGroup3ToGroup4</c> (运行 <c>YGroup3ToGroup4</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
-        /// <para>Inverse function (逆函数): <see cref="YGroup4ToYGroup3_AcceleratedTypes">YGroup4ToYGroup3</see>.</para>
+        /// <para>Inverse function (逆函数): <see cref="YGroup4ToGroup3_AcceleratedTypes">YGroup4ToGroup3</see>.</para>
         /// <para>Sample (示例).</para>
         /// <list type="table">
         ///    <listheader>
@@ -792,7 +792,7 @@ namespace Zyl.VectorTraits.Impl {
         /// </list>
         /// </remarks>
         /// <seealso cref="YGroup3ToGroup4(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
-        /// <seealso cref="YGroup4ToYGroup3_AcceleratedTypes"/>
+        /// <seealso cref="YGroup4ToGroup3_AcceleratedTypes"/>
         TypeCodeFlags YGroup3ToGroup4_AcceleratedTypes { get; }
 
         /// <summary>

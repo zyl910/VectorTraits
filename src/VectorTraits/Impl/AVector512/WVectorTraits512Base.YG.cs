@@ -2175,7 +2175,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                     TypeCodeFlags rt = TypeCodeFlags.None;
 #if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     if (Vector512.IsHardwareAccelerated) {
-                        rt = TypeCodeFlagsUtil.Most32Types;
+                        rt = TypeCodeFlags.Byte | TypeCodeFlags.SByte;
                     }
 #endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
                     return rt;
