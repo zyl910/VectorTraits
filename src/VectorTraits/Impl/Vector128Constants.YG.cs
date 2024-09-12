@@ -2782,11 +2782,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector128<uint> YGroup4ToGroup3_Shuffle_UInt32_1 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
-            get => Vector128.Create((uint)5, 6, 8, 9);
+            get => Vector128.Create((uint)1, 2, 4, 5);
         }
 #else
             get;
-        } = Vector128.Create((uint)5, 6, 8, 9);
+        } = Vector128.Create((uint)1, 2, 4, 5);
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup4ToGroup3 - Shuffle - UInt32 - The index of item 2.</summary>
@@ -2794,11 +2794,11 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector128<uint> YGroup4ToGroup3_Shuffle_UInt32_2 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #if USE_VECTOR_CREATE
-            get => Vector128.Create((uint)10, 12, 13, 14);
+            get => Vector128.Create((uint)2, 4, 5, 6);
         }
 #else
             get;
-        } = Vector128.Create((uint)10, 12, 13, 14);
+        } = Vector128.Create((uint)2, 4, 5, 6);
 #endif // USE_VECTOR_CREATE
 
         /// <summary>YGroup4ToGroup3 - Shuffle - UInt64 - The index of item 0.</summary>
