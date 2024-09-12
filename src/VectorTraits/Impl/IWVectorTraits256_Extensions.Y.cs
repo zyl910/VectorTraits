@@ -1238,6 +1238,127 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3{T}(Vector256{T}, Vector256{T}, Vector256{T}, Vector256{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<T> Result0, Vector256<T> Result1, Vector256<T> Result2) YGroup4ToGroup3<T>(this IWVectorTraits256 athis, Vector256<T> data0, Vector256<T> data1, Vector256<T> data2, Vector256<T> data3) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, float>(), data1.As<T, float>(), data2.As<T, float>(), data3.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>());
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, double>(), data1.As<T, double>(), data2.As<T, double>(), data3.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>());
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, sbyte>(), data1.As<T, sbyte>(), data2.As<T, sbyte>(), data3.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>());
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, byte>(), data1.As<T, byte>(), data2.As<T, byte>(), data3.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>());
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, short>(), data1.As<T, short>(), data2.As<T, short>(), data3.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>());
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, ushort>(), data1.As<T, ushort>(), data2.As<T, ushort>(), data3.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>());
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, int>(), data1.As<T, int>(), data2.As<T, int>(), data3.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>());
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, uint>(), data1.As<T, uint>(), data2.As<T, uint>(), data3.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>());
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, long>(), data1.As<T, long>(), data2.As<T, long>(), data3.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>());
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup4ToGroup3(data0.As<T, ulong>(), data1.As<T, ulong>(), data2.As<T, ulong>(), data3.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>());
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<float> Result0, Vector256<float> Result1, Vector256<float> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, Vector256<float> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<double> Result0, Vector256<double> Result1, Vector256<double> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, Vector256<double> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<sbyte> Result0, Vector256<sbyte> Result1, Vector256<sbyte> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<sbyte> data0, Vector256<sbyte> data1, Vector256<sbyte> data2, Vector256<sbyte> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<byte> Result0, Vector256<byte> Result1, Vector256<byte> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<byte> data0, Vector256<byte> data1, Vector256<byte> data2, Vector256<byte> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{short}, Vector256{short}, Vector256{short}, Vector256{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<short> Result0, Vector256<short> Result1, Vector256<short> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<short> data0, Vector256<short> data1, Vector256<short> data2, Vector256<short> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{ushort}, Vector256{ushort}, Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ushort> Result0, Vector256<ushort> Result1, Vector256<ushort> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<ushort> data0, Vector256<ushort> data1, Vector256<ushort> data2, Vector256<ushort> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<int> Result0, Vector256<int> Result1, Vector256<int> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, Vector256<int> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{uint}, Vector256{uint}, Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<uint> Result0, Vector256<uint> Result1, Vector256<uint> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, Vector256<uint> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<long> Result0, Vector256<long> Result1, Vector256<long> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, Vector256<long> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vector256s.YGroup4ToGroup3(Vector256{ulong}, Vector256{ulong}, Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector256<ulong> Result0, Vector256<ulong> Result1, Vector256<ulong> Result2) YGroup4ToGroup3(this IWVectorTraits256 athis, Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, Vector256<ulong> data3) {
+            var rt0 = athis.YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+
 #if BCL_TYPE_INT128
 
         /// <inheritdoc cref="Vector256s.YGroup4Unzip(Vector256{ExInt128}, Vector256{ExInt128}, Vector256{ExInt128}, Vector256{ExInt128}, out Vector256{ExInt128}, out Vector256{ExInt128}, out Vector256{ExInt128})"/>

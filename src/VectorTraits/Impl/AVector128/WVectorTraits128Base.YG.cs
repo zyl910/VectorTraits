@@ -4666,6 +4666,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
 
 #endif // VECTOR_HAS_METHOD
 
+
             /// <inheritdoc cref="IWVectorTraits128.YGroup4Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Unzip_AcceleratedTypes {
                 get {
