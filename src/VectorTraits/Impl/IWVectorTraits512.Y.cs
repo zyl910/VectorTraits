@@ -755,6 +755,8 @@ namespace Zyl.VectorTraits.Impl {
         /// </remarks>
         /// <seealso cref="YGroup3ToGroup4(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
         /// <seealso cref="YGroup4ToGroup3_AcceleratedTypes"/>
+        /// <seealso cref="YGroup3Unzip_AcceleratedTypes"/>
+        /// <seealso cref="YGroup4Zip_AcceleratedTypes"/>
         TypeCodeFlags YGroup3ToGroup4_AcceleratedTypes { get; }
 
         /// <summary>
@@ -1142,6 +1144,91 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="data5">Returns part 5 of the interleaved data (返回交织后数据的第5部分).</param>
         /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
         Vector512<T> YGroup3ZipX2_Bit128<T>(Vector512<T> x, Vector512<T> xB, Vector512<T> y, Vector512<T> yB, Vector512<T> z, Vector512<T> zB, out Vector512<T> data1, out Vector512<T> data2, out Vector512<T> data3, out Vector512<T> data4, out Vector512<T> data5) where T : struct;
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup4ToGroup3</c> (运行 <c>YGroup4ToGroup3</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para>Inverse function (逆函数): <see cref="YGroup3ToGroup4_AcceleratedTypes">YGroup4ToYGroup4</see>.</para>
+        /// <para>Sample (示例).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Elements</term>
+        ///        <description>Result</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>1</term>
+        ///        <description><c>f({x[0]}, {y[0]}, {z[0]}, w[0]) = ({x[0]}, {y[0]}, {z[0]})</c>. (Fallback)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>2</term>
+        ///        <description><c>f({x[0], y[0]}, {z[0], w[0]}, {x[1], y[1]}, {z[1], w[1]}) = ({x[0], y[0]}, {z[0], x[1]}, {y[1], z[1]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>4</term>
+        ///        <description><c>f({x[0], y[0], z[0], w[0]}, {x[1], y[1], z[1], w[1]}, {x[2], y[2], z[2], w[2]}, {x[3], y[3], z[3], w[3]}) = ({x[0], y[0], z[0], x[1]}, {y[1], z[1], x[2], y[2]}, {z[2], x[3], y[3], z[3]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>8</term>
+        ///        <description><c>f({x[0], y[0], z[0], w[0], x[1], y[1], z[1], w[1]}, {x[2], y[2], z[2], w[2], x[3], y[3], z[3], w[3]}, {x[4], y[4], z[4], w[4], x[5], y[5], z[5], w[5]}, {x[6], y[6], z[6], w[6], x[7], y[7], z[7], w[7]}) = ({x[0], y[0], z[0], x[1], y[1], z[1], x[2], y[2]}, {z[2], x[3], y[3], z[3], x[4], y[4], z[4], x[5]}, {y[5], z[5], x[6], y[6], z[6], x[7], y[7], z[7]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>16</term>
+        ///        <description><c>f({x[0], y[0], z[0], w[0], x[1], y[1], z[1], w[1], x[2], y[2], z[2], w[2], x[3], y[3], z[3], w[3]}, {x[4], y[4], z[4], w[4], x[5], y[5], z[5], w[5], x[6], y[6], z[6], w[6], x[7], y[7], z[7], w[7]}, {x[8], y[8], z[8], w[8], x[9], y[9], z[9], w[9], x[10], y[10], z[10], w[10], x[11], y[11], z[11], w[11]}, {x[12], y[12], z[12], w[12], x[13], y[13], z[13], w[13], x[14], y[14], z[14], w[14], x[15], y[15], z[15], w[15]}) = ({x[0], y[0], z[0], x[1], y[1], z[1], x[2], y[2], z[2], x[3], y[3], z[3], x[4], y[4], z[4], x[5]}, {y[5], z[5], x[6], y[6], z[6], x[7], y[7], z[7], x[8], y[8], z[8], x[9], y[9], z[9], x[10], y[10]}, {z[10], x[11], y[11], z[11], x[12], y[12], z[12], x[13], y[13], z[13], x[14], y[14], z[14], x[15], y[15], z[15]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>...</term>
+        ///        <description>...</description>
+        ///    </item>
+        /// </list>
+        /// </remarks>
+        /// <seealso cref="YGroup4ToGroup3(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        /// <seealso cref="YGroup3ToGroup4_AcceleratedTypes"/>
+        /// <seealso cref="YGroup3Zip_AcceleratedTypes"/>
+        /// <seealso cref="YGroup4Unzip_AcceleratedTypes"/>
+        TypeCodeFlags YGroup4ToGroup3_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert a 4-element group, to a 3-element group. It also converts packed RGBA pixel data to packed RGB pixel data (将4-元素组, 转为3-元素组. 它还能将 已打包的RGBA像素数据, 转换为 已打包的RGB像素数据).
+        /// Mnemonic: View for group: <c>(result0, result1, result2) = YGroup3Zip(YGroup4Unzip(data0, data1, data2, data3)))</c>. View for element: <c>element_ref(i, result0, result1, result2) := element_ref((i/3)*4+(i%3), data0, data1, data2, data3)</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 4-element groups - Part 0 (由4元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 4-element groups - Part 1 (由4元素组所组成的向量 - 第1部分).</param>
+        /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
+        /// <param name="data3">A vector made of 4-element groups - Part 3 (由4元素组所组成的向量 - 第3部分).</param>
+        /// <param name="result1">Returns part 1 of the converted data (返回转换后数据的第1部分).</param>
+        /// <param name="result2">Returns part 2 of the converted data (返回转换后数据的第2部分).</param>
+        /// <returns>Returns part 0 of the converted data (返回转换后数据的第0部分).</returns>
+        /// <seealso cref="YGroup4ToGroup3_AcceleratedTypes"/>
+        Vector512<float> YGroup4ToGroup3(Vector512<float> data0, Vector512<float> data1, Vector512<float> data2, Vector512<float> data3, out Vector512<float> result1, out Vector512<float> result2);
+
+        /// <inheritdoc cref="YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<double> YGroup4ToGroup3(Vector512<double> data0, Vector512<double> data1, Vector512<double> data2, Vector512<double> data3, out Vector512<double> result1, out Vector512<double> result2);
+
+        /// <inheritdoc cref="YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<sbyte> YGroup4ToGroup3(Vector512<sbyte> data0, Vector512<sbyte> data1, Vector512<sbyte> data2, Vector512<sbyte> data3, out Vector512<sbyte> result1, out Vector512<sbyte> result2);
+
+        /// <inheritdoc cref="YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<byte> YGroup4ToGroup3(Vector512<byte> data0, Vector512<byte> data1, Vector512<byte> data2, Vector512<byte> data3, out Vector512<byte> result1, out Vector512<byte> result2);
+
+        /// <inheritdoc cref="YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<short> YGroup4ToGroup3(Vector512<short> data0, Vector512<short> data1, Vector512<short> data2, Vector512<short> data3, out Vector512<short> result1, out Vector512<short> result2);
+
+        /// <inheritdoc cref="YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<ushort> YGroup4ToGroup3(Vector512<ushort> data0, Vector512<ushort> data1, Vector512<ushort> data2, Vector512<ushort> data3, out Vector512<ushort> result1, out Vector512<ushort> result2);
+
+        /// <inheritdoc cref="YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<int> YGroup4ToGroup3(Vector512<int> data0, Vector512<int> data1, Vector512<int> data2, Vector512<int> data3, out Vector512<int> result1, out Vector512<int> result2);
+
+        /// <inheritdoc cref="YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<uint> YGroup4ToGroup3(Vector512<uint> data0, Vector512<uint> data1, Vector512<uint> data2, Vector512<uint> data3, out Vector512<uint> result1, out Vector512<uint> result2);
+
+        /// <inheritdoc cref="YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<long> YGroup4ToGroup3(Vector512<long> data0, Vector512<long> data1, Vector512<long> data2, Vector512<long> data3, out Vector512<long> result1, out Vector512<long> result2);
+
+        /// <inheritdoc cref="YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<ulong> YGroup4ToGroup3(Vector512<ulong> data0, Vector512<ulong> data1, Vector512<ulong> data2, Vector512<ulong> data3, out Vector512<ulong> result1, out Vector512<ulong> result2);
 
 
         /// <summary>

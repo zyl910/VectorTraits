@@ -1216,6 +1216,82 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
             }
         }
 
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YGroup4ToGroup3Test<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits512> instances = Vector512s.TraitsInstances;
+            foreach (IWVectorTraits512 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup4ToGroup3_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vector512s.GetSupportedMethodList<FuncIn4Out2<Vector512<T>>>("YGroup4ToGroup3_AlignRight", "YGroup4ToGroup3_Basic", "YGroup4ToGroup3_Move", "YGroup4ToGroup3_Shuffle", "YGroup4ToGroup3_ShuffleX", "YGroup4ToGroup3_ShuffleXImm", "YGroup4ToGroup3_Unzip");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
+            bool[] funcListUnsupported = new bool[funcList.Count];
+            writer.WriteLine();
+            // run.
+            Vector512<T>[] samples = {
+                Vector512s<T>.Serial,
+                Vector512s<T>.SerialDesc,
+                Vector512s<T>.SerialNegative,
+                Vector512s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vector512s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            Vector512<T> data2 = Vector512s<T>.SerialDesc;
+            Vector512<T> data3 = Vector512s<T>.SerialNegative;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector512<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector512<T> data1 = samples[j];
+                    Vector512<T> dst0, dst1, dst2;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (Vector512<T> expected0, Vector512<T> expected1, Vector512<T> expected2) = Vector512s.YGroup4ToGroup3(data0, data1, data2, data3);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}, {2}, {3}): {4}, {5}, {6}", data0, data1, data2, data3, expected0, expected1, expected2));
+                    }
+                    foreach (IWVectorTraits512 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        (dst0, dst1, dst2) = instance.YGroup4ToGroup3(data0, data1, data2, data3);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
+                    }
+                    for (int f = 0; f < funcList.Count; f++) {
+                        if (funcListUnsupported[f]) continue;
+                        var func = funcList[f];
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        try {
+                            dst0 = func(data0, data1, data2, data3, out dst1, out dst2);
+                        } catch (NotSupportedException ex) {
+                            funcListUnsupported[f] = true;
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}, {3}, {4}. {5}", funcName, data0, data1, data2, data3, ex.Message));
+                            continue;
+                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}, {5}, {6}", expected0, dst0, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}, {5}, {6}", expected1, dst1, funcName, data0, data1, data2, data3));
+                        ClassicAssert.IsTrue(expected2.BitEquals(dst2), VectorTextUtil.Format("{0} != {1}. Part 2 on {2}: {3}, {4}, {5}, {6}", expected2, dst2, funcName, data0, data1, data2, data3));
+                    } // funcList
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
 
         [TestCase((float)1)]
         [TestCase((double)2)]

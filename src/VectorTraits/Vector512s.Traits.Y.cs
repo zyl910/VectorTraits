@@ -1782,6 +1782,122 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3_AcceleratedTypes"/>
+        public static TypeCodeFlags YGroup4ToGroup3_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YGroup4ToGroup3_AcceleratedTypes;
+#else
+                return _instance.YGroup4ToGroup3_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{float}, Vector512{float}, Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<float> YGroup4ToGroup3(Vector512<float> data0, Vector512<float> data1, Vector512<float> data2, Vector512<float> data3, out Vector512<float> result1, out Vector512<float> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{double}, Vector512{double}, Vector512{double}, Vector512{double}, out Vector512{double}, out Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<double> YGroup4ToGroup3(Vector512<double> data0, Vector512<double> data1, Vector512<double> data2, Vector512<double> data3, out Vector512<double> result1, out Vector512<double> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<sbyte> YGroup4ToGroup3(Vector512<sbyte> data0, Vector512<sbyte> data1, Vector512<sbyte> data2, Vector512<sbyte> data3, out Vector512<sbyte> result1, out Vector512<sbyte> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<byte> YGroup4ToGroup3(Vector512<byte> data0, Vector512<byte> data1, Vector512<byte> data2, Vector512<byte> data3, out Vector512<byte> result1, out Vector512<byte> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{short}, Vector512{short}, Vector512{short}, Vector512{short}, out Vector512{short}, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<short> YGroup4ToGroup3(Vector512<short> data0, Vector512<short> data1, Vector512<short> data2, Vector512<short> data3, out Vector512<short> result1, out Vector512<short> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ushort> YGroup4ToGroup3(Vector512<ushort> data0, Vector512<ushort> data1, Vector512<ushort> data2, Vector512<ushort> data3, out Vector512<ushort> result1, out Vector512<ushort> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{int}, Vector512{int}, Vector512{int}, Vector512{int}, out Vector512{int}, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<int> YGroup4ToGroup3(Vector512<int> data0, Vector512<int> data1, Vector512<int> data2, Vector512<int> data3, out Vector512<int> result1, out Vector512<int> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{uint}, Vector512{uint}, Vector512{uint}, Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<uint> YGroup4ToGroup3(Vector512<uint> data0, Vector512<uint> data1, Vector512<uint> data2, Vector512<uint> data3, out Vector512<uint> result1, out Vector512<uint> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{long}, Vector512{long}, Vector512{long}, Vector512{long}, out Vector512{long}, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<long> YGroup4ToGroup3(Vector512<long> data0, Vector512<long> data1, Vector512<long> data2, Vector512<long> data3, out Vector512<long> result1, out Vector512<long> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup4ToGroup3(Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector512<ulong> YGroup4ToGroup3(Vector512<ulong> data0, Vector512<ulong> data1, Vector512<ulong> data2, Vector512<ulong> data3, out Vector512<ulong> result1, out Vector512<ulong> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#else
+            return _instance.YGroup4ToGroup3(data0, data1, data2, data3, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits512.YGroup4Unzip_AcceleratedTypes"/>
         public static TypeCodeFlags YGroup4Unzip_AcceleratedTypes {
             get {
