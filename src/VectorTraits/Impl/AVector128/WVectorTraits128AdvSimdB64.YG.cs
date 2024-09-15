@@ -2485,14 +2485,22 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup4ToGroup3(Vector128{int}, Vector128{int}, Vector128{int}, Vector128{int}, out Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YGroup4ToGroup3(Vector128<int> data0, Vector128<int> data1, Vector128<int> data2, Vector128<int> data3, out Vector128<int> result1, out Vector128<int> result2) {
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup4ToGroup3_ShuffleX(data0, data1, data2, data3, out result1, out result2);
+#else
                 return YGroup4ToGroup3_AlignRight(data0, data1, data2, data3, out result1, out result2);
+#endif // ARM_ALLOW_LOOKUP_X
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup4ToGroup3(Vector128{uint}, Vector128{uint}, Vector128{uint}, Vector128{uint}, out Vector128{uint}, out Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup4ToGroup3(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, Vector128<uint> data3, out Vector128<uint> result1, out Vector128<uint> result2) {
+#if ARM_ALLOW_LOOKUP_X
+                return YGroup4ToGroup3_ShuffleX(data0, data1, data2, data3, out result1, out result2);
+#else
                 return YGroup4ToGroup3_AlignRight(data0, data1, data2, data3, out result1, out result2);
+#endif // ARM_ALLOW_LOOKUP_X
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup4ToGroup3(Vector128{long}, Vector128{long}, Vector128{long}, Vector128{long}, out Vector128{long}, out Vector128{long})"/>

@@ -5180,21 +5180,21 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup4ToGroup3(Vector256{float}, Vector256{float}, Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YGroup4ToGroup3(Vector256<float> data0, Vector256<float> data1, Vector256<float> data2, Vector256<float> data3, out Vector256<float> result1, out Vector256<float> result2) {
-                //var d0 = YGroup4ToGroup3(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), data3.AsUInt32(), out var d1, out var d2);
-                //result1 = d1.AsSingle();
-                //result2 = d2.AsSingle();
-                //return d0.AsSingle();
-                return YGroup4ToGroup3_ShuffleXImm(data0, data1, data2, data3, out result1, out result2);
+                var d0 = YGroup4ToGroup3(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), data3.AsUInt32(), out var d1, out var d2);
+                result1 = d1.AsSingle();
+                result2 = d2.AsSingle();
+                return d0.AsSingle();
+                //return YGroup4ToGroup3_ShuffleXImm(data0, data1, data2, data3, out result1, out result2);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup4ToGroup3(Vector256{double}, Vector256{double}, Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YGroup4ToGroup3(Vector256<double> data0, Vector256<double> data1, Vector256<double> data2, Vector256<double> data3, out Vector256<double> result1, out Vector256<double> result2) {
-                //var d0 = YGroup4ToGroup3(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), data3.AsUInt64(), out var d1, out var d2);
-                //result1 = d1.AsDouble();
-                //result2 = d2.AsDouble();
-                //return d0.AsDouble();
-                return YGroup4ToGroup3_ShuffleXImm(data0, data1, data2, data3, out result1, out result2);
+                var d0 = YGroup4ToGroup3(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), data3.AsUInt64(), out var d1, out var d2);
+                result1 = d1.AsDouble();
+                result2 = d2.AsDouble();
+                return d0.AsDouble();
+                //return YGroup4ToGroup3_ShuffleXImm(data0, data1, data2, data3, out result1, out result2);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup4ToGroup3(Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
@@ -5246,6 +5246,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup4ToGroup3(Vector256{int}, Vector256{int}, Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<int> YGroup4ToGroup3(Vector256<int> data0, Vector256<int> data1, Vector256<int> data2, Vector256<int> data3, out Vector256<int> result1, out Vector256<int> result2) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup4ToGroup3_ShuffleX(data0, data1, data2, data3, out result1, out result2);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup4ToGroup3_ShuffleXImm(data0, data1, data2, data3, out result1, out result2);
             }
 
@@ -5253,12 +5258,22 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<uint> YGroup4ToGroup3(Vector256<uint> data0, Vector256<uint> data1, Vector256<uint> data2, Vector256<uint> data3, out Vector256<uint> result1, out Vector256<uint> result2) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup4ToGroup3_ShuffleX(data0, data1, data2, data3, out result1, out result2);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup4ToGroup3_ShuffleXImm(data0, data1, data2, data3, out result1, out result2);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup4ToGroup3(Vector256{long}, Vector256{long}, Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup4ToGroup3(Vector256<long> data0, Vector256<long> data1, Vector256<long> data2, Vector256<long> data3, out Vector256<long> result1, out Vector256<long> result2) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup4ToGroup3_ShuffleX(data0, data1, data2, data3, out result1, out result2);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup4ToGroup3_ShuffleXImm(data0, data1, data2, data3, out result1, out result2);
             }
 
@@ -5266,6 +5281,11 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup4ToGroup3(Vector256<ulong> data0, Vector256<ulong> data1, Vector256<ulong> data2, Vector256<ulong> data3, out Vector256<ulong> result1, out Vector256<ulong> result2) {
+#if NET8_0_OR_GREATER
+                if (Avx512F.VL.IsSupported) {
+                    return YGroup4ToGroup3_ShuffleX(data0, data1, data2, data3, out result1, out result2);
+                }
+#endif // NET8_0_OR_GREATER
                 return YGroup4ToGroup3_ShuffleXImm(data0, data1, data2, data3, out result1, out result2);
             }
 
