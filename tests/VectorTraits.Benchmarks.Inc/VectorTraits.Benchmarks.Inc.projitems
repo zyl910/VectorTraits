@@ -98,6 +98,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup3ZipBenchmark_Int16.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup3ZipBenchmark_Int32.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup3ZipBenchmark_Int64.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup4ToGroup3Benchmark_Byte.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup4ToGroup3Benchmark_Int16.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup4ToGroup3Benchmark_Int32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup4ToGroup3Benchmark_Int64.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup4UnzipBenchmark_Byte.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup4UnzipBenchmark_Int128.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AVector\YG\YGroup4UnzipBenchmark_Int16.cs" />
