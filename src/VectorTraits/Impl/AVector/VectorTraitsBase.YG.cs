@@ -4245,6 +4245,280 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup4ToGroup3_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector.IsHardwareAccelerated) {
+                        rt = TypeCodeFlags.Byte | TypeCodeFlags.SByte;
+                    }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{float}, Vector{float}, Vector{float}, Vector{float}, out Vector{float}, out Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup4ToGroup3(Vector<float> data0, Vector<float> data1, Vector<float> data2, Vector<float> data3, out Vector<float> result1, out Vector<float> result2) {
+                var d0 = YGroup4ToGroup3(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), data3.AsUInt32(), out var d1, out var d2);
+                result1 = d1.AsSingle();
+                result2 = d2.AsSingle();
+                return d0.AsSingle();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{double}, Vector{double}, Vector{double}, Vector{double}, out Vector{double}, out Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YGroup4ToGroup3(Vector<double> data0, Vector<double> data1, Vector<double> data2, Vector<double> data3, out Vector<double> result1, out Vector<double> result2) {
+                var d0 = YGroup4ToGroup3(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), data3.AsUInt64(), out var d1, out var d2);
+                result1 = d1.AsDouble();
+                result2 = d2.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup4ToGroup3(Vector<sbyte> data0, Vector<sbyte> data1, Vector<sbyte> data2, Vector<sbyte> data3, out Vector<sbyte> result1, out Vector<sbyte> result2) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup4ToGroup3_Unzip(data0, data1, data2, data3, out result1, out result2);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup4ToGroup3(Vector<byte> data0, Vector<byte> data1, Vector<byte> data2, Vector<byte> data3, out Vector<byte> result1, out Vector<byte> result2) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup4ToGroup3_Unzip(data0, data1, data2, data3, out result1, out result2);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{short}, Vector{short}, Vector{short}, Vector{short}, out Vector{short}, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup4ToGroup3(Vector<short> data0, Vector<short> data1, Vector<short> data2, Vector<short> data3, out Vector<short> result1, out Vector<short> result2) {
+                return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup4ToGroup3(Vector<ushort> data0, Vector<ushort> data1, Vector<ushort> data2, Vector<ushort> data3, out Vector<ushort> result1, out Vector<ushort> result2) {
+                return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{int}, Vector{int}, Vector{int}, Vector{int}, out Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup4ToGroup3(Vector<int> data0, Vector<int> data1, Vector<int> data2, Vector<int> data3, out Vector<int> result1, out Vector<int> result2) {
+                return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup4ToGroup3(Vector<uint> data0, Vector<uint> data1, Vector<uint> data2, Vector<uint> data3, out Vector<uint> result1, out Vector<uint> result2) {
+                return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{long}, Vector{long}, Vector{long}, Vector{long}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup4ToGroup3(Vector<long> data0, Vector<long> data1, Vector<long> data2, Vector<long> data3, out Vector<long> result1, out Vector<long> result2) {
+                return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup4ToGroup3(Vector<ulong> data0, Vector<ulong> data1, Vector<ulong> data2, Vector<ulong> data3, out Vector<ulong> result1, out Vector<ulong> result2) {
+                return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup4ToGroup3_Basic(Vector<sbyte> data0, Vector<sbyte> data1, Vector<sbyte> data2, Vector<sbyte> data3, out Vector<sbyte> result1, out Vector<sbyte> result2) {
+                var d0 = YGroup4ToGroup3_Basic(data0.AsByte(), data1.AsByte(), data2.AsByte(), data3.AsByte(), out var d1, out var d2);
+                result1 = d1.AsSByte();
+                result2 = d2.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup4ToGroup3_Basic(Vector<byte> data0, Vector<byte> data1, Vector<byte> data2, Vector<byte> data3, out Vector<byte> result1, out Vector<byte> result2) {
+                Span<Vector<byte>> src = [data0, data1, data2, data3];
+                Span<Vector<byte>> dst = stackalloc Vector<byte>[3];
+                Span<byte> p = MemoryMarshal.Cast<Vector<byte>, byte>(src);
+                Span<byte> q = MemoryMarshal.Cast<Vector<byte>, byte>(dst);
+                for (int i = 0; i < Vector<byte>.Count; ++i) {
+                    q[0] = p[0];
+                    q[1] = p[1];
+                    q[2] = p[2];
+                    p = p.Slice(4);
+                    q = q.Slice(3);
+                }
+                result1 = dst[1];
+                result2 = dst[2];
+                return dst[0];
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{short}, Vector{short}, Vector{short}, Vector{short}, out Vector{short}, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup4ToGroup3_Basic(Vector<short> data0, Vector<short> data1, Vector<short> data2, Vector<short> data3, out Vector<short> result1, out Vector<short> result2) {
+                var d0 = YGroup4ToGroup3_Basic(data0.AsUInt16(), data1.AsUInt16(), data2.AsUInt16(), data3.AsUInt16(), out var d1, out var d2);
+                result1 = d1.AsInt16();
+                result2 = d2.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup4ToGroup3_Basic(Vector<ushort> data0, Vector<ushort> data1, Vector<ushort> data2, Vector<ushort> data3, out Vector<ushort> result1, out Vector<ushort> result2) {
+                Span<Vector<ushort>> src = [data0, data1, data2, data3];
+                Span<Vector<ushort>> dst = stackalloc Vector<ushort>[3];
+                Span<ushort> p = MemoryMarshal.Cast<Vector<ushort>, ushort>(src);
+                Span<ushort> q = MemoryMarshal.Cast<Vector<ushort>, ushort>(dst);
+                for (int i = 0; i < Vector<ushort>.Count; ++i) {
+                    q[0] = p[0];
+                    q[1] = p[1];
+                    q[2] = p[2];
+                    p = p.Slice(4);
+                    q = q.Slice(3);
+                }
+                result1 = dst[1];
+                result2 = dst[2];
+                return dst[0];
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{int}, Vector{int}, Vector{int}, Vector{int}, out Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup4ToGroup3_Basic(Vector<int> data0, Vector<int> data1, Vector<int> data2, Vector<int> data3, out Vector<int> result1, out Vector<int> result2) {
+                var d0 = YGroup4ToGroup3_Basic(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), data3.AsUInt32(), out var d1, out var d2);
+                result1 = d1.AsInt32();
+                result2 = d2.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup4ToGroup3_Basic(Vector<uint> data0, Vector<uint> data1, Vector<uint> data2, Vector<uint> data3, out Vector<uint> result1, out Vector<uint> result2) {
+                Span<Vector<uint>> src = [data0, data1, data2, data3];
+                Span<Vector<uint>> dst = stackalloc Vector<uint>[3];
+                Span<uint> p = MemoryMarshal.Cast<Vector<uint>, uint>(src);
+                Span<uint> q = MemoryMarshal.Cast<Vector<uint>, uint>(dst);
+                for (int i = 0; i < Vector<uint>.Count; ++i) {
+                    q[0] = p[0];
+                    q[1] = p[1];
+                    q[2] = p[2];
+                    p = p.Slice(4);
+                    q = q.Slice(3);
+                }
+                result1 = dst[1];
+                result2 = dst[2];
+                return dst[0];
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{long}, Vector{long}, Vector{long}, Vector{long}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup4ToGroup3_Basic(Vector<long> data0, Vector<long> data1, Vector<long> data2, Vector<long> data3, out Vector<long> result1, out Vector<long> result2) {
+                var d0 = YGroup4ToGroup3_Basic(data0.AsUInt64(), data1.AsUInt64(), data2.AsUInt64(), data3.AsUInt64(), out var d1, out var d2);
+                result1 = d1.AsInt64();
+                result2 = d2.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{ulong}, Vector{ulong}, Vector{ulong}, Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup4ToGroup3_Basic(Vector<ulong> data0, Vector<ulong> data1, Vector<ulong> data2, Vector<ulong> data3, out Vector<ulong> result1, out Vector<ulong> result2) {
+                Span<Vector<ulong>> src = [data0, data1, data2, data3];
+                Span<Vector<ulong>> dst = stackalloc Vector<ulong>[3];
+                Span<ulong> p = MemoryMarshal.Cast<Vector<ulong>, ulong>(src);
+                Span<ulong> q = MemoryMarshal.Cast<Vector<ulong>, ulong>(dst);
+                for (int i = 0; i < Vector<ulong>.Count; ++i) {
+                    q[0] = p[0];
+                    q[1] = p[1];
+                    q[2] = p[2];
+                    p = p.Slice(4);
+                    q = q.Slice(3);
+                }
+                result1 = dst[1];
+                result2 = dst[2];
+                return dst[0];
+            }
+
+#if VECTOR_HAS_METHOD
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup4ToGroup3_Unzip(Vector<sbyte> data0, Vector<sbyte> data1, Vector<sbyte> data2, Vector<sbyte> data3, out Vector<sbyte> result1, out Vector<sbyte> result2) {
+                var d0 = YGroup4ToGroup3_Unzip(data0.AsByte(), data1.AsByte(), data2.AsByte(), data3.AsByte(), out var d1, out var d2);
+                result1 = d1.AsSByte();
+                result2 = d2.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup4ToGroup3_Unzip(Vector<byte> data0, Vector<byte> data1, Vector<byte> data2, Vector<byte> data3, out Vector<byte> result1, out Vector<byte> result2) {
+                var a_0 = YGroup4Unzip(data0, data1, data2, data3, out var a_1, out var a_2, out _);
+                var b_0 = YGroup3Zip(a_0, a_1, a_2, out var b_1, out var b_2);
+                result1 = b_1;
+                result2 = b_2;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{short}, Vector{short}, Vector{short}, Vector{short}, out Vector{short}, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup4ToGroup3_Unzip(Vector<short> data0, Vector<short> data1, Vector<short> data2, Vector<short> data3, out Vector<short> result1, out Vector<short> result2) {
+                var d0 = YGroup4ToGroup3_Unzip(data0.AsUInt16(), data1.AsUInt16(), data2.AsUInt16(), data3.AsUInt16(), out var d1, out var d2);
+                result1 = d1.AsInt16();
+                result2 = d2.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{ushort}, Vector{ushort}, Vector{ushort}, Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup4ToGroup3_Unzip(Vector<ushort> data0, Vector<ushort> data1, Vector<ushort> data2, Vector<ushort> data3, out Vector<ushort> result1, out Vector<ushort> result2) {
+                var a_0 = YGroup4Unzip(data0, data1, data2, data3, out var a_1, out var a_2, out _);
+                var b_0 = YGroup3Zip(a_0, a_1, a_2, out var b_1, out var b_2);
+                result1 = b_1;
+                result2 = b_2;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{int}, Vector{int}, Vector{int}, Vector{int}, out Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup4ToGroup3_Unzip(Vector<int> data0, Vector<int> data1, Vector<int> data2, Vector<int> data3, out Vector<int> result1, out Vector<int> result2) {
+                var d0 = YGroup4ToGroup3_Unzip(data0.AsUInt32(), data1.AsUInt32(), data2.AsUInt32(), data3.AsUInt32(), out var d1, out var d2);
+                result1 = d1.AsInt32();
+                result2 = d2.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{uint}, Vector{uint}, Vector{uint}, Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup4ToGroup3_Unzip(Vector<uint> data0, Vector<uint> data1, Vector<uint> data2, Vector<uint> data3, out Vector<uint> result1, out Vector<uint> result2) {
+                var a_0 = YGroup4Unzip(data0, data1, data2, data3, out var a_1, out var a_2, out _);
+                var b_0 = YGroup3Zip(a_0, a_1, a_2, out var b_1, out var b_2);
+                result1 = b_1;
+                result2 = b_2;
+                return b_0;
+            }
+
+#endif // VECTOR_HAS_METHOD
+
+
             /// <inheritdoc cref="IVectorTraits.YGroup4Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup4Unzip_AcceleratedTypes {
                 get {
