@@ -130,5 +130,21 @@ namespace Zyl.VectorTraits.Extensions.SameW {
             return Unsafe.As<Vector<T>, Vector<nuint>>(ref value);
 #endif // NET6_0_OR_GREATER
         }
+
+#if NET6_0_OR_GREATER
+#else
+        /// <summary>
+        /// Reinterprets a <see langword="Vector&lt;TFrom&gt;" /> as a new <see langword="Vector&lt;TTo&gt;" /> (将 <see langword="Vector&lt;TFrom&gt;" /> 重新解释为新的 <see langword="Vector&lt;TTo&gt;" />).
+        /// </summary>
+        /// <typeparam name="TFrom">The type of the input vector (输入向量的类型).</typeparam>
+        /// <typeparam name="TTo">The type of the vector vector should be reinterpreted as (向量 vector 的类型应重新解释为).</typeparam>
+        /// <param name="vector">The vector to reinterpret (要重新解释的向量).</param>
+        /// <returns>vector reinterpreted as a new <see cref="Vector{T}"/> (重新解释后的 vector).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector<TTo> As<TFrom, TTo>(this Vector<TFrom> vector) where TFrom : struct where TTo : struct {
+            return Unsafe.As<Vector<TFrom>, Vector<TTo>>(ref vector);
+        }
+#endif // NET6_0_OR_GREATER
+
     }
 }
