@@ -3998,7 +3998,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup4ToGroup3_AlignRight(Vector128<uint> data0, Vector128<uint> data1, Vector128<uint> data2, Vector128<uint> data3, out Vector128<uint> result1, out Vector128<uint> result2) {
-                Vector128<uint> a_0, a_1, a_2, a_3, b_0, b_1, b_2;
+                Vector128<uint> a_0, a_1, a_2, b_0, b_1, b_2;
                 // 0 data0 x0 y0 z0 w0 data1 x1 y1 z1 w1 data2 x2 y2 z2 w2 data3 x3 y3 z3 w3
                 // 1 a_0 w0 x0 y0 z0 a_1 w1 x1 y1 z1 a_2 w2 x2 y2 z2
                 a_0 = AdvSimd.ExtractVector128(data0, data0, 3);
