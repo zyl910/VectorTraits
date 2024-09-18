@@ -23,35 +23,35 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         public static (Vector<T> Result0, Vector<T> Result1) YShuffleG4X2<T>(this IVectorTraits athis, Vector<T> source0, Vector<T> source1, [ConstantExpected] ShuffleControlG4 control) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<float>)(object)source0, (Vector<float>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, float>(), source1.As<T, float>(), control);
+                return (result0.As<float, T>(), result1.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<double>)(object)source0, (Vector<double>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, double>(), source1.As<T, double>(), control);
+                return (result0.As<double, T>(), result1.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<sbyte>)(object)source0, (Vector<sbyte>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, sbyte>(), source1.As<T, sbyte>(), control);
+                return (result0.As<sbyte, T>(), result1.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<byte>)(object)source0, (Vector<byte>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, byte>(), source1.As<T, byte>(), control);
+                return (result0.As<byte, T>(), result1.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<short>)(object)source0, (Vector<short>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, short>(), source1.As<T, short>(), control);
+                return (result0.As<short, T>(), result1.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<ushort>)(object)source0, (Vector<ushort>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, ushort>(), source1.As<T, ushort>(), control);
+                return (result0.As<ushort, T>(), result1.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<int>)(object)source0, (Vector<int>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, int>(), source1.As<T, int>(), control);
+                return (result0.As<int, T>(), result1.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<uint>)(object)source0, (Vector<uint>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, uint>(), source1.As<T, uint>(), control);
+                return (result0.As<uint, T>(), result1.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<long>)(object)source0, (Vector<long>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, long>(), source1.As<T, long>(), control);
+                return (result0.As<long, T>(), result1.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2((Vector<ulong>)(object)source0, (Vector<ulong>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2(source0.As<T, ulong>(), source1.As<T, ulong>(), control);
+                return (result0.As<ulong, T>(), result1.As<ulong, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -142,35 +142,35 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         public static (Vector<T> Result0, Vector<T> Result1) YShuffleG4X2_Const<T>(this IVectorTraits athis, Vector<T> source0, Vector<T> source1, [ConstantExpected] ShuffleControlG4 control) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<float>)(object)source0, (Vector<float>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, float>(), source1.As<T, float>(), control);
+                return (result0.As<float, T>(), result1.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<double>)(object)source0, (Vector<double>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, double>(), source1.As<T, double>(), control);
+                return (result0.As<double, T>(), result1.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<sbyte>)(object)source0, (Vector<sbyte>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, sbyte>(), source1.As<T, sbyte>(), control);
+                return (result0.As<sbyte, T>(), result1.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<byte>)(object)source0, (Vector<byte>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, byte>(), source1.As<T, byte>(), control);
+                return (result0.As<byte, T>(), result1.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<short>)(object)source0, (Vector<short>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, short>(), source1.As<T, short>(), control);
+                return (result0.As<short, T>(), result1.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<ushort>)(object)source0, (Vector<ushort>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, ushort>(), source1.As<T, ushort>(), control);
+                return (result0.As<ushort, T>(), result1.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<int>)(object)source0, (Vector<int>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, int>(), source1.As<T, int>(), control);
+                return (result0.As<int, T>(), result1.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<uint>)(object)source0, (Vector<uint>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, uint>(), source1.As<T, uint>(), control);
+                return (result0.As<uint, T>(), result1.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<long>)(object)source0, (Vector<long>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, long>(), source1.As<T, long>(), control);
+                return (result0.As<long, T>(), result1.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var result0, var result1) = athis.YShuffleG4X2_Const((Vector<ulong>)(object)source0, (Vector<ulong>)(object)source1, control);
-                return ((Vector<T>)(object)result0, (Vector<T>)(object)result1);
+                (var result0, var result1) = athis.YShuffleG4X2_Const(source0.As<T, ulong>(), source1.As<T, ulong>(), control);
+                return (result0.As<ulong, T>(), result1.As<ulong, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -263,45 +263,45 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleInsert_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a0, var a1, var a2) = athis.YShuffleInsert_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a0;
-                args1 = (Vector<TIdx>)(object)a1;
-                args2 = (Vector<TIdx>)(object)a2;
+                (var a0, var a1, var a2) = athis.YShuffleInsert_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a0, var a1, var a2) = athis.YShuffleInsert_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a0;
-                args1 = (Vector<TIdx>)(object)a1;
-                args2 = (Vector<TIdx>)(object)a2;
+                (var a0, var a1, var a2) = athis.YShuffleInsert_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a0, var a1, var a2) = athis.YShuffleInsert_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a0;
-                args1 = (Vector<TIdx>)(object)a1;
-                args2 = (Vector<TIdx>)(object)a2;
+                (var a0, var a1, var a2) = athis.YShuffleInsert_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a0, var a1, var a2) = athis.YShuffleInsert_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a0;
-                args1 = (Vector<TIdx>)(object)a1;
-                args2 = (Vector<TIdx>)(object)a2;
+                (var a0, var a1, var a2) = athis.YShuffleInsert_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a0, var a1, var a2) = athis.YShuffleInsert_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a0;
-                args1 = (Vector<TIdx>)(object)a1;
-                args2 = (Vector<TIdx>)(object)a2;
+                (var a0, var a1, var a2) = athis.YShuffleInsert_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a0, var a1, var a2) = athis.YShuffleInsert_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a0;
-                args1 = (Vector<TIdx>)(object)a1;
-                args2 = (Vector<TIdx>)(object)a2;
+                (var a0, var a1, var a2) = athis.YShuffleInsert_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a0, var a1, var a2) = athis.YShuffleInsert_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a0;
-                args1 = (Vector<TIdx>)(object)a1;
-                args2 = (Vector<TIdx>)(object)a2;
+                (var a0, var a1, var a2) = athis.YShuffleInsert_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a0, var a1, var a2) = athis.YShuffleInsert_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a0;
-                args1 = (Vector<TIdx>)(object)a1;
-                args2 = (Vector<TIdx>)(object)a2;
+                (var a0, var a1, var a2) = athis.YShuffleInsert_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -401,25 +401,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleInsert_Core<T, TIdx>(this IVectorTraits athis, Vector<T> back, Vector<T> vector, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<float>)(object)back, (Vector<float>)(object)vector, (ValueTuple<Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, float>(), vector.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<double>)(object)back, (Vector<double>)(object)vector, (ValueTuple<Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, double>(), vector.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<sbyte>)(object)back, (Vector<sbyte>)(object)vector, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, sbyte>(), vector.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<byte>)(object)back, (Vector<byte>)(object)vector, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, byte>(), vector.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<short>)(object)back, (Vector<short>)(object)vector, (ValueTuple<Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, short>(), vector.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<ushort>)(object)back, (Vector<ushort>)(object)vector, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, ushort>(), vector.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<int>)(object)back, (Vector<int>)(object)vector, (ValueTuple<Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, int>(), vector.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<uint>)(object)back, (Vector<uint>)(object)vector, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, uint>(), vector.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<long>)(object)back, (Vector<long>)(object)vector, (ValueTuple<Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, long>(), vector.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleInsert_Core((Vector<ulong>)(object)back, (Vector<ulong>)(object)vector, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleInsert_Core(back.As<T, ulong>(), vector.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -502,37 +502,37 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleKernel_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b) = athis.YShuffleKernel_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a0, var a1) = athis.YShuffleKernel_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b) = athis.YShuffleKernel_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a0, var a1) = athis.YShuffleKernel_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b) = athis.YShuffleKernel_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a0, var a1) = athis.YShuffleKernel_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b) = athis.YShuffleKernel_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a0, var a1) = athis.YShuffleKernel_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b) = athis.YShuffleKernel_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a0, var a1) = athis.YShuffleKernel_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b) = athis.YShuffleKernel_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a0, var a1) = athis.YShuffleKernel_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b) = athis.YShuffleKernel_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a0, var a1) = athis.YShuffleKernel_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b) = athis.YShuffleKernel_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a0, var a1) = athis.YShuffleKernel_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -632,25 +632,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleKernel_Core<T, TIdx>(this IVectorTraits athis, Vector<T> vector, (Vector<TIdx> args0, Vector<TIdx> args1) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<float>)(object)vector, (ValueTuple<Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<double>)(object)vector, (ValueTuple<Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<sbyte>)(object)vector, (ValueTuple<Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<byte>)(object)vector, (ValueTuple<Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<short>)(object)vector, (ValueTuple<Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<ushort>)(object)vector, (ValueTuple<Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<int>)(object)vector, (ValueTuple<Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<uint>)(object)vector, (ValueTuple<Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<long>)(object)vector, (ValueTuple<Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleKernel_Core((Vector<ulong>)(object)vector, (ValueTuple<Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleKernel_Core(vector.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -732,61 +732,61 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleX2_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
+                args3 = a3.As<sbyte, TIdx>();
+                args4 = a4.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
+                args3 = a3.As<byte, TIdx>();
+                args4 = a4.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
+                args3 = a3.As<short, TIdx>();
+                args4 = a4.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
+                args3 = a3.As<ushort, TIdx>();
+                args4 = a4.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
+                args3 = a3.As<int, TIdx>();
+                args4 = a4.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
+                args3 = a3.As<uint, TIdx>();
+                args4 = a4.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
+                args3 = a3.As<long, TIdx>();
+                args4 = a4.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
+                args3 = a3.As<ulong, TIdx>();
+                args4 = a4.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -886,25 +886,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleX2_Core<T, TIdx>(this IVectorTraits athis, Vector<T> vector0, Vector<T> vector1, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<float>)(object)vector0, (Vector<float>)(object)vector1, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, float>(), vector1.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<double>)(object)vector0, (Vector<double>)(object)vector1, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, double>(), vector1.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<sbyte>)(object)vector0, (Vector<sbyte>)(object)vector1, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, sbyte>(), vector1.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<byte>)(object)vector0, (Vector<byte>)(object)vector1, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, byte>(), vector1.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<short>)(object)vector0, (Vector<short>)(object)vector1, (ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, short>(), vector1.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<ushort>)(object)vector0, (Vector<ushort>)(object)vector1, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, ushort>(), vector1.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<int>)(object)vector0, (Vector<int>)(object)vector1, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, int>(), vector1.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<uint>)(object)vector0, (Vector<uint>)(object)vector1, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, uint>(), vector1.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<long>)(object)vector0, (Vector<long>)(object)vector1, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, long>(), vector1.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2_Core((Vector<ulong>)(object)vector0, (Vector<ulong>)(object)vector1, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleX2_Core(vector0.As<T, ulong>(), vector1.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -987,61 +987,61 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleX2Insert_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2Insert_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2Insert_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
+                args3 = a3.As<sbyte, TIdx>();
+                args4 = a4.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2Insert_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2Insert_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
+                args3 = a3.As<byte, TIdx>();
+                args4 = a4.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2Insert_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2Insert_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
+                args3 = a3.As<short, TIdx>();
+                args4 = a4.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2Insert_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2Insert_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
+                args3 = a3.As<ushort, TIdx>();
+                args4 = a4.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2Insert_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2Insert_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
+                args3 = a3.As<int, TIdx>();
+                args4 = a4.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2Insert_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2Insert_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
+                args3 = a3.As<uint, TIdx>();
+                args4 = a4.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2Insert_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2Insert_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
+                args3 = a3.As<long, TIdx>();
+                args4 = a4.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX2Insert_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX2Insert_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
+                args3 = a3.As<ulong, TIdx>();
+                args4 = a4.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -1142,25 +1142,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleX2Insert_Core<T, TIdx>(this IVectorTraits athis, Vector<T> back, Vector<T> vector0, Vector<T> vector1, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<float>)(object)back, (Vector<float>)(object)vector0, (Vector<float>)(object)vector1, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, float>(), vector0.As<T, float>(), vector1.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<double>)(object)back, (Vector<double>)(object)vector0, (Vector<double>)(object)vector1, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, double>(), vector0.As<T, double>(), vector1.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<sbyte>)(object)back, (Vector<sbyte>)(object)vector0, (Vector<sbyte>)(object)vector1, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, sbyte>(), vector0.As<T, sbyte>(), vector1.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<byte>)(object)back, (Vector<byte>)(object)vector0, (Vector<byte>)(object)vector1, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, byte>(), vector0.As<T, byte>(), vector1.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<short>)(object)back, (Vector<short>)(object)vector0, (Vector<short>)(object)vector1, (ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, short>(), vector0.As<T, short>(), vector1.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<ushort>)(object)back, (Vector<ushort>)(object)vector0, (Vector<ushort>)(object)vector1, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, ushort>(), vector0.As<T, ushort>(), vector1.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<int>)(object)back, (Vector<int>)(object)vector0, (Vector<int>)(object)vector1, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, int>(), vector0.As<T, int>(), vector1.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<uint>)(object)back, (Vector<uint>)(object)vector0, (Vector<uint>)(object)vector1, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, uint>(), vector0.As<T, uint>(), vector1.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<long>)(object)back, (Vector<long>)(object)vector0, (Vector<long>)(object)vector1, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, long>(), vector0.As<T, long>(), vector1.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Insert_Core((Vector<ulong>)(object)back, (Vector<ulong>)(object)vector0, (Vector<ulong>)(object)vector1, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleX2Insert_Core(back.As<T, ulong>(), vector0.As<T, ulong>(), vector1.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -1243,53 +1243,53 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleX2Kernel_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX2Kernel_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX2Kernel_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
+                args3 = a3.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX2Kernel_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX2Kernel_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
+                args3 = a3.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX2Kernel_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX2Kernel_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
+                args3 = a3.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX2Kernel_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX2Kernel_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
+                args3 = a3.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX2Kernel_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX2Kernel_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
+                args3 = a3.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX2Kernel_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX2Kernel_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
+                args3 = a3.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX2Kernel_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX2Kernel_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
+                args3 = a3.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX2Kernel_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX2Kernel_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
+                args3 = a3.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -1389,25 +1389,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleX2Kernel_Core<T, TIdx>(this IVectorTraits athis, Vector<T> vector0, Vector<T> vector1, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<float>)(object)vector0, (Vector<float>)(object)vector1, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, float>(), vector1.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<double>)(object)vector0, (Vector<double>)(object)vector1, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, double>(), vector1.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<sbyte>)(object)vector0, (Vector<sbyte>)(object)vector1, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, sbyte>(), vector1.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<byte>)(object)vector0, (Vector<byte>)(object)vector1, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, byte>(), vector1.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<short>)(object)vector0, (Vector<short>)(object)vector1, (ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, short>(), vector1.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<ushort>)(object)vector0, (Vector<ushort>)(object)vector1, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, ushort>(), vector1.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<int>)(object)vector0, (Vector<int>)(object)vector1, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, int>(), vector1.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<uint>)(object)vector0, (Vector<uint>)(object)vector1, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, uint>(), vector1.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<long>)(object)vector0, (Vector<long>)(object)vector1, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, long>(), vector1.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX2Kernel_Core((Vector<ulong>)(object)vector0, (Vector<ulong>)(object)vector1, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleX2Kernel_Core(vector0.As<T, ulong>(), vector1.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -1490,61 +1490,61 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleX3_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
+                args3 = a3.As<sbyte, TIdx>();
+                args4 = a4.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
+                args3 = a3.As<byte, TIdx>();
+                args4 = a4.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
+                args3 = a3.As<short, TIdx>();
+                args4 = a4.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
+                args3 = a3.As<ushort, TIdx>();
+                args4 = a4.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
+                args3 = a3.As<int, TIdx>();
+                args4 = a4.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
+                args3 = a3.As<uint, TIdx>();
+                args4 = a4.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
+                args3 = a3.As<long, TIdx>();
+                args4 = a4.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
+                args3 = a3.As<ulong, TIdx>();
+                args4 = a4.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -1645,25 +1645,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleX3_Core<T, TIdx>(this IVectorTraits athis, Vector<T> vector0, Vector<T> vector1, Vector<T> vector2, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<float>)(object)vector0, (Vector<float>)(object)vector1, (Vector<float>)(object)vector2, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, float>(), vector1.As<T, float>(), vector2.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<double>)(object)vector0, (Vector<double>)(object)vector1, (Vector<double>)(object)vector2, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, double>(), vector1.As<T, double>(), vector2.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<sbyte>)(object)vector0, (Vector<sbyte>)(object)vector1, (Vector<sbyte>)(object)vector2, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, sbyte>(), vector1.As<T, sbyte>(), vector2.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<byte>)(object)vector0, (Vector<byte>)(object)vector1, (Vector<byte>)(object)vector2, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, byte>(), vector1.As<T, byte>(), vector2.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<short>)(object)vector0, (Vector<short>)(object)vector1, (Vector<short>)(object)vector2, (ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, short>(), vector1.As<T, short>(), vector2.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<ushort>)(object)vector0, (Vector<ushort>)(object)vector1, (Vector<ushort>)(object)vector2, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, ushort>(), vector1.As<T, ushort>(), vector2.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<int>)(object)vector0, (Vector<int>)(object)vector1, (Vector<int>)(object)vector2, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, int>(), vector1.As<T, int>(), vector2.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<uint>)(object)vector0, (Vector<uint>)(object)vector1, (Vector<uint>)(object)vector2, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, uint>(), vector1.As<T, uint>(), vector2.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<long>)(object)vector0, (Vector<long>)(object)vector1, (Vector<long>)(object)vector2, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, long>(), vector1.As<T, long>(), vector2.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3_Core((Vector<ulong>)(object)vector0, (Vector<ulong>)(object)vector1, (Vector<ulong>)(object)vector2, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleX3_Core(vector0.As<T, ulong>(), vector1.As<T, ulong>(), vector2.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -1746,61 +1746,61 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleX3Insert_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3Insert_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3Insert_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
+                args3 = a3.As<sbyte, TIdx>();
+                args4 = a4.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3Insert_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3Insert_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
+                args3 = a3.As<byte, TIdx>();
+                args4 = a4.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3Insert_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3Insert_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
+                args3 = a3.As<short, TIdx>();
+                args4 = a4.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3Insert_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3Insert_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
+                args3 = a3.As<ushort, TIdx>();
+                args4 = a4.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3Insert_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3Insert_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
+                args3 = a3.As<int, TIdx>();
+                args4 = a4.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3Insert_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3Insert_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
+                args3 = a3.As<uint, TIdx>();
+                args4 = a4.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3Insert_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3Insert_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
+                args3 = a3.As<long, TIdx>();
+                args4 = a4.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX3Insert_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX3Insert_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
+                args3 = a3.As<ulong, TIdx>();
+                args4 = a4.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -1902,25 +1902,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleX3Insert_Core<T, TIdx>(this IVectorTraits athis, Vector<T> back, Vector<T> vector0, Vector<T> vector1, Vector<T> vector2, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<float>)(object)back, (Vector<float>)(object)vector0, (Vector<float>)(object)vector1, (Vector<float>)(object)vector2, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, float>(), vector0.As<T, float>(), vector1.As<T, float>(), vector2.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<double>)(object)back, (Vector<double>)(object)vector0, (Vector<double>)(object)vector1, (Vector<double>)(object)vector2, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, double>(), vector0.As<T, double>(), vector1.As<T, double>(), vector2.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<sbyte>)(object)back, (Vector<sbyte>)(object)vector0, (Vector<sbyte>)(object)vector1, (Vector<sbyte>)(object)vector2, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, sbyte>(), vector0.As<T, sbyte>(), vector1.As<T, sbyte>(), vector2.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<byte>)(object)back, (Vector<byte>)(object)vector0, (Vector<byte>)(object)vector1, (Vector<byte>)(object)vector2, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, byte>(), vector0.As<T, byte>(), vector1.As<T, byte>(), vector2.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<short>)(object)back, (Vector<short>)(object)vector0, (Vector<short>)(object)vector1, (Vector<short>)(object)vector2, (ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, short>(), vector0.As<T, short>(), vector1.As<T, short>(), vector2.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<ushort>)(object)back, (Vector<ushort>)(object)vector0, (Vector<ushort>)(object)vector1, (Vector<ushort>)(object)vector2, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, ushort>(), vector0.As<T, ushort>(), vector1.As<T, ushort>(), vector2.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<int>)(object)back, (Vector<int>)(object)vector0, (Vector<int>)(object)vector1, (Vector<int>)(object)vector2, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, int>(), vector0.As<T, int>(), vector1.As<T, int>(), vector2.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<uint>)(object)back, (Vector<uint>)(object)vector0, (Vector<uint>)(object)vector1, (Vector<uint>)(object)vector2, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, uint>(), vector0.As<T, uint>(), vector1.As<T, uint>(), vector2.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<long>)(object)back, (Vector<long>)(object)vector0, (Vector<long>)(object)vector1, (Vector<long>)(object)vector2, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, long>(), vector0.As<T, long>(), vector1.As<T, long>(), vector2.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Insert_Core((Vector<ulong>)(object)back, (Vector<ulong>)(object)vector0, (Vector<ulong>)(object)vector1, (Vector<ulong>)(object)vector2, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleX3Insert_Core(back.As<T, ulong>(), vector0.As<T, ulong>(), vector1.As<T, ulong>(), vector2.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -2003,53 +2003,53 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleX3Kernel_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX3Kernel_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX3Kernel_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
+                args3 = a3.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX3Kernel_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX3Kernel_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
+                args3 = a3.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX3Kernel_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX3Kernel_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
+                args3 = a3.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX3Kernel_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX3Kernel_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
+                args3 = a3.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX3Kernel_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX3Kernel_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
+                args3 = a3.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX3Kernel_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX3Kernel_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
+                args3 = a3.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX3Kernel_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX3Kernel_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
+                args3 = a3.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX3Kernel_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX3Kernel_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
+                args3 = a3.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -2150,25 +2150,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleX3Kernel_Core<T, TIdx>(this IVectorTraits athis, Vector<T> vector0, Vector<T> vector1, Vector<T> vector2, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<float>)(object)vector0, (Vector<float>)(object)vector1, (Vector<float>)(object)vector2, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, float>(), vector1.As<T, float>(), vector2.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<double>)(object)vector0, (Vector<double>)(object)vector1, (Vector<double>)(object)vector2, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, double>(), vector1.As<T, double>(), vector2.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<sbyte>)(object)vector0, (Vector<sbyte>)(object)vector1, (Vector<sbyte>)(object)vector2, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, sbyte>(), vector1.As<T, sbyte>(), vector2.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<byte>)(object)vector0, (Vector<byte>)(object)vector1, (Vector<byte>)(object)vector2, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, byte>(), vector1.As<T, byte>(), vector2.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<short>)(object)vector0, (Vector<short>)(object)vector1, (Vector<short>)(object)vector2, (ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, short>(), vector1.As<T, short>(), vector2.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<ushort>)(object)vector0, (Vector<ushort>)(object)vector1, (Vector<ushort>)(object)vector2, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, ushort>(), vector1.As<T, ushort>(), vector2.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<int>)(object)vector0, (Vector<int>)(object)vector1, (Vector<int>)(object)vector2, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, int>(), vector1.As<T, int>(), vector2.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<uint>)(object)vector0, (Vector<uint>)(object)vector1, (Vector<uint>)(object)vector2, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, uint>(), vector1.As<T, uint>(), vector2.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<long>)(object)vector0, (Vector<long>)(object)vector1, (Vector<long>)(object)vector2, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, long>(), vector1.As<T, long>(), vector2.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX3Kernel_Core((Vector<ulong>)(object)vector0, (Vector<ulong>)(object)vector1, (Vector<ulong>)(object)vector2, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleX3Kernel_Core(vector0.As<T, ulong>(), vector1.As<T, ulong>(), vector2.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -2251,61 +2251,61 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleX4_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
+                args3 = a3.As<sbyte, TIdx>();
+                args4 = a4.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
+                args3 = a3.As<byte, TIdx>();
+                args4 = a4.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
+                args3 = a3.As<short, TIdx>();
+                args4 = a4.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
+                args3 = a3.As<ushort, TIdx>();
+                args4 = a4.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
+                args3 = a3.As<int, TIdx>();
+                args4 = a4.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
+                args3 = a3.As<uint, TIdx>();
+                args4 = a4.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
+                args3 = a3.As<long, TIdx>();
+                args4 = a4.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
+                args3 = a3.As<ulong, TIdx>();
+                args4 = a4.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -2407,25 +2407,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleX4_Core<T, TIdx>(this IVectorTraits athis, Vector<T> vector0, Vector<T> vector1, Vector<T> vector2, Vector<T> vector3, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<float>)(object)vector0, (Vector<float>)(object)vector1, (Vector<float>)(object)vector2, (Vector<float>)(object)vector3, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, float>(), vector1.As<T, float>(), vector2.As<T, float>(), vector3.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<double>)(object)vector0, (Vector<double>)(object)vector1, (Vector<double>)(object)vector2, (Vector<double>)(object)vector3, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, double>(), vector1.As<T, double>(), vector2.As<T, double>(), vector3.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<sbyte>)(object)vector0, (Vector<sbyte>)(object)vector1, (Vector<sbyte>)(object)vector2, (Vector<sbyte>)(object)vector3, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, sbyte>(), vector1.As<T, sbyte>(), vector2.As<T, sbyte>(), vector3.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<byte>)(object)vector0, (Vector<byte>)(object)vector1, (Vector<byte>)(object)vector2, (Vector<byte>)(object)vector3, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, byte>(), vector1.As<T, byte>(), vector2.As<T, byte>(), vector3.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<short>)(object)vector0, (Vector<short>)(object)vector1, (Vector<short>)(object)vector2, (Vector<short>)(object)vector3, (ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, short>(), vector1.As<T, short>(), vector2.As<T, short>(), vector3.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<ushort>)(object)vector0, (Vector<ushort>)(object)vector1, (Vector<ushort>)(object)vector2, (Vector<ushort>)(object)vector3, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, ushort>(), vector1.As<T, ushort>(), vector2.As<T, ushort>(), vector3.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<int>)(object)vector0, (Vector<int>)(object)vector1, (Vector<int>)(object)vector2, (Vector<int>)(object)vector3, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, int>(), vector1.As<T, int>(), vector2.As<T, int>(), vector3.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<uint>)(object)vector0, (Vector<uint>)(object)vector1, (Vector<uint>)(object)vector2, (Vector<uint>)(object)vector3, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, uint>(), vector1.As<T, uint>(), vector2.As<T, uint>(), vector3.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<long>)(object)vector0, (Vector<long>)(object)vector1, (Vector<long>)(object)vector2, (Vector<long>)(object)vector3, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, long>(), vector1.As<T, long>(), vector2.As<T, long>(), vector3.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4_Core((Vector<ulong>)(object)vector0, (Vector<ulong>)(object)vector1, (Vector<ulong>)(object)vector2, (Vector<ulong>)(object)vector3, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleX4_Core(vector0.As<T, ulong>(), vector1.As<T, ulong>(), vector2.As<T, ulong>(), vector3.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -2508,61 +2508,61 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleX4Insert_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3, out Vector<TIdx> args4)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4Insert_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
+                args3 = a3.As<sbyte, TIdx>();
+                args4 = a4.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4Insert_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
+                args3 = a3.As<byte, TIdx>();
+                args4 = a4.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4Insert_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
+                args3 = a3.As<short, TIdx>();
+                args4 = a4.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4Insert_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
+                args3 = a3.As<ushort, TIdx>();
+                args4 = a4.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4Insert_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
+                args3 = a3.As<int, TIdx>();
+                args4 = a4.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4Insert_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
+                args3 = a3.As<uint, TIdx>();
+                args4 = a4.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4Insert_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
+                args3 = a3.As<long, TIdx>();
+                args4 = a4.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b, var c, var d, var e) = athis.YShuffleX4Insert_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
-                args4 = (Vector<TIdx>)(object)e;
+                (var a0, var a1, var a2, var a3, var a4) = athis.YShuffleX4Insert_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
+                args3 = a3.As<ulong, TIdx>();
+                args4 = a4.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -2665,25 +2665,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleX4Insert_Core<T, TIdx>(this IVectorTraits athis, Vector<T> back, Vector<T> vector0, Vector<T> vector1, Vector<T> vector2, Vector<T> vector3, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3, Vector<TIdx> args4) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<float>)(object)back, (Vector<float>)(object)vector0, (Vector<float>)(object)vector1, (Vector<float>)(object)vector2, (Vector<float>)(object)vector3, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, float>(), vector0.As<T, float>(), vector1.As<T, float>(), vector2.As<T, float>(), vector3.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<double>)(object)back, (Vector<double>)(object)vector0, (Vector<double>)(object)vector1, (Vector<double>)(object)vector2, (Vector<double>)(object)vector3, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, double>(), vector0.As<T, double>(), vector1.As<T, double>(), vector2.As<T, double>(), vector3.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<sbyte>)(object)back, (Vector<sbyte>)(object)vector0, (Vector<sbyte>)(object)vector1, (Vector<sbyte>)(object)vector2, (Vector<sbyte>)(object)vector3, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, sbyte>(), vector0.As<T, sbyte>(), vector1.As<T, sbyte>(), vector2.As<T, sbyte>(), vector3.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<byte>)(object)back, (Vector<byte>)(object)vector0, (Vector<byte>)(object)vector1, (Vector<byte>)(object)vector2, (Vector<byte>)(object)vector3, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, byte>(), vector0.As<T, byte>(), vector1.As<T, byte>(), vector2.As<T, byte>(), vector3.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<short>)(object)back, (Vector<short>)(object)vector0, (Vector<short>)(object)vector1, (Vector<short>)(object)vector2, (Vector<short>)(object)vector3, (ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, short>(), vector0.As<T, short>(), vector1.As<T, short>(), vector2.As<T, short>(), vector3.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<ushort>)(object)back, (Vector<ushort>)(object)vector0, (Vector<ushort>)(object)vector1, (Vector<ushort>)(object)vector2, (Vector<ushort>)(object)vector3, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, ushort>(), vector0.As<T, ushort>(), vector1.As<T, ushort>(), vector2.As<T, ushort>(), vector3.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<int>)(object)back, (Vector<int>)(object)vector0, (Vector<int>)(object)vector1, (Vector<int>)(object)vector2, (Vector<int>)(object)vector3, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, int>(), vector0.As<T, int>(), vector1.As<T, int>(), vector2.As<T, int>(), vector3.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<uint>)(object)back, (Vector<uint>)(object)vector0, (Vector<uint>)(object)vector1, (Vector<uint>)(object)vector2, (Vector<uint>)(object)vector3, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, uint>(), vector0.As<T, uint>(), vector1.As<T, uint>(), vector2.As<T, uint>(), vector3.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<long>)(object)back, (Vector<long>)(object)vector0, (Vector<long>)(object)vector1, (Vector<long>)(object)vector2, (Vector<long>)(object)vector3, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, long>(), vector0.As<T, long>(), vector1.As<T, long>(), vector2.As<T, long>(), vector3.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Insert_Core((Vector<ulong>)(object)back, (Vector<ulong>)(object)vector0, (Vector<ulong>)(object)vector1, (Vector<ulong>)(object)vector2, (Vector<ulong>)(object)vector3, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleX4Insert_Core(back.As<T, ulong>(), vector0.As<T, ulong>(), vector1.As<T, ulong>(), vector2.As<T, ulong>(), vector3.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
@@ -2766,53 +2766,53 @@ namespace Zyl.VectorTraits.Impl {
         public static void YShuffleX4Kernel_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1, out Vector<TIdx> args2, out Vector<TIdx> args3)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX4Kernel_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX4Kernel_Args(indices.As<TIdx, sbyte>());
+                args0 = a0.As<sbyte, TIdx>();
+                args1 = a1.As<sbyte, TIdx>();
+                args2 = a2.As<sbyte, TIdx>();
+                args3 = a3.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX4Kernel_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX4Kernel_Args(indices.As<TIdx, byte>());
+                args0 = a0.As<byte, TIdx>();
+                args1 = a1.As<byte, TIdx>();
+                args2 = a2.As<byte, TIdx>();
+                args3 = a3.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX4Kernel_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX4Kernel_Args(indices.As<TIdx, short>());
+                args0 = a0.As<short, TIdx>();
+                args1 = a1.As<short, TIdx>();
+                args2 = a2.As<short, TIdx>();
+                args3 = a3.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX4Kernel_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX4Kernel_Args(indices.As<TIdx, ushort>());
+                args0 = a0.As<ushort, TIdx>();
+                args1 = a1.As<ushort, TIdx>();
+                args2 = a2.As<ushort, TIdx>();
+                args3 = a3.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX4Kernel_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX4Kernel_Args(indices.As<TIdx, int>());
+                args0 = a0.As<int, TIdx>();
+                args1 = a1.As<int, TIdx>();
+                args2 = a2.As<int, TIdx>();
+                args3 = a3.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX4Kernel_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX4Kernel_Args(indices.As<TIdx, uint>());
+                args0 = a0.As<uint, TIdx>();
+                args1 = a1.As<uint, TIdx>();
+                args2 = a2.As<uint, TIdx>();
+                args3 = a3.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX4Kernel_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX4Kernel_Args(indices.As<TIdx, long>());
+                args0 = a0.As<long, TIdx>();
+                args1 = a1.As<long, TIdx>();
+                args2 = a2.As<long, TIdx>();
+                args3 = a3.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b, var c, var d) = athis.YShuffleX4Kernel_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
-                args2 = (Vector<TIdx>)(object)c;
-                args3 = (Vector<TIdx>)(object)d;
+                (var a0, var a1, var a2, var a3) = athis.YShuffleX4Kernel_Args(indices.As<TIdx, ulong>());
+                args0 = a0.As<ulong, TIdx>();
+                args1 = a1.As<ulong, TIdx>();
+                args2 = a2.As<ulong, TIdx>();
+                args3 = a3.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -2914,25 +2914,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> YShuffleX4Kernel_Core<T, TIdx>(this IVectorTraits athis, Vector<T> vector0, Vector<T> vector1, Vector<T> vector2, Vector<T> vector3, (Vector<TIdx> args0, Vector<TIdx> args1, Vector<TIdx> args2, Vector<TIdx> args3) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<float>)(object)vector0, (Vector<float>)(object)vector1, (Vector<float>)(object)vector2, (Vector<float>)(object)vector3, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, float>(), vector1.As<T, float>(), vector2.As<T, float>(), vector3.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<double>)(object)vector0, (Vector<double>)(object)vector1, (Vector<double>)(object)vector2, (Vector<double>)(object)vector3, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, double>(), vector1.As<T, double>(), vector2.As<T, double>(), vector3.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<sbyte>)(object)vector0, (Vector<sbyte>)(object)vector1, (Vector<sbyte>)(object)vector2, (Vector<sbyte>)(object)vector3, (ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, sbyte>(), vector1.As<T, sbyte>(), vector2.As<T, sbyte>(), vector3.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>, Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<byte>)(object)vector0, (Vector<byte>)(object)vector1, (Vector<byte>)(object)vector2, (Vector<byte>)(object)vector3, (ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, byte>(), vector1.As<T, byte>(), vector2.As<T, byte>(), vector3.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>, Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<short>)(object)vector0, (Vector<short>)(object)vector1, (Vector<short>)(object)vector2, (Vector<short>)(object)vector3, (ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, short>(), vector1.As<T, short>(), vector2.As<T, short>(), vector3.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>, Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<ushort>)(object)vector0, (Vector<ushort>)(object)vector1, (Vector<ushort>)(object)vector2, (Vector<ushort>)(object)vector3, (ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, ushort>(), vector1.As<T, ushort>(), vector2.As<T, ushort>(), vector3.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>, Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<int>)(object)vector0, (Vector<int>)(object)vector1, (Vector<int>)(object)vector2, (Vector<int>)(object)vector3, (ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, int>(), vector1.As<T, int>(), vector2.As<T, int>(), vector3.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>, Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<uint>)(object)vector0, (Vector<uint>)(object)vector1, (Vector<uint>)(object)vector2, (Vector<uint>)(object)vector3, (ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, uint>(), vector1.As<T, uint>(), vector2.As<T, uint>(), vector3.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>, Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<long>)(object)vector0, (Vector<long>)(object)vector1, (Vector<long>)(object)vector2, (Vector<long>)(object)vector3, (ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, long>(), vector1.As<T, long>(), vector2.As<T, long>(), vector3.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>, Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.YShuffleX4Kernel_Core((Vector<ulong>)(object)vector0, (Vector<ulong>)(object)vector1, (Vector<ulong>)(object)vector2, (Vector<ulong>)(object)vector3, (ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.YShuffleX4Kernel_Core(vector0.As<T, ulong>(), vector1.As<T, ulong>(), vector2.As<T, ulong>(), vector3.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>, Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>, Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }

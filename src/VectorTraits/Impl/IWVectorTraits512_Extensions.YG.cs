@@ -47,48 +47,48 @@ namespace Zyl.VectorTraits.Impl {
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static (Vector512<T> X, Vector512<T> Y) YGroup2Unzip<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<float>)(object)data0, (Vector512<float>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, float>(), data1.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<double>)(object)data0, (Vector512<double>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, double>(), data1.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, sbyte>(), data1.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, byte>(), data1.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<short>)(object)data0, (Vector512<short>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, short>(), data1.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, ushort>(), data1.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<int>)(object)data0, (Vector512<int>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, int>(), data1.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, uint>(), data1.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<long>)(object)data0, (Vector512<long>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, long>(), data1.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.As<T, ulong>(), data1.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>());
             } else if (typeof(ExInt128) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<ExInt128>)(object)data0, (Vector512<ExInt128>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.ExAs<T, ExInt128>(), data1.ExAs<T, ExInt128>());
+                return (rt0.ExAs<ExInt128, T>(), rt1.ExAs<ExInt128, T>());
             } else if (typeof(ExUInt128) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<ExUInt128>)(object)data0, (Vector512<ExUInt128>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.ExAs<T, ExUInt128>(), data1.ExAs<T, ExUInt128>());
+                return (rt0.ExAs<ExUInt128, T>(), rt1.ExAs<ExUInt128, T>());
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<Int128>)(object)data0, (Vector512<Int128>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.ExAs<T, Int128>(), data1.ExAs<T, Int128>());
+                return (rt0.ExAs<Int128, T>(), rt1.ExAs<Int128, T>());
             } else if (typeof(UInt128) == typeof(T)) {
-                (var rt0, var rt1) = athis.YGroup2Unzip((Vector512<UInt128>)(object)data0, (Vector512<UInt128>)(object)data1);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1);
+                (var rt0, var rt1) = athis.YGroup2Unzip(data0.ExAs<T, UInt128>(), data1.ExAs<T, UInt128>());
+                return (rt0.ExAs<UInt128, T>(), rt1.ExAs<UInt128, T>());
 #endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
@@ -216,34 +216,34 @@ namespace Zyl.VectorTraits.Impl {
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static Vector512<T> YGroup2UnzipEven<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1) where T : struct {
             if (typeof(float) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<float>)(object)data0, (Vector512<float>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, float>(), data1.As<T, float>()).As<float, T>();
             } else if (typeof(double) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<double>)(object)data0, (Vector512<double>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, double>(), data1.As<T, double>()).As<double, T>();
             } else if (typeof(sbyte) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, sbyte>(), data1.As<T, sbyte>()).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, byte>(), data1.As<T, byte>()).As<byte, T>();
             } else if (typeof(short) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<short>)(object)data0, (Vector512<short>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, short>(), data1.As<T, short>()).As<short, T>();
             } else if (typeof(ushort) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, ushort>(), data1.As<T, ushort>()).As<ushort, T>();
             } else if (typeof(int) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<int>)(object)data0, (Vector512<int>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, int>(), data1.As<T, int>()).As<int, T>();
             } else if (typeof(uint) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, uint>(), data1.As<T, uint>()).As<uint, T>();
             } else if (typeof(long) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<long>)(object)data0, (Vector512<long>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, long>(), data1.As<T, long>()).As<long, T>();
             } else if (typeof(ulong) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.As<T, ulong>(), data1.As<T, ulong>()).As<ulong, T>();
             } else if (typeof(ExInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<ExInt128>)(object)data0, (Vector512<ExInt128>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.ExAs<T, ExInt128>(), data1.ExAs<T, ExInt128>()).ExAs<ExInt128, T>();
             } else if (typeof(ExUInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<ExUInt128>)(object)data0, (Vector512<ExUInt128>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.ExAs<T, ExUInt128>(), data1.ExAs<T, ExUInt128>()).ExAs<ExUInt128, T>();
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<Int128>)(object)data0, (Vector512<Int128>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.ExAs<T, Int128>(), data1.ExAs<T, Int128>()).ExAs<Int128, T>();
             } else if (typeof(UInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipEven((Vector512<UInt128>)(object)data0, (Vector512<UInt128>)(object)data1);
+                return athis.YGroup2UnzipEven(data0.ExAs<T, UInt128>(), data1.ExAs<T, UInt128>()).ExAs<UInt128, T>();
 #endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
@@ -273,34 +273,34 @@ namespace Zyl.VectorTraits.Impl {
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static Vector512<T> YGroup2UnzipOdd<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1) where T : struct {
             if (typeof(float) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<float>)(object)data0, (Vector512<float>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, float>(), data1.As<T, float>()).As<float, T>();
             } else if (typeof(double) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<double>)(object)data0, (Vector512<double>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, double>(), data1.As<T, double>()).As<double, T>();
             } else if (typeof(sbyte) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, sbyte>(), data1.As<T, sbyte>()).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, byte>(), data1.As<T, byte>()).As<byte, T>();
             } else if (typeof(short) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<short>)(object)data0, (Vector512<short>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, short>(), data1.As<T, short>()).As<short, T>();
             } else if (typeof(ushort) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, ushort>(), data1.As<T, ushort>()).As<ushort, T>();
             } else if (typeof(int) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<int>)(object)data0, (Vector512<int>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, int>(), data1.As<T, int>()).As<int, T>();
             } else if (typeof(uint) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, uint>(), data1.As<T, uint>()).As<uint, T>();
             } else if (typeof(long) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<long>)(object)data0, (Vector512<long>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, long>(), data1.As<T, long>()).As<long, T>();
             } else if (typeof(ulong) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.As<T, ulong>(), data1.As<T, ulong>()).As<ulong, T>();
             } else if (typeof(ExInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<ExInt128>)(object)data0, (Vector512<ExInt128>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.ExAs<T, ExInt128>(), data1.ExAs<T, ExInt128>()).ExAs<ExInt128, T>();
             } else if (typeof(ExUInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<ExUInt128>)(object)data0, (Vector512<ExUInt128>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.ExAs<T, ExUInt128>(), data1.ExAs<T, ExUInt128>()).ExAs<ExUInt128, T>();
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<Int128>)(object)data0, (Vector512<Int128>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.ExAs<T, Int128>(), data1.ExAs<T, Int128>()).ExAs<Int128, T>();
             } else if (typeof(UInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2UnzipOdd((Vector512<UInt128>)(object)data0, (Vector512<UInt128>)(object)data1);
+                return athis.YGroup2UnzipOdd(data0.ExAs<T, UInt128>(), data1.ExAs<T, UInt128>()).ExAs<UInt128, T>();
 #endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
@@ -353,48 +353,48 @@ namespace Zyl.VectorTraits.Impl {
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static (Vector512<T> Data0, Vector512<T> Data1) YGroup2Zip<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> y) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<float>)(object)x, (Vector512<float>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, float>(), y.As<T, float>());
+                return (data0.As<float, T>(), data1.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<double>)(object)x, (Vector512<double>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, double>(), y.As<T, double>());
+                return (data0.As<double, T>(), data1.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, sbyte>(), y.As<T, sbyte>());
+                return (data0.As<sbyte, T>(), data1.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<byte>)(object)x, (Vector512<byte>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, byte>(), y.As<T, byte>());
+                return (data0.As<byte, T>(), data1.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<short>)(object)x, (Vector512<short>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, short>(), y.As<T, short>());
+                return (data0.As<short, T>(), data1.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, ushort>(), y.As<T, ushort>());
+                return (data0.As<ushort, T>(), data1.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<int>)(object)x, (Vector512<int>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, int>(), y.As<T, int>());
+                return (data0.As<int, T>(), data1.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<uint>)(object)x, (Vector512<uint>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, uint>(), y.As<T, uint>());
+                return (data0.As<uint, T>(), data1.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<long>)(object)x, (Vector512<long>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, long>(), y.As<T, long>());
+                return (data0.As<long, T>(), data1.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.As<T, ulong>(), y.As<T, ulong>());
+                return (data0.As<ulong, T>(), data1.As<ulong, T>());
             } else if (typeof(ExInt128) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<ExInt128>)(object)x, (Vector512<ExInt128>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.ExAs<T, ExInt128>(), y.ExAs<T, ExInt128>());
+                return (data0.ExAs<ExInt128, T>(), data1.ExAs<ExInt128, T>());
             } else if (typeof(ExUInt128) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<ExUInt128>)(object)x, (Vector512<ExUInt128>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.ExAs<T, ExUInt128>(), y.ExAs<T, ExUInt128>());
+                return (data0.ExAs<ExUInt128, T>(), data1.ExAs<ExUInt128, T>());
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<Int128>)(object)x, (Vector512<Int128>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.ExAs<T, Int128>(), y.ExAs<T, Int128>());
+                return (data0.ExAs<Int128, T>(), data1.ExAs<Int128, T>());
             } else if (typeof(UInt128) == typeof(T)) {
-                (var data0, var data1) = athis.YGroup2Zip((Vector512<UInt128>)(object)x, (Vector512<UInt128>)(object)y);
-                return ((Vector512<T>)(object)data0, (Vector512<T>)(object)data1);
+                (var data0, var data1) = athis.YGroup2Zip(x.ExAs<T, UInt128>(), y.ExAs<T, UInt128>());
+                return (data0.ExAs<UInt128, T>(), data1.ExAs<UInt128, T>());
 #endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
@@ -522,34 +522,34 @@ namespace Zyl.VectorTraits.Impl {
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static Vector512<T> YGroup2ZipHigh<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> y) where T : struct {
             if (typeof(float) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<float>)(object)x, (Vector512<float>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, float>(), y.As<T, float>()).As<float, T>();
             } else if (typeof(double) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<double>)(object)x, (Vector512<double>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, double>(), y.As<T, double>()).As<double, T>();
             } else if (typeof(sbyte) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, sbyte>(), y.As<T, sbyte>()).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<byte>)(object)x, (Vector512<byte>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, byte>(), y.As<T, byte>()).As<byte, T>();
             } else if (typeof(short) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<short>)(object)x, (Vector512<short>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, short>(), y.As<T, short>()).As<short, T>();
             } else if (typeof(ushort) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, ushort>(), y.As<T, ushort>()).As<ushort, T>();
             } else if (typeof(int) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<int>)(object)x, (Vector512<int>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, int>(), y.As<T, int>()).As<int, T>();
             } else if (typeof(uint) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<uint>)(object)x, (Vector512<uint>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, uint>(), y.As<T, uint>()).As<uint, T>();
             } else if (typeof(long) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<long>)(object)x, (Vector512<long>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, long>(), y.As<T, long>()).As<long, T>();
             } else if (typeof(ulong) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)y);
+                return athis.YGroup2ZipHigh(x.As<T, ulong>(), y.As<T, ulong>()).As<ulong, T>();
             } else if (typeof(ExInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<ExInt128>)(object)x, (Vector512<ExInt128>)(object)y);
+                return athis.YGroup2ZipHigh(x.ExAs<T, ExInt128>(), y.ExAs<T, ExInt128>()).ExAs<ExInt128, T>();
             } else if (typeof(ExUInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<ExUInt128>)(object)x, (Vector512<ExUInt128>)(object)y);
+                return athis.YGroup2ZipHigh(x.ExAs<T, ExUInt128>(), y.ExAs<T, ExUInt128>()).ExAs<ExUInt128, T>();
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<Int128>)(object)x, (Vector512<Int128>)(object)y);
+                return athis.YGroup2ZipHigh(x.ExAs<T, Int128>(), y.ExAs<T, Int128>()).ExAs<Int128, T>();
             } else if (typeof(UInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipHigh((Vector512<UInt128>)(object)x, (Vector512<UInt128>)(object)y);
+                return athis.YGroup2ZipHigh(x.ExAs<T, UInt128>(), y.ExAs<T, UInt128>()).ExAs<UInt128, T>();
 #endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
@@ -579,34 +579,34 @@ namespace Zyl.VectorTraits.Impl {
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         public static Vector512<T> YGroup2ZipLow<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> y) where T : struct {
             if (typeof(float) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<float>)(object)x, (Vector512<float>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, float>(), y.As<T, float>()).As<float, T>();
             } else if (typeof(double) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<double>)(object)x, (Vector512<double>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, double>(), y.As<T, double>()).As<double, T>();
             } else if (typeof(sbyte) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, sbyte>(), y.As<T, sbyte>()).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<byte>)(object)x, (Vector512<byte>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, byte>(), y.As<T, byte>()).As<byte, T>();
             } else if (typeof(short) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<short>)(object)x, (Vector512<short>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, short>(), y.As<T, short>()).As<short, T>();
             } else if (typeof(ushort) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, ushort>(), y.As<T, ushort>()).As<ushort, T>();
             } else if (typeof(int) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<int>)(object)x, (Vector512<int>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, int>(), y.As<T, int>()).As<int, T>();
             } else if (typeof(uint) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<uint>)(object)x, (Vector512<uint>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, uint>(), y.As<T, uint>()).As<uint, T>();
             } else if (typeof(long) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<long>)(object)x, (Vector512<long>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, long>(), y.As<T, long>()).As<long, T>();
             } else if (typeof(ulong) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)y);
+                return athis.YGroup2ZipLow(x.As<T, ulong>(), y.As<T, ulong>()).As<ulong, T>();
             } else if (typeof(ExInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<ExInt128>)(object)x, (Vector512<ExInt128>)(object)y);
+                return athis.YGroup2ZipLow(x.ExAs<T, ExInt128>(), y.ExAs<T, ExInt128>()).ExAs<ExInt128, T>();
             } else if (typeof(ExUInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<ExUInt128>)(object)x, (Vector512<ExUInt128>)(object)y);
+                return athis.YGroup2ZipLow(x.ExAs<T, ExUInt128>(), y.ExAs<T, ExUInt128>()).ExAs<ExUInt128, T>();
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<Int128>)(object)x, (Vector512<Int128>)(object)y);
+                return athis.YGroup2ZipLow(x.ExAs<T, Int128>(), y.ExAs<T, Int128>()).ExAs<Int128, T>();
             } else if (typeof(UInt128) == typeof(T)) {
-                return (Vector512<T>)(object)athis.YGroup2ZipLow((Vector512<UInt128>)(object)x, (Vector512<UInt128>)(object)y);
+                return athis.YGroup2ZipLow(x.ExAs<T, UInt128>(), y.ExAs<T, UInt128>()).ExAs<UInt128, T>();
 #endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
@@ -638,35 +638,35 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<T> Result0, Vector512<T> Result1, Vector512<T> Result2, Vector512<T> Result3) YGroup3ToGroup4<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1, Vector512<T> data2) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<float>)(object)data0, (Vector512<float>)(object)data1, (Vector512<float>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, float>(), data1.As<T, float>(), data2.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>(), rt3.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<double>)(object)data0, (Vector512<double>)(object)data1, (Vector512<double>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, double>(), data1.As<T, double>(), data2.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>(), rt3.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1, (Vector512<sbyte>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, sbyte>(), data1.As<T, sbyte>(), data2.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>(), rt3.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1, (Vector512<byte>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, byte>(), data1.As<T, byte>(), data2.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>(), rt3.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<short>)(object)data0, (Vector512<short>)(object)data1, (Vector512<short>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, short>(), data1.As<T, short>(), data2.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>(), rt3.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1, (Vector512<ushort>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, ushort>(), data1.As<T, ushort>(), data2.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>(), rt3.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<int>)(object)data0, (Vector512<int>)(object)data1, (Vector512<int>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, int>(), data1.As<T, int>(), data2.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>(), rt3.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1, (Vector512<uint>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, uint>(), data1.As<T, uint>(), data2.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>(), rt3.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<long>)(object)data0, (Vector512<long>)(object)data1, (Vector512<long>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, long>(), data1.As<T, long>(), data2.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>(), rt3.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1, (Vector512<ulong>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup3ToGroup4(data0.As<T, ulong>(), data1.As<T, ulong>(), data2.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>(), rt3.As<ulong, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -760,35 +760,35 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<T> X, Vector512<T> Y, Vector512<T> Z) YGroup3Unzip<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1, Vector512<T> data2) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<float>)(object)data0, (Vector512<float>)(object)data1, (Vector512<float>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, float>(), data1.As<T, float>(), data2.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<double>)(object)data0, (Vector512<double>)(object)data1, (Vector512<double>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, double>(), data1.As<T, double>(), data2.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1, (Vector512<sbyte>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, sbyte>(), data1.As<T, sbyte>(), data2.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1, (Vector512<byte>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, byte>(), data1.As<T, byte>(), data2.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<short>)(object)data0, (Vector512<short>)(object)data1, (Vector512<short>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, short>(), data1.As<T, short>(), data2.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1, (Vector512<ushort>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, ushort>(), data1.As<T, ushort>(), data2.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<int>)(object)data0, (Vector512<int>)(object)data1, (Vector512<int>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, int>(), data1.As<T, int>(), data2.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1, (Vector512<uint>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, uint>(), data1.As<T, uint>(), data2.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<long>)(object)data0, (Vector512<long>)(object)data1, (Vector512<long>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, long>(), data1.As<T, long>(), data2.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1, (Vector512<ulong>)(object)data2);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Unzip(data0.As<T, ulong>(), data1.As<T, ulong>(), data2.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -881,35 +881,35 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<T> X, Vector512<T> XB, Vector512<T> Y, Vector512<T> YB, Vector512<T> Z, Vector512<T> ZB) YGroup3UnzipX2<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3, Vector512<T> data4, Vector512<T> data5) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<float>)(object)data0, (Vector512<float>)(object)data1, (Vector512<float>)(object)data2, (Vector512<float>)(object)data3, (Vector512<float>)(object)data4, (Vector512<float>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, float>(), data1.As<T, float>(), data2.As<T, float>(), data3.As<T, float>(), data4.As<T, float>(), data5.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>(), rt3.As<float, T>(), rt4.As<float, T>(), rt5.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<double>)(object)data0, (Vector512<double>)(object)data1, (Vector512<double>)(object)data2, (Vector512<double>)(object)data3, (Vector512<double>)(object)data4, (Vector512<double>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, double>(), data1.As<T, double>(), data2.As<T, double>(), data3.As<T, double>(), data4.As<T, double>(), data5.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>(), rt3.As<double, T>(), rt4.As<double, T>(), rt5.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1, (Vector512<sbyte>)(object)data2, (Vector512<sbyte>)(object)data3, (Vector512<sbyte>)(object)data4, (Vector512<sbyte>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, sbyte>(), data1.As<T, sbyte>(), data2.As<T, sbyte>(), data3.As<T, sbyte>(), data4.As<T, sbyte>(), data5.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>(), rt3.As<sbyte, T>(), rt4.As<sbyte, T>(), rt5.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1, (Vector512<byte>)(object)data2, (Vector512<byte>)(object)data3, (Vector512<byte>)(object)data4, (Vector512<byte>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, byte>(), data1.As<T, byte>(), data2.As<T, byte>(), data3.As<T, byte>(), data4.As<T, byte>(), data5.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>(), rt3.As<byte, T>(), rt4.As<byte, T>(), rt5.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<short>)(object)data0, (Vector512<short>)(object)data1, (Vector512<short>)(object)data2, (Vector512<short>)(object)data3, (Vector512<short>)(object)data4, (Vector512<short>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, short>(), data1.As<T, short>(), data2.As<T, short>(), data3.As<T, short>(), data4.As<T, short>(), data5.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>(), rt3.As<short, T>(), rt4.As<short, T>(), rt5.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1, (Vector512<ushort>)(object)data2, (Vector512<ushort>)(object)data3, (Vector512<ushort>)(object)data4, (Vector512<ushort>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, ushort>(), data1.As<T, ushort>(), data2.As<T, ushort>(), data3.As<T, ushort>(), data4.As<T, ushort>(), data5.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>(), rt3.As<ushort, T>(), rt4.As<ushort, T>(), rt5.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<int>)(object)data0, (Vector512<int>)(object)data1, (Vector512<int>)(object)data2, (Vector512<int>)(object)data3, (Vector512<int>)(object)data4, (Vector512<int>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, int>(), data1.As<T, int>(), data2.As<T, int>(), data3.As<T, int>(), data4.As<T, int>(), data5.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>(), rt3.As<int, T>(), rt4.As<int, T>(), rt5.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1, (Vector512<uint>)(object)data2, (Vector512<uint>)(object)data3, (Vector512<uint>)(object)data4, (Vector512<uint>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, uint>(), data1.As<T, uint>(), data2.As<T, uint>(), data3.As<T, uint>(), data4.As<T, uint>(), data5.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>(), rt3.As<uint, T>(), rt4.As<uint, T>(), rt5.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<long>)(object)data0, (Vector512<long>)(object)data1, (Vector512<long>)(object)data2, (Vector512<long>)(object)data3, (Vector512<long>)(object)data4, (Vector512<long>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, long>(), data1.As<T, long>(), data2.As<T, long>(), data3.As<T, long>(), data4.As<T, long>(), data5.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>(), rt3.As<long, T>(), rt4.As<long, T>(), rt5.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1, (Vector512<ulong>)(object)data2, (Vector512<ulong>)(object)data3, (Vector512<ulong>)(object)data4, (Vector512<ulong>)(object)data5);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3UnzipX2(data0.As<T, ulong>(), data1.As<T, ulong>(), data2.As<T, ulong>(), data3.As<T, ulong>(), data4.As<T, ulong>(), data5.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>(), rt3.As<ulong, T>(), rt4.As<ulong, T>(), rt5.As<ulong, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -1002,35 +1002,35 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<T> Data0, Vector512<T> Data1, Vector512<T> Data2) YGroup3Zip<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> y, Vector512<T> z) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<float>)(object)x, (Vector512<float>)(object)y, (Vector512<float>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, float>(), y.As<T, float>(), z.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<double>)(object)x, (Vector512<double>)(object)y, (Vector512<double>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, double>(), y.As<T, double>(), z.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)y, (Vector512<sbyte>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, sbyte>(), y.As<T, sbyte>(), z.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<byte>)(object)x, (Vector512<byte>)(object)y, (Vector512<byte>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, byte>(), y.As<T, byte>(), z.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<short>)(object)x, (Vector512<short>)(object)y, (Vector512<short>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, short>(), y.As<T, short>(), z.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)y, (Vector512<ushort>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, ushort>(), y.As<T, ushort>(), z.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<int>)(object)x, (Vector512<int>)(object)y, (Vector512<int>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, int>(), y.As<T, int>(), z.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<uint>)(object)x, (Vector512<uint>)(object)y, (Vector512<uint>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, uint>(), y.As<T, uint>(), z.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<long>)(object)x, (Vector512<long>)(object)y, (Vector512<long>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, long>(), y.As<T, long>(), z.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var rt0, var rt1, var rt2) = athis.YGroup3Zip((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)y, (Vector512<ulong>)(object)z);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2);
+                (var rt0, var rt1, var rt2) = athis.YGroup3Zip(x.As<T, ulong>(), y.As<T, ulong>(), z.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -1123,35 +1123,35 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<T> Data0, Vector512<T> Data1, Vector512<T> Data2, Vector512<T> Data3, Vector512<T> Data4, Vector512<T> Data5) YGroup3ZipX2<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> xB, Vector512<T> y, Vector512<T> yB, Vector512<T> z, Vector512<T> zB) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<float>)(object)x, (Vector512<float>)(object)xB, (Vector512<float>)(object)y, (Vector512<float>)(object)yB, (Vector512<float>)(object)z, (Vector512<float>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, float>(), xB.As<T, float>(), y.As<T, float>(), yB.As<T, float>(), z.As<T, float>(), zB.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>(), rt3.As<float, T>(), rt4.As<float, T>(), rt5.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<double>)(object)x, (Vector512<double>)(object)xB, (Vector512<double>)(object)y, (Vector512<double>)(object)yB, (Vector512<double>)(object)z, (Vector512<double>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, double>(), xB.As<T, double>(), y.As<T, double>(), yB.As<T, double>(), z.As<T, double>(), zB.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>(), rt3.As<double, T>(), rt4.As<double, T>(), rt5.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)xB, (Vector512<sbyte>)(object)y, (Vector512<sbyte>)(object)yB, (Vector512<sbyte>)(object)z, (Vector512<sbyte>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, sbyte>(), xB.As<T, sbyte>(), y.As<T, sbyte>(), yB.As<T, sbyte>(), z.As<T, sbyte>(), zB.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>(), rt3.As<sbyte, T>(), rt4.As<sbyte, T>(), rt5.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<byte>)(object)x, (Vector512<byte>)(object)xB, (Vector512<byte>)(object)y, (Vector512<byte>)(object)yB, (Vector512<byte>)(object)z, (Vector512<byte>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, byte>(), xB.As<T, byte>(), y.As<T, byte>(), yB.As<T, byte>(), z.As<T, byte>(), zB.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>(), rt3.As<byte, T>(), rt4.As<byte, T>(), rt5.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<short>)(object)x, (Vector512<short>)(object)xB, (Vector512<short>)(object)y, (Vector512<short>)(object)yB, (Vector512<short>)(object)z, (Vector512<short>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, short>(), xB.As<T, short>(), y.As<T, short>(), yB.As<T, short>(), z.As<T, short>(), zB.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>(), rt3.As<short, T>(), rt4.As<short, T>(), rt5.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)xB, (Vector512<ushort>)(object)y, (Vector512<ushort>)(object)yB, (Vector512<ushort>)(object)z, (Vector512<ushort>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, ushort>(), xB.As<T, ushort>(), y.As<T, ushort>(), yB.As<T, ushort>(), z.As<T, ushort>(), zB.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>(), rt3.As<ushort, T>(), rt4.As<ushort, T>(), rt5.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<int>)(object)x, (Vector512<int>)(object)xB, (Vector512<int>)(object)y, (Vector512<int>)(object)yB, (Vector512<int>)(object)z, (Vector512<int>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, int>(), xB.As<T, int>(), y.As<T, int>(), yB.As<T, int>(), z.As<T, int>(), zB.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>(), rt3.As<int, T>(), rt4.As<int, T>(), rt5.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<uint>)(object)x, (Vector512<uint>)(object)xB, (Vector512<uint>)(object)y, (Vector512<uint>)(object)yB, (Vector512<uint>)(object)z, (Vector512<uint>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, uint>(), xB.As<T, uint>(), y.As<T, uint>(), yB.As<T, uint>(), z.As<T, uint>(), zB.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>(), rt3.As<uint, T>(), rt4.As<uint, T>(), rt5.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<long>)(object)x, (Vector512<long>)(object)xB, (Vector512<long>)(object)y, (Vector512<long>)(object)yB, (Vector512<long>)(object)z, (Vector512<long>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, long>(), xB.As<T, long>(), y.As<T, long>(), yB.As<T, long>(), z.As<T, long>(), zB.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>(), rt3.As<long, T>(), rt4.As<long, T>(), rt5.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)xB, (Vector512<ulong>)(object)y, (Vector512<ulong>)(object)yB, (Vector512<ulong>)(object)z, (Vector512<ulong>)(object)zB);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3, (Vector512<T>)(object)rt4, (Vector512<T>)(object)rt5);
+                (var rt0, var rt1, var rt2, var rt3, var rt4, var rt5) = athis.YGroup3ZipX2(x.As<T, ulong>(), xB.As<T, ulong>(), y.As<T, ulong>(), yB.As<T, ulong>(), z.As<T, ulong>(), zB.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>(), rt3.As<ulong, T>(), rt4.As<ulong, T>(), rt5.As<ulong, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -1392,48 +1392,48 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<T> X, Vector512<T> Y, Vector512<T> Z, Vector512<T> W) YGroup4Unzip<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1, Vector512<T> data2, Vector512<T> data3) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<float>)(object)data0, (Vector512<float>)(object)data1, (Vector512<float>)(object)data2, (Vector512<float>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, float>(), data1.As<T, float>(), data2.As<T, float>(), data3.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>(), rt3.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<double>)(object)data0, (Vector512<double>)(object)data1, (Vector512<double>)(object)data2, (Vector512<double>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, double>(), data1.As<T, double>(), data2.As<T, double>(), data3.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>(), rt3.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<sbyte>)(object)data0, (Vector512<sbyte>)(object)data1, (Vector512<sbyte>)(object)data2, (Vector512<sbyte>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, sbyte>(), data1.As<T, sbyte>(), data2.As<T, sbyte>(), data3.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>(), rt3.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<byte>)(object)data0, (Vector512<byte>)(object)data1, (Vector512<byte>)(object)data2, (Vector512<byte>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, byte>(), data1.As<T, byte>(), data2.As<T, byte>(), data3.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>(), rt3.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<short>)(object)data0, (Vector512<short>)(object)data1, (Vector512<short>)(object)data2, (Vector512<short>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, short>(), data1.As<T, short>(), data2.As<T, short>(), data3.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>(), rt3.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<ushort>)(object)data0, (Vector512<ushort>)(object)data1, (Vector512<ushort>)(object)data2, (Vector512<ushort>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, ushort>(), data1.As<T, ushort>(), data2.As<T, ushort>(), data3.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>(), rt3.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<int>)(object)data0, (Vector512<int>)(object)data1, (Vector512<int>)(object)data2, (Vector512<int>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, int>(), data1.As<T, int>(), data2.As<T, int>(), data3.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>(), rt3.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<uint>)(object)data0, (Vector512<uint>)(object)data1, (Vector512<uint>)(object)data2, (Vector512<uint>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, uint>(), data1.As<T, uint>(), data2.As<T, uint>(), data3.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>(), rt3.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<long>)(object)data0, (Vector512<long>)(object)data1, (Vector512<long>)(object)data2, (Vector512<long>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, long>(), data1.As<T, long>(), data2.As<T, long>(), data3.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>(), rt3.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<ulong>)(object)data0, (Vector512<ulong>)(object)data1, (Vector512<ulong>)(object)data2, (Vector512<ulong>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.As<T, ulong>(), data1.As<T, ulong>(), data2.As<T, ulong>(), data3.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>(), rt3.As<ulong, T>());
             } else if (typeof(ExInt128) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<ExInt128>)(object)data0, (Vector512<ExInt128>)(object)data1, (Vector512<ExInt128>)(object)data2, (Vector512<ExInt128>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.ExAs<T, ExInt128>(), data1.ExAs<T, ExInt128>(), data2.ExAs<T, ExInt128>(), data3.ExAs<T, ExInt128>());
+                return (rt0.ExAs<ExInt128, T>(), rt1.ExAs<ExInt128, T>(), rt2.ExAs<ExInt128, T>(), rt3.ExAs<ExInt128, T>());
             } else if (typeof(ExUInt128) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<ExUInt128>)(object)data0, (Vector512<ExUInt128>)(object)data1, (Vector512<ExUInt128>)(object)data2, (Vector512<ExUInt128>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.ExAs<T, ExUInt128>(), data1.ExAs<T, ExUInt128>(), data2.ExAs<T, ExUInt128>(), data3.ExAs<T, ExUInt128>());
+                return (rt0.ExAs<ExUInt128, T>(), rt1.ExAs<ExUInt128, T>(), rt2.ExAs<ExUInt128, T>(), rt3.ExAs<ExUInt128, T>());
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<Int128>)(object)data0, (Vector512<Int128>)(object)data1, (Vector512<Int128>)(object)data2, (Vector512<Int128>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.ExAs<T, Int128>(), data1.ExAs<T, Int128>(), data2.ExAs<T, Int128>(), data3.ExAs<T, Int128>());
+                return (rt0.ExAs<Int128, T>(), rt1.ExAs<Int128, T>(), rt2.ExAs<Int128, T>(), rt3.ExAs<Int128, T>());
             } else if (typeof(UInt128) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip((Vector512<UInt128>)(object)data0, (Vector512<UInt128>)(object)data1, (Vector512<UInt128>)(object)data2, (Vector512<UInt128>)(object)data3);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Unzip(data0.ExAs<T, UInt128>(), data1.ExAs<T, UInt128>(), data2.ExAs<T, UInt128>(), data3.ExAs<T, UInt128>());
+                return (rt0.ExAs<UInt128, T>(), rt1.ExAs<UInt128, T>(), rt2.ExAs<UInt128, T>(), rt3.ExAs<UInt128, T>());
 #endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
@@ -1537,7 +1537,6 @@ namespace Zyl.VectorTraits.Impl {
             return (rt0, rt1, rt2, rt3);
         }
 
-
 #if BCL_TYPE_INT128
 
         /// <inheritdoc cref="Vector512s.YGroup4Unzip(Vector512{Int128}, Vector512{Int128}, Vector512{Int128}, Vector512{Int128})"/>
@@ -1592,48 +1591,48 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<T> Data0, Vector512<T> Data1, Vector512<T> Data2, Vector512<T> Data3) YGroup4Zip<T>(this IWVectorTraits512 athis, Vector512<T> x, Vector512<T> y, Vector512<T> z, Vector512<T> w) where T : struct {
             if (typeof(float) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<float>)(object)x, (Vector512<float>)(object)y, (Vector512<float>)(object)z, (Vector512<float>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, float>(), y.As<T, float>(), z.As<T, float>(), w.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>(), rt3.As<float, T>());
             } else if (typeof(double) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<double>)(object)x, (Vector512<double>)(object)y, (Vector512<double>)(object)z, (Vector512<double>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, double>(), y.As<T, double>(), z.As<T, double>(), w.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>(), rt3.As<double, T>());
             } else if (typeof(sbyte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<sbyte>)(object)x, (Vector512<sbyte>)(object)y, (Vector512<sbyte>)(object)z, (Vector512<sbyte>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, sbyte>(), y.As<T, sbyte>(), z.As<T, sbyte>(), w.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>(), rt3.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<byte>)(object)x, (Vector512<byte>)(object)y, (Vector512<byte>)(object)z, (Vector512<byte>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, byte>(), y.As<T, byte>(), z.As<T, byte>(), w.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>(), rt3.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<short>)(object)x, (Vector512<short>)(object)y, (Vector512<short>)(object)z, (Vector512<short>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, short>(), y.As<T, short>(), z.As<T, short>(), w.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>(), rt3.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<ushort>)(object)x, (Vector512<ushort>)(object)y, (Vector512<ushort>)(object)z, (Vector512<ushort>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, ushort>(), y.As<T, ushort>(), z.As<T, ushort>(), w.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>(), rt3.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<int>)(object)x, (Vector512<int>)(object)y, (Vector512<int>)(object)z, (Vector512<int>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, int>(), y.As<T, int>(), z.As<T, int>(), w.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>(), rt3.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<uint>)(object)x, (Vector512<uint>)(object)y, (Vector512<uint>)(object)z, (Vector512<uint>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, uint>(), y.As<T, uint>(), z.As<T, uint>(), w.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>(), rt3.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<long>)(object)x, (Vector512<long>)(object)y, (Vector512<long>)(object)z, (Vector512<long>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, long>(), y.As<T, long>(), z.As<T, long>(), w.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>(), rt3.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<ulong>)(object)x, (Vector512<ulong>)(object)y, (Vector512<ulong>)(object)z, (Vector512<ulong>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.As<T, ulong>(), y.As<T, ulong>(), z.As<T, ulong>(), w.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>(), rt3.As<ulong, T>());
             } else if (typeof(ExInt128) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<ExInt128>)(object)x, (Vector512<ExInt128>)(object)y, (Vector512<ExInt128>)(object)z, (Vector512<ExInt128>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.ExAs<T, ExInt128>(), y.ExAs<T, ExInt128>(), z.ExAs<T, ExInt128>(), w.ExAs<T, ExInt128>());
+                return (rt0.ExAs<ExInt128, T>(), rt1.ExAs<ExInt128, T>(), rt2.ExAs<ExInt128, T>(), rt3.ExAs<ExInt128, T>());
             } else if (typeof(ExUInt128) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<ExUInt128>)(object)x, (Vector512<ExUInt128>)(object)y, (Vector512<ExUInt128>)(object)z, (Vector512<ExUInt128>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.ExAs<T, ExUInt128>(), y.ExAs<T, ExUInt128>(), z.ExAs<T, ExUInt128>(), w.ExAs<T, ExUInt128>());
+                return (rt0.ExAs<ExUInt128, T>(), rt1.ExAs<ExUInt128, T>(), rt2.ExAs<ExUInt128, T>(), rt3.ExAs<ExUInt128, T>());
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<Int128>)(object)x, (Vector512<Int128>)(object)y, (Vector512<Int128>)(object)z, (Vector512<Int128>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.ExAs<T, Int128>(), y.ExAs<T, Int128>(), z.ExAs<T, Int128>(), w.ExAs<T, Int128>());
+                return (rt0.ExAs<Int128, T>(), rt1.ExAs<Int128, T>(), rt2.ExAs<Int128, T>(), rt3.ExAs<Int128, T>());
             } else if (typeof(UInt128) == typeof(T)) {
-                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip((Vector512<UInt128>)(object)x, (Vector512<UInt128>)(object)y, (Vector512<UInt128>)(object)z, (Vector512<UInt128>)(object)w);
-                return ((Vector512<T>)(object)rt0, (Vector512<T>)(object)rt1, (Vector512<T>)(object)rt2, (Vector512<T>)(object)rt3);
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup4Zip(x.ExAs<T, UInt128>(), y.ExAs<T, UInt128>(), z.ExAs<T, UInt128>(), w.ExAs<T, UInt128>());
+                return (rt0.ExAs<UInt128, T>(), rt1.ExAs<UInt128, T>(), rt2.ExAs<UInt128, T>(), rt3.ExAs<UInt128, T>());
 #endif // BCL_TYPE_INT128
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));

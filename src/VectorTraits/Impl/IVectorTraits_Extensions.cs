@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Zyl.VectorTraits.Extensions.SameW;
 using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 
 namespace Zyl.VectorTraits.Impl {
@@ -17,33 +18,33 @@ namespace Zyl.VectorTraits.Impl {
         public static void Widen<T, TOut>(this IVectorTraits athis, Vector<T> source, out Vector<TOut> lower, out Vector<TOut> upper)
                  where T : struct where TOut : struct {
             if (typeof(float) == typeof(T) && typeof(double) == typeof(TOut)) {
-                (Vector<double> a, Vector<double> b) = athis.Widen((Vector<float>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
+                (Vector<double> a, Vector<double> b) = athis.Widen(source.As<T, float>());
+                lower = a.As<double, TOut>();
+                upper = b.As<double, TOut>();
             } else if (typeof(sbyte) == typeof(T) && typeof(short) == typeof(TOut)) {
-                (Vector<short> a, Vector<short> b) = athis.Widen((Vector<sbyte>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
+                (Vector<short> a, Vector<short> b) = athis.Widen(source.As<T, sbyte>());
+                lower = a.As<short, TOut>();
+                upper = b.As<short, TOut>();
             } else if (typeof(byte) == typeof(T) && typeof(ushort) == typeof(TOut)) {
-                (Vector<ushort> a, Vector<ushort> b) = athis.Widen((Vector<byte>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
+                (Vector<ushort> a, Vector<ushort> b) = athis.Widen(source.As<T, byte>());
+                lower = a.As<ushort, TOut>();
+                upper = b.As<ushort, TOut>();
             } else if (typeof(short) == typeof(T) && typeof(int) == typeof(TOut)) {
-                (Vector<int> a, Vector<int> b) = athis.Widen((Vector<short>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
+                (Vector<int> a, Vector<int> b) = athis.Widen(source.As<T, short>());
+                lower = a.As<int, TOut>();
+                upper = b.As<int, TOut>();
             } else if (typeof(ushort) == typeof(T) && typeof(uint) == typeof(TOut)) {
-                (Vector<uint> a, Vector<uint> b) = athis.Widen((Vector<ushort>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
+                (Vector<uint> a, Vector<uint> b) = athis.Widen(source.As<T, ushort>());
+                lower = a.As<uint, TOut>();
+                upper = b.As<uint, TOut>();
             } else if (typeof(int) == typeof(T) && typeof(long) == typeof(TOut)) {
-                (Vector<long> a, Vector<long> b) = athis.Widen((Vector<int>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
+                (Vector<long> a, Vector<long> b) = athis.Widen(source.As<T, int>());
+                lower = a.As<long, TOut>();
+                upper = b.As<long, TOut>();
             } else if (typeof(uint) == typeof(T) && typeof(ulong) == typeof(TOut)) {
-                (Vector<ulong> a, Vector<ulong> b) = athis.Widen((Vector<uint>)(object)source);
-                lower = (Vector<TOut>)(object)a;
-                upper = (Vector<TOut>)(object)b;
+                (Vector<ulong> a, Vector<ulong> b) = athis.Widen(source.As<T, uint>());
+                lower = a.As<ulong, TOut>();
+                upper = b.As<ulong, TOut>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TOut).Name));
             }
@@ -111,29 +112,29 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         public static (Vector<T> args0, Vector<T> args1) ShiftLeft_Args<T>(this IVectorTraits athis, Vector<T> dummy, int shiftAmount) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftLeft_Args((Vector<sbyte>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftLeft_Args(dummy.As<T, sbyte>(), shiftAmount);
+                return (args0.As<sbyte, T>(), args1.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftLeft_Args((Vector<byte>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftLeft_Args(dummy.As<T, byte>(), shiftAmount);
+                return (args0.As<byte, T>(), args1.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftLeft_Args((Vector<short>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftLeft_Args(dummy.As<T, short>(), shiftAmount);
+                return (args0.As<short, T>(), args1.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftLeft_Args((Vector<ushort>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftLeft_Args(dummy.As<T, ushort>(), shiftAmount);
+                return (args0.As<ushort, T>(), args1.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftLeft_Args((Vector<int>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftLeft_Args(dummy.As<T, int>(), shiftAmount);
+                return (args0.As<int, T>(), args1.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftLeft_Args((Vector<uint>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftLeft_Args(dummy.As<T, uint>(), shiftAmount);
+                return (args0.As<uint, T>(), args1.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftLeft_Args((Vector<long>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftLeft_Args(dummy.As<T, long>(), shiftAmount);
+                return (args0.As<long, T>(), args1.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftLeft_Args((Vector<ulong>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftLeft_Args(dummy.As<T, ulong>(), shiftAmount);
+                return (args0.As<ulong, T>(), args1.As<ulong, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -209,17 +210,17 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         public static (Vector<T> args0, Vector<T> args1) ShiftRightArithmetic_Args<T>(this IVectorTraits athis, Vector<T> dummy, int shiftAmount) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightArithmetic_Args((Vector<sbyte>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightArithmetic_Args(dummy.As<T, sbyte>(), shiftAmount);
+                return (args0.As<sbyte, T>(), args1.As<sbyte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightArithmetic_Args((Vector<short>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightArithmetic_Args(dummy.As<T, short>(), shiftAmount);
+                return (args0.As<short, T>(), args1.As<short, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightArithmetic_Args((Vector<int>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightArithmetic_Args(dummy.As<T, int>(), shiftAmount);
+                return (args0.As<int, T>(), args1.As<int, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightArithmetic_Args((Vector<long>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightArithmetic_Args(dummy.As<T, long>(), shiftAmount);
+                return (args0.As<long, T>(), args1.As<long, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -263,29 +264,29 @@ namespace Zyl.VectorTraits.Impl {
         [CLSCompliant(false)]
         public static (Vector<T> args0, Vector<T> args1) ShiftRightLogical_Args<T>(this IVectorTraits athis, Vector<T> dummy, int shiftAmount) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<sbyte>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightLogical_Args(dummy.As<T, sbyte>(), shiftAmount);
+                return (args0.As<sbyte, T>(), args1.As<sbyte, T>());
             } else if (typeof(byte) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<byte>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightLogical_Args(dummy.As<T, byte>(), shiftAmount);
+                return (args0.As<byte, T>(), args1.As<byte, T>());
             } else if (typeof(short) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<short>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightLogical_Args(dummy.As<T, short>(), shiftAmount);
+                return (args0.As<short, T>(), args1.As<short, T>());
             } else if (typeof(ushort) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<ushort>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightLogical_Args(dummy.As<T, ushort>(), shiftAmount);
+                return (args0.As<ushort, T>(), args1.As<ushort, T>());
             } else if (typeof(int) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<int>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightLogical_Args(dummy.As<T, int>(), shiftAmount);
+                return (args0.As<int, T>(), args1.As<int, T>());
             } else if (typeof(uint) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<uint>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightLogical_Args(dummy.As<T, uint>(), shiftAmount);
+                return (args0.As<uint, T>(), args1.As<uint, T>());
             } else if (typeof(long) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<long>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightLogical_Args(dummy.As<T, long>(), shiftAmount);
+                return (args0.As<long, T>(), args1.As<long, T>());
             } else if (typeof(ulong) == typeof(T)) {
-                (var args0, var args1) = athis.ShiftRightLogical_Args((Vector<ulong>)(object)dummy, shiftAmount);
-                return ((Vector<T>)(object)args0, (Vector<T>)(object)args1);
+                (var args0, var args1) = athis.ShiftRightLogical_Args(dummy.As<T, ulong>(), shiftAmount);
+                return (args0.As<ulong, T>(), args1.As<ulong, T>());
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
             }
@@ -362,37 +363,37 @@ namespace Zyl.VectorTraits.Impl {
         public static void Shuffle_Args<TIdx>(this IVectorTraits athis, Vector<TIdx> indices, out Vector<TIdx> args0, out Vector<TIdx> args1)
                  where TIdx : struct {
             if (typeof(sbyte) == typeof(TIdx)) {
-                (var a, var b) = athis.Shuffle_Args((Vector<sbyte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a, var b) = athis.Shuffle_Args(indices.As<TIdx, sbyte>());
+                args0 = a.As<sbyte, TIdx>();
+                args1 = b.As<sbyte, TIdx>();
             } else if (typeof(byte) == typeof(TIdx)) {
-                (var a, var b) = athis.Shuffle_Args((Vector<byte>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a, var b) = athis.Shuffle_Args(indices.As<TIdx, byte>());
+                args0 = a.As<byte, TIdx>();
+                args1 = b.As<byte, TIdx>();
             } else if (typeof(short) == typeof(TIdx)) {
-                (var a, var b) = athis.Shuffle_Args((Vector<short>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a, var b) = athis.Shuffle_Args(indices.As<TIdx, short>());
+                args0 = a.As<short, TIdx>();
+                args1 = b.As<short, TIdx>();
             } else if (typeof(ushort) == typeof(TIdx)) {
-                (var a, var b) = athis.Shuffle_Args((Vector<ushort>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a, var b) = athis.Shuffle_Args(indices.As<TIdx, ushort>());
+                args0 = a.As<ushort, TIdx>();
+                args1 = b.As<ushort, TIdx>();
             } else if (typeof(int) == typeof(TIdx)) {
-                (var a, var b) = athis.Shuffle_Args((Vector<int>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a, var b) = athis.Shuffle_Args(indices.As<TIdx, int>());
+                args0 = a.As<int, TIdx>();
+                args1 = b.As<int, TIdx>();
             } else if (typeof(uint) == typeof(TIdx)) {
-                (var a, var b) = athis.Shuffle_Args((Vector<uint>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a, var b) = athis.Shuffle_Args(indices.As<TIdx, uint>());
+                args0 = a.As<uint, TIdx>();
+                args1 = b.As<uint, TIdx>();
             } else if (typeof(long) == typeof(TIdx)) {
-                (var a, var b) = athis.Shuffle_Args((Vector<long>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a, var b) = athis.Shuffle_Args(indices.As<TIdx, long>());
+                args0 = a.As<long, TIdx>();
+                args1 = b.As<long, TIdx>();
             } else if (typeof(ulong) == typeof(TIdx)) {
-                (var a, var b) = athis.Shuffle_Args((Vector<ulong>)(object)indices);
-                args0 = (Vector<TIdx>)(object)a;
-                args1 = (Vector<TIdx>)(object)b;
+                (var a, var b) = athis.Shuffle_Args(indices.As<TIdx, ulong>());
+                args0 = a.As<ulong, TIdx>();
+                args1 = b.As<ulong, TIdx>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(TIdx).Name));
             }
@@ -492,25 +493,25 @@ namespace Zyl.VectorTraits.Impl {
         public static Vector<T> Shuffle_Core<T, TIdx>(this IVectorTraits athis, Vector<T> vector, (Vector<TIdx> args0, Vector<TIdx> args1) args)
                  where T : struct where TIdx : struct {
             if (typeof(float) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<float>)(object)vector, (ValueTuple<Vector<int>, Vector<int>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, float>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>>>(ref args)).As<float, T>();
             } else if (typeof(double) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<double>)(object)vector, (ValueTuple<Vector<long>, Vector<long>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, double>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>>>(ref args)).As<double, T>();
             } else if (typeof(sbyte) == typeof(T) && typeof(sbyte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<sbyte>)(object)vector, (ValueTuple<Vector<sbyte>, Vector<sbyte>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, sbyte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<sbyte>, Vector<sbyte>>>(ref args)).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T) && typeof(byte) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<byte>)(object)vector, (ValueTuple<Vector<byte>, Vector<byte>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, byte>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<byte>, Vector<byte>>>(ref args)).As<byte, T>();
             } else if (typeof(short) == typeof(T) && typeof(short) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<short>)(object)vector, (ValueTuple<Vector<short>, Vector<short>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, short>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<short>, Vector<short>>>(ref args)).As<short, T>();
             } else if (typeof(ushort) == typeof(T) && typeof(ushort) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<ushort>)(object)vector, (ValueTuple<Vector<ushort>, Vector<ushort>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, ushort>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ushort>, Vector<ushort>>>(ref args)).As<ushort, T>();
             } else if (typeof(int) == typeof(T) && typeof(int) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<int>)(object)vector, (ValueTuple<Vector<int>, Vector<int>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, int>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<int>, Vector<int>>>(ref args)).As<int, T>();
             } else if (typeof(uint) == typeof(T) && typeof(uint) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<uint>)(object)vector, (ValueTuple<Vector<uint>, Vector<uint>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, uint>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<uint>, Vector<uint>>>(ref args)).As<uint, T>();
             } else if (typeof(long) == typeof(T) && typeof(long) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<long>)(object)vector, (ValueTuple<Vector<long>, Vector<long>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, long>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<long>, Vector<long>>>(ref args)).As<long, T>();
             } else if (typeof(ulong) == typeof(T) && typeof(ulong) == typeof(TIdx)) {
-                return (Vector<T>)(object)athis.Shuffle_Core((Vector<ulong>)(object)vector, (ValueTuple<Vector<ulong>, Vector<ulong>>)(object)args);
+                return athis.Shuffle_Core(vector.As<T, ulong>(), Unsafe.As<ValueTuple<Vector<TIdx>, Vector<TIdx>>, ValueTuple<Vector<ulong>, Vector<ulong>>>(ref args)).As<ulong, T>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TIdx).Name));
             }
