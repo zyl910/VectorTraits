@@ -170,40 +170,40 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> Create<T>(T value) where T : struct {
             if (typeof(T) == typeof(float)) {
-                return (Vector256<T>)(object)Vector256.Create((float)(object)value);
+                return Vector256.Create(Unsafe.As<T, float>(ref value)).As<float, T>();
             } else if (typeof(T) == typeof(double)) {
-                return (Vector256<T>)(object)Vector256.Create((double)(object)value);
+                return Vector256.Create(Unsafe.As<T, double>(ref value)).As<double, T>();
             } else if (typeof(T) == typeof(sbyte)) {
-                return (Vector256<T>)(object)Vector256.Create((sbyte)(object)value);
-            } else if (typeof(T) == typeof(short)) {
-                return (Vector256<T>)(object)Vector256.Create((short)(object)value);
-            } else if (typeof(T) == typeof(int)) {
-                return (Vector256<T>)(object)Vector256.Create((int)(object)value);
-            } else if (typeof(T) == typeof(long)) {
-                return (Vector256<T>)(object)Vector256.Create((long)(object)value);
+                return Vector256.Create(Unsafe.As<T, sbyte>(ref value)).As<sbyte, T>();
             } else if (typeof(T) == typeof(byte)) {
-                return (Vector256<T>)(object)Vector256.Create((byte)(object)value);
+                return Vector256.Create(Unsafe.As<T, byte>(ref value)).As<byte, T>();
+            } else if (typeof(T) == typeof(short)) {
+                return Vector256.Create(Unsafe.As<T, short>(ref value)).As<short, T>();
             } else if (typeof(T) == typeof(ushort)) {
-                return (Vector256<T>)(object)Vector256.Create((ushort)(object)value);
+                return Vector256.Create(Unsafe.As<T, ushort>(ref value)).As<ushort, T>();
+            } else if (typeof(T) == typeof(int)) {
+                return Vector256.Create(Unsafe.As<T, int>(ref value)).As<int, T>();
             } else if (typeof(T) == typeof(uint)) {
-                return (Vector256<T>)(object)Vector256.Create((uint)(object)value);
+                return Vector256.Create(Unsafe.As<T, uint>(ref value)).As<uint, T>();
+            } else if (typeof(T) == typeof(long)) {
+                return Vector256.Create(Unsafe.As<T, long>(ref value)).As<long, T>();
             } else if (typeof(T) == typeof(ulong)) {
-                return (Vector256<T>)(object)Vector256.Create((ulong)(object)value);
+                return Vector256.Create(Unsafe.As<T, ulong>(ref value)).As<ulong, T>();
             } else if (typeof(T) == typeof(ExInt128)) {
-                return (Vector256<T>)(object)Vector256s.Create((ExInt128)(object)value);
+                return Vector256s.Create(Unsafe.As<T, ExInt128>(ref value)).ExAs<ExInt128, T>();
             } else if (typeof(T) == typeof(ExUInt128)) {
-                return (Vector256<T>)(object)Vector256s.Create((ExUInt128)(object)value);
+                return Vector256s.Create(Unsafe.As<T, ExUInt128>(ref value)).ExAs<ExUInt128, T>();
 #if BCL_TYPE_INT128
             } else if (typeof(T) == typeof(Int128)) {
-                return (Vector256<T>)(object)Vector256s.Create((Int128)(object)value);
+                return Vector256s.Create(Unsafe.As<T, Int128>(ref value)).ExAs<Int128, T>();
             } else if (typeof(T) == typeof(UInt128)) {
-                return (Vector256<T>)(object)Vector256s.Create((UInt128)(object)value);
+                return Vector256s.Create(Unsafe.As<T, UInt128>(ref value)).ExAs<UInt128, T>();
 #endif // BCL_TYPE_INT128
             } else {
 #if NET7_0_OR_GREATER
                 return Vector256.Create(value);
 #else
-                return (Vector256<T>)(object)Vector256.Create((dynamic)value);
+                return Vector256.Create((dynamic)value);
 #endif
             }
         }

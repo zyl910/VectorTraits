@@ -356,14 +356,14 @@ namespace Zyl.VectorTraits {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> Create<T>(T value) where T : struct {
             if (typeof(T) == typeof(ExInt128)) {
-                return (Vector<T>)(object)Vectors.Create((ExInt128)(object)value);
+                return Vectors.Create(Unsafe.As<T, ExInt128>(ref value)).ExAs<ExInt128, T>();
             } else if (typeof(T) == typeof(ExUInt128)) {
-                return (Vector<T>)(object)Vectors.Create((ExUInt128)(object)value);
+                return Vectors.Create(Unsafe.As<T, ExUInt128>(ref value)).ExAs<ExUInt128, T>();
 #if BCL_TYPE_INT128
             } else if (typeof(T) == typeof(Int128)) {
-                return (Vector<T>)(object)Vectors.Create((Int128)(object)value);
+                return Vectors.Create(Unsafe.As<T, Int128>(ref value)).ExAs<Int128, T>();
             } else if (typeof(T) == typeof(UInt128)) {
-                return (Vector<T>)(object)Vectors.Create((UInt128)(object)value);
+                return Vectors.Create(Unsafe.As<T, UInt128>(ref value)).ExAs<UInt128, T>();
 #endif // BCL_TYPE_INT128
             } else {
                 return new Vector<T>(value);

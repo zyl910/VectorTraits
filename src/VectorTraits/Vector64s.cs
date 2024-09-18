@@ -143,27 +143,27 @@ namespace Zyl.VectorTraits {
             return Vector64.Create(value);
 #else
             if (typeof(T) == typeof(float)) {
-                return (Vector64<T>)(object)Vector64.Create((float)(object)value);
+                return Vector64.Create(Unsafe.As<T, float>(ref value)).As<float, T>();
             } else if (typeof(T) == typeof(double)) {
-                return (Vector64<T>)(object)Vector64.Create((double)(object)value);
+                return Vector64.Create(Unsafe.As<T, double>(ref value)).As<double, T>();
             } else if (typeof(T) == typeof(sbyte)) {
-                return (Vector64<T>)(object)Vector64.Create((sbyte)(object)value);
-            } else if (typeof(T) == typeof(short)) {
-                return (Vector64<T>)(object)Vector64.Create((short)(object)value);
-            } else if (typeof(T) == typeof(int)) {
-                return (Vector64<T>)(object)Vector64.Create((int)(object)value);
-            } else if (typeof(T) == typeof(long)) {
-                return (Vector64<T>)(object)Vector64.Create((long)(object)value);
+                return Vector64.Create(Unsafe.As<T, sbyte>(ref value)).As<sbyte, T>();
             } else if (typeof(T) == typeof(byte)) {
-                return (Vector64<T>)(object)Vector64.Create((byte)(object)value);
+                return Vector64.Create(Unsafe.As<T, byte>(ref value)).As<byte, T>();
+            } else if (typeof(T) == typeof(short)) {
+                return Vector64.Create(Unsafe.As<T, short>(ref value)).As<short, T>();
             } else if (typeof(T) == typeof(ushort)) {
-                return (Vector64<T>)(object)Vector64.Create((ushort)(object)value);
+                return Vector64.Create(Unsafe.As<T, ushort>(ref value)).As<ushort, T>();
+            } else if (typeof(T) == typeof(int)) {
+                return Vector64.Create(Unsafe.As<T, int>(ref value)).As<int, T>();
             } else if (typeof(T) == typeof(uint)) {
-                return (Vector64<T>)(object)Vector64.Create((uint)(object)value);
+                return Vector64.Create(Unsafe.As<T, uint>(ref value)).As<uint, T>();
+            } else if (typeof(T) == typeof(long)) {
+                return Vector64.Create(Unsafe.As<T, long>(ref value)).As<long, T>();
             } else if (typeof(T) == typeof(ulong)) {
-                return (Vector64<T>)(object)Vector64.Create((ulong)(object)value);
+                return Vector64.Create(Unsafe.As<T, ulong>(ref value)).As<ulong, T>();
             } else {
-                return (Vector64<T>)(object)Vector64.Create((dynamic)value);
+                return Vector64.Create((dynamic)value);
             }
 #endif
         }
