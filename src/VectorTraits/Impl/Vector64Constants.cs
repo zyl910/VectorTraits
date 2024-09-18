@@ -390,21 +390,21 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector64<T> GetMaskBits<T>(int index) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
-                return (Vector64<T>)(object)GetMaskBits_SByte(index);
+                return GetMaskBits_SByte(index).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T)) {
-                return (Vector64<T>)(object)GetMaskBits_Byte(index);
+                return GetMaskBits_Byte(index).As<byte, T>();
             } else if (typeof(short) == typeof(T)) {
-                return (Vector64<T>)(object)GetMaskBits_Int16(index);
+                return GetMaskBits_Int16(index).As<short, T>();
             } else if (typeof(ushort) == typeof(T)) {
-                return (Vector64<T>)(object)GetMaskBits_UInt16(index);
+                return GetMaskBits_UInt16(index).As<ushort, T>();
             } else if (typeof(int) == typeof(T)) {
-                return (Vector64<T>)(object)GetMaskBits_Int32(index);
+                return GetMaskBits_Int32(index).As<int, T>();
             } else if (typeof(uint) == typeof(T)) {
-                return (Vector64<T>)(object)GetMaskBits_UInt32(index);
+                return GetMaskBits_UInt32(index).As<uint, T>();
             } else if (typeof(long) == typeof(T)) {
-                return (Vector64<T>)(object)GetMaskBits_Int64(index);
+                return GetMaskBits_Int64(index).As<long, T>();
             } else if (typeof(ulong) == typeof(T)) {
-                return (Vector64<T>)(object)GetMaskBits_UInt64(index);
+                return GetMaskBits_UInt64(index).As<ulong, T>();
             } else {
 #if FALLBACK_USE_T
                 return Vector64s<T>.GetMaskBits(index);
@@ -570,21 +570,21 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector64<T> GetResidueMaskBits<T>(int index) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
-                return (Vector64<T>)(object)GetResidueMaskBits_SByte(index);
+                return GetResidueMaskBits_SByte(index).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T)) {
-                return (Vector64<T>)(object)GetResidueMaskBits_Byte(index);
+                return GetResidueMaskBits_Byte(index).As<byte, T>();
             } else if (typeof(short) == typeof(T)) {
-                return (Vector64<T>)(object)GetResidueMaskBits_Int16(index);
+                return GetResidueMaskBits_Int16(index).As<short, T>();
             } else if (typeof(ushort) == typeof(T)) {
-                return (Vector64<T>)(object)GetResidueMaskBits_UInt16(index);
+                return GetResidueMaskBits_UInt16(index).As<ushort, T>();
             } else if (typeof(int) == typeof(T)) {
-                return (Vector64<T>)(object)GetResidueMaskBits_Int32(index);
+                return GetResidueMaskBits_Int32(index).As<int, T>();
             } else if (typeof(uint) == typeof(T)) {
-                return (Vector64<T>)(object)GetResidueMaskBits_UInt32(index);
+                return GetResidueMaskBits_UInt32(index).As<uint, T>();
             } else if (typeof(long) == typeof(T)) {
-                return (Vector64<T>)(object)GetResidueMaskBits_Int64(index);
+                return GetResidueMaskBits_Int64(index).As<long, T>();
             } else if (typeof(ulong) == typeof(T)) {
-                return (Vector64<T>)(object)GetResidueMaskBits_UInt64(index);
+                return GetResidueMaskBits_UInt64(index).As<ulong, T>();
             } else {
 #if FALLBACK_USE_T
                 return Vector64s<T>.GetMaskBits(Scalars<T>.BitSize - index);

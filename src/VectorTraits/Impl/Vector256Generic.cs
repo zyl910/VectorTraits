@@ -21,33 +21,33 @@ namespace Zyl.VectorTraits.Impl {
         public static void Widen<T, TOut>(Vector256<T> source, out Vector256<TOut> lower, out Vector256<TOut> upper)
                  where T : struct where TOut : struct {
             if (typeof(float) == typeof(T) && typeof(double) == typeof(TOut)) {
-                (Vector256<double> a, Vector256<double> b) = Vector256.Widen((Vector256<float>)(object)source);
-                lower = (Vector256<TOut>)(object)a;
-                upper = (Vector256<TOut>)(object)b;
+                (Vector256<double> a, Vector256<double> b) = Vector256.Widen(source.As<T, float>());
+                lower = a.As<double, TOut>();
+                upper = b.As<double, TOut>();
             } else if (typeof(sbyte) == typeof(T) && typeof(short) == typeof(TOut)) {
-                (Vector256<short> a, Vector256<short> b) = Vector256.Widen((Vector256<sbyte>)(object)source);
-                lower = (Vector256<TOut>)(object)a;
-                upper = (Vector256<TOut>)(object)b;
+                (Vector256<short> a, Vector256<short> b) = Vector256.Widen(source.As<T, sbyte>());
+                lower = a.As<short, TOut>();
+                upper = b.As<short, TOut>();
             } else if (typeof(byte) == typeof(T) && typeof(ushort) == typeof(TOut)) {
-                (Vector256<ushort> a, Vector256<ushort> b) = Vector256.Widen((Vector256<byte>)(object)source);
-                lower = (Vector256<TOut>)(object)a;
-                upper = (Vector256<TOut>)(object)b;
+                (Vector256<ushort> a, Vector256<ushort> b) = Vector256.Widen(source.As<T, byte>());
+                lower = a.As<ushort, TOut>();
+                upper = b.As<ushort, TOut>();
             } else if (typeof(short) == typeof(T) && typeof(int) == typeof(TOut)) {
-                (Vector256<int> a, Vector256<int> b) = Vector256.Widen((Vector256<short>)(object)source);
-                lower = (Vector256<TOut>)(object)a;
-                upper = (Vector256<TOut>)(object)b;
+                (Vector256<int> a, Vector256<int> b) = Vector256.Widen(source.As<T, short>());
+                lower = a.As<int, TOut>();
+                upper = b.As<int, TOut>();
             } else if (typeof(ushort) == typeof(T) && typeof(uint) == typeof(TOut)) {
-                (Vector256<uint> a, Vector256<uint> b) = Vector256.Widen((Vector256<ushort>)(object)source);
-                lower = (Vector256<TOut>)(object)a;
-                upper = (Vector256<TOut>)(object)b;
+                (Vector256<uint> a, Vector256<uint> b) = Vector256.Widen(source.As<T, ushort>());
+                lower = a.As<uint, TOut>();
+                upper = b.As<uint, TOut>();
             } else if (typeof(int) == typeof(T) && typeof(long) == typeof(TOut)) {
-                (Vector256<long> a, Vector256<long> b) = Vector256.Widen((Vector256<int>)(object)source);
-                lower = (Vector256<TOut>)(object)a;
-                upper = (Vector256<TOut>)(object)b;
+                (Vector256<long> a, Vector256<long> b) = Vector256.Widen(source.As<T, int>());
+                lower = a.As<long, TOut>();
+                upper = b.As<long, TOut>();
             } else if (typeof(uint) == typeof(T) && typeof(ulong) == typeof(TOut)) {
-                (Vector256<ulong> a, Vector256<ulong> b) = Vector256.Widen((Vector256<uint>)(object)source);
-                lower = (Vector256<TOut>)(object)a;
-                upper = (Vector256<TOut>)(object)b;
+                (Vector256<ulong> a, Vector256<ulong> b) = Vector256.Widen(source.As<T, uint>());
+                lower = a.As<ulong, TOut>();
+                upper = b.As<ulong, TOut>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TOut).Name));
             }

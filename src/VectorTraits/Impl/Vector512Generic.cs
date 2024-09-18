@@ -19,33 +19,33 @@ namespace Zyl.VectorTraits.Impl {
         public static void Widen<T, TOut>(Vector512<T> source, out Vector512<TOut> lower, out Vector512<TOut> upper)
                  where T : struct where TOut : struct {
             if (typeof(float) == typeof(T) && typeof(double) == typeof(TOut)) {
-                (Vector512<double> a, Vector512<double> b) = Vector512.Widen((Vector512<float>)(object)source);
-                lower = (Vector512<TOut>)(object)a;
-                upper = (Vector512<TOut>)(object)b;
+                (Vector512<double> a, Vector512<double> b) = Vector512.Widen(source.As<T, float>());
+                lower = a.As<double, TOut>();
+                upper = b.As<double, TOut>();
             } else if (typeof(sbyte) == typeof(T) && typeof(short) == typeof(TOut)) {
-                (Vector512<short> a, Vector512<short> b) = Vector512.Widen((Vector512<sbyte>)(object)source);
-                lower = (Vector512<TOut>)(object)a;
-                upper = (Vector512<TOut>)(object)b;
+                (Vector512<short> a, Vector512<short> b) = Vector512.Widen(source.As<T, sbyte>());
+                lower = a.As<short, TOut>();
+                upper = b.As<short, TOut>();
             } else if (typeof(byte) == typeof(T) && typeof(ushort) == typeof(TOut)) {
-                (Vector512<ushort> a, Vector512<ushort> b) = Vector512.Widen((Vector512<byte>)(object)source);
-                lower = (Vector512<TOut>)(object)a;
-                upper = (Vector512<TOut>)(object)b;
+                (Vector512<ushort> a, Vector512<ushort> b) = Vector512.Widen(source.As<T, byte>());
+                lower = a.As<ushort, TOut>();
+                upper = b.As<ushort, TOut>();
             } else if (typeof(short) == typeof(T) && typeof(int) == typeof(TOut)) {
-                (Vector512<int> a, Vector512<int> b) = Vector512.Widen((Vector512<short>)(object)source);
-                lower = (Vector512<TOut>)(object)a;
-                upper = (Vector512<TOut>)(object)b;
+                (Vector512<int> a, Vector512<int> b) = Vector512.Widen(source.As<T, short>());
+                lower = a.As<int, TOut>();
+                upper = b.As<int, TOut>();
             } else if (typeof(ushort) == typeof(T) && typeof(uint) == typeof(TOut)) {
-                (Vector512<uint> a, Vector512<uint> b) = Vector512.Widen((Vector512<ushort>)(object)source);
-                lower = (Vector512<TOut>)(object)a;
-                upper = (Vector512<TOut>)(object)b;
+                (Vector512<uint> a, Vector512<uint> b) = Vector512.Widen(source.As<T, ushort>());
+                lower = a.As<uint, TOut>();
+                upper = b.As<uint, TOut>();
             } else if (typeof(int) == typeof(T) && typeof(long) == typeof(TOut)) {
-                (Vector512<long> a, Vector512<long> b) = Vector512.Widen((Vector512<int>)(object)source);
-                lower = (Vector512<TOut>)(object)a;
-                upper = (Vector512<TOut>)(object)b;
+                (Vector512<long> a, Vector512<long> b) = Vector512.Widen(source.As<T, int>());
+                lower = a.As<long, TOut>();
+                upper = b.As<long, TOut>();
             } else if (typeof(uint) == typeof(T) && typeof(ulong) == typeof(TOut)) {
-                (Vector512<ulong> a, Vector512<ulong> b) = Vector512.Widen((Vector512<uint>)(object)source);
-                lower = (Vector512<TOut>)(object)a;
-                upper = (Vector512<TOut>)(object)b;
+                (Vector512<ulong> a, Vector512<ulong> b) = Vector512.Widen(source.As<T, uint>());
+                lower = a.As<ulong, TOut>();
+                upper = b.As<ulong, TOut>();
             } else {
                 throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_2, typeof(T).Name, typeof(TOut).Name));
             }

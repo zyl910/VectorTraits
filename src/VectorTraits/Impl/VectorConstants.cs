@@ -317,30 +317,30 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> GetMaskBits<T>(int index) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_SByte(index);
+                return GetMaskBits_SByte(index).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_Byte(index);
+                return GetMaskBits_Byte(index).As<byte, T>();
             } else if (typeof(short) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_Int16(index);
+                return GetMaskBits_Int16(index).As<short, T>();
             } else if (typeof(ushort) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_UInt16(index);
+                return GetMaskBits_UInt16(index).As<ushort, T>();
             } else if (typeof(int) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_Int32(index);
+                return GetMaskBits_Int32(index).As<int, T>();
             } else if (typeof(uint) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_UInt32(index);
+                return GetMaskBits_UInt32(index).As<uint, T>();
             } else if (typeof(long) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_Int64(index);
+                return GetMaskBits_Int64(index).As<long, T>();
             } else if (typeof(ulong) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_UInt64(index);
+                return GetMaskBits_UInt64(index).As<ulong, T>();
             } else if (typeof(ExInt128) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_ExInt128(index);
+                return GetMaskBits_ExInt128(index).ExAs<ExInt128, T>();
             } else if (typeof(ExUInt128) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_ExUInt128(index);
+                return GetMaskBits_ExUInt128(index).ExAs<ExUInt128, T>();
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_Int128(index);
+                return GetMaskBits_Int128(index).ExAs<Int128, T>();
             } else if (typeof(UInt128) == typeof(T)) {
-                return (Vector<T>)(object)GetMaskBits_UInt128(index);
+                return GetMaskBits_UInt128(index).ExAs<UInt128, T>();
 #endif // BCL_TYPE_INT128
             } else {
 #if FALLBACK_USE_T
@@ -577,30 +577,30 @@ namespace Zyl.VectorTraits.Impl {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector<T> GetResidueMaskBits<T>(int index) where T : struct {
             if (typeof(sbyte) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_SByte(index);
+                return GetResidueMaskBits_SByte(index).As<sbyte, T>();
             } else if (typeof(byte) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_Byte(index);
+                return GetResidueMaskBits_Byte(index).As<byte, T>();
             } else if (typeof(short) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_Int16(index);
+                return GetResidueMaskBits_Int16(index).As<short, T>();
             } else if (typeof(ushort) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_UInt16(index);
+                return GetResidueMaskBits_UInt16(index).As<ushort, T>();
             } else if (typeof(int) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_Int32(index);
+                return GetResidueMaskBits_Int32(index).As<int, T>();
             } else if (typeof(uint) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_UInt32(index);
+                return GetResidueMaskBits_UInt32(index).As<uint, T>();
             } else if (typeof(long) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_Int64(index);
+                return GetResidueMaskBits_Int64(index).As<long, T>();
             } else if (typeof(ulong) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_UInt64(index);
+                return GetResidueMaskBits_UInt64(index).As<ulong, T>();
             } else if (typeof(ExInt128) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_ExInt128(index);
+                return GetResidueMaskBits_ExInt128(index).ExAs<ExInt128, T>();
             } else if (typeof(ExUInt128) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_ExUInt128(index);
+                return GetResidueMaskBits_ExUInt128(index).ExAs<ExUInt128, T>();
 #if BCL_TYPE_INT128
             } else if (typeof(Int128) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_Int128(index);
+                return GetResidueMaskBits_Int128(index).ExAs<Int128, T>();
             } else if (typeof(UInt128) == typeof(T)) {
-                return (Vector<T>)(object)GetResidueMaskBits_UInt128(index);
+                return GetResidueMaskBits_UInt128(index).ExAs<UInt128, T>();
 #endif // BCL_TYPE_INT128
             } else {
 #if FALLBACK_USE_T
