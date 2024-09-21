@@ -22,6 +22,247 @@ namespace Zyl.VectorTraits.Impl {
     partial class Vector128Constants {
 #if NETCOREAPP3_0_OR_GREATER
 
+        /// <summary>YGroup1ToGroup3 - Shuffle - Byte - The index of item 0.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_Shuffle_Byte_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)0, 0, 0, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - Byte - The index of item 1.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_Shuffle_Byte_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 9, 10, 10);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - Byte - The index of item 2.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_Shuffle_Byte_2 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)10, 11, 11, 11, 12, 12, 12, 13, 13, 13, 14, 14, 14, 15, 15, 15);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)10, 11, 11, 11, 12, 12, 12, 13, 13, 13, 14, 14, 14, 15, 15, 15);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - UInt16 - The index of item 0.</summary>
+        [CLSCompliant(false)]
+        public static Vector128<ushort> YGroup1ToGroup3_Shuffle_UInt16_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((ushort)0, 0, 0, 1, 1, 1, 2, 2);
+        }
+#else
+            get;
+        } = Vector128.Create((ushort)0, 0, 0, 1, 1, 1, 2, 2);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - UInt16 - The index of item 1.</summary>
+        [CLSCompliant(false)]
+        public static Vector128<ushort> YGroup1ToGroup3_Shuffle_UInt16_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((ushort)2, 3, 3, 3, 4, 4, 4, 5);
+        }
+#else
+            get;
+        } = Vector128.Create((ushort)2, 3, 3, 3, 4, 4, 4, 5);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - UInt16 - The index of item 2.</summary>
+        [CLSCompliant(false)]
+        public static Vector128<ushort> YGroup1ToGroup3_Shuffle_UInt16_2 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((ushort)5, 5, 6, 6, 6, 7, 7, 7);
+        }
+#else
+            get;
+        } = Vector128.Create((ushort)5, 5, 6, 6, 6, 7, 7, 7);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - UInt32 - The index of item 0.</summary>
+        [CLSCompliant(false)]
+        public static Vector128<uint> YGroup1ToGroup3_Shuffle_UInt32_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((uint)0, 0, 0, 1);
+        }
+#else
+            get;
+        } = Vector128.Create((uint)0, 0, 0, 1);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - UInt32 - The index of item 1.</summary>
+        [CLSCompliant(false)]
+        public static Vector128<uint> YGroup1ToGroup3_Shuffle_UInt32_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((uint)1, 1, 2, 2);
+        }
+#else
+            get;
+        } = Vector128.Create((uint)1, 1, 2, 2);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - UInt32 - The index of item 2.</summary>
+        [CLSCompliant(false)]
+        public static Vector128<uint> YGroup1ToGroup3_Shuffle_UInt32_2 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((uint)2, 3, 3, 3);
+        }
+#else
+            get;
+        } = Vector128.Create((uint)2, 3, 3, 3);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - UInt64 - The index of item 0.</summary>
+        [CLSCompliant(false)]
+        public static Vector128<ulong> YGroup1ToGroup3_Shuffle_UInt64_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((ulong)0, 0);
+        }
+#else
+            get;
+        } = Vector128.Create((ulong)0, 0);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle - UInt64 - The index of item 1.</summary>
+        [CLSCompliant(false)]
+        public static Vector128<ulong> YGroup1ToGroup3_Shuffle_UInt64_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+        get => Vector128.Create((ulong)0, 1);
+        }
+#else
+            get;
+        } = Vector128.Create((ulong)0, 1);
+#endif // USE_VECTOR_CREATE
+
+    /// <summary>YGroup1ToGroup3 - Shuffle - UInt64 - The index of item 2.</summary>
+    [CLSCompliant(false)]
+        public static Vector128<ulong> YGroup1ToGroup3_Shuffle_UInt64_2 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((ulong)1, 1);
+        }
+#else
+            get;
+        } = Vector128.Create((ulong)1, 1);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle on byte - UInt16 - The index of item 0.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_ShuffleOnByte_UInt16_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)0, 1, 0, 1, 0, 1, 2, 3, 2, 3, 2, 3, 4, 5, 4, 5);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)0, 1, 0, 1, 0, 1, 2, 3, 2, 3, 2, 3, 4, 5, 4, 5);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle on byte - UInt16 - The index of item 1.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_ShuffleOnByte_UInt16_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)4, 5, 6, 7, 6, 7, 6, 7, 8, 9, 8, 9, 8, 9, 10, 11);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)4, 5, 6, 7, 6, 7, 6, 7, 8, 9, 8, 9, 8, 9, 10, 11);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle on byte - UInt16 - The index of item 2.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_ShuffleOnByte_UInt16_2 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)10, 11, 10, 11, 12, 13, 12, 13, 12, 13, 14, 15, 14, 15, 14, 15);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)10, 11, 10, 11, 12, 13, 12, 13, 12, 13, 14, 15, 14, 15, 14, 15);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle on byte - UInt32 - The index of item 0.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_ShuffleOnByte_UInt32_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle on byte - UInt32 - The index of item 1.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_ShuffleOnByte_UInt32_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)4, 5, 6, 7, 4, 5, 6, 7, 8, 9, 10, 11, 8, 9, 10, 11);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)4, 5, 6, 7, 4, 5, 6, 7, 8, 9, 10, 11, 8, 9, 10, 11);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle on byte - UInt32 - The index of item 2.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_ShuffleOnByte_UInt32_2 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 12, 13, 14, 15, 12, 13, 14, 15);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 12, 13, 14, 15, 12, 13, 14, 15);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle on byte - UInt64 - The index of item 0.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_ShuffleOnByte_UInt64_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle on byte - UInt64 - The index of item 1.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_ShuffleOnByte_UInt64_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup1ToGroup3 - Shuffle on byte - UInt64 - The index of item 2.</summary>
+        public static Vector128<byte> YGroup1ToGroup3_ShuffleOnByte_UInt64_2 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector128.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 8, 9, 10, 11, 12, 13, 14, 15);
+        }
+#else
+            get;
+        } = Vector128.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 8, 9, 10, 11, 12, 13, 14, 15);
+#endif // USE_VECTOR_CREATE
+
+
         /// <summary>YGroup2Unzip - ShuffleX2 - Byte - The index of X.</summary>
         public static Vector128<byte> YGroup2Unzip_ShuffleX2_Byte_X {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

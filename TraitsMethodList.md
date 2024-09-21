@@ -123,9 +123,11 @@ Types: Vector, Vector128, Vector256, Vector512 .
 Summary (概要):
 - Provides vector methods for de-interleave (提供解交织的向量方法): YGroup2Unzip, YGroup2UnzipEven, YGroup2UnzipOdd, YGroup3Unzip, YGroup3UnzipX2, YGroup4Unzip, YGroup6Unzip_Bit128.
 - Provides vector methods for interleave (提供交织的向量方法): YGroup2Zip, YGroup2ZipHigh, YGroup2ZipLow, YGroup3Zip, YGroup3ZipX2, YGroup4Unzip, YGroup6Zip_Bit128.
-- Provides vector methods for reconstructing groups (提供重新构造组的向量方法): YGroup3ToGroup4, YGroup4ToGroup3.
+- Provides vector methods for reconstruction groups (提供重新构造组的向量方法): YGroup1ToGroup3, YGroup3ToGroup4, YGroup4ToGroup3.
 
 List (列表):
+- `YGroup1ToGroup3`: Convert a 1-element group, to a 3-element group. It also converts grayscale pixel data to packed RGB pixel data (将1-元素组, 转为3-元素组. 它还能将 灰度像素数据, 转换为 已打包的RGB像素数据).
+  Mnemonic: View for group: `(result0, result1, result2) = YGroup3Zip(x, x, x)`. View for element: `element_ref(i, result0, result1, result2) := x[i/3]`.
 - `YGroup2Unzip[/_Bit128]`: De-Interleave 2-element groups into 2 vectors. It converts the 2-element groups AoS to SoA (将2-元素组解交织为2个向量. 它能将2元素组的 数组结构体 转为 结构体数组).
   Mnemonic: `x[i] =: element_ref(2*i, data0, data1)`, `y[i] =: element_ref(2*i+1, data0, data1)`.
 - `YGroup2UnzipEven`: De-Interleave the 2-element groups into 2 vectors, and return the vector of even positions (将2-元素组解交织为2个向量, 并返回偶数位置的数据).
