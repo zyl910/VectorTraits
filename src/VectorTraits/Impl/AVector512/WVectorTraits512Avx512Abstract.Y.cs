@@ -194,6 +194,222 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3_AcceleratedTypes"/>
+        public override TypeCodeFlags YGroup1ToGroup3_AcceleratedTypes {
+            get {
+                return Statics.YGroup1ToGroup3_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<float> YGroup1ToGroup3(Vector512<float> x, out Vector512<float> result1, out Vector512<float> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{double}, out Vector512{double}, out Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<double> YGroup1ToGroup3(Vector512<double> x, out Vector512<double> result1, out Vector512<double> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<sbyte> YGroup1ToGroup3(Vector512<sbyte> x, out Vector512<sbyte> result1, out Vector512<sbyte> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<byte> YGroup1ToGroup3(Vector512<byte> x, out Vector512<byte> result1, out Vector512<byte> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{short}, out Vector512{short}, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<short> YGroup1ToGroup3(Vector512<short> x, out Vector512<short> result1, out Vector512<short> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<ushort> YGroup1ToGroup3(Vector512<ushort> x, out Vector512<ushort> result1, out Vector512<ushort> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{int}, out Vector512{int}, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<int> YGroup1ToGroup3(Vector512<int> x, out Vector512<int> result1, out Vector512<int> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<uint> YGroup1ToGroup3(Vector512<uint> x, out Vector512<uint> result1, out Vector512<uint> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{long}, out Vector512{long}, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<long> YGroup1ToGroup3(Vector512<long> x, out Vector512<long> result1, out Vector512<long> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup3(Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<ulong> YGroup1ToGroup3(Vector512<ulong> x, out Vector512<ulong> result1, out Vector512<ulong> result2) {
+            return Statics.YGroup1ToGroup3(x, out result1, out result2);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4_AcceleratedTypes"/>
+        public override TypeCodeFlags YGroup1ToGroup4_AcceleratedTypes {
+            get {
+                return Statics.YGroup1ToGroup4_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<float> YGroup1ToGroup4(Vector512<float> x, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<double> YGroup1ToGroup4(Vector512<double> x, out Vector512<double> data1, out Vector512<double> data2, out Vector512<double> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<sbyte> YGroup1ToGroup4(Vector512<sbyte> x, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<byte> YGroup1ToGroup4(Vector512<byte> x, out Vector512<byte> data1, out Vector512<byte> data2, out Vector512<byte> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<short> YGroup1ToGroup4(Vector512<short> x, out Vector512<short> data1, out Vector512<short> data2, out Vector512<short> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<ushort> YGroup1ToGroup4(Vector512<ushort> x, out Vector512<ushort> data1, out Vector512<ushort> data2, out Vector512<ushort> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<int> YGroup1ToGroup4(Vector512<int> x, out Vector512<int> data1, out Vector512<int> data2, out Vector512<int> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<uint> YGroup1ToGroup4(Vector512<uint> x, out Vector512<uint> data1, out Vector512<uint> data2, out Vector512<uint> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<long> YGroup1ToGroup4(Vector512<long> x, out Vector512<long> data1, out Vector512<long> data2, out Vector512<long> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4(Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<ulong> YGroup1ToGroup4(Vector512<ulong> x, out Vector512<ulong> data1, out Vector512<ulong> data2, out Vector512<ulong> data3) {
+            return Statics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW_AcceleratedTypes"/>
+        public override TypeCodeFlags YGroup1ToGroup4WithW_AcceleratedTypes {
+            get {
+                return Statics.YGroup1ToGroup4WithW_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<float> YGroup1ToGroup4WithW(Vector512<float> x, Vector512<float> w, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{double}, Vector512{double}, out Vector512{double}, out Vector512{double}, out Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<double> YGroup1ToGroup4WithW(Vector512<double> x, Vector512<double> w, out Vector512<double> data1, out Vector512<double> data2, out Vector512<double> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte}, out Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<sbyte> YGroup1ToGroup4WithW(Vector512<sbyte> x, Vector512<sbyte> w, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<byte> YGroup1ToGroup4WithW(Vector512<byte> x, Vector512<byte> w, out Vector512<byte> data1, out Vector512<byte> data2, out Vector512<byte> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{short}, Vector512{short}, out Vector512{short}, out Vector512{short}, out Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<short> YGroup1ToGroup4WithW(Vector512<short> x, Vector512<short> w, out Vector512<short> data1, out Vector512<short> data2, out Vector512<short> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{ushort}, Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort}, out Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<ushort> YGroup1ToGroup4WithW(Vector512<ushort> x, Vector512<ushort> w, out Vector512<ushort> data1, out Vector512<ushort> data2, out Vector512<ushort> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{int}, Vector512{int}, out Vector512{int}, out Vector512{int}, out Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<int> YGroup1ToGroup4WithW(Vector512<int> x, Vector512<int> w, out Vector512<int> data1, out Vector512<int> data2, out Vector512<int> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{uint}, Vector512{uint}, out Vector512{uint}, out Vector512{uint}, out Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<uint> YGroup1ToGroup4WithW(Vector512<uint> x, Vector512<uint> w, out Vector512<uint> data1, out Vector512<uint> data2, out Vector512<uint> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{long}, Vector512{long}, out Vector512{long}, out Vector512{long}, out Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<long> YGroup1ToGroup4WithW(Vector512<long> x, Vector512<long> w, out Vector512<long> data1, out Vector512<long> data2, out Vector512<long> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup1ToGroup4WithW(Vector512{ulong}, Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong}, out Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector512<ulong> YGroup1ToGroup4WithW(Vector512<ulong> x, Vector512<ulong> w, out Vector512<ulong> data1, out Vector512<ulong> data2, out Vector512<ulong> data3) {
+            return Statics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip_AcceleratedTypes"/>
         public override TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
             get {

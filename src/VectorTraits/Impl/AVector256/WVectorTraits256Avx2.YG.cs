@@ -32,21 +32,19 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{float}, out Vector256{float}, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<float> YGroup1ToGroup3(Vector256<float> x, out Vector256<float> result1, out Vector256<float> result2) {
-                //var d0 = YGroup1ToGroup3(x.AsUInt32(), out var d1, out var d2);
-                //result1 = d1.AsSingle();
-                //result2 = d2.AsSingle();
-                //return d0.AsSingle();
-                return YGroup1ToGroup3_ShuffleXImm(x, out result1, out result2);
+                var d0 = YGroup1ToGroup3(x.AsUInt32(), out var d1, out var d2);
+                result1 = d1.AsSingle();
+                result2 = d2.AsSingle();
+                return d0.AsSingle();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{double}, out Vector256{double}, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YGroup1ToGroup3(Vector256<double> x, out Vector256<double> result1, out Vector256<double> result2) {
-                //var d0 = YGroup1ToGroup3(x.AsUInt64(), out var d1, out var d2);
-                //result1 = d1.AsDouble();
-                //result2 = d2.AsDouble();
-                //return d0.AsDouble();
-                return YGroup1ToGroup3_ShuffleXImm(x, out result1, out result2);
+                var d0 = YGroup1ToGroup3(x.AsUInt64(), out var d1, out var d2);
+                result1 = d1.AsDouble();
+                result2 = d2.AsDouble();
+                return d0.AsDouble();
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>

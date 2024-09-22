@@ -249,6 +249,151 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup1ToGroup3</c> (运行 <c>YGroup1ToGroup3</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YGroup1ToGroup3(Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        /// <seealso cref="YGroup1ToGroup4_AcceleratedTypes"/>
+        /// <seealso cref="YGroup1ToGroup4WithW_AcceleratedTypes"/>
+        /// <seealso cref="YGroup3Zip_AcceleratedTypes"/>
+        TypeCodeFlags YGroup1ToGroup3_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert a 1-element group, to a 3-element group. It also converts grayscale pixel data to packed RGB pixel data (将1-元素组, 转为3-元素组. 它还能将 灰度像素数据, 转换为 已打包的RGB像素数据).
+        /// Mnemonic: View for group: <c>(result0, result1, result2) = YGroup3Zip(x, x, x)</c>. View for element: <c>element_ref(i, result0, result1, result2) := x[i/3]</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="result1">Returns part 1 of the converted data (返回转换后数据的第1部分).</param>
+        /// <param name="result2">Returns part 2 of the converted data (返回转换后数据的第2部分).</param>
+        /// <returns>Returns part 0 of the converted data (返回转换后数据的第0部分).</returns>
+        /// <seealso cref="YGroup1ToGroup3_AcceleratedTypes"/>
+        Vector512<float> YGroup1ToGroup3(Vector512<float> x, out Vector512<float> result1, out Vector512<float> result2);
+
+        /// <inheritdoc cref="YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<double> YGroup1ToGroup3(Vector512<double> x, out Vector512<double> result1, out Vector512<double> result2);
+
+        /// <inheritdoc cref="YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<sbyte> YGroup1ToGroup3(Vector512<sbyte> x, out Vector512<sbyte> result1, out Vector512<sbyte> result2);
+
+        /// <inheritdoc cref="YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<byte> YGroup1ToGroup3(Vector512<byte> x, out Vector512<byte> result1, out Vector512<byte> result2);
+
+        /// <inheritdoc cref="YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<short> YGroup1ToGroup3(Vector512<short> x, out Vector512<short> result1, out Vector512<short> result2);
+
+        /// <inheritdoc cref="YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<ushort> YGroup1ToGroup3(Vector512<ushort> x, out Vector512<ushort> result1, out Vector512<ushort> result2);
+
+        /// <inheritdoc cref="YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<int> YGroup1ToGroup3(Vector512<int> x, out Vector512<int> result1, out Vector512<int> result2);
+
+        /// <inheritdoc cref="YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<uint> YGroup1ToGroup3(Vector512<uint> x, out Vector512<uint> result1, out Vector512<uint> result2);
+
+        /// <inheritdoc cref="YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<long> YGroup1ToGroup3(Vector512<long> x, out Vector512<long> result1, out Vector512<long> result2);
+
+        /// <inheritdoc cref="YGroup1ToGroup3(Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<ulong> YGroup1ToGroup3(Vector512<ulong> x, out Vector512<ulong> result1, out Vector512<ulong> result2);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup1ToGroup4</c> (运行 <c>YGroup1ToGroup4</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YGroup1ToGroup4(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        /// <seealso cref="YGroup1ToGroup3_AcceleratedTypes"/>
+        /// <seealso cref="YGroup1ToGroup4WithW_AcceleratedTypes"/>
+        /// <seealso cref="YGroup4Zip_AcceleratedTypes"/>
+        TypeCodeFlags YGroup1ToGroup4_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert a 1-element group, to a 4-element group. It also converts grayscale pixel data to packed RGBA pixel data (将1-元素组, 转为4-元素组. 它还能将 灰度像素数据, 转换为 已打包的RGBA像素数据).
+        /// Mnemonic: View for group: <c>(result0, result1, result2, result4) = YGroup4Zip(x, x, x, x)</c>. View for element: <c>element_ref(i, result0, result1, result2, result4) := x[i/4]</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
+        /// <param name="data2">Returns part 2 of the interleaved data (返回交织后数据的第2部分).</param>
+        /// <param name="data3">Returns part 3 of the interleaved data (返回交织后数据的第3部分).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        Vector512<float> YGroup1ToGroup4(Vector512<float> x, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<double> YGroup1ToGroup4(Vector512<double> x, out Vector512<double> data1, out Vector512<double> data2, out Vector512<double> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<sbyte> YGroup1ToGroup4(Vector512<sbyte> x, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<byte> YGroup1ToGroup4(Vector512<byte> x, out Vector512<byte> data1, out Vector512<byte> data2, out Vector512<byte> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<short> YGroup1ToGroup4(Vector512<short> x, out Vector512<short> data1, out Vector512<short> data2, out Vector512<short> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<ushort> YGroup1ToGroup4(Vector512<ushort> x, out Vector512<ushort> data1, out Vector512<ushort> data2, out Vector512<ushort> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<int> YGroup1ToGroup4(Vector512<int> x, out Vector512<int> data1, out Vector512<int> data2, out Vector512<int> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<uint> YGroup1ToGroup4(Vector512<uint> x, out Vector512<uint> data1, out Vector512<uint> data2, out Vector512<uint> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<long> YGroup1ToGroup4(Vector512<long> x, out Vector512<long> data1, out Vector512<long> data2, out Vector512<long> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<ulong> YGroup1ToGroup4(Vector512<ulong> x, out Vector512<ulong> data1, out Vector512<ulong> data2, out Vector512<ulong> data3);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup1ToGroup4WithW</c> (运行 <c>YGroup1ToGroup4WithW</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <seealso cref="YGroup1ToGroup4WithW(Vector512{byte}, Vector512{byte}, Vector512{byte}, Vector512{byte}, out Vector512{byte}, out Vector512{byte}, out Vector512{byte})"/>
+        /// <seealso cref="YGroup1ToGroup3_AcceleratedTypes"/>
+        /// <seealso cref="YGroup1ToGroup4_AcceleratedTypes"/>
+        /// <seealso cref="YGroup4Zip_AcceleratedTypes"/>
+        TypeCodeFlags YGroup1ToGroup4WithW_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Convert a 1-element group and w argument, to a 4-element group. It also converts grayscale pixel data to packed RGBA pixel data (将1-元素组及w参数, 转为4-元素组. 它还能将 灰度像素数据, 转换为 已打包的RGBA像素数据).
+        /// Mnemonic: View for group: <c>(result0, result1, result2, result4) = YGroup4Zip(x, x, x, w)</c>. View for element: <c>element_ref(i, result0, result1, result2, result4) := ((i%4)&lt;3)?( x[i2] ):( w[i2] )</c>, <c>i2 := i/4</c>.
+        /// </summary>
+        /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
+        /// <param name="w">A vector consisting purely of W-components (纯由W分量所组成的向量).</param>
+        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
+        /// <param name="data2">Returns part 2 of the interleaved data (返回交织后数据的第2部分).</param>
+        /// <param name="data3">Returns part 3 of the interleaved data (返回交织后数据的第3部分).</param>
+        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
+        Vector512<float> YGroup1ToGroup4WithW(Vector512<float> x, Vector512<float> w, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<double> YGroup1ToGroup4WithW(Vector512<double> x, Vector512<double> w, out Vector512<double> data1, out Vector512<double> data2, out Vector512<double> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<sbyte> YGroup1ToGroup4WithW(Vector512<sbyte> x, Vector512<sbyte> w, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<byte> YGroup1ToGroup4WithW(Vector512<byte> x, Vector512<byte> w, out Vector512<byte> data1, out Vector512<byte> data2, out Vector512<byte> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<short> YGroup1ToGroup4WithW(Vector512<short> x, Vector512<short> w, out Vector512<short> data1, out Vector512<short> data2, out Vector512<short> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<ushort> YGroup1ToGroup4WithW(Vector512<ushort> x, Vector512<ushort> w, out Vector512<ushort> data1, out Vector512<ushort> data2, out Vector512<ushort> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<int> YGroup1ToGroup4WithW(Vector512<int> x, Vector512<int> w, out Vector512<int> data1, out Vector512<int> data2, out Vector512<int> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<uint> YGroup1ToGroup4WithW(Vector512<uint> x, Vector512<uint> w, out Vector512<uint> data1, out Vector512<uint> data2, out Vector512<uint> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<long> YGroup1ToGroup4WithW(Vector512<long> x, Vector512<long> w, out Vector512<long> data1, out Vector512<long> data2, out Vector512<long> data3);
+
+        /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
+        Vector512<ulong> YGroup1ToGroup4WithW(Vector512<ulong> x, Vector512<ulong> w, out Vector512<ulong> data1, out Vector512<ulong> data2, out Vector512<ulong> data3);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2Unzip</c> (运行 <c>YGroup2Unzip</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
