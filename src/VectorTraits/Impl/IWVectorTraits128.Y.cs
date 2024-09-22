@@ -293,6 +293,8 @@ namespace Zyl.VectorTraits.Impl {
         /// Types with hardware acceleration when running <c>YGroup1ToGroup3</c> (运行 <c>YGroup1ToGroup3</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YGroup1ToGroup3(Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
+        /// <seealso cref="YGroup1ToGroup4_AcceleratedTypes"/>
+        /// <seealso cref="YGroup1ToGroup4WithW_AcceleratedTypes"/>
         /// <seealso cref="YGroup3Zip_AcceleratedTypes"/>
         TypeCodeFlags YGroup1ToGroup3_AcceleratedTypes { get; }
 
@@ -339,7 +341,9 @@ namespace Zyl.VectorTraits.Impl {
         /// Types with hardware acceleration when running <c>YGroup1ToGroup4</c> (运行 <c>YGroup1ToGroup4</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YGroup1ToGroup4(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
-        /// <seealso cref="YGroup2Unzip_AcceleratedTypes"/>
+        /// <seealso cref="YGroup1ToGroup3_AcceleratedTypes"/>
+        /// <seealso cref="YGroup1ToGroup4WithW_AcceleratedTypes"/>
+        /// <seealso cref="YGroup4Zip_AcceleratedTypes"/>
         TypeCodeFlags YGroup1ToGroup4_AcceleratedTypes { get; }
 
         /// <summary>
@@ -385,7 +389,9 @@ namespace Zyl.VectorTraits.Impl {
         /// Types with hardware acceleration when running <c>YGroup1ToGroup4WithW</c> (运行 <c>YGroup1ToGroup4WithW</c> 时具有硬件加速的类型).
         /// </summary>
         /// <seealso cref="YGroup1ToGroup4WithW(Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}, out Vector128{byte}, out Vector128{byte}, out Vector128{byte})"/>
-        /// <seealso cref="YGroup2Unzip_AcceleratedTypes"/>
+        /// <seealso cref="YGroup1ToGroup3_AcceleratedTypes"/>
+        /// <seealso cref="YGroup1ToGroup4_AcceleratedTypes"/>
+        /// <seealso cref="YGroup4Zip_AcceleratedTypes"/>
         TypeCodeFlags YGroup1ToGroup4WithW_AcceleratedTypes { get; }
 
         /// <summary>

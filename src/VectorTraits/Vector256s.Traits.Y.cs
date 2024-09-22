@@ -308,6 +308,354 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3_AcceleratedTypes"/>
+        public static TypeCodeFlags YGroup1ToGroup3_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YGroup1ToGroup3_AcceleratedTypes;
+#else
+                return _instance.YGroup1ToGroup3_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YGroup1ToGroup3(Vector256<float> x, out Vector256<float> result1, out Vector256<float> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YGroup1ToGroup3(Vector256<double> x, out Vector256<double> result1, out Vector256<double> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YGroup1ToGroup3(Vector256<sbyte> x, out Vector256<sbyte> result1, out Vector256<sbyte> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YGroup1ToGroup3(Vector256<byte> x, out Vector256<byte> result1, out Vector256<byte> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YGroup1ToGroup3(Vector256<short> x, out Vector256<short> result1, out Vector256<short> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YGroup1ToGroup3(Vector256<ushort> x, out Vector256<ushort> result1, out Vector256<ushort> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YGroup1ToGroup3(Vector256<int> x, out Vector256<int> result1, out Vector256<int> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YGroup1ToGroup3(Vector256<uint> x, out Vector256<uint> result1, out Vector256<uint> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YGroup1ToGroup3(Vector256<long> x, out Vector256<long> result1, out Vector256<long> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup3(Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YGroup1ToGroup3(Vector256<ulong> x, out Vector256<ulong> result1, out Vector256<ulong> result2) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup3(x, out result1, out result2);
+#else
+            return _instance.YGroup1ToGroup3(x, out result1, out result2);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4_AcceleratedTypes"/>
+        public static TypeCodeFlags YGroup1ToGroup4_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YGroup1ToGroup4_AcceleratedTypes;
+#else
+                return _instance.YGroup1ToGroup4_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YGroup1ToGroup4(Vector256<float> x, out Vector256<float> data1, out Vector256<float> data2, out Vector256<float> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YGroup1ToGroup4(Vector256<double> x, out Vector256<double> data1, out Vector256<double> data2, out Vector256<double> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YGroup1ToGroup4(Vector256<sbyte> x, out Vector256<sbyte> data1, out Vector256<sbyte> data2, out Vector256<sbyte> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YGroup1ToGroup4(Vector256<byte> x, out Vector256<byte> data1, out Vector256<byte> data2, out Vector256<byte> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YGroup1ToGroup4(Vector256<short> x, out Vector256<short> data1, out Vector256<short> data2, out Vector256<short> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YGroup1ToGroup4(Vector256<ushort> x, out Vector256<ushort> data1, out Vector256<ushort> data2, out Vector256<ushort> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YGroup1ToGroup4(Vector256<int> x, out Vector256<int> data1, out Vector256<int> data2, out Vector256<int> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YGroup1ToGroup4(Vector256<uint> x, out Vector256<uint> data1, out Vector256<uint> data2, out Vector256<uint> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YGroup1ToGroup4(Vector256<long> x, out Vector256<long> data1, out Vector256<long> data2, out Vector256<long> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4(Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YGroup1ToGroup4(Vector256<ulong> x, out Vector256<ulong> data1, out Vector256<ulong> data2, out Vector256<ulong> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4(x, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW_AcceleratedTypes"/>
+        public static TypeCodeFlags YGroup1ToGroup4WithW_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YGroup1ToGroup4WithW_AcceleratedTypes;
+#else
+                return _instance.YGroup1ToGroup4WithW_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{float}, Vector256{float}, out Vector256{float}, out Vector256{float}, out Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YGroup1ToGroup4WithW(Vector256<float> x, Vector256<float> w, out Vector256<float> data1, out Vector256<float> data2, out Vector256<float> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{double}, Vector256{double}, out Vector256{double}, out Vector256{double}, out Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YGroup1ToGroup4WithW(Vector256<double> x, Vector256<double> w, out Vector256<double> data1, out Vector256<double> data2, out Vector256<double> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte}, out Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YGroup1ToGroup4WithW(Vector256<sbyte> x, Vector256<sbyte> w, out Vector256<sbyte> data1, out Vector256<sbyte> data2, out Vector256<sbyte> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YGroup1ToGroup4WithW(Vector256<byte> x, Vector256<byte> w, out Vector256<byte> data1, out Vector256<byte> data2, out Vector256<byte> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{short}, Vector256{short}, out Vector256{short}, out Vector256{short}, out Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YGroup1ToGroup4WithW(Vector256<short> x, Vector256<short> w, out Vector256<short> data1, out Vector256<short> data2, out Vector256<short> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort}, out Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YGroup1ToGroup4WithW(Vector256<ushort> x, Vector256<ushort> w, out Vector256<ushort> data1, out Vector256<ushort> data2, out Vector256<ushort> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{int}, Vector256{int}, out Vector256{int}, out Vector256{int}, out Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YGroup1ToGroup4WithW(Vector256<int> x, Vector256<int> w, out Vector256<int> data1, out Vector256<int> data2, out Vector256<int> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{uint}, Vector256{uint}, out Vector256{uint}, out Vector256{uint}, out Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YGroup1ToGroup4WithW(Vector256<uint> x, Vector256<uint> w, out Vector256<uint> data1, out Vector256<uint> data2, out Vector256<uint> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{long}, Vector256{long}, out Vector256{long}, out Vector256{long}, out Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YGroup1ToGroup4WithW(Vector256<long> x, Vector256<long> w, out Vector256<long> data1, out Vector256<long> data2, out Vector256<long> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup1ToGroup4WithW(Vector256{ulong}, Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong}, out Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YGroup1ToGroup4WithW(Vector256<ulong> x, Vector256<ulong> w, out Vector256<ulong> data1, out Vector256<ulong> data2, out Vector256<ulong> data3) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#else
+            return _instance.YGroup1ToGroup4WithW(x, w, out data1, out data2, out data3);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip_AcceleratedTypes"/>
         public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
             get {
