@@ -19,11 +19,11 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static bool YBitToByte_IsAccelerated {
                 get {
                     bool rt = false;
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                     if (Vector.IsHardwareAccelerated) {
                         rt = true;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                     return rt;
                 }
             }
@@ -32,11 +32,11 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YBitToByte(ulong value) {
-#if BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#if BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
                 return YBitToByte_Widen(value);
 #else
                 return YBitToByte_WidenScalar(value);
-#endif // BCL_OVERRIDE_BASE_FIXED && NET7_0_OR_GREATER
+#endif // BCL_OVERRIDE_BASE_VAR && NET7_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IVectorTraits.YBitToByte"/>
@@ -319,12 +319,12 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static TypeCodeFlags YCopySign_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     if (Vector.IsHardwareAccelerated) {
                         rt |= TypeCodeFlags.Single | TypeCodeFlags.Double;
                         rt |= (TypeCodeFlags.SByte | TypeCodeFlags.Int16 | TypeCodeFlags.Int32 | TypeCodeFlags.Int64); // & ShiftRightArithmetic_AcceleratedTypes
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -332,62 +332,62 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{float}, Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YCopySign(Vector<float> value, Vector<float> sign) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YCopySign_Bit(value, sign);
 #else
                 return YCopySign_Basic(value, sign);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{double}, Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YCopySign(Vector<double> value, Vector<double> sign) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YCopySign_Bit(value, sign);
 #else
                 return YCopySign_Basic(value, sign);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{sbyte}, Vector{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> YCopySign(Vector<sbyte> value, Vector<sbyte> sign) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YCopySign_Bit(value, sign);
 #else
                 return YCopySign_Basic(value, sign);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{short}, Vector{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> YCopySign(Vector<short> value, Vector<short> sign) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YCopySign_Bit(value, sign);
 #else
                 return YCopySign_Basic(value, sign);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{int}, Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> YCopySign(Vector<int> value, Vector<int> sign) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YCopySign_Bit(value, sign);
 #else
                 return YCopySign_Basic(value, sign);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{long}, Vector{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> YCopySign(Vector<long> value, Vector<long> sign) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YCopySign_Bit(value, sign);
 #else
                 return YCopySign_Basic(value, sign);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{float}, Vector{float})"/>
@@ -475,7 +475,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IVectorTraits.YCopySign(Vector{float}, Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YCopySign_Bit(Vector<float> value, Vector<float> sign) {
@@ -525,18 +525,18 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<long> rt = Vector.Subtract(Vector.Xor(value, t), t);
                 return rt;
             }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IVectorTraits.YMaxNumber_AcceleratedTypes"/>
             public static TypeCodeFlags YMaxNumber_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     if (Vector.IsHardwareAccelerated) {
                         rt = YIsNaN_AcceleratedTypes;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -544,21 +544,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YMaxNumber(Vector<float> left, Vector<float> right) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YMaxNumber_Bit(left, right);
 #else
                 return YMaxNumber_Basic(left, right);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{double}, Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YMaxNumber(Vector<double> left, Vector<double> right) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YMaxNumber_Bit(left, right);
 #else
                 return YMaxNumber_Basic(left, right);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
@@ -589,7 +589,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IVectorTraits.YMaxNumber(Vector{float}, Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YMaxNumber_Bit(Vector<float> left, Vector<float> right) {
@@ -607,18 +607,18 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<double> rt = Vector.ConditionalSelect(mask, left, right);
                 return rt;
             }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
 
 
             /// <inheritdoc cref="IVectorTraits.YMinNumber_AcceleratedTypes"/>
             public static TypeCodeFlags YMinNumber_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     if (Vector.IsHardwareAccelerated) {
                         rt = YIsNaN_AcceleratedTypes;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -626,21 +626,21 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YMinNumber(Vector<float> left, Vector<float> right) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YMinNumber_Bit(left, right);
 #else
                 return YMinNumber_Basic(left, right);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{double}, Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YMinNumber(Vector<double> left, Vector<double> right) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YMinNumber_Bit(left, right);
 #else
                 return YMinNumber_Basic(left, right);
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             }
 
             /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
@@ -671,7 +671,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return rt;
             }
 
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
             /// <inheritdoc cref="IVectorTraits.YMinNumber(Vector{float}, Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YMinNumber_Bit(Vector<float> left, Vector<float> right) {
@@ -689,7 +689,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 Vector<double> rt = Vector.ConditionalSelect(mask, left, right);
                 return rt;
             }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
 
             /// <inheritdoc cref="IVectorTraits.YNarrowSaturate_AcceleratedTypes"/>
             public static TypeCodeFlags YNarrowSaturate_AcceleratedTypes {

@@ -2314,11 +2314,11 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static TypeCodeFlags YGroup3ToGroup4_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     if (Vector.IsHardwareAccelerated) {
                         rt = TypeCodeFlags.Byte | TypeCodeFlags.SByte;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -2347,22 +2347,22 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> YGroup3ToGroup4(Vector<sbyte> data0, Vector<sbyte> data1, Vector<sbyte> data2, out Vector<sbyte> result1, out Vector<sbyte> result2, out Vector<sbyte> result3) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 if (Vector.IsHardwareAccelerated) {
                     return YGroup3ToGroup4_Unzip(data0, data1, data2, out result1, out result2, out result3);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YGroup3ToGroup4_Basic(data0, data1, data2, out result1, out result2, out result3);
             }
 
             /// <inheritdoc cref="IVectorTraits.YGroup3ToGroup4(Vector{byte}, Vector{byte}, Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup3ToGroup4(Vector<byte> data0, Vector<byte> data1, Vector<byte> data2, out Vector<byte> result1, out Vector<byte> result2, out Vector<byte> result3) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 if (Vector.IsHardwareAccelerated) {
                     return YGroup3ToGroup4_Unzip(data0, data1, data2, out result1, out result2, out result3);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YGroup3ToGroup4_Basic(data0, data1, data2, out result1, out result2, out result3);
             }
 
@@ -4249,11 +4249,11 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static TypeCodeFlags YGroup4ToGroup3_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     if (Vector.IsHardwareAccelerated) {
                         rt = TypeCodeFlags.Byte | TypeCodeFlags.SByte;
                     }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                     return rt;
                 }
             }
@@ -4280,22 +4280,22 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<sbyte> YGroup4ToGroup3(Vector<sbyte> data0, Vector<sbyte> data1, Vector<sbyte> data2, Vector<sbyte> data3, out Vector<sbyte> result1, out Vector<sbyte> result2) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 if (Vector.IsHardwareAccelerated) {
                     return YGroup4ToGroup3_Unzip(data0, data1, data2, data3, out result1, out result2);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
             }
 
             /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, out Vector{byte}, out Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup4ToGroup3(Vector<byte> data0, Vector<byte> data1, Vector<byte> data2, Vector<byte> data3, out Vector<byte> result1, out Vector<byte> result2) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 if (Vector.IsHardwareAccelerated) {
                     return YGroup4ToGroup3_Unzip(data0, data1, data2, data3, out result1, out result2);
                 }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YGroup4ToGroup3_Basic(data0, data1, data2, data3, out result1, out result2);
             }
 
