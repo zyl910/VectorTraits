@@ -195,75 +195,75 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the interleaved data (返回交织后数据).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<float> Result0, Vector512<float> Result1, Vector512<float> Result2, Vector512<float> Result3) YGroup1ToGroup4(Vector512<float> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<double> Result0, Vector512<double> Result1, Vector512<double> Result2, Vector512<double> Result3) YGroup1ToGroup4(Vector512<double> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<sbyte> Result0, Vector512<sbyte> Result1, Vector512<sbyte> Result2, Vector512<sbyte> Result3) YGroup1ToGroup4(Vector512<sbyte> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<byte> Result0, Vector512<byte> Result1, Vector512<byte> Result2, Vector512<byte> Result3) YGroup1ToGroup4(Vector512<byte> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<short> Result0, Vector512<short> Result1, Vector512<short> Result2, Vector512<short> Result3) YGroup1ToGroup4(Vector512<short> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<ushort> Result0, Vector512<ushort> Result1, Vector512<ushort> Result2, Vector512<ushort> Result3) YGroup1ToGroup4(Vector512<ushort> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<int> Result0, Vector512<int> Result1, Vector512<int> Result2, Vector512<int> Result3) YGroup1ToGroup4(Vector512<int> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<uint> Result0, Vector512<uint> Result1, Vector512<uint> Result2, Vector512<uint> Result3) YGroup1ToGroup4(Vector512<uint> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<long> Result0, Vector512<long> Result1, Vector512<long> Result2, Vector512<long> Result3) YGroup1ToGroup4(Vector512<long> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<ulong> Result0, Vector512<ulong> Result1, Vector512<ulong> Result2, Vector512<ulong> Result3) YGroup1ToGroup4(Vector512<ulong> x) {
-            var data0 = YGroup1ToGroup4(x, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4(x, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
 
@@ -316,75 +316,75 @@ namespace Zyl.VectorTraits {
         /// <returns>Returns the interleaved data (返回交织后数据).</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<float> Result0, Vector512<float> Result1, Vector512<float> Result2, Vector512<float> Result3) YGroup1ToGroup4WithW(Vector512<float> x, Vector512<float> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<double> Result0, Vector512<double> Result1, Vector512<double> Result2, Vector512<double> Result3) YGroup1ToGroup4WithW(Vector512<double> x, Vector512<double> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<sbyte> Result0, Vector512<sbyte> Result1, Vector512<sbyte> Result2, Vector512<sbyte> Result3) YGroup1ToGroup4WithW(Vector512<sbyte> x, Vector512<sbyte> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<byte> Result0, Vector512<byte> Result1, Vector512<byte> Result2, Vector512<byte> Result3) YGroup1ToGroup4WithW(Vector512<byte> x, Vector512<byte> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<short> Result0, Vector512<short> Result1, Vector512<short> Result2, Vector512<short> Result3) YGroup1ToGroup4WithW(Vector512<short> x, Vector512<short> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<ushort> Result0, Vector512<ushort> Result1, Vector512<ushort> Result2, Vector512<ushort> Result3) YGroup1ToGroup4WithW(Vector512<ushort> x, Vector512<ushort> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<int> Result0, Vector512<int> Result1, Vector512<int> Result2, Vector512<int> Result3) YGroup1ToGroup4WithW(Vector512<int> x, Vector512<int> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<uint> Result0, Vector512<uint> Result1, Vector512<uint> Result2, Vector512<uint> Result3) YGroup1ToGroup4WithW(Vector512<uint> x, Vector512<uint> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<long> Result0, Vector512<long> Result1, Vector512<long> Result2, Vector512<long> Result3) YGroup1ToGroup4WithW(Vector512<long> x, Vector512<long> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float})"/>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector512<ulong> Result0, Vector512<ulong> Result1, Vector512<ulong> Result2, Vector512<ulong> Result3) YGroup1ToGroup4WithW(Vector512<ulong> x, Vector512<ulong> w) {
-            var data0 = YGroup1ToGroup4WithW(x, w, out var data1, out var data2, out var data3);
-            return (data0, data1, data2, data3);
+            var result0 = YGroup1ToGroup4WithW(x, w, out var result1, out var result2, out var result3);
+            return (result0, result1, result2, result3);
         }
 
 

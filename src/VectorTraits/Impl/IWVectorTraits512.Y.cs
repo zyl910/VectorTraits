@@ -310,38 +310,38 @@ namespace Zyl.VectorTraits.Impl {
         /// Mnemonic: View for group: <c>(result0, result1, result2, result4) = YGroup4Zip(x, x, x, x)</c>. View for element: <c>element_ref(i, result0, result1, result2, result4) := x[i/4]</c>.
         /// </summary>
         /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
-        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
-        /// <param name="data2">Returns part 2 of the interleaved data (返回交织后数据的第2部分).</param>
-        /// <param name="data3">Returns part 3 of the interleaved data (返回交织后数据的第3部分).</param>
-        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
-        Vector512<float> YGroup1ToGroup4(Vector512<float> x, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3);
+        /// <param name="result1">Returns part 1 of the converted data (返回转换后数据的第1部分).</param>
+        /// <param name="result2">Returns part 2 of the converted data (返回转换后数据的第2部分).</param>
+        /// <param name="result3">Returns part 3 of the converted data (返回转换后数据的第3部分).</param>
+        /// <returns>Returns part 0 of the interleaved result (返回交织后数据的第0部分).</returns>
+        Vector512<float> YGroup1ToGroup4(Vector512<float> x, out Vector512<float> result1, out Vector512<float> result2, out Vector512<float> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<double> YGroup1ToGroup4(Vector512<double> x, out Vector512<double> data1, out Vector512<double> data2, out Vector512<double> data3);
+        Vector512<double> YGroup1ToGroup4(Vector512<double> x, out Vector512<double> result1, out Vector512<double> result2, out Vector512<double> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<sbyte> YGroup1ToGroup4(Vector512<sbyte> x, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3);
+        Vector512<sbyte> YGroup1ToGroup4(Vector512<sbyte> x, out Vector512<sbyte> result1, out Vector512<sbyte> result2, out Vector512<sbyte> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<byte> YGroup1ToGroup4(Vector512<byte> x, out Vector512<byte> data1, out Vector512<byte> data2, out Vector512<byte> data3);
+        Vector512<byte> YGroup1ToGroup4(Vector512<byte> x, out Vector512<byte> result1, out Vector512<byte> result2, out Vector512<byte> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<short> YGroup1ToGroup4(Vector512<short> x, out Vector512<short> data1, out Vector512<short> data2, out Vector512<short> data3);
+        Vector512<short> YGroup1ToGroup4(Vector512<short> x, out Vector512<short> result1, out Vector512<short> result2, out Vector512<short> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<ushort> YGroup1ToGroup4(Vector512<ushort> x, out Vector512<ushort> data1, out Vector512<ushort> data2, out Vector512<ushort> data3);
+        Vector512<ushort> YGroup1ToGroup4(Vector512<ushort> x, out Vector512<ushort> result1, out Vector512<ushort> result2, out Vector512<ushort> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<int> YGroup1ToGroup4(Vector512<int> x, out Vector512<int> data1, out Vector512<int> data2, out Vector512<int> data3);
+        Vector512<int> YGroup1ToGroup4(Vector512<int> x, out Vector512<int> result1, out Vector512<int> result2, out Vector512<int> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<uint> YGroup1ToGroup4(Vector512<uint> x, out Vector512<uint> data1, out Vector512<uint> data2, out Vector512<uint> data3);
+        Vector512<uint> YGroup1ToGroup4(Vector512<uint> x, out Vector512<uint> result1, out Vector512<uint> result2, out Vector512<uint> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<long> YGroup1ToGroup4(Vector512<long> x, out Vector512<long> data1, out Vector512<long> data2, out Vector512<long> data3);
+        Vector512<long> YGroup1ToGroup4(Vector512<long> x, out Vector512<long> result1, out Vector512<long> result2, out Vector512<long> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4(Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<ulong> YGroup1ToGroup4(Vector512<ulong> x, out Vector512<ulong> data1, out Vector512<ulong> data2, out Vector512<ulong> data3);
+        Vector512<ulong> YGroup1ToGroup4(Vector512<ulong> x, out Vector512<ulong> result1, out Vector512<ulong> result2, out Vector512<ulong> result3);
 
 
         /// <summary>
@@ -359,38 +359,38 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="x">A vector consisting purely of X-components (纯由X分量所组成的向量).</param>
         /// <param name="w">A vector consisting purely of W-components (纯由W分量所组成的向量).</param>
-        /// <param name="data1">Returns part 1 of the interleaved data (返回交织后数据的第1部分).</param>
-        /// <param name="data2">Returns part 2 of the interleaved data (返回交织后数据的第2部分).</param>
-        /// <param name="data3">Returns part 3 of the interleaved data (返回交织后数据的第3部分).</param>
-        /// <returns>Returns part 0 of the interleaved data (返回交织后数据的第0部分).</returns>
-        Vector512<float> YGroup1ToGroup4WithW(Vector512<float> x, Vector512<float> w, out Vector512<float> data1, out Vector512<float> data2, out Vector512<float> data3);
+        /// <param name="result1">Returns part 1 of the converted data (返回转换后数据的第1部分).</param>
+        /// <param name="result2">Returns part 2 of the converted data (返回转换后数据的第2部分).</param>
+        /// <param name="result3">Returns part 3 of the converted data (返回转换后数据的第3部分).</param>
+        /// <returns>Returns part 0 of the interleaved result (返回交织后数据的第0部分).</returns>
+        Vector512<float> YGroup1ToGroup4WithW(Vector512<float> x, Vector512<float> w, out Vector512<float> result1, out Vector512<float> result2, out Vector512<float> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<double> YGroup1ToGroup4WithW(Vector512<double> x, Vector512<double> w, out Vector512<double> data1, out Vector512<double> data2, out Vector512<double> data3);
+        Vector512<double> YGroup1ToGroup4WithW(Vector512<double> x, Vector512<double> w, out Vector512<double> result1, out Vector512<double> result2, out Vector512<double> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<sbyte> YGroup1ToGroup4WithW(Vector512<sbyte> x, Vector512<sbyte> w, out Vector512<sbyte> data1, out Vector512<sbyte> data2, out Vector512<sbyte> data3);
+        Vector512<sbyte> YGroup1ToGroup4WithW(Vector512<sbyte> x, Vector512<sbyte> w, out Vector512<sbyte> result1, out Vector512<sbyte> result2, out Vector512<sbyte> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<byte> YGroup1ToGroup4WithW(Vector512<byte> x, Vector512<byte> w, out Vector512<byte> data1, out Vector512<byte> data2, out Vector512<byte> data3);
+        Vector512<byte> YGroup1ToGroup4WithW(Vector512<byte> x, Vector512<byte> w, out Vector512<byte> result1, out Vector512<byte> result2, out Vector512<byte> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<short> YGroup1ToGroup4WithW(Vector512<short> x, Vector512<short> w, out Vector512<short> data1, out Vector512<short> data2, out Vector512<short> data3);
+        Vector512<short> YGroup1ToGroup4WithW(Vector512<short> x, Vector512<short> w, out Vector512<short> result1, out Vector512<short> result2, out Vector512<short> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<ushort> YGroup1ToGroup4WithW(Vector512<ushort> x, Vector512<ushort> w, out Vector512<ushort> data1, out Vector512<ushort> data2, out Vector512<ushort> data3);
+        Vector512<ushort> YGroup1ToGroup4WithW(Vector512<ushort> x, Vector512<ushort> w, out Vector512<ushort> result1, out Vector512<ushort> result2, out Vector512<ushort> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<int> YGroup1ToGroup4WithW(Vector512<int> x, Vector512<int> w, out Vector512<int> data1, out Vector512<int> data2, out Vector512<int> data3);
+        Vector512<int> YGroup1ToGroup4WithW(Vector512<int> x, Vector512<int> w, out Vector512<int> result1, out Vector512<int> result2, out Vector512<int> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<uint> YGroup1ToGroup4WithW(Vector512<uint> x, Vector512<uint> w, out Vector512<uint> data1, out Vector512<uint> data2, out Vector512<uint> data3);
+        Vector512<uint> YGroup1ToGroup4WithW(Vector512<uint> x, Vector512<uint> w, out Vector512<uint> result1, out Vector512<uint> result2, out Vector512<uint> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<long> YGroup1ToGroup4WithW(Vector512<long> x, Vector512<long> w, out Vector512<long> data1, out Vector512<long> data2, out Vector512<long> data3);
+        Vector512<long> YGroup1ToGroup4WithW(Vector512<long> x, Vector512<long> w, out Vector512<long> result1, out Vector512<long> result2, out Vector512<long> result3);
 
         /// <inheritdoc cref="YGroup1ToGroup4WithW(Vector512{float}, Vector512{float}, out Vector512{float}, out Vector512{float}, out Vector512{float})"/>
-        Vector512<ulong> YGroup1ToGroup4WithW(Vector512<ulong> x, Vector512<ulong> w, out Vector512<ulong> data1, out Vector512<ulong> data2, out Vector512<ulong> data3);
+        Vector512<ulong> YGroup1ToGroup4WithW(Vector512<ulong> x, Vector512<ulong> w, out Vector512<ulong> result1, out Vector512<ulong> result2, out Vector512<ulong> result3);
 
 
         /// <summary>
