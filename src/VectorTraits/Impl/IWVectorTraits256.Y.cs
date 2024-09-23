@@ -385,7 +385,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <summary>
         /// Types with hardware acceleration when running <c>YGroup1ToGroup4WithW</c> (运行 <c>YGroup1ToGroup4WithW</c> 时具有硬件加速的类型).
         /// </summary>
-        /// <seealso cref="YGroup1ToGroup4WithW(Vector256{byte}, Vector256{byte}, Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
+        /// <seealso cref="YGroup1ToGroup4WithW(Vector256{byte}, Vector256{byte}, out Vector256{byte}, out Vector256{byte}, out Vector256{byte})"/>
         /// <seealso cref="YGroup1ToGroup3_AcceleratedTypes"/>
         /// <seealso cref="YGroup1ToGroup4_AcceleratedTypes"/>
         /// <seealso cref="YGroup4Zip_AcceleratedTypes"/>

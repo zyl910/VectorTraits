@@ -18,6 +18,369 @@ using static Zyl.VectorTraits.Impl.VectorMessageFormats;
 namespace Zyl.VectorTraits.Impl {
     partial class IVectorTraits_Extensions {
 
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3{T}(Vector{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<T> Result0, Vector<T> Result1, Vector<T> Result2) YGroup1ToGroup3<T>(this IVectorTraits athis, Vector<T> x) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>());
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>());
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>());
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>());
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>());
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>());
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>());
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>());
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>());
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2) = athis.YGroup1ToGroup3(x.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>());
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<float> Result0, Vector<float> Result1, Vector<float> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<float> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<double> Result0, Vector<double> Result1, Vector<double> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<double> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> Result0, Vector<sbyte> Result1, Vector<sbyte> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<sbyte> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> Result0, Vector<byte> Result1, Vector<byte> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<byte> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> Result0, Vector<short> Result1, Vector<short> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<short> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> Result0, Vector<ushort> Result1, Vector<ushort> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<ushort> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> Result0, Vector<int> Result1, Vector<int> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<int> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> Result0, Vector<uint> Result1, Vector<uint> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<uint> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> Result0, Vector<long> Result1, Vector<long> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<long> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup3(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> Result0, Vector<ulong> Result1, Vector<ulong> Result2) YGroup1ToGroup3(this IVectorTraits athis, Vector<ulong> x) {
+            var rt0 = athis.YGroup1ToGroup3(x, out var rt1, out var rt2);
+            return (rt0, rt1, rt2);
+        }
+
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4{T}(Vector{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<T> Result0, Vector<T> Result1, Vector<T> Result2, Vector<T> Result3) YGroup1ToGroup4<T>(this IVectorTraits athis, Vector<T> x) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>(), rt3.As<float, T>());
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>(), rt3.As<double, T>());
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>(), rt3.As<sbyte, T>());
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>(), rt3.As<byte, T>());
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>(), rt3.As<short, T>());
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>(), rt3.As<ushort, T>());
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>(), rt3.As<int, T>());
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>(), rt3.As<uint, T>());
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>(), rt3.As<long, T>());
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4(x.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>(), rt3.As<ulong, T>());
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<float> Result0, Vector<float> Result1, Vector<float> Result2, Vector<float> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<float> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<double> Result0, Vector<double> Result1, Vector<double> Result2, Vector<double> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<double> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> Result0, Vector<sbyte> Result1, Vector<sbyte> Result2, Vector<sbyte> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<sbyte> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> Result0, Vector<byte> Result1, Vector<byte> Result2, Vector<byte> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<byte> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> Result0, Vector<short> Result1, Vector<short> Result2, Vector<short> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<short> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> Result0, Vector<ushort> Result1, Vector<ushort> Result2, Vector<ushort> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<ushort> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> Result0, Vector<int> Result1, Vector<int> Result2, Vector<int> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<int> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> Result0, Vector<uint> Result1, Vector<uint> Result2, Vector<uint> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<uint> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> Result0, Vector<long> Result1, Vector<long> Result2, Vector<long> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<long> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4(Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> Result0, Vector<ulong> Result1, Vector<ulong> Result2, Vector<ulong> Result3) YGroup1ToGroup4(this IVectorTraits athis, Vector<ulong> x) {
+            var rt0 = athis.YGroup1ToGroup4(x, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW{T}(Vector{T}, Vector{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<T> Result0, Vector<T> Result1, Vector<T> Result2, Vector<T> Result3) YGroup1ToGroup4WithW<T>(this IVectorTraits athis, Vector<T> x, Vector<T> w) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, float>(), w.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>(), rt2.As<float, T>(), rt3.As<float, T>());
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, double>(), w.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>(), rt2.As<double, T>(), rt3.As<double, T>());
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, sbyte>(), w.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>(), rt2.As<sbyte, T>(), rt3.As<sbyte, T>());
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, byte>(), w.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>(), rt2.As<byte, T>(), rt3.As<byte, T>());
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, short>(), w.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>(), rt2.As<short, T>(), rt3.As<short, T>());
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, ushort>(), w.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>(), rt2.As<ushort, T>(), rt3.As<ushort, T>());
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, int>(), w.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>(), rt2.As<int, T>(), rt3.As<int, T>());
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, uint>(), w.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>(), rt2.As<uint, T>(), rt3.As<uint, T>());
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, long>(), w.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>(), rt2.As<long, T>(), rt3.As<long, T>());
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1, var rt2, var rt3) = athis.YGroup1ToGroup4WithW(x.As<T, ulong>(), w.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>(), rt2.As<ulong, T>(), rt3.As<ulong, T>());
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<float> Result0, Vector<float> Result1, Vector<float> Result2, Vector<float> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<float> x, Vector<float> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{double}, Vector{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<double> Result0, Vector<double> Result1, Vector<double> Result2, Vector<double> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<double> x, Vector<double> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{sbyte}, Vector{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> Result0, Vector<sbyte> Result1, Vector<sbyte> Result2, Vector<sbyte> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<sbyte> x, Vector<sbyte> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{byte}, Vector{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> Result0, Vector<byte> Result1, Vector<byte> Result2, Vector<byte> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<byte> x, Vector<byte> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{short}, Vector{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> Result0, Vector<short> Result1, Vector<short> Result2, Vector<short> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<short> x, Vector<short> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{ushort}, Vector{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> Result0, Vector<ushort> Result1, Vector<ushort> Result2, Vector<ushort> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<ushort> x, Vector<ushort> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{int}, Vector{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> Result0, Vector<int> Result1, Vector<int> Result2, Vector<int> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<int> x, Vector<int> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{uint}, Vector{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> Result0, Vector<uint> Result1, Vector<uint> Result2, Vector<uint> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<uint> x, Vector<uint> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{long}, Vector{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> Result0, Vector<long> Result1, Vector<long> Result2, Vector<long> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<long> x, Vector<long> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+        /// <inheritdoc cref="Vectors.YGroup1ToGroup4WithW(Vector{ulong}, Vector{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> Result0, Vector<ulong> Result1, Vector<ulong> Result2, Vector<ulong> Result3) YGroup1ToGroup4WithW(this IVectorTraits athis, Vector<ulong> x, Vector<ulong> w) {
+            var rt0 = athis.YGroup1ToGroup4WithW(x, w, out var rt1, out var rt2, out var rt3);
+            return (rt0, rt1, rt2, rt3);
+        }
+
+
 #if BCL_TYPE_INT128
 
         /// <inheritdoc cref="Vectors.YGroup2Unzip(Vector{ExInt128}, Vector{ExInt128}, out Vector{ExInt128})"/>

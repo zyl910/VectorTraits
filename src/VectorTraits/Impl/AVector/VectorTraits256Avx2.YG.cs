@@ -23,6 +23,332 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #if NETCOREAPP3_0_OR_GREATER
         partial class Statics {
 
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup1ToGroup3_AcceleratedTypes {
+                get {
+                    return WStatics.YGroup1ToGroup3_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{float}, out Vector{float}, out Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup1ToGroup3(Vector<float> x, out Vector<float> result1, out Vector<float> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{double}, out Vector{double}, out Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YGroup1ToGroup3(Vector<double> x, out Vector<double> result1, out Vector<double> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup1ToGroup3(Vector<sbyte> x, out Vector<sbyte> result1, out Vector<sbyte> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup1ToGroup3(Vector<byte> x, out Vector<byte> result1, out Vector<byte> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{short}, out Vector{short}, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup1ToGroup3(Vector<short> x, out Vector<short> result1, out Vector<short> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup1ToGroup3(Vector<ushort> x, out Vector<ushort> result1, out Vector<ushort> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{int}, out Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup1ToGroup3(Vector<int> x, out Vector<int> result1, out Vector<int> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup1ToGroup3(Vector<uint> x, out Vector<uint> result1, out Vector<uint> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{long}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup1ToGroup3(Vector<long> x, out Vector<long> result1, out Vector<long> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3(Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup1ToGroup3(Vector<ulong> x, out Vector<ulong> result1, out Vector<ulong> result2) {
+                var a0 = WStatics.YGroup1ToGroup3(x.AsVector256(), out var a1, out var a2);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                return a0.AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup1ToGroup4_AcceleratedTypes {
+                get {
+                    return WStatics.YGroup1ToGroup4_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{float}, out Vector{float}, out Vector{float}, out Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup1ToGroup4(Vector<float> x, out Vector<float> result1, out Vector<float> result2, out Vector<float> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{double}, out Vector{double}, out Vector{double}, out Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YGroup1ToGroup4(Vector<double> x, out Vector<double> result1, out Vector<double> result2, out Vector<double> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup1ToGroup4(Vector<sbyte> x, out Vector<sbyte> result1, out Vector<sbyte> result2, out Vector<sbyte> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup1ToGroup4(Vector<byte> x, out Vector<byte> result1, out Vector<byte> result2, out Vector<byte> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup1ToGroup4(Vector<short> x, out Vector<short> result1, out Vector<short> result2, out Vector<short> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup1ToGroup4(Vector<ushort> x, out Vector<ushort> result1, out Vector<ushort> result2, out Vector<ushort> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup1ToGroup4(Vector<int> x, out Vector<int> result1, out Vector<int> result2, out Vector<int> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup1ToGroup4(Vector<uint> x, out Vector<uint> result1, out Vector<uint> result2, out Vector<uint> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup1ToGroup4(Vector<long> x, out Vector<long> result1, out Vector<long> result2, out Vector<long> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4(Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup1ToGroup4(Vector<ulong> x, out Vector<ulong> result1, out Vector<ulong> result2, out Vector<ulong> result3) {
+                var a0 = WStatics.YGroup1ToGroup4(x.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup1ToGroup4WithW_AcceleratedTypes {
+                get {
+                    return WStatics.YGroup1ToGroup4WithW_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{float}, Vector{float}, out Vector{float}, out Vector{float}, out Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup1ToGroup4WithW(Vector<float> x, Vector<float> w, out Vector<float> result1, out Vector<float> result2, out Vector<float> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{double}, Vector{double}, out Vector{double}, out Vector{double}, out Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YGroup1ToGroup4WithW(Vector<double> x, Vector<double> w, out Vector<double> result1, out Vector<double> result2, out Vector<double> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{sbyte}, Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte}, out Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup1ToGroup4WithW(Vector<sbyte> x, Vector<sbyte> w, out Vector<sbyte> result1, out Vector<sbyte> result2, out Vector<sbyte> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{byte}, Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup1ToGroup4WithW(Vector<byte> x, Vector<byte> w, out Vector<byte> result1, out Vector<byte> result2, out Vector<byte> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{short}, Vector{short}, out Vector{short}, out Vector{short}, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup1ToGroup4WithW(Vector<short> x, Vector<short> w, out Vector<short> result1, out Vector<short> result2, out Vector<short> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{ushort}, Vector{ushort}, out Vector{ushort}, out Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup1ToGroup4WithW(Vector<ushort> x, Vector<ushort> w, out Vector<ushort> result1, out Vector<ushort> result2, out Vector<ushort> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{int}, Vector{int}, out Vector{int}, out Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup1ToGroup4WithW(Vector<int> x, Vector<int> w, out Vector<int> result1, out Vector<int> result2, out Vector<int> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{uint}, Vector{uint}, out Vector{uint}, out Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup1ToGroup4WithW(Vector<uint> x, Vector<uint> w, out Vector<uint> result1, out Vector<uint> result2, out Vector<uint> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{long}, Vector{long}, out Vector{long}, out Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup1ToGroup4WithW(Vector<long> x, Vector<long> w, out Vector<long> result1, out Vector<long> result2, out Vector<long> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup4WithW(Vector{ulong}, Vector{ulong}, out Vector{ulong}, out Vector{ulong}, out Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup1ToGroup4WithW(Vector<ulong> x, Vector<ulong> w, out Vector<ulong> result1, out Vector<ulong> result2, out Vector<ulong> result3) {
+                var a0 = WStatics.YGroup1ToGroup4WithW(x.AsVector256(), w.AsVector256(), out var a1, out var a2, out var a3);
+                result1 = a1.AsVector();
+                result2 = a2.AsVector();
+                result3 = a3.AsVector();
+                return a0.AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {
