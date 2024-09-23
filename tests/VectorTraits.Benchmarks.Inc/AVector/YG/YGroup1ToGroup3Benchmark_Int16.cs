@@ -1,4 +1,4 @@
-﻿//#undef BENCHMARKS_OFF
+﻿#undef BENCHMARKS_OFF
 
 using BenchmarkDotNet.Attributes;
 using System;
@@ -25,24 +25,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 #endif // BENCHMARKS_OFF
 
     // My type.
-    using TMy = Int32;
+    using TMy = Int16;
 
     /// <summary>
-    /// YGroup4ToGroup3 benchmark - Int32.
+    /// YGroup1ToGroup3 benchmark - Int16.
     /// </summary>
 #if NETCOREAPP3_0_OR_GREATER && DRY_JOB
     [DryJob]
 #endif // NETCOREAPP3_0_OR_GREATER && DRY_JOB
-    public partial class YGroup4ToGroup3Benchmark_Int32 : AbstractSharedBenchmark_Int32 {
-
-        // -- var --
-        private static readonly Vector<TMy> vector1 = Vectors<TMy>.SerialNegative;
-        private static readonly Vector<TMy> vector2 = Vectors<TMy>.SerialDesc;
-        private static readonly Vector<TMy> vector3 = Vectors<TMy>.Serial;
-
+    public partial class YGroup1ToGroup3Benchmark_Int16 : AbstractSharedBenchmark_Int16 {
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector - base - basic.
+        /// Sum YGroup1ToGroup3 - Vector - base - basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -54,9 +48,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vector1Used = vector1;
-            Vector<TMy> vector2Used = vector2;
-            Vector<TMy> vector3Used = vector3;
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
             Vector<TMy> vrt1 = Vector<TMy>.Zero;
             Vector<TMy> vrt2 = Vector<TMy>.Zero;
@@ -65,7 +56,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup4ToGroup3_Basic(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup1ToGroup3_Basic(p0, out var vtemp1, out var vtemp2);
                 vrt = Vector.Add(vrt, vtemp);
                 vrt1 = Vector.Add(vrt1, vtemp1);
                 vrt2 = Vector.Add(vrt2, vtemp2);
@@ -100,21 +91,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 #if BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector - base - Unzip.
+        /// Sum YGroup1ToGroup3 - Vector - base - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSumBase_Unzip(TMy[] src, int srcCount) {
+        private static TMy StaticSumBase_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vector1Used = vector1;
-            Vector<TMy> vector2Used = vector2;
-            Vector<TMy> vector3Used = vector3;
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
             Vector<TMy> vrt1 = Vector<TMy>.Zero;
             Vector<TMy> vrt2 = Vector<TMy>.Zero;
@@ -123,7 +111,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup4ToGroup3_Unzip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
                 vrt = Vector.Add(vrt, vtemp);
                 vrt1 = Vector.Add(vrt1, vtemp1);
                 vrt2 = Vector.Add(vrt2, vtemp2);
@@ -142,17 +130,17 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void SumBase_Unzip() {
+        public void SumBase_Zip() {
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstTMy = StaticSumBase_Unzip(srcArray, srcArray.Length);
-            CheckResult("SumBase_Unzip");
+            dstTMy = StaticSumBase_Zip(srcArray, srcArray.Length);
+            CheckResult("SumBase_Zip");
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector - base.
+        /// Sum YGroup1ToGroup3 - Vector - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -164,9 +152,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vector1Used = vector1;
-            Vector<TMy> vector2Used = vector2;
-            Vector<TMy> vector3Used = vector3;
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
             Vector<TMy> vrt1 = Vector<TMy>.Zero;
             Vector<TMy> vrt2 = Vector<TMy>.Zero;
@@ -175,7 +160,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup4ToGroup3(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector<TMy> vtemp = VectorTraitsBase.Statics.YGroup1ToGroup3(p0, out var vtemp1, out var vtemp2);
                 vrt = Vector.Add(vrt, vtemp);
                 vrt1 = Vector.Add(vrt1, vtemp1);
                 vrt2 = Vector.Add(vrt2, vtemp2);
@@ -207,7 +192,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector - Traits.
+        /// Sum YGroup1ToGroup3 - Vector - Traits.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -219,9 +204,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector<TMy> vector1Used = vector1;
-            Vector<TMy> vector2Used = vector2;
-            Vector<TMy> vector3Used = vector3;
             Vector<TMy> vrt = Vector<TMy>.Zero; // Vector result.
             Vector<TMy> vrt1 = Vector<TMy>.Zero;
             Vector<TMy> vrt2 = Vector<TMy>.Zero;
@@ -230,7 +212,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector<TMy> p0 = ref Unsafe.As<TMy, Vector<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector<TMy> vtemp = Vectors.YGroup4ToGroup3(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector<TMy> vtemp = Vectors.YGroup1ToGroup3(p0, out var vtemp1, out var vtemp2);
                 vrt = Vector.Add(vrt, vtemp);
                 vrt1 = Vector.Add(vrt1, vtemp1);
                 vrt2 = Vector.Add(vrt2, vtemp2);
@@ -270,7 +252,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - base - basic.
+        /// Sum YGroup1ToGroup3 - Vector128 - base - basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -282,9 +264,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -293,7 +272,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YGroup4ToGroup3_Basic(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YGroup1ToGroup3_Basic(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128Base.Statics.Add(vrt2, vtemp2);
@@ -330,7 +309,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 #if NET7_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - base - Shuffle.
+        /// Sum YGroup1ToGroup3 - Vector128 - base - Shuffle.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -342,9 +321,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -353,7 +329,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YGroup4ToGroup3_Shuffle(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YGroup1ToGroup3_Shuffle(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128Base.Statics.Add(vrt2, vtemp2);
@@ -382,21 +358,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - base - Unzip.
+        /// Sum YGroup1ToGroup3 - Vector128 - base - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum128Base_Unzip(TMy[] src, int srcCount) {
+        private static TMy StaticSum128Base_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -405,7 +378,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YGroup4ToGroup3_Unzip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128Base.Statics.Add(vrt2, vtemp2);
@@ -424,19 +397,19 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void Sum128Base_Unzip() {
+        public void Sum128Base_Zip() {
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstOn128 = StaticSum128Base_Unzip(srcArray, srcArray.Length);
-            CheckResult128("Sum128Base_Unzip");
+            dstOn128 = StaticSum128Base_Zip(srcArray, srcArray.Length);
+            CheckResult128("Sum128Base_Zip");
         }
 
 #endif // NET7_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - base.
+        /// Sum YGroup1ToGroup3 - Vector128 - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -448,9 +421,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -459,7 +429,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YGroup4ToGroup3(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128Base.Statics.YGroup1ToGroup3(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128Base.Statics.Add(vrt2, vtemp2);
@@ -490,61 +460,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 #if NET5_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - AdvSimd - AlignRight.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum128AdvSimd_AlignRight(TMy[] src, int srcCount) {
-            TMy rt = 0; // Result.
-            const int GroupSize = 1;
-            int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth * GroupSize; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
-            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
-            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
-            Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
-            Vector128<TMy> vrt3 = Vector128<TMy>.Zero;
-            int i;
-            // Body.
-            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
-            // a) Vector processs.
-            for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YGroup4ToGroup3_AlignRight(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
-                vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
-                vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
-                vrt2 = WVectorTraits128AdvSimd.Statics.Add(vrt2, vtemp2);
-                p0 = ref Unsafe.Add(ref p0, GroupSize);
-            }
-            // b) Remainder processs.
-            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
-            // for (i = 0; i < cntRem; ++i) {
-            //     // Ignore
-            // }
-            // Reduce.
-            vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vrt1);
-            vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vrt2);
-            rt = WVectorTraits128AdvSimd.Statics.Sum(vrt);
-            return rt;
-        }
-
-        [Benchmark]
-        public void Sum128AdvSimd_AlignRight() {
-            WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
-            if (BenchmarkUtil.IsLastRun) {
-                //Debugger.Break();
-                Volatile.Write(ref dstTMy, 0);
-            }
-            dstOn128 = StaticSum128AdvSimd_AlignRight(srcArray, srcArray.Length);
-            CheckResult128("Sum128AdvSimd_AlignRight");
-        }
-
-        /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - AdvSimd - Shuffle.
+        /// Sum YGroup1ToGroup3 - Vector128 - AdvSimd - Shuffle.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -556,9 +472,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -568,7 +481,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YGroup4ToGroup3_Shuffle(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YGroup1ToGroup3_Shuffle(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128AdvSimd.Statics.Add(vrt2, vtemp2);
@@ -597,23 +510,19 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             CheckResult128("Sum128AdvSimd_Shuffle");
         }
 
-#if NET8_0_OR_GREATER
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - AdvSimd - ShuffleX.
+        /// Sum YGroup1ToGroup3 - Vector128 - AdvSimd - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum128AdvSimd_ShuffleX(TMy[] src, int srcCount) {
+        private static TMy StaticSum128AdvSimd_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -623,7 +532,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YGroup4ToGroup3_ShuffleX(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128AdvSimd.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128AdvSimd.Statics.Add(vrt2, vtemp2);
@@ -642,19 +551,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void Sum128AdvSimd_ShuffleX() {
+        public void Sum128AdvSimd_Zip() {
             WVectorTraits128AdvSimd.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstOn128 = StaticSum128AdvSimd_ShuffleX(srcArray, srcArray.Length);
-            CheckResult128("Sum128AdvSimd_ShuffleX");
+            dstOn128 = StaticSum128AdvSimd_Zip(srcArray, srcArray.Length);
+            CheckResult128("Sum128AdvSimd_Zip");
         }
-#endif // NET8_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - AdvSimdB64 - Shuffle.
+        /// Sum YGroup1ToGroup3 - Vector128 - AdvSimdB64 - Shuffle.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -666,9 +574,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -678,7 +583,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128AdvSimdB64.Statics.YGroup4ToGroup3_Shuffle(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128AdvSimdB64.Statics.YGroup1ToGroup3_Shuffle(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128AdvSimd.Statics.Add(vrt2, vtemp2);
@@ -707,23 +612,19 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             CheckResult128("Sum128AdvSimdB64_Shuffle");
         }
 
-#if NET8_0_OR_GREATER
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - AdvSimdB64 - ShuffleX.
+        /// Sum YGroup1ToGroup3 - Vector128 - AdvSimdB64 - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum128AdvSimdB64_ShuffleX(TMy[] src, int srcCount) {
+        private static TMy StaticSum128AdvSimdB64_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -733,7 +634,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128AdvSimdB64.Statics.YGroup4ToGroup3_ShuffleX(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128AdvSimdB64.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128AdvSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128AdvSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128AdvSimd.Statics.Add(vrt2, vtemp2);
@@ -752,23 +653,22 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void Sum128AdvSimdB64_ShuffleX() {
+        public void Sum128AdvSimdB64_Zip() {
             WVectorTraits128AdvSimdB64.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstOn128 = StaticSum128AdvSimdB64_ShuffleX(srcArray, srcArray.Length);
-            CheckResult128("Sum128AdvSimdB64_ShuffleX");
+            dstOn128 = StaticSum128AdvSimdB64_Zip(srcArray, srcArray.Length);
+            CheckResult128("Sum128AdvSimdB64_Zip");
         }
-#endif // NET8_0_OR_GREATER
 
 #endif // NET5_0_OR_GREATER
 
 #if NET8_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - PackedSimd - Shuffle.
+        /// Sum YGroup1ToGroup3 - Vector128 - PackedSimd - Shuffle.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -780,9 +680,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -792,7 +689,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128PackedSimd.Statics.YGroup4ToGroup3_Shuffle(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128PackedSimd.Statics.YGroup1ToGroup3_Shuffle(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128PackedSimd.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128PackedSimd.Statics.Add(vrt2, vtemp2);
@@ -821,10 +718,61 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             CheckResult128("Sum128PackedSimd_Shuffle");
         }
 
+        /// <summary>
+        /// Sum YGroup1ToGroup3 - Vector128 - PackedSimd - Zip.
+        /// </summary>
+        /// <param name="src">Source array.</param>
+        /// <param name="srcCount">Source count</param>
+        /// <returns>Returns the sum.</returns>
+        private static TMy StaticSum128PackedSimd_Zip(TMy[] src, int srcCount) {
+            TMy rt = 0; // Result.
+            const int GroupSize = 1;
+            int VectorWidth = Vector128<TMy>.Count; // Block width.
+            int nBlockWidth = VectorWidth * GroupSize; // Block width.
+            int cntBlock = srcCount / nBlockWidth; // Block count.
+            int cntRem = srcCount % nBlockWidth; // Remainder count.
+            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
+            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
+            Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
+            Vector128<TMy> vrt3 = Vector128<TMy>.Zero;
+            int i;
+            // Body.
+            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
+            // a) Vector processs.
+            for (i = 0; i < cntBlock; ++i) {
+                Vector128<TMy> vtemp = WVectorTraits128PackedSimd.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
+                vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vtemp);
+                vrt1 = WVectorTraits128PackedSimd.Statics.Add(vrt1, vtemp1);
+                vrt2 = WVectorTraits128PackedSimd.Statics.Add(vrt2, vtemp2);
+                p0 = ref Unsafe.Add(ref p0, GroupSize);
+            }
+            // b) Remainder processs.
+            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
+            // for (i = 0; i < cntRem; ++i) {
+            //     // Ignore
+            // }
+            // Reduce.
+            vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vrt1);
+            vrt = WVectorTraits128PackedSimd.Statics.Add(vrt, vrt2);
+            rt = WVectorTraits128PackedSimd.Statics.Sum(vrt);
+            return rt;
+        }
+
+        [Benchmark]
+        public void Sum128PackedSimd_Zip() {
+            WVectorTraits128PackedSimd.Statics.ThrowForUnsupported(true);
+            if (BenchmarkUtil.IsLastRun) {
+                //Debugger.Break();
+                Volatile.Write(ref dstTMy, 0);
+            }
+            dstOn128 = StaticSum128PackedSimd_Zip(srcArray, srcArray.Length);
+            CheckResult128("Sum128PackedSimd_Zip");
+        }
+
 #endif // NET8_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - Sse - Shuffle.
+        /// Sum YGroup1ToGroup3 - Vector128 - Sse - Shuffle.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -836,9 +784,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -848,7 +793,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128Sse.Statics.YGroup4ToGroup3_Shuffle(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128Sse.Statics.YGroup1ToGroup3_Shuffle(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128Sse.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128Sse.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128Sse.Statics.Add(vrt2, vtemp2);
@@ -877,23 +822,19 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             CheckResult128("Sum128Sse_Shuffle");
         }
 
-#if NET8_0_OR_GREATER
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - Sse - ShuffleX.
+        /// Sum YGroup1ToGroup3 - Vector128 - Sse - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum128Sse_ShuffleX(TMy[] src, int srcCount) {
+        private static TMy StaticSum128Sse_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector128<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -903,7 +844,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128Sse.Statics.YGroup4ToGroup3_ShuffleX(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = WVectorTraits128Sse.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits128Sse.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits128Sse.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits128Sse.Statics.Add(vrt2, vtemp2);
@@ -922,76 +863,21 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void Sum128Sse_ShuffleX() {
+        public void Sum128Sse_Zip() {
             WVectorTraits128Sse.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstOn128 = StaticSum128Sse_ShuffleX(srcArray, srcArray.Length);
-            CheckResult128("Sum128Sse_ShuffleX");
-        }
-#endif // NET8_0_OR_GREATER
-
-        /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - Sse - ShuffleXImm.
-        /// </summary>
-        /// <param name="src">Source array.</param>
-        /// <param name="srcCount">Source count</param>
-        /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum128Sse_ShuffleXImm(TMy[] src, int srcCount) {
-            TMy rt = 0; // Result.
-            const int GroupSize = 1;
-            int VectorWidth = Vector128<TMy>.Count; // Block width.
-            int nBlockWidth = VectorWidth * GroupSize; // Block width.
-            int cntBlock = srcCount / nBlockWidth; // Block count.
-            int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
-            Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
-            Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
-            Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
-            Vector128<TMy> vrt3 = Vector128<TMy>.Zero;
-            int i;
-            // Body.
-            ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
-            // a) Vector processs.
-            for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = WVectorTraits128Sse.Statics.YGroup4ToGroup3_ShuffleXImm(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
-                vrt = WVectorTraits128Sse.Statics.Add(vrt, vtemp);
-                vrt1 = WVectorTraits128Sse.Statics.Add(vrt1, vtemp1);
-                vrt2 = WVectorTraits128Sse.Statics.Add(vrt2, vtemp2);
-                p0 = ref Unsafe.Add(ref p0, GroupSize);
-            }
-            // b) Remainder processs.
-            // ref TMy p = ref Unsafe.As<Vector128<TMy>, TMy>(ref p0);
-            // for (i = 0; i < cntRem; ++i) {
-            //     // Ignore
-            // }
-            // Reduce.
-            vrt = WVectorTraits128Sse.Statics.Add(vrt, vrt1);
-            vrt = WVectorTraits128Sse.Statics.Add(vrt, vrt2);
-            rt = WVectorTraits128Sse.Statics.Sum(vrt);
-            return rt;
-        }
-
-        [Benchmark]
-        public void Sum128Sse_ShuffleXImm() {
-            WVectorTraits128Sse.Statics.ThrowForUnsupported(true);
-            if (BenchmarkUtil.IsLastRun) {
-                //Debugger.Break();
-                Volatile.Write(ref dstTMy, 0);
-            }
-            dstOn128 = StaticSum128Sse_ShuffleXImm(srcArray, srcArray.Length);
-            CheckResult128("Sum128Sse_ShuffleXImm");
+            dstOn128 = StaticSum128Sse_Zip(srcArray, srcArray.Length);
+            CheckResult128("Sum128Sse_Zip");
         }
 
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector128 - Traits.
+        /// Sum YGroup1ToGroup3 - Vector128 - Traits.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1003,9 +889,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector128<TMy> vector1Used = vector1.AsVector128();
-            Vector128<TMy> vector2Used = vector2.AsVector128();
-            Vector128<TMy> vector3Used = vector3.AsVector128();
             Vector128<TMy> vrt = Vector128<TMy>.Zero; // Vector result.
             Vector128<TMy> vrt1 = Vector128<TMy>.Zero;
             Vector128<TMy> vrt2 = Vector128<TMy>.Zero;
@@ -1015,7 +898,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector128<TMy> p0 = ref Unsafe.As<TMy, Vector128<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector128<TMy> vtemp = Vector128s.YGroup4ToGroup3(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector128<TMy> vtemp = Vector128s.YGroup1ToGroup3(p0, out var vtemp1, out var vtemp2);
                 vrt = Vector128s.Add(vrt, vtemp);
                 vrt1 = Vector128s.Add(vrt1, vtemp1);
                 vrt2 = Vector128s.Add(vrt2, vtemp2);
@@ -1058,7 +941,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector256 - base - basic.
+        /// Sum YGroup1ToGroup3 - Vector256 - base - basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1070,9 +953,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMy> vector1Used = vector1.AsVector256();
-            Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             Vector256<TMy> vrt2 = Vector256<TMy>.Zero;
@@ -1082,7 +962,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup4ToGroup3_Basic(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup1ToGroup3_Basic(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits256Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Base.Statics.Add(vrt2, vtemp2);
@@ -1119,7 +999,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 #if NET7_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector256 - base - Shuffle.
+        /// Sum YGroup1ToGroup3 - Vector256 - base - Shuffle.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1131,9 +1011,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMy> vector1Used = vector1.AsVector256();
-            Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             Vector256<TMy> vrt2 = Vector256<TMy>.Zero;
@@ -1143,7 +1020,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup4ToGroup3_Shuffle(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup1ToGroup3_Shuffle(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits256Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Base.Statics.Add(vrt2, vtemp2);
@@ -1172,21 +1049,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector256 - base - Unzip.
+        /// Sum YGroup1ToGroup3 - Vector256 - base - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum256Base_Unzip(TMy[] src, int srcCount) {
+        private static TMy StaticSum256Base_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMy> vector1Used = vector1.AsVector256();
-            Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             Vector256<TMy> vrt2 = Vector256<TMy>.Zero;
@@ -1196,7 +1070,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup4ToGroup3_Unzip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits256Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Base.Statics.Add(vrt2, vtemp2);
@@ -1215,19 +1089,19 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void Sum256Base_Unzip() {
+        public void Sum256Base_Zip() {
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstOn256 = StaticSum256Base_Unzip(srcArray, srcArray.Length);
-            CheckResult256("Sum256Base_Unzip");
+            dstOn256 = StaticSum256Base_Zip(srcArray, srcArray.Length);
+            CheckResult256("Sum256Base_Zip");
         }
 
 #endif // NET7_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector256 - base.
+        /// Sum YGroup1ToGroup3 - Vector256 - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1239,9 +1113,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMy> vector1Used = vector1.AsVector256();
-            Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             Vector256<TMy> vrt2 = Vector256<TMy>.Zero;
@@ -1251,7 +1122,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup4ToGroup3(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector256<TMy> vtemp = WVectorTraits256Base.Statics.YGroup1ToGroup3(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits256Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Base.Statics.Add(vrt2, vtemp2);
@@ -1280,7 +1151,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector256 - Avx2 - Shuffle.
+        /// Sum YGroup1ToGroup3 - Vector256 - Avx2 - Shuffle.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1292,9 +1163,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMy> vector1Used = vector1.AsVector256();
-            Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             Vector256<TMy> vrt2 = Vector256<TMy>.Zero;
@@ -1304,7 +1172,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup4ToGroup3_Shuffle(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup1ToGroup3_Shuffle(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Avx2.Statics.Add(vrt2, vtemp2);
@@ -1335,7 +1203,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 
 #if NET8_0_OR_GREATER
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector256 - Avx2 - ShuffleX.
+        /// Sum YGroup1ToGroup3 - Vector256 - Avx2 - ShuffleX.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1347,9 +1215,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMy> vector1Used = vector1.AsVector256();
-            Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             Vector256<TMy> vrt2 = Vector256<TMy>.Zero;
@@ -1359,7 +1224,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup4ToGroup3_ShuffleX(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup1ToGroup3_ShuffleX(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Avx2.Statics.Add(vrt2, vtemp2);
@@ -1390,21 +1255,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 #endif // NET8_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector256 - Avx2 - ShuffleXImm.
+        /// Sum YGroup1ToGroup3 - Vector256 - Avx2 - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum256Avx2_ShuffleXImm(TMy[] src, int srcCount) {
+        private static TMy StaticSum256Avx2_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector256<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMy> vector1Used = vector1.AsVector256();
-            Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             Vector256<TMy> vrt2 = Vector256<TMy>.Zero;
@@ -1414,7 +1276,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup4ToGroup3_ShuffleXImm(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector256<TMy> vtemp = WVectorTraits256Avx2.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits256Avx2.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits256Avx2.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits256Avx2.Statics.Add(vrt2, vtemp2);
@@ -1433,21 +1295,21 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void Sum256Avx2_ShuffleXImm() {
+        public void Sum256Avx2_Zip() {
             WVectorTraits256Avx2.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstOn256 = StaticSum256Avx2_ShuffleXImm(srcArray, srcArray.Length);
-            CheckResult256("Sum256Avx2_ShuffleXImm");
+            dstOn256 = StaticSum256Avx2_Zip(srcArray, srcArray.Length);
+            CheckResult256("Sum256Avx2_Zip");
         }
 
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector256 - Traits.
+        /// Sum YGroup1ToGroup3 - Vector256 - Traits.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1459,9 +1321,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector256<TMy> vector1Used = vector1.AsVector256();
-            Vector256<TMy> vector2Used = vector2.AsVector256();
-            Vector256<TMy> vector3Used = vector3.AsVector256();
             Vector256<TMy> vrt = Vector256<TMy>.Zero; // Vector result.
             Vector256<TMy> vrt1 = Vector256<TMy>.Zero;
             Vector256<TMy> vrt2 = Vector256<TMy>.Zero;
@@ -1471,7 +1330,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector256<TMy> p0 = ref Unsafe.As<TMy, Vector256<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector256<TMy> vtemp = Vector256s.YGroup4ToGroup3(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector256<TMy> vtemp = Vector256s.YGroup1ToGroup3(p0, out var vtemp1, out var vtemp2);
                 vrt = Vector256s.Add(vrt, vtemp);
                 vrt1 = Vector256s.Add(vrt1, vtemp1);
                 vrt2 = Vector256s.Add(vrt2, vtemp2);
@@ -1514,7 +1373,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector512 - base - basic.
+        /// Sum YGroup1ToGroup3 - Vector512 - base - basic.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1526,9 +1385,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector512<TMy> vector1Used = vector1.AsVector512();
-            Vector512<TMy> vector2Used = vector2.AsVector512();
-            Vector512<TMy> vector3Used = vector3.AsVector512();
             Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
             Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
             Vector512<TMy> vrt2 = Vector512<TMy>.Zero;
@@ -1538,7 +1394,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup4ToGroup3_Basic(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup1ToGroup3_Basic(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits512Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits512Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits512Base.Statics.Add(vrt2, vtemp2);
@@ -1575,7 +1431,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
 #if NET7_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector512 - base - Shuffle.
+        /// Sum YGroup1ToGroup3 - Vector512 - base - Shuffle.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1587,9 +1443,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector512<TMy> vector1Used = vector1.AsVector512();
-            Vector512<TMy> vector2Used = vector2.AsVector512();
-            Vector512<TMy> vector3Used = vector3.AsVector512();
             Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
             Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
             Vector512<TMy> vrt2 = Vector512<TMy>.Zero;
@@ -1599,7 +1452,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup4ToGroup3_Shuffle(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup1ToGroup3_Shuffle(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits512Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits512Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits512Base.Statics.Add(vrt2, vtemp2);
@@ -1628,21 +1481,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector512 - base - Unzip.
+        /// Sum YGroup1ToGroup3 - Vector512 - base - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum512Base_Unzip(TMy[] src, int srcCount) {
+        private static TMy StaticSum512Base_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector512<TMy> vector1Used = vector1.AsVector512();
-            Vector512<TMy> vector2Used = vector2.AsVector512();
-            Vector512<TMy> vector3Used = vector3.AsVector512();
             Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
             Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
             Vector512<TMy> vrt2 = Vector512<TMy>.Zero;
@@ -1652,7 +1502,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup4ToGroup3_Unzip(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits512Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits512Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits512Base.Statics.Add(vrt2, vtemp2);
@@ -1671,19 +1521,19 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void Sum512Base_Unzip() {
+        public void Sum512Base_Zip() {
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstOn512 = StaticSum512Base_Unzip(srcArray, srcArray.Length);
-            CheckResult512("Sum512Base_Unzip");
+            dstOn512 = StaticSum512Base_Zip(srcArray, srcArray.Length);
+            CheckResult512("Sum512Base_Zip");
         }
 
 #endif // NET7_0_OR_GREATER
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector512 - base.
+        /// Sum YGroup1ToGroup3 - Vector512 - base.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1695,9 +1545,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector512<TMy> vector1Used = vector1.AsVector512();
-            Vector512<TMy> vector2Used = vector2.AsVector512();
-            Vector512<TMy> vector3Used = vector3.AsVector512();
             Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
             Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
             Vector512<TMy> vrt2 = Vector512<TMy>.Zero;
@@ -1707,7 +1554,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup4ToGroup3(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector512<TMy> vtemp = WVectorTraits512Base.Statics.YGroup1ToGroup3(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits512Base.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits512Base.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits512Base.Statics.Add(vrt2, vtemp2);
@@ -1736,7 +1583,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector512 - Avx512 - ShuffleX.
+        /// Sum YGroup1ToGroup3 - Vector512 - Avx512 - ShuffleX.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1748,9 +1595,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector512<TMy> vector1Used = vector1.AsVector512();
-            Vector512<TMy> vector2Used = vector2.AsVector512();
-            Vector512<TMy> vector3Used = vector3.AsVector512();
             Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
             Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
             Vector512<TMy> vrt2 = Vector512<TMy>.Zero;
@@ -1760,7 +1604,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = WVectorTraits512Avx512.Statics.YGroup4ToGroup3_ShuffleX(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector512<TMy> vtemp = WVectorTraits512Avx512.Statics.YGroup1ToGroup3_ShuffleX(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits512Avx512.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits512Avx512.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits512Avx512.Statics.Add(vrt2, vtemp2);
@@ -1790,21 +1634,18 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector512 - Avx512 - ShuffleXImm.
+        /// Sum YGroup1ToGroup3 - Vector512 - Avx512 - Zip.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
         /// <returns>Returns the sum.</returns>
-        private static TMy StaticSum512Avx512_ShuffleXImm(TMy[] src, int srcCount) {
+        private static TMy StaticSum512Avx512_Zip(TMy[] src, int srcCount) {
             TMy rt = 0; // Result.
             const int GroupSize = 1;
             int VectorWidth = Vector512<TMy>.Count; // Block width.
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector512<TMy> vector1Used = vector1.AsVector512();
-            Vector512<TMy> vector2Used = vector2.AsVector512();
-            Vector512<TMy> vector3Used = vector3.AsVector512();
             Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
             Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
             Vector512<TMy> vrt2 = Vector512<TMy>.Zero;
@@ -1814,7 +1655,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = WVectorTraits512Avx512.Statics.YGroup4ToGroup3_ShuffleXImm(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector512<TMy> vtemp = WVectorTraits512Avx512.Statics.YGroup1ToGroup3_Zip(p0, out var vtemp1, out var vtemp2);
                 vrt = WVectorTraits512Avx512.Statics.Add(vrt, vtemp);
                 vrt1 = WVectorTraits512Avx512.Statics.Add(vrt1, vtemp1);
                 vrt2 = WVectorTraits512Avx512.Statics.Add(vrt2, vtemp2);
@@ -1833,21 +1674,21 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
         }
 
         [Benchmark]
-        public void Sum512Avx512_ShuffleXImm() {
+        public void Sum512Avx512_Zip() {
             WVectorTraits512Avx512.Statics.ThrowForUnsupported(true);
             if (BenchmarkUtil.IsLastRun) {
                 //Debugger.Break();
                 Volatile.Write(ref dstTMy, 0);
             }
-            dstOn512 = StaticSum512Avx512_ShuffleXImm(srcArray, srcArray.Length);
-            CheckResult512("Sum512Avx512_ShuffleXImm");
+            dstOn512 = StaticSum512Avx512_Zip(srcArray, srcArray.Length);
+            CheckResult512("Sum512Avx512_Zip");
         }
 
 #endif // BENCHMARKS_ALGORITHM
         #endregion // BENCHMARKS_ALGORITHM
 
         /// <summary>
-        /// Sum YGroup4ToGroup3 - Vector512 - Traits.
+        /// Sum YGroup1ToGroup3 - Vector512 - Traits.
         /// </summary>
         /// <param name="src">Source array.</param>
         /// <param name="srcCount">Source count</param>
@@ -1859,9 +1700,6 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             int nBlockWidth = VectorWidth * GroupSize; // Block width.
             int cntBlock = srcCount / nBlockWidth; // Block count.
             int cntRem = srcCount % nBlockWidth; // Remainder count.
-            Vector512<TMy> vector1Used = vector1.AsVector512();
-            Vector512<TMy> vector2Used = vector2.AsVector512();
-            Vector512<TMy> vector3Used = vector3.AsVector512();
             Vector512<TMy> vrt = Vector512<TMy>.Zero; // Vector result.
             Vector512<TMy> vrt1 = Vector512<TMy>.Zero;
             Vector512<TMy> vrt2 = Vector512<TMy>.Zero;
@@ -1871,7 +1709,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
             ref Vector512<TMy> p0 = ref Unsafe.As<TMy, Vector512<TMy>>(ref src[0]);
             // a) Vector processs.
             for (i = 0; i < cntBlock; ++i) {
-                Vector512<TMy> vtemp = Vector512s.YGroup4ToGroup3(p0, vector1Used, vector2Used, vector3Used, out var vtemp1, out var vtemp2);
+                Vector512<TMy> vtemp = Vector512s.YGroup1ToGroup3(p0, out var vtemp1, out var vtemp2);
                 vrt = Vector512s.Add(vrt, vtemp);
                 vrt1 = Vector512s.Add(vrt1, vtemp1);
                 vrt2 = Vector512s.Add(vrt2, vtemp2);

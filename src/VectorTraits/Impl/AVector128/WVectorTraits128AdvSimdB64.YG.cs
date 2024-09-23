@@ -105,6 +105,27 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 return YGroup1ToGroup3_Move(x, out result1, out result2);
             }
 
+            /// <inheritdoc cref="IWVectorTraits128.YGroup1ToGroup3(Vector128{long}, out Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup1ToGroup3_Move(Vector128<long> x, out Vector128<long> result1, out Vector128<long> result2) {
+                var d0 = YGroup1ToGroup3_Move(x.AsUInt64(), out var d1, out var d2);
+                result1 = d1.AsInt64();
+                result2 = d2.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup1ToGroup3(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup1ToGroup3_Move(Vector128<ulong> x, out Vector128<ulong> result1, out Vector128<ulong> result2) {
+                var a_0 = AdvSimd.Arm64.TransposeEven(x, x);
+                var a_1 = x;
+                var a_2 = AdvSimd.Arm64.TransposeOdd(x, x);
+                result1 = a_1;
+                result2 = a_2;
+                return a_0;
+            }
+
             /// <inheritdoc cref="IWVectorTraits128.YGroup1ToGroup3(Vector128{sbyte}, out Vector128{sbyte}, out Vector128{sbyte})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -198,27 +219,6 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
                 var a_0 = AdvSimd.Arm64.VectorTableLookup(s0, f0).AsUInt64();
                 var a_1 = x;
                 var a_2 = AdvSimd.Arm64.VectorTableLookup(s0, f2).AsUInt64();
-                result1 = a_1;
-                result2 = a_2;
-                return a_0;
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup1ToGroup3(Vector128{long}, out Vector128{long}, out Vector128{long})"/>
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<long> YGroup1ToGroup3_Move(Vector128<long> x, out Vector128<long> result1, out Vector128<long> result2) {
-                var d0 = YGroup1ToGroup3_Move(x.AsUInt64(), out var d1, out var d2);
-                result1 = d1.AsInt64();
-                result2 = d2.AsInt64();
-                return d0.AsInt64();
-            }
-
-            /// <inheritdoc cref="IWVectorTraits128.YGroup1ToGroup3(Vector128{ulong}, out Vector128{ulong}, out Vector128{ulong})"/>
-            [CLSCompliant(false)]
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<ulong> YGroup1ToGroup3_Move(Vector128<ulong> x, out Vector128<ulong> result1, out Vector128<ulong> result2) {
-                var a_0 = AdvSimd.Arm64.TransposeEven(x, x);
-                var a_1 = x;
-                var a_2 = AdvSimd.Arm64.TransposeOdd(x, x);
                 result1 = a_1;
                 result2 = a_2;
                 return a_0;
