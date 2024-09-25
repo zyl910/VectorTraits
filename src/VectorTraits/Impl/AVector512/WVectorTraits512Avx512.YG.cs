@@ -755,6 +755,66 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{float}, Vector512{float}, out Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<float> YGroup2Unzip_ShuffleXImm(Vector512<float> data0, Vector512<float> data1, out Vector512<float> y) {
+                Vector512<float> a0, a1;
+                // 0 data0 x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 data1 x8 y8 x9 y9 x10 y10 x11 y11 x12 y12 x13 y13 x14 y14 x15 y15
+                //0b temp0 x0 y0 x1 y1 x4 y4 x5 y5 x8 y8 x9 y9 x12 y12 x13 y13 temp1 x2 y2 x3 y3 x6 y6 x7 y7 x10 y10 x11 y11 x14 y14 x15 y15
+                var temp0 = YGroup2Unzip_Bit128(data0, data1, out var temp1);
+                // 1 a_0 x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 a_1 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 y13 y14 y15
+                a0 = Avx512F.Shuffle(temp0, temp1, (byte)ShuffleControlG4.XZXZ);
+                a1 = Avx512F.Shuffle(temp0, temp1, (byte)ShuffleControlG4.YWYW);
+                y = a1;
+                return a0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{short}, Vector512{short}, out Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YGroup2Unzip_ShuffleXImm(Vector512<short> data0, Vector512<short> data1, out Vector512<short> y) {
+                var d0 = YGroup2Unzip_ShuffleXImm(data0.AsUInt16(), data1.AsUInt16(), out var d1);
+                y = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{ushort}, Vector512{ushort}, out Vector512{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YGroup2Unzip_ShuffleXImm(Vector512<ushort> data0, Vector512<ushort> data1, out Vector512<ushort> y) {
+                Vector512<ushort> a0, a1, b0, b1;
+                const byte ctl = (byte)ShuffleControlG4.XZYW;
+                // 0 data0 x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 x8 y8 x9 y9 x10 y10 x11 y11 x12 y12 x13 y13 x14 y14 x15 y15 data1 x16 y16 x17 y17 x18 y18 x19 y19 x20 y20 x21 y21 x22 y22 x23 y23 x24 y24 x25 y25 x26 y26 x27 y27 x28 y28 x29 y29 x30 y30 x31 y31
+                //0b temp0 x0 y0 x1 y1 x2 y2 x3 y3 x8 y8 x9 y9 x10 y10 x11 y11 x16 y16 x17 y17 x18 y18 x19 y19 x24 y24 x25 y25 x26 y26 x27 y27 temp1 x4 y4 x5 y5 x6 y6 x7 y7 x12 y12 x13 y13 x14 y14 x15 y15 x20 y20 x21 y21 x22 y22 x23 y23 x28 y28 x29 y29 x30 y30 x31 y31
+                var temp0 = YGroup2Unzip_Bit128(data0, data1, out var temp1);
+                // 1 a_0 x0 x1 y0 y1 x2 x3 y2 y3 x8 x9 y8 y9 x10 x11 y10 y11 x16 x17 y16 y17 x18 x19 y18 y19 x24 x25 y24 y25 x26 x27 y26 y27 a_1 x4 x5 y4 y5 x6 x7 y6 y7 x12 x13 y12 y13 x14 x15 y14 y15 x20 x21 y20 y21 x22 x23 y22 y23 x28 x29 y28 y29 x30 x31 y30 y31
+                a0 = Avx512BW.ShuffleLow(temp0, ctl);
+                a1 = Avx512BW.ShuffleLow(temp1, ctl);
+                a0 = Avx512BW.ShuffleHigh(a0, ctl);
+                a1 = Avx512BW.ShuffleHigh(a1, ctl);
+                // 2 b_0 x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 x16 x17 x18 x19 x20 x21 x22 x23 x24 x25 x26 x27 x28 x29 x30 x31 b_1 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 y13 y14 y15 y16 y17 y18 y19 y20 y21 y22 y23 y24 y25 y26 y27 y28 y29 y30 y31
+                b0 = Avx512F.Shuffle(a0.AsSingle(), a1.AsSingle(), (byte)ShuffleControlG4.XZXZ).AsUInt16();
+                b1 = Avx512F.Shuffle(a0.AsSingle(), a1.AsSingle(), (byte)ShuffleControlG4.YWYW).AsUInt16();
+                y = b1;
+                return b0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{int}, Vector512{int}, out Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YGroup2Unzip_ShuffleXImm(Vector512<int> data0, Vector512<int> data1, out Vector512<int> y) {
+                var d0 = YGroup2Unzip_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), out var d1);
+                y = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{uint}, Vector512{uint}, out Vector512{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YGroup2Unzip_ShuffleXImm(Vector512<uint> data0, Vector512<uint> data1, out Vector512<uint> y) {
+                var d0 = YGroup2Unzip_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), out var d1);
+                y = d1.AsUInt32();
+                return d0.AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YGroup2Unzip_Unpack(Vector512<float> data0, Vector512<float> data1, out Vector512<float> y) {
                 Vector512<float> temp0, temp1;
                 Vector512<float> a_0, a_1, b_0, b_1;

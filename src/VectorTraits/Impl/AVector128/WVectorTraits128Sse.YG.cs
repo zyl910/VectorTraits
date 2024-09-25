@@ -499,12 +499,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2Unzip(Vector128<float> data0, Vector128<float> data1, out Vector128<float> y) {
-#if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
-                    return YGroup2Unzip_Permute(data0, data1, out y);
-                }
-#endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Unpack(data0, data1, out y);
+                return YGroup2Unzip_ShuffleXImm(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{double}, Vector128{double}, out Vector128{double})"/>
@@ -567,24 +562,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{int}, Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YGroup2Unzip(Vector128<int> data0, Vector128<int> data1, out Vector128<int> y) {
-#if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
-                    return YGroup2Unzip_Permute(data0, data1, out y);
-                }
-#endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Unpack(data0, data1, out y);
+                return YGroup2Unzip_ShuffleXImm(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{uint}, Vector128{uint}, out Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2Unzip(Vector128<uint> data0, Vector128<uint> data1, out Vector128<uint> y) {
-#if NET8_0_OR_GREATER
-                if (Avx512F.VL.IsSupported) {
-                    return YGroup2Unzip_Permute(data0, data1, out y);
-                }
-#endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Unpack(data0, data1, out y);
+                return YGroup2Unzip_ShuffleXImm(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{long}, Vector128{long}, out Vector128{long})"/>
@@ -785,6 +770,61 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 #endif // NET8_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YGroup2Unzip_ShuffleXImm(Vector128<float> data0, Vector128<float> data1, out Vector128<float> y) {
+                Vector128<float> a0, a1;
+                a0 = Sse.Shuffle(data0, data1, (byte)ShuffleControlG4.XZXZ);
+                a1 = Sse.Shuffle(data0, data1, (byte)ShuffleControlG4.YWYW);
+                y = a1;
+                return a0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{short}, Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YGroup2Unzip_ShuffleXImm(Vector128<short> data0, Vector128<short> data1, out Vector128<short> y) {
+                var d0 = YGroup2Unzip_ShuffleXImm(data0.AsUInt16(), data1.AsUInt16(), out var d1);
+                y = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{ushort}, Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YGroup2Unzip_ShuffleXImm(Vector128<ushort> data0, Vector128<ushort> data1, out Vector128<ushort> y) {
+                Vector128<ushort> a0, a1, b0, b1;
+                const byte ctl = (byte)ShuffleControlG4.XZYW;
+                // Format: Code; //Latency, Throughput(references IceLake)
+                // 0 data0 x0 y0 x1 y1 x2 y2 x3 y3 data1 x4 y4 x5 y5 x6 y6 x7 y7
+                // 1 a_0 x0 x1 y0 y1 x2 x3 y2 y3 a_1 x4 x5 y4 y5 x6 x7 y6 y7
+                a0 = Sse2.ShuffleLow(data0, ctl); // 1,0.5
+                a1 = Sse2.ShuffleLow(data1, ctl); // 1,0.5
+                a0 = Sse2.ShuffleHigh(a0, ctl); // 1,0.5
+                a1 = Sse2.ShuffleHigh(a1, ctl); // 1,0.5
+                // 2 b_0 x0 x1 x2 x3 x4 x5 x6 x7 b_1 y0 y1 y2 y3 y4 y5 y6 y7
+                b0 = Sse.Shuffle(a0.AsSingle(), a1.AsSingle(), (byte)ShuffleControlG4.XZXZ).AsUInt16(); // 1,0.5
+                b1 = Sse.Shuffle(a0.AsSingle(), a1.AsSingle(), (byte)ShuffleControlG4.YWYW).AsUInt16(); // 1,0.5
+                y = b1;
+                return b0; //total latency: 6, total throughput CPI: 3
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{int}, Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YGroup2Unzip_ShuffleXImm(Vector128<int> data0, Vector128<int> data1, out Vector128<int> y) {
+                var d0 = YGroup2Unzip_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), out var d1);
+                y = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{uint}, Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YGroup2Unzip_ShuffleXImm(Vector128<uint> data0, Vector128<uint> data1, out Vector128<uint> y) {
+                var d0 = YGroup2Unzip_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), out var d1);
+                y = d1.AsUInt32();
+                return d0.AsUInt32();
+            }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip(Vector128{float}, Vector128{float}, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

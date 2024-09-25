@@ -633,7 +633,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Unpack(data0, data1, out y);
+                return YGroup2Unzip_ShuffleXImm(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{double}, Vector256{double}, out Vector256{double})"/>
@@ -701,7 +701,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Unpack(data0, data1, out y);
+                return YGroup2Unzip_ShuffleXImm(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{uint}, Vector256{uint}, out Vector256{uint})"/>
@@ -713,7 +713,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Unpack(data0, data1, out y);
+                return YGroup2Unzip_ShuffleXImm(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{long}, Vector256{long}, out Vector256{long})"/>
@@ -948,6 +948,66 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 #endif // NET8_0_OR_GREATER
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup2Unzip_ShuffleXImm(Vector256<float> data0, Vector256<float> data1, out Vector256<float> y) {
+                Vector256<float> a0, a1;
+                // 0 data0 x0 y0 x1 y1 x2 y2 x3 y3 data1 x4 y4 x5 y5 x6 y6 x7 y7
+                //0b temp0 x0 y0 x1 y1 x4 y4 x5 y5 temp1 x2 y2 x3 y3 x6 y6 x7 y7
+                var temp0 = YGroup2Unzip_Bit128(data0, data1, out var temp1);
+                // 1 a_0 x0 x1 x2 x3 x4 x5 x6 x7 a_1 y0 y1 y2 y3 y4 y5 y6 y7
+                a0 = Avx.Shuffle(temp0, temp1, (byte)ShuffleControlG4.XZXZ);
+                a1 = Avx.Shuffle(temp0, temp1, (byte)ShuffleControlG4.YWYW);
+                y = a1;
+                return a0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{short}, Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup2Unzip_ShuffleXImm(Vector256<short> data0, Vector256<short> data1, out Vector256<short> y) {
+                var d0 = YGroup2Unzip_ShuffleXImm(data0.AsUInt16(), data1.AsUInt16(), out var d1);
+                y = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup2Unzip_ShuffleXImm(Vector256<ushort> data0, Vector256<ushort> data1, out Vector256<ushort> y) {
+                Vector256<ushort> a0, a1, b0, b1;
+                const byte ctl = (byte)ShuffleControlG4.XZYW;
+                // 0 data0 x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 data1 x8 y8 x9 y9 x10 y10 x11 y11 x12 y12 x13 y13 x14 y14 x15 y15
+                //0b temp0 x0 y0 x1 y1 x2 y2 x3 y3 x8 y8 x9 y9 x10 y10 x11 y11 temp1 x4 y4 x5 y5 x6 y6 x7 y7 x12 y12 x13 y13 x14 y14 x15 y15
+                var temp0 = YGroup2Unzip_Bit128(data0, data1, out var temp1);
+                // 1 a_0 x0 x1 y0 y1 x2 x3 y2 y3 x8 x9 y8 y9 x10 x11 y10 y11 a_1 x4 x5 y4 y5 x6 x7 y6 y7 x12 x13 y12 y13 x14 x15 y14 y15
+                a0 = Avx2.ShuffleLow(temp0, ctl);
+                a1 = Avx2.ShuffleLow(temp1, ctl);
+                a0 = Avx2.ShuffleHigh(a0, ctl);
+                a1 = Avx2.ShuffleHigh(a1, ctl);
+                // 2 b_0 x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 b_1 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 y13 y14 y15
+                b0 = Avx.Shuffle(a0.AsSingle(), a1.AsSingle(), (byte)ShuffleControlG4.XZXZ).AsUInt16();
+                b1 = Avx.Shuffle(a0.AsSingle(), a1.AsSingle(), (byte)ShuffleControlG4.YWYW).AsUInt16();
+                y = b1;
+                return b0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{int}, Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup2Unzip_ShuffleXImm(Vector256<int> data0, Vector256<int> data1, out Vector256<int> y) {
+                var d0 = YGroup2Unzip_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), out var d1);
+                y = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{uint}, Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup2Unzip_ShuffleXImm(Vector256<uint> data0, Vector256<uint> data1, out Vector256<uint> y) {
+                var d0 = YGroup2Unzip_ShuffleXImm(data0.AsSingle(), data1.AsSingle(), out var d1);
+                y = d1.AsUInt32();
+                return d0.AsUInt32();
+            }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{float}, Vector256{float}, out Vector256{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

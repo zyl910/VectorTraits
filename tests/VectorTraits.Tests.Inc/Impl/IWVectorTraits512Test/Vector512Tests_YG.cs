@@ -390,7 +390,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits512Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector512s.GetSupportedMethodList<Func<Vector512<T>, Vector512<T>, Vector512<T>>>("YGroup2UnzipEven_Basic", "YGroup2UnzipEven_Narrow", "YGroup2UnzipEven_Permute", "YGroup2UnzipEven_Unpack");
+            var funcList = Vector512s.GetSupportedMethodList<Func<Vector512<T>, Vector512<T>, Vector512<T>>>("YGroup2UnzipEven_Basic", "YGroup2UnzipEven_Narrow", "YGroup2UnzipEven_Permute", "YGroup2Unzip_ShuffleXImm", "YGroup2UnzipEven_Unpack");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }
