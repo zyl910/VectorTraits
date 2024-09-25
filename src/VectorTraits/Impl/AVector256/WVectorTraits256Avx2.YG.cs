@@ -678,7 +678,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Narrow(data0, data1, out y);
+                return YGroup2Unzip_ShuffleXImm(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort})"/>
@@ -690,7 +690,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Unzip_Permute(data0, data1, out y);
                 }
 #endif // NET8_0_OR_GREATER
-                return YGroup2Unzip_Narrow(data0, data1, out y);
+                return YGroup2Unzip_ShuffleXImm(data0, data1, out y);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip(Vector256{int}, Vector256{int}, out Vector256{int})"/>
