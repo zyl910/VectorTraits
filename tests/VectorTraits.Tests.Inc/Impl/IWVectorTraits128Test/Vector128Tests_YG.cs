@@ -252,6 +252,79 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        public void YGroup2TransposeTest<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IWVectorTraits128> instances = Vector128s.TraitsInstances;
+            foreach (IWVectorTraits128 instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup2Transpose_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vector128s.GetSupportedMethodList<FuncIn2Out1<Vector128<T>>>("YGroup2Transpose_Basic", "YGroup2Transpose_Shift", "YGroup2Transpose_Shuffle", "YGroup2Transpose_ShuffleX", "YGroup2Transpose_ShuffleXImm");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            if (!MyTestUtil.AllowDelegateOut) funcList.Clear();
+            bool[] funcListUnsupported = new bool[funcList.Count];
+            writer.WriteLine();
+            // run.
+            Vector128<T>[] samples = {
+                Vector128s<T>.Serial,
+                Vector128s<T>.SerialDesc,
+                Vector128s<T>.SerialNegative,
+                Vector128s.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vector128s.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = true;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector128<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector128<T> data1 = samples[j];
+                    Vector128<T> dst0, dst1;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    (Vector128<T> expected0, Vector128<T> expected1) = Vector128s.YGroup2Transpose(data0, data1);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}, {3}", data0, data1, expected0, expected1));
+                    }
+                    foreach (IWVectorTraits128 instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        (dst0, dst1) = instance.YGroup2Transpose(data0, data1);
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, data0, data1));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, data0, data1));
+                    }
+                    for (int f = 0; f < funcList.Count; f++) {
+                        if (funcListUnsupported[f]) continue;
+                        var func = funcList[f];
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        try {
+                            dst0 = func(data0, data1, out dst1);
+                        } catch (NotSupportedException ex) {
+                            funcListUnsupported[f] = true;
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, data0, data1, ex.Message));
+                            continue;
+                        }
+                        ClassicAssert.IsTrue(expected0.BitEquals(dst0), VectorTextUtil.Format("{0} != {1}. Part 0 on {2}: {3}, {4}", expected0, dst0, funcName, data0, data1));
+                        ClassicAssert.IsTrue(expected1.BitEquals(dst1), VectorTextUtil.Format("{0} != {1}. Part 1 on {2}: {3}, {4}", expected1, dst1, funcName, data0, data1));
+                    } // funcList
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]
