@@ -383,6 +383,126 @@ namespace Zyl.VectorTraits.Impl {
         }
 
 
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose{T}(Vector512{T}, Vector512{T})"/>
+        [CLSCompliant(false)]
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector512<T> Result0, Vector512<T> Result1) YGroup2Transpose<T>(this IWVectorTraits512 athis, Vector512<T> data0, Vector512<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, float>(), data1.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>());
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, double>(), data1.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>());
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, sbyte>(), data1.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>());
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, byte>(), data1.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>());
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, short>(), data1.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>());
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, ushort>(), data1.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>());
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, int>(), data1.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>());
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, uint>(), data1.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>());
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, long>(), data1.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>());
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1) = athis.YGroup2Transpose(data0.As<T, ulong>(), data1.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>());
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{float}, Vector512{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<float> Result0, Vector512<float> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<float> data0, Vector512<float> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{double}, Vector512{double})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<double> Result0, Vector512<double> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<double> data0, Vector512<double> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<sbyte> Result0, Vector512<sbyte> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<sbyte> data0, Vector512<sbyte> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{byte}, Vector512{byte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<byte> Result0, Vector512<byte> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<byte> data0, Vector512<byte> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{short}, Vector512{short})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<short> Result0, Vector512<short> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<short> data0, Vector512<short> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ushort> Result0, Vector512<ushort> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<ushort> data0, Vector512<ushort> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{int}, Vector512{int})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<int> Result0, Vector512<int> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<int> data0, Vector512<int> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<uint> Result0, Vector512<uint> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<uint> data0, Vector512<uint> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{long}, Vector512{long})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<long> Result0, Vector512<long> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<long> data0, Vector512<long> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="Vector512s.YGroup2Transpose(Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector512<ulong> Result0, Vector512<ulong> Result1) YGroup2Transpose(this IWVectorTraits512 athis, Vector512<ulong> data0, Vector512<ulong> data1) {
+            var rt0 = athis.YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+
 #if BCL_TYPE_INT128
 
         /// <inheritdoc cref="Vector512s.YGroup2Unzip(Vector512{ExInt128}, Vector512{ExInt128}, out Vector512{ExInt128})"/>

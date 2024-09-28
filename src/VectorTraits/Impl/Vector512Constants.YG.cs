@@ -395,6 +395,343 @@ namespace Zyl.VectorTraits.Impl {
 #endif // USE_VECTOR_CREATE
 
 
+        /// <summary>YGroup2Transpose - Shuffle - Byte - The index of item 0.</summary>
+        public static Vector512<byte> YGroup2Transpose_Shuffle_Byte_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)0, 64, 2, 66, 4, 68, 6, 70, 8, 72, 10, 74, 12, 76, 14, 78, 16, 80, 18, 82, 20, 84, 22, 86, 24, 88, 26, 90, 28, 92, 30, 94, 32, 96, 34, 98, 36, 100, 38, 102, 40, 104, 42, 106, 44, 108, 46, 110, 48, 112, 50, 114, 52, 116, 54, 118, 56, 120, 58, 122, 60, 124, 62, 126);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)0, 64, 2, 66, 4, 68, 6, 70, 8, 72, 10, 74, 12, 76, 14, 78, 16, 80, 18, 82, 20, 84, 22, 86, 24, 88, 26, 90, 28, 92, 30, 94, 32, 96, 34, 98, 36, 100, 38, 102, 40, 104, 42, 106, 44, 108, 46, 110, 48, 112, 50, 114, 52, 116, 54, 118, 56, 120, 58, 122, 60, 124, 62, 126);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - Byte - The index of item 0 - Sub part0.</summary>
+        public static Vector512<byte> YGroup2Transpose_Shuffle_Byte_0A {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)0, -1, 2, -1, 4, -1, 6, -1, 8, -1, 10, -1, 12, -1, 14, -1, 16, -1, 18, -1, 20, -1, 22, -1, 24, -1, 26, -1, 28, -1, 30, -1, 32, -1, 34, -1, 36, -1, 38, -1, 40, -1, 42, -1, 44, -1, 46, -1, 48, -1, 50, -1, 52, -1, 54, -1, 56, -1, 58, -1, 60, -1, 62, -1).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)0, -1, 2, -1, 4, -1, 6, -1, 8, -1, 10, -1, 12, -1, 14, -1, 16, -1, 18, -1, 20, -1, 22, -1, 24, -1, 26, -1, 28, -1, 30, -1, 32, -1, 34, -1, 36, -1, 38, -1, 40, -1, 42, -1, 44, -1, 46, -1, 48, -1, 50, -1, 52, -1, 54, -1, 56, -1, 58, -1, 60, -1, 62, -1).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - Byte - The index of item 0 - Sub part1.</summary>
+        public static Vector512<byte> YGroup2Transpose_Shuffle_Byte_0B {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)-1, 0, -1, 2, -1, 4, -1, 6, -1, 8, -1, 10, -1, 12, -1, 14, -1, 16, -1, 18, -1, 20, -1, 22, -1, 24, -1, 26, -1, 28, -1, 30, -1, 32, -1, 34, -1, 36, -1, 38, -1, 40, -1, 42, -1, 44, -1, 46, -1, 48, -1, 50, -1, 52, -1, 54, -1, 56, -1, 58, -1, 60, -1, 62).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)-1, 0, -1, 2, -1, 4, -1, 6, -1, 8, -1, 10, -1, 12, -1, 14, -1, 16, -1, 18, -1, 20, -1, 22, -1, 24, -1, 26, -1, 28, -1, 30, -1, 32, -1, 34, -1, 36, -1, 38, -1, 40, -1, 42, -1, 44, -1, 46, -1, 48, -1, 50, -1, 52, -1, 54, -1, 56, -1, 58, -1, 60, -1, 62).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - Byte - The index of item 1.</summary>
+        public static Vector512<byte> YGroup2Transpose_Shuffle_Byte_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)1, 65, 3, 67, 5, 69, 7, 71, 9, 73, 11, 75, 13, 77, 15, 79, 17, 81, 19, 83, 21, 85, 23, 87, 25, 89, 27, 91, 29, 93, 31, 95, 33, 97, 35, 99, 37, 101, 39, 103, 41, 105, 43, 107, 45, 109, 47, 111, 49, 113, 51, 115, 53, 117, 55, 119, 57, 121, 59, 123, 61, 125, 63, 127);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)1, 65, 3, 67, 5, 69, 7, 71, 9, 73, 11, 75, 13, 77, 15, 79, 17, 81, 19, 83, 21, 85, 23, 87, 25, 89, 27, 91, 29, 93, 31, 95, 33, 97, 35, 99, 37, 101, 39, 103, 41, 105, 43, 107, 45, 109, 47, 111, 49, 113, 51, 115, 53, 117, 55, 119, 57, 121, 59, 123, 61, 125, 63, 127);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - Byte - The index of item 1 - Sub part0.</summary>
+        public static Vector512<byte> YGroup2Transpose_Shuffle_Byte_1A {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)1, -1, 3, -1, 5, -1, 7, -1, 9, -1, 11, -1, 13, -1, 15, -1, 17, -1, 19, -1, 21, -1, 23, -1, 25, -1, 27, -1, 29, -1, 31, -1, 33, -1, 35, -1, 37, -1, 39, -1, 41, -1, 43, -1, 45, -1, 47, -1, 49, -1, 51, -1, 53, -1, 55, -1, 57, -1, 59, -1, 61, -1, 63, -1).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)1, -1, 3, -1, 5, -1, 7, -1, 9, -1, 11, -1, 13, -1, 15, -1, 17, -1, 19, -1, 21, -1, 23, -1, 25, -1, 27, -1, 29, -1, 31, -1, 33, -1, 35, -1, 37, -1, 39, -1, 41, -1, 43, -1, 45, -1, 47, -1, 49, -1, 51, -1, 53, -1, 55, -1, 57, -1, 59, -1, 61, -1, 63, -1).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - Byte - The index of item 1 - Sub part1.</summary>
+        public static Vector512<byte> YGroup2Transpose_Shuffle_Byte_1B {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)-1, 1, -1, 3, -1, 5, -1, 7, -1, 9, -1, 11, -1, 13, -1, 15, -1, 17, -1, 19, -1, 21, -1, 23, -1, 25, -1, 27, -1, 29, -1, 31, -1, 33, -1, 35, -1, 37, -1, 39, -1, 41, -1, 43, -1, 45, -1, 47, -1, 49, -1, 51, -1, 53, -1, 55, -1, 57, -1, 59, -1, 61, -1, 63).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)-1, 1, -1, 3, -1, 5, -1, 7, -1, 9, -1, 11, -1, 13, -1, 15, -1, 17, -1, 19, -1, 21, -1, 23, -1, 25, -1, 27, -1, 29, -1, 31, -1, 33, -1, 35, -1, 37, -1, 39, -1, 41, -1, 43, -1, 45, -1, 47, -1, 49, -1, 51, -1, 53, -1, 55, -1, 57, -1, 59, -1, 61, -1, 63).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - UInt16 - The index of item 0.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup2Transpose_Shuffle_UInt16_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)0, 32, 2, 34, 4, 36, 6, 38, 8, 40, 10, 42, 12, 44, 14, 46, 16, 48, 18, 50, 20, 52, 22, 54, 24, 56, 26, 58, 28, 60, 30, 62);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)0, 32, 2, 34, 4, 36, 6, 38, 8, 40, 10, 42, 12, 44, 14, 46, 16, 48, 18, 50, 20, 52, 22, 54, 24, 56, 26, 58, 28, 60, 30, 62);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - UInt16 - The index of item 1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ushort> YGroup2Transpose_Shuffle_UInt16_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ushort)1, 33, 3, 35, 5, 37, 7, 39, 9, 41, 11, 43, 13, 45, 15, 47, 17, 49, 19, 51, 21, 53, 23, 55, 25, 57, 27, 59, 29, 61, 31, 63);
+        }
+#else
+            get;
+        } = Vector512.Create((ushort)1, 33, 3, 35, 5, 37, 7, 39, 9, 41, 11, 43, 13, 45, 15, 47, 17, 49, 19, 51, 21, 53, 23, 55, 25, 57, 27, 59, 29, 61, 31, 63);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - UInt32 - The index of item 0.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup2Transpose_Shuffle_UInt32_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)0, 16, 2, 18, 4, 20, 6, 22, 8, 24, 10, 26, 12, 28, 14, 30);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)0, 16, 2, 18, 4, 20, 6, 22, 8, 24, 10, 26, 12, 28, 14, 30);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - UInt32 - The index of item 1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<uint> YGroup2Transpose_Shuffle_UInt32_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((uint)1, 17, 3, 19, 5, 21, 7, 23, 9, 25, 11, 27, 13, 29, 15, 31);
+        }
+#else
+            get;
+        } = Vector512.Create((uint)1, 17, 3, 19, 5, 21, 7, 23, 9, 25, 11, 27, 13, 29, 15, 31);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - UInt64 - The index of item 0.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup2Transpose_Shuffle_UInt64_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)0, 8, 2, 10, 4, 12, 6, 14);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)0, 8, 2, 10, 4, 12, 6, 14);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle - UInt64 - The index of item 1.</summary>
+        [CLSCompliant(false)]
+        public static Vector512<ulong> YGroup2Transpose_Shuffle_UInt64_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((ulong)1, 9, 3, 11, 5, 13, 7, 15);
+        }
+#else
+            get;
+        } = Vector512.Create((ulong)1, 9, 3, 11, 5, 13, 7, 15);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt16 - The index of item 0.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt16_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)0, 1, 64, 65, 4, 5, 68, 69, 8, 9, 72, 73, 12, 13, 76, 77, 16, 17, 80, 81, 20, 21, 84, 85, 24, 25, 88, 89, 28, 29, 92, 93, 32, 33, 96, 97, 36, 37, 100, 101, 40, 41, 104, 105, 44, 45, 108, 109, 48, 49, 112, 113, 52, 53, 116, 117, 56, 57, 120, 121, 60, 61, 124, 125);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)0, 1, 64, 65, 4, 5, 68, 69, 8, 9, 72, 73, 12, 13, 76, 77, 16, 17, 80, 81, 20, 21, 84, 85, 24, 25, 88, 89, 28, 29, 92, 93, 32, 33, 96, 97, 36, 37, 100, 101, 40, 41, 104, 105, 44, 45, 108, 109, 48, 49, 112, 113, 52, 53, 116, 117, 56, 57, 120, 121, 60, 61, 124, 125);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt16 - The index of item 0 - Sub part0.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt16_0A {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)0, 1, -1, -1, 4, 5, -1, -1, 8, 9, -1, -1, 12, 13, -1, -1, 16, 17, -1, -1, 20, 21, -1, -1, 24, 25, -1, -1, 28, 29, -1, -1, 32, 33, -1, -1, 36, 37, -1, -1, 40, 41, -1, -1, 44, 45, -1, -1, 48, 49, -1, -1, 52, 53, -1, -1, 56, 57, -1, -1, 60, 61, -1, -1).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)0, 1, -1, -1, 4, 5, -1, -1, 8, 9, -1, -1, 12, 13, -1, -1, 16, 17, -1, -1, 20, 21, -1, -1, 24, 25, -1, -1, 28, 29, -1, -1, 32, 33, -1, -1, 36, 37, -1, -1, 40, 41, -1, -1, 44, 45, -1, -1, 48, 49, -1, -1, 52, 53, -1, -1, 56, 57, -1, -1, 60, 61, -1, -1).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt16 - The index of item 0 - Sub part1.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt16_0B {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)-1, -1, 0, 1, -1, -1, 4, 5, -1, -1, 8, 9, -1, -1, 12, 13, -1, -1, 16, 17, -1, -1, 20, 21, -1, -1, 24, 25, -1, -1, 28, 29, -1, -1, 32, 33, -1, -1, 36, 37, -1, -1, 40, 41, -1, -1, 44, 45, -1, -1, 48, 49, -1, -1, 52, 53, -1, -1, 56, 57, -1, -1, 60, 61).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)-1, -1, 0, 1, -1, -1, 4, 5, -1, -1, 8, 9, -1, -1, 12, 13, -1, -1, 16, 17, -1, -1, 20, 21, -1, -1, 24, 25, -1, -1, 28, 29, -1, -1, 32, 33, -1, -1, 36, 37, -1, -1, 40, 41, -1, -1, 44, 45, -1, -1, 48, 49, -1, -1, 52, 53, -1, -1, 56, 57, -1, -1, 60, 61).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt16 - The index of item 1.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt16_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)2, 3, 66, 67, 6, 7, 70, 71, 10, 11, 74, 75, 14, 15, 78, 79, 18, 19, 82, 83, 22, 23, 86, 87, 26, 27, 90, 91, 30, 31, 94, 95, 34, 35, 98, 99, 38, 39, 102, 103, 42, 43, 106, 107, 46, 47, 110, 111, 50, 51, 114, 115, 54, 55, 118, 119, 58, 59, 122, 123, 62, 63, 126, 127);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)2, 3, 66, 67, 6, 7, 70, 71, 10, 11, 74, 75, 14, 15, 78, 79, 18, 19, 82, 83, 22, 23, 86, 87, 26, 27, 90, 91, 30, 31, 94, 95, 34, 35, 98, 99, 38, 39, 102, 103, 42, 43, 106, 107, 46, 47, 110, 111, 50, 51, 114, 115, 54, 55, 118, 119, 58, 59, 122, 123, 62, 63, 126, 127);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt16 - The index of item 1 - Sub part0.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt16_1A {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)2, 3, -1, -1, 6, 7, -1, -1, 10, 11, -1, -1, 14, 15, -1, -1, 18, 19, -1, -1, 22, 23, -1, -1, 26, 27, -1, -1, 30, 31, -1, -1, 34, 35, -1, -1, 38, 39, -1, -1, 42, 43, -1, -1, 46, 47, -1, -1, 50, 51, -1, -1, 54, 55, -1, -1, 58, 59, -1, -1, 62, 63, -1, -1).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)2, 3, -1, -1, 6, 7, -1, -1, 10, 11, -1, -1, 14, 15, -1, -1, 18, 19, -1, -1, 22, 23, -1, -1, 26, 27, -1, -1, 30, 31, -1, -1, 34, 35, -1, -1, 38, 39, -1, -1, 42, 43, -1, -1, 46, 47, -1, -1, 50, 51, -1, -1, 54, 55, -1, -1, 58, 59, -1, -1, 62, 63, -1, -1).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt16 - The index of item 1 - Sub part1.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt16_1B {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)-1, -1, 2, 3, -1, -1, 6, 7, -1, -1, 10, 11, -1, -1, 14, 15, -1, -1, 18, 19, -1, -1, 22, 23, -1, -1, 26, 27, -1, -1, 30, 31, -1, -1, 34, 35, -1, -1, 38, 39, -1, -1, 42, 43, -1, -1, 46, 47, -1, -1, 50, 51, -1, -1, 54, 55, -1, -1, 58, 59, -1, -1, 62, 63).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)-1, -1, 2, 3, -1, -1, 6, 7, -1, -1, 10, 11, -1, -1, 14, 15, -1, -1, 18, 19, -1, -1, 22, 23, -1, -1, 26, 27, -1, -1, 30, 31, -1, -1, 34, 35, -1, -1, 38, 39, -1, -1, 42, 43, -1, -1, 46, 47, -1, -1, 50, 51, -1, -1, 54, 55, -1, -1, 58, 59, -1, -1, 62, 63).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt32 - The index of item 0.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt32_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)0, 1, 2, 3, 64, 65, 66, 67, 8, 9, 10, 11, 72, 73, 74, 75, 16, 17, 18, 19, 80, 81, 82, 83, 24, 25, 26, 27, 88, 89, 90, 91, 32, 33, 34, 35, 96, 97, 98, 99, 40, 41, 42, 43, 104, 105, 106, 107, 48, 49, 50, 51, 112, 113, 114, 115, 56, 57, 58, 59, 120, 121, 122, 123);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)0, 1, 2, 3, 64, 65, 66, 67, 8, 9, 10, 11, 72, 73, 74, 75, 16, 17, 18, 19, 80, 81, 82, 83, 24, 25, 26, 27, 88, 89, 90, 91, 32, 33, 34, 35, 96, 97, 98, 99, 40, 41, 42, 43, 104, 105, 106, 107, 48, 49, 50, 51, 112, 113, 114, 115, 56, 57, 58, 59, 120, 121, 122, 123);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt32 - The index of item 0 - Sub part0.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt32_0A {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)0, 1, 2, 3, -1, -1, -1, -1, 8, 9, 10, 11, -1, -1, -1, -1, 16, 17, 18, 19, -1, -1, -1, -1, 24, 25, 26, 27, -1, -1, -1, -1, 32, 33, 34, 35, -1, -1, -1, -1, 40, 41, 42, 43, -1, -1, -1, -1, 48, 49, 50, 51, -1, -1, -1, -1, 56, 57, 58, 59, -1, -1, -1, -1).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)0, 1, 2, 3, -1, -1, -1, -1, 8, 9, 10, 11, -1, -1, -1, -1, 16, 17, 18, 19, -1, -1, -1, -1, 24, 25, 26, 27, -1, -1, -1, -1, 32, 33, 34, 35, -1, -1, -1, -1, 40, 41, 42, 43, -1, -1, -1, -1, 48, 49, 50, 51, -1, -1, -1, -1, 56, 57, 58, 59, -1, -1, -1, -1).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt32 - The index of item 0 - Sub part1.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt32_0B {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)-1, -1, -1, -1, 0, 1, 2, 3, -1, -1, -1, -1, 8, 9, 10, 11, -1, -1, -1, -1, 16, 17, 18, 19, -1, -1, -1, -1, 24, 25, 26, 27, -1, -1, -1, -1, 32, 33, 34, 35, -1, -1, -1, -1, 40, 41, 42, 43, -1, -1, -1, -1, 48, 49, 50, 51, -1, -1, -1, -1, 56, 57, 58, 59).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)-1, -1, -1, -1, 0, 1, 2, 3, -1, -1, -1, -1, 8, 9, 10, 11, -1, -1, -1, -1, 16, 17, 18, 19, -1, -1, -1, -1, 24, 25, 26, 27, -1, -1, -1, -1, 32, 33, 34, 35, -1, -1, -1, -1, 40, 41, 42, 43, -1, -1, -1, -1, 48, 49, 50, 51, -1, -1, -1, -1, 56, 57, 58, 59).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt32 - The index of item 1.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt32_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)4, 5, 6, 7, 68, 69, 70, 71, 12, 13, 14, 15, 76, 77, 78, 79, 20, 21, 22, 23, 84, 85, 86, 87, 28, 29, 30, 31, 92, 93, 94, 95, 36, 37, 38, 39, 100, 101, 102, 103, 44, 45, 46, 47, 108, 109, 110, 111, 52, 53, 54, 55, 116, 117, 118, 119, 60, 61, 62, 63, 124, 125, 126, 127);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)4, 5, 6, 7, 68, 69, 70, 71, 12, 13, 14, 15, 76, 77, 78, 79, 20, 21, 22, 23, 84, 85, 86, 87, 28, 29, 30, 31, 92, 93, 94, 95, 36, 37, 38, 39, 100, 101, 102, 103, 44, 45, 46, 47, 108, 109, 110, 111, 52, 53, 54, 55, 116, 117, 118, 119, 60, 61, 62, 63, 124, 125, 126, 127);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt32 - The index of item 1 - Sub part0.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt32_1A {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)4, 5, 6, 7, -1, -1, -1, -1, 12, 13, 14, 15, -1, -1, -1, -1, 20, 21, 22, 23, -1, -1, -1, -1, 28, 29, 30, 31, -1, -1, -1, -1, 36, 37, 38, 39, -1, -1, -1, -1, 44, 45, 46, 47, -1, -1, -1, -1, 52, 53, 54, 55, -1, -1, -1, -1, 60, 61, 62, 63, -1, -1, -1, -1).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)4, 5, 6, 7, -1, -1, -1, -1, 12, 13, 14, 15, -1, -1, -1, -1, 20, 21, 22, 23, -1, -1, -1, -1, 28, 29, 30, 31, -1, -1, -1, -1, 36, 37, 38, 39, -1, -1, -1, -1, 44, 45, 46, 47, -1, -1, -1, -1, 52, 53, 54, 55, -1, -1, -1, -1, 60, 61, 62, 63, -1, -1, -1, -1).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt32 - The index of item 1 - Sub part1.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt32_1B {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)-1, -1, -1, -1, 4, 5, 6, 7, -1, -1, -1, -1, 12, 13, 14, 15, -1, -1, -1, -1, 20, 21, 22, 23, -1, -1, -1, -1, 28, 29, 30, 31, -1, -1, -1, -1, 36, 37, 38, 39, -1, -1, -1, -1, 44, 45, 46, 47, -1, -1, -1, -1, 52, 53, 54, 55, -1, -1, -1, -1, 60, 61, 62, 63).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)-1, -1, -1, -1, 4, 5, 6, 7, -1, -1, -1, -1, 12, 13, 14, 15, -1, -1, -1, -1, 20, 21, 22, 23, -1, -1, -1, -1, 28, 29, 30, 31, -1, -1, -1, -1, 36, 37, 38, 39, -1, -1, -1, -1, 44, 45, 46, 47, -1, -1, -1, -1, 52, 53, 54, 55, -1, -1, -1, -1, 60, 61, 62, 63).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt64 - The index of item 0.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt64_0 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 64, 65, 66, 67, 68, 69, 70, 71, 16, 17, 18, 19, 20, 21, 22, 23, 80, 81, 82, 83, 84, 85, 86, 87, 32, 33, 34, 35, 36, 37, 38, 39, 96, 97, 98, 99, 100, 101, 102, 103, 48, 49, 50, 51, 52, 53, 54, 55, 112, 113, 114, 115, 116, 117, 118, 119);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)0, 1, 2, 3, 4, 5, 6, 7, 64, 65, 66, 67, 68, 69, 70, 71, 16, 17, 18, 19, 20, 21, 22, 23, 80, 81, 82, 83, 84, 85, 86, 87, 32, 33, 34, 35, 36, 37, 38, 39, 96, 97, 98, 99, 100, 101, 102, 103, 48, 49, 50, 51, 52, 53, 54, 55, 112, 113, 114, 115, 116, 117, 118, 119);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt64 - The index of item 0 - Sub part0.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt64_0A {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)0, 1, 2, 3, 4, 5, 6, 7, -1, -1, -1, -1, -1, -1, -1, -1, 16, 17, 18, 19, 20, 21, 22, 23, -1, -1, -1, -1, -1, -1, -1, -1, 32, 33, 34, 35, 36, 37, 38, 39, -1, -1, -1, -1, -1, -1, -1, -1, 48, 49, 50, 51, 52, 53, 54, 55, -1, -1, -1, -1, -1, -1, -1, -1).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)0, 1, 2, 3, 4, 5, 6, 7, -1, -1, -1, -1, -1, -1, -1, -1, 16, 17, 18, 19, 20, 21, 22, 23, -1, -1, -1, -1, -1, -1, -1, -1, 32, 33, 34, 35, 36, 37, 38, 39, -1, -1, -1, -1, -1, -1, -1, -1, 48, 49, 50, 51, 52, 53, 54, 55, -1, -1, -1, -1, -1, -1, -1, -1).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt64 - The index of item 0 - Sub part1.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt64_0B {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)-1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, -1, -1, -1, -1, -1, -1, -1, -1, 16, 17, 18, 19, 20, 21, 22, 23, -1, -1, -1, -1, -1, -1, -1, -1, 32, 33, 34, 35, 36, 37, 38, 39, -1, -1, -1, -1, -1, -1, -1, -1, 48, 49, 50, 51, 52, 53, 54, 55).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)-1, -1, -1, -1, -1, -1, -1, -1, 0, 1, 2, 3, 4, 5, 6, 7, -1, -1, -1, -1, -1, -1, -1, -1, 16, 17, 18, 19, 20, 21, 22, 23, -1, -1, -1, -1, -1, -1, -1, -1, 32, 33, 34, 35, 36, 37, 38, 39, -1, -1, -1, -1, -1, -1, -1, -1, 48, 49, 50, 51, 52, 53, 54, 55).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt64 - The index of item 1.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt64_1 {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 72, 73, 74, 75, 76, 77, 78, 79, 24, 25, 26, 27, 28, 29, 30, 31, 88, 89, 90, 91, 92, 93, 94, 95, 40, 41, 42, 43, 44, 45, 46, 47, 104, 105, 106, 107, 108, 109, 110, 111, 56, 57, 58, 59, 60, 61, 62, 63, 120, 121, 122, 123, 124, 125, 126, 127);
+        }
+#else
+            get;
+        } = Vector512.Create((byte)8, 9, 10, 11, 12, 13, 14, 15, 72, 73, 74, 75, 76, 77, 78, 79, 24, 25, 26, 27, 28, 29, 30, 31, 88, 89, 90, 91, 92, 93, 94, 95, 40, 41, 42, 43, 44, 45, 46, 47, 104, 105, 106, 107, 108, 109, 110, 111, 56, 57, 58, 59, 60, 61, 62, 63, 120, 121, 122, 123, 124, 125, 126, 127);
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt64 - The index of item 1 - Sub part0.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt64_1A {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)8, 9, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, 24, 25, 26, 27, 28, 29, 30, 31, -1, -1, -1, -1, -1, -1, -1, -1, 40, 41, 42, 43, 44, 45, 46, 47, -1, -1, -1, -1, -1, -1, -1, -1, 56, 57, 58, 59, 60, 61, 62, 63, -1, -1, -1, -1, -1, -1, -1, -1).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)8, 9, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, 24, 25, 26, 27, 28, 29, 30, 31, -1, -1, -1, -1, -1, -1, -1, -1, 40, 41, 42, 43, 44, 45, 46, 47, -1, -1, -1, -1, -1, -1, -1, -1, 56, 57, 58, 59, 60, 61, 62, 63, -1, -1, -1, -1, -1, -1, -1, -1).AsByte();
+#endif // USE_VECTOR_CREATE
+
+        /// <summary>YGroup2Transpose - Shuffle on byte - UInt64 - The index of item 1 - Sub part1.</summary>
+        public static Vector512<byte> YGroup2Transpose_ShuffleOnByte_UInt64_1B {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+#if USE_VECTOR_CREATE
+            get => Vector512.Create((sbyte)-1, -1, -1, -1, -1, -1, -1, -1, 8, 9, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, 24, 25, 26, 27, 28, 29, 30, 31, -1, -1, -1, -1, -1, -1, -1, -1, 40, 41, 42, 43, 44, 45, 46, 47, -1, -1, -1, -1, -1, -1, -1, -1, 56, 57, 58, 59, 60, 61, 62, 63).AsByte();
+        }
+#else
+            get;
+        } = Vector512.Create((sbyte)-1, -1, -1, -1, -1, -1, -1, -1, 8, 9, 10, 11, 12, 13, 14, 15, -1, -1, -1, -1, -1, -1, -1, -1, 24, 25, 26, 27, 28, 29, 30, 31, -1, -1, -1, -1, -1, -1, -1, -1, 40, 41, 42, 43, 44, 45, 46, 47, -1, -1, -1, -1, -1, -1, -1, -1, 56, 57, 58, 59, 60, 61, 62, 63).AsByte();
+#endif // USE_VECTOR_CREATE
+
+
         /// <summary>YGroup2Unzip - ShuffleX2 - Byte - The index of X.</summary>
         public static Vector512<byte> YGroup2Unzip_ShuffleX2_Byte_X {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

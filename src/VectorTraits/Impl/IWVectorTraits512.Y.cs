@@ -394,6 +394,119 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2Transpose</c> (运行 <c>YGroup2Transpose</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2TransposeEven + YGroup2TransposeOdd = YGroup2Transpose</c>.</para>
+        /// <para>Inverse function (逆函数): self (自身).</para>
+        /// <para>Sample (示例).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Elements</term>
+        ///        <description>Result</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>1</term>
+        ///        <description><c>f({x[0]}, {y[0]}) = ({x[0]}, {y[0]})</c>. (Fallback)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>2</term>
+        ///        <description><c>f({x[0], x[1]}, {y[0], y[1]}) = ({x[0], y[0]}, {x[1], y[1]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>4</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3]}, {y[0], y[1], y[2], y[3]}) = ({x[0], y[0], x[2], y[2]}, {x[1], y[1], x[3], y[3]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>8</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7]}) = ({x[0], y[0], x[2], y[2], x[4], y[4], x[6], y[6]}, {x[1], y[1], x[3], y[3], x[5], y[5], x[7], y[7]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>16</term>
+        ///        <description><c>f({x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], x[8], x[9], x[10], x[11], x[12], x[13], x[14], x[15]}, {y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7], y[8], y[9], y[10], y[11], y[12], y[13], y[14], y[15]}) = ({x[0], y[0], x[2], y[2], x[4], y[4], x[6], y[6], x[8], y[8], x[10], y[10], x[12], y[12], x[14], y[14]}, {x[1], y[1], x[3], y[3], x[5], y[5], x[7], y[7], x[9], y[9], x[11], y[11], x[13], y[13], x[15], y[15]})</c></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>...</term>
+        ///        <description>...</description>
+        ///    </item>
+        /// </list>
+        /// <para>Related hardware instructions (相关的硬件指令).</para>
+        /// <list type="table">
+        ///    <listheader>
+        ///        <term>Architecture</term>
+        ///        <description>8bit</description>
+        ///        <description>16bit</description>
+        ///        <description>32bit</description>
+        ///        <description>64bit</description>
+        ///    </listheader>
+        ///    <item>
+        ///        <term>Arm</term>
+        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{byte}, Vector128{byte})">TRN1(vtrn1q_u8)</see>/<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{byte}, Vector128{byte})">TRN2(vtrn2q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{ushort}, Vector128{ushort})">TRN1(vtrn1q_u16)</see>/<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{ushort}, Vector128{ushort})">TRN2(vtrn2q_u16)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{uint}, Vector128{uint})">TRN1(vtrn1q_u32)</see>/<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{uint}, Vector128{uint})">TRN2(vtrn2q_u32)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{ulong}, Vector128{ulong})">TRN1(vtrn1q_u64)</see>/<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{ulong}, Vector128{ulong})">TRN2(vtrn2q_u64)</see></description>
+        ///    </item>
+        ///    <item>
+        ///        <term>Wasm</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        ///    <item>
+        ///        <term>X86</term>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///        <description>(None)</description>
+        ///    </item>
+        /// </list>
+        /// </remarks>
+        /// <seealso cref="YGroup2Transpose(Vector512{byte}, Vector512{byte}, out Vector512{byte})"/>
+        /// <seealso cref="YGroup2TransposeEven_AcceleratedTypes"/>
+        /// <seealso cref="YGroup2TransposeOdd_AcceleratedTypes"/>
+        TypeCodeFlags YGroup2Transpose_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Transpose a 2*2 matrix (对2*2矩阵进行转置).
+        /// Mnemonic: <c>result0[i] := (0==(i&amp;1))?( x[i&amp;~1] ):( y[i&amp;~1] )</c>, <c>result1[i] := (0==(i&amp;1))?( x[(i&amp;~1) + 1] ):( y[(i&amp;~1) + 1] )</c>.
+        /// </summary>
+        /// <param name="data0">Part 0 of the vector data (向量数据的第0部分).</param>
+        /// <param name="data1">Part 1 of the vector data (向量数据的第1部分).</param>
+        /// <param name="result1">Returns part 1 of the transposed data (返回转置后数据的第1部分).</param>
+        /// <returns>Returns part 0 of the transposed data (返回转置后数据的第0部分).</returns>
+        /// <seealso cref="YGroup2Transpose_AcceleratedTypes"/>
+        Vector512<float> YGroup2Transpose(Vector512<float> data0, Vector512<float> data1, out Vector512<float> result1);
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+        Vector512<double> YGroup2Transpose(Vector512<double> data0, Vector512<double> data1, out Vector512<double> result1);
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+        Vector512<sbyte> YGroup2Transpose(Vector512<sbyte> data0, Vector512<sbyte> data1, out Vector512<sbyte> result1);
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+        Vector512<byte> YGroup2Transpose(Vector512<byte> data0, Vector512<byte> data1, out Vector512<byte> result1);
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+        Vector512<short> YGroup2Transpose(Vector512<short> data0, Vector512<short> data1, out Vector512<short> result1);
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+        Vector512<ushort> YGroup2Transpose(Vector512<ushort> data0, Vector512<ushort> data1, out Vector512<ushort> result1);
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+        Vector512<int> YGroup2Transpose(Vector512<int> data0, Vector512<int> data1, out Vector512<int> result1);
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+        Vector512<uint> YGroup2Transpose(Vector512<uint> data0, Vector512<uint> data1, out Vector512<uint> result1);
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+        Vector512<long> YGroup2Transpose(Vector512<long> data0, Vector512<long> data1, out Vector512<long> result1);
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+        Vector512<ulong> YGroup2Transpose(Vector512<ulong> data0, Vector512<ulong> data1, out Vector512<ulong> result1);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2Unzip</c> (运行 <c>YGroup2Unzip</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
