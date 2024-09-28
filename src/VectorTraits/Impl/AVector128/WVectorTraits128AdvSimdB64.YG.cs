@@ -433,6 +433,98 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup2Transpose_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    return rt;
+                }
+            }
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{float}, Vector128{float}, out Vector128{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<float> YGroup2Transpose(Vector128<float> data0, Vector128<float> data1, out Vector128<float> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{double}, Vector128{double}, out Vector128{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<double> YGroup2Transpose(Vector128<double> data0, Vector128<double> data1, out Vector128<double> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<sbyte> YGroup2Transpose(Vector128<sbyte> data0, Vector128<sbyte> data1, out Vector128<sbyte> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<byte> YGroup2Transpose(Vector128<byte> data0, Vector128<byte> data1, out Vector128<byte> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{short}, Vector128{short}, out Vector128{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<short> YGroup2Transpose(Vector128<short> data0, Vector128<short> data1, out Vector128<short> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{ushort}, Vector128{ushort}, out Vector128{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ushort> YGroup2Transpose(Vector128<ushort> data0, Vector128<ushort> data1, out Vector128<ushort> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{int}, Vector128{int}, out Vector128{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<int> YGroup2Transpose(Vector128<int> data0, Vector128<int> data1, out Vector128<int> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{uint}, Vector128{uint}, out Vector128{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<uint> YGroup2Transpose(Vector128<uint> data0, Vector128<uint> data1, out Vector128<uint> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{long}, Vector128{long}, out Vector128{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<long> YGroup2Transpose(Vector128<long> data0, Vector128<long> data1, out Vector128<long> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{ulong}, Vector128{ulong}, out Vector128{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector128<ulong> YGroup2Transpose(Vector128<ulong> data0, Vector128<ulong> data1, out Vector128<ulong> result1) {
+                var rt0 = AdvSimd.Arm64.TransposeEven(data0, data1);
+                result1 = AdvSimd.Arm64.TransposeOdd(data0, data1);
+                return rt0;
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {
