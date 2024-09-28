@@ -349,6 +349,98 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
 
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup2Transpose_AcceleratedTypes {
+                get {
+                    return WStatics.YGroup2Transpose_AcceleratedTypes;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{float}, Vector{float}, out Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup2Transpose(Vector<float> data0, Vector<float> data1, out Vector<float> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{double}, Vector{double}, out Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YGroup2Transpose(Vector<double> data0, Vector<double> data1, out Vector<double> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{sbyte}, Vector{sbyte}, out Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup2Transpose(Vector<sbyte> data0, Vector<sbyte> data1, out Vector<sbyte> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{byte}, Vector{byte}, out Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup2Transpose(Vector<byte> data0, Vector<byte> data1, out Vector<byte> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{short}, Vector{short}, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup2Transpose(Vector<short> data0, Vector<short> data1, out Vector<short> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{ushort}, Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup2Transpose(Vector<ushort> data0, Vector<ushort> data1, out Vector<ushort> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{int}, Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup2Transpose(Vector<int> data0, Vector<int> data1, out Vector<int> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{uint}, Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup2Transpose(Vector<uint> data0, Vector<uint> data1, out Vector<uint> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{long}, Vector{long}, out Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup2Transpose(Vector<long> data0, Vector<long> data1, out Vector<long> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{ulong}, Vector{ulong}, out Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup2Transpose(Vector<ulong> data0, Vector<ulong> data1, out Vector<ulong> result1) {
+                var a0 = WStatics.YGroup2Transpose(data0.AsVector256(), data1.AsVector256(), out var a1);
+                result1 = a1.AsVector();
+                return a0.AsVector();
+            }
+
+
             /// <inheritdoc cref="IVectorTraits.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {

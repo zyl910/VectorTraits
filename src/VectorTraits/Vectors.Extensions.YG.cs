@@ -381,6 +381,126 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
+        [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
+        public static (Vector<T> Result0, Vector<T> Result1) YGroup2Transpose<T>(Vector<T> data0, Vector<T> data1) where T : struct {
+            if (typeof(float) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, float>(), data1.As<T, float>());
+                return (rt0.As<float, T>(), rt1.As<float, T>());
+            } else if (typeof(double) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, double>(), data1.As<T, double>());
+                return (rt0.As<double, T>(), rt1.As<double, T>());
+            } else if (typeof(sbyte) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, sbyte>(), data1.As<T, sbyte>());
+                return (rt0.As<sbyte, T>(), rt1.As<sbyte, T>());
+            } else if (typeof(byte) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, byte>(), data1.As<T, byte>());
+                return (rt0.As<byte, T>(), rt1.As<byte, T>());
+            } else if (typeof(short) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, short>(), data1.As<T, short>());
+                return (rt0.As<short, T>(), rt1.As<short, T>());
+            } else if (typeof(ushort) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, ushort>(), data1.As<T, ushort>());
+                return (rt0.As<ushort, T>(), rt1.As<ushort, T>());
+            } else if (typeof(int) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, int>(), data1.As<T, int>());
+                return (rt0.As<int, T>(), rt1.As<int, T>());
+            } else if (typeof(uint) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, uint>(), data1.As<T, uint>());
+                return (rt0.As<uint, T>(), rt1.As<uint, T>());
+            } else if (typeof(long) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, long>(), data1.As<T, long>());
+                return (rt0.As<long, T>(), rt1.As<long, T>());
+            } else if (typeof(ulong) == typeof(T)) {
+                (var rt0, var rt1) = YGroup2Transpose(data0.As<T, ulong>(), data1.As<T, ulong>());
+                return (rt0.As<ulong, T>(), rt1.As<ulong, T>());
+            } else {
+                throw new NotSupportedException(string.Format(FORMAT_TYPE_NOT_SUPPORTED_1, typeof(T).Name));
+            }
+        }
+
+        /// <summary>
+        /// Transpose a 2*2 matrix (对2*2矩阵进行转置).
+        /// Mnemonic: <c>result0[i] := (0==(i&amp;1))?( x[i&amp;~1] ):( y[i&amp;~1] )</c>, <c>result1[i] := (0==(i&amp;1))?( x[(i&amp;~1) + 1] ):( y[(i&amp;~1) + 1] )</c>.
+        /// </summary>
+        /// <param name="data0">Part 0 of the vector data (向量数据的第0部分).</param>
+        /// <param name="data1">Part 1 of the vector data (向量数据的第1部分).</param>
+        /// <returns>Returns the transposed data (返回转置后数据).</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<float> Result0, Vector<float> Result1) YGroup2Transpose(Vector<float> data0, Vector<float> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<double> Result0, Vector<double> Result1) YGroup2Transpose(Vector<double> data0, Vector<double> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<sbyte> Result0, Vector<sbyte> Result1) YGroup2Transpose(Vector<sbyte> data0, Vector<sbyte> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<byte> Result0, Vector<byte> Result1) YGroup2Transpose(Vector<byte> data0, Vector<byte> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<short> Result0, Vector<short> Result1) YGroup2Transpose(Vector<short> data0, Vector<short> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ushort> Result0, Vector<ushort> Result1) YGroup2Transpose(Vector<ushort> data0, Vector<ushort> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<int> Result0, Vector<int> Result1) YGroup2Transpose(Vector<int> data0, Vector<int> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<uint> Result0, Vector<uint> Result1) YGroup2Transpose(Vector<uint> data0, Vector<uint> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<long> Result0, Vector<long> Result1) YGroup2Transpose(Vector<long> data0, Vector<long> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+        /// <inheritdoc cref="YGroup2Transpose(Vector{float}, Vector{float})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static (Vector<ulong> Result0, Vector<ulong> Result1) YGroup2Transpose(Vector<ulong> data0, Vector<ulong> data1) {
+            var rt0 = YGroup2Transpose(data0, data1, out var rt1);
+            return (rt0, rt1);
+        }
+
+
 #if BCL_TYPE_INT128
 
         /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{ExInt128}, Vector{ExInt128}, out Vector{ExInt128})"/>
