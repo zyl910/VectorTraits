@@ -538,6 +538,495 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup2Transpose_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    if (Vector256.IsHardwareAccelerated) {
+                        rt = TypeCodeFlagsUtil.Most32Types;
+                    }
+#if BCL_HAS_SHUFFLE
+                    if (Bcl_Shuffle_Used && Vector256.IsHardwareAccelerated) {
+                        rt |= TypeCodeFlagsUtil.Bit64Types;
+                    }
+#endif // BCL_HAS_SHUFFLE
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup2Transpose(Vector256<float> data0, Vector256<float> data1, out Vector256<float> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                if (Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shift(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{double}, Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup2Transpose(Vector256<double> data0, Vector256<double> data1, out Vector256<double> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
+                if (Bcl_Shuffle_Used && Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shuffle(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup2Transpose(Vector256<sbyte> data0, Vector256<sbyte> data1, out Vector256<sbyte> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                if (Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shift(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{byte}, Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup2Transpose(Vector256<byte> data0, Vector256<byte> data1, out Vector256<byte> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                if (Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shift(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{short}, Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup2Transpose(Vector256<short> data0, Vector256<short> data1, out Vector256<short> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                if (Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shift(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup2Transpose(Vector256<ushort> data0, Vector256<ushort> data1, out Vector256<ushort> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                if (Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shift(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{int}, Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup2Transpose(Vector256<int> data0, Vector256<int> data1, out Vector256<int> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                if (Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shift(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{uint}, Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup2Transpose(Vector256<uint> data0, Vector256<uint> data1, out Vector256<uint> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                if (Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shift(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{long}, Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup2Transpose(Vector256<long> data0, Vector256<long> data1, out Vector256<long> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
+                if (Bcl_Shuffle_Used && Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shuffle(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ulong}, Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup2Transpose(Vector256<ulong> data0, Vector256<ulong> data1, out Vector256<ulong> result1) {
+#if BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
+                if (Bcl_Shuffle_Used && Vector256.IsHardwareAccelerated) {
+                    return YGroup2Transpose_Shuffle(data0, data1, out result1);
+                }
+#endif // BCL_OVERRIDE_BASE_FIXED && BCL_HAS_SHUFFLE
+                return YGroup2Transpose_Basic(data0, data1, out result1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup2Transpose_Basic(Vector256<float> data0, Vector256<float> data1, out Vector256<float> result1) {
+                var d0 = YGroup2Transpose_Basic(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                result1 = d1.AsSingle();
+                return d0.AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{double}, Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup2Transpose_Basic(Vector256<double> data0, Vector256<double> data1, out Vector256<double> result1) {
+                var d0 = YGroup2Transpose_Basic(data0.AsUInt64(), data1.AsUInt64(), out var d1);
+                result1 = d1.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup2Transpose_Basic(Vector256<sbyte> data0, Vector256<sbyte> data1, out Vector256<sbyte> result1) {
+                var d0 = YGroup2Transpose_Basic(data0.AsByte(), data1.AsByte(), out var d1);
+                result1 = d1.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{byte}, Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup2Transpose_Basic(Vector256<byte> data0, Vector256<byte> data1, out Vector256<byte> result1) {
+                UnsafeUtil.SkipInit(out Vector256<byte> rt0);
+                UnsafeUtil.SkipInit(out Vector256<byte> rt1);
+                ref byte px = ref Unsafe.As<Vector256<byte>, byte>(ref data0);
+                ref byte py = ref Unsafe.As<Vector256<byte>, byte>(ref data1);
+                ref byte q0 = ref Unsafe.As<Vector256<byte>, byte>(ref rt0);
+                ref byte q1 = ref Unsafe.As<Vector256<byte>, byte>(ref rt1);
+                for (int i = 0; i < Vector256<byte>.Count; i += 2) {
+                    q0 = px;
+                    Unsafe.Add(ref q0, 1) = py;
+                    q1 = Unsafe.Add(ref px, 1);
+                    Unsafe.Add(ref q1, 1) = Unsafe.Add(ref py, 1);
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q0 = ref Unsafe.Add(ref q0, 2);
+                    q1 = ref Unsafe.Add(ref q1, 2);
+                }
+                result1 = rt1;
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{short}, Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup2Transpose_Basic(Vector256<short> data0, Vector256<short> data1, out Vector256<short> result1) {
+                var d0 = YGroup2Transpose_Basic(data0.AsUInt16(), data1.AsUInt16(), out var d1);
+                result1 = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup2Transpose_Basic(Vector256<ushort> data0, Vector256<ushort> data1, out Vector256<ushort> result1) {
+                UnsafeUtil.SkipInit(out Vector256<ushort> rt0);
+                UnsafeUtil.SkipInit(out Vector256<ushort> rt1);
+                ref ushort px = ref Unsafe.As<Vector256<ushort>, ushort>(ref data0);
+                ref ushort py = ref Unsafe.As<Vector256<ushort>, ushort>(ref data1);
+                ref ushort q0 = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt0);
+                ref ushort q1 = ref Unsafe.As<Vector256<ushort>, ushort>(ref rt1);
+                for (int i = 0; i < Vector256<ushort>.Count; i += 2) {
+                    q0 = px;
+                    Unsafe.Add(ref q0, 1) = py;
+                    q1 = Unsafe.Add(ref px, 1);
+                    Unsafe.Add(ref q1, 1) = Unsafe.Add(ref py, 1);
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q0 = ref Unsafe.Add(ref q0, 2);
+                    q1 = ref Unsafe.Add(ref q1, 2);
+                }
+                result1 = rt1;
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{int}, Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup2Transpose_Basic(Vector256<int> data0, Vector256<int> data1, out Vector256<int> result1) {
+                var d0 = YGroup2Transpose_Basic(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                result1 = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{uint}, Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup2Transpose_Basic(Vector256<uint> data0, Vector256<uint> data1, out Vector256<uint> result1) {
+                UnsafeUtil.SkipInit(out Vector256<uint> rt0);
+                UnsafeUtil.SkipInit(out Vector256<uint> rt1);
+                ref uint px = ref Unsafe.As<Vector256<uint>, uint>(ref data0);
+                ref uint py = ref Unsafe.As<Vector256<uint>, uint>(ref data1);
+                ref uint q0 = ref Unsafe.As<Vector256<uint>, uint>(ref rt0);
+                ref uint q1 = ref Unsafe.As<Vector256<uint>, uint>(ref rt1);
+                for (int i = 0; i < Vector256<uint>.Count; i += 2) {
+                    q0 = px;
+                    Unsafe.Add(ref q0, 1) = py;
+                    q1 = Unsafe.Add(ref px, 1);
+                    Unsafe.Add(ref q1, 1) = Unsafe.Add(ref py, 1);
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q0 = ref Unsafe.Add(ref q0, 2);
+                    q1 = ref Unsafe.Add(ref q1, 2);
+                }
+                result1 = rt1;
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{long}, Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup2Transpose_Basic(Vector256<long> data0, Vector256<long> data1, out Vector256<long> result1) {
+                var d0 = YGroup2Transpose_Basic(data0.AsUInt64(), data1.AsUInt64(), out var d1);
+                result1 = d1.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ulong}, Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup2Transpose_Basic(Vector256<ulong> data0, Vector256<ulong> data1, out Vector256<ulong> result1) {
+                UnsafeUtil.SkipInit(out Vector256<ulong> rt0);
+                UnsafeUtil.SkipInit(out Vector256<ulong> rt1);
+                ref ulong px = ref Unsafe.As<Vector256<ulong>, ulong>(ref data0);
+                ref ulong py = ref Unsafe.As<Vector256<ulong>, ulong>(ref data1);
+                ref ulong q0 = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt0);
+                ref ulong q1 = ref Unsafe.As<Vector256<ulong>, ulong>(ref rt1);
+                for (int i = 0; i < Vector256<ulong>.Count; i += 2) {
+                    q0 = px;
+                    Unsafe.Add(ref q0, 1) = py;
+                    q1 = Unsafe.Add(ref px, 1);
+                    Unsafe.Add(ref q1, 1) = Unsafe.Add(ref py, 1);
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q0 = ref Unsafe.Add(ref q0, 2);
+                    q1 = ref Unsafe.Add(ref q1, 2);
+                }
+                result1 = rt1;
+                return rt0;
+            }
+
+#if VECTOR_HAS_METHOD
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup2Transpose_Shift(Vector256<float> data0, Vector256<float> data1, out Vector256<float> result1) {
+                var d0 = YGroup2Transpose_Shift(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                result1 = d1.AsSingle();
+                return d0.AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup2Transpose_Shift(Vector256<sbyte> data0, Vector256<sbyte> data1, out Vector256<sbyte> result1) {
+                var d0 = YGroup2Transpose_Shift(data0.AsByte(), data1.AsByte(), out var d1);
+                result1 = d1.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{byte}, Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup2Transpose_Shift(Vector256<byte> data0, Vector256<byte> data1, out Vector256<byte> result1) {
+                const int L = 8;
+                Vector256<ushort> a_0, a_1, b_0, b_1, c_0, c_1;
+                Vector256<ushort> mask = Vector256.Create((ushort)0x00FFU);
+                a_0 = data0.AsUInt16();
+                a_1 = data1.AsUInt16();
+                if (BitConverter.IsLittleEndian) {
+                    b_1 = Vector256.ShiftLeft(a_1, L);
+                    b_0 = Vector256.ShiftRightLogical(a_0, L);
+                    c_0 = Vector256.BitwiseOr(Vector256.BitwiseAnd(a_0, mask), b_1);
+                    c_1 = Vector256.BitwiseOr(Vector256.AndNot(a_1, mask), b_0);
+                } else {
+                    b_1 = Vector256.ShiftRightLogical(a_1, L);
+                    b_0 = Vector256.ShiftLeft(a_0, L);
+                    c_0 = Vector256.BitwiseOr(Vector256.AndNot(a_0, mask), b_1);
+                    c_1 = Vector256.BitwiseOr(Vector256.BitwiseAnd(a_1, mask), b_0);
+                }
+                result1 = c_1.AsByte();
+                return c_0.AsByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{short}, Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup2Transpose_Shift(Vector256<short> data0, Vector256<short> data1, out Vector256<short> result1) {
+                var d0 = YGroup2Transpose_Shift(data0.AsUInt16(), data1.AsUInt16(), out var d1);
+                result1 = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup2Transpose_Shift(Vector256<ushort> data0, Vector256<ushort> data1, out Vector256<ushort> result1) {
+                const int L = 16;
+                Vector256<uint> a_0, a_1, b_0, b_1, c_0, c_1;
+                Vector256<uint> mask = Vector256.Create((uint)0x0000FFFFU);
+                a_0 = data0.AsUInt32();
+                a_1 = data1.AsUInt32();
+                if (BitConverter.IsLittleEndian) {
+                    b_1 = Vector256.ShiftLeft(a_1, L);
+                    b_0 = Vector256.ShiftRightLogical(a_0, L);
+                    c_0 = Vector256.BitwiseOr(Vector256.BitwiseAnd(a_0, mask), b_1);
+                    c_1 = Vector256.BitwiseOr(Vector256.AndNot(a_1, mask), b_0);
+                } else {
+                    b_1 = Vector256.ShiftRightLogical(a_1, L);
+                    b_0 = Vector256.ShiftLeft(a_0, L);
+                    c_0 = Vector256.BitwiseOr(Vector256.AndNot(a_0, mask), b_1);
+                    c_1 = Vector256.BitwiseOr(Vector256.BitwiseAnd(a_1, mask), b_0);
+                }
+                result1 = c_1.AsUInt16();
+                return c_0.AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{int}, Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup2Transpose_Shift(Vector256<int> data0, Vector256<int> data1, out Vector256<int> result1) {
+                var d0 = YGroup2Transpose_Shift(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                result1 = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{uint}, Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup2Transpose_Shift(Vector256<uint> data0, Vector256<uint> data1, out Vector256<uint> result1) {
+                const int L = 32;
+                Vector256<ulong> a_0, a_1, b_0, b_1, c_0, c_1;
+                Vector256<ulong> mask = Vector256.Create((ulong)0x00000000FFFFFFFFUL);
+                a_0 = data0.AsUInt64();
+                a_1 = data1.AsUInt64();
+                if (BitConverter.IsLittleEndian) {
+                    b_1 = Vector256.ShiftLeft(a_1, L);
+                    b_0 = Vector256.ShiftRightLogical(a_0, L);
+                    c_0 = Vector256.BitwiseOr(Vector256.BitwiseAnd(a_0, mask), b_1);
+                    c_1 = Vector256.BitwiseOr(Vector256.AndNot(a_1, mask), b_0);
+                } else {
+                    b_1 = Vector256.ShiftRightLogical(a_1, L);
+                    b_0 = Vector256.ShiftLeft(a_0, L);
+                    c_0 = Vector256.BitwiseOr(Vector256.AndNot(a_0, mask), b_1);
+                    c_1 = Vector256.BitwiseOr(Vector256.BitwiseAnd(a_1, mask), b_0);
+                }
+                result1 = c_1.AsUInt32();
+                return c_0.AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<float> YGroup2Transpose_Shuffle(Vector256<float> data0, Vector256<float> data1, out Vector256<float> result1) {
+                var d0 = YGroup2Transpose_Shuffle(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                result1 = d1.AsSingle();
+                return d0.AsSingle();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{double}, Vector256{double}, out Vector256{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<double> YGroup2Transpose_Shuffle(Vector256<double> data0, Vector256<double> data1, out Vector256<double> result1) {
+                var d0 = YGroup2Transpose_Shuffle(data0.AsUInt64(), data1.AsUInt64(), out var d1);
+                result1 = d1.AsDouble();
+                return d0.AsDouble();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<sbyte> YGroup2Transpose_Shuffle(Vector256<sbyte> data0, Vector256<sbyte> data1, out Vector256<sbyte> result1) {
+                var d0 = YGroup2Transpose_Shuffle(data0.AsByte(), data1.AsByte(), out var d1);
+                result1 = d1.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{byte}, Vector256{byte}, out Vector256{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<byte> YGroup2Transpose_Shuffle(Vector256<byte> data0, Vector256<byte> data1, out Vector256<byte> result1) {
+                var f0A = Vector256Constants.YGroup2Transpose_Shuffle_Byte_0A;
+                var f0B = Vector256Constants.YGroup2Transpose_Shuffle_Byte_0B;
+                var f1A = Vector256Constants.YGroup2Transpose_Shuffle_Byte_1A;
+                var f1B = Vector256Constants.YGroup2Transpose_Shuffle_Byte_1B;
+                var a_0 = Vector256.BitwiseOr(Vector256.Shuffle(data0, f0A), Vector256.Shuffle(data1, f0B));
+                var a_1 = Vector256.BitwiseOr(Vector256.Shuffle(data0, f1A), Vector256.Shuffle(data1, f1B));
+                result1 = a_1;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{short}, Vector256{short}, out Vector256{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<short> YGroup2Transpose_Shuffle(Vector256<short> data0, Vector256<short> data1, out Vector256<short> result1) {
+                var d0 = YGroup2Transpose_Shuffle(data0.AsUInt16(), data1.AsUInt16(), out var d1);
+                result1 = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ushort> YGroup2Transpose_Shuffle(Vector256<ushort> data0, Vector256<ushort> data1, out Vector256<ushort> result1) {
+                var f0A = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt16_0A;
+                var f0B = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt16_0B;
+                var f1A = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt16_1A;
+                var f1B = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt16_1B;
+                var a_0 = Vector256.BitwiseOr(Vector256.Shuffle(data0.AsByte(), f0A), Vector256.Shuffle(data1.AsByte(), f0B)).AsUInt16();
+                var a_1 = Vector256.BitwiseOr(Vector256.Shuffle(data0.AsByte(), f1A), Vector256.Shuffle(data1.AsByte(), f1B)).AsUInt16();
+                result1 = a_1;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{int}, Vector256{int}, out Vector256{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<int> YGroup2Transpose_Shuffle(Vector256<int> data0, Vector256<int> data1, out Vector256<int> result1) {
+                var d0 = YGroup2Transpose_Shuffle(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                result1 = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{uint}, Vector256{uint}, out Vector256{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<uint> YGroup2Transpose_Shuffle(Vector256<uint> data0, Vector256<uint> data1, out Vector256<uint> result1) {
+                var f0A = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt32_0A;
+                var f0B = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt32_0B;
+                var f1A = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt32_1A;
+                var f1B = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt32_1B;
+                var a_0 = Vector256.BitwiseOr(Vector256.Shuffle(data0.AsByte(), f0A), Vector256.Shuffle(data1.AsByte(), f0B)).AsUInt32();
+                var a_1 = Vector256.BitwiseOr(Vector256.Shuffle(data0.AsByte(), f1A), Vector256.Shuffle(data1.AsByte(), f1B)).AsUInt32();
+                result1 = a_1;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{long}, Vector256{long}, out Vector256{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<long> YGroup2Transpose_Shuffle(Vector256<long> data0, Vector256<long> data1, out Vector256<long> result1) {
+                var d0 = YGroup2Transpose_Shuffle(data0.AsUInt64(), data1.AsUInt64(), out var d1);
+                result1 = d1.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ulong}, Vector256{ulong}, out Vector256{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector256<ulong> YGroup2Transpose_Shuffle(Vector256<ulong> data0, Vector256<ulong> data1, out Vector256<ulong> result1) {
+                var f0A = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt64_0A;
+                var f0B = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt64_0B;
+                var f1A = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt64_1A;
+                var f1B = Vector256Constants.YGroup2Transpose_ShuffleOnByte_UInt64_1B;
+                var a_0 = Vector256.BitwiseOr(Vector256.Shuffle(data0.AsByte(), f0A), Vector256.Shuffle(data1.AsByte(), f0B)).AsUInt64();
+                var a_1 = Vector256.BitwiseOr(Vector256.Shuffle(data0.AsByte(), f1A), Vector256.Shuffle(data1.AsByte(), f1B)).AsUInt64();
+                result1 = a_1;
+                return a_0;
+            }
+
+#endif // VECTOR_HAS_METHOD
+
+
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {

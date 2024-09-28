@@ -656,6 +656,122 @@ namespace Zyl.VectorTraits {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose_AcceleratedTypes"/>
+        public static TypeCodeFlags YGroup2Transpose_AcceleratedTypes {
+            get {
+#if BCL_BASE_OVERRIDE_STATIC
+                return BaseStatics.YGroup2Transpose_AcceleratedTypes;
+#else
+                return _instance.YGroup2Transpose_AcceleratedTypes;
+#endif // BCL_BASE_OVERRIDE_STATIC
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{float}, Vector256{float}, out Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<float> YGroup2Transpose(Vector256<float> data0, Vector256<float> data1, out Vector256<float> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{double}, Vector256{double}, out Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<double> YGroup2Transpose(Vector256<double> data0, Vector256<double> data1, out Vector256<double> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<sbyte> YGroup2Transpose(Vector256<sbyte> data0, Vector256<sbyte> data1, out Vector256<sbyte> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{byte}, Vector256{byte}, out Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<byte> YGroup2Transpose(Vector256<byte> data0, Vector256<byte> data1, out Vector256<byte> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{short}, Vector256{short}, out Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<short> YGroup2Transpose(Vector256<short> data0, Vector256<short> data1, out Vector256<short> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ushort}, Vector256{ushort}, out Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ushort> YGroup2Transpose(Vector256<ushort> data0, Vector256<ushort> data1, out Vector256<ushort> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{int}, Vector256{int}, out Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<int> YGroup2Transpose(Vector256<int> data0, Vector256<int> data1, out Vector256<int> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{uint}, Vector256{uint}, out Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<uint> YGroup2Transpose(Vector256<uint> data0, Vector256<uint> data1, out Vector256<uint> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{long}, Vector256{long}, out Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<long> YGroup2Transpose(Vector256<long> data0, Vector256<long> data1, out Vector256<long> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ulong}, Vector256{ulong}, out Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector256<ulong> YGroup2Transpose(Vector256<ulong> data0, Vector256<ulong> data1, out Vector256<ulong> result1) {
+#if BCL_BASE_OVERRIDE_STATIC
+            return BaseStatics.YGroup2Transpose(data0, data1, out result1);
+#else
+            return _instance.YGroup2Transpose(data0, data1, out result1);
+#endif // BCL_BASE_OVERRIDE_STATIC
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip_AcceleratedTypes"/>
         public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
             get {

@@ -581,12 +581,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{double}, Vector128{double}, out Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YGroup2Transpose(Vector128<double> data0, Vector128<double> data1, out Vector128<double> result1) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                if (Vector128.IsHardwareAccelerated) {
-                    return YGroup2Transpose_Shuffle(data0, data1, out result1);
-                }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Transpose_Basic(data0, data1, out result1);
+                return YGroup2Transpose_Move(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{sbyte}, Vector128{sbyte}, out Vector128{sbyte})"/>
@@ -661,24 +656,14 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{long}, Vector128{long}, out Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YGroup2Transpose(Vector128<long> data0, Vector128<long> data1, out Vector128<long> result1) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                if (Vector128.IsHardwareAccelerated) {
-                    return YGroup2Transpose_Shuffle(data0, data1, out result1);
-                }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Transpose_Basic(data0, data1, out result1);
+                return YGroup2Transpose_Move(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{ulong}, Vector128{ulong}, out Vector128{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2Transpose(Vector128<ulong> data0, Vector128<ulong> data1, out Vector128<ulong> result1) {
-#if BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                if (Vector128.IsHardwareAccelerated) {
-                    return YGroup2Transpose_Shuffle(data0, data1, out result1);
-                }
-#endif // BCL_OVERRIDE_BASE_FIXED && VECTOR_HAS_METHOD
-                return YGroup2Transpose_Basic(data0, data1, out result1);
+                return YGroup2Transpose_Move(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{float}, Vector128{float}, out Vector128{float})"/>

@@ -712,6 +712,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2Transpose_Shuffle(Vector128<byte> data0, Vector128<byte> data1, out Vector128<byte> result1) {
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup2Transpose_Shuffle_Byte_0A;
                 var f0B = Vector128Constants.YGroup2Transpose_Shuffle_Byte_0B;
                 var f1A = Vector128Constants.YGroup2Transpose_Shuffle_Byte_1A;
@@ -734,6 +735,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2Transpose_Shuffle(Vector128<ushort> data0, Vector128<ushort> data1, out Vector128<ushort> result1) {
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup2Transpose_ShuffleOnByte_UInt16_0A;
                 var f0B = Vector128Constants.YGroup2Transpose_ShuffleOnByte_UInt16_0B;
                 var f1A = Vector128Constants.YGroup2Transpose_ShuffleOnByte_UInt16_1A;
@@ -756,6 +758,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2Transpose_Shuffle(Vector128<uint> data0, Vector128<uint> data1, out Vector128<uint> result1) {
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup2Transpose_ShuffleOnByte_UInt32_0A;
                 var f0B = Vector128Constants.YGroup2Transpose_ShuffleOnByte_UInt32_0B;
                 var f1A = Vector128Constants.YGroup2Transpose_ShuffleOnByte_UInt32_1A;
@@ -778,6 +781,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YGroup2Transpose_Shuffle(Vector128<ulong> data0, Vector128<ulong> data1, out Vector128<ulong> result1) {
+                if (!Ssse3.IsSupported) VectorMessageFormats.ThrowNewUnsupported("Ssse3");
                 var f0A = Vector128Constants.YGroup2Transpose_ShuffleOnByte_UInt64_0A;
                 var f0B = Vector128Constants.YGroup2Transpose_ShuffleOnByte_UInt64_0B;
                 var f1A = Vector128Constants.YGroup2Transpose_ShuffleOnByte_UInt64_1A;
