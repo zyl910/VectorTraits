@@ -651,10 +651,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Transpose_ShuffleX(data0, data1, out result1);
                 }
 #endif // NET8_0_OR_GREATER
-                if (Avx2.IsSupported) {
-                    return YGroup2Transpose_Shift(data0, data1, out result1);
-                }
-                return YGroup2Transpose_ShuffleXImm(data0, data1, out result1);
+                return YGroup2Transpose_Shift(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{byte}, Vector256{byte}, out Vector256{byte})"/>
@@ -665,10 +662,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                     return YGroup2Transpose_ShuffleX(data0, data1, out result1);
                 }
 #endif // NET8_0_OR_GREATER
-                if (Avx2.IsSupported) {
-                    return YGroup2Transpose_Shift(data0, data1, out result1);
-                }
-                return YGroup2Transpose_ShuffleXImm(data0, data1, out result1);
+                return YGroup2Transpose_Shift(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{short}, Vector256{short}, out Vector256{short})"/>

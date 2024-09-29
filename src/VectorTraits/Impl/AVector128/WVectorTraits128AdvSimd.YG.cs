@@ -423,11 +423,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{float}, Vector128{float}, out Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YGroup2Transpose(Vector128<float> data0, Vector128<float> data1, out Vector128<float> result1) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup2Transpose_ShuffleX(data0, data1, out result1);
-#else
                 return YGroup2Transpose_Shift(data0, data1, out result1);
-#endif // ARM_ALLOW_LOOKUP_X
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{double}, Vector128{double}, out Vector128{double})"/>
@@ -440,63 +436,39 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YGroup2Transpose(Vector128<sbyte> data0, Vector128<sbyte> data1, out Vector128<sbyte> result1) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup2Transpose_ShuffleX(data0, data1, out result1);
-#else
                 return YGroup2Transpose_Shift(data0, data1, out result1);
-#endif // ARM_ALLOW_LOOKUP_X
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2Transpose(Vector128<byte> data0, Vector128<byte> data1, out Vector128<byte> result1) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup2Transpose_ShuffleX(data0, data1, out result1);
-#else
                 return YGroup2Transpose_Shift(data0, data1, out result1);
-#endif // ARM_ALLOW_LOOKUP_X
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{short}, Vector128{short}, out Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YGroup2Transpose(Vector128<short> data0, Vector128<short> data1, out Vector128<short> result1) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup2Transpose_ShuffleX(data0, data1, out result1);
-#else
                 return YGroup2Transpose_Shift(data0, data1, out result1);
-#endif // ARM_ALLOW_LOOKUP_X
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{ushort}, Vector128{ushort}, out Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2Transpose(Vector128<ushort> data0, Vector128<ushort> data1, out Vector128<ushort> result1) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup2Transpose_ShuffleX(data0, data1, out result1);
-#else
                 return YGroup2Transpose_Shift(data0, data1, out result1);
-#endif // ARM_ALLOW_LOOKUP_X
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{int}, Vector128{int}, out Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YGroup2Transpose(Vector128<int> data0, Vector128<int> data1, out Vector128<int> result1) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup2Transpose_ShuffleX(data0, data1, out result1);
-#else
                 return YGroup2Transpose_Shift(data0, data1, out result1);
-#endif // ARM_ALLOW_LOOKUP_X
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{uint}, Vector128{uint}, out Vector128{uint})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YGroup2Transpose(Vector128<uint> data0, Vector128<uint> data1, out Vector128<uint> result1) {
-#if ARM_ALLOW_LOOKUP_X
-                return YGroup2Transpose_ShuffleX(data0, data1, out result1);
-#else
                 return YGroup2Transpose_Shift(data0, data1, out result1);
-#endif // ARM_ALLOW_LOOKUP_X
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{long}, Vector128{long}, out Vector128{long})"/>

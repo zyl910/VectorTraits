@@ -432,26 +432,42 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YGroup2Transpose(Vector128<sbyte> data0, Vector128<sbyte> data1, out Vector128<sbyte> result1) {
+#if NETX_0_OR_GREATER
                 return YGroup2Transpose_Shuffle(data0, data1, out result1);
+#else
+                return SuperStatics.YGroup2Transpose(data0, data1, out result1);
+#endif // NETX_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{byte}, Vector128{byte}, out Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YGroup2Transpose(Vector128<byte> data0, Vector128<byte> data1, out Vector128<byte> result1) {
+#if NETX_0_OR_GREATER
                 return YGroup2Transpose_Shuffle(data0, data1, out result1);
+#else
+                return SuperStatics.YGroup2Transpose(data0, data1, out result1);
+#endif // NETX_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{short}, Vector128{short}, out Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YGroup2Transpose(Vector128<short> data0, Vector128<short> data1, out Vector128<short> result1) {
+#if NETX_0_OR_GREATER
                 return YGroup2Transpose_Shuffle(data0, data1, out result1);
+#else
+                return SuperStatics.YGroup2Transpose(data0, data1, out result1);
+#endif // NETX_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{ushort}, Vector128{ushort}, out Vector128{ushort})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YGroup2Transpose(Vector128<ushort> data0, Vector128<ushort> data1, out Vector128<ushort> result1) {
+#if NETX_0_OR_GREATER
                 return YGroup2Transpose_Shuffle(data0, data1, out result1);
+#else
+                return SuperStatics.YGroup2Transpose(data0, data1, out result1);
+#endif // NETX_0_OR_GREATER
             }
 
             /// <inheritdoc cref="IWVectorTraits128.YGroup2Transpose(Vector128{int}, Vector128{int}, out Vector128{int})"/>
