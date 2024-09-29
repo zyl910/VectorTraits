@@ -949,7 +949,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 // b_1 = Vector.ShiftLeft(a_1, L);
                 b_1 = Vector.Multiply(a_1.AsInt16(), vscaleMul).AsUInt16();
                 // b_0 = Vector.ShiftRightLogical(a_0, L);
-                b_0 = Vector.AndNot(a_0, mask); // Keep high 8 bit.
+                b_0 = Vector.AndNot(a_0, mask); // Clears the low bits, which avoids floating-point rounding errors.
                 Vector.Widen(b_0, out e_0, out e_1);
                 f_0 = Vector.ConvertToSingle(e_0.AsInt32());
                 f_1 = Vector.ConvertToSingle(e_1.AsInt32());
@@ -1000,7 +1000,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 // b_1 = Vector.ShiftLeft(a_1, L);
                 b_1 = Vector.Multiply(a_1.AsInt32(), vscaleMul).AsUInt32();
                 // b_0 = Vector.ShiftRightLogical(a_0, L);
-                b_0 = Vector.AndNot(a_0, mask); // Keep high 16 bit. Single only 23bit Mantissa.
+                b_0 = Vector.AndNot(a_0, mask); // Clears the low bits, which avoids floating-point rounding errors.
                 f_0 = Vector.ConvertToSingle(b_0);
                 f_0 = Vector.Multiply(f_0, vscaleDiv);
                 b_0 = Vector.ConvertToInt32(f_0).AsUInt32();
@@ -1013,6 +1013,52 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 } else {
                     result1 = c_0.AsUInt16();
                     return c_1.AsUInt16();
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{int}, Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup2Transpose_ShiftByMul(Vector<int> data0, Vector<int> data1, out Vector<int> result1) {
+                var d0 = YGroup2Transpose_ShiftByMul(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                result1 = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{uint}, Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup2Transpose_ShiftByMul(Vector<uint> data0, Vector<uint> data1, out Vector<uint> result1) {
+                const int L = 32;
+                const ulong scaleMul = 1L << L;
+                const double scaleDiv = 1.0d / scaleMul;
+                Vector<ulong> vscaleMul = new Vector<ulong>(scaleMul);
+                Vector<double> vscaleDiv = new Vector<double>(scaleDiv);
+                Vector<double> f_0;
+                Vector<ulong> a_0, a_1, b_0, b_1, c_0, c_1;
+                Vector<ulong> mask = new Vector<ulong>(0x00000000FFFFFFFFUL);
+                if (BitConverter.IsLittleEndian) {
+                    a_0 = data0.AsUInt64();
+                    a_1 = data1.AsUInt64();
+                } else {
+                    a_0 = data1.AsUInt64();
+                    a_1 = data0.AsUInt64();
+                }
+                // b_1 = Vector.ShiftLeft(a_1, L);
+                b_1 = Vector.Multiply(a_1, vscaleMul);
+                // b_0 = Vector.ShiftRightLogical(a_0, L);
+                b_0 = Vector.AndNot(a_0, mask); // Clears the low bits, which avoids floating-point rounding errors.
+                f_0 = Vector.ConvertToDouble(b_0);
+                f_0 = Vector.Multiply(f_0, vscaleDiv);
+                b_0 = ConvertToInt64_Range52RoundToEven(f_0).AsUInt64();
+                // BitwiseOr.
+                c_0 = Vector.BitwiseOr(Vector.BitwiseAnd(a_0, mask), b_1);
+                c_1 = Vector.BitwiseOr(Vector.AndNot(a_1, mask), b_0);
+                if (BitConverter.IsLittleEndian) {
+                    result1 = c_1.AsUInt32();
+                    return c_0.AsUInt32();
+                } else {
+                    result1 = c_0.AsUInt32();
+                    return c_1.AsUInt32();
                 }
             }
 
