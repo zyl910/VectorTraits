@@ -1084,18 +1084,17 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{float}, Vector{float}, out Vector{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<float> YGroup2Unzip(Vector<float> data0, Vector<float> data1, out Vector<float> y) {
-#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD && BCL_HAS_SHIFT
-                if (Vector.IsHardwareAccelerated) {
-                    return YGroup2Unzip_Narrow(data0, data1, out y);
-                }
-#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
-                return YGroup2Unzip_Basic(data0, data1, out y);
+                var d0 = YGroup2Unzip(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                y = d1.AsSingle();
+                return d0.AsSingle();
             }
 
             /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{double}, Vector{double}, out Vector{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<double> YGroup2Unzip(Vector<double> data0, Vector<double> data1, out Vector<double> y) {
-                return YGroup2Unzip_Basic(data0, data1, out y);
+                var d0 = YGroup2Unzip(data0.AsUInt64(), data1.AsUInt64(), out var d1);
+                y = d1.AsDouble();
+                return d0.AsDouble();
             }
 
             /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{sbyte}, Vector{sbyte}, out Vector{sbyte})"/>
@@ -1163,9 +1162,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{int}, Vector{int}, out Vector{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> YGroup2Unzip(Vector<int> data0, Vector<int> data1, out Vector<int> y) {
-#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD && BCL_HAS_SHIFT
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 if (Vector.IsHardwareAccelerated) {
+#if BCL_HAS_SHIFT
                     return YGroup2Unzip_Narrow(data0, data1, out y);
+#else
+                    return YGroup2Unzip_NarrowMul(data0, data1, out y);
+#endif // BCL_HAS_SHIFT
                 }
 #endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YGroup2Unzip_Basic(data0, data1, out y);
@@ -1175,9 +1178,13 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YGroup2Unzip(Vector<uint> data0, Vector<uint> data1, out Vector<uint> y) {
-#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD && BCL_HAS_SHIFT
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 if (Vector.IsHardwareAccelerated) {
+#if BCL_HAS_SHIFT
                     return YGroup2Unzip_Narrow(data0, data1, out y);
+#else
+                    return YGroup2Unzip_NarrowMul(data0, data1, out y);
+#endif // BCL_HAS_SHIFT
                 }
 #endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
                 return YGroup2Unzip_Basic(data0, data1, out y);
@@ -1560,7 +1567,48 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YGroup2Unzip_NarrowMul(Vector<ushort> data0, Vector<ushort> data1, out Vector<ushort> y) {
                 const int L = 16;
-                const double scale = 1.0d / (1 << L);
+                const float scale = 1.0f / (1 << L);
+                Vector<float> vscale = new Vector<float>(scale);
+                Vector<float> f_0, f_1;
+                Vector<ushort> rt0, rt1;
+                Vector<uint> temp0 = data0.AsUInt32();
+                Vector<uint> temp1 = data1.AsUInt32();
+                Vector<uint> mask = Vectors<ushort>.XyYMask.AsUInt32();
+                rt0 = Vector.Narrow(temp0, temp1);
+                //temp0 = Vector.ShiftRightLogical(temp0, L);
+                //temp1 = Vector.ShiftRightLogical(temp1, L);
+                temp0 = Vector.BitwiseAnd(temp0, mask);
+                temp1 = Vector.BitwiseAnd(temp1, mask);
+                f_0 = Vector.ConvertToSingle(temp0);
+                f_1 = Vector.ConvertToSingle(temp1);
+                f_0 = Vector.Multiply(f_0, vscale);
+                f_1 = Vector.Multiply(f_1, vscale);
+                temp0 = Vector.ConvertToInt32(f_0).AsUInt32();
+                temp1 = Vector.ConvertToInt32(f_1).AsUInt32();
+                rt1 = Vector.Narrow(temp0, temp1);
+                if (BitConverter.IsLittleEndian) {
+                    y = rt1;
+                    return rt0;
+                } else {
+                    y = rt0;
+                    return rt1;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{short}, Vector{short}, out Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup2Unzip_NarrowMulOld(Vector<short> data0, Vector<short> data1, out Vector<short> y) {
+                var d0 = YGroup2Unzip_NarrowMulOld(data0.AsUInt16(), data1.AsUInt16(), out var d1);
+                y = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{ushort}, Vector{ushort}, out Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup2Unzip_NarrowMulOld(Vector<ushort> data0, Vector<ushort> data1, out Vector<ushort> y) {
+                const int L = 16;
+                const double scale = 1.0d / (1L << L);
                 Vector<double> vscale = new Vector<double>(scale);
                 Vector<double> f0, f1, f2, f3;
                 Vector<ulong> e0, e1, e2, e3;
@@ -1589,6 +1637,47 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 e3 = ConvertToUInt64_Range52RoundToEven(f3);
                 temp0 = Vector.Narrow(e0, e1);
                 temp1 = Vector.Narrow(e2, e3);
+                rt1 = Vector.Narrow(temp0, temp1);
+                if (BitConverter.IsLittleEndian) {
+                    y = rt1;
+                    return rt0;
+                } else {
+                    y = rt0;
+                    return rt1;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{int}, Vector{int}, out Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup2Unzip_NarrowMul(Vector<int> data0, Vector<int> data1, out Vector<int> y) {
+                var d0 = YGroup2Unzip_NarrowMul(data0.AsUInt32(), data1.AsUInt32(), out var d1);
+                y = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{uint}, Vector{uint}, out Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup2Unzip_NarrowMul(Vector<uint> data0, Vector<uint> data1, out Vector<uint> y) {
+                const int L = 32;
+                const double scale = 1.0d / (1L << L);
+                Vector<double> vscale = new Vector<double>(scale);
+                Vector<double> f_0, f_1;
+                Vector<uint> rt0, rt1;
+                Vector<ulong> temp0 = data0.AsUInt64();
+                Vector<ulong> temp1 = data1.AsUInt64();
+                Vector<ulong> mask = Vectors<uint>.XyYMask.AsUInt64();
+                rt0 = Vector.Narrow(temp0, temp1);
+                //temp0 = Vector.ShiftRightLogical(temp0, L);
+                //temp1 = Vector.ShiftRightLogical(temp1, L);
+                temp0 = Vector.BitwiseAnd(temp0, mask);
+                temp1 = Vector.BitwiseAnd(temp1, mask);
+                f_0 = Vector.ConvertToDouble(temp0);
+                f_1 = Vector.ConvertToDouble(temp1);
+                f_0 = Vector.Multiply(f_0, vscale);
+                f_1 = Vector.Multiply(f_1, vscale);
+                temp0 = ConvertToUInt64_Range52RoundToEven(f_0);
+                temp1 = ConvertToUInt64_Range52RoundToEven(f_1);
                 rt1 = Vector.Narrow(temp0, temp1);
                 if (BitConverter.IsLittleEndian) {
                     y = rt1;
