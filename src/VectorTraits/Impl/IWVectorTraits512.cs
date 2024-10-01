@@ -12,6 +12,9 @@ using System.Runtime.Intrinsics.X86;
 #if NET5_0_OR_GREATER
 using System.Runtime.Intrinsics.Arm;
 #endif // NET5_0_OR_GREATER
+#if NET8_0_OR_GREATER
+using System.Runtime.Intrinsics.Wasm;
+#endif // NET8_0_OR_GREATER
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
@@ -2173,26 +2176,24 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">TBL(vqvtbl1q_u8)</see></description>
+        ///        <description>Same <see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">vqvtbl1q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///    </item>
         ///    <item>
         ///        <term>Wasm</term>
-        ///        <description>(None)</description>
+        ///        <description>Same <see cref="PackedSimd.Swizzle(Vector128{byte}, Vector128{byte})">i8x16.swizzle</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///    </item>
         ///    <item>
         ///        <term>X86</term>
-        ///        <description>Combine by <see cref="Avx512Vbmi.PermuteVar64x8(Vector512{byte}, Vector512{byte})">VPERMB(_mm512_permutevar64x8_epi8)</see></description>
-        ///        <description>Combine by <see cref="Avx512BW.PermuteVar32x16(Vector512{ushort}, Vector512{ushort})">VPERMW(_mm512_permutevar32x16_epi16)</see></description>
-        ///        <description>Combine by <see cref="Avx512F.PermuteVar16x32(Vector512{uint}, Vector512{uint})">VPERMD(_mm512_permutevar16x32_epi32)</see>
-        ///        /<see cref="Avx512F.PermuteVar16x32(Vector512{float}, Vector512{int})">VPERMPS(_mm512_permutevar16x32_ps)</see></description>
-        ///        <description>Combine by <see cref="Avx512F.PermuteVar8x64(Vector512{ulong}, Vector512{ulong})">VPERMQ(_mm512_permute8x64_pd)</see>
-        ///        /<see cref="Avx512F.PermuteVar8x64(Vector512{double}, Vector512{long})">VPERMPD(_mm512_permute8x64_pd)</see></description>
+        ///        <description>Combine by <see cref="Avx512Vbmi.PermuteVar64x8(Vector512{byte}, Vector512{byte})">_mm512_permutevar64x8_epi8</see>(Avx512Vbmi)</description>
+        ///        <description>Combine by <see cref="Avx512BW.PermuteVar32x16(Vector512{ushort}, Vector512{ushort})">_mm512_permutevar32x16_epi16</see>(Avx512BW)</description>
+        ///        <description>Combine by <see cref="Avx512F.PermuteVar16x32(Vector512{uint}, Vector512{uint})">_mm512_permutevar16x32_epi32</see>(Avx512F)</description>
+        ///        <description>Combine by <see cref="Avx512F.PermuteVar8x64(Vector512{ulong}, Vector512{ulong})">_mm512_permute8x64_pd</see>(Avx512F)</description>
         ///    </item>
         /// </list>
         /// </remarks>

@@ -482,10 +482,10 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{byte}, Vector128{byte})">TRN1(vtrn1q_u8)</see>/<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{byte}, Vector128{byte})">TRN2(vtrn2q_u8)</see></description>
-        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{ushort}, Vector128{ushort})">TRN1(vtrn1q_u16)</see>/<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{ushort}, Vector128{ushort})">TRN2(vtrn2q_u16)</see></description>
-        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{uint}, Vector128{uint})">TRN1(vtrn1q_u32)</see>/<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{uint}, Vector128{uint})">TRN2(vtrn2q_u32)</see></description>
-        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{ulong}, Vector128{ulong})">TRN1(vtrn1q_u64)</see>/<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{ulong}, Vector128{ulong})">TRN2(vtrn2q_u64)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{byte}, Vector128{byte})">vtrn1q_u8</see>,<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{byte}, Vector128{byte})">vtrn2q_u8</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{ushort}, Vector128{ushort})">vtrn1q_u16</see>,<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{ushort}, Vector128{ushort})">vtrn2q_u16</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{uint}, Vector128{uint})">vtrn1q_u32</see>,<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{uint}, Vector128{uint})">vtrn2q_u32</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.TransposeEven(Vector128{ulong}, Vector128{ulong})">vtrn1q_u64</see>,<see cref="AdvSimd.Arm64.TransposeOdd(Vector128{ulong}, Vector128{ulong})">vtrn2q_u64</see></description>
         ///    </item>
         ///    <item>
         ///        <term>Wasm</term>
@@ -595,10 +595,10 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{byte}, Vector128{byte})">UZP1(vuzp1q_u8)</see>/<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{byte}, Vector128{byte})">UZP2(vuzp2q_u8)</see></description>
-        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{ushort}, Vector128{ushort})">UZP1(vuzp1q_u16)</see>/<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{ushort}, Vector128{ushort})">UZP2(vuzp2q_u16)</see></description>
-        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{uint}, Vector128{uint})">UZP1(vuzp1q_u32)</see>/<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{uint}, Vector128{uint})">UZP2(vuzp2q_u32)</see></description>
-        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{ulong}, Vector128{ulong})">UZP1(vuzp1q_u64)</see>/<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{ulong}, Vector128{ulong})">UZP2(vuzp2q_u64)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{byte}, Vector128{byte})">vuzp1q_u8</see>,<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{byte}, Vector128{byte})">vuzp2q_u8</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{ushort}, Vector128{ushort})">vuzp1q_u16</see>,<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{ushort}, Vector128{ushort})">vuzp2q_u16</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{uint}, Vector128{uint})">vuzp1q_u32</see>,<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{uint}, Vector128{uint})">vuzp2q_u32</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.UnzipEven(Vector128{ulong}, Vector128{ulong})">vuzp1q_u64</see>,<see cref="AdvSimd.Arm64.UnzipOdd(Vector128{ulong}, Vector128{ulong})">vuzp2q_u64</see></description>
         ///    </item>
         ///    <item>
         ///        <term>Wasm</term>
@@ -829,10 +829,10 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{byte}, Vector128{byte})">ZIP1(vzip1q_u8)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{byte}, Vector128{byte})">ZIP2(vzip2q_u8)</see></description>
-        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{ushort}, Vector128{ushort})">ZIP1(vzip1q_u16)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{ushort}, Vector128{ushort})">ZIP2(vzip2q_u16)</see></description>
-        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{uint}, Vector128{uint})">ZIP1(vzip1q_u32)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{uint}, Vector128{uint})">ZIP2(vzip2q_u32)</see></description>
-        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{ulong}, Vector128{ulong})">ZIP1(vzip1q_u64)</see>/<see cref="AdvSimd.Arm64.ZipHigh(Vector128{ulong}, Vector128{ulong})">ZIP2(vzip2q_u64)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{byte}, Vector128{byte})">vzip1q_u8</see>,<see cref="AdvSimd.Arm64.ZipHigh(Vector128{byte}, Vector128{byte})">vzip2q_u8</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{ushort}, Vector128{ushort})">vzip1q_u16</see>,<see cref="AdvSimd.Arm64.ZipHigh(Vector128{ushort}, Vector128{ushort})">vzip2q_u16</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{uint}, Vector128{uint})">vzip1q_u32</see>,<see cref="AdvSimd.Arm64.ZipHigh(Vector128{uint}, Vector128{uint})">vzip2q_u32</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.ZipLow(Vector128{ulong}, Vector128{ulong})">vzip1q_u64</see>,<see cref="AdvSimd.Arm64.ZipHigh(Vector128{ulong}, Vector128{ulong})">vzip2q_u64</see></description>
         ///    </item>
         ///    <item>
         ///        <term>Wasm</term>
@@ -843,10 +843,10 @@ namespace Zyl.VectorTraits.Impl {
         ///    </item>
         ///    <item>
         ///        <term>X86</term>
-        ///        <description><see cref="Sse2.UnpackLow(Vector128{byte}, Vector128{byte})">PUNPCKLBW(_mm_unpacklo_epi8)</see>/<see cref="Sse2.UnpackHigh(Vector128{byte}, Vector128{byte})">PUNPCKHBW(_mm_unpackhi_epi8)</see></description>
-        ///        <description><see cref="Sse2.UnpackLow(Vector128{ushort}, Vector128{ushort})">PUNPCKLWD(_mm_unpacklo_epi16)</see>/<see cref="Sse2.UnpackHigh(Vector128{ushort}, Vector128{ushort})">PUNPCKHWD(_mm_unpackhi_epi16)</see></description>
-        ///        <description><see cref="Sse2.UnpackLow(Vector128{uint}, Vector128{uint})">PUNPCKLDQ(_mm_unpacklo_epi32)</see>/<see cref="Sse2.UnpackHigh(Vector128{uint}, Vector128{uint})">PUNPCKHDQ(_mm_unpackhi_epi32)</see></description>
-        ///        <description><see cref="Sse2.UnpackLow(Vector128{ulong}, Vector128{ulong})">PUNPCKLQDQ(_mm_unpacklo_epi64)</see>/<see cref="Sse2.UnpackHigh(Vector128{ulong}, Vector128{ulong})">PUNPCKHQDQ(_mm_unpackhi_epi64)</see></description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{byte}, Vector128{byte})">_mm_unpacklo_epi8</see>,<see cref="Sse2.UnpackHigh(Vector128{byte}, Vector128{byte})">_mm_unpackhi_epi8</see>(Sse2)</description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{ushort}, Vector128{ushort})">_mm_unpacklo_epi16</see>,<see cref="Sse2.UnpackHigh(Vector128{ushort}, Vector128{ushort})">_mm_unpackhi_epi16</see>(Sse2)</description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{uint}, Vector128{uint})">_mm_unpacklo_epi32</see>,<see cref="Sse2.UnpackHigh(Vector128{uint}, Vector128{uint})">_mm_unpackhi_epi32</see>(Sse2)</description>
+        ///        <description><see cref="Sse2.UnpackLow(Vector128{ulong}, Vector128{ulong})">_mm_unpacklo_epi64</see>,<see cref="Sse2.UnpackHigh(Vector128{ulong}, Vector128{ulong})">_mm_unpackhi_epi64</see>(Sse2)</description>
         ///    </item>
         /// </list>
         /// </remarks>
@@ -3385,7 +3385,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, Vector128{byte}, Vector128{byte})">TBX(vqvtbx1q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, Vector128{byte}, Vector128{byte})">vqvtbx1q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -3399,13 +3399,11 @@ namespace Zyl.VectorTraits.Impl {
         ///    </item>
         ///    <item>
         ///        <term>X86</term>
-        ///        <description>Combine by <see cref="Ssse3.Shuffle(Vector128{byte}, Vector128{byte})">PSHUFB(_mm_shuffle_epi8)</see>
-        ///        /<see cref="Avx512Vbmi.VL.PermuteVar16x8(Vector128{byte}, Vector128{byte})">VPERMB(_mm128_permutevar16x8_epi8)</see></description>
-        ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar8x16(Vector128{ushort}, Vector128{ushort})">VPERMW(_mm128_permutevar8x16_epi16)</see></description>
-        ///        <description>Combine by <see cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})">VPERMD(_mm256_permutevar8x32_epi32)</see>
-        ///        /<see cref="Avx2.PermuteVar8x32(Vector256{float}, Vector256{int})">VPERMPS(_mm256_permutevar8x32_ps)</see></description>
-        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">VPERMQ(_mm256_permute4x64_pd)</see>
-        ///        /<see cref="Avx512F.VL.PermuteVar4x64(Vector256{double}, Vector256{long})">VPERMPD(_mm256_permute4x64_pd)</see></description>
+        ///        <description>Combine by <see cref="Ssse3.Shuffle(Vector128{byte}, Vector128{byte})">_mm_shuffle_epi8</see>(Ssse3)
+        ///        /<see cref="Avx512Vbmi.VL.PermuteVar16x8(Vector128{byte}, Vector128{byte})">_mm_permutexvar_epi8</see>(Avx512Vbmi)</description>
+        ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar8x16(Vector128{ushort}, Vector128{ushort})">_mm_permutexvar_epi16</see>(Avx512BW)</description>
+        ///        <description>Same combine by <see cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})">_mm256_permutevar8x32_epi32</see>(Avx2)</description>
+        ///        <description>Same combine by <see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">_mm256_permute4x64_pd</see>(Avx512F)</description>
         ///    </item>
         /// </list>
         /// </remarks>
@@ -3798,7 +3796,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">TBL(vqvtbl1q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">vqvtbl1q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -3812,13 +3810,10 @@ namespace Zyl.VectorTraits.Impl {
         ///    </item>
         ///    <item>
         ///        <term>X86</term>
-        ///        <description><see cref="Ssse3.Shuffle(Vector128{byte}, Vector128{byte})">PSHUFB(_mm_shuffle_epi8)</see>
-        ///        /<see cref="Avx512Vbmi.VL.PermuteVar16x8(Vector128{byte}, Vector128{byte})">VPERMB(_mm128_permutevar16x8_epi8)</see></description>
-        ///        <description><see cref="Avx512BW.VL.PermuteVar8x16(Vector128{ushort}, Vector128{ushort})">VPERMW(_mm128_permutevar8x16_epi16)</see></description>
-        ///        <description><see cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})">VPERMD(_mm256_permutevar8x32_epi32)</see>
-        ///        /<see cref="Avx2.PermuteVar8x32(Vector256{float}, Vector256{int})">VPERMPS(_mm256_permutevar8x32_ps)</see></description>
-        ///        <description><see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">VPERMQ(_mm256_permute4x64_pd)</see>
-        ///        /<see cref="Avx512F.VL.PermuteVar4x64(Vector256{double}, Vector256{long})">VPERMPD(_mm256_permute4x64_pd)</see></description>
+        ///        <description><see cref="Ssse3.Shuffle(Vector128{byte}, Vector128{byte})">_mm_shuffle_epi8</see>(Ssse3)</description>
+        ///        <description><see cref="Avx512BW.VL.PermuteVar8x16(Vector128{ushort}, Vector128{ushort})">_mm_permutexvar_epi16</see>(Avx512BW)</description>
+        ///        <description>Same <see cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})">_mm256_permutevar8x32_epi32</see>(Avx2)</description>
+        ///        <description>Same <see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">_mm256_permute4x64_pd</see>(Avx512F)</description>
         ///    </item>
         /// </list>
         /// </remarks>
@@ -4185,7 +4180,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBL(vqtbl2q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}}, Vector128{byte})">vqtbl2q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -4199,12 +4194,10 @@ namespace Zyl.VectorTraits.Impl {
         ///    </item>
         ///    <item>
         ///        <term>X86</term>
-        ///        <description>Combine by <see cref="Avx512Vbmi.VL.PermuteVar16x8x2(Vector128{byte}, Vector128{byte}, Vector128{byte})">VPERMI2B(_mm_permutex2var_epi8)</see></description>
-        ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar8x16x2(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})">VPERMI2W(_mm_permutex2var_epi16)</see></description>
-        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x32x2(Vector128{uint}, Vector128{uint}, Vector128{uint})">VPERMI2D(_mm_permutex2var_epi32)</see>
-        ///        /<see cref="Avx512F.VL.PermuteVar4x32x2(Vector128{float}, Vector128{int}, Vector128{float})">VPERMI2PS(_mm_permutex2var_ps)</see></description>
-        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar2x64x2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})">VPERMI2Q(_mm_permutex2var_epi64)</see>
-        ///        /<see cref="Avx512F.VL.PermuteVar2x64x2(Vector128{double}, Vector128{long}, Vector128{double})">VPERMI2PD(_mm_permutex2var_pd)</see></description>
+        ///        <description>Combine by <see cref="Avx512Vbmi.VL.PermuteVar16x8x2(Vector128{byte}, Vector128{byte}, Vector128{byte})">_mm_permutex2var_epi8</see>(Avx512Vbmi)</description>
+        ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar8x16x2(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})">_mm_permutex2var_epi16</see>(Avx512BW)</description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x32x2(Vector128{uint}, Vector128{uint}, Vector128{uint})">_mm_permutex2var_epi32</see>(Avx512F)</description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar2x64x2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})">_mm_permutex2var_epi64</see>(Avx512F)</description>
         ///    </item>
         /// </list>
         /// </remarks>
@@ -4370,7 +4363,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, ValueTuple{Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBX(vqtbx2q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, ValueTuple{Vector128{byte}, Vector128{byte}}, Vector128{byte})">vqtbx2q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -4384,12 +4377,10 @@ namespace Zyl.VectorTraits.Impl {
         ///    </item>
         ///    <item>
         ///        <term>X86</term>
-        ///        <description>Combine by <see cref="Avx512Vbmi.VL.PermuteVar16x8x2(Vector128{byte}, Vector128{byte}, Vector128{byte})">VPERMI2B(_mm_permutex2var_epi8)</see></description>
-        ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar8x16x2(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})">VPERMI2W(_mm_permutex2var_epi16)</see></description>
-        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x32x2(Vector128{uint}, Vector128{uint}, Vector128{uint})">VPERMI2D(_mm_permutex2var_epi32)</see>
-        ///        /<see cref="Avx512F.VL.PermuteVar4x32x2(Vector128{float}, Vector128{int}, Vector128{float})">VPERMI2PS(_mm_permutex2var_ps)</see></description>
-        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar2x64x2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})">VPERMI2Q(_mm_permutex2var_epi64)</see>
-        ///        /<see cref="Avx512F.VL.PermuteVar2x64x2(Vector128{double}, Vector128{long}, Vector128{double})">VPERMI2PD(_mm_permutex2var_pd)</see></description>
+        ///        <description>Combine by <see cref="Avx512Vbmi.VL.PermuteVar16x8x2(Vector128{byte}, Vector128{byte}, Vector128{byte})">_mm_permutex2var_epi8</see>(Avx512Vbmi)</description>
+        ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar8x16x2(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})">_mm_permutex2var_epi16</see>(Avx512BW)</description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x32x2(Vector128{uint}, Vector128{uint}, Vector128{uint})">_mm_permutex2var_epi32</see>(Avx512F)</description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar2x64x2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})">_mm_permutex2var_epi64</see>(Avx512F)</description>
         ///    </item>
         /// </list>
         /// </remarks>
@@ -4556,7 +4547,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBL(vqtbl2q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}}, Vector128{byte})">vqtbl2q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -4570,12 +4561,10 @@ namespace Zyl.VectorTraits.Impl {
         ///    </item>
         ///    <item>
         ///        <term>X86</term>
-        ///        <description><see cref="Avx512Vbmi.VL.PermuteVar16x8x2(Vector128{byte}, Vector128{byte}, Vector128{byte})">VPERMI2B(_mm_permutex2var_epi8)</see></description>
-        ///        <description><see cref="Avx512BW.VL.PermuteVar8x16x2(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})">VPERMI2W(_mm_permutex2var_epi16)</see></description>
-        ///        <description><see cref="Avx512F.VL.PermuteVar4x32x2(Vector128{uint}, Vector128{uint}, Vector128{uint})">VPERMI2D(_mm_permutex2var_epi32)</see>
-        ///        /<see cref="Avx512F.VL.PermuteVar4x32x2(Vector128{float}, Vector128{int}, Vector128{float})">VPERMI2PS(_mm_permutex2var_ps)</see></description>
-        ///        <description><see cref="Avx512F.VL.PermuteVar2x64x2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})">VPERMI2Q(_mm_permutex2var_epi64)</see>
-        ///        /<see cref="Avx512F.VL.PermuteVar2x64x2(Vector128{double}, Vector128{long}, Vector128{double})">VPERMI2PD(_mm_permutex2var_pd)</see></description>
+        ///        <description><see cref="Avx512Vbmi.VL.PermuteVar16x8x2(Vector128{byte}, Vector128{byte}, Vector128{byte})">_mm_permutex2var_epi8</see>(Avx512Vbmi)</description>
+        ///        <description><see cref="Avx512BW.VL.PermuteVar8x16x2(Vector128{ushort}, Vector128{ushort}, Vector128{ushort})">_mm_permutex2var_epi16</see>(Avx512BW)</description>
+        ///        <description><see cref="Avx512F.VL.PermuteVar4x32x2(Vector128{uint}, Vector128{uint}, Vector128{uint})">_mm_permutex2var_epi32</see>(Avx512F)</description>
+        ///        <description><see cref="Avx512F.VL.PermuteVar2x64x2(Vector128{ulong}, Vector128{ulong}, Vector128{ulong})">_mm_permutex2var_epi64</see>(Avx512F)</description>
         ///    </item>
         /// </list>
         /// </remarks>
@@ -4739,7 +4728,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBL(vqtbl3q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">vqtbl3q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -4924,7 +4913,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBX(vqtbx3q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">vqtbx3q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -5110,7 +5099,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBL(vqtbl3q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">vqtbl3q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -5293,7 +5282,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBL(vqtbl4q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">vqtbl4q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -5480,7 +5469,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBX(vqtbx4q_u8)</see></description>
+        ///        <description>Same <see cref="AdvSimd.Arm64.VectorTableLookupExtension(Vector128{byte}, ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">vqtbx4q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -5668,7 +5657,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">TBL(vqtbl4q_u8)</see></description>
+        ///        <description><see cref="AdvSimd.Arm64.VectorTableLookup(ValueTuple{Vector128{byte}, Vector128{byte}, Vector128{byte}, Vector128{byte}}, Vector128{byte})">vqtbl4q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
