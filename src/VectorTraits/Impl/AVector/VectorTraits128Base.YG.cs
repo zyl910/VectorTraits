@@ -19,6 +19,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 
         partial class Statics {
 #if NETCOREAPP3_0_OR_GREATER
+#if NET7_0_OR_GREATER
 
             /// <inheritdoc cref="IVectorTraits.YGroup1ToGroup3_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup1ToGroup3_AcceleratedTypes {
@@ -487,6 +488,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.ExAsVector();
             }
 
+#endif // NET7_0_OR_GREATER
             /// <inheritdoc cref="IVectorTraits.YGroup2Unzip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<T> YGroup2Unzip_Bit128<T>(Vector<T> data0, Vector<T> data1, out Vector<T> y) where T : struct {
@@ -500,6 +502,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.AsVector();
 #endif // EX_APPLY_GENERIC
             }
+#if NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IVectorTraits.YGroup2UnzipEven_AcceleratedTypes"/>
@@ -631,6 +634,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.ExAsVector();
             }
 
+#endif // NET7_0_OR_GREATER
             /// <inheritdoc cref="IVectorTraits.YGroup2Zip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<T> YGroup2Zip_Bit128<T>(Vector<T> x, Vector<T> y, out Vector<T> data1) where T : struct {
@@ -644,6 +648,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.AsVector();
 #endif // EX_APPLY_GENERIC
             }
+#if NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IVectorTraits.YGroup2ZipHigh_AcceleratedTypes"/>
@@ -939,6 +944,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.AsVector();
             }
 
+#endif // NET7_0_OR_GREATER
             /// <inheritdoc cref="IVectorTraits.YGroup3Unzip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<T> YGroup3Unzip_Bit128<T>(Vector<T> data0, Vector<T> data1, Vector<T> data2, out Vector<T> y, out Vector<T> z) where T : struct {
@@ -947,6 +953,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 z = a2.AsVector();
                 return a0.AsVector();
             }
+#if NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IVectorTraits.YGroup3UnzipX2_AcceleratedTypes"/>
@@ -1080,6 +1087,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.AsVector();
             }
 
+#endif // NET7_0_OR_GREATER
             /// <inheritdoc cref="IVectorTraits.YGroup3UnzipX2_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<T> YGroup3UnzipX2_Bit128<T>(Vector<T> data0, Vector<T> data1, Vector<T> data2, Vector<T> data3, Vector<T> data4, Vector<T> data5, out Vector<T> xB, out Vector<T> y, out Vector<T> yB, out Vector<T> z, out Vector<T> zB) where T : struct {
@@ -1091,6 +1099,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 zB = a5.AsVector();
                 return a0.AsVector();
             }
+#if NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IVectorTraits.YGroup3Zip_AcceleratedTypes"/>
@@ -1194,6 +1203,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.AsVector();
             }
 
+#endif // NET7_0_OR_GREATER
             /// <inheritdoc cref="IVectorTraits.YGroup3Zip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<T> YGroup3Zip_Bit128<T>(Vector<T> x, Vector<T> y, Vector<T> z, out Vector<T> data1, out Vector<T> data2) where T : struct {
@@ -1202,6 +1212,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 data2 = a2.AsVector();
                 return a0.AsVector();
             }
+#if NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IVectorTraits.YGroup3ZipX2_AcceleratedTypes"/>
@@ -1335,6 +1346,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.AsVector();
             }
 
+#endif // NET7_0_OR_GREATER
             /// <inheritdoc cref="IVectorTraits.YGroup3ZipX2_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<T> YGroup3ZipX2_Bit128<T>(Vector<T> x, Vector<T> xB, Vector<T> y, Vector<T> yB, Vector<T> z, Vector<T> zB, out Vector<T> data1, out Vector<T> data2, out Vector<T> data3, out Vector<T> data4, out Vector<T> data5) where T : struct {
@@ -1346,6 +1358,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 data5 = a5.AsVector();
                 return a0.AsVector();
             }
+#if NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3_AcceleratedTypes"/>
@@ -1509,6 +1522,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.ExAsVector();
             }
 
+#endif // NET7_0_OR_GREATER
             /// <inheritdoc cref="IVectorTraits.YGroup4Unzip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<T> YGroup4Unzip_Bit128<T>(Vector<T> data0, Vector<T> data1, Vector<T> data2, Vector<T> data3, out Vector<T> y, out Vector<T> z, out Vector<T> w) where T : struct {
@@ -1526,6 +1540,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 return a0.AsVector();
 #endif // EX_APPLY_GENERIC
             }
+#if NET7_0_OR_GREATER
 
 
             /// <inheritdoc cref="IVectorTraits.YGroup4Zip_AcceleratedTypes"/>
@@ -1586,6 +1601,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 data3 = a3.ExAsVector();
                 return a0.ExAsVector();
             }
+#endif // NET7_0_OR_GREATER
 
             /// <inheritdoc cref="IVectorTraits.YGroup4Zip_Bit128"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]

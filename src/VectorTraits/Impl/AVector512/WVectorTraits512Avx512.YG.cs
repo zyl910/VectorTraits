@@ -1831,14 +1831,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YGroup2UnzipOdd(Vector512<long> data0, Vector512<long> data1) {
-                return YGroup2UnzipOdd_Unpack(data0, data1);
+                return YGroup2UnzipOdd_Permute(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{ulong}, Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YGroup2UnzipOdd(Vector512<ulong> data0, Vector512<ulong> data1) {
-                return YGroup2UnzipOdd_Unpack(data0, data1);
+                return YGroup2UnzipOdd_Permute(data0, data1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2UnzipOdd(Vector512{ExInt128}, Vector512{ExInt128})"/>

@@ -2007,7 +2007,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                     return rt1;
                 }
 #else
-                return YGroup2UnzipEven_Basic(data0, data1);
+                return YGroup2Unzip_NarrowMul(data0, data1, out _);
 #endif // BCL_HAS_SHIFT
             }
 
@@ -2328,7 +2328,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
                     return rt0;
                 }
 #else
-                return YGroup2UnzipOdd_Basic(data0, data1);
+                _ = YGroup2Unzip_NarrowMul(data0, data1, out var rt1);
+                return rt1;
 #endif // BCL_HAS_SHIFT
             }
 
