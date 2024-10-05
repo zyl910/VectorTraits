@@ -482,6 +482,150 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven_AcceleratedTypes"/>
+        public override TypeCodeFlags YGroup2TransposeEven_AcceleratedTypes {
+            get {
+                return Statics.YGroup2TransposeEven_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> YGroup2TransposeEven(Vector256<float> data0, Vector256<float> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> YGroup2TransposeEven(Vector256<double> data0, Vector256<double> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> YGroup2TransposeEven(Vector256<sbyte> data0, Vector256<sbyte> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> YGroup2TransposeEven(Vector256<byte> data0, Vector256<byte> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> YGroup2TransposeEven(Vector256<short> data0, Vector256<short> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> YGroup2TransposeEven(Vector256<ushort> data0, Vector256<ushort> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YGroup2TransposeEven(Vector256<int> data0, Vector256<int> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> YGroup2TransposeEven(Vector256<uint> data0, Vector256<uint> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YGroup2TransposeEven(Vector256<long> data0, Vector256<long> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ulong> YGroup2TransposeEven(Vector256<ulong> data0, Vector256<ulong> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd_AcceleratedTypes"/>
+        public override TypeCodeFlags YGroup2TransposeOdd_AcceleratedTypes {
+            get {
+                return Statics.YGroup2TransposeOdd_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<float> YGroup2TransposeOdd(Vector256<float> data0, Vector256<float> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{double}, Vector256{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<double> YGroup2TransposeOdd(Vector256<double> data0, Vector256<double> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{sbyte}, Vector256{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<sbyte> YGroup2TransposeOdd(Vector256<sbyte> data0, Vector256<sbyte> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{byte}, Vector256{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<byte> YGroup2TransposeOdd(Vector256<byte> data0, Vector256<byte> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{short}, Vector256{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<short> YGroup2TransposeOdd(Vector256<short> data0, Vector256<short> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{ushort}, Vector256{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ushort> YGroup2TransposeOdd(Vector256<ushort> data0, Vector256<ushort> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{int}, Vector256{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<int> YGroup2TransposeOdd(Vector256<int> data0, Vector256<int> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{uint}, Vector256{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<uint> YGroup2TransposeOdd(Vector256<uint> data0, Vector256<uint> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{long}, Vector256{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<long> YGroup2TransposeOdd(Vector256<long> data0, Vector256<long> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeOdd(Vector256{ulong}, Vector256{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public override Vector256<ulong> YGroup2TransposeOdd(Vector256<ulong> data0, Vector256<ulong> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits256.YGroup2Unzip_AcceleratedTypes"/>
         public override TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
             get {

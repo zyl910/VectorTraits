@@ -548,6 +548,100 @@ namespace Zyl.VectorTraits.Impl {
 
 
         /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2TransposeEven</c> (运行 <c>YGroup2TransposeEven</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2TransposeEven + YGroup2TransposeOdd = YGroup2Transpose</c>. See more: <see cref="YGroup2Transpose_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2TransposeEven(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags YGroup2TransposeEven_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Transpose a 2*2 matrix and return a data in even positions (对2*2矩阵进行转置, 并返回偶数位置的数据).
+        /// Mnemonic: <c>rt[i] =: (0==(i&amp;1))?( x[i&amp;~1] ):( y[i&amp;~1] )</c>.
+        /// </summary>
+        /// <param name="data0">Part 0 of the vector data (向量数据的第0部分).</param>
+        /// <param name="data1">Part 1 of the vector data (向量数据的第1部分).</param>
+        /// <returns>Returns part 0 of the transposed data (返回转置后数据的第0部分).</returns>
+        /// <seealso cref="YGroup2TransposeEven_AcceleratedTypes"/>
+        Vector256<float> YGroup2TransposeEven(Vector256<float> data0, Vector256<float> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        Vector256<double> YGroup2TransposeEven(Vector256<double> data0, Vector256<double> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        Vector256<sbyte> YGroup2TransposeEven(Vector256<sbyte> data0, Vector256<sbyte> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        Vector256<byte> YGroup2TransposeEven(Vector256<byte> data0, Vector256<byte> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        Vector256<short> YGroup2TransposeEven(Vector256<short> data0, Vector256<short> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        Vector256<ushort> YGroup2TransposeEven(Vector256<ushort> data0, Vector256<ushort> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        Vector256<int> YGroup2TransposeEven(Vector256<int> data0, Vector256<int> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        Vector256<uint> YGroup2TransposeEven(Vector256<uint> data0, Vector256<uint> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        Vector256<long> YGroup2TransposeEven(Vector256<long> data0, Vector256<long> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeEven(Vector256{float}, Vector256{float})"/>
+        Vector256<ulong> YGroup2TransposeEven(Vector256<ulong> data0, Vector256<ulong> data1);
+
+
+        /// <summary>
+        /// Types with hardware acceleration when running <c>YGroup2TransposeOdd</c> (运行 <c>YGroup2TransposeOdd</c> 时具有硬件加速的类型).
+        /// </summary>
+        /// <remarks>
+        /// <para><c>YGroup2TransposeEven + YGroup2TransposeOdd = YGroup2Transpose</c>. See more: <see cref="YGroup2Transpose_AcceleratedTypes"/>.</para>
+        /// </remarks>
+        /// <seealso cref="YGroup2TransposeOdd(Vector256{byte}, Vector256{byte})"/>
+        TypeCodeFlags YGroup2TransposeOdd_AcceleratedTypes { get; }
+
+        /// <summary>
+        /// Transpose a 2*2 matrix and return a data in odd positions (对2*2矩阵进行转置, 并返回奇数位置的数据).
+        /// Mnemonic: <c>rt[i] =: (0==(i&amp;1))?( x[(i&amp;~1) + 1] ):( y[(i&amp;~1) + 1] )</c>.
+        /// </summary>
+        /// <param name="data0">A vector made of 2-element groups - Part 0 (由2元素组所组成的向量 - 第0部分).</param>
+        /// <param name="data1">A vector made of 2-element groups - Part 1 (由2元素组所组成的向量 - 第1部分).</param>
+        /// <returns>Returns part 1 of the transposed data (返回转置后数据的第1部分).</returns>
+        /// <seealso cref="YGroup2TransposeOdd_AcceleratedTypes"/>
+        Vector256<float> YGroup2TransposeOdd(Vector256<float> data0, Vector256<float> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<double> YGroup2TransposeOdd(Vector256<double> data0, Vector256<double> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<sbyte> YGroup2TransposeOdd(Vector256<sbyte> data0, Vector256<sbyte> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<byte> YGroup2TransposeOdd(Vector256<byte> data0, Vector256<byte> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<short> YGroup2TransposeOdd(Vector256<short> data0, Vector256<short> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<ushort> YGroup2TransposeOdd(Vector256<ushort> data0, Vector256<ushort> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<int> YGroup2TransposeOdd(Vector256<int> data0, Vector256<int> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<uint> YGroup2TransposeOdd(Vector256<uint> data0, Vector256<uint> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<long> YGroup2TransposeOdd(Vector256<long> data0, Vector256<long> data1);
+
+        /// <inheritdoc cref="YGroup2TransposeOdd(Vector256{float}, Vector256{float})"/>
+        Vector256<ulong> YGroup2TransposeOdd(Vector256<ulong> data0, Vector256<ulong> data1);
+
+
+        /// <summary>
         /// Types with hardware acceleration when running <c>YGroup2Unzip</c> (运行 <c>YGroup2Unzip</c> 时具有硬件加速的类型).
         /// </summary>
         /// <remarks>
