@@ -482,6 +482,150 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
         }
 
 
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YGroup2TransposeEven_AcceleratedTypes {
+            get {
+                return Statics.YGroup2TransposeEven_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{float}, Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<float> YGroup2TransposeEven(Vector512<float> data0, Vector512<float> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{double}, Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<double> YGroup2TransposeEven(Vector512<double> data0, Vector512<double> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<sbyte> YGroup2TransposeEven(Vector512<sbyte> data0, Vector512<sbyte> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{byte}, Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<byte> YGroup2TransposeEven(Vector512<byte> data0, Vector512<byte> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{short}, Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<short> YGroup2TransposeEven(Vector512<short> data0, Vector512<short> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<ushort> YGroup2TransposeEven(Vector512<ushort> data0, Vector512<ushort> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<int> YGroup2TransposeEven(Vector512<int> data0, Vector512<int> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<uint> YGroup2TransposeEven(Vector512<uint> data0, Vector512<uint> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<long> YGroup2TransposeEven(Vector512<long> data0, Vector512<long> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<ulong> YGroup2TransposeEven(Vector512<ulong> data0, Vector512<ulong> data1) {
+            return Statics.YGroup2TransposeEven(data0, data1);
+        }
+
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd_AcceleratedTypes"/>
+        public virtual TypeCodeFlags YGroup2TransposeOdd_AcceleratedTypes {
+            get {
+                return Statics.YGroup2TransposeOdd_AcceleratedTypes;
+            }
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{float}, Vector512{float})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<float> YGroup2TransposeOdd(Vector512<float> data0, Vector512<float> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{double}, Vector512{double})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<double> YGroup2TransposeOdd(Vector512<double> data0, Vector512<double> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{sbyte}, Vector512{sbyte})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<sbyte> YGroup2TransposeOdd(Vector512<sbyte> data0, Vector512<sbyte> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{byte}, Vector512{byte})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<byte> YGroup2TransposeOdd(Vector512<byte> data0, Vector512<byte> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{short}, Vector512{short})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<short> YGroup2TransposeOdd(Vector512<short> data0, Vector512<short> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{ushort}, Vector512{ushort})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<ushort> YGroup2TransposeOdd(Vector512<ushort> data0, Vector512<ushort> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{int}, Vector512{int})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<int> YGroup2TransposeOdd(Vector512<int> data0, Vector512<int> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{uint}, Vector512{uint})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<uint> YGroup2TransposeOdd(Vector512<uint> data0, Vector512<uint> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{long}, Vector512{long})"/>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<long> YGroup2TransposeOdd(Vector512<long> data0, Vector512<long> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+        /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{ulong}, Vector512{ulong})"/>
+        [CLSCompliant(false)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual Vector512<ulong> YGroup2TransposeOdd(Vector512<ulong> data0, Vector512<ulong> data1) {
+            return Statics.YGroup2TransposeOdd(data0, data1);
+        }
+
+
         /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip_AcceleratedTypes"/>
         public virtual TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
             get {

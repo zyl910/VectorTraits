@@ -937,6 +937,464 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             }
 
 
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup2TransposeEven_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{float}, Vector512{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<float> YGroup2TransposeEven(Vector512<float> data0, Vector512<float> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{double}, Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<double> YGroup2TransposeEven(Vector512<double> data0, Vector512<double> data1) {
+                return YGroup2TransposeEven_ShuffleXImm(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{sbyte}, Vector512{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<sbyte> YGroup2TransposeEven(Vector512<sbyte> data0, Vector512<sbyte> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{byte}, Vector512{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YGroup2TransposeEven(Vector512<byte> data0, Vector512<byte> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{short}, Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YGroup2TransposeEven(Vector512<short> data0, Vector512<short> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{ushort}, Vector512{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YGroup2TransposeEven(Vector512<ushort> data0, Vector512<ushort> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{int}, Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YGroup2TransposeEven(Vector512<int> data0, Vector512<int> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{uint}, Vector512{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YGroup2TransposeEven(Vector512<uint> data0, Vector512<uint> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{long}, Vector512{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YGroup2TransposeEven(Vector512<long> data0, Vector512<long> data1) {
+                return YGroup2TransposeEven_ShuffleXImm(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{ulong}, Vector512{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ulong> YGroup2TransposeEven(Vector512<ulong> data0, Vector512<ulong> data1) {
+                return YGroup2TransposeEven_ShuffleXImm(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{float}, Vector512{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<float> YGroup2TransposeEven_ShuffleX(Vector512<float> data0, Vector512<float> data1) {
+                return Avx512F.PermuteVar16x32x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt32_0.AsInt32(), data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{double}, Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<double> YGroup2TransposeEven_ShuffleX(Vector512<double> data0, Vector512<double> data1) {
+                return Avx512F.PermuteVar8x64x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt64_0.AsInt64(), data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{sbyte}, Vector512{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<sbyte> YGroup2TransposeEven_ShuffleX(Vector512<sbyte> data0, Vector512<sbyte> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0.AsByte(), data1.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{byte}, Vector512{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YGroup2TransposeEven_ShuffleX(Vector512<byte> data0, Vector512<byte> data1) {
+                return Avx512Vbmi.PermuteVar64x8x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_Byte_0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{short}, Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YGroup2TransposeEven_ShuffleX(Vector512<short> data0, Vector512<short> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0.AsUInt16(), data1.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{ushort}, Vector512{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YGroup2TransposeEven_ShuffleX(Vector512<ushort> data0, Vector512<ushort> data1) {
+                return Avx512BW.PermuteVar32x16x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt16_0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{int}, Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YGroup2TransposeEven_ShuffleX(Vector512<int> data0, Vector512<int> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0.AsUInt32(), data1.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{uint}, Vector512{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YGroup2TransposeEven_ShuffleX(Vector512<uint> data0, Vector512<uint> data1) {
+                return Avx512F.PermuteVar16x32x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt32_0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{long}, Vector512{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YGroup2TransposeEven_ShuffleX(Vector512<long> data0, Vector512<long> data1) {
+                return YGroup2TransposeEven_ShuffleX(data0.AsUInt64(), data1.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{ulong}, Vector512{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ulong> YGroup2TransposeEven_ShuffleX(Vector512<ulong> data0, Vector512<ulong> data1) {
+                return Avx512F.PermuteVar8x64x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt64_0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{float}, Vector512{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<float> YGroup2TransposeEven_ShuffleXImm(Vector512<float> data0, Vector512<float> data1) {
+                Vector512<float> a_0, a_1, b_0;
+                // 0 data0 x0 x1 x2 x3 data1 y0 y1 y2 y3
+                // 1 a_0 x0 x2 y0 y2 a_1 x1 x3 y1 y3
+                a_0 = Avx512F.Shuffle(data0, data1, (byte)ShuffleControlG4.XZXZ);
+                a_1 = Avx512F.Shuffle(data0, data1, (byte)ShuffleControlG4.YWYW);
+                // 2 b_0 x0 y0 x2 y2 b_1 x1 y1 x3 y3
+                b_0 = Avx512F.Shuffle(a_0, a_0, (byte)ShuffleControlG4.XZYW);
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{double}, Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<double> YGroup2TransposeEven_ShuffleXImm(Vector512<double> data0, Vector512<double> data1) {
+                return Avx512F.UnpackLow(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{sbyte}, Vector512{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<sbyte> YGroup2TransposeEven_ShuffleXImm(Vector512<sbyte> data0, Vector512<sbyte> data1) {
+                return YGroup2TransposeEven_ShuffleXImm(data0.AsByte(), data1.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{byte}, Vector512{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YGroup2TransposeEven_ShuffleXImm(Vector512<byte> data0, Vector512<byte> data1) {
+                Vector512<byte> a_0, a_1;
+                Vector512<ushort> b_0, b_1;
+                const byte ctl = (byte)ShuffleControlG4.XZYW;
+                // 0 data0 x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 data1 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 y13 y14 y15
+                // 1 a_0 x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 a_1 x8 y8 x9 y9 x10 y10 x11 y11 x12 y12 x13 y13 x14 y14 x15 y15
+                a_0 = Avx512BW.UnpackLow(data0, data1);
+                a_1 = Avx512BW.UnpackHigh(data0, data1);
+                // 2 b_0 x0 y0 x2 y2 x1 y1 x3 y3 x4 y4 x6 y6 x5 y5 x7 y7 b_1 x8 y8 x10 y10 x9 y9 x11 y11 x12 y12 x14 y14 x13 y13 x15 y15
+                b_0 = Avx512BW.ShuffleLow(a_0.AsUInt16(), ctl);
+                b_1 = Avx512BW.ShuffleLow(a_1.AsUInt16(), ctl);
+                b_0 = Avx512BW.ShuffleHigh(b_0, ctl);
+                b_1 = Avx512BW.ShuffleHigh(b_1, ctl);
+                // 3 a_1 x0 y0 x2 y2 x4 y4 x6 y6 x8 y8 x10 y10 x12 y12 x14 y14 a_1 x1 y1 x3 y3 x5 y5 x7 y7 x9 y9 x11 y11 x13 y13 x15 y15
+                a_0 = Avx512F.Shuffle(b_0.AsSingle(), b_1.AsSingle(), (byte)ShuffleControlG4.XZXZ).AsByte();
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{short}, Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YGroup2TransposeEven_ShuffleXImm(Vector512<short> data0, Vector512<short> data1) {
+                return YGroup2TransposeEven_ShuffleXImm(data0.AsUInt16(), data1.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{ushort}, Vector512{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YGroup2TransposeEven_ShuffleXImm(Vector512<ushort> data0, Vector512<ushort> data1) {
+                Vector512<ushort> a_0, a_1, b_0;
+                // 0 data0 x0 x1 x2 x3 x4 x5 x6 x7 data1 y0 y1 y2 y3 y4 y5 y6 y7
+                // 1 a_0 x0 y0 x1 y1 x2 y2 x3 y3 a_1 x4 y4 x5 y5 x6 y6 x7 y7
+                a_0 = Avx512BW.UnpackLow(data0, data1);
+                a_1 = Avx512BW.UnpackHigh(data0, data1);
+                // 2 b_0 x0 y0 x2 y2 x4 y4 x6 y6 b_1 x1 y1 x3 y3 x5 y5 x7 y7
+                b_0 = Avx512F.Shuffle(a_0.AsSingle(), a_1.AsSingle(), (byte)ShuffleControlG4.XZXZ).AsUInt16();
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{int}, Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YGroup2TransposeEven_ShuffleXImm(Vector512<int> data0, Vector512<int> data1) {
+                return YGroup2TransposeEven_ShuffleXImm(data0.AsSingle(), data1.AsSingle()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{uint}, Vector512{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YGroup2TransposeEven_ShuffleXImm(Vector512<uint> data0, Vector512<uint> data1) {
+                return YGroup2TransposeEven_ShuffleXImm(data0.AsSingle(), data1.AsSingle()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{long}, Vector512{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YGroup2TransposeEven_ShuffleXImm(Vector512<long> data0, Vector512<long> data1) {
+                return Avx512F.UnpackLow(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeEven(Vector512{ulong}, Vector512{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ulong> YGroup2TransposeEven_ShuffleXImm(Vector512<ulong> data0, Vector512<ulong> data1) {
+                return Avx512F.UnpackLow(data0, data1);
+            }
+
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup2TransposeOdd_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlagsUtil.AllTypes;
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{float}, Vector512{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<float> YGroup2TransposeOdd(Vector512<float> data0, Vector512<float> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{double}, Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<double> YGroup2TransposeOdd(Vector512<double> data0, Vector512<double> data1) {
+                return YGroup2TransposeOdd_ShuffleXImm(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{sbyte}, Vector512{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<sbyte> YGroup2TransposeOdd(Vector512<sbyte> data0, Vector512<sbyte> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{byte}, Vector512{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YGroup2TransposeOdd(Vector512<byte> data0, Vector512<byte> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{short}, Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YGroup2TransposeOdd(Vector512<short> data0, Vector512<short> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{ushort}, Vector512{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YGroup2TransposeOdd(Vector512<ushort> data0, Vector512<ushort> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{int}, Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YGroup2TransposeOdd(Vector512<int> data0, Vector512<int> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{uint}, Vector512{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YGroup2TransposeOdd(Vector512<uint> data0, Vector512<uint> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{long}, Vector512{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YGroup2TransposeOdd(Vector512<long> data0, Vector512<long> data1) {
+                return YGroup2TransposeOdd_ShuffleXImm(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{ulong}, Vector512{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ulong> YGroup2TransposeOdd(Vector512<ulong> data0, Vector512<ulong> data1) {
+                return YGroup2TransposeOdd_ShuffleXImm(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{float}, Vector512{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<float> YGroup2TransposeOdd_ShuffleX(Vector512<float> data0, Vector512<float> data1) {
+                return Avx512F.PermuteVar16x32x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt32_1.AsInt32(), data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{double}, Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<double> YGroup2TransposeOdd_ShuffleX(Vector512<double> data0, Vector512<double> data1) {
+                return Avx512F.PermuteVar8x64x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt64_1.AsInt64(), data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{sbyte}, Vector512{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<sbyte> YGroup2TransposeOdd_ShuffleX(Vector512<sbyte> data0, Vector512<sbyte> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0.AsByte(), data1.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{byte}, Vector512{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YGroup2TransposeOdd_ShuffleX(Vector512<byte> data0, Vector512<byte> data1) {
+                return Avx512Vbmi.PermuteVar64x8x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_Byte_1, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{short}, Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YGroup2TransposeOdd_ShuffleX(Vector512<short> data0, Vector512<short> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0.AsUInt16(), data1.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{ushort}, Vector512{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YGroup2TransposeOdd_ShuffleX(Vector512<ushort> data0, Vector512<ushort> data1) {
+                return Avx512BW.PermuteVar32x16x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt16_1, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{int}, Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YGroup2TransposeOdd_ShuffleX(Vector512<int> data0, Vector512<int> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0.AsUInt32(), data1.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{uint}, Vector512{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YGroup2TransposeOdd_ShuffleX(Vector512<uint> data0, Vector512<uint> data1) {
+                return Avx512F.PermuteVar16x32x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt32_1, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{long}, Vector512{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YGroup2TransposeOdd_ShuffleX(Vector512<long> data0, Vector512<long> data1) {
+                return YGroup2TransposeOdd_ShuffleX(data0.AsUInt64(), data1.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{ulong}, Vector512{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ulong> YGroup2TransposeOdd_ShuffleX(Vector512<ulong> data0, Vector512<ulong> data1) {
+                return Avx512F.PermuteVar8x64x2(data0, Vector512Constants.YGroup2Transpose_Shuffle_UInt64_1, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{float}, Vector512{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<float> YGroup2TransposeOdd_ShuffleXImm(Vector512<float> data0, Vector512<float> data1) {
+                Vector512<float> a_0, a_1, b_1;
+                // 0 data0 x0 x1 x2 x3 data1 y0 y1 y2 y3
+                // 1 a_0 x0 x2 y0 y2 a_1 x1 x3 y1 y3
+                a_0 = Avx512F.Shuffle(data0, data1, (byte)ShuffleControlG4.XZXZ);
+                a_1 = Avx512F.Shuffle(data0, data1, (byte)ShuffleControlG4.YWYW);
+                // 2 b_0 x0 y0 x2 y2 b_1 x1 y1 x3 y3
+                b_1 = Avx512F.Shuffle(a_1, a_1, (byte)ShuffleControlG4.XZYW);
+                return b_1;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{double}, Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<double> YGroup2TransposeOdd_ShuffleXImm(Vector512<double> data0, Vector512<double> data1) {
+                return Avx512F.UnpackHigh(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{sbyte}, Vector512{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<sbyte> YGroup2TransposeOdd_ShuffleXImm(Vector512<sbyte> data0, Vector512<sbyte> data1) {
+                return YGroup2TransposeOdd_ShuffleXImm(data0.AsByte(), data1.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{byte}, Vector512{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YGroup2TransposeOdd_ShuffleXImm(Vector512<byte> data0, Vector512<byte> data1) {
+                Vector512<byte> a_0, a_1;
+                Vector512<ushort> b_0, b_1;
+                const byte ctl = (byte)ShuffleControlG4.XZYW;
+                // 0 data0 x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 data1 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 y13 y14 y15
+                // 1 a_0 x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 a_1 x8 y8 x9 y9 x10 y10 x11 y11 x12 y12 x13 y13 x14 y14 x15 y15
+                a_0 = Avx512BW.UnpackLow(data0, data1);
+                a_1 = Avx512BW.UnpackHigh(data0, data1);
+                // 2 b_0 x0 y0 x2 y2 x1 y1 x3 y3 x4 y4 x6 y6 x5 y5 x7 y7 b_1 x8 y8 x10 y10 x9 y9 x11 y11 x12 y12 x14 y14 x13 y13 x15 y15
+                b_0 = Avx512BW.ShuffleLow(a_0.AsUInt16(), ctl);
+                b_1 = Avx512BW.ShuffleLow(a_1.AsUInt16(), ctl);
+                b_0 = Avx512BW.ShuffleHigh(b_0, ctl);
+                b_1 = Avx512BW.ShuffleHigh(b_1, ctl);
+                // 3 a_1 x0 y0 x2 y2 x4 y4 x6 y6 x8 y8 x10 y10 x12 y12 x14 y14 a_1 x1 y1 x3 y3 x5 y5 x7 y7 x9 y9 x11 y11 x13 y13 x15 y15
+                a_1 = Avx512F.Shuffle(b_0.AsSingle(), b_1.AsSingle(), (byte)ShuffleControlG4.YWYW).AsByte();
+                return a_1;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{short}, Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YGroup2TransposeOdd_ShuffleXImm(Vector512<short> data0, Vector512<short> data1) {
+                return YGroup2TransposeOdd_ShuffleXImm(data0.AsUInt16(), data1.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{ushort}, Vector512{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YGroup2TransposeOdd_ShuffleXImm(Vector512<ushort> data0, Vector512<ushort> data1) {
+                Vector512<ushort> a_0, a_1, b_1;
+                // 0 data0 x0 x1 x2 x3 x4 x5 x6 x7 data1 y0 y1 y2 y3 y4 y5 y6 y7
+                // 1 a_0 x0 y0 x1 y1 x2 y2 x3 y3 a_1 x4 y4 x5 y5 x6 y6 x7 y7
+                a_0 = Avx512BW.UnpackLow(data0, data1);
+                a_1 = Avx512BW.UnpackHigh(data0, data1);
+                // 2 b_0 x0 y0 x2 y2 x4 y4 x6 y6 b_1 x1 y1 x3 y3 x5 y5 x7 y7
+                b_1 = Avx512F.Shuffle(a_0.AsSingle(), a_1.AsSingle(), (byte)ShuffleControlG4.YWYW).AsUInt16();
+                return b_1;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{int}, Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YGroup2TransposeOdd_ShuffleXImm(Vector512<int> data0, Vector512<int> data1) {
+                return YGroup2TransposeOdd_ShuffleXImm(data0.AsSingle(), data1.AsSingle()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{uint}, Vector512{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YGroup2TransposeOdd_ShuffleXImm(Vector512<uint> data0, Vector512<uint> data1) {
+                return YGroup2TransposeOdd_ShuffleXImm(data0.AsSingle(), data1.AsSingle()).AsUInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{long}, Vector512{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YGroup2TransposeOdd_ShuffleXImm(Vector512<long> data0, Vector512<long> data1) {
+                return Avx512F.UnpackHigh(data0, data1);
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2TransposeOdd(Vector512{ulong}, Vector512{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ulong> YGroup2TransposeOdd_ShuffleXImm(Vector512<ulong> data0, Vector512<ulong> data1) {
+                return Avx512F.UnpackHigh(data0, data1);
+            }
+
+
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {
