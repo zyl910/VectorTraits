@@ -33,7 +33,7 @@ namespace Zyl.VectorTraits {
         private static readonly Vector<byte>[] MaskBitPosArray4B;
         /// <summary>Bit pos mask array - 8Byte (位偏移掩码的数组 - 8字节). e.g. 1, 2, 4, 8, 0x10 ...</summary>
         private static readonly Vector<byte>[] MaskBitPosArray8B;
-        /// <summary>Bit pos mask array - 8Byte (位偏移掩码的数组 - 16字节). e.g. 1, 2, 4, 8, 0x10 ...</summary>
+        /// <summary>Bit pos mask array - 16Byte (位偏移掩码的数组 - 16字节). e.g. 1, 2, 4, 8, 0x10 ...</summary>
         private static readonly Vector<byte>[] MaskBitPosArray16B;
         /// <summary>Bits mask array - 1Byte (位集掩码的数组 - 1字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
         private static readonly Vector<byte>[] MaskBitsArray1B;
@@ -43,7 +43,7 @@ namespace Zyl.VectorTraits {
         private static readonly Vector<byte>[] MaskBitsArray4B;
         /// <summary>Bits mask array - 8Byte (位集掩码的数组 - 8字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
         private static readonly Vector<byte>[] MaskBitsArray8B;
-        /// <summary>Bits mask array - 8Byte (位集掩码的数组 - 16字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
+        /// <summary>Bits mask array - 16Byte (位集掩码的数组 - 16字节). e.g. 0, 1, 3, 7, 0xF, 0x1F ...</summary>
         private static readonly Vector<byte>[] MaskBitsArray16B;
 
         /// <summary>

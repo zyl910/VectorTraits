@@ -10,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Zyl.VectorTraits.Extensions.SameW;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector;
 
 namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
 #if USED_NUNIT3
@@ -180,6 +181,29 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
                         }
                     }
                 }
+            }
+        }
+
+        [TestCase]
+        public void ShiftLeft_Bit32_OrTest() {
+            string funcName = "Base";
+            const int L = 32;
+            //ReadOnlySpan<Vector<ulong>> maskSpan = MemoryMarshal.Cast<Vector<byte>, Vector<ulong>>(Vectors<ulong>.GetMaskBitPosSpan());
+            //for (int i = 0; i < maskSpan.Length; i++) {
+            //    Console.WriteLine(VectorTextUtil.Format("[{0}]:\t{1}", i, maskSpan[i]));
+            //}
+            Vector<ulong>[] samples = {
+                Vectors<ulong>.Serial,
+                Vectors.CreateByDoubleLoop<ulong>(8, 1),
+                Vectors.CreateByDoubleLoop<ulong>(16, 1),
+                Vectors<ulong>.SerialNegative,
+            };
+            foreach (Vector<ulong> src in samples) {
+                Vector<ulong> expected, dst;
+                expected = Vectors.ShiftLeft_Const(src, L);
+                dst = VectorTraitsBase.Statics.ShiftLeft_Bit32_Or(src);
+                Console.WriteLine(VectorTextUtil.Format("{0}:\tvsrc={1}, expected={2}, dst={3}", funcName, src, expected, dst));
+                ClassicAssert.AreEqual(expected, dst, VectorTextUtil.Format("{0}:\tvsrc={1}, expected={2}, dst={3}", funcName, src, expected, dst));
             }
         }
 

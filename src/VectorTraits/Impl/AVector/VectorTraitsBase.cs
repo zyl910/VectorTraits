@@ -1798,6 +1798,84 @@ namespace Zyl.VectorTraits.Impl.AVector {
             //    return Vector.Multiply(value, m);
             //}
 
+            /// <inheritdoc cref="ShiftLeft_Bit32(Vector{ulong})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftLeft_Bit32(Vector<long> value) {
+                return ShiftLeft_Bit32(value.AsUInt64()).AsInt64();
+            }
+
+            /// <summary>
+            /// Shifts each element of a vector left by the 32 bit (将向量的每个元素左移32位).
+            /// </summary>
+            /// <param name="value">The vector whose elements are to be shifted (要移位其元素的向量).</param>
+            /// <returns>A vector whose elements where shifted left by 32 bit (每个元素的左移32位的一个向量).</returns>
+            /// <seealso cref="ShiftLeft_AcceleratedTypes"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ShiftLeft_Bit32(Vector<ulong> value) {
+#if NET7_0_OR_GREATER
+                return Vector.ShiftLeft(value, 32);
+#else
+                // ShiftLeft_Fast_Basic > ShiftLeft_Bit32_Or
+                return ShiftLeft_Fast_Basic(value, 32);
+                //return ShiftLeft_Bit32_Or(value);
+#endif
+            }
+
+            /// <inheritdoc cref="ShiftLeft_Bit32(Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> ShiftLeft_Bit32_Or(Vector<ulong> value) {
+                Vector<ulong> rt0, rt1, rt2, rt3, m0, m1, m2, m3;
+                ReadOnlySpan<Vector<byte>> maskSpan = Vectors<ulong>.GetMaskBitPosSpan();
+                ref Vector<ulong> pmask = ref Unsafe.As<Vector<byte>, Vector<ulong>>(ref Unsafe.AsRef(in maskSpan.GetPinnableReference()));
+                // bits 0~3
+                m0 = Unsafe.Add(ref pmask, 0); rt0 = Vector.BitwiseAnd(Vector.Equals(m0, Vector.BitwiseAnd(m0, value)), Unsafe.Add(ref pmask, 32));
+                m1 = Unsafe.Add(ref pmask, 1); rt1 = Vector.BitwiseAnd(Vector.Equals(m1, Vector.BitwiseAnd(m1, value)), Unsafe.Add(ref pmask, 33));
+                m2 = Unsafe.Add(ref pmask, 2); rt2 = Vector.BitwiseAnd(Vector.Equals(m2, Vector.BitwiseAnd(m2, value)), Unsafe.Add(ref pmask, 34));
+                m3 = Unsafe.Add(ref pmask, 3); rt3 = Vector.BitwiseAnd(Vector.Equals(m3, Vector.BitwiseAnd(m3, value)), Unsafe.Add(ref pmask, 35));
+                // bits 4~7
+                m0 = Unsafe.Add(ref pmask, 4); rt0 = Vector.BitwiseOr(rt0, Vector.BitwiseAnd(Vector.Equals(m0, Vector.BitwiseAnd(m0, value)), Unsafe.Add(ref pmask, 36)));
+                m1 = Unsafe.Add(ref pmask, 5); rt1 = Vector.BitwiseOr(rt1, Vector.BitwiseAnd(Vector.Equals(m1, Vector.BitwiseAnd(m1, value)), Unsafe.Add(ref pmask, 37)));
+                m2 = Unsafe.Add(ref pmask, 6); rt2 = Vector.BitwiseOr(rt2, Vector.BitwiseAnd(Vector.Equals(m2, Vector.BitwiseAnd(m2, value)), Unsafe.Add(ref pmask, 38)));
+                m3 = Unsafe.Add(ref pmask, 7); rt3 = Vector.BitwiseOr(rt3, Vector.BitwiseAnd(Vector.Equals(m3, Vector.BitwiseAnd(m3, value)), Unsafe.Add(ref pmask, 39)));
+                // bits 8~11
+                m0 = Unsafe.Add(ref pmask, 8); rt0 = Vector.BitwiseOr(rt0, Vector.BitwiseAnd(Vector.Equals(m0, Vector.BitwiseAnd(m0, value)), Unsafe.Add(ref pmask, 40)));
+                m1 = Unsafe.Add(ref pmask, 9); rt1 = Vector.BitwiseOr(rt1, Vector.BitwiseAnd(Vector.Equals(m1, Vector.BitwiseAnd(m1, value)), Unsafe.Add(ref pmask, 41)));
+                m2 = Unsafe.Add(ref pmask, 10); rt2 = Vector.BitwiseOr(rt2, Vector.BitwiseAnd(Vector.Equals(m2, Vector.BitwiseAnd(m2, value)), Unsafe.Add(ref pmask, 42)));
+                m3 = Unsafe.Add(ref pmask, 11); rt3 = Vector.BitwiseOr(rt3, Vector.BitwiseAnd(Vector.Equals(m3, Vector.BitwiseAnd(m3, value)), Unsafe.Add(ref pmask, 43)));
+                // bits 12~15
+                m0 = Unsafe.Add(ref pmask, 12); rt0 = Vector.BitwiseOr(rt0, Vector.BitwiseAnd(Vector.Equals(m0, Vector.BitwiseAnd(m0, value)), Unsafe.Add(ref pmask, 44)));
+                m1 = Unsafe.Add(ref pmask, 13); rt1 = Vector.BitwiseOr(rt1, Vector.BitwiseAnd(Vector.Equals(m1, Vector.BitwiseAnd(m1, value)), Unsafe.Add(ref pmask, 45)));
+                m2 = Unsafe.Add(ref pmask, 14); rt2 = Vector.BitwiseOr(rt2, Vector.BitwiseAnd(Vector.Equals(m2, Vector.BitwiseAnd(m2, value)), Unsafe.Add(ref pmask, 46)));
+                m3 = Unsafe.Add(ref pmask, 15); rt3 = Vector.BitwiseOr(rt3, Vector.BitwiseAnd(Vector.Equals(m3, Vector.BitwiseAnd(m3, value)), Unsafe.Add(ref pmask, 47)));
+                // bits 16~19
+                m0 = Unsafe.Add(ref pmask, 16); rt0 = Vector.BitwiseOr(rt0, Vector.BitwiseAnd(Vector.Equals(m0, Vector.BitwiseAnd(m0, value)), Unsafe.Add(ref pmask, 48)));
+                m1 = Unsafe.Add(ref pmask, 17); rt1 = Vector.BitwiseOr(rt1, Vector.BitwiseAnd(Vector.Equals(m1, Vector.BitwiseAnd(m1, value)), Unsafe.Add(ref pmask, 49)));
+                m2 = Unsafe.Add(ref pmask, 18); rt2 = Vector.BitwiseOr(rt2, Vector.BitwiseAnd(Vector.Equals(m2, Vector.BitwiseAnd(m2, value)), Unsafe.Add(ref pmask, 50)));
+                m3 = Unsafe.Add(ref pmask, 19); rt3 = Vector.BitwiseOr(rt3, Vector.BitwiseAnd(Vector.Equals(m3, Vector.BitwiseAnd(m3, value)), Unsafe.Add(ref pmask, 51)));
+                // bits 20~23
+                m0 = Unsafe.Add(ref pmask, 20); rt0 = Vector.BitwiseOr(rt0, Vector.BitwiseAnd(Vector.Equals(m0, Vector.BitwiseAnd(m0, value)), Unsafe.Add(ref pmask, 52)));
+                m1 = Unsafe.Add(ref pmask, 21); rt1 = Vector.BitwiseOr(rt1, Vector.BitwiseAnd(Vector.Equals(m1, Vector.BitwiseAnd(m1, value)), Unsafe.Add(ref pmask, 53)));
+                m2 = Unsafe.Add(ref pmask, 22); rt2 = Vector.BitwiseOr(rt2, Vector.BitwiseAnd(Vector.Equals(m2, Vector.BitwiseAnd(m2, value)), Unsafe.Add(ref pmask, 54)));
+                m3 = Unsafe.Add(ref pmask, 23); rt3 = Vector.BitwiseOr(rt3, Vector.BitwiseAnd(Vector.Equals(m3, Vector.BitwiseAnd(m3, value)), Unsafe.Add(ref pmask, 55)));
+                // bits 24~27
+                m0 = Unsafe.Add(ref pmask, 24); rt0 = Vector.BitwiseOr(rt0, Vector.BitwiseAnd(Vector.Equals(m0, Vector.BitwiseAnd(m0, value)), Unsafe.Add(ref pmask, 56)));
+                m1 = Unsafe.Add(ref pmask, 25); rt1 = Vector.BitwiseOr(rt1, Vector.BitwiseAnd(Vector.Equals(m1, Vector.BitwiseAnd(m1, value)), Unsafe.Add(ref pmask, 57)));
+                m2 = Unsafe.Add(ref pmask, 26); rt2 = Vector.BitwiseOr(rt2, Vector.BitwiseAnd(Vector.Equals(m2, Vector.BitwiseAnd(m2, value)), Unsafe.Add(ref pmask, 58)));
+                m3 = Unsafe.Add(ref pmask, 27); rt3 = Vector.BitwiseOr(rt3, Vector.BitwiseAnd(Vector.Equals(m3, Vector.BitwiseAnd(m3, value)), Unsafe.Add(ref pmask, 59)));
+                // bits 28~31
+                m0 = Unsafe.Add(ref pmask, 28); rt0 = Vector.BitwiseOr(rt0, Vector.BitwiseAnd(Vector.Equals(m0, Vector.BitwiseAnd(m0, value)), Unsafe.Add(ref pmask, 60)));
+                m1 = Unsafe.Add(ref pmask, 29); rt1 = Vector.BitwiseOr(rt1, Vector.BitwiseAnd(Vector.Equals(m1, Vector.BitwiseAnd(m1, value)), Unsafe.Add(ref pmask, 61)));
+                m2 = Unsafe.Add(ref pmask, 30); rt2 = Vector.BitwiseOr(rt2, Vector.BitwiseAnd(Vector.Equals(m2, Vector.BitwiseAnd(m2, value)), Unsafe.Add(ref pmask, 62)));
+                m3 = Unsafe.Add(ref pmask, 31); rt3 = Vector.BitwiseOr(rt3, Vector.BitwiseAnd(Vector.Equals(m3, Vector.BitwiseAnd(m3, value)), Unsafe.Add(ref pmask, 63)));
+                // Combine
+                rt0 = Vector.BitwiseOr(rt0, rt1);
+                rt2 = Vector.BitwiseOr(rt2, rt3);
+                rt0 = Vector.BitwiseOr(rt0, rt2);
+                return rt0;
+            }
+
 
             /// <inheritdoc cref="IVectorTraits.ShiftRightArithmetic_AcceleratedTypes"/>
             public static TypeCodeFlags ShiftRightArithmetic_AcceleratedTypes {
