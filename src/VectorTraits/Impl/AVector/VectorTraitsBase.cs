@@ -1823,6 +1823,12 @@ namespace Zyl.VectorTraits.Impl.AVector {
             }
 
             /// <inheritdoc cref="ShiftLeft_Bit32(Vector{ulong})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> ShiftLeft_Bit32_Or(Vector<long> value) {
+                return ShiftLeft_Bit32_Or(value.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="ShiftLeft_Bit32(Vector{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> ShiftLeft_Bit32_Or(Vector<ulong> value) {
