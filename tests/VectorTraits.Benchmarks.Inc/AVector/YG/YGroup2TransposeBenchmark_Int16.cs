@@ -393,10 +393,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 Volatile.Write(ref dstTMy, 0);
             }
             dstOn128 = StaticSum128Base_Shift(srcArray, srcArray.Length);
-            if (CheckMode) {
-                baselineOn128 = dstOn128;
-                BenchmarkUtil.WriteItem("# Sum128Base_Shift", string.Format("{0}", baselineOn128));
-            }
+            CheckResult128("Sum128Base_Shift");
         }
 
         /// <summary>
@@ -443,10 +440,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 Volatile.Write(ref dstTMy, 0);
             }
             dstOn128 = StaticSum128Base_Shuffle(srcArray, srcArray.Length);
-            if (CheckMode) {
-                baselineOn128 = dstOn128;
-                BenchmarkUtil.WriteItem("# Sum128Base_Shuffle", string.Format("{0}", baselineOn128));
-            }
+            CheckResult128("Sum128Base_Shuffle");
         }
 #endif // NET7_0_OR_GREATER
 
@@ -1151,10 +1145,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 Volatile.Write(ref dstTMy, 0);
             }
             dstOn256 = StaticSum256Base_Shift(srcArray, srcArray.Length);
-            if (CheckMode) {
-                baselineOn256 = dstOn256;
-                BenchmarkUtil.WriteItem("# Sum256Base_Shift", string.Format("{0}", baselineOn256));
-            }
+            CheckResult256("Sum256Base_Shift");
         }
 
         /// <summary>
@@ -1201,10 +1192,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 Volatile.Write(ref dstTMy, 0);
             }
             dstOn256 = StaticSum256Base_Shuffle(srcArray, srcArray.Length);
-            if (CheckMode) {
-                baselineOn256 = dstOn256;
-                BenchmarkUtil.WriteItem("# Sum256Base_Shuffle", string.Format("{0}", baselineOn256));
-            }
+            CheckResult256("Sum256Base_Shuffle");
         }
 #endif // NET7_0_OR_GREATER
 
@@ -1610,10 +1598,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 Volatile.Write(ref dstTMy, 0);
             }
             dstOn512 = StaticSum512Base_Shift(srcArray, srcArray.Length);
-            if (CheckMode) {
-                baselineOn512 = dstOn512;
-                BenchmarkUtil.WriteItem("# Sum512Base_Shift", string.Format("{0}", baselineOn512));
-            }
+            CheckResult512("Sum512Base_Shift");
         }
 
         /// <summary>
@@ -1660,10 +1645,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.YG {
                 Volatile.Write(ref dstTMy, 0);
             }
             dstOn512 = StaticSum512Base_Shuffle(srcArray, srcArray.Length);
-            if (CheckMode) {
-                baselineOn512 = dstOn512;
-                BenchmarkUtil.WriteItem("# Sum512Base_Shuffle", string.Format("{0}", baselineOn512));
-            }
+            CheckResult512("Sum512Base_Shuffle");
         }
 
         /// <summary>

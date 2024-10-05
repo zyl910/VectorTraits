@@ -1031,7 +1031,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
                 const int L = 32;
                 const ulong scaleMul = 1L << L;
                 const double scaleDiv = 1.0d / scaleMul;
-                Vector<ulong> vscaleMul = new Vector<ulong>(scaleMul);
+                //Vector<ulong> vscaleMul = new Vector<ulong>(scaleMul);
                 Vector<double> vscaleDiv = new Vector<double>(scaleDiv);
                 Vector<double> f_0;
                 Vector<ulong> a_0, a_1, b_0, b_1, c_0, c_1;
@@ -1044,7 +1044,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
                     a_1 = data0.AsUInt64();
                 }
                 // b_1 = Vector.ShiftLeft(a_1, L);
-                b_1 = Vector.Multiply(a_1, vscaleMul);
+                //b_1 = Vector.Multiply(a_1, vscaleMul);
+                b_1 = ShiftLeft_Fast_Basic(a_1, L);
+                //b_1 = ShiftLeft_Bit32_Or(a_1);
                 // b_0 = Vector.ShiftRightLogical(a_0, L);
                 b_0 = Vector.AndNot(a_0, mask); // Clears the low bits, which avoids floating-point rounding errors.
                 f_0 = Vector.ConvertToDouble(b_0);
