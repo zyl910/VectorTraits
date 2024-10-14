@@ -262,7 +262,7 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                     writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
                 }
             }
-            var funcList = Vector128s.GetSupportedMethodList<FuncIn2Out1<Vector128<T>>>("YGroup2Transpose_AlignRight", "YGroup2Transpose_Basic", "YGroup2Transpose_Shift", "YGroup2Transpose_Shuffle", "YGroup2Transpose_ShuffleX", "YGroup2Transpose_ShuffleXImm");
+            var funcList = Vector128s.GetSupportedMethodList<FuncIn2Out1<Vector128<T>>>("YGroup2Transpose_AlignRight", "YGroup2Transpose_Basic", "YGroup2Transpose_Move", "YGroup2Transpose_Shift", "YGroup2Transpose_ShiftByMul", "YGroup2Transpose_Shuffle", "YGroup2Transpose_ShuffleX", "YGroup2Transpose_ShuffleXImm", "YGroup2Transpose_Unpack");
             foreach (var func in funcList) {
                 writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
             }

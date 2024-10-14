@@ -840,11 +840,11 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{double}, Vector512{double}, out Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YGroup2Transpose_ShuffleXImm(Vector512<double> data0, Vector512<double> data1, out Vector512<double> result1) {
-                Vector512<double> a0, a1;
-                a0 = Avx512F.UnpackLow(data0, data1);
-                a1 = Avx512F.UnpackHigh(data0, data1);
-                result1 = a1;
-                return a0;
+                Vector512<double> a_0, a_1;
+                a_0 = Avx512F.Shuffle(data0, data1, (byte)ShuffleControlG2On512.XXXXXXXX);
+                a_1 = Avx512F.Shuffle(data0, data1, (byte)ShuffleControlG2On512.YYYYYYYY);
+                result1 = a_1;
+                return a_0;
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte})"/>
@@ -934,6 +934,131 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
                 var d0 = YGroup2Transpose_ShuffleXImm(data0.AsDouble(), data1.AsDouble(), out var d1);
                 result1 = d1.AsUInt64();
                 return d0.AsUInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<float> YGroup2Transpose_Unpack(Vector512<float> data0, Vector512<float> data1, out Vector512<float> result1) {
+                Vector512<float> a_0, a_1, b_0, b_1;
+                // 0 data0 x0 x1 x2 x3 data1 y0 y1 y2 y3
+                // 1 a_0 x0 y0 x1 y1 a_1 x2 y2 x3 y3 // Unpack:32
+                a_0 = Avx512F.UnpackLow(data0, data1);
+                a_1 = Avx512F.UnpackHigh(data0, data1);
+                // 2 b_0 x0 y0 x2 y2 b_1 x1 y1 x3 y3 // Unpack:64
+                b_0 = Avx512F.UnpackLow(a_0.AsDouble(), a_1.AsDouble()).AsSingle();
+                b_1 = Avx512F.UnpackHigh(a_0.AsDouble(), a_1.AsDouble()).AsSingle();
+                result1 = b_1;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{double}, Vector512{double}, out Vector512{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<double> YGroup2Transpose_Unpack(Vector512<double> data0, Vector512<double> data1, out Vector512<double> result1) {
+                Vector512<double> a_0, a_1;
+                a_0 = Avx512F.UnpackLow(data0, data1);
+                a_1 = Avx512F.UnpackHigh(data0, data1);
+                result1 = a_1;
+                return a_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<sbyte> YGroup2Transpose_Unpack(Vector512<sbyte> data0, Vector512<sbyte> data1, out Vector512<sbyte> result1) {
+                var d0 = YGroup2Transpose_Unpack(data0.AsByte(), data1.AsByte(), out var d1);
+                result1 = d1.AsSByte();
+                return d0.AsSByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{byte}, Vector512{byte}, out Vector512{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<byte> YGroup2Transpose_Unpack(Vector512<byte> data0, Vector512<byte> data1, out Vector512<byte> result1) {
+                Vector512<ushort> a_0, a_1, b_0, b_1;
+                // 0 data0 x0 x1 x2 x3 x4 x5 x6 x7 x8 x9 x10 x11 x12 x13 x14 x15 data1 y0 y1 y2 y3 y4 y5 y6 y7 y8 y9 y10 y11 y12 y13 y14 y15 
+                // 1 a_0 x0 y0 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 a_1 x8 y8 x9 y9 x10 y10 x11 y11 x12 y12 x13 y13 x14 y14 x15 y15 // Unpack:8
+                a_0 = Avx512BW.UnpackLow(data0, data1).AsUInt16();
+                a_1 = Avx512BW.UnpackHigh(data0, data1).AsUInt16();
+                // 2 b_0 x0 y0 x8 y8 x1 y1 x9 y9 x2 y2 x10 y10 x3 y3 x11 y11 b_1 x4 y4 x12 y12 x5 y5 x13 y13 x6 y6 x14 y14 x7 y7 x15 y15 // Unpack:16
+                b_0 = Avx512BW.UnpackLow(a_0, a_1);
+                b_1 = Avx512BW.UnpackHigh(a_0, a_1);
+                // 3 a_1 x0 y0 x4 y4 x8 y8 x12 y12 x1 y1 x5 y5 x9 y9 x13 y13 a_1 x2 y2 x6 y6 x10 y10 x14 y14 x3 y3 x7 y7 x11 y11 x15 y15 // Unpack:16
+                a_0 = Avx512BW.UnpackLow(b_0, b_1);
+                a_1 = Avx512BW.UnpackHigh(b_0, b_1);
+                // 4 b_0 x0 y0 x2 y2 x4 y4 x6 y6 x8 y8 x10 y10 x12 y12 x14 y14 b_1 x1 y1 x3 y3 x5 y5 x7 y7 x9 y9 x11 y11 x13 y13 x15 y15 // Unpack:16
+                b_0 = Avx512BW.UnpackLow(a_0, a_1);
+                b_1 = Avx512BW.UnpackHigh(a_0, a_1);
+                result1 = b_1.AsByte();
+                return b_0.AsByte();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{short}, Vector512{short}, out Vector512{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<short> YGroup2Transpose_Unpack(Vector512<short> data0, Vector512<short> data1, out Vector512<short> result1) {
+                var d0 = YGroup2Transpose_Unpack(data0.AsUInt16(), data1.AsUInt16(), out var d1);
+                result1 = d1.AsInt16();
+                return d0.AsInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{ushort}, Vector512{ushort}, out Vector512{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ushort> YGroup2Transpose_Unpack(Vector512<ushort> data0, Vector512<ushort> data1, out Vector512<ushort> result1) {
+                Vector512<uint> a_0, a_1, b_0, b_1;
+                // 0 data0 x0 x1 x2 x3 x4 x5 x6 x7 data1 y0 y1 y2 y3 y4 y5 y6 y7
+                // 1 a_0 x0 y0 x1 y1 x2 y2 x3 y3 a_1 x4 y4 x5 y5 x6 y6 x7 y7 // Unpack:16
+                a_0 = Avx512BW.UnpackLow(data0, data1).AsUInt32();
+                a_1 = Avx512BW.UnpackHigh(data0, data1).AsUInt32();
+                // 2 b_0 x0 y0 x4 y4 x1 y1 x5 y5 b_1 x2 y2 x6 y6 x3 y3 x7 y7 // Unpack:32
+                b_0 = Avx512F.UnpackLow(a_0, a_1);
+                b_1 = Avx512F.UnpackHigh(a_0, a_1);
+                // 3 a_0 x0 y0 x2 y2 x4 y4 x6 y6 a_1 x1 y1 x3 y3 x5 y5 x7 y7 // Unpack:32
+                a_0 = Avx512F.UnpackLow(b_0, b_1);
+                a_1 = Avx512F.UnpackHigh(b_0, b_1);
+                result1 = a_1.AsUInt16();
+                return a_0.AsUInt16();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{int}, Vector512{int}, out Vector512{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<int> YGroup2Transpose_Unpack(Vector512<int> data0, Vector512<int> data1, out Vector512<int> result1) {
+                var d0 = YGroup2Transpose_Unpack(data0.AsSingle(), data1.AsSingle(), out var d1);
+                result1 = d1.AsInt32();
+                return d0.AsInt32();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{uint}, Vector512{uint}, out Vector512{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<uint> YGroup2Transpose_Unpack(Vector512<uint> data0, Vector512<uint> data1, out Vector512<uint> result1) {
+                Vector512<uint> a_0, a_1, b_0, b_1;
+                // 0 data0 x0 x1 x2 x3 data1 y0 y1 y2 y3
+                // 1 a_0 x0 y0 x1 y1 a_1 x2 y2 x3 y3 // Unpack:32
+                a_0 = Avx512F.UnpackLow(data0, data1);
+                a_1 = Avx512F.UnpackHigh(data0, data1);
+                // 2 b_0 x0 y0 x2 y2 b_1 x1 y1 x3 y3 // Unpack:64
+                b_0 = Avx512F.UnpackLow(a_0.AsUInt64(), a_1.AsUInt64()).AsUInt32();
+                b_1 = Avx512F.UnpackHigh(a_0.AsUInt64(), a_1.AsUInt64()).AsUInt32();
+                result1 = b_1;
+                return b_0;
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{long}, Vector512{long}, out Vector512{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<long> YGroup2Transpose_Unpack(Vector512<long> data0, Vector512<long> data1, out Vector512<long> result1) {
+                var d0 = YGroup2Transpose_Unpack(data0.AsUInt64(), data1.AsUInt64(), out var d1);
+                result1 = d1.AsInt64();
+                return d0.AsInt64();
+            }
+
+            /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{ulong}, Vector512{ulong}, out Vector512{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector512<ulong> YGroup2Transpose_Unpack(Vector512<ulong> data0, Vector512<ulong> data1, out Vector512<ulong> result1) {
+                Vector512<ulong> a_0, a_1;
+                a_0 = Avx512F.UnpackLow(data0, data1);
+                a_1 = Avx512F.UnpackHigh(data0, data1);
+                result1 = a_1;
+                return a_0;
             }
 
 
