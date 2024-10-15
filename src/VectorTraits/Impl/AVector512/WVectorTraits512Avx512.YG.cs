@@ -492,7 +492,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{double}, Vector512{double}, out Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YGroup2Transpose(Vector512<double> data0, Vector512<double> data1, out Vector512<double> result1) {
-                return YGroup2Transpose_ShuffleXImm(data0, data1, out result1);
+                return YGroup2Transpose_Unpack(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{sbyte}, Vector512{sbyte}, out Vector512{sbyte})"/>
@@ -537,14 +537,14 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{long}, Vector512{long}, out Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YGroup2Transpose(Vector512<long> data0, Vector512<long> data1, out Vector512<long> result1) {
-                return YGroup2Transpose_ShuffleXImm(data0, data1, out result1);
+                return YGroup2Transpose_Unpack(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{ulong}, Vector512{ulong}, out Vector512{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YGroup2Transpose(Vector512<ulong> data0, Vector512<ulong> data1, out Vector512<ulong> result1) {
-                return YGroup2Transpose_ShuffleXImm(data0, data1, out result1);
+                return YGroup2Transpose_Unpack(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits512.YGroup2Transpose(Vector512{float}, Vector512{float}, out Vector512{float})"/>

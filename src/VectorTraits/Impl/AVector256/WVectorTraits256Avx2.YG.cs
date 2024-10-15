@@ -639,7 +639,7 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{double}, Vector256{double}, out Vector256{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<double> YGroup2Transpose(Vector256<double> data0, Vector256<double> data1, out Vector256<double> result1) {
-                return YGroup2Transpose_ShuffleXImm(data0, data1, out result1);
+                return YGroup2Transpose_Unpack(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{sbyte}, Vector256{sbyte}, out Vector256{sbyte})"/>
@@ -714,14 +714,14 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{long}, Vector256{long}, out Vector256{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<long> YGroup2Transpose(Vector256<long> data0, Vector256<long> data1, out Vector256<long> result1) {
-                return YGroup2Transpose_ShuffleXImm(data0, data1, out result1);
+                return YGroup2Transpose_Unpack(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{ulong}, Vector256{ulong}, out Vector256{ulong})"/>
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector256<ulong> YGroup2Transpose(Vector256<ulong> data0, Vector256<ulong> data1, out Vector256<ulong> result1) {
-                return YGroup2Transpose_ShuffleXImm(data0, data1, out result1);
+                return YGroup2Transpose_Unpack(data0, data1, out result1);
             }
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2Transpose(Vector256{float}, Vector256{float}, out Vector256{float})"/>
@@ -1243,7 +1243,6 @@ namespace Zyl.VectorTraits.Impl.AVector256 {
                 result1 = a_1;
                 return a_0;
             }
-
 
 
             /// <inheritdoc cref="IWVectorTraits256.YGroup2TransposeEven_AcceleratedTypes"/>
