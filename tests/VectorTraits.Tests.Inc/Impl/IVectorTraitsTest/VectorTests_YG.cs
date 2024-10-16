@@ -322,6 +322,148 @@ namespace Zyl.VectorTraits.Tests.Impl.IVectorTraitsTest {
         [TestCase((uint)8)]
         [TestCase((long)9)]
         [TestCase((ulong)10)]
+        public void YGroup2TransposeEvenTest<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup2TransposeEven_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<T>, Vector<T>>>("YGroup2TransposeEven_Basic", "YGroup2TransposeEven_Shift", "YGroup2TransposeEven_Shuffle", "YGroup2TransposeEven_ShuffleX", "YGroup2TransposeEven_ShuffleXImm");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
+            bool[] funcListUnsupported = new bool[funcList.Count];
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector<T> expected = Vectors.YGroup2TransposeEven((dynamic)data0, (dynamic)data1);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}", data0, data1, expected));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst = instance.YGroup2TransposeEven((dynamic)data0, (dynamic)data1);
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, data0, data1));
+                    }
+                    for (int f = 0; f < funcList.Count; f++) {
+                        if (funcListUnsupported[f]) continue;
+                        var func = funcList[f];
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        try {
+                            dst = func(data0, data1);
+                        } catch (NotSupportedException ex) {
+                            funcListUnsupported[f] = true;
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, data0, data1, ex.Message));
+                            continue;
+                        }
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, data0, data1));
+                    } // funcList
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
+        public void YGroup2TransposeOddTest<T>(T src) where T : struct {
+            TextWriter writer = Console.Out;
+            IReadOnlyList<IVectorTraits> instances = Vectors.TraitsInstances;
+            foreach (IVectorTraits instance in instances) {
+                if (instance.GetIsSupported(true)) {
+                    writer.WriteLine($"{instance.GetType().Name}: OK. {instance.YGroup2TransposeOdd_AcceleratedTypes}");
+                } else {
+                    writer.WriteLine($"{instance.GetType().Name}: {instance.GetUnsupportedMessage()}");
+                }
+            }
+            var funcList = Vectors.GetSupportedMethodList<Func<Vector<T>, Vector<T>, Vector<T>>>("YGroup2TransposeOdd_Basic", "YGroup2TransposeOdd_Shift", "YGroup2TransposeOdd_Shuffle", "YGroup2TransposeOdd_ShuffleX", "YGroup2TransposeOdd_ShuffleXImm");
+            foreach (var func in funcList) {
+                writer.WriteLine("{0}: OK", ReflectionUtil.GetShortNameWithType(func.Method));
+            }
+            if (!MyTestUtil.AllowDelegateMultiParam) funcList.Clear();
+            bool[] funcListUnsupported = new bool[funcList.Count];
+            writer.WriteLine();
+            // run.
+            Vector<T>[] samples = {
+                Vectors<T>.Serial,
+                Vectors<T>.SerialDesc,
+                Vectors<T>.SerialNegative,
+                Vectors.CreateByDoubleLoop<T>(Scalars.GetDoubleFrom(src), 1.0),
+                Vectors.CreateByDoubleLoop<T>(-Scalars.GetDoubleFrom(src), -1.0),
+            };
+            bool allowLog = false;
+            for (int i = 0; i < samples.Length; i++) {
+                Vector<T> data0 = samples[i];
+                for (int j = 0; j < samples.Length; j++) {
+                    if (j == i) continue;
+                    Vector<T> data1 = samples[j];
+                    Vector<T> dst;
+#pragma warning disable CS0618 // Type or member is obsolete
+                    Vector<T> expected = Vectors.YGroup2TransposeOdd((dynamic)data0, (dynamic)data1);
+                    if (allowLog && 0 == i && 1 == j) {
+                        writer.WriteLine(VectorTextUtil.Format("f({0}, {1}): {2}", data0, data1, expected));
+                    }
+                    foreach (IVectorTraits instance in instances) {
+                        if (!instance.GetIsSupported(true)) continue;
+                        string funcName = instance.GetType().Name;
+                        dst = instance.YGroup2TransposeOdd((dynamic)data0, (dynamic)data1);
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, data0, data1));
+                    }
+                    for (int f = 0; f < funcList.Count; f++) {
+                        if (funcListUnsupported[f]) continue;
+                        var func = funcList[f];
+                        string funcName = ReflectionUtil.GetShortNameWithType(func.Method);
+                        try {
+                            dst = func(data0, data1);
+                        } catch (NotSupportedException ex) {
+                            funcListUnsupported[f] = true;
+                            writer.WriteLine(VectorTextUtil.Format("NotSupportedException on {0}: {1}, {2}. {3}", funcName, data0, data1, ex.Message));
+                            continue;
+                        }
+                        ClassicAssert.IsTrue(expected.BitEquals(dst), VectorTextUtil.Format("{0} != {1}. {2}: {3}, {4}", expected, dst, funcName, data0, data1));
+                    } // funcList
+#pragma warning restore CS0618 // Type or member is obsolete
+                }
+            }
+        }
+
+        [TestCase((float)1)]
+        [TestCase((double)2)]
+        [TestCase((sbyte)3)]
+        [TestCase((byte)4)]
+        [TestCase((short)5)]
+        [TestCase((ushort)6)]
+        [TestCase((int)7)]
+        [TestCase((uint)8)]
+        [TestCase((long)9)]
+        [TestCase((ulong)10)]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExInt128))]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseExUInt128))]
         [TestCaseSource(typeof(TestDataSource), nameof(TestDataSource.UseInt128))]

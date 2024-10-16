@@ -1067,7 +1067,574 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #endif // VECTOR_HAS_METHOD
 
 
-            /// <inheritdoc cref="IVectorTraits.YGroup2Unzip_AcceleratedTypes"/>
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup2TransposeEven_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                    if (Vector.IsHardwareAccelerated) {
+                        rt = TypeCodeFlagsUtil.Most32Types;
+                    }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup2TransposeEven(Vector<float> data0, Vector<float> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeEven_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YGroup2TransposeEven(Vector<double> data0, Vector<double> data1) {
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup2TransposeEven(Vector<sbyte> data0, Vector<sbyte> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeEven_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup2TransposeEven(Vector<byte> data0, Vector<byte> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeEven_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup2TransposeEven(Vector<short> data0, Vector<short> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeEven_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup2TransposeEven(Vector<ushort> data0, Vector<ushort> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeEven_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup2TransposeEven(Vector<int> data0, Vector<int> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeEven_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup2TransposeEven(Vector<uint> data0, Vector<uint> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeEven_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup2TransposeEven(Vector<long> data0, Vector<long> data1) {
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup2TransposeEven(Vector<ulong> data0, Vector<ulong> data1) {
+                return YGroup2TransposeEven_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup2TransposeEven_Basic(Vector<float> data0, Vector<float> data1) {
+                return YGroup2TransposeEven_Basic(data0.AsUInt32(), data1.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YGroup2TransposeEven_Basic(Vector<double> data0, Vector<double> data1) {
+                return YGroup2TransposeEven_Basic(data0.AsUInt64(), data1.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup2TransposeEven_Basic(Vector<sbyte> data0, Vector<sbyte> data1) {
+                return YGroup2TransposeEven_Basic(data0.AsByte(), data1.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup2TransposeEven_Basic(Vector<byte> data0, Vector<byte> data1) {
+                UnsafeUtil.SkipInit(out Vector<byte> rt0);
+                ref byte px = ref Unsafe.As<Vector<byte>, byte>(ref data0);
+                ref byte py = ref Unsafe.As<Vector<byte>, byte>(ref data1);
+                ref byte q0 = ref Unsafe.As<Vector<byte>, byte>(ref rt0);
+                for (int i = 0; i < Vector<byte>.Count; i += 2) {
+                    q0 = px;
+                    Unsafe.Add(ref q0, 1) = py;
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q0 = ref Unsafe.Add(ref q0, 2);
+                }
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup2TransposeEven_Basic(Vector<short> data0, Vector<short> data1) {
+                return YGroup2TransposeEven_Basic(data0.AsUInt16(), data1.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup2TransposeEven_Basic(Vector<ushort> data0, Vector<ushort> data1) {
+                UnsafeUtil.SkipInit(out Vector<ushort> rt0);
+                ref ushort px = ref Unsafe.As<Vector<ushort>, ushort>(ref data0);
+                ref ushort py = ref Unsafe.As<Vector<ushort>, ushort>(ref data1);
+                ref ushort q0 = ref Unsafe.As<Vector<ushort>, ushort>(ref rt0);
+                for (int i = 0; i < Vector<ushort>.Count; i += 2) {
+                    q0 = px;
+                    Unsafe.Add(ref q0, 1) = py;
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q0 = ref Unsafe.Add(ref q0, 2);
+                }
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup2TransposeEven_Basic(Vector<int> data0, Vector<int> data1) {
+                return YGroup2TransposeEven_Basic(data0.AsUInt32(), data1.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup2TransposeEven_Basic(Vector<uint> data0, Vector<uint> data1) {
+                UnsafeUtil.SkipInit(out Vector<uint> rt0);
+                ref uint px = ref Unsafe.As<Vector<uint>, uint>(ref data0);
+                ref uint py = ref Unsafe.As<Vector<uint>, uint>(ref data1);
+                ref uint q0 = ref Unsafe.As<Vector<uint>, uint>(ref rt0);
+                for (int i = 0; i < Vector<uint>.Count; i += 2) {
+                    q0 = px;
+                    Unsafe.Add(ref q0, 1) = py;
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q0 = ref Unsafe.Add(ref q0, 2);
+                }
+                return rt0;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup2TransposeEven_Basic(Vector<long> data0, Vector<long> data1) {
+                return YGroup2TransposeEven_Basic(data0.AsUInt64(), data1.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup2TransposeEven_Basic(Vector<ulong> data0, Vector<ulong> data1) {
+                UnsafeUtil.SkipInit(out Vector<ulong> rt0);
+                ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref data0);
+                ref ulong py = ref Unsafe.As<Vector<ulong>, ulong>(ref data1);
+                ref ulong q0 = ref Unsafe.As<Vector<ulong>, ulong>(ref rt0);
+                for (int i = 0; i < Vector<ulong>.Count; i += 2) {
+                    q0 = px;
+                    Unsafe.Add(ref q0, 1) = py;
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q0 = ref Unsafe.Add(ref q0, 2);
+                }
+                return rt0;
+            }
+
+#if VECTOR_HAS_METHOD
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup2TransposeEven_Shift(Vector<float> data0, Vector<float> data1) {
+                return YGroup2TransposeEven_Shift(data0.AsUInt32(), data1.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup2TransposeEven_Shift(Vector<sbyte> data0, Vector<sbyte> data1) {
+                return YGroup2TransposeEven_Shift(data0.AsByte(), data1.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup2TransposeEven_Shift(Vector<byte> data0, Vector<byte> data1) {
+#if BCL_HAS_SHIFT
+                return YGroup2Transpose_Shift(data0, data1, out _);
+#else
+                return YGroup2Transpose_ShiftByMul(data0, data1, out _);
+#endif // BCL_HAS_SHIFT
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup2TransposeEven_Shift(Vector<short> data0, Vector<short> data1) {
+                return YGroup2TransposeEven_Shift(data0.AsUInt16(), data1.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup2TransposeEven_Shift(Vector<ushort> data0, Vector<ushort> data1) {
+#if BCL_HAS_SHIFT
+                return YGroup2Transpose_Shift(data0, data1, out _);
+#else
+                return YGroup2Transpose_ShiftByMul(data0, data1, out _);
+#endif // BCL_HAS_SHIFT
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup2TransposeEven_Shift(Vector<int> data0, Vector<int> data1) {
+                return YGroup2TransposeEven_Shift(data0.AsUInt32(), data1.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup2TransposeEven_Shift(Vector<uint> data0, Vector<uint> data1) {
+#if BCL_HAS_SHIFT
+                return YGroup2Transpose_Shift(data0, data1, out _);
+#else
+                return YGroup2Transpose_ShiftByMul(data0, data1, out _);
+#endif // BCL_HAS_SHIFT
+            }
+
+#endif // VECTOR_HAS_METHOD
+
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd_AcceleratedTypes"/>
+            public static TypeCodeFlags YGroup2TransposeOdd_AcceleratedTypes {
+                get {
+                    TypeCodeFlags rt = TypeCodeFlags.None;
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                    if (Vector.IsHardwareAccelerated) {
+                        rt = TypeCodeFlagsUtil.Most32Types;
+                    }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                    return rt;
+                }
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup2TransposeOdd(Vector<float> data0, Vector<float> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeOdd_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YGroup2TransposeOdd(Vector<double> data0, Vector<double> data1) {
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup2TransposeOdd(Vector<sbyte> data0, Vector<sbyte> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeOdd_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup2TransposeOdd(Vector<byte> data0, Vector<byte> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeOdd_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup2TransposeOdd(Vector<short> data0, Vector<short> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeOdd_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup2TransposeOdd(Vector<ushort> data0, Vector<ushort> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeOdd_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup2TransposeOdd(Vector<int> data0, Vector<int> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeOdd_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup2TransposeOdd(Vector<uint> data0, Vector<uint> data1) {
+#if BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                if (Vector.IsHardwareAccelerated) {
+                    return YGroup2TransposeOdd_Shift(data0, data1);
+                }
+#endif // BCL_OVERRIDE_BASE_VAR && VECTOR_HAS_METHOD
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup2TransposeOdd(Vector<long> data0, Vector<long> data1) {
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup2TransposeOdd(Vector<ulong> data0, Vector<ulong> data1) {
+                return YGroup2TransposeOdd_Basic(data0, data1);
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup2TransposeOdd_Basic(Vector<float> data0, Vector<float> data1) {
+                return YGroup2TransposeOdd_Basic(data0.AsUInt32(), data1.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{double}, Vector{double})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<double> YGroup2TransposeOdd_Basic(Vector<double> data0, Vector<double> data1) {
+                return YGroup2TransposeOdd_Basic(data0.AsUInt64(), data1.AsUInt64()).AsDouble();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup2TransposeOdd_Basic(Vector<sbyte> data0, Vector<sbyte> data1) {
+                return YGroup2TransposeOdd_Basic(data0.AsByte(), data1.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup2TransposeOdd_Basic(Vector<byte> data0, Vector<byte> data1) {
+                UnsafeUtil.SkipInit(out Vector<byte> rt1);
+                ref byte px = ref Unsafe.As<Vector<byte>, byte>(ref data0);
+                ref byte py = ref Unsafe.As<Vector<byte>, byte>(ref data1);
+                ref byte q1 = ref Unsafe.As<Vector<byte>, byte>(ref rt1);
+                for (int i = 0; i < Vector<byte>.Count; i += 2) {
+                    q1 = Unsafe.Add(ref px, 1);
+                    Unsafe.Add(ref q1, 1) = Unsafe.Add(ref py, 1);
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q1 = ref Unsafe.Add(ref q1, 2);
+                }
+                return rt1;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup2TransposeOdd_Basic(Vector<short> data0, Vector<short> data1) {
+                return YGroup2TransposeOdd_Basic(data0.AsUInt16(), data1.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup2TransposeOdd_Basic(Vector<ushort> data0, Vector<ushort> data1) {
+                UnsafeUtil.SkipInit(out Vector<ushort> rt1);
+                ref ushort px = ref Unsafe.As<Vector<ushort>, ushort>(ref data0);
+                ref ushort py = ref Unsafe.As<Vector<ushort>, ushort>(ref data1);
+                ref ushort q1 = ref Unsafe.As<Vector<ushort>, ushort>(ref rt1);
+                for (int i = 0; i < Vector<ushort>.Count; i += 2) {
+                    q1 = Unsafe.Add(ref px, 1);
+                    Unsafe.Add(ref q1, 1) = Unsafe.Add(ref py, 1);
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q1 = ref Unsafe.Add(ref q1, 2);
+                }
+                return rt1;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup2TransposeOdd_Basic(Vector<int> data0, Vector<int> data1) {
+                return YGroup2TransposeOdd_Basic(data0.AsUInt32(), data1.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup2TransposeOdd_Basic(Vector<uint> data0, Vector<uint> data1) {
+                UnsafeUtil.SkipInit(out Vector<uint> rt1);
+                ref uint px = ref Unsafe.As<Vector<uint>, uint>(ref data0);
+                ref uint py = ref Unsafe.As<Vector<uint>, uint>(ref data1);
+                ref uint q1 = ref Unsafe.As<Vector<uint>, uint>(ref rt1);
+                for (int i = 0; i < Vector<uint>.Count; i += 2) {
+                    q1 = Unsafe.Add(ref px, 1);
+                    Unsafe.Add(ref q1, 1) = Unsafe.Add(ref py, 1);
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q1 = ref Unsafe.Add(ref q1, 2);
+                }
+                return rt1;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{long}, Vector{long})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<long> YGroup2TransposeOdd_Basic(Vector<long> data0, Vector<long> data1) {
+                return YGroup2TransposeOdd_Basic(data0.AsUInt64(), data1.AsUInt64()).AsInt64();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{ulong}, Vector{ulong})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ulong> YGroup2TransposeOdd_Basic(Vector<ulong> data0, Vector<ulong> data1) {
+                UnsafeUtil.SkipInit(out Vector<ulong> rt1);
+                ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref data0);
+                ref ulong py = ref Unsafe.As<Vector<ulong>, ulong>(ref data1);
+                ref ulong q1 = ref Unsafe.As<Vector<ulong>, ulong>(ref rt1);
+                for (int i = 0; i < Vector<ulong>.Count; i += 2) {
+                    q1 = Unsafe.Add(ref px, 1);
+                    Unsafe.Add(ref q1, 1) = Unsafe.Add(ref py, 1);
+                    px = ref Unsafe.Add(ref px, 2);
+                    py = ref Unsafe.Add(ref py, 2);
+                    q1 = ref Unsafe.Add(ref q1, 2);
+                }
+                return rt1;
+            }
+
+#if VECTOR_HAS_METHOD
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{float}, Vector{float})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<float> YGroup2TransposeOdd_Shift(Vector<float> data0, Vector<float> data1) {
+                return YGroup2TransposeOdd_Shift(data0.AsUInt32(), data1.AsUInt32()).AsSingle();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{sbyte}, Vector{sbyte})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<sbyte> YGroup2TransposeOdd_Shift(Vector<sbyte> data0, Vector<sbyte> data1) {
+                return YGroup2TransposeOdd_Shift(data0.AsByte(), data1.AsByte()).AsSByte();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{byte}, Vector{byte})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<byte> YGroup2TransposeOdd_Shift(Vector<byte> data0, Vector<byte> data1) {
+#if BCL_HAS_SHIFT
+                _ = YGroup2Transpose_Shift(data0, data1, out var rt1);
+#else
+                _ = YGroup2Transpose_ShiftByMul(data0, data1, out var rt1);
+#endif // BCL_HAS_SHIFT
+                return rt1;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{short}, Vector{short})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<short> YGroup2TransposeOdd_Shift(Vector<short> data0, Vector<short> data1) {
+                return YGroup2TransposeOdd_Shift(data0.AsUInt16(), data1.AsUInt16()).AsInt16();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{ushort}, Vector{ushort})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<ushort> YGroup2TransposeOdd_Shift(Vector<ushort> data0, Vector<ushort> data1) {
+#if BCL_HAS_SHIFT
+                _ = YGroup2Transpose_Shift(data0, data1, out var rt1);
+#else
+                _ = YGroup2Transpose_ShiftByMul(data0, data1, out var rt1);
+#endif // BCL_HAS_SHIFT
+                return rt1;
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{int}, Vector{int})"/>
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<int> YGroup2TransposeOdd_Shift(Vector<int> data0, Vector<int> data1) {
+                return YGroup2TransposeOdd_Shift(data0.AsUInt32(), data1.AsUInt32()).AsInt32();
+            }
+
+            /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{uint}, Vector{uint})"/>
+            [CLSCompliant(false)]
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static Vector<uint> YGroup2TransposeOdd_Shift(Vector<uint> data0, Vector<uint> data1) {
+#if BCL_HAS_SHIFT
+                _ = YGroup2Transpose_Shift(data0, data1, out var rt1);
+#else
+                _ = YGroup2Transpose_ShiftByMul(data0, data1, out var rt1);
+#endif // BCL_HAS_SHIFT
+                return rt1;
+            }
+
+#endif // VECTOR_HAS_METHOD
+
+
+                /// <inheritdoc cref="IVectorTraits.YGroup2Unzip_AcceleratedTypes"/>
             public static TypeCodeFlags YGroup2Unzip_AcceleratedTypes {
                 get {
                     TypeCodeFlags rt = TypeCodeFlags.None;

@@ -554,6 +554,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <para><c>YGroup2TransposeEven + YGroup2TransposeOdd = YGroup2Transpose</c>. See more: <see cref="YGroup2Transpose_AcceleratedTypes"/>.</para>
         /// </remarks>
         /// <seealso cref="YGroup2TransposeEven(Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="YGroup2Transpose_AcceleratedTypes"/>
         TypeCodeFlags YGroup2TransposeEven_AcceleratedTypes { get; }
 
         /// <summary>
@@ -601,6 +602,7 @@ namespace Zyl.VectorTraits.Impl {
         /// <para><c>YGroup2TransposeEven + YGroup2TransposeOdd = YGroup2Transpose</c>. See more: <see cref="YGroup2Transpose_AcceleratedTypes"/>.</para>
         /// </remarks>
         /// <seealso cref="YGroup2TransposeOdd(Vector128{byte}, Vector128{byte})"/>
+        /// <seealso cref="YGroup2Transpose_AcceleratedTypes"/>
         TypeCodeFlags YGroup2TransposeOdd_AcceleratedTypes { get; }
 
         /// <summary>
