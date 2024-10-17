@@ -521,6 +521,9 @@ namespace UpdateBenchmarkResults.Service {
         private string ProcessFileBody(string rootPath, FileInfo fileInfo, string fileShortPath) {
             string message = string.Empty;
             string filePath = fileInfo.FullName;
+            //if (filePath.IndexOf("ConditionalSelect") >=0) {
+            //    Debugger.Break(); // [Debug]
+            //}
             // Load.
             string[] lines = ReadAllLines(filePath);
             // Parse.
@@ -805,9 +808,7 @@ namespace UpdateBenchmarkResults.Service {
                                 }
                                 inputFrameworkList.Clear();
                             }
-                        }
-                        if (cnt <= 2) { // New Architecture.
-                            if (null!= benchmarkArchitecture && string.Equals(benchmarkArchitecture.Title, ArchitectureFamily, comparisonType)) {
+                            if (null != benchmarkArchitecture && string.Equals(benchmarkArchitecture.Title, ArchitectureFamily, comparisonType)) {
                                 if (insertCpu) {
                                     m = string.Compare(title, SourceBaseName, comparisonType);
                                     if (m > 0) {
@@ -818,6 +819,18 @@ namespace UpdateBenchmarkResults.Service {
                                         }
                                         WriteFromInputCpu();
                                     }
+                                }
+                            }
+                        }
+                        if (cnt <= 2) { // New Architecture.
+                            if (null!= benchmarkArchitecture && string.Equals(benchmarkArchitecture.Title, ArchitectureFamily, comparisonType)) {
+                                if (insertCpu) {
+                                    insertCpu = false;
+                                    if (!lastIsEmpty) {
+                                        lastIsEmpty = true;
+                                        WriteFromInput();
+                                    }
+                                    WriteFromInputCpu();
                                 }
                             }
                             benchmarkCpu = null;
