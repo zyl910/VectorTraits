@@ -1,6 +1,11 @@
 ﻿# Benchmark - Widen
 ([← Back](README.md))
 
+See [Group](Widen_Group.md)
+
+- `Widen`: Widens a Vector into two Vector instances (将一个 Vector 扩宽为两个 Vector 实例).
+  Mnemonic: `element_ref(i, lower, upper) := widen(source[i])`.
+
 ## X86
 
 ### AMD Ryzen 7 7840H

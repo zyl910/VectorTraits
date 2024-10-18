@@ -1,6 +1,8 @@
 ﻿# Benchmark - ConvertToSingle
 ([← Back](README.md))
 
+See [Group](ConvertToSingle_Group.md)
+
 - `ConvertToInt32`: Convert to a vector whose elements are of type Int32 (转换为元素类型是Int32的向量).
   Mnemonic: `rt[i] := (Int32)(value[i])` .
 - `ConvertToSingle`: Convert to a vector whose elements are of type Single (转换为元素类型是Single的向量).

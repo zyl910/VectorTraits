@@ -1,6 +1,8 @@
 ﻿# Benchmark - ConvertToDouble
 ([← Back](README.md))
 
+See [Group](ConvertToDouble_Group.md)
+
 - `ConvertToDouble[/_Range52]`: Convert to a vector whose elements are of type Double (转换为元素类型是Double的向量).
   Mnemonic: `rt[i] := (Double)(value[i])` .
 - `ConvertToInt64[/_Range52/Range52RoundToEven]`: Convert to a vector whose elements are of type Int64 (转换为元素类型是Int64的向量).

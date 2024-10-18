@@ -2,6 +2,8 @@
 ([← Back](README.md))
 
 See [Group](ShiftRightLogical.md)
+- `ShiftRightLogical[/_Args/_Core/_Const/_ConstCore/_Fast]`: Shifts (unsigned) each element of a vector right by the specified amount (将向量的每个无符号元素逻辑右移指定量).
+  Mnemonic: `rt[i] := value[i] >>> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
 
 ## X86
 

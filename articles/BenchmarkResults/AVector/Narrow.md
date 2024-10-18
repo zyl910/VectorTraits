@@ -1,6 +1,11 @@
 ﻿# Benchmark - Narrow
 ([← Back](README.md))
 
+See [Group](Narrow_Group.md)
+
+- `Narrow`: Narrows two Vector instances into one Vector  (将两个 Vector 实例缩窄为一个 Vector ).
+  Mnemonic: `rt[i] := narrow(element_ref(i, lower, upper))`.
+
 ## X86
 
 ### AMD Ryzen 7 7840H

@@ -3,6 +3,9 @@
 
 See [Group](Multiply_Group.md)
 
+- `Multiply`: Multiplies two vectors to compute their element-wise product (将两个向量相乘来计算它们各元素的积).
+  Mnemonic: `rt[i] := left[i] * right[i]`.
+
 ## X86
 
 ### AMD Ryzen 7 7840H

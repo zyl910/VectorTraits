@@ -3,6 +3,9 @@
 
 See [Group](ShiftLeft_Group.md)
 
+- `ShiftLeft[/_Args/_Core/_Const/_ConstCore/_Fast]`: Shifts each element of a vector left by the specified amount (将向量的每个元素左移指定量).
+  Mnemonic: `rt[i] := value[i] << shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
+
 ## X86
 
 ### AMD Ryzen 7 7840H

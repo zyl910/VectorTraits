@@ -3,6 +3,9 @@
 
 See [Group](ShiftRightArithmetic_Group.md)
 
+- `ShiftRightArithmetic[/_Args/_Core/_Const/_ConstCore/_Fast]`: Shifts (signed) each element of a vector right by the specified amount (将向量的每个有符号元素算术右移指定量).
+  Mnemonic: `rt[i] := value[i] >> shiftAmount`, `shiftAmount &= (T.BitSize-1)`.
+
 ## X86
 
 ### AMD Ryzen 7 7840H

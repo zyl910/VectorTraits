@@ -1,6 +1,11 @@
 ﻿# Benchmark - YClamp
 ([← Back](README.md))
 
+See [Group](YClamp_Group.md)
+
+- `YClamp`: Computes the numerical clamp of each element in a vector (计算向量中每个元素的数值限制).
+  Mnemonic: `rt[i] := clamp(value[i], amin[i], amax[i]) = min(max(amin[i], value[i]), amax[i])` .
+
 ## X86
 
 ### AMD Ryzen 7 7840H
