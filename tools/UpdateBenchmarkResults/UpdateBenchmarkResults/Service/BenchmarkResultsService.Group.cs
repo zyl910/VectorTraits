@@ -267,6 +267,9 @@ namespace UpdateBenchmarkResults.Service {
             itemRow.AddRange(Enumerable.Repeat("", itemCountCommons));
             for (i = 0; i < benchmarkGroupFile.List.Count; ++i) {
                 dataPlatform = benchmarkGroupFile.List[i];
+                if (dataPlatform.List.Count<=0) {
+                    continue;
+                }
                 fieldNames = dataPlatform.FieldNames;
                 rtList.Add("### " + dataPlatform.Title);
                 // Fill itemWidths.

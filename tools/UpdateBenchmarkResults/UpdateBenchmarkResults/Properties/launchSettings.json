@@ -2,7 +2,7 @@
   "profiles": {
     "UpdateBenchmarkResults": {
       "commandName": "Project",
-      "commandLineArgs": "\"E:\\zylSelf\\Code\\cs\\base\\_Vector\\_WillTest\" \"-folder=E:\\zylSelf\\Code\\cs\\base\\VectorTraits\\articles\\BenchmarkResults\""
+      "commandLineArgs": "\"E:\\zylSelf\\Code\\cs\\base\\VectorTraits\\articles\\BenchmarkResultsRaw\" \"-folder=E:\\zylSelf\\Code\\cs\\base\\VectorTraits\\articles\\BenchmarkResults\""
     }
   }
 }
