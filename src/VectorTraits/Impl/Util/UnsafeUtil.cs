@@ -138,7 +138,7 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// <param name="origin">The reference to origin (指向源的托管指针).</param>
         /// <param name="target">The reference to target (指向目标的托管指针).</param>
         /// <returns>The offset from origin to target (从源到目标的偏移量). i.e. <c>target - origin</c>.</returns>
-        /// <seealso cref="Unsafe.ByteOffset{T}(ref T, ref T)"/>
+        /// <seealso cref="Unsafe.ByteOffset"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static nint GetOffset<T>(ref T origin, ref T target) {
             nint byteOffset = Unsafe.ByteOffset(ref origin, ref target);

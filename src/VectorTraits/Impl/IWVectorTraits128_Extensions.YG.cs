@@ -1871,7 +1871,6 @@ namespace Zyl.VectorTraits.Impl {
 #endif // BCL_TYPE_INT128
 
         /// <inheritdoc cref="Vector128s.YGroup4Unzip{T}(Vector128{T}, Vector128{T}, Vector128{T}, Vector128{T})"/>
-        /// <typeparam name="T">The element type of the input parameter (输入参数的元素类型).</typeparam>
         [CLSCompliant(false)]
         [Obsolete("It is only suitable for unit testing because it contains branching statements and has poor performance. In general, it is recommended to use the non-generic version of the methods (因它含有分支语句, 性能较差, 仅适用于单元测试. 一般情况下, 建议使用非泛型版方法).")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

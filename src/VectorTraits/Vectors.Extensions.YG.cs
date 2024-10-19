@@ -1771,7 +1771,6 @@ namespace Zyl.VectorTraits {
         /// <param name="data2">A vector made of 4-element groups - Part 2 (由4元素组所组成的向量 - 第2部分).</param>
         /// <param name="data3">A vector made of 4-element groups - Part 3 (由4元素组所组成的向量 - 第3部分).</param>
         /// <returns>Returns the converted data. (返回转换后数据).</returns>
-        /// <inheritdoc cref="IVectorTraits.YGroup4ToGroup3(Vector{float}, Vector{float}, Vector{float}, Vector{float}, out Vector{float}, out Vector{float})"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static (Vector<float> Result0, Vector<float> Result1, Vector<float> Result2) YGroup4ToGroup3(Vector<float> data0, Vector<float> data1, Vector<float> data2, Vector<float> data3) {
             var rt0 = YGroup4ToGroup3(data0, data1, data2, data3, out var rt1, out var rt2);

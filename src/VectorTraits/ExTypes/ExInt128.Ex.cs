@@ -37,16 +37,16 @@ namespace Zyl.VectorTraits.ExTypes {
 
 #if BCL_TYPE_INT128
 
-        /// <summary>Implicit converts a 128-bit unsigned integer to a <see cref="UUInt128" /> value.</summary>
+        /// <summary>Implicit converts a 128-bit unsigned integer to a <see cref="UInt128" /> value.</summary>
         /// <param name="value">The value to convert.</param>
-        /// <returns><paramref name="value" /> converted to a <see cref="UUInt128" />.</returns>
+        /// <returns><paramref name="value" /> converted to a <see cref="UInt128" />.</returns>
         [CLSCompliant(false)]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator UInt128(ExInt128 value) {
             return Unsafe.As<ExInt128, UInt128>(ref value);
         }
 
-        /// <summary>Implicit converts a <see cref="UUInt128" /> value to a 128-bit unsigned integer.</summary>
+        /// <summary>Implicit converts a <see cref="UInt128" /> value to a 128-bit unsigned integer.</summary>
         /// <param name="value">The value to convert.</param>
         /// <returns><paramref name="value" /> converted to a 128-bit unsigned integer.</returns>
         [CLSCompliant(false)]
