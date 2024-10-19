@@ -21,7 +21,7 @@ Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
 Environment.Version:	4.0.30319.42000
 Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
-RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9232.0
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9277.0
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
 IntPtr.Size:	8
@@ -29,7 +29,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks/bin/Release/Release/System.Numerics.Vectors.DLL
+Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
 VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
@@ -43,23 +43,23 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	6636.150	197.512
-SumClamp_IfUnrolling4	6037.909	217.082	1.099081
-SumClamp_MinMax	7138.703	183.608	0.929602
-SumClamp_MinMaxUnrolling4	6919.643	189.420	0.959031
-SumClamp_BitMath	3346.086	391.717	1.983257
-SumClamp_BitMathUnrolling4	3502.430	374.232	1.894727
+SumClamp_If	6525.960	200.847
+SumClamp_IfUnrolling4	6117.904	214.243	1.066699
+SumClamp_MinMax	7123.185	184.008	0.916158
+SumClamp_MinMaxUnrolling4	6796.903	192.841	0.960137
+SumClamp_BitMath	3043.319	430.688	2.144356
+SumClamp_BitMathUnrolling4	3494.178	375.115	1.867667
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	5966.297	219.687
-SumClamp_IfUnrolling4	5845.057	224.244	1.020742
-SumClamp_MinMax	6613.447	198.190	0.902146
-SumClamp_MinMaxUnrolling4	6391.809	205.062	0.933429
-SumClamp_BitMath	2515.922	520.970	2.371416
-SumClamp_BitMathUnrolling4	2532.692	517.520	2.355713
+SumClamp_If	5939.546	220.677
+SumClamp_IfUnrolling4	5619.760	233.234	1.056904
+SumClamp_MinMax	6402.801	204.710	0.927648
+SumClamp_MinMaxUnrolling4	6356.565	206.199	0.934396
+SumClamp_BitMath	2201.963	595.251	2.697387
+SumClamp_BitMathUnrolling4	2175.685	602.440	2.729966
 
 ```
 
@@ -98,27 +98,27 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	6160.754	212.753
-SumClamp_IfUnrolling4	5861.818	223.603	1.050997
-SumClamp_MinMax	6467.861	202.651	0.952518
-SumClamp_MinMaxUnrolling4	6350.276	206.404	0.970155
-SumClamp_Math	7666.108	170.976	0.803635
-SumClamp_MathUnrolling4	7197.620	182.105	0.855943
-SumClamp_BitMath	2791.498	469.540	2.206971
-SumClamp_BitMathUnrolling4	3349.437	391.325	1.839340
+SumClamp_If	6461.712	202.844
+SumClamp_IfUnrolling4	6251.810	209.654	1.033575
+SumClamp_MinMax	6852.774	191.269	0.942934
+SumClamp_MinMaxUnrolling4	6722.820	194.966	0.961161
+SumClamp_Math	7872.820	166.487	0.820762
+SumClamp_MathUnrolling4	7662.532	171.056	0.843287
+SumClamp_BitMath	3275.642	400.141	1.972655
+SumClamp_BitMathUnrolling4	3592.138	364.886	1.798849
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	5696.271	230.101
-SumClamp_IfUnrolling4	5459.618	240.075	1.043346
-SumClamp_MinMax	6200.901	211.376	0.918620
-SumClamp_MinMaxUnrolling4	6142.313	213.392	0.927382
-SumClamp_Math	6796.941	192.840	0.838064
-SumClamp_MathUnrolling4	6946.560	188.686	0.820013
-SumClamp_BitMath	2029.270	645.907	2.807055
-SumClamp_BitMathUnrolling4	1980.364	661.858	2.876376
+SumClamp_If	6081.458	215.527
+SumClamp_IfUnrolling4	5776.911	226.889	1.052718
+SumClamp_MinMax	6511.671	201.288	0.933932
+SumClamp_MinMaxUnrolling4	6437.907	203.594	0.944633
+SumClamp_Math	7610.356	172.228	0.799103
+SumClamp_MathUnrolling4	7405.953	176.982	0.821158
+SumClamp_BitMath	2358.603	555.719	2.578416
+SumClamp_BitMathUnrolling4	2404.738	545.057	2.528948
 
 ```
 
@@ -159,27 +159,27 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	6051.456	216.596
-SumClamp_IfUnrolling4	5854.498	223.883	1.033642
-SumClamp_MinMax	6491.442	201.915	0.932221
-SumClamp_MinMaxUnrolling4	6394.931	204.962	0.946289
-SumClamp_Math	6623.409	197.892	0.913647
-SumClamp_MathUnrolling4	6318.673	207.436	0.957710
-SumClamp_BitMath	3327.622	393.891	1.818553
-SumClamp_BitMathUnrolling4	2765.165	474.011	2.188461
+SumClamp_If	6587.070	198.984
+SumClamp_IfUnrolling4	6168.111	212.499	1.067923
+SumClamp_MinMax	7159.065	183.085	0.920102
+SumClamp_MinMaxUnrolling4	6688.293	195.972	0.984866
+SumClamp_Math	6928.485	189.178	0.950723
+SumClamp_MathUnrolling4	6576.418	199.306	1.001620
+SumClamp_BitMath	3592.495	364.850	1.833564
+SumClamp_BitMathUnrolling4	3187.272	411.236	2.066680
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	6012.268	218.008
-SumClamp_IfUnrolling4	5584.480	234.708	1.076603
-SumClamp_MinMax	6163.689	212.652	0.975433
-SumClamp_MinMaxUnrolling4	6058.613	216.340	0.992351
-SumClamp_Math	6305.263	207.877	0.953532
-SumClamp_MathUnrolling4	6112.293	214.440	0.983635
-SumClamp_BitMath	1992.352	657.876	3.017674
-SumClamp_BitMathUnrolling4	1911.162	685.824	3.145871
+SumClamp_If	6080.054	215.577
+SumClamp_IfUnrolling4	5938.524	220.715	1.023832
+SumClamp_MinMax	6749.904	194.184	0.900762
+SumClamp_MinMaxUnrolling4	6372.068	205.698	0.954173
+SumClamp_Math	6488.306	202.013	0.937079
+SumClamp_MathUnrolling4	6304.317	207.908	0.964427
+SumClamp_BitMath	2375.374	551.795	2.559619
+SumClamp_BitMathUnrolling4	2233.354	586.884	2.722387
 
 ```
 
@@ -221,27 +221,27 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	6580.930	199.169
-SumClamp_IfUnrolling4	6410.269	204.472	1.026623
-SumClamp_MinMax	7208.198	181.837	0.912979
-SumClamp_MinMaxUnrolling4	7182.915	182.477	0.916192
-SumClamp_Math	7087.901	184.924	0.928474
-SumClamp_MathUnrolling4	6746.019	194.295	0.975528
-SumClamp_BitMath	6804.232	192.633	0.967182
-SumClamp_BitMathUnrolling4	5596.932	234.185	1.175810
+SumClamp_If	6363.195	205.985
+SumClamp_IfUnrolling4	6183.721	211.963	1.029024
+SumClamp_MinMax	6912.799	189.608	0.920495
+SumClamp_MinMaxUnrolling4	6902.335	189.895	0.921890
+SumClamp_Math	6782.039	193.263	0.938242
+SumClamp_MathUnrolling4	6594.018	198.774	0.964995
+SumClamp_BitMath	6593.604	198.787	0.965056
+SumClamp_BitMathUnrolling4	5522.567	237.339	1.152217
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	6024.221	217.575
-SumClamp_IfUnrolling4	5898.482	222.213	1.021317
-SumClamp_MinMax	6554.455	199.974	0.919103
-SumClamp_MinMaxUnrolling4	6696.734	195.725	0.899576
-SumClamp_Math	6595.429	198.732	0.913393
-SumClamp_MathUnrolling4	6349.335	206.434	0.948796
-SumClamp_BitMath	5454.964	240.280	1.104356
-SumClamp_BitMathUnrolling4	4853.721	270.044	1.241155
+SumClamp_If	6310.224	207.714
+SumClamp_IfUnrolling4	5951.449	220.235	1.060284
+SumClamp_MinMax	6841.248	191.591	0.922379
+SumClamp_MinMaxUnrolling4	6706.567	195.438	0.940902
+SumClamp_Math	6429.251	203.868	0.981487
+SumClamp_MathUnrolling4	6383.038	205.344	0.988593
+SumClamp_BitMath	5331.742	245.833	1.183520
+SumClamp_BitMathUnrolling4	4633.261	282.894	1.361940
 
 ```
 
@@ -255,10 +255,10 @@ IsRelease:	True
 Environment.ProcessorCount:	16
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
-Environment.Version:	6.0.29
+Environment.Version:	6.0.33
 Stopwatch.Frequency:	10000000
-RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.29\
-RuntimeInformation.FrameworkDescription:	.NET 6.0.29
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.33\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.33
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
 RuntimeInformation.RuntimeIdentifier:	win10-x64
@@ -267,7 +267,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.29/System.Private.CoreLib.dll
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.33/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
 VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
@@ -283,27 +283,27 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	6806.397	192.572
-SumClamp_IfUnrolling4	6424.867	204.007	1.059383
-SumClamp_MinMax	7113.624	184.255	0.956811
-SumClamp_MinMaxUnrolling4	7065.020	185.522	0.963394
-SumClamp_Math	7165.360	182.925	0.949903
-SumClamp_MathUnrolling4	6814.141	192.353	0.998864
-SumClamp_BitMath	6397.697	204.874	1.063882
-SumClamp_BitMathUnrolling4	5387.744	243.278	1.263311
+SumClamp_If	6344.721	206.584
+SumClamp_IfUnrolling4	6154.448	212.971	1.030916
+SumClamp_MinMax	7337.908	178.623	0.864650
+SumClamp_MinMaxUnrolling4	6851.447	191.306	0.926041
+SumClamp_Math	6786.096	193.148	0.934959
+SumClamp_MathUnrolling4	6632.620	197.617	0.956593
+SumClamp_BitMath	6147.435	213.214	1.032092
+SumClamp_BitMathUnrolling4	5259.130	249.228	1.206420
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	6917.582	189.477
-SumClamp_IfUnrolling4	6139.759	213.481	1.126686
-SumClamp_MinMax	7103.246	184.524	0.973862
-SumClamp_MinMaxUnrolling4	7027.583	186.511	0.984347
-SumClamp_Math	6629.297	197.716	1.043487
-SumClamp_MathUnrolling4	6732.225	194.693	1.027533
-SumClamp_BitMath	5418.312	241.906	1.276704
-SumClamp_BitMathUnrolling4	4768.602	274.865	1.450652
+SumClamp_If	6616.016	198.113
+SumClamp_IfUnrolling4	5843.225	224.314	1.132254
+SumClamp_MinMax	6943.124	188.780	0.952887
+SumClamp_MinMaxUnrolling4	6643.633	197.290	0.995843
+SumClamp_Math	6571.752	199.448	1.006736
+SumClamp_MathUnrolling4	6340.283	206.729	1.043489
+SumClamp_BitMath	5347.109	245.127	1.237307
+SumClamp_BitMathUnrolling4	4591.586	285.461	1.440900
 
 ```
 
@@ -317,10 +317,10 @@ IsRelease:	True
 Environment.ProcessorCount:	16
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
-Environment.Version:	7.0.18
+Environment.Version:	7.0.20
 Stopwatch.Frequency:	10000000
-RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.18\
-RuntimeInformation.FrameworkDescription:	.NET 7.0.18
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.20\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.20
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
 RuntimeInformation.RuntimeIdentifier:	win10-x64
@@ -331,7 +331,7 @@ Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
 Vector128.IsHardwareAccelerated:	True
 Vector256.IsHardwareAccelerated:	True
-Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.18/System.Private.CoreLib.dll
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.20/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
 VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
@@ -347,27 +347,27 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	5771.577	227.099
-SumClamp_IfUnrolling4	5556.635	235.884	1.038682
-SumClamp_MinMax	6445.581	203.352	0.895432
-SumClamp_MinMaxUnrolling4	6603.622	198.485	0.874002
-SumClamp_Math	6478.686	202.313	0.890856
-SumClamp_MathUnrolling4	5938.468	220.717	0.971897
-SumClamp_BitMath	3525.115	371.823	1.637273
-SumClamp_BitMathUnrolling4	3484.233	376.186	1.656484
+SumClamp_If	6144.704	213.309
+SumClamp_IfUnrolling4	5805.339	225.778	1.058457
+SumClamp_MinMax	6613.260	198.196	0.929149
+SumClamp_MinMaxUnrolling4	6703.717	195.521	0.916611
+SumClamp_Math	6597.095	198.681	0.931426
+SumClamp_MathUnrolling4	6134.498	213.664	1.001664
+SumClamp_BitMath	3764.236	348.203	1.632390
+SumClamp_BitMathUnrolling4	3761.571	348.450	1.633547
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	5607.683	233.736
-SumClamp_IfUnrolling4	5264.353	248.980	1.065218
-SumClamp_MinMax	6044.594	216.842	0.927719
-SumClamp_MinMaxUnrolling4	5909.813	221.787	0.948877
-SumClamp_Math	5933.810	220.890	0.945039
-SumClamp_MathUnrolling4	5611.541	233.576	0.999313
-SumClamp_BitMath	2351.279	557.450	2.384950
-SumClamp_BitMathUnrolling4	2328.591	562.881	2.408187
+SumClamp_If	5838.830	224.483
+SumClamp_IfUnrolling4	5499.829	238.320	1.061638
+SumClamp_MinMax	6239.450	210.070	0.935792
+SumClamp_MinMaxUnrolling4	6373.527	205.651	0.916107
+SumClamp_Math	6436.756	203.631	0.907108
+SumClamp_MathUnrolling4	5839.913	224.442	0.999815
+SumClamp_BitMath	2718.824	482.091	2.147557
+SumClamp_BitMathUnrolling4	2688.711	487.490	2.171609
 
 ```
 
@@ -381,10 +381,10 @@ IsRelease:	True
 Environment.ProcessorCount:	16
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
-Environment.Version:	8.0.4
+Environment.Version:	8.0.8
 Stopwatch.Frequency:	10000000
-RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.4\
-RuntimeInformation.FrameworkDescription:	.NET 8.0.4
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.8\
+RuntimeInformation.FrameworkDescription:	.NET 8.0.8
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
 RuntimeInformation.RuntimeIdentifier:	win-x64
@@ -396,7 +396,7 @@ Vector<float>.Count:	8	# 256bit
 Vector128.IsHardwareAccelerated:	True
 Vector256.IsHardwareAccelerated:	True
 Vector512.IsHardwareAccelerated:	True
-Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.4/System.Private.CoreLib.dll
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.8/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
 VectorTraitsGlobal.InitCheckSum:	-2122844161	# 0x8177F7FF
@@ -413,27 +413,27 @@ Vectors.BaseInstance:	VectorTraits256Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	5821.118	225.166
-SumClamp_IfUnrolling4	5585.104	234.681	1.042258
-SumClamp_MinMax	6198.299	211.464	0.939148
-SumClamp_MinMaxUnrolling4	6187.332	211.839	0.940812
-SumClamp_Math	5837.308	224.542	0.997226
-SumClamp_MathUnrolling4	5872.685	223.189	0.991219
-SumClamp_BitMath	2033.664	644.511	2.862379
-SumClamp_BitMathUnrolling4	2014.526	650.635	2.889572
+SumClamp_If	5902.928	222.046
+SumClamp_IfUnrolling4	6005.248	218.262	0.982962
+SumClamp_MinMax	6534.867	200.573	0.903297
+SumClamp_MinMaxUnrolling4	6665.010	196.657	0.885659
+SumClamp_Math	6815.538	192.314	0.866099
+SumClamp_MathUnrolling4	6126.906	213.929	0.963444
+SumClamp_BitMath	2500.605	524.161	2.360600
+SumClamp_BitMathUnrolling4	2540.442	515.942	2.323582
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	5400.621	242.698
-SumClamp_IfUnrolling4	5455.419	240.260	0.989955
-SumClamp_MinMax	6107.529	214.607	0.884256
-SumClamp_MinMaxUnrolling4	6013.231	217.973	0.898123
-SumClamp_Math	6165.024	212.606	0.876010
-SumClamp_MathUnrolling4	5712.176	229.461	0.945458
-SumClamp_BitMath	1475.568	888.281	3.660028
-SumClamp_BitMathUnrolling4	1425.584	919.427	3.788358
+SumClamp_If	5600.774	234.025
+SumClamp_IfUnrolling4	5756.265	227.703	0.972987
+SumClamp_MinMax	6988.506	187.554	0.801426
+SumClamp_MinMaxUnrolling4	6379.493	205.458	0.877934
+SumClamp_Math	5966.148	219.693	0.938759
+SumClamp_MathUnrolling4	5711.469	229.489	0.980619
+SumClamp_BitMath	1786.346	733.743	3.135323
+SumClamp_BitMathUnrolling4	1742.071	752.392	3.215008
 
 ```
 
@@ -803,6 +803,197 @@ SumClamp_BitMathUnrolling4	2428.114	539.810	2.448672
 
 ## Arm
 
+### Apple M2
+`Apple M2`
+
+#### .NET 6.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 15.0.1
+Environment.Version:	6.0.33
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/usr/local/share/dotnet/shared/Microsoft.NETCore.App/6.0.33/
+RuntimeInformation.FrameworkDescription:	.NET 6.0.33
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Darwin 24.0.0 Darwin Kernel Version 24.0.0: Tue Sep 24 23:37:13 PDT 2024; root:xnu-11215.1.12~1/RELEASE_ARM64_T8112
+RuntimeInformation.RuntimeIdentifier:	osx.15-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector<T>.Assembly.CodeBase:	file:///usr/local/share/dotnet/shared/Microsoft.NETCore.App/6.0.33/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Apple M2
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, ArmBase, Crc32
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	4907.773	267.070
+SumClamp_IfUnrolling4	4717.896	277.819	1.040246
+SumClamp_MinMax	5715.134	229.342	0.858733
+SumClamp_MinMaxUnrolling4	5396.101	242.901	0.909504
+SumClamp_Math	5486.060	238.918	0.894590
+SumClamp_MathUnrolling4	5161.372	253.948	0.950866
+SumClamp_BitMath	2021.048	648.535	2.428331
+SumClamp_BitMathUnrolling4	2015.749	650.240	2.434715
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	4889.574	268.064
+SumClamp_IfUnrolling4	4659.474	281.302	1.049383
+SumClamp_MinMax	5575.672	235.078	0.876948
+SumClamp_MinMaxUnrolling4	5317.907	246.473	0.919455
+SumClamp_Math	5655.775	231.749	0.864528
+SumClamp_MathUnrolling4	5093.088	257.353	0.960041
+SumClamp_BitMath	1395.342	939.354	3.504212
+SumClamp_BitMathUnrolling4	1340.001	978.149	3.648934
+
+```
+
+#### .NET 7.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 15.0.1
+Environment.Version:	7.0.20
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/usr/local/share/dotnet/shared/Microsoft.NETCore.App/7.0.20/
+RuntimeInformation.FrameworkDescription:	.NET 7.0.20
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Darwin 24.0.0 Darwin Kernel Version 24.0.0: Tue Sep 24 23:37:13 PDT 2024; root:xnu-11215.1.12~1/RELEASE_ARM64_T8112
+RuntimeInformation.RuntimeIdentifier:	osx.15-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	file:///usr/local/share/dotnet/shared/Microsoft.NETCore.App/7.0.20/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Apple M2
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Dp, Rdm, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	4300.084	304.813
+SumClamp_IfUnrolling4	4183.756	313.288	1.027805
+SumClamp_MinMax	4965.818	263.948	0.865937
+SumClamp_MinMaxUnrolling4	4907.687	267.075	0.876194
+SumClamp_Math	4706.018	278.520	0.913742
+SumClamp_MathUnrolling4	4562.135	287.304	0.942560
+SumClamp_BitMath	1605.508	816.389	2.678332
+SumClamp_BitMathUnrolling4	1563.824	838.151	2.749724
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	4222.771	310.393
+SumClamp_IfUnrolling4	4198.380	312.197	1.005809
+SumClamp_MinMax	4748.910	276.004	0.889208
+SumClamp_MinMaxUnrolling4	4711.191	278.214	0.896328
+SumClamp_Math	4591.634	285.458	0.919666
+SumClamp_MathUnrolling4	4480.732	292.524	0.942429
+SumClamp_BitMath	1031.341	1270.889	4.094445
+SumClamp_BitMathUnrolling4	1057.625	1239.305	3.992690
+
+```
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 15.0.1
+Environment.Version:	8.0.4
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/usr/local/share/dotnet/shared/Microsoft.NETCore.App/8.0.4/
+RuntimeInformation.FrameworkDescription:	.NET 8.0.4
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Darwin 24.0.0 Darwin Kernel Version 24.0.0: Tue Sep 24 23:37:13 PDT 2024; root:xnu-11215.1.12~1/RELEASE_ARM64_T8112
+RuntimeInformation.RuntimeIdentifier:	osx-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector512.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	file:///usr/local/share/dotnet/shared/Microsoft.NETCore.App/8.0.4/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844159	# 0x8177F801
+VectorEnvironment.CpuModelName:	Apple M2
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Dp, Rdm, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	4126.041	317.670
+SumClamp_IfUnrolling4	4224.832	310.242	0.976616
+SumClamp_MinMax	4804.546	272.808	0.858779
+SumClamp_MinMaxUnrolling4	4865.373	269.398	0.848042
+SumClamp_Math	4558.388	287.540	0.905153
+SumClamp_MathUnrolling4	4267.812	307.118	0.966781
+SumClamp_BitMath	1383.865	947.144	2.981534
+SumClamp_BitMathUnrolling4	1365.834	959.648	3.020894
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	4114.090	318.593
+SumClamp_IfUnrolling4	4142.870	316.380	0.993053
+SumClamp_MinMax	4887.199	268.195	0.841809
+SumClamp_MinMaxUnrolling4	4682.087	279.944	0.878687
+SumClamp_Math	4539.399	288.743	0.906307
+SumClamp_MathUnrolling4	4364.857	300.289	0.942548
+SumClamp_BitMath	976.491	1342.275	4.213136
+SumClamp_BitMathUnrolling4	993.023	1319.929	4.142995
+
+```
+
 ### AWS Arm t4g.small
 `AWS Arm t4g.small`
 
@@ -815,13 +1006,13 @@ benchmarkMode:	0
 IsRelease:	True
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 6.2.0.1013
+Environment.OSVersion:	Unix 6.8.0.1015
 Environment.Version:	3.1.32
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/
 RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.8.0-1015-aws #16~22.04.1-Ubuntu SMP Mon Aug 19 20:21:57 UTC 2024
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
@@ -843,27 +1034,27 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	8431.193	155.461
-SumClamp_IfUnrolling4	8319.654	157.545	1.013407
-SumClamp_MinMax	9246.616	141.751	0.911814
-SumClamp_MinMaxUnrolling4	9357.920	140.065	0.900969
-SumClamp_Math	8350.139	156.970	1.009707
-SumClamp_MathUnrolling4	8565.720	153.019	0.984295
-SumClamp_BitMath	5306.037	247.024	1.588981
-SumClamp_BitMathUnrolling4	5339.037	245.497	1.579160
+SumClamp_If	7851.308	166.943
+SumClamp_IfUnrolling4	7556.821	173.449	1.038970
+SumClamp_MinMax	8639.582	151.711	0.908760
+SumClamp_MinMaxUnrolling4	8494.139	154.309	0.924321
+SumClamp_Math	8155.732	160.712	0.962674
+SumClamp_MathUnrolling4	8460.032	154.931	0.928047
+SumClamp_BitMath	5292.026	247.678	1.483611
+SumClamp_BitMathUnrolling4	5255.392	249.405	1.493953
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	7997.246	163.896
-SumClamp_IfUnrolling4	7885.756	166.214	1.014138
-SumClamp_MinMax	8511.760	153.989	0.939553
-SumClamp_MinMaxUnrolling4	8501.579	154.174	0.940678
-SumClamp_Math	9088.432	144.218	0.879937
-SumClamp_MathUnrolling4	8643.703	151.639	0.925211
-SumClamp_BitMath	3958.763	331.093	2.020138
-SumClamp_BitMathUnrolling4	4133.795	317.074	1.934602
+SumClamp_If	7841.992	167.141
+SumClamp_IfUnrolling4	7795.465	168.139	1.005968
+SumClamp_MinMax	8531.045	153.641	0.919230
+SumClamp_MinMaxUnrolling4	8408.627	155.878	0.932613
+SumClamp_Math	8266.193	158.564	0.948682
+SumClamp_MathUnrolling4	8122.236	161.374	0.965497
+SumClamp_BitMath	4054.303	323.291	1.934239
+SumClamp_BitMathUnrolling4	4095.037	320.075	1.914999
 
 ```
 
@@ -876,13 +1067,13 @@ benchmarkMode:	0
 IsRelease:	True
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 6.2.0.1013
+Environment.OSVersion:	Unix 6.8.0.1015
 Environment.Version:	5.0.17
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/
 RuntimeInformation.FrameworkDescription:	.NET 5.0.17
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.8.0-1015-aws #16~22.04.1-Ubuntu SMP Mon Aug 19 20:21:57 UTC 2024
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
@@ -905,27 +1096,27 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	7738.254	169.382
-SumClamp_IfUnrolling4	7532.430	174.010	1.027325
-SumClamp_MinMax	11199.799	117.031	0.690928
-SumClamp_MinMaxUnrolling4	10148.654	129.152	0.762491
-SumClamp_Math	8202.351	159.798	0.943419
-SumClamp_MathUnrolling4	8070.123	162.416	0.958877
-SumClamp_BitMath	6971.293	188.017	1.110017
-SumClamp_BitMathUnrolling4	7150.491	183.305	1.082199
+SumClamp_If	7696.812	170.294
+SumClamp_IfUnrolling4	7946.264	164.948	0.968608
+SumClamp_MinMax	8430.965	155.465	0.912922
+SumClamp_MinMaxUnrolling4	9498.339	137.995	0.810332
+SumClamp_Math	8015.646	163.520	0.960223
+SumClamp_MathUnrolling4	8312.450	157.682	0.925938
+SumClamp_BitMath	6933.126	189.052	1.110150
+SumClamp_BitMathUnrolling4	7189.025	182.322	1.070634
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	7659.706	171.119
-SumClamp_IfUnrolling4	7706.364	170.083	0.993945
-SumClamp_MinMax	9017.235	145.357	0.849452
-SumClamp_MinMaxUnrolling4	8936.581	146.669	0.857118
-SumClamp_Math	8251.760	158.841	0.928251
-SumClamp_MathUnrolling4	8211.092	159.628	0.932849
-SumClamp_BitMath	5452.747	240.378	1.404742
-SumClamp_BitMathUnrolling4	5708.417	229.612	1.341827
+SumClamp_If	7568.787	173.174
+SumClamp_IfUnrolling4	7612.609	172.177	0.994243
+SumClamp_MinMax	10868.024	120.603	0.696427
+SumClamp_MinMaxUnrolling4	11060.172	118.508	0.684328
+SumClamp_Math	8211.354	159.623	0.921746
+SumClamp_MathUnrolling4	8070.213	162.415	0.937867
+SumClamp_BitMath	5443.168	240.801	1.390511
+SumClamp_BitMathUnrolling4	5733.610	228.603	1.320074
 
 ```
 
@@ -938,13 +1129,13 @@ benchmarkMode:	0
 IsRelease:	True
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 6.2.0.1013
+Environment.OSVersion:	Unix 6.8.0.1015
 Environment.Version:	6.0.19
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/
 RuntimeInformation.FrameworkDescription:	.NET 6.0.19
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.8.0-1015-aws #16~22.04.1-Ubuntu SMP Mon Aug 19 20:21:57 UTC 2024
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
@@ -967,27 +1158,27 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	7994.583	163.951
-SumClamp_IfUnrolling4	7768.185	168.729	1.029144
-SumClamp_MinMax	8773.997	149.387	0.911168
-SumClamp_MinMaxUnrolling4	9780.949	134.007	0.817363
-SumClamp_Math	8228.475	159.291	0.971575
-SumClamp_MathUnrolling4	8112.601	161.566	0.985452
-SumClamp_BitMath	6956.688	188.412	1.149194
-SumClamp_BitMathUnrolling4	7169.469	182.820	1.115087
+SumClamp_If	7989.851	164.048
+SumClamp_IfUnrolling4	7738.241	169.382	1.032515
+SumClamp_MinMax	8707.972	150.520	0.917533
+SumClamp_MinMaxUnrolling4	9601.919	136.506	0.832110
+SumClamp_Math	8294.740	158.018	0.963243
+SumClamp_MathUnrolling4	8405.900	155.929	0.950505
+SumClamp_BitMath	6940.193	188.859	1.151243
+SumClamp_BitMathUnrolling4	7138.842	183.604	1.119208
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	7999.279	163.855
-SumClamp_IfUnrolling4	7663.561	171.033	1.043807
-SumClamp_MinMax	8359.100	156.802	0.956955
-SumClamp_MinMaxUnrolling4	10081.031	130.018	0.793498
-SumClamp_Math	8286.800	158.170	0.965304
-SumClamp_MathUnrolling4	8233.885	159.186	0.971507
-SumClamp_BitMath	5445.736	240.687	1.468907
-SumClamp_BitMathUnrolling4	5742.796	228.237	1.392924
+SumClamp_If	7645.667	171.433
+SumClamp_IfUnrolling4	7649.955	171.337	0.999439
+SumClamp_MinMax	8786.730	149.170	0.870138
+SumClamp_MinMaxUnrolling4	8755.775	149.698	0.873214
+SumClamp_Math	8216.534	159.522	0.930522
+SumClamp_MathUnrolling4	8086.720	162.083	0.945460
+SumClamp_BitMath	5444.736	240.732	1.404231
+SumClamp_BitMathUnrolling4	5731.000	228.707	1.334089
 
 ```
 
@@ -1000,19 +1191,21 @@ benchmarkMode:	0
 IsRelease:	True
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 6.2.0.1013
+Environment.OSVersion:	Unix 6.8.0.1015
 Environment.Version:	7.0.8
 Stopwatch.Frequency:	1000000000
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
 RuntimeInformation.FrameworkDescription:	.NET 7.0.8
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
+RuntimeInformation.OSDescription:	Linux 6.8.0-1015-aws #16~22.04.1-Ubuntu SMP Mon Aug 19 20:21:57 UTC 2024
 RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
 Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
@@ -1029,27 +1222,161 @@ Vectors.BaseInstance:	VectorTraits128Base
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-13446
-SumClamp_If	6779.391	193.339
-SumClamp_IfUnrolling4	6668.302	196.560	1.016659
-SumClamp_MinMax	7661.888	171.070	0.884820
-SumClamp_MinMaxUnrolling4	7467.287	175.528	0.907879
-SumClamp_Math	7462.095	175.650	0.908510
-SumClamp_MathUnrolling4	7077.597	185.193	0.957866
-SumClamp_BitMath	5470.553	239.596	1.239252
-SumClamp_BitMathUnrolling4	5583.683	234.741	1.214143
+SumClamp_If	6776.848	193.411
+SumClamp_IfUnrolling4	6662.951	196.718	1.017094
+SumClamp_MinMax	7677.384	170.725	0.882703
+SumClamp_MinMaxUnrolling4	7444.090	176.075	0.910366
+SumClamp_Math	7454.675	175.825	0.909074
+SumClamp_MathUnrolling4	7076.553	185.220	0.957648
+SumClamp_BitMath	5469.794	239.629	1.238958
+SumClamp_BitMathUnrolling4	5593.104	234.346	1.211643
 
 [ClampBenchmark_Int32(262144)]
 ---
 NAME	US	MOPS	SCALE
 # SumClamp_If	-141291292
-SumClamp_If	6513.662	201.226
-SumClamp_IfUnrolling4	6191.666	211.691	1.052005
-SumClamp_MinMax	7106.689	184.435	0.916554
-SumClamp_MinMaxUnrolling4	7241.533	181.000	0.899487
-SumClamp_Math	7069.565	185.403	0.921367
-SumClamp_MathUnrolling4	6638.336	197.447	0.981219
-SumClamp_BitMath	4045.410	324.002	1.610136
-SumClamp_BitMathUnrolling4	4027.704	325.426	1.617215
+SumClamp_If	6507.411	201.420
+SumClamp_IfUnrolling4	6194.322	211.600	1.050545
+SumClamp_MinMax	7117.671	184.150	0.914261
+SumClamp_MinMaxUnrolling4	7240.861	181.017	0.898707
+SumClamp_Math	7064.808	185.528	0.921102
+SumClamp_MathUnrolling4	6637.843	197.462	0.980350
+SumClamp_BitMath	4050.669	323.581	1.606503
+SumClamp_BitMathUnrolling4	4016.211	326.357	1.620286
+
+```
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	2
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 6.8.0.1015
+Environment.Version:	8.0.7
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/8.0.7/
+RuntimeInformation.FrameworkDescription:	.NET 8.0.7
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Ubuntu 22.04.2 LTS
+RuntimeInformation.RuntimeIdentifier:	linux-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector512.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/8.0.7/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844159	# 0x8177F801
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Dp, Rdm, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	6472.839	202.495
+SumClamp_IfUnrolling4	6689.152	195.947	0.967662
+SumClamp_MinMax	7522.052	174.250	0.860515
+SumClamp_MinMaxUnrolling4	7608.415	172.272	0.850747
+SumClamp_Math	6620.821	197.969	0.977649
+SumClamp_MathUnrolling4	6404.128	204.668	1.010729
+SumClamp_BitMath	3738.606	350.591	1.731351
+SumClamp_BitMathUnrolling4	3755.713	348.994	1.723464
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	6257.078	209.478
+SumClamp_IfUnrolling4	6222.490	210.642	1.005558
+SumClamp_MinMax	6846.630	191.440	0.913892
+SumClamp_MinMaxUnrolling4	7060.640	185.638	0.886191
+SumClamp_Math	6078.890	215.618	1.029313
+SumClamp_MathUnrolling4	6181.733	212.031	1.012188
+SumClamp_BitMath	2666.086	491.627	2.346916
+SumClamp_BitMathUnrolling4	2605.895	502.983	2.401124
+
+```
+
+## Wasm
+
+### Wasm on AMD Ryzen 7 7840H
+``
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks.Wasm
+
+
+IsRelease:	True
+Environment.ProcessorCount:	1
+Environment.Is64BitProcess:	False
+Environment.OSVersion:	Other 1.0.0.0
+Environment.Version:	8.0.7
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/
+RuntimeInformation.FrameworkDescription:	.NET 8.0.7
+RuntimeInformation.OSArchitecture:	Wasm
+RuntimeInformation.OSDescription:	Browser
+RuntimeInformation.RuntimeIdentifier:	browser-wasm
+IntPtr.Size:	4
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	False
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector512.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844158	# 0x8177F802
+VectorEnvironment.CpuModelName:	
+VectorEnvironment.SupportedInstructionSets:	PackedSimd
+Vector128s.Instance:	WVectorTraits128PackedSimd	// PackedSimd
+Vectors.Instance:	VectorTraits128PackedSimd	// PackedSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[ClampBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-13446
+SumClamp_If	33158.333	39.529
+SumClamp_IfUnrolling4	23500.000	55.775	1.410993
+SumClamp_MinMax	35566.667	36.852	0.932287
+SumClamp_MinMaxUnrolling4	29425.000	44.544	1.126876
+SumClamp_Math	35266.667	37.166	0.940217
+SumClamp_MathUnrolling4	28235.417	46.421	1.174353
+SumClamp_BitMath	33041.667	39.669	1.003531
+SumClamp_BitMathUnrolling4	45108.333	29.057	0.735082
+
+[ClampBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumClamp_If	-141291292
+SumClamp_If	31866.667	41.131
+SumClamp_IfUnrolling4	21866.667	59.941	1.457317
+SumClamp_MinMax	34595.833	37.887	0.921113
+SumClamp_MinMaxUnrolling4	28131.250	46.593	1.132785
+SumClamp_Math	34920.833	37.534	0.912540
+SumClamp_MathUnrolling4	26727.083	49.041	1.192299
+SumClamp_BitMath	29733.333	44.083	1.071749
+SumClamp_BitMathUnrolling4	36708.333	35.706	0.868104
 
 ```
 

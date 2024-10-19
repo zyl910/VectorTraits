@@ -30,7 +30,7 @@ Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
 Environment.Version:	4.0.30319.42000
 Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
-RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9232.0
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9277.0
 RuntimeInformation.OSArchitecture:	X64
 RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
 IntPtr.Size:	8
@@ -38,7 +38,7 @@ BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks/bin/Release/Release/System.Numerics.Vectors.DLL
+Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
 VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
@@ -46,6 +46,7 @@ VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
 VectorEnvironment.SupportedInstructionSets:	
 Vectors.Instance:	VectorTraits256Base	// 
 Vectors.BaseInstance:	VectorTraits256Base
+
 
 [YGroup3UnzipBenchmark_Byte(262144)]
 ---
@@ -162,6 +163,7245 @@ SumX2Base_Basic	2466.507	106.281	0.878961
 SumX2Base_X2	2384.211	109.950	0.909300
 SumX2Base	2451.738	106.922	0.884255
 SumX2Traits	2490.048	105.277	0.870651
+
+```
+
+#### .NET Core 2.1
+
+```
+VectorTraits.Benchmarks.NetCore
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.30\
+RuntimeInformation.FrameworkDescription:	.NET Core 4.6.30411.01
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+SumBase_Basic	527.757	496.713
+SumBase_ByX2Zip	239.378	1095.105	2.204702
+SumBase	248.867	1053.352	2.120644
+SumTraits	241.207	1086.799	2.187981
+SumX2Base_Basic	512.403	511.598	1.029966
+SumX2Base_X2	404.957	647.339	1.303244
+SumX2Base_Zip	123.465	2123.219	4.274537
+SumX2Base	125.527	2088.353	4.204344
+SumX2Traits	121.334	2160.516	4.349624
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+SumBase_Basic	672.825	389.617
+SumBase_ByX2Zip	372.567	703.616	1.805917
+SumBase	362.173	723.809	1.857746
+SumTraits	379.219	691.273	1.774237
+SumX2Base_Basic	698.714	375.181	0.962948
+SumX2Base_X2	876.207	299.180	0.767883
+SumX2Base_Zip	214.020	1224.857	3.143748
+SumX2Base	207.655	1262.400	3.240105
+SumX2Traits	213.554	1227.530	3.150609
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+SumBase_Basic	948.901	276.261
+SumBase_ByX2Zip	6641.934	39.468	0.142865
+SumBase	958.820	273.403	0.989655
+SumTraits	946.167	277.059	1.002889
+SumX2Base_Basic	1030.774	254.318	0.920572
+SumX2Base_X2	1043.658	251.178	0.909207
+SumX2Base_Zip	3465.817	75.637	0.273789
+SumX2Base	1018.765	257.316	0.931423
+SumX2Traits	1034.836	253.319	0.916958
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+SumBase_Basic	1541.505	170.057
+SumBase	1539.101	170.323	1.001562
+SumTraits	1561.309	167.900	0.987316
+SumX2Base_Basic	1752.712	149.565	0.879497
+SumX2Base_X2	1736.707	150.943	0.887602
+SumX2Base	1733.161	151.252	0.889418
+SumX2Traits	1733.266	151.243	0.889364
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+SumBase_Basic	491.866	532.958
+SumBase_ByX2Unzip	887.010	295.537	0.554521
+SumBase	504.506	519.605	0.974946
+SumTraits	495.445	529.108	0.992777
+SumX2Base_Basic	503.882	520.249	0.976153
+SumX2Base_X2	493.358	531.347	0.996977
+SumX2Base_Unzip	438.500	597.820	1.121703
+SumX2Base	439.459	596.515	1.119253
+SumX2Traits	439.251	596.798	1.119785
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+SumBase_Basic	615.053	426.213
+SumBase_ByX2Unzip	951.269	275.573	0.646561
+SumBase	592.707	442.283	1.037703
+SumTraits	589.717	444.525	1.042964
+SumX2Base_Basic	668.713	392.013	0.919756
+SumX2Base_X2	654.829	400.325	0.939259
+SumX2Base_Unzip	573.541	457.062	1.072379
+SumX2Base	675.993	387.791	0.909852
+SumX2Traits	665.260	394.047	0.924531
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+SumBase_Basic	952.147	275.319
+SumBase_ByX2Unzip	2711.737	96.670	0.351121
+SumBase	909.252	288.307	1.047176
+SumTraits	853.801	307.032	1.115186
+SumX2Base_Basic	1083.064	242.039	0.879123
+SumX2Base_X2	1099.998	238.313	0.865589
+SumX2Base_Unzip	1387.787	188.894	0.686090
+SumX2Base	1070.417	244.899	0.889510
+SumX2Traits	1067.063	245.669	0.892306
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+SumBase_Basic	1632.127	160.615
+SumBase	1658.624	158.049	0.984025
+SumTraits	1662.061	157.722	0.981990
+SumX2Base_Basic	1937.271	135.316	0.842488
+SumX2Base_X2	1989.708	131.750	0.820285
+SumX2Base	1888.930	138.779	0.864049
+SumX2Traits	1906.347	137.511	0.856155
+
+```
+
+#### .NET Core 3.1
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	3.1.32
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.32\
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	522.485	501.725
+SumBase_ByX2Zip	238.410	1099.552	2.191542
+SumBase	240.697	1089.103	2.170717
+SumTraits	35.101	7468.216	14.885077
+SumX2Base_Basic	516.801	507.244	1.011000
+SumX2Base_X2	397.370	659.698	1.314860
+SumX2Base_Zip	121.213	2162.668	4.310464
+SumX2Base	120.740	2171.143	4.327357
+SumX2Traits	25.158	10419.951	20.768251
+Sum128Base_Basic	1048.769	249.954	0.498189
+Sum128Base	1040.199	252.013	0.502294
+Sum128Sse_ByX2Zip	58.080	4513.536	8.996035
+Sum128Sse_Shuffle	55.034	4763.302	9.493850
+Sum128Traits	56.629	4629.170	9.226508
+Sum128X2Base_Basic	1374.478	190.723	0.380134
+Sum128X2Base_X2	1027.590	255.106	0.508457
+Sum128X2Base	1266.096	207.049	0.412675
+Sum128X2Sse_X2	72.840	3598.881	7.173016
+Sum128X2Sse_Zip	33.117	7915.771	15.777110
+Sum128X2Traits	33.575	7807.671	15.561653
+Sum256Base_Basic	950.576	275.774	0.549652
+Sum256Base	913.913	286.837	0.571701
+Sum256Avx2_ByShorter	37.034	7078.529	14.108384
+Sum256Avx2_ByX2Unpack	40.486	6474.951	12.905378
+Sum256Avx2_ByX2Zip	82.223	3188.225	6.354526
+Sum256Avx2_Shuffle	31.253	8387.875	16.718073
+Sum256Traits	30.340	8640.201	17.220989
+Sum256X2Base_Basic	990.888	264.555	0.527290
+Sum256X2Base_X2	1083.645	241.909	0.482155
+Sum256X2Base	1209.290	216.775	0.432060
+Sum256X2Avx2_Unpack	23.798	11015.280	21.954815
+Sum256X2Avx2_X2	37.923	6912.534	13.777535
+Sum256X2Avx2_Zip	44.169	5935.029	11.829247
+Sum256X2Traits	23.711	11055.618	22.035215
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	596.107	439.760
+SumBase_ByX2Zip	380.012	689.830	1.568653
+SumBase	381.762	686.669	1.561463
+SumTraits	69.589	3767.055	8.566166
+SumX2Base_Basic	677.806	386.754	0.879466
+SumX2Base_X2	714.061	367.117	0.834813
+SumX2Base_Zip	203.904	1285.624	2.923470
+SumX2Base	207.960	1260.547	2.866445
+SumX2Traits	42.833	6120.175	13.917090
+Sum128Base_Basic	1601.926	163.643	0.372119
+Sum128Base	1530.610	171.268	0.389457
+Sum128Sse_ByX2Zip	91.959	2850.656	6.482305
+Sum128Sse_Shuffle	109.971	2383.760	5.420595
+Sum128Traits	92.128	2845.443	6.470449
+Sum128X2Base_Basic	1577.480	166.179	0.377886
+Sum128X2Base_X2	1530.585	171.270	0.389464
+Sum128X2Base	1576.409	166.292	0.378143
+Sum128X2Sse_X2	91.142	2876.225	6.540446
+Sum128X2Sse_Zip	54.484	4811.361	10.940886
+Sum128X2Traits	54.845	4779.715	10.868925
+Sum256Base_Basic	1289.035	203.365	0.462445
+Sum256Base	1256.814	208.578	0.474301
+Sum256Avx2_ByShorter	62.337	4205.251	9.562612
+Sum256Avx2_ByX2Unpack	70.081	3740.590	8.505987
+Sum256Avx2_ByX2Zip	133.420	1964.798	4.467890
+Sum256Avx2_Shuffle	59.548	4402.253	10.010588
+Sum256Traits	60.676	4320.356	9.824355
+Sum256X2Base_Basic	1371.204	191.178	0.434733
+Sum256X2Base_X2	1524.584	171.945	0.390997
+Sum256X2Base	1780.460	147.234	0.334805
+Sum256X2Avx2_Unpack	41.222	6359.316	14.460887
+Sum256X2Avx2_X2	75.254	3483.474	7.921313
+Sum256X2Avx2_Zip	71.095	3687.259	8.384713
+Sum256X2Traits	41.687	6288.341	14.299492
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	885.646	295.992
+SumBase_ByX2Zip	6040.748	43.396	0.146612
+SumBase	854.318	306.846	1.036671
+SumTraits	41.858	6262.687	21.158316
+SumX2Base_Basic	915.276	286.410	0.967627
+SumX2Base_X2	927.325	282.688	0.955055
+SumX2Base_Zip	3104.103	84.451	0.285315
+SumX2Base	920.145	284.894	0.962508
+SumX2Traits	51.913	5049.720	17.060343
+Sum128Base_Basic	2482.761	105.586	0.356718
+Sum128Base	2485.783	105.457	0.356285
+Sum128Sse_ByX2Zip	124.253	2109.758	7.127761
+Sum128Sse_Shuffle	222.734	1176.936	3.976246
+Sum128Sse_ShuffleXImm	56.602	4631.363	15.646933
+Sum128Traits	55.238	4745.718	16.033279
+Sum128X2Base_Basic	2505.014	104.648	0.353549
+Sum128X2Base_X2	2480.363	105.688	0.357063
+Sum128X2Base	2436.144	107.606	0.363544
+Sum128X2Sse_X2	53.562	4894.206	16.534942
+Sum128X2Sse_Zip	92.996	2818.889	9.523539
+Sum128X2Traits	53.286	4919.579	16.620665
+Sum256Base_Basic	1798.772	145.735	0.492362
+Sum256Base	1723.942	152.061	0.513733
+Sum256Avx2_ByShorter	75.199	3485.999	11.777351
+Sum256Avx2_ByX2Unpack	119.843	2187.403	7.390082
+Sum256Avx2_ByX2Zip	205.674	1274.561	4.306070
+Sum256Avx2_Shuffle	126.031	2080.001	7.027227
+Sum256Avx2_ShuffleXImm	40.837	6419.314	21.687477
+Sum256Traits	43.655	6004.869	20.287286
+Sum256X2Base_Basic	1912.926	137.038	0.462980
+Sum256X2Base_X2	1746.169	150.125	0.507194
+Sum256X2Base	1720.412	152.373	0.514787
+Sum256X2Avx2_Unpack	72.388	3621.353	12.234643
+Sum256X2Avx2_X2	41.009	6392.326	21.596300
+Sum256X2Avx2_Zip	109.256	2399.351	8.106140
+Sum256X2Traits	40.872	6413.822	21.668923
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	1399.130	187.362
+SumBase	1394.881	187.933	1.003046
+SumTraits	64.009	4095.410	21.858260
+SumX2Base_Basic	1513.896	173.159	0.924192
+SumX2Base_X2	1472.315	178.049	0.950293
+SumX2Base	1469.055	178.444	0.952401
+SumX2Traits	97.647	2684.613	14.328475
+Sum128Base_Basic	4572.907	57.325	0.305961
+Sum128Base_Move	6067.474	43.205	0.230595
+Sum128Base	4558.556	57.506	0.306924
+Sum128Sse_ByX2Zip	158.050	1658.611	8.852433
+Sum128Sse_Shuffle	231.742	1131.190	6.037455
+Sum128Sse_ShuffleXImm	82.197	3189.230	17.021746
+Sum128Traits	79.650	3291.189	17.565925
+Sum128X2Base_Basic	4598.624	57.005	0.304250
+Sum128X2Base_X2	4718.792	55.553	0.296502
+Sum128X2Base	4679.960	56.014	0.298962
+Sum128X2Sse_X2	77.481	3383.319	18.057647
+Sum128X2Sse_Zip	174.529	1502.012	8.016628
+Sum128X2Traits	74.677	3510.351	18.735647
+Sum256Base_Basic	3180.958	82.410	0.439846
+Sum256Base	2906.659	90.187	0.481353
+Sum256Avx2_ByShorter	112.286	2334.610	12.460416
+Sum256Avx2_ByX2Unpack	185.343	1414.372	7.548867
+Sum256Avx2_ByX2Zip	302.170	867.538	4.630275
+Sum256Avx2_Shuffle	134.623	1947.240	10.392923
+Sum256Avx2_ShuffleXImm	63.073	4156.204	22.182733
+Sum256Traits	65.027	4031.321	21.516201
+Sum256X2Base_Basic	3456.430	75.842	0.404791
+Sum256X2Base_X2	2982.437	87.896	0.469123
+Sum256X2Base	2953.071	88.770	0.473788
+Sum256X2Avx2_Unpack	116.466	2250.828	12.013253
+Sum256X2Avx2_X2	63.333	4139.117	22.091538
+Sum256X2Avx2_Zip	166.598	1573.510	8.398228
+Sum256X2Traits	66.591	3936.643	21.010878
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	459.009	571.109
+SumBase_ByX2Unzip	870.917	300.998	0.527041
+SumBase	473.684	553.415	0.969018
+SumTraits	32.328	8108.844	14.198420
+SumX2Base_Basic	474.531	552.428	0.967289
+SumX2Base_X2	471.323	556.188	0.973873
+SumX2Base_Unzip	437.456	599.247	1.049268
+SumX2Base	436.127	601.072	1.052465
+SumX2Traits	41.676	6290.095	11.013828
+Sum128Base_Basic	1012.525	258.901	0.453331
+Sum128Base	971.598	269.807	0.472426
+Sum128Sse_ByX2Unzip	181.574	1443.727	2.527937
+Sum128Sse_Shuffle	55.287	4741.521	8.302306
+Sum128Traits	57.519	4557.543	7.980164
+Sum128X2Base_Basic	968.544	270.658	0.473916
+Sum128X2Base_X2	972.002	269.695	0.472230
+Sum128X2Base	980.943	267.237	0.467926
+Sum128X2Sse_X2	76.773	3414.517	5.978749
+Sum128X2Sse_Unzip	117.209	2236.545	3.916144
+Sum128X2Traits	74.663	3511.017	6.147718
+Sum256Base_Basic	870.366	301.188	0.527375
+Sum256Base	877.908	298.601	0.522844
+Sum256Avx2_ByShorter	69.649	3763.762	6.590270
+Sum256Avx2_ByX2Unzip	155.457	1686.285	2.952650
+Sum256Avx2_Shuffle	29.003	9038.412	15.826074
+Sum256Traits	29.671	8835.152	15.470170
+Sum256X2Base_Basic	902.304	290.527	0.508708
+Sum256X2Base_X2	895.647	292.687	0.512488
+Sum256X2Base	899.871	291.313	0.510083
+Sum256X2Avx2_X2	40.844	6418.152	11.238053
+Sum256X2Avx2_Unzip	93.564	2801.755	4.905816
+Sum256X2Traits	40.876	6413.146	11.229287
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	537.865	487.379
+SumBase_ByX2Unzip	912.186	287.380	0.589644
+SumBase	534.692	490.271	1.005936
+SumTraits	65.271	4016.255	8.240525
+SumX2Base_Basic	528.409	496.100	1.017895
+SumX2Base_X2	541.832	483.811	0.992680
+SumX2Base_Unzip	558.002	469.791	0.963913
+SumX2Base	559.139	468.835	0.961952
+SumX2Traits	83.252	3148.790	6.460666
+Sum128Base_Basic	1492.989	175.583	0.360261
+Sum128Base	1503.533	174.352	0.357734
+Sum128Sse_ByX2Unzip	289.402	905.813	1.858541
+Sum128Sse_Shuffle	112.658	2326.910	4.774338
+Sum128Traits	111.322	2354.836	4.831638
+Sum128X2Base_Basic	1462.069	179.297	0.367880
+Sum128X2Base_X2	1468.323	178.533	0.366313
+Sum128X2Base	1471.792	178.112	0.365449
+Sum128X2Sse_X2	146.018	1795.284	3.683552
+Sum128X2Sse_Unzip	154.027	1701.931	3.492010
+Sum128X2Traits	148.622	1763.835	3.619026
+Sum256Base_Basic	1121.282	233.790	0.479688
+Sum256Base	1094.153	239.586	0.491581
+Sum256Avx2_ByShorter	130.257	2012.520	4.129276
+Sum256Avx2_ByX2Unzip	245.665	1067.078	2.189423
+Sum256Avx2_Shuffle	57.932	4525.043	9.284454
+Sum256Traits	56.804	4614.883	9.468787
+Sum256X2Base_Basic	1152.957	227.367	0.466510
+Sum256X2Base_X2	1119.154	234.234	0.480600
+Sum256X2Base	1128.949	232.202	0.476430
+Sum256X2Avx2_X2	81.885	3201.376	6.568562
+Sum256X2Avx2_Unzip	132.085	1984.669	4.072130
+Sum256X2Traits	81.945	3199.034	6.563757
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	717.356	365.431
+SumBase_ByX2Unzip	2336.618	112.189	0.307006
+SumBase	734.597	356.854	0.976530
+SumTraits	45.946	5705.539	15.613185
+SumX2Base_Basic	731.135	358.544	0.981154
+SumX2Base_X2	785.185	333.863	0.913614
+SumX2Base_Unzip	1310.340	200.058	0.547458
+SumX2Base	783.680	334.504	0.915369
+SumX2Traits	52.556	4987.932	13.649457
+Sum128Base_Basic	2588.245	101.283	0.277159
+Sum128Base	2598.766	100.872	0.276037
+Sum128Sse_ByX2Unzip	129.117	2030.279	5.555851
+Sum128Sse_Shuffle	221.802	1181.883	3.234219
+Sum128Sse_ShuffleXImm	63.862	4104.861	11.232936
+Sum128Traits	62.881	4168.915	11.408219
+Sum128X2Base_Basic	2520.039	104.024	0.284661
+Sum128X2Base_X2	2592.875	101.102	0.276664
+Sum128X2Base	2552.155	102.715	0.281078
+Sum128X2Sse_X2	61.063	4292.981	11.747724
+Sum128X2Sse_Unzip	92.933	2820.796	7.719098
+Sum128X2Traits	64.796	4045.680	11.070986
+Sum256Base_Basic	1709.147	153.377	0.419716
+Sum256Base	1585.482	165.340	0.452453
+Sum256Avx2_ByShorter	78.837	3325.145	9.099245
+Sum256Avx2_ByX2Unzip	202.490	1294.603	3.542676
+Sum256Avx2_Shuffle	115.741	2264.911	6.197921
+Sum256Avx2_ShuffleXImm	45.901	5711.050	15.628265
+Sum256Traits	43.289	6055.653	16.571269
+Sum256X2Base_Basic	1793.429	146.169	0.399991
+Sum256X2Base_X2	1622.593	161.559	0.442105
+Sum256X2Base	1631.659	160.661	0.439648
+Sum256X2Avx2_X2	44.085	5946.376	16.272233
+Sum256X2Avx2_Unzip	109.557	2392.761	6.547781
+Sum256X2Traits	44.869	5842.373	15.987630
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	1252.067	209.369
+SumBase	1205.458	217.464	1.038665
+SumTraits	65.519	4001.016	19.109871
+SumX2Base_Basic	1312.649	199.706	0.953847
+SumX2Base_X2	1303.640	201.086	0.960439
+SumX2Base	1286.049	203.837	0.973576
+SumX2Traits	97.505	2688.523	12.841071
+Sum128Base_Basic	4600.665	56.980	0.272149
+Sum128Base_Move	6051.747	43.317	0.206893
+Sum128Base	4516.549	58.041	0.277218
+Sum128Sse_ByX2Unzip	161.190	1626.305	7.767648
+Sum128Sse_Shuffle	240.274	1091.019	5.210984
+Sum128Sse_ShuffleXImm	83.153	3152.557	15.057417
+Sum128Traits	83.688	3132.392	14.961103
+Sum128X2Base_Basic	4544.278	57.687	0.275526
+Sum128X2Base_X2	4552.410	57.584	0.275034
+Sum128X2Base	4578.551	57.255	0.273464
+Sum128X2Sse_X2	78.997	3318.389	15.849471
+Sum128X2Sse_Unzip	175.038	1497.639	7.153108
+Sum128X2Traits	77.328	3390.011	16.191558
+Sum256Base_Basic	2935.573	89.299	0.426515
+Sum256Base	2693.658	97.319	0.464820
+Sum256Avx2_ByShorter	109.847	2386.445	11.398269
+Sum256Avx2_ByX2Unzip	249.096	1052.382	5.026442
+Sum256Avx2_Shuffle	130.310	2011.699	9.608387
+Sum256Avx2_ShuffleXImm	62.583	4188.730	20.006441
+Sum256Traits	63.020	4159.706	19.867815
+Sum256X2Base_Basic	3156.564	83.047	0.396655
+Sum256X2Base_X2	2834.396	92.487	0.441740
+Sum256X2Base	2831.848	92.570	0.442138
+Sum256X2Avx2_X2	62.347	4204.600	20.082240
+Sum256X2Avx2_Unzip	161.232	1625.885	7.765639
+Sum256X2Traits	66.932	3916.547	18.706426
+
+```
+
+#### .NET 5.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	5.0.17
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\
+RuntimeInformation.FrameworkDescription:	.NET 5.0.17
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	524.707	499.601
+SumBase_ByX2Zip	233.489	1122.726	2.247244
+SumBase	230.307	1138.235	2.278288
+SumTraits	23.239	11280.246	22.578507
+SumX2Base_Basic	513.110	510.892	1.022600
+SumX2Base_X2	337.724	776.209	1.553657
+SumX2Base_Zip	125.054	2096.243	4.195833
+SumX2Base	124.160	2111.332	4.226036
+SumX2Traits	23.854	10989.673	21.996897
+Sum128Base_Basic	949.471	276.095	0.552631
+Sum128Base	994.240	263.663	0.527747
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	51.897	5051.260	10.110586
+Sum128Sse_Shuffle	40.502	6472.296	12.954928
+Sum128Traits	40.412	6486.847	12.984053
+Sum128X2Base_Basic	1033.125	253.739	0.507883
+Sum128X2Base_X2	1265.675	207.118	0.414567
+Sum128X2Base	1272.849	205.951	0.412230
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	57.476	4560.950	9.129183
+Sum128X2Sse_Zip	32.683	8020.765	16.054339
+Sum128X2Traits	33.047	7932.466	15.877601
+Sum256Base_Basic	981.707	267.029	0.534484
+Sum256Base	940.206	278.816	0.558076
+Sum256Avx2_ByShorter	36.408	7200.267	14.412032
+Sum256Avx2_ByX2Unpack	40.632	6451.710	12.913724
+Sum256Avx2_ByX2Zip	72.609	3610.353	7.226472
+Sum256Avx2_Shuffle	23.356	11223.659	22.465242
+Sum256Traits	23.045	11375.240	22.768647
+Sum256X2Base_Basic	1140.937	229.762	0.459891
+Sum256X2Base_X2	913.803	286.871	0.574201
+Sum256X2Base	994.078	263.706	0.527833
+Sum256X2Avx2_Unpack	23.927	10955.832	21.929160
+Sum256X2Avx2_X2	98.104	2672.094	5.348456
+Sum256X2Avx2_Zip	44.194	5931.680	11.872834
+Sum256X2Traits	23.945	10947.957	21.913397
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	742.969	352.833
+SumBase_ByX2Zip	359.201	729.798	2.068394
+SumBase	354.690	739.079	2.094699
+SumTraits	48.693	5383.595	15.258185
+SumX2Base_Basic	690.919	379.414	1.075334
+SumX2Base_X2	790.866	331.465	0.939437
+SumX2Base_Zip	234.821	1116.355	3.163974
+SumX2Base	199.673	1312.866	3.720925
+SumX2Traits	42.347	6190.444	17.544956
+Sum128Base_Basic	1462.368	179.260	0.508059
+Sum128Base	1477.534	177.420	0.502844
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	78.899	3322.534	9.416727
+Sum128Sse_Shuffle	78.628	3333.962	9.449115
+Sum128Traits	76.134	3443.172	9.758637
+Sum128X2Base_Basic	1516.595	172.850	0.489892
+Sum128X2Base_X2	1517.873	172.705	0.489480
+Sum128X2Base	1506.484	174.010	0.493180
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	116.077	2258.354	6.400626
+Sum128X2Sse_Zip	55.821	4696.157	13.309847
+Sum128X2Traits	53.820	4870.768	13.804730
+Sum256Base_Basic	1319.960	198.600	0.562872
+Sum256Base	1348.309	194.424	0.551037
+Sum256Avx2_ByShorter	61.348	4273.034	12.110632
+Sum256Avx2_ByX2Unpack	70.132	3737.858	10.593838
+Sum256Avx2_ByX2Zip	117.565	2229.774	6.319627
+Sum256Avx2_Shuffle	47.526	5515.752	15.632744
+Sum256Traits	47.345	5536.858	15.692563
+Sum256X2Base_Basic	1495.143	175.330	0.496922
+Sum256X2Base_X2	1272.382	206.026	0.583919
+Sum256X2Base	1476.149	177.586	0.503316
+Sum256X2Avx2_Unpack	42.480	6171.021	17.489909
+Sum256X2Avx2_X2	195.039	1344.060	3.809335
+Sum256X2Avx2_Zip	70.771	3704.110	10.498189
+Sum256X2Traits	42.199	6212.027	17.606128
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+Check-Sum256X2Avx2_Zip	Check `Sum256X2Avx2_Zip` mismatch. -467755046!=0
+Check-Sum256X2Traits	Check `Sum256X2Traits` mismatch. -467755046!=0
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+Sum256X2Avx2_Zip	110.626	2369.640
+Sum256X2Traits	42.733	6134.518	2.588797
+SumBase_Basic	1191.603	219.993	0.092838
+SumBase_ByX2Zip	7366.335	35.587	0.015018
+SumBase	1168.037	224.431	0.094711
+SumTraits	40.613	6454.641	2.723890
+SumX2Base_Basic	1018.973	257.263	0.108566
+SumX2Base_X2	1110.905	235.973	0.099582
+SumX2Base_Zip	3416.871	76.720	0.032376
+SumX2Base	1058.486	247.659	0.104514
+SumX2Traits	41.339	6341.390	2.676098
+Sum128Base_Basic	2458.152	106.643	0.045004
+Sum128Base	2505.162	104.642	0.044159
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	99.034	2647.001	1.117048
+Sum128Sse_Shuffle	159.018	1648.515	0.695682
+Sum128Sse_ShuffleXImm	55.557	4718.473	1.991219
+Sum128Traits	56.914	4605.942	1.943731
+Sum128X2Base_Basic	2363.578	110.910	0.046804
+Sum128X2Base_X2	2396.441	109.389	0.046163
+Sum128X2Base	2369.652	110.626	0.046685
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	51.601	5080.211	2.143874
+Sum128X2Sse_Zip	93.870	2792.641	1.178509
+Sum128X2Traits	53.403	4908.756	2.071520
+Sum256Base_Basic	2110.723	124.196	0.052411
+Sum256Base	2076.167	126.263	0.053284
+Sum256Avx2_ByShorter	65.142	4024.178	1.698223
+Sum256Avx2_ByX2Unpack	120.575	2174.120	0.917490
+Sum256Avx2_ByX2Zip	177.659	1475.546	0.622688
+Sum256Avx2_Shuffle	95.956	2731.931	1.152888
+Sum256Avx2_ShuffleXImm	40.776	6428.864	2.713013
+Sum256Traits	40.838	6419.062	2.708876
+Sum256X2Base_Basic	1977.151	132.587	0.055952
+Sum256X2Base_X2	1957.133	133.943	0.056525
+Sum256X2Base	1914.560	136.921	0.057781
+Sum256X2Avx2_Unpack	73.466	3568.237	1.505814
+Sum256X2Avx2_X2	41.124	6374.461	2.690054
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+Check-Sum256X2Avx2_Zip	Check `Sum256X2Avx2_Zip` mismatch. 5910372263572008452!=0
+Check-Sum256X2Traits	Check `Sum256X2Traits` mismatch. 5910372263572008452!=0
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+Sum256X2Avx2_Zip	164.324	1595.288
+Sum256X2Traits	67.678	3873.382	2.428014
+SumBase_Basic	1999.118	131.130	0.082198
+SumBase	2089.048	125.485	0.078660
+SumTraits	67.769	3868.199	2.424765
+SumX2Base_Basic	1763.208	148.674	0.093196
+SumX2Base_X2	1847.885	141.862	0.088925
+SumX2Base	1911.442	137.145	0.085969
+SumX2Traits	67.507	3883.237	2.434191
+Sum128Base_Basic	4599.833	56.990	0.035724
+Sum128Base_Move	6113.534	42.879	0.026879
+Sum128Base	4615.874	56.792	0.035600
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	125.620	2086.809	1.308108
+Sum128Sse_Shuffle	183.097	1431.726	0.897471
+Sum128Sse_ShuffleXImm	86.484	3031.139	1.900057
+Sum128Traits	83.862	3125.882	1.959446
+Sum128X2Base_Basic	4445.965	58.962	0.036960
+Sum128X2Base_X2	4305.438	60.887	0.038167
+Sum128X2Base	4296.980	61.007	0.038242
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	79.921	3280.057	2.056090
+Sum128X2Sse_Zip	174.713	1500.430	0.940538
+Sum128X2Traits	78.040	3359.090	2.105632
+Sum256Base_Basic	3777.293	69.400	0.043503
+Sum256Base	3842.246	68.227	0.042768
+Sum256Avx2_ByShorter	93.013	2818.352	1.766672
+Sum256Avx2_ByX2Unpack	185.393	1413.991	0.886355
+Sum256Avx2_ByX2Zip	250.919	1044.737	0.654889
+Sum256Avx2_Shuffle	113.514	2309.344	1.447603
+Sum256Avx2_ShuffleXImm	63.448	4131.657	2.589912
+Sum256Traits	63.466	4130.471	2.589169
+Sum256X2Base_Basic	3521.508	74.441	0.046663
+Sum256X2Base_X2	3561.271	73.610	0.046142
+Sum256X2Base	3566.693	73.498	0.046072
+Sum256X2Avx2_Unpack	117.651	2228.140	1.396701
+Sum256X2Avx2_X2	66.447	3945.155	2.473004
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	501.152	523.083
+SumBase_ByX2Unzip	872.379	300.493	0.574466
+SumBase	561.302	467.029	0.892838
+SumTraits	21.619	12125.735	23.181283
+SumX2Base_Basic	519.316	504.787	0.965022
+SumX2Base_X2	448.451	584.555	1.117518
+SumX2Base_Unzip	451.900	580.093	1.108988
+SumX2Base	452.668	579.109	1.107107
+SumX2Traits	96.687	2711.253	5.183217
+Sum128Base_Basic	1001.745	261.687	0.500279
+Sum128Base	969.431	270.410	0.516954
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	169.935	1542.612	2.949078
+Sum128Sse_Shuffle	38.849	6747.812	12.900080
+Sum128Traits	39.076	6708.615	12.825145
+Sum128X2Base_Basic	980.452	267.371	0.511144
+Sum128X2Base_X2	957.897	273.666	0.523179
+Sum128X2Base	956.521	274.060	0.523932
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	58.030	4517.415	8.636134
+Sum128X2Sse_Unzip	110.794	2366.059	4.523296
+Sum128X2Traits	57.349	4571.006	8.738587
+Sum256Base_Basic	881.387	297.422	0.568594
+Sum256Base	874.661	299.709	0.572967
+Sum256Avx2_ByShorter	48.289	5428.627	10.378136
+Sum256Avx2_ByX2Unzip	145.183	1805.611	3.451863
+Sum256Avx2_Shuffle	21.235	12344.821	23.600119
+Sum256Traits	21.486	12200.515	23.324243
+Sum256X2Base_Basic	849.983	308.411	0.589602
+Sum256X2Base_X2	890.816	294.274	0.562576
+Sum256X2Base	881.990	297.219	0.568206
+Sum256X2Avx2_X2	97.097	2699.804	5.161330
+Sum256X2Avx2_Unzip	150.188	1745.439	3.336830
+Sum256X2Traits	93.537	2802.577	5.357806
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	857.136	305.837
+SumBase_ByX2Unzip	908.767	288.461	0.943185
+SumBase	880.316	297.784	0.973668
+SumTraits	47.364	5534.713	18.096921
+SumX2Base_Basic	539.960	485.488	1.587405
+SumX2Base_X2	597.847	438.480	1.433703
+SumX2Base_Unzip	584.202	448.721	1.467190
+SumX2Base	608.967	430.473	1.407524
+SumX2Traits	193.391	1355.513	4.432137
+Sum128Base_Basic	1534.587	170.824	0.558545
+Sum128Base	1560.014	168.039	0.549441
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	274.791	953.977	3.119232
+Sum128Sse_Shuffle	77.071	3401.318	11.121335
+Sum128Traits	78.870	3323.763	10.867750
+Sum128X2Base_Basic	1612.343	162.586	0.531609
+Sum128X2Base_X2	1602.738	163.560	0.534795
+Sum128X2Base	1606.880	163.139	0.533416
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	117.623	2228.677	7.287133
+Sum128X2Sse_Unzip	153.564	1707.062	5.581604
+Sum128X2Traits	115.221	2275.149	7.439083
+Sum256Base_Basic	1369.343	191.438	0.625947
+Sum256Base	1481.561	176.938	0.578536
+Sum256Avx2_ByShorter	100.530	2607.625	8.526185
+Sum256Avx2_ByX2Unzip	245.359	1068.410	3.493395
+Sum256Avx2_Shuffle	45.555	5754.492	18.815536
+Sum256Traits	44.720	5861.841	19.166538
+Sum256X2Base_Basic	1255.468	208.802	0.682722
+Sum256X2Base_X2	1144.104	229.126	0.749177
+Sum256X2Base	1106.676	236.875	0.774513
+Sum256X2Avx2_X2	192.644	1360.767	4.449317
+Sum256X2Avx2_Unzip	132.082	1984.712	6.489440
+Sum256X2Traits	186.146	1408.271	4.604643
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	1468.120	178.558
+SumBase_ByX2Unzip	2560.688	102.372	0.573330
+SumBase	1467.280	178.660	1.000573
+SumTraits	43.157	6074.149	34.017869
+SumX2Base_Basic	829.997	315.837	1.768826
+SumX2Base_X2	944.504	277.547	1.554383
+SumX2Base_Unzip	1508.178	173.815	0.973439
+SumX2Base	963.954	271.947	1.523019
+SumX2Traits	44.109	5943.090	33.283886
+Sum128Base_Basic	2391.127	109.632	0.613987
+Sum128Base	2403.536	109.066	0.610817
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	127.605	2054.336	11.505173
+Sum128Sse_Shuffle	155.202	1689.048	9.459404
+Sum128Sse_ShuffleXImm	63.054	4157.462	23.283590
+Sum128Traits	63.179	4149.212	23.237390
+Sum128X2Base_Basic	2444.822	107.224	0.600502
+Sum128X2Base_X2	2461.241	106.509	0.596496
+Sum128X2Base	2430.398	107.861	0.604066
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	62.125	4219.604	23.631614
+Sum128X2Sse_Unzip	93.632	2799.730	15.679701
+Sum128X2Traits	65.906	3977.528	22.275882
+Sum256Base_Basic	2304.302	113.763	0.637121
+Sum256Base	2360.184	111.069	0.622036
+Sum256Avx2_ByShorter	66.900	3918.436	21.944942
+Sum256Avx2_ByX2Unzip	202.200	1296.459	7.260732
+Sum256Avx2_Shuffle	90.372	2900.709	16.245231
+Sum256Avx2_ShuffleXImm	44.415	5902.148	33.054589
+Sum256Traits	44.605	5876.988	32.913685
+Sum256X2Base_Basic	1909.270	137.301	0.768943
+Sum256X2Base_X2	1733.644	151.210	0.846841
+Sum256X2Base	1683.858	155.681	0.871879
+Sum256X2Avx2_X2	44.635	5873.015	32.891431
+Sum256X2Avx2_Unzip	110.564	2370.980	13.278518
+Sum256X2Traits	45.401	5773.941	32.336577
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	2710.226	96.724
+SumBase	2681.986	97.743	1.010530
+SumTraits	62.559	4190.347	43.322703
+SumX2Base_Basic	1408.187	186.157	1.924621
+SumX2Base_X2	1670.594	156.917	1.622313
+SumX2Base	1675.209	156.484	1.617844
+SumX2Traits	63.606	4121.396	42.609844
+Sum128Base_Basic	4538.533	57.760	0.597159
+Sum128Base_Move	6124.463	42.803	0.442525
+Sum128Base	4528.740	57.885	0.598450
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	123.171	2128.287	22.003698
+Sum128Sse_Shuffle	172.654	1518.320	15.697444
+Sum128Sse_ShuffleXImm	79.323	3304.785	34.167150
+Sum128Traits	80.678	3249.257	33.593065
+Sum128X2Base_Basic	4462.892	58.739	0.607280
+Sum128X2Base_X2	4513.770	58.077	0.600435
+Sum128X2Base	4490.646	58.376	0.603527
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	75.659	3464.817	35.821675
+Sum128X2Sse_Unzip	176.249	1487.352	15.377274
+Sum128X2Traits	78.435	3342.186	34.553833
+Sum256Base_Basic	4241.084	61.811	0.639041
+Sum256Base	4332.160	60.511	0.625606
+Sum256Avx2_ByShorter	96.676	2711.574	28.034128
+Sum256Avx2_ByX2Unzip	231.232	1133.683	11.720797
+Sum256Avx2_Shuffle	113.118	2317.446	23.959364
+Sum256Avx2_ShuffleXImm	63.614	4120.870	42.604404
+Sum256Traits	61.646	4252.392	43.964174
+Sum256X2Base_Basic	3374.023	77.695	0.803262
+Sum256X2Base_X2	3121.150	83.990	0.868342
+Sum256X2Base	3145.167	83.348	0.861711
+Sum256X2Avx2_X2	64.866	4041.288	41.781632
+Sum256X2Avx2_Unzip	162.579	1612.407	16.670178
+Sum256X2Traits	64.677	4053.155	41.904321
+
+```
+
+#### .NET 6.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	6.0.33
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.33\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.33
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.33/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	462.396	566.925
+SumBase_ByX2Zip	235.252	1114.310	1.965532
+SumBase	235.929	1111.114	1.959895
+SumTraits	22.713	11541.671	20.358357
+SumX2Base_Basic	456.463	574.295	1.012998
+SumX2Base_X2	287.199	912.760	1.610018
+SumX2Base_Zip	116.332	2253.421	3.974810
+SumX2Base	120.299	2179.099	3.843714
+SumX2Traits	23.863	10985.330	19.377027
+Sum128Base_Basic	1021.882	256.531	0.452494
+Sum128Base	1005.642	260.673	0.459802
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	51.861	5054.709	8.916002
+Sum128Sse_Shuffle	38.673	6778.492	11.956584
+Sum128Traits	36.472	7187.572	12.678161
+Sum128X2Base_Basic	1010.342	259.461	0.457663
+Sum128X2Base_X2	1027.469	255.136	0.450034
+Sum128X2Base	1001.619	261.720	0.461648
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	57.351	4570.847	8.062518
+Sum128X2Sse_Zip	33.795	7756.965	13.682513
+Sum128X2Traits	33.668	7786.044	13.733806
+Sum256Base_Basic	863.656	303.528	0.535394
+Sum256Base	883.892	296.579	0.523136
+Sum256Avx2_ByShorter	36.384	7204.867	12.708668
+Sum256Avx2_ByX2Unpack	40.285	6507.249	11.478139
+Sum256Avx2_ByX2Zip	72.381	3621.740	6.388388
+Sum256Avx2_Shuffle	24.328	10775.225	19.006423
+Sum256Traits	23.075	11360.549	20.038877
+Sum256X2Base_Basic	873.343	300.162	0.529455
+Sum256X2Base_X2	1399.010	187.378	0.330517
+Sum256X2Base	1376.896	190.388	0.335825
+Sum256X2Avx2_Unpack	23.972	10935.261	19.288711
+Sum256X2Avx2_X2	35.419	7401.180	13.054944
+Sum256X2Avx2_Zip	44.471	5894.749	10.397749
+Sum256X2Traits	23.857	10988.243	19.382166
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	577.575	453.870
+SumBase_ByX2Zip	358.452	731.322	1.611305
+SumBase	360.058	728.061	1.604119
+SumTraits	46.495	5638.094	12.422275
+SumX2Base_Basic	586.273	447.136	0.985165
+SumX2Base_X2	655.692	399.797	0.880864
+SumX2Base_Zip	201.295	1302.285	2.869293
+SumX2Base	203.413	1288.727	2.839421
+SumX2Traits	42.220	6208.993	13.680123
+Sum128Base_Basic	1456.217	180.017	0.396627
+Sum128Base	1455.306	180.130	0.396876
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	80.744	3246.598	7.153151
+Sum128Sse_Shuffle	79.456	3299.222	7.269096
+Sum128Traits	80.026	3275.723	7.217320
+Sum128X2Base_Basic	1531.861	171.128	0.377042
+Sum128X2Base_X2	1514.696	173.067	0.381314
+Sum128X2Base	1528.228	171.535	0.377938
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	115.999	2259.891	4.979162
+Sum128X2Sse_Zip	54.863	4778.163	10.527610
+Sum128X2Traits	54.596	4801.510	10.579049
+Sum256Base_Basic	1210.999	216.469	0.476941
+Sum256Base	1198.904	218.653	0.481753
+Sum256Avx2_ByShorter	61.457	4265.460	9.397984
+Sum256Avx2_ByX2Unpack	69.884	3751.136	8.264785
+Sum256Avx2_ByX2Zip	117.022	2240.128	4.935619
+Sum256Avx2_Shuffle	47.110	5564.505	12.260137
+Sum256Traits	44.092	5945.449	13.099462
+Sum256X2Base_Basic	1114.190	235.278	0.518381
+Sum256X2Base_X2	1152.363	227.484	0.501210
+Sum256X2Base	1175.558	222.995	0.491320
+Sum256X2Avx2_Unpack	42.592	6154.767	13.560648
+Sum256X2Avx2_X2	71.208	3681.388	8.111113
+Sum256X2Avx2_Zip	71.422	3670.356	8.086806
+Sum256X2Traits	42.703	6138.802	13.525473
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+Check-Sum256X2Avx2_Zip	Check `Sum256X2Avx2_Zip` mismatch. -467755046!=0
+Check-Sum256X2Traits	Check `Sum256X2Traits` mismatch. -467755046!=0
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+Sum256X2Avx2_Zip	109.527	2393.409
+Sum256X2Traits	40.778	6428.620	2.685968
+SumBase_Basic	810.548	323.416	0.135128
+SumBase_ByX2Zip	5974.140	43.880	0.018334
+SumBase	818.352	320.332	0.133839
+SumTraits	41.009	6392.289	2.670789
+SumX2Base_Basic	849.400	308.622	0.128947
+SumX2Base_X2	835.771	313.655	0.131050
+SumX2Base_Zip	3077.468	85.182	0.035590
+SumX2Base	823.079	318.492	0.133070
+SumX2Traits	41.705	6285.681	2.626247
+Sum128Base_Basic	2493.831	105.117	0.043919
+Sum128Base	2460.347	106.548	0.044517
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	100.390	2611.266	1.091024
+Sum128Sse_Shuffle	153.150	1711.685	0.715166
+Sum128Sse_ShuffleXImm	54.287	4828.894	2.017580
+Sum128Traits	55.895	4689.915	1.959513
+Sum128X2Base_Basic	2402.504	109.113	0.045589
+Sum128X2Base_X2	2443.005	107.304	0.044833
+Sum128X2Base	2402.743	109.102	0.045584
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	52.808	4964.140	2.074088
+Sum128X2Sse_Zip	86.189	3041.497	1.270781
+Sum128X2Traits	53.092	4937.537	2.062973
+Sum256Base_Basic	1672.028	156.782	0.065506
+Sum256Base	1684.078	155.660	0.065037
+Sum256Avx2_ByShorter	63.538	4125.784	1.723811
+Sum256Avx2_ByX2Unpack	120.027	2184.033	0.912520
+Sum256Avx2_ByX2Zip	178.168	1471.331	0.614743
+Sum256Avx2_Shuffle	91.477	2865.671	1.197318
+Sum256Avx2_ShuffleXImm	40.200	6521.061	2.724592
+Sum256Traits	40.089	6539.009	2.732091
+Sum256X2Base_Basic	1619.531	161.864	0.067629
+Sum256X2Base_X2	1610.653	162.756	0.068002
+Sum256X2Base	1641.370	159.711	0.066729
+Sum256X2Avx2_Unpack	74.270	3529.617	1.474724
+Sum256X2Avx2_X2	40.684	6443.376	2.692134
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+Check-Sum256X2Avx2_Zip	Check `Sum256X2Avx2_Zip` mismatch. 5910372263572008452!=0
+Check-Sum256X2Traits	Check `Sum256X2Traits` mismatch. 5910372263572008452!=0
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+Sum256X2Avx2_Zip	165.425	1584.669
+Sum256X2Traits	65.465	4004.345	2.526929
+SumBase_Basic	1353.819	193.633	0.122191
+SumBase	1360.837	192.634	0.121561
+SumTraits	65.284	4015.411	2.533912
+SumX2Base_Basic	1367.973	191.630	0.120927
+SumX2Base_X2	1416.623	185.049	0.116774
+SumX2Base	1432.557	182.990	0.115475
+SumX2Traits	65.888	3978.648	2.510713
+Sum128Base_Basic	4629.652	56.623	0.035732
+Sum128Base_Move	6094.561	43.013	0.027143
+Sum128Base	4509.892	58.126	0.036681
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	125.988	2080.708	1.313024
+Sum128Sse_Shuffle	176.841	1482.372	0.935446
+Sum128Sse_ShuffleXImm	82.595	3173.841	2.002842
+Sum128Traits	82.890	3162.539	1.995710
+Sum128X2Base_Basic	4412.442	59.410	0.037491
+Sum128X2Base_X2	4470.389	58.640	0.037005
+Sum128X2Base	4413.417	59.397	0.037482
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	78.125	3355.459	2.117451
+Sum128X2Sse_Zip	119.223	2198.774	1.387529
+Sum128X2Traits	74.055	3539.851	2.233811
+Sum256Base_Basic	2923.314	89.674	0.056588
+Sum256Base	2936.804	89.262	0.056328
+Sum256Avx2_ByShorter	91.825	2854.823	1.801527
+Sum256Avx2_ByX2Unpack	183.853	1425.834	0.899768
+Sum256Avx2_ByX2Zip	251.502	1042.313	0.657748
+Sum256Avx2_Shuffle	109.340	2397.510	1.512941
+Sum256Avx2_ShuffleXImm	65.696	3990.275	2.518050
+Sum256Traits	64.136	4087.309	2.579283
+Sum256X2Base_Basic	2860.036	91.658	0.057840
+Sum256X2Base_X2	2782.434	94.214	0.059453
+Sum256X2Base	2824.998	92.794	0.058558
+Sum256X2Avx2_Unpack	114.427	2290.923	1.445679
+Sum256X2Avx2_X2	64.857	4041.907	2.550632
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	472.101	555.271
+SumBase_ByX2Unzip	880.741	297.640	0.536027
+SumBase	476.832	549.762	0.990079
+SumTraits	22.768	11513.732	20.735339
+SumX2Base_Basic	460.984	568.661	1.024115
+SumX2Base_X2	454.462	576.822	1.038812
+SumX2Base_Unzip	442.698	592.151	1.066418
+SumX2Base	443.324	591.315	1.064912
+SumX2Traits	31.442	8337.479	15.015154
+Sum128Base_Basic	981.210	267.164	0.481142
+Sum128Base	962.373	272.393	0.490559
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	163.552	1602.819	2.886553
+Sum128Sse_Shuffle	39.342	6663.213	11.999930
+Sum128Traits	38.197	6862.931	12.359607
+Sum128X2Base_Basic	970.415	270.136	0.486494
+Sum128X2Base_X2	969.368	270.428	0.487020
+Sum128X2Base	986.659	265.689	0.478485
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	56.945	4603.425	8.290412
+Sum128X2Sse_Unzip	107.380	2441.264	4.396527
+Sum128X2Traits	56.993	4599.569	8.283468
+Sum256Base_Basic	864.656	303.177	0.545999
+Sum256Base	865.323	302.944	0.545578
+Sum256Avx2_ByShorter	47.211	5552.562	9.999735
+Sum256Avx2_ByX2Unzip	142.953	1833.782	3.302500
+Sum256Avx2_Shuffle	22.514	11643.626	20.969269
+Sum256Traits	22.902	11446.513	20.614283
+Sum256X2Base_Basic	862.071	304.086	0.547636
+Sum256X2Base_X2	889.584	294.682	0.530699
+Sum256X2Base	867.204	302.286	0.544395
+Sum256X2Avx2_X2	32.203	8140.396	14.660223
+Sum256X2Avx2_Unzip	89.854	2917.432	5.254070
+Sum256X2Traits	31.929	8210.158	14.785858
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	501.725	522.485
+SumBase_ByX2Unzip	920.611	284.750	0.544992
+SumBase	530.766	493.898	0.945285
+SumTraits	44.842	5845.907	11.188651
+SumX2Base_Basic	532.142	492.620	0.942840
+SumX2Base_X2	532.812	492.001	0.941655
+SumX2Base_Unzip	560.502	467.695	0.895135
+SumX2Base	528.570	495.950	0.949213
+SumX2Traits	63.507	4127.791	7.900299
+Sum128Base_Basic	1586.221	165.263	0.316302
+Sum128Base	1578.649	166.056	0.317819
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	275.324	952.128	1.822305
+Sum128Sse_Shuffle	78.652	3332.964	6.379057
+Sum128Traits	79.766	3286.421	6.289977
+Sum128X2Base_Basic	1602.297	163.605	0.313129
+Sum128X2Base_X2	1618.350	161.982	0.310023
+Sum128X2Base	1605.928	163.235	0.312421
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	116.736	2245.617	4.297952
+Sum128X2Sse_Unzip	152.695	1716.784	3.285803
+Sum128X2Traits	115.456	2270.510	4.345595
+Sum256Base_Basic	1090.133	240.470	0.460242
+Sum256Base	1113.637	235.395	0.450528
+Sum256Avx2_ByShorter	96.372	2720.129	5.206133
+Sum256Avx2_ByX2Unzip	247.063	1061.041	2.030758
+Sum256Avx2_Shuffle	45.922	5708.400	10.925473
+Sum256Traits	44.694	5865.302	11.225771
+Sum256X2Base_Basic	1134.865	230.991	0.442101
+Sum256X2Base_X2	1110.611	236.036	0.451756
+Sum256X2Base	1096.043	239.173	0.457760
+Sum256X2Avx2_X2	76.406	3430.947	6.566589
+Sum256X2Avx2_Unzip	130.075	2015.327	3.857192
+Sum256X2Traits	64.104	4089.343	7.826711
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	724.127	362.014
+SumBase_ByX2Unzip	2355.473	111.291	0.307423
+SumBase	723.769	362.193	1.000494
+SumTraits	44.023	5954.770	16.449002
+SumX2Base_Basic	766.872	341.835	0.944260
+SumX2Base_X2	754.336	347.516	0.959953
+SumX2Base_Unzip	1306.759	200.606	0.554139
+SumX2Base	749.642	349.692	0.965963
+SumX2Traits	43.700	5998.708	16.570374
+Sum128Base_Basic	2543.756	103.054	0.284668
+Sum128Base	2524.740	103.830	0.286812
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	127.117	2062.224	5.696531
+Sum128Sse_Shuffle	154.269	1699.261	4.693909
+Sum128Sse_ShuffleXImm	63.167	4149.989	11.463614
+Sum128Traits	64.873	4040.905	11.162287
+Sum128X2Base_Basic	2393.521	109.522	0.302536
+Sum128X2Base_X2	2429.972	107.879	0.297998
+Sum128X2Base	2449.933	107.000	0.295570
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	63.430	4132.826	11.416203
+Sum128X2Sse_Unzip	93.282	2810.238	7.762788
+Sum128X2Traits	63.475	4129.902	11.408127
+Sum256Base_Basic	1553.737	168.718	0.466055
+Sum256Base	1532.254	171.084	0.472589
+Sum256Avx2_ByShorter	68.360	3834.751	10.592822
+Sum256Avx2_ByX2Unzip	202.540	1294.282	3.575225
+Sum256Avx2_Shuffle	87.808	2985.413	8.246678
+Sum256Avx2_ShuffleXImm	42.473	6171.966	17.048967
+Sum256Traits	44.163	5935.859	16.396763
+Sum256X2Base_Basic	1566.586	167.335	0.462232
+Sum256X2Base_X2	1548.805	169.256	0.467539
+Sum256X2Base	1577.058	166.223	0.459163
+Sum256X2Avx2_X2	44.503	5890.432	16.271278
+Sum256X2Avx2_Unzip	110.384	2374.834	6.560059
+Sum256X2Traits	45.714	5734.486	15.840507
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	1196.030	219.178
+SumBase	1224.841	214.023	0.976477
+SumTraits	61.882	4236.178	19.327529
+SumX2Base_Basic	1276.218	205.407	0.937167
+SumX2Base_X2	1287.185	203.657	0.929183
+SumX2Base	1264.625	207.290	0.945758
+SumX2Traits	63.218	4146.674	18.919165
+Sum128Base_Basic	4495.285	58.315	0.266063
+Sum128Base_Move	6062.811	43.238	0.197273
+Sum128Base	4553.492	57.570	0.262662
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	133.218	1967.777	8.977965
+Sum128Sse_Shuffle	181.604	1443.493	6.585924
+Sum128Sse_ShuffleXImm	81.761	3206.216	14.628335
+Sum128Traits	85.060	3081.855	14.060938
+Sum128X2Base_Basic	4383.740	59.799	0.272833
+Sum128X2Base_X2	4346.615	60.310	0.275163
+Sum128X2Base	4351.541	60.242	0.274852
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	75.552	3469.736	15.830640
+Sum128X2Sse_Unzip	119.684	2190.299	9.993219
+Sum128X2Traits	75.033	3493.704	15.939995
+Sum256Base_Basic	2621.109	100.013	0.456307
+Sum256Base	2641.814	99.229	0.452730
+Sum256Avx2_ByShorter	93.126	2814.944	12.843158
+Sum256Avx2_ByX2Unzip	234.068	1119.946	5.109745
+Sum256Avx2_Shuffle	114.446	2290.538	10.450560
+Sum256Avx2_ShuffleXImm	61.251	4279.829	19.526685
+Sum256Traits	63.448	4131.639	18.850567
+Sum256X2Base_Basic	2704.335	96.935	0.442264
+Sum256X2Base_X2	2708.421	96.789	0.441597
+Sum256X2Base	2696.383	97.221	0.443568
+Sum256X2Avx2_X2	62.456	4197.264	19.149984
+Sum256X2Avx2_Unzip	161.088	1627.334	7.424699
+Sum256X2Traits	65.319	4013.313	18.310707
+
+```
+
+#### .NET 7.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	7.0.20
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.20\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.20
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.20/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	519.044	505.052
+SumBase_ByX2Zip	180.622	1451.341	2.873650
+SumBase	177.283	1478.675	2.927771
+SumTraits	21.076	12438.171	24.627530
+SumX2Base_Basic	539.588	485.823	0.961927
+SumX2Base_X2	179.900	1457.164	2.885180
+SumX2Base_Zip	93.369	2807.625	5.559086
+SumX2Base	93.204	2812.575	5.568888
+SumX2Traits	22.850	11472.251	22.715012
+Sum128Base_Basic	527.085	497.347	0.984745
+Sum128Base_ByX2Zip	217.949	1202.776	2.381491
+Sum128Base	216.365	1211.580	2.398924
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	52.325	5009.925	9.919631
+Sum128Sse_Shuffle	32.923	7962.298	15.765319
+Sum128Traits	32.052	8178.769	16.193931
+Sum128X2Base_Basic	497.031	527.420	1.044289
+Sum128X2Base_X2	777.199	337.293	0.667839
+Sum128X2Base_Zip	132.326	1981.044	3.922460
+Sum128X2Base	132.195	1983.016	3.926364
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	33.877	7738.129	15.321464
+Sum128X2Sse_Zip	34.260	7651.703	15.150342
+Sum128X2Traits	35.000	7489.845	14.829863
+Sum256Base_Basic	493.551	531.139	1.051653
+Sum256Base_ByShorter	142.665	1837.481	3.638205
+Sum256Base_ByX2Zip	137.569	1905.547	3.772975
+Sum256Base	142.622	1838.032	3.639296
+Sum256Avx2_ByShorter	37.098	7066.288	13.991223
+Sum256Avx2_ByX2Unpack	40.893	6410.532	12.692827
+Sum256Avx2_ByX2Zip	73.105	3585.854	7.099976
+Sum256Avx2_Shuffle	20.550	12756.529	25.257877
+Sum256Traits	21.015	12473.862	24.698197
+Sum256X2Base_Basic	505.783	518.294	1.026219
+Sum256X2Base_X2	378.387	692.793	1.371727
+Sum256X2Base_Zip	86.450	3032.309	6.003959
+Sum256X2Base	86.237	3039.807	6.018806
+Sum256X2Avx2_Unpack	24.101	10876.832	21.536084
+Sum256X2Avx2_X2	22.262	11775.534	23.315510
+Sum256X2Avx2_Zip	44.508	5889.817	11.661814
+Sum256X2Traits	22.397	11704.543	23.174949
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	647.522	404.842
+SumBase_ByX2Zip	261.287	1003.279	2.478202
+SumBase	258.090	1015.709	2.508905
+SumTraits	41.803	6270.971	15.489938
+SumX2Base_Basic	656.625	399.229	0.986137
+SumX2Base_X2	263.754	993.897	2.455028
+SumX2Base_Zip	155.200	1689.073	4.172182
+SumX2Base	152.096	1723.543	4.257326
+SumX2Traits	45.207	5798.718	14.323424
+Sum128Base_Basic	702.959	372.915	0.921138
+Sum128Base_ByX2Zip	327.900	799.463	1.974754
+Sum128Base	328.565	797.845	1.970758
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	80.921	3239.524	8.001953
+Sum128Sse_Shuffle	65.429	4006.572	9.896640
+Sum128Traits	64.436	4068.295	10.049104
+Sum128X2Base_Basic	700.536	374.205	0.924325
+Sum128X2Base_X2	938.181	279.417	0.690189
+Sum128X2Base_Zip	212.538	1233.400	3.046623
+Sum128X2Base	212.175	1235.510	3.051837
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	64.900	4039.173	9.977170
+Sum128X2Sse_Zip	54.859	4778.519	11.803430
+Sum128X2Traits	55.831	4695.327	11.597935
+Sum256Base_Basic	645.079	406.375	1.003787
+Sum256Base_ByShorter	231.779	1131.009	2.793707
+Sum256Base_ByX2Zip	223.097	1175.021	2.902422
+Sum256Base	231.412	1132.803	2.798140
+Sum256Avx2_ByShorter	64.294	4077.272	10.071279
+Sum256Avx2_ByX2Unpack	70.452	3720.863	9.190911
+Sum256Avx2_ByX2Zip	118.077	2220.115	5.483910
+Sum256Avx2_Shuffle	42.024	6237.993	15.408479
+Sum256Traits	42.608	6152.492	15.197282
+Sum256X2Base_Basic	666.381	393.385	0.971700
+Sum256X2Base_X2	768.180	341.254	0.842931
+Sum256X2Base_Zip	144.141	1818.658	4.492269
+Sum256X2Base	142.642	1837.780	4.539503
+Sum256X2Avx2_Unpack	43.000	6096.369	15.058653
+Sum256X2Avx2_X2	45.437	5769.403	14.251013
+Sum256X2Avx2_Zip	71.529	3664.860	9.052577
+Sum256X2Traits	47.073	5568.883	13.755708
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	933.351	280.863
+SumBase_ByX2Zip	475.527	551.271	1.962773
+SumBase	475.633	551.148	1.962334
+SumTraits	40.404	6488.127	23.100665
+SumX2Base_Basic	965.014	271.648	0.967189
+SumX2Base_X2	472.972	554.248	1.973375
+SumX2Base_Zip	243.933	1074.657	3.826264
+SumX2Base	244.401	1072.598	3.818935
+SumX2Traits	42.179	6215.097	22.128556
+Sum128Base_Basic	1085.203	241.562	0.860071
+Sum128Base_ByX2Zip	436.802	600.144	2.136785
+Sum128Base	436.609	600.409	2.137729
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	105.255	2490.556	8.867505
+Sum128Sse_Shuffle	129.409	2025.701	7.212412
+Sum128Sse_ShuffleXImm	58.685	4466.959	15.904394
+Sum128Traits	58.216	4502.925	16.032449
+Sum128X2Base_Basic	1118.041	234.467	0.834809
+Sum128X2Base_X2	806.410	325.075	1.157415
+Sum128X2Base_Zip	316.667	827.822	2.947421
+Sum128X2Base	317.993	824.371	2.935132
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	56.036	4678.134	16.656272
+Sum128X2Sse_Zip	85.437	3068.281	10.924469
+Sum128X2Traits	53.548	4895.530	17.430302
+Sum256Base_Basic	937.141	279.727	0.995956
+Sum256Base_ByShorter	354.283	739.928	2.634479
+Sum256Base_ByX2Zip	333.759	785.429	2.796481
+Sum256Base	353.477	741.615	2.640484
+Sum256Avx2_ByShorter	72.926	3594.638	12.798538
+Sum256Avx2_ByX2Unpack	120.242	2180.138	7.762276
+Sum256Avx2_ByX2Zip	178.436	1469.117	5.230721
+Sum256Avx2_Shuffle	83.769	3129.362	11.141942
+Sum256Avx2_ShuffleXImm	40.898	6409.728	22.821530
+Sum256Traits	41.007	6392.612	22.760590
+Sum256X2Base_Basic	938.306	279.380	0.994720
+Sum256X2Base_X2	719.570	364.307	1.297096
+Sum256X2Base_Zip	229.916	1140.173	4.059533
+Sum256X2Base	230.546	1137.057	4.048436
+Sum256X2Avx2_Unpack	73.685	3557.617	12.666727
+Sum256X2Avx2_X2	42.392	6183.778	22.017046
+Sum256X2Avx2_Zip	109.892	2385.466	8.493336
+Sum256X2Traits	41.544	6310.064	22.466681
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	1489.849	175.953
+SumBase	1557.603	168.300	0.956501
+SumTraits	64.537	4061.920	23.085203
+SumX2Base_Basic	1610.293	162.793	0.925204
+SumX2Base_X2	1564.975	167.507	0.951996
+SumX2Base	1685.808	155.501	0.883760
+SumX2Traits	67.331	3893.358	22.127210
+Sum128Base_Basic	1926.522	136.071	0.773336
+Sum128Base_Move	3723.301	70.406	0.400142
+Sum128Base	1906.455	137.503	0.781476
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Zip	132.444	1979.282	11.248897
+Sum128Sse_Shuffle	172.941	1515.797	8.614766
+Sum128Sse_ShuffleXImm	84.756	3092.943	17.578196
+Sum128Traits	87.471	2996.937	17.032562
+Sum128X2Base_Basic	2240.020	117.028	0.665105
+Sum128X2Base_X2	2216.174	118.287	0.672262
+Sum128X2Base	2205.446	118.862	0.675532
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	80.840	3242.732	18.429492
+Sum128X2Sse_Zip	122.584	2138.492	12.153742
+Sum128X2Traits	79.721	3288.272	18.688313
+Sum256Base_Basic	1547.340	169.416	0.962845
+Sum256Base_ByShorter	2121.231	123.581	0.702351
+Sum256Base	1543.348	169.854	0.965336
+Sum256Avx2_ByShorter	111.392	2353.341	13.374795
+Sum256Avx2_ByX2Unpack	185.450	1413.555	8.033689
+Sum256Avx2_ByX2Zip	251.548	1042.122	5.922715
+Sum256Avx2_Shuffle	118.172	2218.327	12.607471
+Sum256Avx2_ShuffleXImm	67.122	3905.458	22.195982
+Sum256Traits	65.618	3994.982	22.704775
+Sum256X2Base_Basic	1627.405	161.081	0.915475
+Sum256X2Base_X2	1565.106	167.493	0.951916
+Sum256X2Base	1655.048	158.391	0.900185
+Sum256X2Avx2_Unpack	116.522	2249.737	12.785984
+Sum256X2Avx2_X2	64.782	4046.579	22.998017
+Sum256X2Avx2_Zip	165.444	1584.492	9.005181
+Sum256X2Traits	66.501	3941.973	22.403507
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	436.650	600.353
+SumBase_ByX2Unzip	165.319	1585.690	2.641263
+SumBase	164.908	1589.642	2.647847
+SumTraits	21.444	12224.632	20.362414
+SumX2Base_Basic	442.291	592.696	0.987246
+SumX2Base_X2	165.121	1587.586	2.644422
+SumX2Base_Unzip	84.994	3084.266	5.137422
+SumX2Base	84.754	3092.986	5.151947
+SumX2Traits	22.869	11463.088	19.093919
+Sum128Base_Basic	491.007	533.891	0.889295
+Sum128Base_ByX2Unzip	164.271	1595.806	2.658113
+Sum128Base	163.628	1602.076	2.668557
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	165.992	1579.257	2.630548
+Sum128Sse_Shuffle	32.545	8054.840	13.416843
+Sum128Traits	32.051	8179.048	13.623735
+Sum128X2Base_Basic	477.142	549.405	0.915137
+Sum128X2Base_X2	162.530	1612.897	2.686582
+Sum128X2Base_Unzip	107.698	2434.069	4.054398
+Sum128X2Base	107.015	2449.608	4.080280
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	34.296	7643.675	12.731972
+Sum128X2Sse_Unzip	106.563	2460.000	4.097591
+Sum128X2Traits	33.938	7724.295	12.866258
+Sum256Base_Basic	435.599	601.801	1.002412
+Sum256Base_ByShorter	102.612	2554.710	4.255348
+Sum256Base_ByX2Unzip	134.973	1942.202	3.235101
+Sum256Base	101.964	2570.940	4.282381
+Sum256Avx2_ByShorter	35.498	7384.694	12.300591
+Sum256Avx2_ByX2Unzip	140.575	1864.802	3.106177
+Sum256Avx2_Shuffle	21.639	12114.458	20.178897
+Sum256Traits	21.859	11992.316	19.975447
+Sum256X2Base_Basic	434.137	603.827	1.005788
+Sum256X2Base_X2	149.235	1756.584	2.925920
+Sum256X2Base_Unzip	80.123	3271.758	5.449725
+Sum256X2Base	80.044	3275.013	5.455147
+Sum256X2Avx2_X2	22.636	11580.611	19.289676
+Sum256X2Avx2_Unzip	88.234	2971.004	4.948763
+Sum256X2Traits	22.591	11603.820	19.328335
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	542.179	483.501
+SumBase_ByX2Unzip	242.031	1083.100	2.240121
+SumBase	239.373	1095.126	2.264995
+SumTraits	42.520	6165.240	12.751256
+SumX2Base_Basic	550.576	476.127	0.984750
+SumX2Base_X2	237.368	1104.380	2.284134
+SumX2Base_Unzip	139.616	1877.608	3.883362
+SumX2Base	138.176	1897.174	3.923831
+SumX2Traits	46.039	5693.957	11.776527
+Sum128Base_Basic	687.549	381.273	0.788569
+Sum128Base_ByX2Unzip	260.616	1005.864	2.080378
+Sum128Base	251.242	1043.391	2.157994
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	273.239	959.395	1.984269
+Sum128Sse_Shuffle	64.653	4054.607	8.385940
+Sum128Traits	66.007	3971.470	8.213992
+Sum128X2Base_Basic	927.019	282.782	0.584863
+Sum128X2Base_X2	246.444	1063.708	2.200013
+Sum128X2Base_Unzip	172.013	1523.978	3.151967
+Sum128X2Base	167.920	1561.128	3.228803
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	68.276	3839.485	7.941014
+Sum128X2Sse_Unzip	153.433	1708.523	3.533653
+Sum128X2Traits	66.459	3944.475	8.158161
+Sum256Base_Basic	516.626	507.416	1.049462
+Sum256Base_ByShorter	167.757	1562.642	3.231935
+Sum256Base_ByX2Unzip	221.128	1185.487	2.451884
+Sum256Base	168.072	1559.716	3.225883
+Sum256Avx2_ByShorter	70.610	3712.569	7.678520
+Sum256Avx2_ByX2Unzip	246.974	1061.424	2.195289
+Sum256Avx2_Shuffle	43.200	6068.177	12.550506
+Sum256Traits	43.256	6060.287	12.534188
+Sum256X2Base_Basic	569.408	460.380	0.952181
+Sum256X2Base_X2	151.275	1732.898	3.584065
+Sum256X2Base_Unzip	147.216	1780.678	3.682887
+Sum256X2Base	147.369	1778.823	3.679051
+Sum256X2Avx2_X2	46.112	5684.912	11.757820
+Sum256X2Avx2_Unzip	130.857	2003.281	4.143285
+Sum256X2Traits	44.986	5827.259	12.052227
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	787.530	332.869
+SumBase_ByX2Unzip	464.686	564.131	1.694755
+SumBase	467.934	560.215	1.682992
+SumTraits	44.533	5886.480	17.684089
+SumX2Base_Basic	831.843	315.137	0.946729
+SumX2Base_X2	474.592	552.357	1.659383
+SumX2Base_Unzip	235.771	1111.858	3.340231
+SumX2Base	233.184	1124.193	3.377285
+SumX2Traits	45.025	5822.141	17.490803
+Sum128Base_Basic	1204.237	217.685	0.653966
+Sum128Base_ByX2Unzip	372.911	702.967	2.111844
+Sum128Base	372.091	704.515	2.116497
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	128.553	2039.191	6.126112
+Sum128Sse_Shuffle	127.022	2063.776	6.199971
+Sum128Sse_ShuffleXImm	65.966	3973.944	11.938473
+Sum128Traits	66.371	3949.682	11.865584
+Sum128X2Base_Basic	1378.056	190.227	0.571479
+Sum128X2Base_X2	363.928	720.318	2.163970
+Sum128X2Base_Unzip	267.093	981.471	2.948522
+Sum128X2Base	271.870	964.226	2.896716
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	64.225	4081.624	12.261962
+Sum128X2Sse_Unzip	96.582	2714.210	8.153995
+Sum128X2Traits	64.772	4047.165	12.158443
+Sum256Base_Basic	797.843	328.566	0.987073
+Sum256Base_ByShorter	303.683	863.216	2.593264
+Sum256Base_ByX2Unzip	345.394	758.970	2.280088
+Sum256Base	303.329	864.224	2.596292
+Sum256Avx2_ByShorter	77.320	3390.365	10.185293
+Sum256Avx2_ByX2Unzip	203.707	1286.867	3.865990
+Sum256Avx2_Shuffle	88.423	2964.651	8.906368
+Sum256Avx2_ShuffleXImm	45.087	5814.163	17.466834
+Sum256Traits	44.741	5859.163	17.602022
+Sum256X2Base_Basic	839.700	312.188	0.937871
+Sum256X2Base_X2	267.552	979.786	2.943462
+Sum256X2Base_Unzip	224.375	1168.329	3.509878
+Sum256X2Base	223.691	1171.904	3.520618
+Sum256X2Avx2_X2	45.105	5811.831	17.459830
+Sum256X2Avx2_Unzip	110.576	2370.711	7.122060
+Sum256X2Traits	46.443	5644.395	16.956820
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	1313.606	199.561
+SumBase	1322.404	198.233	0.993347
+SumTraits	65.257	4017.094	20.129691
+SumX2Base_Basic	1426.488	183.769	0.920867
+SumX2Base_X2	1393.264	188.151	0.942826
+SumX2Base	1423.129	184.203	0.923041
+SumX2Traits	64.695	4052.023	20.304723
+Sum128Base_Basic	1826.330	143.536	0.719260
+Sum128Base_Move	3706.512	70.725	0.354405
+Sum128Base	1847.302	141.906	0.711094
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128Sse_ByX2Unzip	128.463	2040.616	10.225545
+Sum128Sse_Shuffle	177.279	1478.706	7.409810
+Sum128Sse_ShuffleXImm	85.917	3051.116	15.289170
+Sum128Traits	86.200	3041.130	15.239131
+Sum128X2Base_Basic	1853.836	141.406	0.708588
+Sum128X2Base_X2	1855.887	141.250	0.707805
+Sum128X2Base	1847.382	141.900	0.711064
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2Sse_X2	78.261	3349.594	16.784846
+Sum128X2Sse_Unzip	126.441	2073.246	10.389056
+Sum128X2Traits	77.077	3401.052	17.042703
+Sum256Base_Basic	1309.567	200.176	1.003084
+Sum256Base_ByShorter	1896.014	138.261	0.692825
+Sum256Base	1339.342	195.726	0.980784
+Sum256Avx2_ByShorter	107.198	2445.416	12.254003
+Sum256Avx2_ByX2Unzip	235.618	1112.579	5.575142
+Sum256Avx2_Shuffle	122.443	2140.945	10.728293
+Sum256Avx2_ShuffleXImm	62.353	4204.163	21.067097
+Sum256Traits	66.129	3964.121	19.864243
+Sum256X2Base_Basic	1439.122	182.155	0.912783
+Sum256X2Base_X2	1426.135	183.814	0.921095
+Sum256X2Base	1413.325	185.480	0.929443
+Sum256X2Avx2_X2	65.027	4031.334	20.201048
+Sum256X2Avx2_Unzip	163.783	1600.553	8.020386
+Sum256X2Traits	64.311	4076.183	20.425787
+
+```
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	16
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	8.0.8
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.8\
+RuntimeInformation.FrameworkDescription:	.NET 8.0.8
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector512.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.8/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844161	# 0x8177F7FF
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Avx512BW, Avx512CD, Avx512DQ, Avx512F, Avx512Vbmi, Avx512VL, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2, Avx512VL
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vector512s.Instance:	WVectorTraits512Avx512	// Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi, Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+# Sum512Base_Basic	114
+# Sum512X2Base_Basic	114
+SumBase_Basic	390.850	670.702
+SumBase_ByX2Zip	175.599	1492.857	2.225812
+SumBase	179.096	1463.708	2.182351
+SumTraits	11.989	21865.365	32.600700
+SumX2Base_Basic	401.549	652.833	0.973357
+SumX2Base_X2	174.482	1502.412	2.240059
+SumX2Base_Zip	89.098	2942.197	4.386740
+SumX2Base	88.171	2973.122	4.432849
+SumX2Traits	11.706	22393.695	33.388426
+Sum128Base_Basic	364.311	719.561	1.072847
+Sum128Base_ByX2Zip	209.574	1250.840	1.864970
+Sum128Base	210.079	1247.833	1.860486
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	51.770	5063.589	7.549681
+Sum128Sse_Shuffle	31.752	8256.101	12.309635
+Sum128Sse_ShuffleX	22.692	11552.229	17.224078
+Sum128Traits	22.801	11497.157	17.141967
+Sum128X2Base_Basic	392.152	668.476	0.996681
+Sum128X2Base_X2	279.167	939.022	1.400058
+Sum128X2Base_Zip	124.438	2106.623	3.140921
+Sum128X2Base	124.512	2105.378	3.139065
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	22.376	11715.481	17.467483
+Sum128X2Sse_Zip	29.007	9037.282	13.474356
+Sum128X2Traits	23.342	11230.363	16.744184
+Sum256Base_Basic	414.721	632.097	0.942441
+Sum256Base_ByShorter	139.454	1879.790	2.802720
+Sum256Base_ByX2Zip	136.125	1925.758	2.871256
+Sum256Base	139.755	1875.743	2.796686
+Sum256Avx2_ByShorter	27.374	9576.397	14.278164
+Sum256Avx2_ByX2Unpack	32.044	8180.676	12.197179
+Sum256Avx2_ByX2Zip	41.465	6322.010	9.425956
+Sum256Avx2_Shuffle	18.048	14524.757	21.656041
+Sum256Avx2_ShuffleX	11.437	22919.696	34.172681
+Sum256Traits	11.987	21868.298	32.605073
+Sum256X2Base_Basic	401.949	652.183	0.972388
+Sum256X2Base_X2	229.655	1141.468	1.701899
+Sum256X2Base_Zip	79.239	3308.276	4.932555
+Sum256X2Base	78.542	3337.624	4.976312
+Sum256X2Avx2_Unpack	19.254	13615.024	20.299652
+Sum256X2Avx2_X2	11.292	23214.536	34.612279
+Sum256X2Avx2_Zip	22.889	11453.027	17.076171
+Sum256X2Traits	11.795	22225.162	33.137148
+Sum512Base_Basic	373.927	701.056	1.045257
+Sum512Base_ByShorter	89.913	2915.542	4.346999
+Sum512Base_ByX2Zip	147.599	1776.056	2.648054
+Sum512Base	89.492	2929.252	4.367440
+Sum512Avx512_ByShorter	16.761	15640.103	23.318994
+Sum512Avx512_ByX2Unpack	32.683	8020.784	11.958784
+Sum512Avx512_ByX2Zip	42.861	6116.089	9.118932
+Sum512Avx512_ShuffleX	10.113	25920.214	38.646376
+Sum512Traits	10.103	25947.696	38.687351
+Sum512X2Base_Basic	371.071	706.452	1.053302
+Sum512X2Base_X2	243.016	1078.709	1.608328
+Sum512X2Base_Zip	84.515	3101.737	4.624610
+Sum512X2Base	83.866	3125.751	4.660414
+Sum512X2Avx512_Unpack	20.632	12705.827	18.944063
+Sum512X2Avx512_X2	10.065	26045.677	38.833438
+Sum512X2Avx512_Zip	23.116	11340.582	16.908518
+Sum512X2Traits	10.143	25845.321	38.534713
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+# Sum512Base_Basic	-24614
+# Sum512X2Base_Basic	-24614
+SumBase_Basic	491.595	533.252
+SumBase_ByX2Zip	256.450	1022.203	1.916921
+SumBase	259.821	1008.942	1.892054
+SumTraits	25.080	10452.168	19.600790
+SumX2Base_Basic	484.619	540.928	1.014394
+SumX2Base_X2	255.943	1024.229	1.920721
+SumX2Base_Zip	145.989	1795.638	3.367333
+SumX2Base	148.852	1761.102	3.302568
+SumX2Traits	24.029	10909.299	20.458040
+Sum128Base_Basic	495.306	529.257	0.992507
+Sum128Base_ByX2Zip	312.690	838.350	1.572145
+Sum128Base	313.968	834.939	1.565748
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	79.947	3278.958	6.148980
+Sum128Sse_Shuffle	65.768	3985.895	7.474688
+Sum128Sse_ShuffleX	46.214	5672.390	10.637346
+Sum128Traits	46.574	5628.521	10.555079
+Sum128X2Base_Basic	490.297	534.664	1.002647
+Sum128X2Base_X2	287.914	910.493	1.707434
+Sum128X2Base_Zip	196.417	1334.632	2.502814
+Sum128X2Base	196.658	1332.993	2.499742
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	45.232	5795.504	10.868219
+Sum128X2Sse_Zip	47.054	5571.178	10.447545
+Sum128X2Traits	47.229	5550.486	10.408741
+Sum256Base_Basic	473.235	553.940	1.038796
+Sum256Base_ByShorter	231.073	1134.466	2.127446
+Sum256Base_ByX2Zip	216.248	1212.238	2.273291
+Sum256Base	230.034	1139.589	2.137054
+Sum256Avx2_ByShorter	53.567	4893.746	9.177166
+Sum256Avx2_ByX2Unpack	52.812	4963.754	9.308451
+Sum256Avx2_ByX2Zip	64.349	4073.785	7.639506
+Sum256Avx2_Shuffle	34.967	7496.953	14.058920
+Sum256Avx2_ShuffleX	25.695	10201.952	19.131563
+Sum256Traits	25.001	10485.354	19.663022
+Sum256X2Base_Basic	477.647	548.823	1.029200
+Sum256X2Base_X2	337.827	775.972	1.455168
+Sum256X2Base_Zip	128.774	2035.685	3.817488
+Sum256X2Base	131.265	1997.059	3.745054
+Sum256X2Avx2_Unpack	30.621	8560.828	16.053988
+Sum256X2Avx2_X2	24.320	10778.854	20.213418
+Sum256X2Avx2_Zip	36.336	7214.355	13.528969
+Sum256X2Traits	24.378	10753.432	20.165745
+Sum512Base_Basic	419.460	624.956	1.171970
+Sum512Base_ByShorter	154.124	1700.865	3.189606
+Sum512Base_ByX2Zip	243.723	1075.581	2.017020
+Sum512Base	153.508	1707.693	3.202411
+Sum512Avx512_ByShorter	34.561	7584.870	14.223791
+Sum512Avx512_ByX2Unpack	56.392	4648.601	8.717450
+Sum512Avx512_ByX2Zip	70.961	3694.187	6.927652
+Sum512Avx512_ShuffleX	22.062	11882.103	22.282325
+Sum512Traits	21.819	12014.209	22.530061
+Sum512X2Base_Basic	428.687	611.505	1.146745
+Sum512X2Base_X2	280.603	934.217	1.751924
+Sum512X2Base_Zip	142.532	1839.193	3.449011
+Sum512X2Base	142.953	1833.781	3.438862
+Sum512X2Avx512_Unpack	35.490	7386.441	13.851679
+Sum512X2Avx512_X2	21.888	11976.703	22.459725
+Sum512X2Avx512_Zip	39.224	6683.174	12.532852
+Sum512X2Traits	22.020	11904.808	22.324902
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+# Sum512Base_Basic	-467755046
+# Sum512X2Base_Basic	-467755046
+SumBase_Basic	669.571	391.511
+SumBase_ByX2Zip	472.694	554.575	1.416501
+SumBase	472.274	555.068	1.417760
+SumTraits	37.709	6951.683	17.756056
+SumX2Base_Basic	659.307	397.606	1.015568
+SumX2Base_X2	469.516	558.328	1.426087
+SumX2Base_Zip	241.275	1086.495	2.775135
+SumX2Base	239.819	1093.091	2.791984
+SumX2Traits	35.319	7422.183	18.957812
+Sum128Base_Basic	765.680	342.368	0.874479
+Sum128Base_ByX2Zip	419.659	624.660	1.595513
+Sum128Base	416.641	629.184	1.607069
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	99.324	2639.280	6.741275
+Sum128Sse_Shuffle	124.462	2106.215	5.379715
+Sum128Sse_ShuffleX	92.754	2826.239	7.218807
+Sum128Sse_ShuffleXImm	49.111	5337.733	13.633690
+Sum128Traits	50.320	5209.526	13.306221
+Sum128X2Base_Basic	747.987	350.466	0.895163
+Sum128X2Base_X2	375.426	698.258	1.783496
+Sum128X2Base_Zip	286.223	915.872	2.339330
+Sum128X2Base	288.253	909.424	2.322859
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	48.799	5371.966	13.721129
+Sum128X2Sse_Zip	68.558	3823.660	9.766430
+Sum128X2Traits	47.707	5494.890	14.035102
+Sum256Base_Basic	672.752	389.659	0.995272
+Sum256Base_ByShorter	353.725	741.095	1.892912
+Sum256Base_ByX2Zip	319.799	819.715	2.093723
+Sum256Base	353.932	740.661	1.891804
+Sum256Avx2_ByShorter	63.926	4100.731	10.474127
+Sum256Avx2_ByX2Unpack	78.435	3342.191	8.536658
+Sum256Avx2_ByX2Zip	99.238	2641.572	6.747129
+Sum256Avx2_Shuffle	72.040	3638.845	9.294374
+Sum256Avx2_ShuffleX	50.084	5234.086	13.368953
+Sum256Avx2_ShuffleXImm	38.167	6868.362	17.543238
+Sum256Traits	37.837	6928.314	17.696368
+Sum256X2Base_Basic	658.134	398.314	1.017377
+Sum256X2Base_X2	326.486	802.926	2.050842
+Sum256X2Base_Zip	204.277	1283.275	3.277754
+Sum256X2Base	205.494	1275.678	3.258350
+Sum256X2Avx2_Unpack	51.571	5083.183	12.983517
+Sum256X2Avx2_X2	36.491	7183.896	18.349177
+Sum256X2Avx2_Zip	60.672	4320.654	11.035856
+Sum256X2Traits	37.060	7073.414	18.066982
+Sum512Base_Basic	556.315	471.215	1.203581
+Sum512Base_ByShorter	251.608	1041.874	2.661164
+Sum512Base_ByX2Zip	383.320	683.877	1.746766
+Sum512Base	251.200	1043.567	2.665490
+Sum512Avx512_ByShorter	55.167	4751.835	12.137183
+Sum512Avx512_ByX2Unpack	91.040	2879.436	7.354683
+Sum512Avx512_ByX2Zip	113.157	2316.631	5.917160
+Sum512Avx512_ShuffleX	44.515	5888.938	15.041584
+Sum512Avx512_ShuffleXImm	39.084	6707.153	17.131477
+Sum512Traits	39.290	6672.005	17.041701
+Sum512X2Base_Basic	570.790	459.265	1.173059
+Sum512X2Base_X2	255.097	1027.626	2.624772
+Sum512X2Base_Zip	233.050	1124.839	2.873074
+Sum512X2Base	232.355	1128.204	2.881670
+Sum512X2Avx512_Unpack	57.494	4559.510	11.645944
+Sum512X2Avx512_X2	38.947	6730.724	17.191681
+Sum512X2Avx512_Zip	63.553	4124.833	10.535690
+Sum512X2Traits	39.094	6705.456	17.127140
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+# Sum512Base_Basic	5910372263572008452
+# Sum512X2Base_Basic	5910372263572008452
+SumBase_Basic	1091.212	240.232
+SumBase	1099.497	238.422	0.992465
+SumTraits	59.775	4385.505	18.255297
+SumX2Base_Basic	1071.201	244.720	1.018681
+SumX2Base_X2	1076.678	243.475	1.013499
+SumX2Base	1075.847	243.663	1.014282
+SumX2Traits	54.777	4785.675	19.921062
+Sum128Base_Basic	1328.674	197.297	0.821279
+Sum128Base_Move	1760.916	148.868	0.619685
+Sum128Base	1327.635	197.452	0.821922
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	131.471	1993.932	8.300030
+Sum128Sse_Shuffle	175.028	1497.726	6.234499
+Sum128Sse_ShuffleX	127.185	2061.123	8.579721
+Sum128Sse_ShuffleXImm	86.048	3046.479	12.681407
+Sum128Traits	84.241	3111.839	12.953480
+Sum128X2Base_Basic	1290.718	203.099	0.845431
+Sum128X2Base_X2	1294.848	202.452	0.842734
+Sum128X2Base	1290.419	203.146	0.845626
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	63.453	4131.315	17.197197
+Sum128X2Sse_Zip	98.572	2659.430	11.070260
+Sum128X2Traits	69.164	3790.193	15.777227
+Sum256Base_Basic	1084.064	241.816	1.006594
+Sum256Base_ByShorter	1312.017	199.802	0.831706
+Sum256Base	1109.290	236.317	0.983703
+Sum256Avx2_ByShorter	96.207	2724.795	11.342354
+Sum256Avx2_ByX2Unpack	106.021	2472.575	10.292449
+Sum256Avx2_ByX2Zip	127.484	2056.297	8.559634
+Sum256Avx2_Shuffle	106.189	2468.659	10.276150
+Sum256Avx2_ShuffleX	100.764	2601.554	10.829342
+Sum256Avx2_ShuffleXImm	57.833	4532.797	18.868422
+Sum256Traits	58.641	4470.329	18.608391
+Sum256X2Base_Basic	1065.547	246.018	1.024087
+Sum256X2Base_X2	1069.480	245.114	1.020320
+Sum256X2Base	1075.229	243.803	1.014865
+Sum256X2Avx2_Unpack	76.875	3410.007	14.194647
+Sum256X2Avx2_X2	56.321	4654.469	19.374900
+Sum256X2Avx2_Zip	90.883	2884.402	12.006741
+Sum256X2Traits	57.697	4543.439	18.912720
+Sum512Base_Basic	839.494	312.264	1.299845
+Sum512Base_ByShorter	1108.234	236.542	0.984641
+Sum512Base	845.848	309.919	1.290081
+Sum512Avx512_ByShorter	92.934	2820.750	11.741778
+Sum512Avx512_ByX2Unpack	140.746	1862.534	7.753067
+Sum512Avx512_ByX2Zip	167.431	1565.685	6.517390
+Sum512Avx512_ShuffleX	86.197	3041.213	12.659488
+Sum512Avx512_ShuffleXImm	62.297	4207.988	17.516358
+Sum512Traits	62.520	4192.943	17.453732
+Sum512X2Base_Basic	841.424	311.548	1.296864
+Sum512X2Base_X2	834.820	314.013	1.307123
+Sum512X2Base	836.214	313.489	1.304944
+Sum512X2Avx512_Unpack	87.815	2985.192	12.426291
+Sum512X2Avx512_X2	61.971	4230.122	17.608495
+Sum512X2Avx512_Zip	97.342	2693.015	11.210065
+Sum512X2Traits	61.953	4231.356	17.613630
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+# Sum512Base_Basic	114
+# Sum512X2Base_Basic	114
+SumBase_Basic	385.629	679.783
+SumBase_ByX2Unzip	153.191	1711.221	2.517304
+SumBase	153.429	1708.570	2.513404
+SumTraits	12.175	21531.572	31.674165
+SumX2Base_Basic	402.243	651.705	0.958695
+SumX2Base_X2	156.583	1674.158	2.462781
+SumX2Base_Unzip	76.555	3424.238	5.037248
+SumX2Base	76.891	3409.277	5.015240
+SumX2Traits	11.529	22736.985	33.447397
+Sum128Base_Basic	438.014	598.484	0.880403
+Sum128Base_ByX2Unzip	175.010	1497.883	2.203471
+Sum128Base	175.058	1497.468	2.202860
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	65.566	3998.143	5.881495
+Sum128Sse_Shuffle	32.099	8166.821	12.013858
+Sum128Sse_ShuffleX	22.287	11762.303	17.303016
+Sum128Traits	21.842	12001.819	17.655357
+Sum128X2Base_Basic	411.116	637.641	0.938005
+Sum128X2Base_X2	167.011	1569.619	2.308998
+Sum128X2Base_Unzip	109.339	2397.535	3.526911
+Sum128X2Base	108.611	2413.611	3.550559
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	21.845	12000.367	17.653221
+Sum128X2Sse_Unzip	39.226	6682.915	9.830947
+Sum128X2Traits	22.884	11455.327	16.851437
+Sum256Base_Basic	367.164	713.970	1.050290
+Sum256Base_ByShorter	124.836	2099.915	3.089094
+Sum256Base_ByX2Unzip	117.002	2240.503	3.295907
+Sum256Base	124.789	2100.705	3.090256
+Sum256Avx2_ByShorter	26.424	9920.785	14.594039
+Sum256Avx2_ByX2Unzip	42.039	6235.736	9.173121
+Sum256Avx2_Shuffle	18.782	13957.492	20.532263
+Sum256Avx2_ShuffleX	11.979	21883.450	32.191797
+Sum256Traits	12.126	21617.547	31.800639
+Sum256X2Base_Basic	385.927	679.258	0.999228
+Sum256X2Base_X2	112.208	2336.242	3.436745
+Sum256X2Base_Unzip	69.825	3754.315	5.522810
+Sum256X2Base	69.781	3756.670	5.526276
+Sum256X2Avx2_X2	12.005	21837.127	32.123654
+Sum256X2Avx2_Unzip	23.826	11002.207	16.184872
+Sum256X2Traits	11.969	21901.427	32.218243
+Sum512Base_Basic	406.709	644.550	0.948170
+Sum512Base_ByShorter	83.976	3121.646	4.592118
+Sum512Base_ByX2Unzip	129.832	2019.100	2.970211
+Sum512Base	83.622	3134.877	4.611581
+Sum512Avx512_ByShorter	17.202	15239.149	22.417654
+Sum512Avx512_ByX2Unzip	42.728	6135.134	9.025130
+Sum512Avx512_ShuffleX	10.144	25842.514	38.015806
+Sum512Traits	10.109	25931.299	38.146413
+Sum512X2Base_Basic	414.599	632.283	0.930124
+Sum512X2Base_X2	76.901	3408.872	5.014644
+Sum512X2Base_Unzip	75.466	3473.689	5.109993
+Sum512X2Base	75.199	3486.006	5.128114
+Sum512X2Avx512_X2	9.995	26226.454	38.580603
+Sum512X2Avx512_Unzip	24.344	10768.522	15.841108
+Sum512X2Traits	10.206	25685.122	37.784274
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+# Sum512Base_Basic	-24614
+# Sum512X2Base_Basic	-24614
+SumBase_Basic	465.239	563.462
+SumBase_ByX2Unzip	228.808	1145.697	2.033318
+SumBase	228.712	1146.176	2.034170
+SumTraits	25.328	10349.838	18.368313
+SumX2Base_Basic	474.148	552.873	0.981209
+SumX2Base_X2	224.239	1169.037	2.074742
+SumX2Base_Unzip	126.854	2066.503	3.667513
+SumX2Base	126.930	2065.269	3.665324
+SumX2Traits	24.561	10673.106	18.942031
+Sum128Base_Basic	702.476	373.172	0.662284
+Sum128Base_ByX2Unzip	252.390	1038.647	1.843333
+Sum128Base	252.576	1037.884	1.841978
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	96.578	2714.316	4.817217
+Sum128Sse_Shuffle	65.176	4022.091	7.138182
+Sum128Sse_ShuffleX	47.763	5488.383	9.740475
+Sum128Traits	46.065	5690.684	10.099508
+Sum128X2Base_Basic	662.724	395.555	0.702009
+Sum128X2Base_X2	238.531	1098.994	1.950433
+Sum128X2Base_Unzip	170.241	1539.842	2.732826
+Sum128X2Base	170.300	1539.309	2.731880
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	46.648	5619.666	9.973469
+Sum128X2Sse_Unzip	63.974	4097.653	7.272285
+Sum128X2Traits	44.552	5884.038	10.442662
+Sum256Base_Basic	450.200	582.283	1.033404
+Sum256Base_ByShorter	205.442	1275.999	2.264571
+Sum256Base_ByX2Unzip	190.349	1377.177	2.444137
+Sum256Base	205.439	1276.016	2.264602
+Sum256Avx2_ByShorter	53.337	4914.845	8.722592
+Sum256Avx2_ByX2Unzip	65.048	4030.032	7.152276
+Sum256Avx2_Shuffle	38.253	6852.817	12.161996
+Sum256Avx2_ShuffleX	24.884	10534.644	18.696297
+Sum256Traits	26.827	9771.631	17.342144
+Sum256X2Base_Basic	484.947	540.562	0.959359
+Sum256X2Base_X2	181.686	1442.843	2.560677
+Sum256X2Base_Unzip	115.968	2260.480	4.011773
+Sum256X2Base	115.961	2260.624	4.012029
+Sum256X2Avx2_X2	24.424	10732.979	19.048291
+Sum256X2Avx2_Unzip	40.622	6453.217	11.452808
+Sum256X2Traits	24.597	10657.366	18.914098
+Sum512Base_Basic	500.546	523.716	0.929461
+Sum512Base_ByShorter	145.618	1800.216	3.194923
+Sum512Base_ByX2Unzip	220.706	1187.754	2.107960
+Sum512Base	145.674	1799.529	3.193703
+Sum512Avx512_ByShorter	35.563	7371.247	13.082077
+Sum512Avx512_ByX2Unzip	70.865	3699.195	6.565124
+Sum512Avx512_ShuffleX	22.559	11620.418	20.623268
+Sum512Traits	22.005	11912.948	21.142434
+Sum512X2Base_Basic	500.712	523.543	0.929154
+Sum512X2Base_X2	131.333	1996.031	3.542445
+Sum512X2Base_Unzip	130.520	2008.463	3.564508
+Sum512X2Base	130.139	2014.343	3.574943
+Sum512X2Avx512_X2	21.824	12011.647	21.317599
+Sum512X2Avx512_Unzip	41.452	6324.074	11.223612
+Sum512X2Traits	21.999	11915.957	21.147774
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-466706470
+# Sum128X2Base_Basic	-466706470
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+# Sum512Base_Basic	-467755046
+# Sum512X2Base_Basic	-467755046
+SumBase_Basic	696.382	376.437
+SumBase_ByX2Unzip	406.692	644.576	1.712306
+SumBase	407.323	643.577	1.709654
+SumTraits	41.521	6313.509	16.771747
+SumX2Base_Basic	729.620	359.289	0.954445
+SumX2Base_X2	410.537	638.540	1.696272
+SumX2Base_Unzip	204.016	1284.918	3.413366
+SumX2Base	203.835	1286.062	3.416405
+SumX2Traits	39.639	6613.310	17.568164
+Sum128Base_Basic	1207.970	217.012	0.576490
+Sum128Base_ByX2Unzip	317.461	825.751	2.193596
+Sum128Base	315.795	830.109	2.205172
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	104.219	2515.324	6.681923
+Sum128Sse_Shuffle	127.888	2049.798	5.445259
+Sum128Sse_ShuffleX	97.357	2692.596	7.152844
+Sum128Sse_ShuffleXImm	59.650	4394.699	11.674456
+Sum128Traits	58.236	4501.424	11.957970
+Sum128X2Base_Basic	1022.668	256.334	0.680946
+Sum128X2Base_X2	285.072	919.572	2.442831
+Sum128X2Base_Unzip	250.091	1048.194	2.784511
+Sum128X2Base	250.301	1047.316	2.782180
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	54.232	4833.785	12.840882
+Sum128X2Sse_Unzip	77.091	3400.468	9.033294
+Sum128X2Traits	54.624	4799.044	12.748592
+Sum256Base_Basic	705.843	371.391	0.986596
+Sum256Base_ByShorter	310.785	843.489	2.240718
+Sum256Base_ByX2Unzip	272.608	961.616	2.554519
+Sum256Base	311.000	842.907	2.239171
+Sum256Avx2_ByShorter	71.886	3646.666	9.687317
+Sum256Avx2_ByX2Unzip	97.296	2694.290	7.157343
+Sum256Avx2_Shuffle	77.875	3366.230	8.942343
+Sum256Avx2_ShuffleX	51.034	5136.703	13.645580
+Sum256Avx2_ShuffleXImm	41.687	6288.328	16.704854
+Sum256Traits	40.640	6450.377	17.135336
+Sum256X2Base_Basic	714.123	367.085	0.975156
+Sum256X2Base_X2	268.211	977.380	2.596397
+Sum256X2Base_Unzip	180.811	1449.824	3.851437
+Sum256X2Base	181.228	1446.490	3.842581
+Sum256X2Avx2_X2	39.905	6569.127	17.450794
+Sum256X2Avx2_Unzip	64.357	4073.254	10.820541
+Sum256X2Traits	39.364	6659.476	17.690804
+Sum512Base_Basic	679.874	385.577	1.024281
+Sum512Base_ByShorter	239.116	1096.304	2.912316
+Sum512Base_ByX2Unzip	344.339	761.296	2.022372
+Sum512Base	238.644	1098.474	2.918082
+Sum512Avx512_ByShorter	66.318	3952.849	10.500688
+Sum512Avx512_ByX2Unzip	112.793	2324.108	6.173959
+Sum512Avx512_ShuffleX	44.432	5899.928	15.673075
+Sum512Avx512_ShuffleXImm	43.796	5985.577	15.900601
+Sum512Traits	43.640	6006.968	15.957426
+Sum512X2Base_Basic	729.349	359.422	0.954799
+Sum512X2Base_X2	210.087	1247.789	3.314733
+Sum512X2Base_Unzip	214.288	1223.325	3.249747
+Sum512X2Base	209.321	1252.354	3.326861
+Sum512X2Avx512_X2	43.977	5960.937	15.835145
+Sum512X2Avx512_Unzip	68.328	3836.576	10.191809
+Sum512X2Traits	43.788	5986.623	15.903379
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572532740
+# Sum128X2Base_Basic	5910372263572532740
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+# Sum512Base_Basic	5910372263572008452
+# Sum512X2Base_Basic	5910372263572008452
+SumBase_Basic	1158.419	226.295
+SumBase	1160.440	225.900	0.998258
+SumTraits	57.194	4583.389	20.254082
+SumX2Base_Basic	1237.836	211.776	0.935842
+SumX2Base_X2	1261.030	207.881	0.918629
+SumX2Base	1262.995	207.557	0.917200
+SumX2Traits	57.305	4574.568	20.215100
+Sum128Base_Basic	1793.855	146.134	0.645771
+Sum128Base_Move	1752.955	149.544	0.660838
+Sum128Base	1785.417	146.825	0.648823
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	134.656	1946.775	8.602834
+Sum128Sse_Shuffle	174.363	1503.441	6.643734
+Sum128Sse_ShuffleX	125.746	2084.716	9.212397
+Sum128Sse_ShuffleXImm	83.554	3137.428	13.864354
+Sum128Traits	82.738	3168.371	14.001091
+Sum128X2Base_Basic	1766.131	148.428	0.655908
+Sum128X2Base_X2	1759.178	149.015	0.658500
+Sum128X2Base	1758.321	149.088	0.658821
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	72.002	3640.803	16.088778
+Sum128X2Sse_Unzip	105.527	2484.139	10.977456
+Sum128X2Traits	68.858	3807.024	16.823311
+Sum256Base_Basic	1171.586	223.751	0.988762
+Sum256Base_ByShorter	1824.430	143.685	0.634949
+Sum256Base	1152.558	227.445	1.005085
+Sum256Avx2_ByShorter	96.875	2706.013	11.957921
+Sum256Avx2_ByX2Unzip	124.231	2110.139	9.324744
+Sum256Avx2_Shuffle	108.922	2406.720	10.635343
+Sum256Avx2_ShuffleX	100.287	2613.951	11.551098
+Sum256Avx2_ShuffleXImm	58.596	4473.729	19.769492
+Sum256Traits	59.054	4439.048	19.616239
+Sum256X2Base_Basic	1247.005	210.219	0.928961
+Sum256X2Base_X2	1234.344	212.375	0.938490
+Sum256X2Base	1236.896	211.937	0.936554
+Sum256X2Avx2_X2	56.797	4615.440	20.395717
+Sum256X2Avx2_Unzip	99.404	2637.167	11.653692
+Sum256X2Traits	56.435	4645.092	20.526749
+Sum512Base_Basic	1167.096	224.612	0.992565
+Sum512Base_ByShorter	1365.533	191.972	0.848328
+Sum512Base	1160.164	225.954	0.998496
+Sum512Avx512_ByShorter	90.894	2884.058	12.744708
+Sum512Avx512_ByX2Unzip	168.058	1559.843	6.892973
+Sum512Avx512_ShuffleX	86.933	3015.456	13.325358
+Sum512Avx512_ShuffleXImm	65.068	4028.783	17.803270
+Sum512Traits	64.745	4048.897	17.892152
+Sum512X2Base_Basic	1211.120	216.448	0.956486
+Sum512X2Base_X2	1215.339	215.696	0.953166
+Sum512X2Base	1264.499	207.311	0.916109
+Sum512X2Avx512_X2	65.090	4027.411	17.797206
+Sum512X2Avx512_Unzip	107.474	2439.135	10.778581
+Sum512X2Traits	65.128	4025.030	17.786683
+
+```
+
+### Intel Core i5-8250U
+`Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz`
+
+#### .NET Framework
+
+```
+VectorTraits.Benchmarks.NetFw
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9195.0
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///E:/910Soft/MyCode/VectorTraits_test/RunBenchmarks_All/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+```
+
+#### .NET Core 2.1
+
+```
+VectorTraits.Benchmarks.NetCore
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
+Environment.Version:	4.0.30319.42000
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\2.1.30\
+RuntimeInformation.FrameworkDescription:	.NET Core 4.6.30411.01
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045 
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/2.1.30/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 2.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 2.1
+VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	
+Vectors.Instance:	VectorTraits256Base	// 
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+```
+
+#### .NET Core 3.1
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
+Environment.Version:	3.1.32
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\3.1.32\
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+```
+
+#### .NET 5.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
+Environment.Version:	5.0.17
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\5.0.17\
+RuntimeInformation.FrameworkDescription:	.NET 5.0.17
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+```
+
+#### .NET 6.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
+Environment.Version:	6.0.24
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.24\
+RuntimeInformation.FrameworkDescription:	.NET 6.0.24
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/6.0.24/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+```
+
+#### .NET 7.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
+Environment.Version:	7.0.13
+Stopwatch.Frequency:	10000000
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.13\
+RuntimeInformation.FrameworkDescription:	.NET 7.0.13
+RuntimeInformation.OSArchitecture:	X64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
+RuntimeInformation.RuntimeIdentifier:	win10-x64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	32	# 256bit
+Vector<float>.Count:	8	# 256bit
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.13/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
+VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vectors.BaseInstance:	VectorTraits256Base
+
+
+```
+
+## Arm
+
+### Apple M2
+`Apple M2`
+
+#### .NET 6.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 15.0.1
+Environment.Version:	6.0.33
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/usr/local/share/dotnet/shared/Microsoft.NETCore.App/6.0.33/
+RuntimeInformation.FrameworkDescription:	.NET 6.0.33
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Darwin 24.0.0 Darwin Kernel Version 24.0.0: Tue Sep 24 23:37:13 PDT 2024; root:xnu-11215.1.12~1/RELEASE_ARM64_T8112
+RuntimeInformation.RuntimeIdentifier:	osx.15-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector<T>.Assembly.CodeBase:	file:///usr/local/share/dotnet/shared/Microsoft.NETCore.App/6.0.33/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Apple M2
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, ArmBase, Crc32
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	362.868	722.423
+SumBase_ByX2Zip	154.193	1700.102	2.353332
+SumBase	154.188	1700.158	2.353410
+SumTraits	21.714	12072.352	16.710910
+SumX2Base_Basic	364.453	719.280	0.995649
+SumX2Base_X2	216.828	1208.996	1.673528
+SumX2Base_Zip	85.809	3054.984	4.228801
+SumX2Base	85.743	3057.308	4.232017
+SumX2Traits	19.303	13580.447	18.798460
+Sum128Base_Basic	562.881	465.719	0.644662
+Sum128Base	565.609	463.472	0.641552
+Sum128AdvSimd_ByX2Zip	129.389	2026.016	2.804471
+Sum128AdvSimd_Shuffle	55.431	4729.162	6.546248
+Sum128AdvSimdB64_ByX2Zip	31.334	8366.119	11.580631
+Sum128AdvSimdB64_Shuffle	21.718	12070.559	16.708428
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	21.715	12071.952	16.710356
+Sum128X2Base_Basic	572.904	457.571	0.633383
+Sum128X2Base_X2	573.292	457.261	0.632954
+Sum128X2Base	572.899	457.574	0.633388
+Sum128X2AdvSimd_X2	55.435	4728.871	6.545845
+Sum128X2AdvSimd_Zip	73.759	3554.042	4.919611
+Sum128X2AdvSimdB64_X2	21.716	12071.659	16.709951
+Sum128X2AdvSimdB64_Zip	19.295	13585.857	18.805950
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	19.299	13583.550	18.802756
+Sum256Base_Basic	576.541	454.684	0.629387
+Sum256Base	575.872	455.212	0.630119
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	591.783	442.973	0.613177
+Sum256X2Base_Basic	980.748	267.290	0.369990
+Sum256X2Base_X2	979.280	267.691	0.370545
+Sum256X2Base	982.057	266.934	0.369498
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1033.572	253.629	0.351081
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	512.610	511.390
+SumBase_ByX2Zip	274.668	954.404	1.866293
+SumBase	274.608	954.612	1.866699
+SumTraits	43.386	6042.142	11.815129
+SumX2Base_Basic	512.901	511.101	0.999434
+SumX2Base_X2	494.728	529.875	1.036146
+SumX2Base_Zip	140.043	1871.882	3.660378
+SumX2Base	141.198	1856.567	3.630431
+SumX2Traits	31.348	8362.373	16.352233
+Sum128Base_Basic	729.525	359.335	0.702663
+Sum128Base	729.801	359.200	0.702398
+Sum128AdvSimd_ByX2Zip	200.297	1308.779	2.559257
+Sum128AdvSimd_Shuffle	110.837	2365.134	4.624910
+Sum128AdvSimdB64_ByX2Zip	48.207	5437.850	10.633464
+Sum128AdvSimdB64_Shuffle	43.397	6040.626	11.812164
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	43.414	6038.304	11.807624
+Sum128X2Base_Basic	746.578	351.128	0.686614
+Sum128X2Base_X2	749.468	349.774	0.683966
+Sum128X2Base	749.401	349.805	0.684026
+Sum128X2AdvSimd_X2	110.818	2365.540	4.625703
+Sum128X2AdvSimd_Zip	118.331	2215.344	4.332002
+Sum128X2AdvSimdB64_X2	43.396	6040.750	11.812406
+Sum128X2AdvSimdB64_Zip	31.349	8362.098	16.351694
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	31.343	8363.704	16.354836
+Sum256Base_Basic	744.868	351.934	0.688190
+Sum256Base	742.027	353.281	0.690824
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	741.211	353.670	0.691585
+Sum256X2Base_Basic	821.591	319.069	0.623924
+Sum256X2Base_X2	815.105	321.608	0.628889
+Sum256X2Base	815.274	321.541	0.628759
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	903.582	290.116	0.567309
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+Check-Sum256X2Traits	Check `Sum256X2Traits` mismatch. -467755046!=0
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1275.953	205.450
+SumBase_Basic	721.175	363.496	1.769270
+SumBase_ByX2Zip	3053.060	85.863	0.417926
+SumBase	723.338	362.409	1.763979
+SumTraits	86.777	3020.904	14.703874
+SumX2Base_Basic	726.735	360.715	1.755735
+SumX2Base_X2	728.489	359.846	1.751506
+SumX2Base_Zip	1543.843	169.800	0.826479
+SumX2Base	724.551	361.802	1.761026
+SumX2Traits	48.212	5437.308	26.465417
+Sum128Base_Basic	993.799	263.780	1.283915
+Sum128Base	1000.102	262.117	1.275823
+Sum128AdvSimd_ByX2Zip	284.314	922.023	4.487834
+Sum128AdvSimd_Shuffle	221.621	1182.849	5.757370
+Sum128AdvSimdB64_ByX2Zip	67.480	3884.782	18.908692
+Sum128AdvSimdB64_Shuffle	86.759	3021.534	14.706939
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	86.776	3020.932	14.704012
+Sum128X2Base_Basic	1039.974	252.068	1.226909
+Sum128X2Base_X2	1033.873	253.555	1.234149
+Sum128X2Base	1037.510	252.666	1.229823
+Sum128X2AdvSimd_X2	221.612	1182.895	5.757595
+Sum128X2AdvSimd_Zip	178.315	1470.120	7.155625
+Sum128X2AdvSimdB64_X2	86.751	3021.801	14.708241
+Sum128X2AdvSimdB64_Zip	48.204	5438.177	26.469650
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	48.211	5437.415	26.465939
+Sum256Base_Basic	1053.831	248.753	1.210776
+Sum256Base	1048.546	250.007	1.216879
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1046.208	250.566	1.219598
+Sum256X2Base_Basic	1173.421	223.402	1.087379
+Sum256X2Base_X2	1155.269	226.912	1.104464
+Sum256X2Base	1153.482	227.263	1.106175
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+Check-Sum256X2Traits	Check `Sum256X2Traits` mismatch. 5910372263572008452!=0
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1999.353	131.114
+SumBase_Basic	1050.164	249.622	1.903848
+SumBase	1060.622	247.161	1.885075
+SumTraits	77.288	3391.780	25.868858
+SumX2Base_Basic	1144.589	229.029	1.746787
+SumX2Base_X2	1138.038	230.347	1.756841
+SumX2Base	1138.275	230.299	1.756476
+SumX2Traits	77.105	3399.847	25.930384
+Sum128Base_Basic	1534.931	170.786	1.302569
+Sum128Base_Move	605.392	433.015	3.302575
+Sum128Base	604.426	433.708	3.307855
+Sum128AdvSimd_AlignRight	77.268	3392.658	25.875549
+Sum128AdvSimd_ByX2Zip	173.402	1511.769	11.530149
+Sum128AdvSimd_Shuffle	301.519	869.412	6.630944
+Sum128AdvSimdB64_ByX2Zip	91.557	2863.165	21.837147
+Sum128AdvSimdB64_Shuffle	115.660	2266.500	17.286428
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	77.238	3393.987	25.885690
+Sum128X2Base_Basic	1613.531	162.466	1.239116
+Sum128X2Base_X2	398.215	658.297	5.020785
+Sum128X2Base	398.166	658.378	5.021400
+Sum128X2AdvSimd_X2	77.154	3397.663	25.913725
+Sum128X2AdvSimd_Zip	115.717	2265.388	17.277949
+Sum128X2AdvSimdB64_X2	77.139	3398.333	25.918834
+Sum128X2AdvSimdB64_Zip	67.515	3882.724	29.613250
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	77.114	3399.429	25.927195
+Sum256Base_Basic	1860.984	140.863	1.074352
+Sum256Base	1860.757	140.880	1.074483
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1870.883	140.118	1.068668
+Sum256X2Base_Basic	2017.930	129.907	0.990794
+Sum256X2Base_X2	2002.424	130.913	0.998466
+Sum256X2Base	2012.240	130.275	0.993596
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	317.275	826.236
+SumBase_ByX2Unzip	385.202	680.536	0.823659
+SumBase	317.394	825.927	0.999626
+SumTraits	21.716	12071.652	14.610425
+SumX2Base_Basic	316.734	827.647	1.001708
+SumX2Base_X2	316.716	827.694	1.001765
+SumX2Base_Unzip	234.348	1118.608	1.353861
+SumX2Base	234.386	1118.431	1.353646
+SumX2Traits	20.500	12787.321	15.476605
+Sum128Base_Basic	524.449	499.847	0.604969
+Sum128Base	524.409	499.885	0.605015
+Sum128AdvSimd_ByX2Unzip	88.294	2968.993	3.593398
+Sum128AdvSimd_Shuffle	55.434	4728.918	5.723450
+Sum128AdvSimdB64_ByX2Unzip	31.343	8363.726	10.122689
+Sum128AdvSimdB64_Shuffle	21.710	12074.551	14.613933
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	21.707	12076.569	14.616376
+Sum128X2Base_Basic	543.511	482.316	0.583752
+Sum128X2Base_X2	543.689	482.158	0.583560
+Sum128X2Base	543.555	482.277	0.583704
+Sum128X2AdvSimd_X2	55.422	4729.988	5.724745
+Sum128X2AdvSimd_Unzip	54.568	4803.999	5.814322
+Sum128X2AdvSimdB64_X2	21.716	12071.310	14.610011
+Sum128X2AdvSimdB64_Unzip	20.501	12786.623	15.475760
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	20.502	12786.572	15.475699
+Sum256Base_Basic	562.404	466.113	0.564141
+Sum256Base	576.531	454.692	0.550317
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	597.475	438.753	0.531027
+Sum256X2Base_Basic	599.415	437.333	0.529308
+Sum256X2Base_X2	606.585	432.164	0.523052
+Sum256X2Base	605.859	432.681	0.523678
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1068.186	245.411	0.297022
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	396.243	661.574
+SumBase_ByX2Unzip	396.924	660.439	0.998284
+SumBase	396.244	661.572	0.999997
+SumTraits	43.393	6041.101	9.131404
+SumX2Base_Basic	398.661	657.562	0.993935
+SumX2Base_X2	398.715	657.472	0.993800
+SumX2Base_Unzip	201.639	1300.064	1.965107
+SumX2Base	398.972	657.049	0.993160
+SumX2Traits	33.752	7766.751	11.739805
+Sum128Base_Basic	605.367	433.033	0.654550
+Sum128Base	605.545	432.906	0.654357
+Sum128AdvSimd_ByX2Unzip	132.826	1973.587	2.983169
+Sum128AdvSimd_Shuffle	110.845	2364.970	3.574763
+Sum128AdvSimdB64_ByX2Unzip	48.201	5438.586	8.220676
+Sum128AdvSimdB64_Shuffle	43.392	6041.244	9.131621
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	43.397	6040.646	9.130717
+Sum128X2Base_Basic	629.469	416.452	0.629487
+Sum128X2Base_X2	630.591	415.712	0.628367
+Sum128X2Base	628.877	416.845	0.630080
+Sum128X2AdvSimd_X2	110.833	2365.218	3.575136
+Sum128X2AdvSimd_Unzip	87.190	3006.578	4.544582
+Sum128X2AdvSimdB64_X2	43.395	6040.894	9.131092
+Sum128X2AdvSimdB64_Unzip	33.753	7766.465	11.739372
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	33.746	7768.063	11.741788
+Sum256Base_Basic	714.459	366.913	0.554606
+Sum256Base	713.809	367.247	0.555110
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	753.166	348.056	0.526103
+Sum256X2Base_Basic	786.590	333.266	0.503748
+Sum256X2Base_X2	801.576	327.036	0.494330
+Sum256X2Base	801.762	326.960	0.494215
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	997.409	262.825	0.397272
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	474.715	552.214
+SumBase_ByX2Unzip	1175.181	223.067	0.403950
+SumBase	474.514	552.447	1.000422
+SumTraits	67.460	3885.942	7.037026
+SumX2Base_Basic	479.694	546.482	0.989621
+SumX2Base_X2	479.702	546.473	0.989603
+SumX2Base_Unzip	742.140	353.227	0.639657
+SumX2Base	479.761	546.405	0.989481
+SumX2Traits	53.024	4943.916	8.952903
+Sum128Base_Basic	771.965	339.580	0.614943
+Sum128Base	771.715	339.690	0.615143
+Sum128AdvSimd_ByX2Unzip	178.590	1467.851	2.658121
+Sum128AdvSimd_Shuffle	221.635	1182.775	2.141880
+Sum128AdvSimdB64_ByX2Unzip	67.464	3885.661	7.036517
+Sum128AdvSimdB64_Shuffle	86.757	3021.583	5.471764
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	67.470	3885.360	7.035971
+Sum128X2Base_Basic	783.124	334.741	0.606181
+Sum128X2Base_X2	782.301	335.093	0.606818
+Sum128X2Base	782.352	335.071	0.606779
+Sum128X2AdvSimd_X2	175.092	1497.175	2.711224
+Sum128X2AdvSimd_Unzip	130.553	2007.951	3.636184
+Sum128X2AdvSimdB64_X2	67.465	3885.658	7.036511
+Sum128X2AdvSimdB64_Unzip	53.032	4943.142	8.951501
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	53.023	4943.922	8.952913
+Sum256Base_Basic	1033.221	253.715	0.459451
+Sum256Base	1028.371	254.912	0.461618
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1031.321	254.183	0.460298
+Sum256X2Base_Basic	1163.278	225.349	0.408084
+Sum256X2Base_X2	1157.382	226.497	0.410163
+Sum256X2Base	1193.318	219.676	0.397811
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1598.506	163.993	0.296974
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	482.778	542.991
+SumBase	482.784	542.984	0.999986
+SumTraits	77.829	3368.200	6.203045
+SumX2Base_Basic	778.941	336.539	0.619787
+SumX2Base_X2	779.819	336.160	0.619089
+SumX2Base	779.325	336.373	0.619482
+SumX2Traits	77.119	3399.234	6.260199
+Sum128Base_Basic	1034.191	253.477	0.466817
+Sum128Base_Move	604.509	433.648	0.798628
+Sum128Base	604.277	433.815	0.798935
+Sum128AdvSimd_AlignRight	77.824	3368.442	6.203492
+Sum128AdvSimd_ByX2Unzip	173.444	1511.403	2.783475
+Sum128AdvSimd_Shuffle	291.488	899.331	1.656252
+Sum128AdvSimdB64_ByX2Unzip	91.549	2863.441	5.273457
+Sum128AdvSimdB64_Shuffle	115.660	2266.506	4.174110
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	77.806	3369.193	6.204874
+Sum128X2Base_Basic	982.711	266.756	0.491271
+Sum128X2Base_X2	396.558	661.048	1.217418
+Sum128X2Base	396.540	661.079	1.217476
+Sum128X2AdvSimd_X2	77.140	3398.285	6.258452
+Sum128X2AdvSimd_Unzip	115.720	2265.330	4.171945
+Sum128X2AdvSimdB64_X2	77.124	3398.990	6.259749
+Sum128X2AdvSimdB64_Unzip	77.158	3397.491	6.256990
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	77.109	3399.650	6.260966
+Sum256Base_Basic	1761.591	148.811	0.274058
+Sum256Base	1756.221	149.266	0.274896
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1755.635	149.316	0.274987
+Sum256X2Base_Basic	1820.754	143.976	0.265153
+Sum256X2Base_X2	1911.036	137.174	0.252626
+Sum256X2Base	1976.328	132.642	0.244280
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	2767.122	94.735	0.174469
+
+```
+
+#### .NET 7.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 15.0.1
+Environment.Version:	7.0.20
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/usr/local/share/dotnet/shared/Microsoft.NETCore.App/7.0.20/
+RuntimeInformation.FrameworkDescription:	.NET 7.0.20
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Darwin 24.0.0 Darwin Kernel Version 24.0.0: Tue Sep 24 23:37:13 PDT 2024; root:xnu-11215.1.12~1/RELEASE_ARM64_T8112
+RuntimeInformation.RuntimeIdentifier:	osx.15-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	file:///usr/local/share/dotnet/shared/Microsoft.NETCore.App/7.0.20/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Apple M2
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Dp, Rdm, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	271.519	965.473
+SumBase_ByX2Zip	138.978	1886.222	1.953676
+SumBase	138.933	1886.833	1.954309
+SumTraits	21.719	12069.818	12.501451
+SumX2Base_Basic	275.453	951.683	0.985716
+SumX2Base_X2	137.183	1910.910	1.979247
+SumX2Base_Zip	77.666	3375.253	3.495956
+SumX2Base	77.669	3375.158	3.495858
+SumX2Traits	21.715	12071.817	12.503522
+Sum128Base_Basic	272.252	962.874	0.997307
+Sum128Base_ByX2Zip	1028.544	254.869	0.263983
+Sum128Base	1025.189	255.703	0.264847
+Sum128AdvSimd_ByX2Zip	129.364	2026.400	2.098867
+Sum128AdvSimd_Shuffle	54.677	4794.441	4.965897
+Sum128AdvSimdB64_ByX2Zip	31.348	8362.256	8.661302
+Sum128AdvSimdB64_Shuffle	21.719	12069.563	12.501187
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	21.713	12072.973	12.504719
+Sum128X2Base_Basic	275.101	952.899	0.986976
+Sum128X2Base_X2	1388.946	188.736	0.195485
+Sum128X2Base_Zip	487.699	537.512	0.556735
+Sum128X2Base	487.677	537.536	0.556759
+Sum128X2AdvSimd_X2	55.289	4741.370	4.910928
+Sum128X2AdvSimd_Zip	74.026	3541.249	3.667889
+Sum128X2AdvSimdB64_X2	18.102	14481.596	14.999477
+Sum128X2AdvSimdB64_Zip	19.301	13581.618	14.067315
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	21.714	12072.522	12.504251
+Sum256Base_Basic	616.699	425.076	0.440278
+Sum256Base_ByShorter	1070.475	244.886	0.253643
+Sum256Base_ByX2Zip	3211.618	81.624	0.084543
+Sum256Base	1075.862	243.659	0.252373
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1040.137	252.028	0.261041
+Sum256X2Base_Basic	621.733	421.634	0.436713
+Sum256X2Base_X2	2106.234	124.461	0.128912
+Sum256X2Base_Zip	1808.513	144.950	0.150134
+Sum256X2Base	2087.214	125.595	0.130087
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	2133.286	122.883	0.127277
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	361.753	724.649
+SumBase_ByX2Zip	248.098	1056.614	1.458104
+SumBase	248.095	1056.627	1.458121
+SumTraits	43.413	6038.402	8.332860
+SumX2Base_Basic	370.890	706.798	0.975365
+SumX2Base_X2	242.577	1080.662	1.491289
+SumX2Base_Zip	125.674	2085.908	2.878507
+SumX2Base	127.011	2063.952	2.848207
+SumX2Traits	31.354	8360.858	11.537797
+Sum128Base_Basic	359.953	728.273	1.005000
+Sum128Base_ByX2Zip	1577.029	166.226	0.229389
+Sum128Base	1575.623	166.375	0.229594
+Sum128AdvSimd_ByX2Zip	200.295	1308.787	1.806097
+Sum128AdvSimd_Shuffle	109.335	2397.617	3.308658
+Sum128AdvSimdB64_ByX2Zip	48.197	5439.048	7.505765
+Sum128AdvSimdB64_Shuffle	43.412	6038.533	8.333041
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	43.386	6042.119	8.337990
+Sum128X2Base_Basic	369.270	709.898	0.979643
+Sum128X2Base_X2	2131.609	122.979	0.169709
+Sum128X2Base_Zip	744.860	351.937	0.485666
+Sum128X2Base	740.037	354.231	0.488831
+Sum128X2AdvSimd_X2	110.552	2371.228	3.272242
+Sum128X2AdvSimd_Zip	118.322	2215.513	3.057359
+Sum128X2AdvSimdB64_X2	36.170	7247.471	10.001348
+Sum128X2AdvSimdB64_Zip	31.353	8361.053	11.538066
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	31.354	8360.711	11.537595
+Sum256Base_Basic	759.879	344.981	0.476067
+Sum256Base_ByShorter	1584.601	165.432	0.228293
+Sum256Base_ByX2Zip	3276.843	79.999	0.110397
+Sum256Base	1599.853	163.855	0.226116
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1624.329	161.386	0.222709
+Sum256X2Base_Basic	805.885	325.287	0.448889
+Sum256X2Base_X2	2730.666	96.000	0.132478
+Sum256X2Base_Zip	1901.206	137.883	0.190275
+Sum256X2Base	2799.786	93.630	0.129207
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	2768.658	94.683	0.130660
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	540.394	485.098
+SumBase_ByX2Zip	314.454	833.647	1.718514
+SumBase	314.378	833.849	1.718930
+SumTraits	86.743	3022.090	6.229860
+SumX2Base_Basic	572.680	457.750	0.943624
+SumX2Base_X2	308.290	850.315	1.752875
+SumX2Base_Zip	188.057	1393.962	2.873570
+SumX2Base	192.889	1359.042	2.801585
+SumX2Traits	48.200	5438.716	11.211592
+Sum128Base_Basic	543.970	481.909	0.993428
+Sum128Base_ByX2Zip	1645.693	159.291	0.328369
+Sum128Base	1638.393	160.001	0.329832
+Sum128AdvSimd_ByX2Zip	284.268	922.172	1.901004
+Sum128AdvSimd_Shuffle	218.643	1198.961	2.471588
+Sum128AdvSimdB64_ByX2Zip	67.518	3882.562	8.003672
+Sum128AdvSimdB64_Shuffle	86.772	3021.061	6.227740
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	86.744	3022.039	6.229755
+Sum128X2Base_Basic	570.675	459.358	0.946940
+Sum128X2Base_X2	2791.149	93.920	0.193610
+Sum128X2Base_Zip	1005.989	260.583	0.537177
+Sum128X2Base	1007.250	260.257	0.536505
+Sum128X2AdvSimd_X2	221.068	1185.806	2.444470
+Sum128X2AdvSimd_Zip	178.319	1470.084	3.030491
+Sum128X2AdvSimdB64_X2	72.287	3626.446	7.475704
+Sum128X2AdvSimdB64_Zip	48.197	5439.053	11.212287
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	48.200	5438.646	11.211448
+Sum256Base_Basic	1074.796	243.901	0.502788
+Sum256Base_ByShorter	2209.835	118.626	0.244541
+Sum256Base_ByX2Zip	3841.365	68.242	0.140678
+Sum256Base	2238.354	117.115	0.241425
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	2243.532	116.844	0.240868
+Sum256X2Base_Basic	1045.866	250.648	0.516696
+Sum256X2Base_X2	3912.049	67.009	0.138136
+Sum256X2Base_Zip	2226.345	117.746	0.242727
+Sum256X2Base	3921.474	66.848	0.137804
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	3823.246	68.566	0.141344
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	844.966	310.242
+SumBase	841.181	311.638	1.004500
+SumTraits	77.226	3394.515	10.941510
+SumX2Base_Basic	889.825	294.602	0.949587
+SumX2Base_X2	887.661	295.320	0.951902
+SumX2Base	891.511	294.045	0.947792
+SumX2Traits	77.109	3399.648	10.958054
+Sum128Base_Basic	841.507	311.517	1.004111
+Sum128Base_Move	88.251	2970.437	9.574584
+Sum128Base	88.272	2969.724	9.572284
+Sum128AdvSimd_AlignRight	77.206	3395.396	10.944350
+Sum128AdvSimd_ByX2Zip	173.440	1511.435	4.871796
+Sum128AdvSimd_Shuffle	291.037	900.725	2.903298
+Sum128AdvSimdB64_ByX2Zip	81.938	3199.282	10.312216
+Sum128AdvSimdB64_Shuffle	115.821	2263.353	7.295444
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	77.205	3395.410	10.944396
+Sum128X2Base_Basic	900.971	290.957	0.937839
+Sum128X2Base_X2	89.638	2924.472	9.426423
+Sum128X2Base	89.448	2930.679	9.446430
+Sum128X2AdvSimd_X2	77.102	3399.961	10.959063
+Sum128X2AdvSimd_Zip	115.714	2265.439	7.302168
+Sum128X2AdvSimdB64_X2	77.117	3399.300	10.956933
+Sum128X2AdvSimdB64_Zip	67.491	3884.121	12.519651
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	77.102	3399.974	10.959106
+Sum256Base_Basic	1856.725	141.186	0.455084
+Sum256Base_ByShorter	1790.166	146.436	0.472004
+Sum256Base	1862.996	140.711	0.453552
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1860.521	140.898	0.454156
+Sum256X2Base_Basic	1750.629	149.743	0.482664
+Sum256X2Base_X2	1756.050	149.281	0.481175
+Sum256X2Base	1769.218	148.169	0.477593
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1741.198	150.554	0.485279
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	224.646	1166.921
+SumBase_ByX2Unzip	101.133	2592.060	2.221282
+SumBase	101.131	2592.130	2.221342
+SumTraits	21.713	12072.992	10.346025
+SumX2Base_Basic	224.613	1167.091	1.000145
+SumX2Base_X2	98.965	2648.862	2.269959
+SumX2Base_Unzip	59.679	4392.532	3.764207
+SumX2Base	59.721	4389.446	3.761563
+SumX2Traits	20.497	12789.137	10.959730
+Sum128Base_Basic	224.689	1166.698	0.999809
+Sum128Base_ByX2Unzip	88.280	2969.448	2.544687
+Sum128Base	88.281	2969.430	2.544671
+Sum128AdvSimd_ByX2Unzip	88.260	2970.137	2.545277
+Sum128AdvSimd_Shuffle	54.695	4792.854	4.107266
+Sum128AdvSimdB64_ByX2Unzip	31.343	8363.679	7.167307
+Sum128AdvSimdB64_Shuffle	21.720	12069.484	10.343019
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	21.716	12071.237	10.344522
+Sum128X2Base_Basic	224.649	1166.903	0.999985
+Sum128X2Base_X2	87.262	3004.114	2.574394
+Sum128X2Base_Unzip	54.569	4803.883	4.116718
+Sum128X2Base	54.576	4803.303	4.116220
+Sum128X2AdvSimd_X2	54.589	4802.180	4.115258
+Sum128X2AdvSimd_Unzip	54.576	4803.243	4.116169
+Sum128X2AdvSimdB64_X2	21.719	12069.901	10.343377
+Sum128X2AdvSimdB64_Unzip	20.503	12785.402	10.956530
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	20.500	12787.206	10.958076
+Sum256Base_Basic	583.098	449.571	0.385263
+Sum256Base_ByShorter	563.778	464.977	0.398465
+Sum256Base_ByX2Unzip	3644.247	71.934	0.061644
+Sum256Base	573.798	456.858	0.391507
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	573.638	456.985	0.391616
+Sum256X2Base_Basic	594.686	440.811	0.377756
+Sum256X2Base_X2	1623.715	161.447	0.138353
+Sum256X2Base_Unzip	2501.124	104.810	0.089818
+Sum256X2Base	1606.960	163.130	0.139796
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1651.748	158.707	0.136005
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	271.230	966.501
+SumBase_ByX2Unzip	186.135	1408.356	1.457169
+SumBase	186.178	1408.032	1.456833
+SumTraits	43.392	6041.231	6.250618
+SumX2Base_Basic	275.458	951.665	0.984650
+SumX2Base_X2	182.203	1438.745	1.488611
+SumX2Base_Unzip	95.191	2753.867	2.849315
+SumX2Base	96.959	2703.655	2.797363
+SumX2Traits	33.754	7766.207	8.035381
+Sum128Base_Basic	276.209	949.079	0.981974
+Sum128Base_ByX2Unzip	132.801	1973.955	2.042371
+Sum128Base	132.804	1973.918	2.042334
+Sum128AdvSimd_ByX2Unzip	132.814	1973.763	2.042173
+Sum128AdvSimd_Shuffle	109.326	2397.815	2.480922
+Sum128AdvSimdB64_ByX2Unzip	48.200	5438.688	5.627191
+Sum128AdvSimdB64_Shuffle	43.393	6041.112	6.250495
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	43.402	6039.947	6.249290
+Sum128X2Base_Basic	278.131	942.519	0.975187
+Sum128X2Base_X2	130.478	2009.099	2.078734
+Sum128X2Base_Unzip	87.187	3006.686	3.110897
+Sum128X2Base	87.212	3005.833	3.110014
+Sum128X2AdvSimd_X2	109.161	2401.441	2.484674
+Sum128X2AdvSimd_Unzip	87.211	3005.865	3.110048
+Sum128X2AdvSimdB64_X2	43.393	6041.142	6.250526
+Sum128X2AdvSimdB64_Unzip	33.764	7764.095	8.033196
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	33.754	7766.396	8.035576
+Sum256Base_Basic	698.549	375.269	0.388276
+Sum256Base_ByShorter	755.651	346.911	0.358935
+Sum256Base_ByX2Unzip	4196.573	62.466	0.064631
+Sum256Base	776.086	337.777	0.349484
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	775.951	337.836	0.349545
+Sum256X2Base_Basic	803.712	326.167	0.337472
+Sum256X2Base_X2	1388.977	188.732	0.195273
+Sum256X2Base_Unzip	2606.658	100.567	0.104053
+Sum256X2Base	1741.477	150.530	0.155747
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1786.785	146.713	0.151798
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	359.660	728.866
+SumBase_ByX2Unzip	224.544	1167.448	1.601732
+SumBase	224.541	1167.468	1.601760
+SumTraits	67.483	3884.575	5.329615
+SumX2Base_Basic	371.761	705.142	0.967450
+SumX2Base_X2	217.305	1206.342	1.655094
+SumX2Base_Unzip	147.315	1779.481	2.441438
+SumX2Base	150.739	1739.061	2.385981
+SumX2Traits	53.028	4943.499	6.782453
+Sum128Base_Basic	359.639	728.910	1.000060
+Sum128Base_ByX2Unzip	178.627	1467.553	2.013474
+Sum128Base	178.608	1467.706	2.013684
+Sum128AdvSimd_ByX2Unzip	178.612	1467.673	2.013640
+Sum128AdvSimd_Shuffle	218.637	1198.994	1.645013
+Sum128AdvSimdB64_ByX2Unzip	67.462	3885.788	5.331278
+Sum128AdvSimdB64_Shuffle	86.758	3021.554	4.145555
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	67.475	3885.026	5.330233
+Sum128X2Base_Basic	370.921	706.739	0.969641
+Sum128X2Base_X2	173.922	1507.254	2.067944
+Sum128X2Base_Unzip	130.668	2006.190	2.752481
+Sum128X2Base	130.622	2006.885	2.753434
+Sum128X2AdvSimd_X2	173.903	1507.411	2.068159
+Sum128X2AdvSimd_Unzip	130.571	2007.676	2.754520
+Sum128X2AdvSimdB64_X2	67.474	3885.100	5.330335
+Sum128X2AdvSimdB64_Unzip	53.026	4943.649	6.782658
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	53.026	4943.650	6.782659
+Sum256Base_Basic	985.725	265.940	0.364869
+Sum256Base_ByShorter	1104.958	237.243	0.325497
+Sum256Base_ByX2Unzip	5040.645	52.006	0.071352
+Sum256Base	1141.968	229.555	0.314948
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1140.458	229.859	0.315365
+Sum256X2Base_Basic	1097.299	238.899	0.327769
+Sum256X2Base_X2	1070.179	244.953	0.336075
+Sum256X2Base_Unzip	2831.640	92.577	0.127015
+Sum256X2Base	1075.700	243.696	0.334350
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1070.190	244.951	0.336071
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	468.649	559.361
+SumBase	468.894	559.069	0.999479
+SumTraits	77.636	3376.557	6.036459
+SumX2Base_Basic	782.048	335.202	0.599259
+SumX2Base_X2	781.563	335.410	0.599631
+SumX2Base	782.070	335.192	0.599242
+SumX2Traits	77.107	3399.733	6.077892
+Sum128Base_Basic	469.332	558.547	0.998546
+Sum128Base_Move	91.564	2862.948	5.118252
+Sum128Base	91.556	2863.199	5.118700
+Sum128AdvSimd_AlignRight	77.651	3375.937	6.035350
+Sum128AdvSimd_ByX2Unzip	173.466	1511.217	2.701686
+Sum128AdvSimd_Shuffle	291.016	900.790	1.610393
+Sum128AdvSimdB64_ByX2Unzip	81.938	3199.303	5.719571
+Sum128AdvSimdB64_Shuffle	115.710	2265.527	4.050208
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	77.663	3375.419	6.034425
+Sum128X2Base_Basic	778.463	336.746	0.602019
+Sum128X2Base_X2	88.722	2954.673	5.282233
+Sum128X2Base	88.585	2959.227	5.290374
+Sum128X2AdvSimd_X2	77.099	3400.098	6.078543
+Sum128X2AdvSimd_Unzip	115.712	2265.484	4.050132
+Sum128X2AdvSimdB64_X2	77.110	3399.610	6.077671
+Sum128X2AdvSimdB64_Unzip	77.124	3399.007	6.076595
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	77.119	3399.222	6.076978
+Sum256Base_Basic	1605.834	163.245	0.291842
+Sum256Base_ByShorter	1620.687	161.749	0.289167
+Sum256Base	1606.248	163.203	0.291767
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1605.546	163.274	0.291894
+Sum256X2Base_Basic	1744.718	150.250	0.268610
+Sum256X2Base_X2	1748.531	149.922	0.268025
+Sum256X2Base	1774.038	147.767	0.264171
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1743.116	150.388	0.268857
+
+```
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	8
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 15.0.1
+Environment.Version:	8.0.4
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/usr/local/share/dotnet/shared/Microsoft.NETCore.App/8.0.4/
+RuntimeInformation.FrameworkDescription:	.NET 8.0.4
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Darwin 24.0.0 Darwin Kernel Version 24.0.0: Tue Sep 24 23:37:13 PDT 2024; root:xnu-11215.1.12~1/RELEASE_ARM64_T8112
+RuntimeInformation.RuntimeIdentifier:	osx-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector512.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	file:///usr/local/share/dotnet/shared/Microsoft.NETCore.App/8.0.4/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844159	# 0x8177F801
+VectorEnvironment.CpuModelName:	Apple M2
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Dp, Rdm, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+# Sum512Base_Basic	114
+# Sum512X2Base_Basic	114
+SumBase_Basic	203.210	1290.017
+SumBase_ByX2Zip	137.071	1912.470	1.482515
+SumBase	137.022	1913.147	1.483040
+SumTraits	12.868	20371.835	15.791912
+SumX2Base_Basic	201.739	1299.420	1.007289
+SumX2Base_X2	137.098	1912.091	1.482222
+SumX2Base_Zip	76.542	3424.851	2.654888
+SumX2Base	76.557	3424.171	2.654361
+SumX2Traits	12.802	20476.015	15.872671
+Sum128Base_Basic	203.207	1290.033	1.000013
+Sum128Base_ByX2Zip	124.760	2101.192	1.628810
+Sum128Base	124.758	2101.228	1.628837
+Sum128AdvSimd_ByX2Zip	122.184	2145.494	1.663152
+Sum128AdvSimd_Shuffle	54.634	4798.178	3.719469
+Sum128AdvSimd_ShuffleX	26.715	9812.548	7.606526
+Sum128AdvSimdB64_ByX2Zip	31.327	8367.958	6.486704
+Sum128AdvSimdB64_Shuffle	21.706	12076.917	9.361828
+Sum128AdvSimdB64_ShuffleX	12.899	20322.034	15.753307
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	12.824	20441.550	15.845955
+Sum128X2Base_Basic	201.727	1299.498	1.007350
+Sum128X2Base_X2	167.421	1565.780	1.213767
+Sum128X2Base_Zip	72.703	3605.695	2.795076
+Sum128X2Base	72.706	3605.540	2.794955
+Sum128X2AdvSimd_X2	26.610	9851.189	7.636480
+Sum128X2AdvSimd_Zip	72.713	3605.209	2.794699
+Sum128X2AdvSimdB64_X2	12.742	20572.466	15.947438
+Sum128X2AdvSimdB64_Zip	19.288	13591.008	10.535527
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	12.755	20551.546	15.931222
+Sum256Base_Basic	201.349	1301.937	1.009240
+Sum256Base_ByShorter	73.492	3566.962	2.765050
+Sum256Base_ByX2Zip	3402.473	77.045	0.059724
+Sum256Base	73.486	3567.267	2.765287
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	73.478	3567.676	2.765604
+Sum256X2Base_Basic	202.528	1294.359	1.003366
+Sum256X2Base_X2	149.643	1751.799	1.357966
+Sum256X2Base_Zip	1707.119	153.559	0.119037
+Sum256X2Base	149.367	1755.030	1.360470
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	149.312	1755.677	1.360972
+Sum512Base_Basic	207.487	1263.426	0.979387
+Sum512Base_ByShorter	273.759	957.573	0.742295
+Sum512Base_ByX2Zip	4281.611	61.226	0.047461
+Sum512Base	273.862	957.213	0.742015
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	273.091	959.915	0.744110
+Sum512X2Base_Basic	213.137	1229.933	0.953424
+Sum512X2Base_X2	288.814	907.657	0.703601
+Sum512X2Base_Zip	2123.528	123.447	0.095694
+Sum512X2Base	288.911	907.351	0.703364
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	287.593	911.509	0.706587
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+# Sum512Base_Basic	-24614
+# Sum512X2Base_Basic	-24614
+SumBase_Basic	225.289	1163.592
+SumBase_ByX2Zip	244.539	1071.993	0.921279
+SumBase	244.580	1071.814	0.921125
+SumTraits	24.897	10529.245	9.048914
+SumX2Base_Basic	231.444	1132.644	0.973403
+SumX2Base_X2	245.558	1067.542	0.917454
+SumX2Base_Zip	123.622	2120.524	1.822395
+SumX2Base	123.634	2120.328	1.822226
+SumX2Traits	25.514	10274.392	8.829891
+Sum128Base_Basic	225.268	1163.698	1.000091
+Sum128Base_ByX2Zip	191.109	1371.701	1.178851
+Sum128Base	191.142	1371.465	1.178648
+Sum128AdvSimd_ByX2Zip	186.007	1409.321	1.211182
+Sum128AdvSimd_Shuffle	109.224	2400.057	2.062627
+Sum128AdvSimd_ShuffleX	53.341	4914.485	4.223546
+Sum128AdvSimdB64_ByX2Zip	48.183	5440.579	4.675675
+Sum128AdvSimdB64_Shuffle	43.392	6041.320	5.191957
+Sum128AdvSimdB64_ShuffleX	24.914	10521.871	9.042577
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	24.916	10521.204	9.042004
+Sum128X2Base_Basic	227.038	1154.625	0.992294
+Sum128X2Base_X2	185.959	1409.685	1.211494
+Sum128X2Base_Zip	116.265	2254.719	1.937723
+Sum128X2Base	116.257	2254.864	1.937848
+Sum128X2AdvSimd_X2	53.371	4911.703	4.221156
+Sum128X2AdvSimd_Zip	115.451	2270.614	1.951383
+Sum128X2AdvSimdB64_X2	25.606	10237.511	8.798195
+Sum128X2AdvSimdB64_Zip	31.338	8365.007	7.188951
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	25.635	10225.936	8.788248
+Sum256Base_Basic	219.804	1192.628	1.024954
+Sum256Base_ByShorter	118.136	2219.003	1.907028
+Sum256Base_ByX2Zip	3074.032	85.277	0.073288
+Sum256Base	118.142	2218.896	1.906936
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	118.162	2218.510	1.906604
+Sum256X2Base_Basic	222.231	1179.604	1.013761
+Sum256X2Base_X2	242.669	1080.253	0.928377
+Sum256X2Base_Zip	1548.627	169.275	0.145476
+Sum256X2Base	242.673	1080.237	0.928364
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	242.766	1079.822	0.928007
+Sum512Base_Basic	232.189	1129.013	0.970282
+Sum512Base_ByShorter	475.280	551.557	0.474013
+Sum512Base_ByX2Zip	3708.331	70.691	0.060752
+Sum512Base	476.840	549.753	0.472462
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	456.451	574.309	0.493566
+Sum512X2Base_Basic	249.066	1052.507	0.904533
+Sum512X2Base_X2	489.368	535.679	0.460367
+Sum512X2Base_Zip	1878.137	139.577	0.119953
+Sum512X2Base	487.089	538.185	0.462520
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	487.091	538.183	0.462519
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+# Sum512Base_Basic	-467755046
+# Sum512X2Base_Basic	-467755046
+SumBase_Basic	277.688	944.022
+SumBase_ByX2Zip	310.679	843.778	0.893811
+SumBase	310.793	843.467	0.893482
+SumTraits	51.282	5111.822	5.414937
+SumX2Base_Basic	281.480	931.306	0.986530
+SumX2Base_X2	310.645	843.871	0.893909
+SumX2Base_Zip	188.872	1387.946	1.470247
+SumX2Base	188.878	1387.900	1.470198
+SumX2Traits	48.201	5438.601	5.761093
+Sum128Base_Basic	277.697	943.991	0.999967
+Sum128Base_ByX2Zip	265.395	987.751	1.046322
+Sum128Base	265.384	987.791	1.046364
+Sum128AdvSimd_ByX2Zip	255.559	1025.766	1.086590
+Sum128AdvSimd_Shuffle	218.466	1199.928	1.271080
+Sum128AdvSimd_ShuffleX	107.591	2436.490	2.580966
+Sum128AdvSimdB64_ByX2Zip	67.465	3885.602	4.116006
+Sum128AdvSimdB64_Shuffle	86.742	3022.103	3.201304
+Sum128AdvSimdB64_ShuffleX	51.146	5125.406	5.429326
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	50.940	5146.153	5.451303
+Sum128X2Base_Basic	281.473	931.330	0.986555
+Sum128X2Base_X2	255.675	1025.300	1.086097
+Sum128X2Base_Zip	173.733	1508.893	1.598366
+Sum128X2Base	173.744	1508.791	1.598258
+Sum128X2AdvSimd_X2	106.583	2459.532	2.605374
+Sum128X2AdvSimd_Zip	169.053	1550.665	1.642615
+Sum128X2AdvSimdB64_X2	51.040	5136.023	5.440573
+Sum128X2AdvSimdB64_Zip	48.204	5438.226	5.760695
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	48.199	5438.830	5.761335
+Sum256Base_Basic	263.001	996.742	1.055846
+Sum256Base_ByShorter	178.276	1470.435	1.557627
+Sum256Base_ByX2Zip	2951.447	88.819	0.094085
+Sum256Base	178.285	1470.361	1.557549
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	178.260	1470.572	1.557772
+Sum256X2Base_Basic	270.838	967.899	1.025293
+Sum256X2Base_X2	166.902	1570.643	1.663777
+Sum256X2Base_Zip	1523.489	172.068	0.182271
+Sum256X2Base	166.916	1570.518	1.663645
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	166.908	1570.592	1.663724
+Sum512Base_Basic	300.184	873.278	0.925061
+Sum512Base_ByShorter	322.652	812.467	0.860644
+Sum512Base_ByX2Zip	3645.380	71.911	0.076175
+Sum512Base	322.560	812.698	0.860889
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	267.673	979.345	1.037417
+Sum512X2Base_Basic	350.144	748.675	0.793069
+Sum512X2Base_X2	574.100	456.618	0.483694
+Sum512X2Base_Zip	1861.886	140.795	0.149144
+Sum512X2Base	573.866	456.803	0.483890
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	572.737	457.704	0.484844
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+# Sum512Base_Basic	5910372263572008452
+# Sum512X2Base_Basic	5910372263572008452
+SumBase_Basic	432.564	606.023
+SumBase	432.460	606.169	1.000241
+SumTraits	77.393	3387.173	5.589181
+SumX2Base_Basic	433.542	604.657	0.997745
+SumX2Base_X2	433.511	604.699	0.997816
+SumX2Base	433.585	604.597	0.997647
+SumX2Traits	62.651	4184.177	6.904317
+Sum128Base_Basic	432.465	606.162	1.000230
+Sum128Base_Move	77.820	3368.583	5.558505
+Sum128Base	77.823	3368.474	5.558325
+Sum128AdvSimd_AlignRight	77.398	3386.968	5.588842
+Sum128AdvSimd_ByX2Zip	154.143	1700.659	2.806260
+Sum128AdvSimd_Shuffle	290.966	900.944	1.486649
+Sum128AdvSimd_ShuffleX	142.200	1843.487	3.041941
+Sum128AdvSimdB64_ByX2Zip	81.912	3200.331	5.280872
+Sum128AdvSimdB64_Shuffle	115.830	2263.171	3.734462
+Sum128AdvSimdB64_ShuffleX	81.909	3200.430	5.281035
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	77.411	3386.401	5.587907
+Sum128X2Base_Basic	433.548	604.648	0.997731
+Sum128X2Base_X2	58.870	4452.921	7.347772
+Sum128X2Base	58.858	4453.852	7.349308
+Sum128X2AdvSimd_X2	62.670	4182.899	6.902209
+Sum128X2AdvSimd_Zip	106.000	2473.055	4.080792
+Sum128X2AdvSimdB64_X2	62.662	4183.467	6.903146
+Sum128X2AdvSimdB64_Zip	67.453	3886.332	6.412843
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	62.674	4182.637	6.901777
+Sum256Base_Basic	441.490	593.771	0.979782
+Sum256Base_ByShorter	53.565	4893.918	8.075462
+Sum256Base	441.496	593.762	0.979768
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	441.489	593.772	0.979784
+Sum256X2Base_Basic	454.601	576.647	0.951526
+Sum256X2Base_X2	454.630	576.610	0.951464
+Sum256X2Base	454.647	576.588	0.951429
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	454.603	576.644	0.951522
+Sum512Base_Basic	489.349	535.699	0.883958
+Sum512Base_ByShorter	454.811	576.381	0.951087
+Sum512Base	493.989	530.667	0.875655
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	494.158	530.486	0.875356
+Sum512X2Base_Basic	576.836	454.452	0.749892
+Sum512X2Base_X2	579.175	452.617	0.746863
+Sum512X2Base	579.101	452.674	0.746959
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	579.160	452.628	0.746882
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+# Sum512Base_Basic	114
+# Sum512X2Base_Basic	114
+SumBase_Basic	277.611	944.287
+SumBase_ByX2Unzip	99.895	2624.203	2.779032
+SumBase	99.883	2624.512	2.779359
+SumTraits	12.962	20224.236	21.417473
+SumX2Base_Basic	277.329	945.247	1.001017
+SumX2Base_X2	99.729	2628.571	2.783658
+SumX2Base_Unzip	60.064	4364.380	4.621880
+SumX2Base	60.066	4364.299	4.621794
+SumX2Traits	14.561	18003.583	19.065800
+Sum128Base_Basic	277.566	944.437	1.000159
+Sum128Base_ByX2Unzip	82.467	3178.779	3.366328
+Sum128Base	82.466	3178.814	3.366365
+Sum128AdvSimd_ByX2Unzip	82.468	3178.732	3.366279
+Sum128AdvSimd_Shuffle	54.646	4797.161	5.080195
+Sum128AdvSimd_ShuffleX	26.712	9813.850	10.392870
+Sum128AdvSimdB64_ByX2Unzip	31.343	8363.699	8.857160
+Sum128AdvSimdB64_Shuffle	21.706	12076.790	12.789325
+Sum128AdvSimdB64_ShuffleX	12.911	20304.066	21.502013
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	12.921	20288.249	21.485262
+Sum128X2Base_Basic	277.338	945.214	1.000982
+Sum128X2Base_X2	80.103	3272.588	3.465672
+Sum128X2Base_Unzip	52.483	4994.817	5.289513
+Sum128X2Base	52.480	4995.110	5.289823
+Sum128X2AdvSimd_X2	28.968	9049.327	9.583240
+Sum128X2AdvSimd_Unzip	52.478	4995.321	5.290047
+Sum128X2AdvSimdB64_X2	14.537	18032.565	19.096492
+Sum128X2AdvSimdB64_Unzip	20.489	12794.377	13.549250
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	14.527	18044.990	19.109650
+Sum256Base_Basic	267.033	981.692	1.039612
+Sum256Base_ByShorter	52.510	4992.279	5.286825
+Sum256Base_ByX2Unzip	2451.659	106.925	0.113234
+Sum256Base	52.508	4992.449	5.287005
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	52.505	4992.696	5.287267
+Sum256X2Base_Basic	268.384	976.750	1.034379
+Sum256X2Base_X2	51.391	5100.969	5.401928
+Sum256X2Base_Unzip	1229.471	213.217	0.225797
+Sum256X2Base	51.390	5101.028	5.401991
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	51.384	5101.711	5.402714
+Sum512Base_Basic	270.806	968.015	1.025129
+Sum512Base_ByShorter	52.670	4977.121	5.270773
+Sum512Base_ByX2Unzip	3044.244	86.111	0.091192
+Sum512Base	52.681	4976.065	5.269655
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	52.676	4976.564	5.270183
+Sum512X2Base_Basic	273.538	958.345	1.014888
+Sum512X2Base_X2	145.541	1801.164	1.907434
+Sum512X2Base_Unzip	1573.696	166.579	0.176407
+Sum512X2Base	145.614	1800.261	1.906477
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	145.355	1803.472	1.909878
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+# Sum512Base_Basic	-24614
+# Sum512X2Base_Basic	-24614
+SumBase_Basic	319.226	821.187
+SumBase_ByX2Unzip	185.239	1415.167	1.723319
+SumBase	185.233	1415.211	1.723372
+SumTraits	25.176	10412.378	12.679668
+SumX2Base_Basic	321.227	816.071	0.993770
+SumX2Base_X2	183.937	1425.187	1.735521
+SumX2Base_Unzip	97.020	2701.960	3.290311
+SumX2Base	97.021	2701.930	3.290274
+SumX2Traits	33.754	7766.276	9.457378
+Sum128Base_Basic	319.230	821.177	0.999988
+Sum128Base_ByX2Unzip	121.023	2166.065	2.637725
+Sum128Base	121.011	2166.278	2.637984
+Sum128AdvSimd_ByX2Unzip	121.033	2165.891	2.637513
+Sum128AdvSimd_Shuffle	109.265	2399.154	2.921568
+Sum128AdvSimd_ShuffleX	53.442	4905.227	5.973337
+Sum128AdvSimdB64_ByX2Unzip	48.195	5439.263	6.623660
+Sum128AdvSimdB64_Shuffle	43.388	6041.856	7.357467
+Sum128AdvSimdB64_ShuffleX	24.932	10514.324	12.803813
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	24.983	10492.724	12.777509
+Sum128X2Base_Basic	321.287	815.918	0.993584
+Sum128X2Base_X2	116.564	2248.934	2.738638
+Sum128X2Base_Unzip	82.706	3169.586	3.859762
+Sum128X2Base	82.716	3169.223	3.859320
+Sum128X2AdvSimd_X2	57.944	4524.073	5.509188
+Sum128X2AdvSimd_Unzip	82.733	3168.558	3.858510
+Sum128X2AdvSimdB64_X2	29.078	9015.116	10.978153
+Sum128X2AdvSimdB64_Unzip	33.747	7767.810	9.459247
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	33.747	7767.988	9.459463
+Sum256Base_Basic	295.788	886.255	1.079237
+Sum256Base_ByShorter	80.159	3270.281	3.982383
+Sum256Base_ByX2Unzip	2321.446	112.923	0.137512
+Sum256Base	80.149	3270.702	3.982895
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	80.146	3270.826	3.983046
+Sum256X2Base_Basic	305.437	858.258	1.045143
+Sum256X2Base_X2	79.258	3307.489	4.027693
+Sum256X2Base_Unzip	1166.955	224.639	0.273554
+Sum256X2Base	79.256	3307.569	4.027790
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	79.245	3308.010	4.028327
+Sum512Base_Basic	310.890	843.205	1.026813
+Sum512Base_ByShorter	81.708	3208.307	3.906914
+Sum512Base_ByX2Unzip	3079.800	85.117	0.103651
+Sum512Base	81.702	3208.536	3.907193
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	81.698	3208.715	3.907411
+Sum512X2Base_Basic	326.383	803.179	0.978071
+Sum512X2Base_X2	287.316	912.388	1.111060
+Sum512X2Base_Unzip	1743.112	150.389	0.183136
+Sum512X2Base	287.640	911.361	1.109809
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	287.850	910.695	1.108998
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+# Sum512Base_Basic	-467755046
+# Sum512X2Base_Basic	-467755046
+SumBase_Basic	398.037	658.592
+SumBase_ByX2Unzip	219.810	1192.594	1.810823
+SumBase	219.812	1192.580	1.810802
+SumTraits	51.517	5088.520	7.726359
+SumX2Base_Basic	402.003	652.094	0.990133
+SumX2Base_X2	219.611	1193.672	1.812459
+SumX2Base_Unzip	148.686	1763.075	2.677036
+SumX2Base	148.701	1762.898	2.676766
+SumX2Traits	53.020	4944.259	7.507313
+Sum128Base_Basic	397.972	658.699	1.000163
+Sum128Base_ByX2Unzip	154.757	1693.913	2.572020
+Sum128Base	154.765	1693.825	2.571887
+Sum128AdvSimd_ByX2Unzip	154.777	1693.692	2.571686
+Sum128AdvSimd_Shuffle	218.477	1199.872	1.821873
+Sum128AdvSimd_ShuffleX	107.480	2439.010	3.703368
+Sum128AdvSimdB64_ByX2Unzip	67.476	3885.012	5.898964
+Sum128AdvSimdB64_Shuffle	86.737	3022.295	4.589023
+Sum128AdvSimdB64_ShuffleX	51.180	5122.031	7.777240
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	51.179	5122.091	7.777332
+Sum128X2Base_Basic	401.998	652.103	0.990146
+Sum128X2Base_X2	144.737	1811.181	2.750079
+Sum128X2Base_Unzip	121.363	2159.996	3.279717
+Sum128X2Base	121.378	2159.740	3.279328
+Sum128X2AdvSimd_X2	115.896	2261.890	3.434431
+Sum128X2AdvSimd_Unzip	121.329	2160.596	3.280628
+Sum128X2AdvSimdB64_X2	57.938	4524.558	6.870044
+Sum128X2AdvSimdB64_Unzip	53.021	4944.155	7.507156
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	53.010	4945.197	7.508738
+Sum256Base_Basic	351.369	746.065	1.132817
+Sum256Base_ByShorter	116.431	2251.488	3.418638
+Sum256Base_ByX2Unzip	2363.289	110.923	0.168425
+Sum256Base	116.461	2250.908	3.417756
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	116.451	2251.102	3.418051
+Sum256X2Base_Basic	371.353	705.917	1.071857
+Sum256X2Base_X2	114.472	2290.021	3.477145
+Sum256X2Base_Unzip	1184.479	221.316	0.336044
+Sum256X2Base	114.480	2289.858	3.476897
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	114.465	2290.161	3.477358
+Sum512Base_Basic	387.083	677.229	1.028298
+Sum512Base_ByShorter	118.768	2207.185	3.351368
+Sum512Base_ByX2Unzip	4026.040	65.112	0.098866
+Sum512Base	118.772	2207.121	3.351270
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	118.779	2206.986	3.351066
+Sum512X2Base_Basic	420.345	623.640	0.946929
+Sum512X2Base_X2	538.044	487.217	0.739785
+Sum512X2Base_Unzip	1599.565	163.885	0.248841
+Sum512X2Base	538.123	487.145	0.739676
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	538.571	486.740	0.739062
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+# Sum512Base_Basic	5910372263572008452
+# Sum512X2Base_Basic	5910372263572008452
+SumBase_Basic	468.826	559.150
+SumBase	468.900	559.062	0.999843
+SumTraits	77.333	3389.829	6.062472
+SumX2Base_Basic	775.718	337.937	0.604377
+SumX2Base_X2	774.341	338.538	0.605452
+SumX2Base	774.099	338.644	0.605641
+SumX2Traits	62.624	4186.011	7.486386
+Sum128Base_Basic	469.393	558.475	0.998793
+Sum128Base_Move	77.856	3367.047	6.021727
+Sum128Base	77.837	3367.850	6.023162
+Sum128AdvSimd_AlignRight	77.323	3390.246	6.063217
+Sum128AdvSimd_ByX2Unzip	154.130	1700.799	3.041759
+Sum128AdvSimd_Shuffle	290.975	900.915	1.611223
+Sum128AdvSimd_ShuffleX	155.437	1686.496	3.016180
+Sum128AdvSimdB64_ByX2Unzip	81.897	3200.906	5.724595
+Sum128AdvSimdB64_Shuffle	115.770	2264.357	4.049642
+Sum128AdvSimdB64_ShuffleX	81.903	3200.672	5.724177
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	77.323	3390.257	6.063237
+Sum128X2Base_Basic	775.956	337.834	0.604192
+Sum128X2Base_X2	59.343	4417.453	7.900305
+Sum128X2Base	59.336	4417.922	7.901143
+Sum128X2AdvSimd_X2	62.623	4186.035	7.486430
+Sum128X2AdvSimd_Unzip	110.818	2365.526	4.230577
+Sum128X2AdvSimdB64_X2	62.645	4184.568	7.483806
+Sum128X2AdvSimdB64_Unzip	77.100	3400.065	6.080777
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	62.654	4184.004	7.482796
+Sum256Base_Basic	536.342	488.763	0.874118
+Sum256Base_ByShorter	58.591	4474.149	8.001701
+Sum256Base	540.195	485.277	0.867883
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	539.775	485.654	0.868558
+Sum256X2Base_Basic	619.407	423.218	0.756895
+Sum256X2Base_X2	618.872	423.584	0.757550
+Sum256X2Base	620.096	422.748	0.756054
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	619.528	423.135	0.756747
+Sum512Base_Basic	627.159	417.987	0.747540
+Sum512Base_ByShorter	619.279	423.305	0.757051
+Sum512Base	625.367	419.185	0.749682
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	627.538	417.734	0.747087
+Sum512X2Base_Basic	698.985	375.035	0.670724
+Sum512X2Base_X2	701.946	373.453	0.667895
+Sum512X2Base	701.966	373.442	0.667876
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	701.385	373.752	0.668429
+
+```
+
+### AWS Arm t4g.small
+`Neoverse-N1`
+
+#### .NET Core 3.1
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	2
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 6.8.0.1015
+Environment.Version:	3.1.32
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/
+RuntimeInformation.FrameworkDescription:	.NET Core 3.1.32
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.8.0-1015-aws #16~22.04.1-Ubuntu SMP Mon Aug 19 20:21:57 UTC 2024
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/3.1.32/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Core 3.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET Core 3.1
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	
+Vector128s.Instance:	WVectorTraits128Base	// 
+Vectors.Instance:	VectorTraits128Base	// 
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	993.130	263.957
+SumBase_ByX2Zip	691.759	378.953	1.435659
+SumBase	689.183	380.369	1.441025
+SumTraits	692.202	378.710	1.434741
+SumX2Base_Basic	1036.653	252.875	0.958016
+SumX2Base_X2	1126.883	232.627	0.881307
+SumX2Base_Zip	373.192	702.437	2.661176
+SumX2Base	372.972	702.851	2.662744
+SumX2Traits	374.203	700.539	2.653986
+Sum128Base_Basic	1991.463	131.634	0.498694
+Sum128Base	1990.541	131.695	0.498925
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	1989.032	131.795	0.499303
+Sum128X2Base_Basic	2163.213	121.183	0.459100
+Sum128X2Base_X2	2186.381	119.899	0.454235
+Sum128X2Base	2284.163	114.766	0.434790
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	2057.077	127.435	0.482787
+Sum256Base_Basic	1899.144	138.033	0.522936
+Sum256Base	1924.463	136.217	0.516056
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	2093.030	125.246	0.474494
+Sum256X2Base_Basic	2049.249	127.922	0.484631
+Sum256X2Base_X2	1970.268	133.050	0.504059
+Sum256X2Base	1993.186	131.520	0.498263
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	2322.323	112.880	0.427645
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	1387.853	188.885
+SumBase_ByX2Zip	1200.784	218.311	1.155788
+SumBase	1228.647	213.360	1.129578
+SumTraits	1228.672	213.356	1.129555
+SumX2Base_Basic	1622.249	161.593	0.855512
+SumX2Base_X2	2065.372	126.923	0.671962
+SumX2Base_Zip	624.974	419.448	2.220658
+SumX2Base	624.995	419.434	2.220582
+SumX2Traits	624.983	419.442	2.220625
+Sum128Base_Basic	2745.645	95.476	0.505474
+Sum128Base	2729.178	96.052	0.508524
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	2730.302	96.013	0.508315
+Sum128X2Base_Basic	2916.967	89.869	0.475786
+Sum128X2Base_X2	2922.535	89.697	0.474880
+Sum128X2Base	2921.201	89.738	0.475097
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	2907.724	90.154	0.477299
+Sum256Base_Basic	2930.335	89.459	0.473616
+Sum256Base	2981.203	87.932	0.465534
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	3319.238	78.977	0.418124
+Sum256X2Base_Basic	3501.808	74.860	0.396325
+Sum256X2Base_X2	3406.436	76.956	0.407421
+Sum256X2Base	3517.684	74.522	0.394536
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	3896.348	67.279	0.356193
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	1898.381	138.088
+SumBase_ByX2Zip	8337.118	31.443	0.227702
+SumBase	1858.244	141.071	1.021599
+SumTraits	1811.683	144.696	1.047855
+SumX2Base_Basic	2159.998	121.363	0.878881
+SumX2Base_X2	2169.597	120.826	0.874992
+SumX2Base_Zip	4544.067	57.689	0.417771
+SumX2Base	2153.563	121.726	0.881507
+SumX2Traits	2194.253	119.468	0.865160
+Sum128Base_Basic	3823.410	68.563	0.496515
+Sum128Base	3844.231	68.192	0.493826
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	3961.665	66.170	0.479188
+Sum128X2Base_Basic	4319.647	60.686	0.439476
+Sum128X2Base_X2	4289.078	61.119	0.442608
+Sum128X2Base	4280.935	61.235	0.443450
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	4291.590	61.083	0.442349
+Sum256Base_Basic	4460.399	58.771	0.425608
+Sum256Base	4585.113	57.173	0.414031
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	5215.155	50.266	0.364012
+Sum256X2Base_Basic	4786.677	54.765	0.396597
+Sum256X2Base_X2	5000.858	52.420	0.379611
+Sum256X2Base	5201.969	50.393	0.364935
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	6386.813	41.045	0.297234
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	2388.210	109.766
+SumBase	2393.339	109.531	0.997857
+SumTraits	2442.303	107.335	0.977852
+SumX2Base_Basic	2653.243	98.801	0.900110
+SumX2Base_X2	2672.980	98.072	0.893464
+SumX2Base	2678.843	97.857	0.891508
+SumX2Traits	2670.517	98.162	0.894288
+Sum128Base_Basic	3754.954	69.813	0.636016
+Sum128Base_Move	3266.142	80.261	0.731202
+Sum128Base	3795.575	69.066	0.629209
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	3906.964	67.097	0.611270
+Sum128X2Base_Basic	4549.792	57.617	0.524905
+Sum128X2Base_X2	4527.266	57.903	0.527517
+Sum128X2Base	4529.972	57.869	0.527202
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	4531.257	57.852	0.527052
+Sum256Base_Basic	6876.085	38.124	0.347321
+Sum256Base	7072.303	37.066	0.337685
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	8407.481	31.180	0.284058
+Sum256X2Base_Basic	7535.309	34.789	0.316936
+Sum256X2Base_X2	7888.819	33.230	0.302734
+Sum256X2Base	8244.425	31.797	0.289676
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	10691.444	24.519	0.223376
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+Check-SumBase_ByX2Unzip	Check `SumBase_ByX2Unzip` mismatch. 85!=114
+# SumX2Base_Basic	114
+Check-SumX2Base_Unzip	Check `SumX2Base_Unzip` mismatch. 60!=114
+Check-SumX2Base	Check `SumX2Base` mismatch. 60!=114
+Check-SumX2Traits	Check `SumX2Traits` mismatch. 60!=114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	946.042	277.096
+SumBase_ByX2Unzip	1745.879	150.150	0.541871
+SumBase	945.667	277.206	1.000397
+SumTraits	946.788	276.877	0.999212
+SumX2Base_Basic	960.762	272.850	0.984678
+SumX2Base_X2	966.691	271.176	0.978639
+SumX2Base_Unzip	1084.476	241.724	0.872350
+SumX2Base	1082.439	242.179	0.873991
+SumX2Traits	1085.097	241.586	0.871850
+Sum128Base_Basic	1693.952	154.753	0.558482
+Sum128Base	1693.101	154.831	0.558763
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	1693.955	154.753	0.558481
+Sum128X2Base_Basic	1732.943	151.271	0.545916
+Sum128X2Base_X2	1738.336	150.802	0.544223
+Sum128X2Base	1718.416	152.550	0.550531
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	1721.497	152.277	0.549546
+Sum256Base_Basic	1655.841	158.315	0.571336
+Sum256Base	1684.073	155.661	0.561758
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1844.944	142.088	0.512776
+Sum256X2Base_Basic	1681.344	155.913	0.562670
+Sum256X2Base_X2	1720.518	152.363	0.549859
+Sum256X2Base	1746.297	150.114	0.541742
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1939.114	135.187	0.487873
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	1223.310	214.291
+SumBase_ByX2Unzip	1891.121	138.618	0.646871
+SumBase	1223.561	214.247	0.999795
+SumTraits	1222.687	214.400	1.000510
+SumX2Base_Basic	1250.769	209.586	0.978047
+SumX2Base_X2	1251.051	209.539	0.977826
+SumX2Base_Unzip	967.561	270.933	1.264324
+SumX2Base	1251.023	209.544	0.977848
+SumX2Traits	1250.944	209.557	0.977910
+Sum128Base_Basic	2374.964	110.378	0.515086
+Sum128Base	2376.888	110.289	0.514669
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	2379.461	110.169	0.514112
+Sum128X2Base_Basic	2775.230	94.458	0.440796
+Sum128X2Base_X2	2758.006	95.048	0.443549
+Sum128X2Base	2727.777	96.102	0.448464
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	2728.008	96.094	0.448426
+Sum256Base_Basic	2589.776	101.223	0.472362
+Sum256Base	2652.308	98.836	0.461225
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	2975.552	88.099	0.411120
+Sum256X2Base_Basic	2748.811	95.366	0.445033
+Sum256X2Base_X2	2810.714	93.266	0.435231
+Sum256X2Base	2865.987	91.467	0.426837
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	3397.826	77.150	0.360027
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	1474.715	177.759
+SumBase_ByX2Unzip	4473.500	58.599	0.329656
+SumBase	1475.251	177.694	0.999637
+SumTraits	1477.415	177.434	0.998173
+SumX2Base_Basic	1525.079	171.889	0.966977
+SumX2Base_X2	1523.183	172.103	0.968180
+SumX2Base_Unzip	2683.350	97.693	0.549580
+SumX2Base	1524.369	171.969	0.967427
+SumX2Traits	1525.229	171.872	0.966881
+Sum128Base_Basic	3598.146	72.855	0.409854
+Sum128Base	3589.323	73.034	0.410862
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	3588.378	73.054	0.410970
+Sum128X2Base_Basic	3831.862	68.412	0.384856
+Sum128X2Base_X2	3835.993	68.338	0.384442
+Sum128X2Base	3845.647	68.166	0.383477
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	3843.460	68.205	0.383695
+Sum256Base_Basic	3816.791	68.682	0.386376
+Sum256Base	3939.612	66.541	0.374330
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	4580.087	57.236	0.321984
+Sum256X2Base_Basic	4118.147	63.656	0.358102
+Sum256X2Base_X2	4226.590	62.023	0.348914
+Sum256X2Base	4352.833	60.224	0.338794
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	5584.417	46.942	0.264077
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	1560.803	167.955
+SumBase	1554.294	168.658	1.004188
+SumTraits	1557.456	168.315	1.002149
+SumX2Base_Basic	1606.304	163.197	0.971674
+SumX2Base_X2	1612.334	162.587	0.968040
+SumX2Base	1612.543	162.566	0.967914
+SumX2Traits	1629.331	160.891	0.957941
+Sum128Base_Basic	3052.547	85.877	0.511312
+Sum128Base_Move	3324.161	78.860	0.469533
+Sum128Base	3033.097	86.428	0.514591
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	3027.802	86.579	0.515491
+Sum128X2Base_Basic	3457.183	75.826	0.451467
+Sum128X2Base_X2	3418.453	76.685	0.456582
+Sum128X2Base	3394.990	77.215	0.459737
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	3396.684	77.176	0.459508
+Sum256Base_Basic	5641.008	46.471	0.276689
+Sum256Base	5912.762	44.335	0.263972
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	7234.347	36.236	0.215749
+Sum256X2Base_Basic	6291.057	41.669	0.248099
+Sum256X2Base_X2	6496.101	40.354	0.240268
+Sum256X2Base	6729.339	38.955	0.231940
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	9165.402	28.601	0.170293
+
+```
+
+#### .NET 5.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	2
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 6.8.0.1015
+Environment.Version:	5.0.17
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/
+RuntimeInformation.FrameworkDescription:	.NET 5.0.17
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.8.0-1015-aws #16~22.04.1-Ubuntu SMP Mon Aug 19 20:21:57 UTC 2024
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/5.0.17/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 5.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 5.0
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+```
+
+#### .NET 6.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	2
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 6.8.0.1015
+Environment.Version:	6.0.19
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/
+RuntimeInformation.FrameworkDescription:	.NET 6.0.19
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.8.0-1015-aws #16~22.04.1-Ubuntu SMP Mon Aug 19 20:21:57 UTC 2024
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/6.0.19/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 6.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 6.0
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	987.272	265.524
+SumBase_ByX2Zip	645.304	406.233	1.529934
+SumBase	645.263	406.259	1.530030
+SumTraits	59.829	4381.575	16.501647
+SumX2Base_Basic	995.105	263.433	0.992128
+SumX2Base_X2	846.677	309.615	1.166055
+SumX2Base_Zip	360.324	727.523	2.739957
+SumX2Base	359.746	728.691	2.744356
+SumX2Traits	59.406	4412.785	16.619189
+Sum128Base_Basic	1785.904	146.785	0.552814
+Sum128Base	1793.482	146.165	0.550478
+Sum128AdvSimd_ByX2Zip	562.348	466.160	1.755626
+Sum128AdvSimd_Shuffle	180.669	1450.961	5.464528
+Sum128AdvSimdB64_ByX2Zip	99.119	2644.745	9.960493
+Sum128AdvSimdB64_Shuffle	60.031	4366.836	16.446136
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	68.931	3802.982	14.322583
+Sum128X2Base_Basic	1794.495	146.082	0.550167
+Sum128X2Base_X2	1803.057	145.389	0.547555
+Sum128X2Base	1797.929	145.803	0.549116
+Sum128X2AdvSimd_X2	182.534	1436.136	5.408697
+Sum128X2AdvSimd_Zip	319.265	821.086	3.092329
+Sum128X2AdvSimdB64_X2	65.540	3999.727	15.063552
+Sum128X2AdvSimdB64_Zip	59.424	4411.386	16.613920
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	59.445	4409.831	16.608063
+Sum256Base_Basic	1685.074	155.568	0.585892
+Sum256Base	1685.276	155.550	0.585822
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1727.029	151.789	0.571659
+Sum256X2Base_Basic	2526.827	103.744	0.390716
+Sum256X2Base_X2	2547.258	102.912	0.387582
+Sum256X2Base	2609.241	100.468	0.378375
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	2714.490	96.572	0.363704
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	1380.991	189.823
+SumBase_ByX2Zip	1152.486	227.460	1.198271
+SumBase	1147.693	228.410	1.203276
+SumTraits	136.068	1926.559	10.149235
+SumX2Base_Basic	1444.177	181.518	0.956248
+SumX2Base_X2	1748.049	149.964	0.790018
+SumX2Base_Zip	590.926	443.616	2.336997
+SumX2Base	584.311	448.638	2.363451
+SumX2Traits	108.602	2413.794	12.716021
+Sum128Base_Basic	2606.742	100.564	0.529777
+Sum128Base	2609.745	100.448	0.529167
+Sum128AdvSimd_ByX2Zip	851.571	307.836	1.621697
+Sum128AdvSimd_Shuffle	367.300	713.705	3.759841
+Sum128AdvSimdB64_ByX2Zip	163.298	1605.306	8.456853
+Sum128AdvSimdB64_Shuffle	138.083	1898.455	10.001181
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	141.340	1854.707	9.770713
+Sum128X2Base_Basic	2665.116	98.361	0.518173
+Sum128X2Base_X2	2669.650	98.194	0.517293
+Sum128X2Base	2686.327	97.585	0.514082
+Sum128X2AdvSimd_X2	358.580	731.062	3.851282
+Sum128X2AdvSimd_Zip	505.735	518.343	2.730664
+Sum128X2AdvSimdB64_X2	131.689	1990.631	10.486772
+Sum128X2AdvSimdB64_Zip	103.475	2533.407	13.346150
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	109.756	2388.419	12.582343
+Sum256Base_Basic	2326.473	112.679	0.593599
+Sum256Base	2302.287	113.862	0.599835
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	2306.180	113.670	0.598822
+Sum256X2Base_Basic	2550.251	102.791	0.541512
+Sum256X2Base_X2	2494.734	105.079	0.553563
+Sum256X2Base	2481.527	105.638	0.556509
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	2696.315	97.223	0.512177
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+Check-Sum256X2Traits	Check `Sum256X2Traits` mismatch. -467755046!=0
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	4020.371	65.204
+SumBase_Basic	1832.040	143.089	2.194477
+SumBase_ByX2Zip	9447.502	27.747	0.425549
+SumBase	1828.187	143.390	2.199102
+SumTraits	253.549	1033.899	15.856390
+SumX2Base_Basic	1918.234	136.659	2.095871
+SumX2Base_X2	1917.006	136.747	2.097214
+SumX2Base_Zip	4932.241	53.149	0.815121
+SumX2Base	1886.124	138.986	2.131552
+SumX2Traits	164.026	1598.185	24.510565
+Sum128Base_Basic	3726.589	70.344	1.078834
+Sum128Base	3714.956	70.565	1.082212
+Sum128AdvSimd_ByX2Zip	1162.629	225.475	3.458001
+Sum128AdvSimd_Shuffle	726.575	360.794	5.533315
+Sum128AdvSimdB64_ByX2Zip	246.087	1065.250	16.337204
+Sum128AdvSimdB64_Shuffle	275.575	951.261	14.589011
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	294.674	889.607	13.643460
+Sum128X2Base_Basic	3941.407	66.510	1.020035
+Sum128X2Base_X2	3974.109	65.963	1.011641
+Sum128X2Base	3967.988	66.065	1.013201
+Sum128X2AdvSimd_X2	730.351	358.929	5.504714
+Sum128X2AdvSimd_Zip	749.328	349.839	5.365304
+Sum128X2AdvSimdB64_X2	274.209	956.001	14.661705
+Sum128X2AdvSimdB64_Zip	164.376	1594.783	24.458384
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	165.000	1588.753	24.365912
+Sum256Base_Basic	3485.443	75.211	1.153475
+Sum256Base	3487.291	75.171	1.152864
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	3469.245	75.562	1.158860
+Sum256X2Base_Basic	3715.930	70.546	1.081929
+Sum256X2Base_X2	3696.892	70.909	1.087500
+Sum256X2Base	3706.623	70.723	1.084645
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+Check-Sum256X2Traits	Check `Sum256X2Traits` mismatch. 5910372263572008452!=0
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	5291.387	49.542
+SumBase_Basic	2607.799	100.523	2.029062
+SumBase	2567.930	102.084	2.060565
+SumTraits	227.293	1153.333	23.280073
+SumX2Base_Basic	2726.898	96.133	1.940442
+SumX2Base_X2	2735.787	95.820	1.934137
+SumX2Base	2727.517	96.111	1.940001
+SumX2Traits	215.452	1216.716	24.559467
+Sum128Base_Basic	3660.168	71.621	1.445668
+Sum128Base_Move	1578.815	166.038	3.351493
+Sum128Base	1570.254	166.944	3.369766
+Sum128AdvSimd_AlignRight	227.484	1152.365	23.260528
+Sum128AdvSimd_ByX2Zip	500.002	524.286	10.582740
+Sum128AdvSimd_Shuffle	1035.205	253.229	5.111440
+Sum128AdvSimdB64_ByX2Zip	328.324	798.432	16.116374
+Sum128AdvSimdB64_Shuffle	355.352	737.702	14.890549
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	227.353	1153.024	23.273837
+Sum128X2Base_Basic	4093.998	64.031	1.292474
+Sum128X2Base_X2	1509.442	173.670	3.505526
+Sum128X2Base	1512.951	173.267	3.497395
+Sum128X2AdvSimd_X2	214.946	1219.580	24.617265
+Sum128X2AdvSimd_Zip	358.164	731.911	14.773659
+Sum128X2AdvSimdB64_X2	215.181	1218.246	24.590351
+Sum128X2AdvSimdB64_Zip	243.259	1077.632	21.752052
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	215.119	1218.601	24.597506
+Sum256Base_Basic	4588.855	57.126	1.153095
+Sum256Base	4595.940	57.038	1.151318
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	4601.977	56.963	1.149807
+Sum256X2Base_Basic	5162.855	50.775	1.024896
+Sum256X2Base_X2	5277.327	49.674	1.002664
+Sum256X2Base	5390.425	48.631	0.981627
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	931.415	281.447
+SumBase_ByX2Unzip	1531.029	171.221	0.608359
+SumBase	932.562	281.101	0.998770
+SumTraits	66.320	3952.702	14.044210
+SumX2Base_Basic	932.736	281.048	0.998583
+SumX2Base_X2	934.817	280.423	0.996361
+SumX2Base_Unzip	953.205	275.013	0.977140
+SumX2Base	951.714	275.444	0.978671
+SumX2Traits	59.430	4410.979	15.672500
+Sum128Base_Basic	1686.997	155.391	0.552114
+Sum128Base	1686.862	155.403	0.552158
+Sum128AdvSimd_ByX2Unzip	268.429	976.587	3.469878
+Sum128AdvSimd_Shuffle	182.553	1435.989	5.102164
+Sum128AdvSimdB64_ByX2Unzip	99.049	2646.603	9.403557
+Sum128AdvSimdB64_Shuffle	59.887	4377.288	15.552793
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	66.785	3925.210	13.946530
+Sum128X2Base_Basic	1697.639	154.417	0.548653
+Sum128X2Base_X2	1711.019	153.209	0.544363
+Sum128X2Base	1711.187	153.194	0.544309
+Sum128X2AdvSimd_X2	178.120	1471.730	5.229154
+Sum128X2AdvSimd_Unzip	159.779	1640.662	5.829379
+Sum128X2AdvSimdB64_X2	65.635	3993.936	14.190720
+Sum128X2AdvSimdB64_Unzip	59.539	4402.878	15.643717
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	59.567	4400.841	15.636481
+Sum256Base_Basic	1688.094	155.290	0.551755
+Sum256Base	1691.388	154.987	0.550681
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1745.280	150.202	0.533677
+Sum256X2Base_Basic	1752.007	149.625	0.531627
+Sum256X2Base_X2	1772.286	147.913	0.525544
+Sum256X2Base	1772.449	147.899	0.525496
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	2720.745	96.350	0.342338
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	1198.022	218.814
+SumBase_ByX2Unzip	1649.299	158.943	0.726383
+SumBase	1202.800	217.945	0.996028
+SumTraits	134.592	1947.694	8.901139
+SumX2Base_Basic	1227.714	213.522	0.975815
+SumX2Base_X2	1231.179	212.921	0.973068
+SumX2Base_Unzip	842.852	311.020	1.421391
+SumX2Base	1232.627	212.671	0.971925
+SumX2Traits	103.323	2537.141	11.594963
+Sum128Base_Basic	2350.504	111.527	0.509687
+Sum128Base	2356.273	111.254	0.508439
+Sum128AdvSimd_ByX2Unzip	402.872	650.688	2.973705
+Sum128AdvSimd_Shuffle	378.080	693.356	3.168700
+Sum128AdvSimdB64_ByX2Unzip	163.390	1604.411	7.332304
+Sum128AdvSimdB64_Shuffle	127.207	2060.763	9.417876
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	145.928	1796.388	8.209656
+Sum128X2Base_Basic	2447.031	107.127	0.489582
+Sum128X2Base_X2	2422.732	108.202	0.494492
+Sum128X2Base	2422.542	108.210	0.494531
+Sum128X2AdvSimd_X2	358.410	731.407	3.342598
+Sum128X2AdvSimd_Unzip	256.518	1021.932	4.670322
+Sum128X2AdvSimdB64_X2	138.237	1896.333	8.666414
+Sum128X2AdvSimdB64_Unzip	103.316	2537.307	11.595722
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	109.168	2401.298	10.974148
+Sum256Base_Basic	2308.415	113.560	0.518980
+Sum256Base	2344.299	111.822	0.511036
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	2441.139	107.386	0.490764
+Sum256X2Base_Basic	2435.569	107.632	0.491886
+Sum256X2Base_X2	2509.277	104.470	0.477437
+Sum256X2Base	2509.111	104.477	0.477469
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	2987.583	87.745	0.401000
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	1456.010	180.043
+SumBase_ByX2Unzip	3563.501	73.564	0.408590
+SumBase	1467.945	178.579	0.991869
+SumTraits	244.531	1072.026	5.954290
+SumX2Base_Basic	1517.255	172.775	0.959635
+SumX2Base_X2	1521.859	172.253	0.956732
+SumX2Base_Unzip	2316.850	113.147	0.628444
+SumX2Base	1521.239	172.323	0.957121
+SumX2Traits	164.631	1592.314	8.844092
+Sum128Base_Basic	3239.852	80.912	0.449406
+Sum128Base	3226.057	81.258	0.451328
+Sum128AdvSimd_ByX2Unzip	561.937	466.501	2.591056
+Sum128AdvSimd_Shuffle	732.454	357.898	1.987852
+Sum128AdvSimdB64_ByX2Unzip	244.693	1071.316	5.950344
+Sum128AdvSimdB64_Shuffle	253.103	1035.719	5.752631
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	244.884	1070.484	5.945721
+Sum128X2Base_Basic	3652.690	71.767	0.398613
+Sum128X2Base_X2	3647.569	71.868	0.399173
+Sum128X2Base	3646.864	71.882	0.399250
+Sum128X2AdvSimd_X2	555.265	472.106	2.622190
+Sum128X2AdvSimd_Unzip	397.344	659.740	3.664354
+Sum128X2AdvSimdB64_X2	253.494	1034.123	5.743767
+Sum128X2AdvSimdB64_Unzip	163.746	1600.918	8.891878
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	164.502	1593.558	8.851002
+Sum256Base_Basic	3375.748	77.655	0.431315
+Sum256Base	3439.462	76.217	0.423325
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	3437.080	76.269	0.423618
+Sum256X2Base_Basic	3679.399	71.246	0.395720
+Sum256X2Base_X2	3695.201	70.942	0.394027
+Sum256X2Base	3893.103	67.335	0.373997
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	4697.476	55.805	0.309956
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	1406.846	186.335
+SumBase	1397.951	187.520	1.006363
+SumTraits	228.648	1146.498	6.152899
+SumX2Base_Basic	1537.093	170.545	0.915264
+SumX2Base_X2	1543.913	169.792	0.911221
+SumX2Base	1544.655	169.710	0.910783
+SumX2Traits	214.827	1220.258	6.548745
+Sum128Base_Basic	2766.255	94.765	0.508574
+Sum128Base_Move	1577.923	166.132	0.891581
+Sum128Base	1580.517	165.860	0.890118
+Sum128AdvSimd_AlignRight	227.902	1150.248	6.173024
+Sum128AdvSimd_ByX2Unzip	502.024	522.174	2.802347
+Sum128AdvSimd_Shuffle	969.417	270.414	1.451229
+Sum128AdvSimdB64_ByX2Unzip	328.319	798.442	4.284993
+Sum128AdvSimdB64_Shuffle	343.229	763.758	4.098852
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	226.562	1157.051	6.209534
+Sum128X2Base_Basic	3209.868	81.668	0.438288
+Sum128X2Base_X2	1509.766	173.632	0.931831
+Sum128X2Base	1513.604	173.192	0.929467
+Sum128X2AdvSimd_X2	214.642	1221.308	6.554381
+Sum128X2AdvSimd_Unzip	356.869	734.566	3.942190
+Sum128X2AdvSimdB64_X2	215.065	1218.905	6.541485
+Sum128X2AdvSimdB64_Unzip	245.042	1069.791	5.741236
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	214.128	1224.242	6.570131
+Sum256Base_Basic	4641.155	56.482	0.303124
+Sum256Base	4591.190	57.097	0.306423
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	4612.988	56.827	0.304975
+Sum256X2Base_Basic	4952.133	52.936	0.284089
+Sum256X2Base_X2	5350.773	48.992	0.262924
+Sum256X2Base	5587.045	46.920	0.251805
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	7957.314	32.944	0.176799
+
+```
+
+#### .NET 7.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	2
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 6.8.0.1015
+Environment.Version:	7.0.8
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
+RuntimeInformation.FrameworkDescription:	.NET 7.0.8
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Linux 6.8.0-1015-aws #16~22.04.1-Ubuntu SMP Mon Aug 19 20:21:57 UTC 2024
+RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
+VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	799.662	327.819
+SumBase_ByX2Zip	611.134	428.947	1.308489
+SumBase	608.866	430.545	1.313363
+SumTraits	63.731	4113.304	12.547503
+SumX2Base_Basic	809.541	323.818	0.987796
+SumX2Base_X2	622.964	420.801	1.283641
+SumX2Base_Zip	353.950	740.625	2.259253
+SumX2Base	353.919	740.690	2.259451
+SumX2Traits	61.338	4273.763	13.036980
+Sum128Base_Basic	792.767	330.670	1.008697
+Sum128Base_ByX2Zip	3304.762	79.323	0.241973
+Sum128Base	3294.884	79.561	0.242698
+Sum128AdvSimd_ByX2Zip	557.908	469.870	1.433322
+Sum128AdvSimd_Shuffle	150.965	1736.461	5.297019
+Sum128AdvSimdB64_ByX2Zip	102.172	2565.711	7.826620
+Sum128AdvSimdB64_Shuffle	61.329	4274.400	13.038922
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	62.444	4198.067	12.806071
+Sum128X2Base_Basic	809.380	323.883	0.987994
+Sum128X2Base_X2	3682.582	71.185	0.217147
+Sum128X2Base_Zip	1636.405	160.195	0.488670
+Sum128X2Base	1647.263	159.139	0.485449
+Sum128X2AdvSimd_X2	154.498	1696.752	5.175889
+Sum128X2AdvSimd_Zip	317.822	824.813	2.516065
+Sum128X2AdvSimdB64_X2	52.206	5021.327	15.317400
+Sum128X2AdvSimdB64_Zip	62.048	4224.854	12.887785
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	61.151	4286.813	13.076788
+Sum256Base_Basic	1906.497	137.500	0.419441
+Sum256Base_ByShorter	3319.141	78.979	0.240924
+Sum256Base_ByX2Zip	9750.718	26.885	0.082011
+Sum256Base	3337.183	78.552	0.239622
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	3259.885	80.415	0.245304
+Sum256X2Base_Basic	1929.087	135.890	0.414529
+Sum256X2Base_X2	6353.564	41.259	0.125860
+Sum256X2Base_Zip	5519.321	47.496	0.144884
+Sum256X2Base	6293.643	41.652	0.127059
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	6316.654	41.500	0.126596
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	1176.294	222.856
+SumBase_ByX2Zip	1115.898	234.918	1.054124
+SumBase	1114.759	235.157	1.055200
+SumTraits	122.788	2134.925	9.579849
+SumX2Base_Basic	1221.950	214.529	0.962637
+SumX2Base_X2	1113.216	235.483	1.056663
+SumX2Base_Zip	562.763	465.816	2.090213
+SumX2Base	562.489	466.043	2.091231
+SumX2Traits	98.921	2650.031	11.891237
+Sum128Base_Basic	1175.713	222.966	1.000494
+Sum128Base_ByX2Zip	5187.488	50.534	0.226756
+Sum128Base	5185.005	50.558	0.226865
+Sum128AdvSimd_ByX2Zip	849.717	308.507	1.384336
+Sum128AdvSimd_Shuffle	298.912	876.993	3.935246
+Sum128AdvSimdB64_ByX2Zip	158.393	1655.024	7.426435
+Sum128AdvSimdB64_Shuffle	123.956	2114.808	9.489579
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	122.321	2143.085	9.616466
+Sum128X2Base_Basic	1223.083	214.330	0.961745
+Sum128X2Base_X2	5626.931	46.587	0.209047
+Sum128X2Base_Zip	2603.363	100.694	0.451836
+Sum128X2Base	2598.175	100.895	0.452739
+Sum128X2AdvSimd_X2	305.275	858.713	3.853224
+Sum128X2AdvSimd_Zip	500.580	523.680	2.349860
+Sum128X2AdvSimdB64_X2	101.802	2575.042	11.554743
+Sum128X2AdvSimdB64_Zip	98.835	2652.346	11.901621
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	98.910	2650.338	11.892614
+Sum256Base_Basic	2624.228	99.894	0.448244
+Sum256Base_ByShorter	4992.919	52.503	0.235592
+Sum256Base_ByX2Zip	10293.879	25.466	0.114271
+Sum256Base	5071.650	51.688	0.231935
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	5003.222	52.395	0.235107
+Sum256X2Base_Basic	2582.970	101.489	0.455404
+Sum256X2Base_X2	8496.418	30.853	0.138446
+Sum256X2Base_Zip	6095.604	43.005	0.192974
+Sum256X2Base	8614.582	30.430	0.136547
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	8431.492	31.091	0.139512
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	1699.576	154.241
+SumBase_ByX2Zip	1403.482	186.781	1.210971
+SumBase	1403.457	186.784	1.210992
+SumTraits	245.000	1069.974	6.937033
+SumX2Base_Basic	1830.193	143.233	0.928632
+SumX2Base_X2	1424.861	183.979	1.192801
+SumX2Base_Zip	907.853	288.752	1.872083
+SumX2Base	951.593	275.479	1.786032
+SumX2Traits	169.366	1547.795	10.034925
+Sum128Base_Basic	1853.502	141.432	0.916954
+Sum128Base_ByX2Zip	7725.229	33.933	0.220003
+Sum128Base	7937.995	33.024	0.214106
+Sum128AdvSimd_ByX2Zip	1259.888	208.069	1.348990
+Sum128AdvSimd_Shuffle	633.933	413.520	2.681003
+Sum128AdvSimdB64_ByX2Zip	250.726	1045.542	6.778631
+Sum128AdvSimdB64_Shuffle	268.063	977.921	6.340218
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	263.401	995.229	6.452438
+Sum128X2Base_Basic	1887.644	138.874	0.900369
+Sum128X2Base_X2	8968.440	29.230	0.189506
+Sum128X2Base_Zip	4089.175	64.107	0.415628
+Sum128X2Base	4099.101	63.952	0.414622
+Sum128X2AdvSimd_X2	644.973	406.442	2.635111
+Sum128X2AdvSimd_Zip	790.617	331.569	2.149684
+Sum128X2AdvSimdB64_X2	219.371	1194.979	7.747490
+Sum128X2AdvSimdB64_Zip	171.229	1530.957	9.925754
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	167.687	1563.293	10.135403
+Sum256Base_Basic	3653.681	71.748	0.465168
+Sum256Base_ByShorter	8061.501	32.518	0.210826
+Sum256Base_ByX2Zip	11427.899	22.939	0.148722
+Sum256Base	8230.181	31.852	0.206505
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	8270.087	31.698	0.205509
+Sum256X2Base_Basic	3511.678	74.649	0.483978
+Sum256X2Base_X2	12159.635	21.559	0.139772
+Sum256X2Base_Zip	7139.566	36.717	0.238050
+Sum256X2Base	12328.325	21.264	0.137859
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	12088.443	21.686	0.140595
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	3119.326	84.039
+SumBase	3222.110	81.358	0.968100
+SumTraits	222.852	1176.315	13.997301
+SumX2Base_Basic	3374.830	77.676	0.924291
+SumX2Base_X2	3337.672	78.541	0.934581
+SumX2Base	3287.947	79.729	0.948715
+SumX2Traits	226.905	1155.302	13.747269
+Sum128Base_Basic	3172.887	82.620	0.983119
+Sum128Base_Move	311.462	841.657	10.015117
+Sum128Base	314.071	834.664	9.931902
+Sum128AdvSimd_AlignRight	230.279	1138.378	13.545880
+Sum128AdvSimd_ByX2Zip	512.956	511.046	6.081080
+Sum128AdvSimd_Shuffle	848.757	308.856	3.675171
+Sum128AdvSimdB64_ByX2Zip	321.022	816.593	9.716869
+Sum128AdvSimdB64_Shuffle	345.974	757.700	9.016083
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	229.511	1142.184	13.591169
+Sum128X2Base_Basic	3277.045	79.994	0.951871
+Sum128X2Base_X2	302.224	867.383	10.321231
+Sum128X2Base	307.917	851.346	10.130402
+Sum128X2AdvSimd_X2	218.029	1202.334	14.306917
+Sum128X2AdvSimd_Zip	349.696	749.634	8.920110
+Sum128X2AdvSimdB64_X2	222.603	1177.631	14.012968
+Sum128X2AdvSimdB64_Zip	249.573	1050.372	12.498675
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	219.961	1191.777	14.181292
+Sum256Base_Basic	4811.613	54.482	0.648291
+Sum256Base_ByShorter	4317.448	60.717	0.722493
+Sum256Base	4830.974	54.263	0.645693
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	4874.086	53.783	0.639982
+Sum256X2Base_Basic	4694.470	55.841	0.664468
+Sum256X2Base_X2	4719.465	55.545	0.660949
+Sum256X2Base	4824.115	54.340	0.646611
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	4612.024	56.839	0.676346
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+SumBase_Basic	642.500	408.006
+SumBase_ByX2Unzip	331.106	791.722	1.940466
+SumBase	336.505	779.019	1.909331
+SumTraits	65.283	4015.509	9.841782
+SumX2Base_Basic	646.114	405.724	0.994407
+SumX2Base_X2	332.586	788.199	1.931830
+SumX2Base_Unzip	195.631	1339.994	3.284249
+SumX2Base	203.136	1290.483	3.162899
+SumX2Traits	64.255	4079.757	9.999249
+Sum128Base_Basic	664.477	394.512	0.966926
+Sum128Base_ByX2Unzip	260.851	1004.958	2.463094
+Sum128Base	265.064	988.985	2.423946
+Sum128AdvSimd_ByX2Unzip	265.223	988.393	2.422493
+Sum128AdvSimd_Shuffle	151.390	1731.581	4.244005
+Sum128AdvSimdB64_ByX2Unzip	105.483	2485.167	6.091001
+Sum128AdvSimdB64_Shuffle	65.206	4020.240	9.853378
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	63.338	4138.803	10.143969
+Sum128X2Base_Basic	666.773	393.153	0.963596
+Sum128X2Base_X2	264.259	991.997	2.431328
+Sum128X2Base_Unzip	164.870	1590.004	3.897009
+Sum128X2Base	163.418	1604.132	3.931635
+Sum128X2AdvSimd_X2	157.101	1668.630	4.089716
+Sum128X2AdvSimd_Unzip	166.121	1578.035	3.867674
+Sum128X2AdvSimdB64_X2	64.000	4095.980	10.039013
+Sum128X2AdvSimdB64_Unzip	64.035	4093.741	10.033525
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	64.269	4078.858	9.997048
+Sum256Base_Basic	1855.533	141.277	0.346262
+Sum256Base_ByShorter	1784.138	146.930	0.360118
+Sum256Base_ByX2Unzip	11313.138	23.172	0.056792
+Sum256Base	1760.671	148.889	0.364918
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1739.428	150.707	0.369374
+Sum256X2Base_Basic	1786.624	146.726	0.359617
+Sum256X2Base_X2	5874.759	44.622	0.109366
+Sum256X2Base_Unzip	8300.172	31.583	0.077408
+Sum256X2Base	6136.124	42.721	0.104708
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	6170.621	42.483	0.104122
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+SumBase_Basic	875.570	299.398
+SumBase_ByX2Unzip	610.120	429.660	1.435079
+SumBase	619.829	422.929	1.412599
+SumTraits	123.392	2124.489	7.095868
+SumX2Base_Basic	916.554	286.010	0.955285
+SumX2Base_X2	610.090	429.681	1.435149
+SumX2Base_Unzip	327.334	800.845	2.674851
+SumX2Base	324.638	807.496	2.697065
+SumX2Traits	102.161	2565.981	8.570465
+Sum128Base_Basic	877.785	298.642	0.997476
+Sum128Base_ByX2Unzip	415.796	630.462	2.105766
+Sum128Base	415.608	630.749	2.106722
+Sum128AdvSimd_ByX2Unzip	390.754	670.868	2.240721
+Sum128AdvSimd_Shuffle	314.670	833.076	2.782501
+Sum128AdvSimdB64_ByX2Unzip	165.905	1580.084	5.277535
+Sum128AdvSimdB64_Shuffle	127.011	2063.941	6.893635
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	127.552	2055.199	6.864434
+Sum128X2Base_Basic	893.459	293.404	0.979978
+Sum128X2Base_X2	434.712	603.029	2.014136
+Sum128X2Base_Unzip	268.641	975.816	3.259260
+Sum128X2Base	263.903	993.336	3.317778
+Sum128X2AdvSimd_X2	311.449	841.692	2.811281
+Sum128X2AdvSimd_Unzip	256.444	1022.228	3.414277
+Sum128X2AdvSimdB64_X2	123.131	2128.986	7.110886
+Sum128X2AdvSimdB64_Unzip	100.047	2620.201	8.751561
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	103.959	2521.617	8.422287
+Sum256Base_Basic	2389.436	109.710	0.366434
+Sum256Base_ByShorter	2299.718	113.990	0.380729
+Sum256Base_ByX2Unzip	13802.854	18.992	0.063434
+Sum256Base	2362.020	110.983	0.370687
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	2422.548	108.210	0.361425
+Sum256X2Base_Basic	2470.055	106.129	0.354474
+Sum256X2Base_X2	4415.554	59.368	0.198292
+Sum256X2Base_Unzip	8761.932	29.919	0.099929
+Sum256X2Base	6571.981	39.888	0.133228
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	6756.032	38.801	0.129598
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+SumBase_Basic	1155.430	226.880
+SumBase_ByX2Unzip	765.998	342.225	1.508398
+SumBase	763.842	343.191	1.512655
+SumTraits	248.935	1053.063	4.641496
+SumX2Base_Basic	1263.120	207.537	0.914743
+SumX2Base_X2	759.209	345.286	1.521887
+SumX2Base_Unzip	524.217	500.068	2.204106
+SumX2Base	520.112	504.015	2.221503
+SumX2Traits	165.632	1582.689	6.975883
+Sum128Base_Basic	1136.732	230.612	1.016449
+Sum128Base_ByX2Unzip	571.827	458.432	2.020593
+Sum128Base	576.426	454.775	2.004472
+Sum128AdvSimd_ByX2Unzip	574.083	456.631	2.012652
+Sum128AdvSimd_Shuffle	622.128	421.367	1.857223
+Sum128AdvSimdB64_ByX2Unzip	248.459	1055.080	4.650386
+Sum128AdvSimdB64_Shuffle	255.016	1027.950	4.530810
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	239.957	1092.464	4.815161
+Sum128X2Base_Basic	1269.105	206.558	0.910429
+Sum128X2Base_X2	566.557	462.697	2.039390
+Sum128X2Base_Unzip	409.932	639.481	2.818588
+Sum128X2Base	407.852	642.743	2.832963
+Sum128X2AdvSimd_X2	558.481	469.388	2.068880
+Sum128X2AdvSimd_Unzip	401.133	653.509	2.880416
+Sum128X2AdvSimdB64_X2	256.733	1021.075	4.500507
+Sum128X2AdvSimdB64_Unzip	164.994	1588.805	7.002843
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	168.361	1557.036	6.862817
+Sum256Base_Basic	2921.341	89.734	0.395514
+Sum256Base_ByShorter	3341.736	78.445	0.345757
+Sum256Base_ByX2Unzip	16127.902	16.254	0.071642
+Sum256Base	3491.983	75.070	0.330881
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	3514.468	74.590	0.328764
+Sum256X2Base_Basic	3283.945	79.826	0.351842
+Sum256X2Base_X2	3203.599	81.828	0.360666
+Sum256X2Base_Unzip	9123.011	28.734	0.126650
+Sum256X2Base	3084.144	84.997	0.374636
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	3093.016	84.754	0.373561
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+SumBase_Basic	1417.956	184.875
+SumBase	1386.207	189.109	1.022904
+SumTraits	222.652	1177.373	6.368498
+SumX2Base_Basic	1551.792	168.930	0.913754
+SumX2Base_X2	1596.881	164.160	0.887954
+SumX2Base	1606.789	163.148	0.882478
+SumX2Traits	211.882	1237.215	6.692188
+Sum128Base_Basic	1317.320	198.998	1.076395
+Sum128Base_Move	291.365	899.710	4.866597
+Sum128Base	291.531	899.198	4.863831
+Sum128AdvSimd_AlignRight	212.740	1232.227	6.665209
+Sum128AdvSimd_ByX2Unzip	481.671	544.238	2.943826
+Sum128AdvSimd_Shuffle	812.361	322.694	1.745475
+Sum128AdvSimdB64_ByX2Unzip	317.614	825.354	4.464404
+Sum128AdvSimdB64_Shuffle	319.838	819.615	4.433360
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	212.642	1232.798	6.668295
+Sum128X2Base_Basic	1503.062	174.407	0.943379
+Sum128X2Base_X2	303.460	863.850	4.672629
+Sum128X2Base	303.054	865.009	4.678896
+Sum128X2AdvSimd_X2	211.439	1239.809	6.706218
+Sum128X2AdvSimd_Unzip	341.435	767.772	4.152935
+Sum128X2AdvSimdB64_X2	211.388	1240.110	6.707850
+Sum128X2AdvSimdB64_Unzip	238.163	1100.693	5.953729
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	211.195	1241.243	6.713975
+Sum256Base_Basic	3498.953	74.921	0.405252
+Sum256Base_ByShorter	4131.136	63.456	0.343236
+Sum256Base	3495.422	74.996	0.405661
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	3496.823	74.966	0.405499
+Sum256X2Base_Basic	3708.038	70.696	0.382401
+Sum256X2Base_X2	3691.304	71.017	0.384134
+Sum256X2Base	3751.319	69.880	0.377989
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	3697.214	70.903	0.383520
+
+```
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks
+benchmarkMode:	0
+
+IsRelease:	True
+Environment.ProcessorCount:	2
+Environment.Is64BitProcess:	True
+Environment.OSVersion:	Unix 6.8.0.1015
+Environment.Version:	8.0.7
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/8.0.7/
+RuntimeInformation.FrameworkDescription:	.NET 8.0.7
+RuntimeInformation.OSArchitecture:	Arm64
+RuntimeInformation.OSDescription:	Ubuntu 22.04.2 LTS
+RuntimeInformation.RuntimeIdentifier:	linux-arm64
+IntPtr.Size:	8
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	True
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector512.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/8.0.7/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844159	# 0x8177F801
+VectorEnvironment.CpuModelName:	Neoverse-N1
+VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Dp, Rdm, Sha1, Sha256
+Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
+Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+# Sum512Base_Basic	114
+# Sum512X2Base_Basic	114
+SumBase_Basic	687.755	381.159
+SumBase_ByX2Zip	590.673	443.805	1.164357
+SumBase	590.663	443.813	1.164378
+SumTraits	40.267	6510.157	17.079892
+SumX2Base_Basic	682.656	384.006	1.007469
+SumX2Base_X2	603.035	434.708	1.140488
+SumX2Base_Zip	341.087	768.555	2.016361
+SumX2Base	341.560	767.491	2.013572
+SumX2Traits	49.516	5294.112	13.889505
+Sum128Base_Basic	687.442	381.332	1.000454
+Sum128Base_ByX2Zip	522.943	501.286	1.315162
+Sum128Base	522.983	501.248	1.315062
+Sum128AdvSimd_ByX2Zip	514.870	509.146	1.335785
+Sum128AdvSimd_Shuffle	151.259	1733.083	4.546874
+Sum128AdvSimd_ShuffleX	91.099	2877.583	7.549558
+Sum128AdvSimdB64_ByX2Zip	100.548	2607.146	6.840046
+Sum128AdvSimdB64_Shuffle	59.568	4400.773	11.545762
+Sum128AdvSimdB64_ShuffleX	39.874	6574.254	17.248056
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	39.889	6571.798	17.241612
+Sum128X2Base_Basic	682.782	383.935	1.007283
+Sum128X2Base_X2	753.366	347.964	0.912909
+Sum128X2Base_Zip	309.590	846.745	2.221500
+Sum128X2Base	310.126	845.281	2.217659
+Sum128X2AdvSimd_X2	108.760	2410.290	6.323578
+Sum128X2AdvSimd_Zip	309.598	846.723	2.221442
+Sum128X2AdvSimdB64_X2	49.545	5291.005	13.881354
+Sum128X2AdvSimdB64_Zip	59.546	4402.362	11.549932
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	49.580	5287.301	13.871636
+Sum256Base_Basic	701.916	373.469	0.979825
+Sum256Base_ByShorter	316.663	827.832	2.171881
+Sum256Base_ByX2Zip	9581.793	27.359	0.071777
+Sum256Base	316.662	827.835	2.171888
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	316.679	827.792	2.171774
+Sum256X2Base_Basic	708.638	369.927	0.970531
+Sum256X2Base_X2	485.403	540.055	1.416875
+Sum256X2Base_Zip	4816.138	54.430	0.142802
+Sum256X2Base	485.934	539.465	1.415326
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	485.524	539.920	1.416521
+Sum512Base_Basic	614.464	426.622	1.119276
+Sum512Base_ByShorter	750.781	349.162	0.916052
+Sum512Base_ByX2Zip	11293.836	23.211	0.060896
+Sum512Base	748.118	350.404	0.919313
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	750.830	349.139	0.915993
+Sum512X2Base_Basic	617.068	424.822	1.114553
+Sum512X2Base_X2	784.316	334.233	0.876885
+Sum512X2Base_Zip	5682.653	46.131	0.121027
+Sum512X2Base	787.811	332.750	0.872995
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	803.687	326.177	0.855750
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+# Sum512Base_Basic	-24614
+# Sum512X2Base_Basic	-24614
+SumBase_Basic	938.245	279.398
+SumBase_ByX2Zip	1131.433	231.692	0.829254
+SumBase	1081.556	242.377	0.867496
+SumTraits	86.313	3037.124	10.870239
+SumX2Base_Basic	913.797	286.873	1.026755
+SumX2Base_X2	1100.578	238.187	0.852502
+SumX2Base_Zip	551.372	475.439	1.701656
+SumX2Base	551.226	475.565	1.702105
+SumX2Traits	99.366	2638.161	9.442300
+Sum128Base_Basic	938.307	279.380	0.999934
+Sum128Base_ByX2Zip	789.612	331.991	1.188236
+Sum128Base	788.726	332.364	1.189571
+Sum128AdvSimd_ByX2Zip	775.171	338.176	1.210372
+Sum128AdvSimd_Shuffle	305.599	857.804	3.070187
+Sum128AdvSimd_ShuffleX	187.366	1399.104	5.007563
+Sum128AdvSimdB64_ByX2Zip	162.871	1609.517	5.760659
+Sum128AdvSimdB64_Shuffle	124.512	2105.378	7.535405
+Sum128AdvSimdB64_ShuffleX	86.217	3040.514	10.882372
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	86.158	3042.605	10.889856
+Sum128X2Base_Basic	914.200	286.747	1.026302
+Sum128X2Base_X2	786.564	333.277	1.192840
+Sum128X2Base_Zip	490.653	534.276	1.912238
+Sum128X2Base	490.658	534.270	1.912218
+Sum128X2AdvSimd_X2	217.788	1203.667	4.308070
+Sum128X2AdvSimd_Zip	480.810	545.213	1.951386
+Sum128X2AdvSimdB64_X2	99.424	2636.632	9.436830
+Sum128X2AdvSimdB64_Zip	99.957	2622.574	9.386515
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	99.408	2637.050	9.438324
+Sum256Base_Basic	1014.781	258.326	0.924579
+Sum256Base_ByShorter	505.319	518.770	1.856741
+Sum256Base_ByX2Zip	9338.487	28.071	0.100471
+Sum256Base	505.301	518.788	1.856805
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	505.226	518.864	1.857079
+Sum256X2Base_Basic	1028.827	254.799	0.911956
+Sum256X2Base_X2	842.604	311.112	1.113506
+Sum256X2Base_Zip	4681.332	55.998	0.200423
+Sum256X2Base	863.453	303.600	1.086620
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	862.029	304.101	1.088415
+Sum512Base_Basic	786.036	333.501	1.193642
+Sum512Base_ByShorter	1348.300	194.426	0.695873
+Sum512Base_ByX2Zip	11099.833	23.617	0.084528
+Sum512Base	1359.278	192.855	0.690253
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	1307.075	200.558	0.717821
+Sum512X2Base_Basic	825.690	317.485	1.136317
+Sum512X2Base_X2	1393.204	188.159	0.673444
+Sum512X2Base_Zip	5579.983	46.979	0.168145
+Sum512X2Base	1375.688	190.555	0.682019
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	1415.461	185.200	0.662855
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+# Sum512Base_Basic	-467755046
+# Sum512X2Base_Basic	-467755046
+SumBase_Basic	1331.911	196.818
+SumBase_ByX2Zip	1322.921	198.155	1.006795
+SumBase	1322.776	198.177	1.006906
+SumTraits	175.440	1494.205	7.591809
+SumX2Base_Basic	1291.768	202.934	1.031076
+SumX2Base_X2	1365.846	191.928	0.975155
+SumX2Base_Zip	843.060	310.944	1.579853
+SumX2Base	842.952	310.983	1.580055
+SumX2Traits	161.993	1618.239	8.222005
+Sum128Base_Basic	1331.076	196.941	1.000627
+Sum128Base_ByX2Zip	1067.480	245.573	1.247715
+Sum128Base	1067.372	245.598	1.247841
+Sum128AdvSimd_ByX2Zip	1039.713	252.131	1.281037
+Sum128AdvSimd_Shuffle	609.310	430.231	2.185931
+Sum128AdvSimd_ShuffleX	377.220	694.937	3.530861
+Sum128AdvSimdB64_ByX2Zip	243.368	1077.152	5.472833
+Sum128AdvSimdB64_Shuffle	248.931	1053.081	5.350530
+Sum128AdvSimdB64_ShuffleX	176.081	1488.770	7.564197
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	174.380	1503.290	7.637971
+Sum128X2Base_Basic	1291.755	202.936	1.031086
+Sum128X2Base_X2	1043.626	251.186	1.276234
+Sum128X2Base_Zip	724.950	361.603	1.837244
+Sum128X2Base	724.880	361.638	1.837422
+Sum128X2AdvSimd_X2	434.779	602.937	3.063423
+Sum128X2AdvSimd_Zip	705.148	371.757	1.888838
+Sum128X2AdvSimdB64_X2	197.899	1324.637	6.730265
+Sum128X2AdvSimdB64_Zip	162.046	1617.714	8.219338
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	162.018	1617.993	8.220757
+Sum256Base_Basic	954.517	274.635	1.395377
+Sum256Base_ByShorter	753.910	347.713	1.766671
+Sum256Base_ByX2Zip	9427.387	27.807	0.141281
+Sum256Base	753.907	347.714	1.766678
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	753.893	347.720	1.766710
+Sum256X2Base_Basic	959.864	273.105	1.387603
+Sum256X2Base_X2	719.682	364.250	1.850694
+Sum256X2Base_Zip	4734.680	55.367	0.281310
+Sum256X2Base	720.528	363.822	1.848519
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	719.066	364.562	1.852280
+Sum512Base_Basic	892.232	293.807	1.492785
+Sum512Base_ByShorter	1185.906	221.049	1.123116
+Sum512Base_ByX2Zip	10992.937	23.847	0.121161
+Sum512Base	1190.882	220.126	1.118423
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	1048.051	250.125	1.270845
+Sum512X2Base_Basic	972.655	269.514	1.369355
+Sum512X2Base_X2	1945.387	134.752	0.684651
+Sum512X2Base_Zip	5590.938	46.887	0.238227
+Sum512X2Base	1939.677	135.148	0.686666
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	1951.147	134.354	0.682629
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+# Sum512Base_Basic	5910372263572008452
+# Sum512X2Base_Basic	5910372263572008452
+SumBase_Basic	1385.027	189.270
+SumBase	1416.568	185.056	0.977734
+SumTraits	220.037	1191.362	6.294509
+SumX2Base_Basic	1276.606	205.344	1.084929
+SumX2Base_X2	1282.277	204.436	1.080131
+SumX2Base	1291.301	203.008	1.072582
+SumX2Traits	190.703	1374.619	7.262739
+Sum128Base_Basic	1398.415	187.458	0.990426
+Sum128Base_Move	227.127	1154.172	6.098016
+Sum128Base	226.920	1155.226	6.103588
+Sum128AdvSimd_AlignRight	219.930	1191.945	6.297591
+Sum128AdvSimd_ByX2Zip	490.101	534.878	2.826003
+Sum128AdvSimd_Shuffle	830.168	315.772	1.668369
+Sum128AdvSimd_ShuffleX	544.967	481.027	2.541488
+Sum128AdvSimdB64_ByX2Zip	323.033	811.510	4.287576
+Sum128AdvSimdB64_Shuffle	336.567	778.877	4.115161
+Sum128AdvSimdB64_ShuffleX	260.971	1004.493	5.307196
+Sum128PackedSimd_ByX2Zip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	219.748	1192.927	6.302782
+Sum128X2Base_Basic	1276.727	205.325	1.084826
+Sum128X2Base_X2	212.678	1232.585	6.512310
+Sum128X2Base	212.944	1231.044	6.504168
+Sum128X2AdvSimd_X2	190.739	1374.357	7.261355
+Sum128X2AdvSimd_Zip	340.196	770.567	4.071257
+Sum128X2AdvSimdB64_X2	190.633	1375.124	7.265411
+Sum128X2AdvSimdB64_Zip	238.725	1098.099	5.801757
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Zip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	190.758	1374.223	7.260650
+Sum256Base_Basic	1204.563	217.626	1.149817
+Sum256Base_ByShorter	199.993	1310.765	6.925372
+Sum256Base	1268.462	206.663	1.091895
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1188.481	220.571	1.165375
+Sum256X2Base_Basic	1257.182	208.517	1.101692
+Sum256X2Base_X2	1268.436	206.667	1.091917
+Sum256X2Base	1276.702	205.329	1.084847
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1240.419	211.335	1.116580
+Sum512Base_Basic	1256.515	208.628	1.102276
+Sum512Base_ByShorter	1239.979	211.410	1.116976
+Sum512Base	1256.551	208.622	1.102245
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	1256.628	208.609	1.102177
+Sum512X2Base_Basic	1385.905	189.150	0.999366
+Sum512X2Base_X2	1386.905	189.014	0.998646
+Sum512X2Base	1386.223	189.107	0.999137
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	1386.315	189.094	0.999070
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+# Sum512Base_Basic	114
+# Sum512X2Base_Basic	114
+SumBase_Basic	782.913	334.832
+SumBase_ByX2Unzip	333.020	787.172	2.350946
+SumBase	333.159	786.843	2.349966
+SumTraits	40.340	6498.419	19.408010
+SumX2Base_Basic	784.897	333.985	0.997472
+SumX2Base_X2	326.154	803.744	2.400441
+SumX2Base_Unzip	190.665	1374.895	4.106227
+SumX2Base	190.526	1375.898	4.109220
+SumX2Traits	59.350	4416.939	13.191515
+Sum128Base_Basic	782.914	334.831	0.999998
+Sum128Base_ByX2Unzip	241.891	1083.727	3.236631
+Sum128Base	241.886	1083.750	3.236701
+Sum128AdvSimd_ByX2Unzip	241.867	1083.835	3.236955
+Sum128AdvSimd_Shuffle	151.221	1733.510	5.177258
+Sum128AdvSimd_ShuffleX	91.284	2871.731	8.576637
+Sum128AdvSimdB64_ByX2Unzip	99.833	2625.824	7.842218
+Sum128AdvSimdB64_Shuffle	59.548	4402.228	13.147581
+Sum128AdvSimdB64_ShuffleX	39.877	6573.892	19.633417
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	39.939	6563.618	19.602734
+Sum128X2Base_Basic	784.697	334.070	0.997726
+Sum128X2Base_X2	241.760	1084.315	3.238386
+Sum128X2Base_Unzip	151.093	1734.981	5.181650
+Sum128X2Base	151.392	1731.552	5.171410
+Sum128X2AdvSimd_X2	128.360	2042.253	6.099339
+Sum128X2AdvSimd_Unzip	151.103	1734.873	5.181326
+Sum128X2AdvSimdB64_X2	59.307	4420.146	13.201094
+Sum128X2AdvSimdB64_Unzip	59.616	4397.191	13.132537
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	59.305	4420.281	13.201498
+Sum256Base_Basic	737.891	355.261	1.061013
+Sum256Base_ByShorter	155.736	1683.262	5.027187
+Sum256Base_ByX2Unzip	7980.287	32.849	0.098106
+Sum256Base	155.792	1682.656	5.025377
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	155.703	1683.614	5.028238
+Sum256X2Base_Basic	753.039	348.115	1.039670
+Sum256X2Base_X2	157.919	1659.987	4.957674
+Sum256X2Base_Unzip	3992.388	65.661	0.196101
+Sum256X2Base	157.922	1659.954	4.957575
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	157.921	1659.965	4.957610
+Sum512Base_Basic	761.213	344.377	1.028507
+Sum512Base_ByShorter	159.990	1638.502	4.893507
+Sum512Base_ByX2Unzip	9048.456	28.971	0.086524
+Sum512Base	158.264	1656.369	4.946870
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	158.274	1656.268	4.946567
+Sum512X2Base_Basic	773.531	338.893	1.012128
+Sum512X2Base_X2	420.281	623.735	1.862830
+Sum512X2Base_Unzip	4624.552	56.685	0.169295
+Sum512X2Base	420.289	623.723	1.862796
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	417.708	627.577	1.874306
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+# Sum512Base_Basic	-24614
+# Sum512X2Base_Basic	-24614
+SumBase_Basic	923.728	283.789
+SumBase_ByX2Unzip	605.989	432.588	1.524331
+SumBase	606.034	432.557	1.524219
+SumTraits	86.304	3037.442	10.703169
+SumX2Base_Basic	942.285	278.200	0.980307
+SumX2Base_X2	600.357	436.647	1.538631
+SumX2Base_Unzip	320.714	817.376	2.880224
+SumX2Base	320.727	817.343	2.880106
+SumX2Traits	100.098	2618.864	9.228206
+Sum128Base_Basic	923.787	283.771	0.999936
+Sum128Base_ByX2Unzip	362.464	723.227	2.548467
+Sum128Base	363.624	720.921	2.540341
+Sum128AdvSimd_ByX2Unzip	362.001	724.153	2.551730
+Sum128AdvSimd_Shuffle	305.454	858.212	3.024120
+Sum128AdvSimd_ShuffleX	187.468	1398.337	4.927383
+Sum128AdvSimdB64_ByX2Unzip	162.933	1608.908	5.669378
+Sum128AdvSimdB64_Shuffle	124.492	2105.704	7.419960
+Sum128AdvSimdB64_ShuffleX	86.182	3041.751	10.718352
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	86.313	3037.146	10.702126
+Sum128X2Base_Basic	942.138	278.244	0.980460
+Sum128X2Base_X2	351.197	746.430	2.630229
+Sum128X2Base_Unzip	241.623	1084.929	3.823012
+Sum128X2Base	241.544	1085.284	3.824264
+Sum128X2AdvSimd_X2	257.167	1019.353	3.591938
+Sum128X2AdvSimd_Unzip	243.500	1076.568	3.793549
+Sum128X2AdvSimdB64_X2	118.770	2207.158	7.777459
+Sum128X2AdvSimdB64_Unzip	100.174	2616.876	9.221201
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	100.145	2617.651	9.223933
+Sum256Base_Basic	864.780	303.134	1.068165
+Sum256Base_ByShorter	232.362	1128.170	3.975383
+Sum256Base_ByX2Unzip	9228.834	28.405	0.100092
+Sum256Base	232.344	1128.260	3.975698
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	232.386	1128.052	3.974966
+Sum256X2Base_Basic	1038.987	252.307	0.889066
+Sum256X2Base_X2	239.298	1095.470	3.860155
+Sum256X2Base_Unzip	4668.735	56.149	0.197854
+Sum256X2Base	239.396	1095.022	3.858576
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	239.316	1095.390	3.859875
+Sum512Base_Basic	959.575	273.188	0.962643
+Sum512Base_ByShorter	246.254	1064.527	3.751121
+Sum512Base_ByX2Unzip	10641.466	24.634	0.086805
+Sum512Base	246.057	1065.381	3.754130
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	246.266	1064.473	3.750930
+Sum512X2Base_Basic	958.480	273.500	0.963743
+Sum512X2Base_X2	855.696	306.352	1.079506
+Sum512X2Base_Unzip	5570.380	47.060	0.165829
+Sum512X2Base	871.687	300.732	1.059702
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	857.848	305.583	1.076797
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+# Sum512Base_Basic	-467755046
+# Sum512X2Base_Basic	-467755046
+SumBase_Basic	1201.360	218.206
+SumBase_ByX2Unzip	730.145	359.030	1.645372
+SumBase	730.286	358.961	1.645054
+SumTraits	175.390	1494.637	6.849658
+SumX2Base_Basic	1270.110	206.395	0.945871
+SumX2Base_X2	744.184	352.257	1.614331
+SumX2Base_Unzip	474.336	552.655	2.532722
+SumX2Base	474.292	552.706	2.532954
+SumX2Traits	162.636	1611.841	7.386784
+Sum128Base_Basic	1201.974	218.095	0.999489
+Sum128Base_ByX2Unzip	489.071	536.004	2.456410
+Sum128Base	491.116	533.772	2.446184
+Sum128AdvSimd_ByX2Unzip	490.811	534.104	2.447705
+Sum128AdvSimd_Shuffle	609.617	430.014	1.970679
+Sum128AdvSimd_ShuffleX	381.146	687.778	3.151967
+Sum128AdvSimdB64_ByX2Unzip	242.327	1081.779	4.957602
+Sum128AdvSimdB64_Shuffle	252.747	1037.179	4.753207
+Sum128AdvSimdB64_ShuffleX	174.987	1498.077	6.865423
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	174.618	1501.241	6.879924
+Sum128X2Base_Basic	1269.886	206.431	0.946038
+Sum128X2Base_X2	451.156	581.050	2.662851
+Sum128X2Base_Unzip	368.640	711.112	3.258900
+Sum128X2Base	368.615	711.159	3.259116
+Sum128X2AdvSimd_X2	513.866	510.140	2.337884
+Sum128X2AdvSimd_Unzip	368.703	710.990	3.258341
+Sum128X2AdvSimdB64_X2	237.177	1105.266	5.065240
+Sum128X2AdvSimdB64_Unzip	163.003	1608.220	7.370187
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	163.221	1606.068	7.360325
+Sum256Base_Basic	1056.789	248.057	1.136802
+Sum256Base_ByShorter	343.256	763.699	3.499897
+Sum256Base_ByX2Unzip	8849.374	29.623	0.135756
+Sum256Base	343.357	763.475	3.498869
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	343.317	763.563	3.499272
+Sum256X2Base_Basic	1587.336	165.147	0.756840
+Sum256X2Base_X2	352.361	743.963	3.409452
+Sum256X2Base_Unzip	4461.901	58.752	0.269248
+Sum256X2Base	352.391	743.902	3.409171
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	352.336	744.016	3.409695
+Sum512Base_Basic	1209.030	216.822	0.993656
+Sum512Base_ByShorter	351.574	745.629	3.417088
+Sum512Base_ByX2Unzip	9931.626	26.395	0.120963
+Sum512Base	351.595	745.584	3.416881
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	351.734	745.291	3.415539
+Sum512X2Base_Basic	1237.498	211.834	0.970797
+Sum512X2Base_X2	1496.780	175.139	0.802629
+Sum512X2Base_Unzip	4986.061	52.575	0.240944
+Sum512X2Base	1547.816	169.364	0.776164
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	1518.737	172.607	0.791025
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+# Sum512Base_Basic	5910372263572008452
+# Sum512X2Base_Basic	5910372263572008452
+SumBase_Basic	1392.839	188.208
+SumBase	1395.644	187.830	0.997990
+SumTraits	221.656	1182.660	6.283776
+SumX2Base_Basic	1502.149	174.513	0.927231
+SumX2Base_X2	1500.810	174.668	0.928058
+SumX2Base	1503.796	174.322	0.926215
+SumX2Traits	212.696	1232.484	6.548503
+Sum128Base_Basic	1392.371	188.272	1.000336
+Sum128Base_Move	249.825	1049.310	5.575253
+Sum128Base	250.018	1048.502	5.570960
+Sum128AdvSimd_AlignRight	221.598	1182.971	6.285431
+Sum128AdvSimd_ByX2Unzip	488.993	536.089	2.848380
+Sum128AdvSimd_Shuffle	825.433	317.584	1.687404
+Sum128AdvSimd_ShuffleX	569.892	459.989	2.444039
+Sum128AdvSimdB64_ByX2Unzip	321.705	814.859	4.329557
+Sum128AdvSimdB64_Shuffle	336.445	779.159	4.139872
+Sum128AdvSimdB64_ShuffleX	259.293	1010.995	5.371676
+Sum128PackedSimd_ByX2Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128PackedSimd_Shuffle	Run fail! Requires hardware support PackedSimd!
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	221.564	1183.150	6.286381
+Sum128X2Base_Basic	1496.747	175.142	0.930577
+Sum128X2Base_X2	239.527	1094.423	5.814950
+Sum128X2Base	239.510	1094.501	5.815365
+Sum128X2AdvSimd_X2	213.027	1230.569	6.538330
+Sum128X2AdvSimd_Unzip	349.382	750.308	3.986578
+Sum128X2AdvSimdB64_X2	212.722	1232.330	6.547687
+Sum128X2AdvSimdB64_Unzip	240.862	1088.358	5.782725
+Sum128X2PackedSimd_X2	Run fail! Requires hardware support PackedSimd!
+Sum128X2PackedSimd_Unzip	Run fail! Requires hardware support PackedSimd!
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	212.737	1232.246	6.547243
+Sum256Base_Basic	1370.568	191.267	1.016249
+Sum256Base_ByShorter	226.744	1156.121	6.142768
+Sum256Base	1370.517	191.274	1.016287
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	1370.486	191.278	1.016310
+Sum256X2Base_Basic	1707.728	153.505	0.815609
+Sum256X2Base_X2	1706.564	153.609	0.816166
+Sum256X2Base	1706.574	153.608	0.816161
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	1707.433	153.531	0.815750
+Sum512Base_Basic	1636.549	160.181	0.851083
+Sum512Base_ByShorter	1679.850	156.052	0.829145
+Sum512Base	1636.376	160.198	0.851173
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	1635.750	160.259	0.851499
+Sum512X2Base_Basic	1783.883	146.951	0.780790
+Sum512X2Base_X2	1784.009	146.941	0.780735
+Sum512X2Base	1783.846	146.954	0.780807
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	1784.142	146.930	0.780677
+
+```
+
+## Wasm
+
+### Wasm on AMD Ryzen 7 7840H
+``
+
+#### .NET 8.0
+
+```
+VectorTraits.Benchmarks.Wasm
+
+
+IsRelease:	True
+Environment.ProcessorCount:	1
+Environment.Is64BitProcess:	False
+Environment.OSVersion:	Other 1.0.0.0
+Environment.Version:	8.0.7
+Stopwatch.Frequency:	1000000000
+RuntimeEnvironment.GetRuntimeDirectory:	/
+RuntimeInformation.FrameworkDescription:	.NET 8.0.7
+RuntimeInformation.OSArchitecture:	Wasm
+RuntimeInformation.OSDescription:	Browser
+RuntimeInformation.RuntimeIdentifier:	browser-wasm
+IntPtr.Size:	4
+BitConverter.IsLittleEndian:	True
+Vector.IsHardwareAccelerated:	False
+Vector<byte>.Count:	16	# 128bit
+Vector<float>.Count:	4	# 128bit
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector512.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844158	# 0x8177F802
+VectorEnvironment.CpuModelName:	
+VectorEnvironment.SupportedInstructionSets:	PackedSimd
+Vector128s.Instance:	WVectorTraits128PackedSimd	// PackedSimd
+Vectors.Instance:	VectorTraits128PackedSimd	// PackedSimd
+Vectors.BaseInstance:	VectorTraits128Base
+
+
+[YGroup3UnzipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+# Sum512Base_Basic	114
+# Sum512X2Base_Basic	114
+SumBase_Basic	23293.750	11.254
+SumBase_ByX2Zip	260866.666	1.005	0.089294
+SumBase	23554.167	11.129	0.988944
+SumTraits	5264.062	49.799	4.425052
+SumX2Base_Basic	25150.000	10.423	0.926193
+SumX2Base_X2	24004.167	10.921	0.970404
+SumX2Base_Zip	133383.333	1.965	0.174638
+SumX2Base	25160.417	10.419	0.925809
+SumX2Traits	5318.750	49.287	4.379553
+Sum128Base_Basic	24979.167	10.495	0.932527
+Sum128Base_ByX2Zip	67583.333	3.879	0.344667
+Sum128Base	22966.667	11.414	1.014242
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128PackedSimd_ByX2Zip	21331.250	12.289	1.092001
+Sum128PackedSimd_Shuffle	5175.521	50.651	4.500755
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	5343.750	49.056	4.359064
+Sum128X2Base_Basic	25345.833	10.343	0.919037
+Sum128X2Base_X2	25341.667	10.344	0.919188
+Sum128X2Base_Zip	35695.833	7.344	0.652562
+Sum128X2Base	23991.667	10.926	0.970910
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2PackedSimd_X2	5144.271	50.958	4.528096
+Sum128X2PackedSimd_Zip	11571.875	22.654	2.012962
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	4936.458	53.104	4.718717
+Sum256Base_Basic	26072.917	10.054	0.893408
+Sum256Base_ByShorter	33150.000	7.908	0.702677
+Sum256Base_ByX2Zip	259933.333	1.009	0.089614
+Sum256Base	34220.833	7.660	0.680689
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	35266.667	7.433	0.660503
+Sum256X2Base_Basic	26010.417	10.078	0.895555
+Sum256X2Base_X2	34629.167	7.570	0.672663
+Sum256X2Base_Zip	136433.333	1.921	0.170734
+Sum256X2Base	34829.167	7.527	0.668800
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	36354.167	7.211	0.640745
+Sum512Base_Basic	26964.583	9.722	0.863865
+Sum512Base_ByShorter	39270.833	6.675	0.593156
+Sum512Base_ByX2Zip	285416.667	0.918	0.081613
+Sum512Base	39833.333	6.581	0.584780
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	42095.833	6.227	0.553350
+Sum512X2Base_Basic	24775.000	10.581	0.940212
+Sum512X2Base_X2	41833.333	6.266	0.556823
+Sum512X2Base_Zip	149466.667	1.754	0.155846
+Sum512X2Base	62616.667	4.186	0.372006
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	63116.667	4.153	0.369059
+
+[YGroup3UnzipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+# Sum512Base_Basic	-24614
+# Sum512X2Base_Basic	-24614
+SumBase_Basic	37595.833	6.973
+SumBase_ByX2Zip	302400.000	0.867	0.124325
+SumBase	37050.000	7.075	1.014732
+SumTraits	10607.292	24.714	3.544339
+SumX2Base_Basic	39962.500	6.560	0.940778
+SumX2Base_X2	37950.000	6.908	0.990668
+SumX2Base_Zip	150966.666	1.736	0.249034
+SumX2Base	38037.500	6.892	0.988389
+SumX2Traits	47300.000	5.542	0.794838
+Sum128Base_Basic	36691.667	7.145	1.024642
+Sum128Base_ByX2Zip	603216.667	0.435	0.062326
+Sum128Base	36950.000	7.095	1.017479
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128PackedSimd_ByX2Zip	34658.333	7.564	1.084756
+Sum128PackedSimd_Shuffle	10981.250	23.872	3.423639
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	10532.292	24.890	3.569578
+Sum128X2Base_Basic	40000.000	6.554	0.939896
+Sum128X2Base_X2	38925.000	6.735	0.965853
+Sum128X2Base_Zip	301233.334	0.870	0.124806
+Sum128X2Base	38837.500	6.750	0.968029
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2PackedSimd_X2	10354.167	25.318	3.630986
+Sum128X2PackedSimd_Zip	18231.250	14.379	2.062164
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	9772.917	26.824	3.846941
+Sum256Base_Basic	38775.000	6.761	0.969590
+Sum256Base_ByShorter	57416.667	4.566	0.654790
+Sum256Base_ByX2Zip	285683.333	0.918	0.131600
+Sum256Base	57733.333	4.541	0.651198
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	60016.667	4.368	0.626423
+Sum256X2Base_Basic	41487.500	6.319	0.906197
+Sum256X2Base_X2	58541.667	4.478	0.642206
+Sum256X2Base_Zip	141466.667	1.853	0.265758
+Sum256X2Base	60225.000	4.353	0.624256
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	59641.667	4.395	0.630362
+Sum512Base_Basic	38704.167	6.773	0.971364
+Sum512Base_ByShorter	85550.000	3.064	0.439460
+Sum512Base_ByX2Zip	284250.000	0.922	0.132263
+Sum512Base	82850.000	3.164	0.453782
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	77850.000	3.367	0.482927
+Sum512X2Base_Basic	39391.667	6.655	0.954411
+Sum512X2Base_X2	97500.000	2.689	0.385598
+Sum512X2Base_Zip	157733.334	1.662	0.238351
+Sum512X2Base	69183.333	3.789	0.543423
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	72766.667	3.603	0.516663
+
+[YGroup3UnzipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+# Sum512Base_Basic	-467755046
+# Sum512X2Base_Basic	-467755046
+SumBase_Basic	50587.500	5.182
+SumBase_ByX2Zip	351150.000	0.747	0.144062
+SumBase	52162.500	5.026	0.969806
+SumTraits	21441.667	12.226	2.359308
+SumX2Base_Basic	58650.000	4.470	0.862532
+SumX2Base_X2	58258.333	4.500	0.868331
+SumX2Base_Zip	167616.667	1.564	0.301805
+SumX2Base	56908.333	4.606	0.888930
+SumX2Traits	95666.667	2.740	0.528789
+Sum128Base_Basic	52295.833	5.013	0.967333
+Sum128Base_ByX2Zip	804950.000	0.326	0.062846
+Sum128Base	55033.333	4.763	0.919216
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128PackedSimd_ByX2Zip	52125.000	5.029	0.970504
+Sum128PackedSimd_Shuffle	20597.917	12.727	2.455952
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	21120.833	12.412	2.395147
+Sum128X2Base_Basic	58445.833	4.485	0.865545
+Sum128X2Base_X2	58191.667	4.505	0.869326
+Sum128X2Base_Zip	401783.333	0.652	0.125907
+Sum128X2Base	59908.333	4.376	0.844415
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2PackedSimd_X2	20031.250	13.087	2.525429
+Sum128X2PackedSimd_Zip	27779.167	9.437	1.821059
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	20118.750	13.030	2.514445
+Sum256Base_Basic	58012.500	4.519	0.872010
+Sum256Base_ByShorter	96483.333	2.717	0.524313
+Sum256Base_ByX2Zip	304916.666	0.860	0.165906
+Sum256Base	92983.333	2.819	0.544049
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	100475.000	2.609	0.503483
+Sum256X2Base_Basic	58733.333	4.463	0.861308
+Sum256X2Base_X2	96008.333	2.730	0.526907
+Sum256X2Base_Zip	164450.000	1.594	0.307616
+Sum256X2Base	98625.000	2.658	0.512928
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	98000.000	2.675	0.516199
+Sum512Base_Basic	56145.833	4.669	0.901002
+Sum512Base_ByShorter	151600.000	1.729	0.333691
+Sum512Base_ByX2Zip	301750.000	0.869	0.167647
+Sum512Base	136891.667	1.915	0.369544
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	142350.000	1.842	0.355374
+Sum512X2Base_Basic	57841.667	4.532	0.874586
+Sum512X2Base_X2	170716.667	1.536	0.296324
+Sum512X2Base_Zip	158033.334	1.659	0.320107
+Sum512X2Base	114125.000	2.297	0.443264
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	120566.667	2.174	0.419581
+
+[YGroup3UnzipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+# Sum512Base_Basic	5910372263572008452
+# Sum512X2Base_Basic	5910372263572008452
+SumBase_Basic	143516.666	1.827
+SumBase	137983.333	1.900	1.040101
+SumTraits	91475.000	2.866	1.568917
+SumX2Base_Basic	156683.333	1.673	0.915966
+SumX2Base_X2	151966.666	1.725	0.944396
+SumX2Base	153366.666	1.709	0.935775
+SumX2Traits	175733.334	1.492	0.816673
+Sum128Base_Basic	236733.333	1.107	0.606238
+Sum128Base_Move	203400.000	1.289	0.705588
+Sum128Base	231900.000	1.130	0.618873
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Zip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Zip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128PackedSimd_ByX2Zip	70708.333	3.707	2.029699
+Sum128PackedSimd_Shuffle	22404.167	11.701	6.405802
+Sum128Sse_ByX2Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	22535.417	11.633	6.368494
+Sum128X2Base_Basic	243216.666	1.078	0.590077
+Sum128X2Base_X2	247316.666	1.060	0.580295
+Sum128X2Base	234250.000	1.119	0.612665
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Zip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2AdvSimdB64_Zip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2PackedSimd_X2	22300.000	11.755	6.435725
+Sum128X2PackedSimd_Zip	37233.333	7.041	3.854521
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Zip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	22781.250	11.507	6.299771
+Sum256Base_Basic	238833.333	1.098	0.600907
+Sum256Base_ByShorter	311833.334	0.841	0.460235
+Sum256Base	242733.334	1.080	0.591252
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	121583.333	2.156	1.180398
+Sum256X2Base_Basic	242166.667	1.082	0.592636
+Sum256X2Base_X2	241750.000	1.084	0.593657
+Sum256X2Base	248650.000	1.054	0.577183
+Sum256X2Avx2_Unpack	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Zip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	127125.000	2.062	1.128941
+Sum512Base_Basic	229400.000	1.143	0.625618
+Sum512Base_ByShorter	272816.667	0.961	0.526055
+Sum512Base	237183.333	1.105	0.605087
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	103391.667	2.535	1.388087
+Sum512X2Base_Basic	230016.666	1.140	0.623940
+Sum512X2Base_X2	231033.333	1.135	0.621195
+Sum512X2Base	223983.333	1.170	0.640747
+Sum512X2Avx512_Unpack	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Zip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	100883.333	2.598	1.422600
+
+[YGroup3ZipBenchmark_Byte(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	114
+# SumX2Base_Basic	114
+# Sum128Base_Basic	114
+# Sum128X2Base_Basic	114
+# Sum256Base_Basic	114
+# Sum256X2Base_Basic	114
+# Sum512Base_Basic	114
+# Sum512X2Base_Basic	114
+SumBase_Basic	24247.917	10.811
+SumBase_ByX2Unzip	234033.333	1.120	0.103609
+SumBase	25516.667	10.273	0.950278
+SumTraits	5050.000	51.910	4.801568
+SumX2Base_Basic	24131.250	10.863	1.004835
+SumX2Base_X2	24033.333	10.908	1.008929
+SumX2Base_Unzip	123141.666	2.129	0.196911
+SumX2Base	24685.417	10.619	0.982277
+SumX2Traits	5105.729	51.343	4.749158
+Sum128Base_Basic	23714.583	11.054	1.022490
+Sum128Base_ByX2Unzip	15695.833	16.702	1.544863
+Sum128Base	15615.625	16.787	1.552798
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128PackedSimd_ByX2Unzip	21372.917	12.265	1.134516
+Sum128PackedSimd_Shuffle	5117.708	51.223	4.738042
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	5425.521	48.317	4.469233
+Sum128X2Base_Basic	24387.500	10.749	0.994276
+Sum128X2Base_X2	14939.583	17.547	1.623065
+Sum128X2Base_Unzip	8107.292	32.334	2.990878
+Sum128X2Base	8129.167	32.247	2.982829
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2PackedSimd_X2	5051.562	51.894	4.800082
+Sum128X2PackedSimd_Unzip	11116.667	23.581	2.181222
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	5086.458	51.538	4.767151
+Sum256Base_Basic	24785.417	10.577	0.978314
+Sum256Base_ByShorter	15881.250	16.507	1.526827
+Sum256Base_ByX2Unzip	258600.000	1.014	0.093766
+Sum256Base	15775.000	16.618	1.537110
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	17666.667	14.838	1.372524
+Sum256X2Base_Basic	24733.333	10.599	0.980374
+Sum256X2Base_X2	15966.667	16.418	1.518659
+Sum256X2Base_Unzip	128550.000	2.039	0.188626
+Sum256X2Base	46241.667	5.669	0.524374
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	49879.167	5.256	0.486133
+Sum512Base_Basic	26000.000	10.082	0.932612
+Sum512Base_ByShorter	27464.583	9.545	0.882879
+Sum512Base_ByX2Unzip	273566.667	0.958	0.088636
+Sum512Base	29620.833	8.850	0.818610
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	29583.333	8.861	0.819648
+Sum512X2Base_Basic	25516.667	10.273	0.950278
+Sum512X2Base_X2	28660.417	9.147	0.846042
+Sum512X2Base_Unzip	141383.333	1.854	0.171505
+Sum512X2Base	33229.167	7.889	0.729718
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	35333.333	7.419	0.686262
+
+[YGroup3ZipBenchmark_Int16(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-24614
+# SumX2Base_Basic	-24614
+# Sum128Base_Basic	-24614
+# Sum128X2Base_Basic	-24614
+# Sum256Base_Basic	-24614
+# Sum256X2Base_Basic	-24614
+# Sum512Base_Basic	-24614
+# Sum512X2Base_Basic	-24614
+SumBase_Basic	31466.667	8.331
+SumBase_ByX2Unzip	295583.334	0.887	0.106456
+SumBase	32237.500	8.132	0.976089
+SumTraits	10492.708	24.983	2.998908
+SumX2Base_Basic	32308.333	8.114	0.973949
+SumX2Base_X2	32500.000	8.066	0.968205
+SumX2Base_Unzip	149900.000	1.749	0.209918
+SumX2Base	33791.667	7.758	0.931196
+SumX2Traits	48350.000	5.422	0.650810
+Sum128Base_Basic	33429.167	7.842	0.941294
+Sum128Base_ByX2Unzip	510933.333	0.513	0.061587
+Sum128Base	33070.833	7.927	0.951493
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128PackedSimd_ByX2Unzip	33237.500	7.887	0.946722
+Sum128PackedSimd_Shuffle	10375.000	25.267	3.032932
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	10385.417	25.242	3.029890
+Sum128X2Base_Basic	31541.667	8.311	0.997622
+Sum128X2Base_X2	31979.167	8.197	0.983974
+Sum128X2Base_Unzip	253250.000	1.035	0.124251
+Sum128X2Base	33425.000	7.843	0.941411
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2PackedSimd_X2	10077.083	26.014	3.122597
+Sum128X2PackedSimd_Unzip	17825.000	14.707	1.765311
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	9712.500	26.990	3.239811
+Sum256Base_Basic	34225.000	7.659	0.919406
+Sum256Base_ByShorter	47825.000	5.481	0.657954
+Sum256Base_ByX2Unzip	299033.333	0.877	0.105228
+Sum256Base	46633.333	5.621	0.674768
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	52958.333	4.950	0.594178
+Sum256X2Base_Basic	35412.500	7.403	0.888575
+Sum256X2Base_X2	46804.167	5.601	0.672305
+Sum256X2Base_Unzip	151383.334	1.732	0.207861
+Sum256X2Base	48762.500	5.376	0.645305
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	50066.667	5.236	0.628495
+Sum512Base_Basic	35495.833	7.385	0.886489
+Sum512Base_ByShorter	79716.667	3.288	0.394731
+Sum512Base_ByX2Unzip	304050.000	0.862	0.103492
+Sum512Base	61925.000	4.233	0.508142
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	63162.500	4.150	0.498186
+Sum512X2Base_Basic	35045.833	7.480	0.897872
+Sum512X2Base_X2	60666.667	4.321	0.518681
+Sum512X2Base_Unzip	160866.667	1.630	0.195607
+Sum512X2Base	62650.000	4.184	0.502261
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	63916.667	4.101	0.492308
+
+[YGroup3ZipBenchmark_Int32(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	-467755046
+# SumX2Base_Basic	-467755046
+# Sum128Base_Basic	-467755046
+# Sum128X2Base_Basic	-467755046
+# Sum256Base_Basic	-467755046
+# Sum256X2Base_Basic	-467755046
+# Sum512Base_Basic	-467755046
+# Sum512X2Base_Basic	-467755046
+SumBase_Basic	46258.333	5.667
+SumBase_ByX2Unzip	315066.666	0.832	0.146821
+SumBase	44212.500	5.929	1.046273
+SumTraits	20325.000	12.898	2.275933
+SumX2Base_Basic	46112.500	5.685	1.003163
+SumX2Base_X2	46225.000	5.671	1.000721
+SumX2Base_Unzip	161350.000	1.625	0.286696
+SumX2Base	47729.167	5.492	0.969184
+SumX2Traits	95950.000	2.732	0.482109
+Sum128Base_Basic	45504.167	5.761	1.016574
+Sum128Base_ByX2Unzip	580700.000	0.451	0.079660
+Sum128Base	45437.500	5.769	1.018065
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128PackedSimd_ByX2Unzip	50362.500	5.205	0.918507
+Sum128PackedSimd_Shuffle	20779.167	12.616	2.226188
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	20445.833	12.821	2.262482
+Sum128X2Base_Basic	46779.167	5.604	0.988866
+Sum128X2Base_X2	45837.500	5.719	1.009181
+Sum128X2Base_Unzip	283316.667	0.925	0.163274
+Sum128X2Base	45987.500	5.700	1.005889
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2PackedSimd_X2	19937.500	13.148	2.320167
+Sum128X2PackedSimd_Unzip	28366.667	9.241	1.630729
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	20218.750	12.965	2.287893
+Sum256Base_Basic	50737.500	5.167	0.911719
+Sum256Base_ByShorter	74858.333	3.502	0.617945
+Sum256Base_ByX2Unzip	330066.667	0.794	0.140148
+Sum256Base	78700.000	3.331	0.587781
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	85550.000	3.064	0.540717
+Sum256X2Base_Basic	52816.667	4.963	0.875828
+Sum256X2Base_X2	76683.333	3.419	0.603238
+Sum256X2Base_Unzip	168950.000	1.552	0.273799
+Sum256X2Base	77208.333	3.395	0.599137
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	81383.333	3.221	0.568401
+Sum512Base_Basic	55754.167	4.702	0.829684
+Sum512Base_ByShorter	152383.334	1.720	0.303566
+Sum512Base_ByX2Unzip	325350.000	0.806	0.142180
+Sum512Base	108283.333	2.421	0.427197
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	116166.667	2.257	0.398207
+Sum512X2Base_Basic	52204.167	5.022	0.886104
+Sum512X2Base_X2	188116.667	1.394	0.245902
+Sum512X2Base_Unzip	297633.334	0.881	0.155421
+Sum512X2Base	178866.666	1.466	0.258619
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	183133.333	1.431	0.252594
+
+[YGroup3ZipBenchmark_Int64(262144)]
+---
+NAME	US	MOPS	SCALE
+# SumBase_Basic	5910372263572008452
+# SumX2Base_Basic	5910372263572008452
+# Sum128Base_Basic	5910372263572008452
+# Sum128X2Base_Basic	5910372263572008452
+# Sum256Base_Basic	5910372263572008452
+# Sum256X2Base_Basic	5910372263572008452
+# Sum512Base_Basic	5910372263572008452
+# Sum512X2Base_Basic	5910372263572008452
+SumBase_Basic	266883.333	0.982
+SumBase	253200.000	1.035	1.054042
+SumTraits	151083.333	1.735	1.766464
+SumX2Base_Basic	244500.000	1.072	1.091547
+SumX2Base_X2	241000.000	1.088	1.107400
+SumX2Base	237366.666	1.104	1.124351
+SumX2Traits	314133.333	0.834	0.849586
+Sum128Base_Basic	386366.667	0.678	0.690751
+Sum128Base_Move	341633.333	0.767	0.781198
+Sum128Base	392616.667	0.668	0.679755
+Sum128AdvSimd_AlignRight	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ByX2Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_Shuffle	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimd_ShuffleX	Run fail! Requires hardware support AdvSimd!
+Sum128AdvSimdB64_ByX2Unzip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_Shuffle	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128AdvSimdB64_ShuffleX	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128PackedSimd_ByX2Unzip	115758.333	2.265	2.305522
+Sum128PackedSimd_Shuffle	37425.000	7.005	7.131151
+Sum128Sse_ByX2Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_Shuffle	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleX	Run fail! Requires hardware support Sse, Sse2!
+Sum128Sse_ShuffleXImm	Run fail! Requires hardware support Sse, Sse2!
+Sum128Traits	37158.333	7.055	7.182328
+Sum128X2Base_Basic	396516.666	0.661	0.673070
+Sum128X2Base_X2	384416.666	0.682	0.694255
+Sum128X2Base	381116.667	0.688	0.700267
+Sum128X2AdvSimd_X2	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimd_Unzip	Run fail! Requires hardware support AdvSimd!
+Sum128X2AdvSimdB64_X2	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2AdvSimdB64_Unzip	Run fail! Requires hardware support AdvSimd!This process(32bit) is not 64-bit!
+Sum128X2PackedSimd_X2	36033.333	7.275	7.406568
+Sum128X2PackedSimd_Unzip	65520.833	4.001	4.073259
+Sum128X2Sse_X2	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Sse_Unzip	Run fail! Requires hardware support Sse, Sse2!
+Sum128X2Traits	36795.833	7.124	7.253086
+Sum256Base_Basic	387133.333	0.677	0.689384
+Sum256Base_ByShorter	473566.666	0.554	0.563560
+Sum256Base	394166.667	0.665	0.677082
+Sum256Avx2_ByShorter	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ByX2Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_Shuffle	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleX	Run fail! Requires hardware support Avx, Avx2!
+Sum256Avx2_ShuffleXImm	Run fail! Requires hardware support Avx, Avx2!
+Sum256Traits	200350.000	1.308	1.332086
+Sum256X2Base_Basic	397850.000	0.659	0.670814
+Sum256X2Base_X2	393383.334	0.666	0.678431
+Sum256X2Base	387466.667	0.677	0.688790
+Sum256X2Avx2_X2	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Avx2_Unzip	Run fail! Requires hardware support Avx, Avx2!
+Sum256X2Traits	191800.000	1.367	1.391467
+Sum512Base_Basic	394366.667	0.665	0.676739
+Sum512Base_ByShorter	437066.667	0.600	0.610624
+Sum512Base	390416.666	0.671	0.683586
+Sum512Avx512_ByShorter	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ByX2Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleX	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Avx512_ShuffleXImm	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512Traits	168966.667	1.551	1.579503
+Sum512X2Base_Basic	390050.000	0.672	0.684229
+Sum512X2Base_X2	388666.667	0.674	0.686664
+Sum512X2Base	395366.666	0.663	0.675027
+Sum512X2Avx512_X2	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Avx512_Unzip	Run fail! Requires hardware support Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi!
+Sum512X2Traits	105350.000	2.488	2.533302
 
 ```
 

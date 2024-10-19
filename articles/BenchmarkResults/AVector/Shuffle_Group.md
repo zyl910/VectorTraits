@@ -6,99 +6,101 @@ Unit of data: Million operations per second. The larger the number, the better t
 ### X86 - AMD Ryzen 7 7840H
 | Type                   | Method                          | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
 | :--------------------- | :------------------------------ | -------------: | ------------: | ------------: | --------: | --------: | --------: | --------: |
-| ShuffleBenchmark_Int16 | SumScalar                       |       1422.518 |      1425.225 |      1472.803 |  1473.315 |  1488.951 |  1493.037 |  1467.810 |
-| ShuffleBenchmark_Int16 | SumBase                         |       1448.711 |      1434.544 |      1415.928 |  1494.525 |  1513.646 |  1521.032 |  1468.943 |
-| ShuffleBenchmark_Int16 | SumTraits                       |       1431.764 |      1439.271 |      9971.759 | 13268.039 | 13544.158 | 15735.949 | 41559.229 |
-| ShuffleBenchmark_Int16 | SumTraits_Args0                 |       1387.798 |      1442.537 |     30098.814 | 30250.367 | 30582.273 | 30447.161 | 41508.057 |
-| ShuffleBenchmark_Int16 | SumTraits_Args                  |       1259.111 |      1403.227 |     30353.501 | 30196.732 | 30439.655 | 30119.309 | 41731.523 |
+| ShuffleBenchmark_Int16 | SumScalar                       |       1236.944 |      1263.908 |      1214.484 |  1278.657 |  1195.188 |  1408.179 |  1235.365 |
+| ShuffleBenchmark_Int16 | SumBase                         |       1270.376 |      1208.793 |      1221.340 |  1246.319 |  1212.305 |  1406.729 |  1261.582 |
+| ShuffleBenchmark_Int16 | SumTraits                       |       1221.046 |      1255.341 |      8067.493 | 10943.134 | 10421.696 | 14194.280 | 32579.746 |
+| ShuffleBenchmark_Int16 | SumTraits_Args0                 |       1278.650 |      1211.361 |     22661.648 | 25363.988 | 24123.555 | 26722.243 | 34671.910 |
+| ShuffleBenchmark_Int16 | SumTraits_Args                  |       1255.109 |      1154.801 |     22911.649 | 26138.766 | 24804.170 | 26585.684 | 33172.777 |
 | ShuffleBenchmark_Int16 | Sum128_Bcl                      |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int16 | Sum128_AdvSimd                  |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int16 | Sum128Traits                    |                |               |               |           |           |           |           |
-| ShuffleBenchmark_Int16 | Sum256_Bcl                      |                |               |               |           |           |  1212.463 |  1198.194 |
-| ShuffleBenchmark_Int16 | Sum256Traits                    |                |               |     10222.173 | 15551.307 | 15885.764 | 21928.142 | 41415.508 |
-| ShuffleBenchmark_Int16 | Sum512_Bcl                      |                |               |               |           |           |           |  1300.448 |
-| ShuffleBenchmark_Int16 | Sum512Traits                    |                |               |               |           |           |           | 35351.213 |
-| ShuffleBenchmark_Int16 | SumKernelTraits                 |       1449.777 |      1426.888 |     11393.934 | 14947.309 | 15122.352 | 19678.576 | 44948.076 |
-| ShuffleBenchmark_Int16 | SumKernelTraits_Args0           |       1412.428 |      1467.398 |     30240.761 | 30326.507 | 30544.781 | 30262.467 | 44689.367 |
-| ShuffleBenchmark_Int16 | SumKernelTraits_Args            |       1362.786 |      1421.216 |     30660.697 | 30550.198 | 30449.549 | 30035.773 | 44946.794 |
+| ShuffleBenchmark_Int16 | Sum256_Bcl                      |                |               |               |           |           |  1074.656 |   938.447 |
+| ShuffleBenchmark_Int16 | Sum256Traits                    |                |               |      8453.891 | 12415.380 | 12463.128 | 19916.073 | 33098.630 |
+| ShuffleBenchmark_Int16 | Sum512_Bcl                      |                |               |               |           |           |           |   918.911 |
+| ShuffleBenchmark_Int16 | Sum512Traits                    |                |               |               |           |           |           | 32342.977 |
+| ShuffleBenchmark_Int16 | SumKernelTraits                 |       1269.733 |      1192.079 |      8698.117 | 12377.326 | 11972.407 | 17610.477 | 35632.301 |
+| ShuffleBenchmark_Int16 | SumKernelTraits_Args0           |       1297.765 |      1199.697 |     23028.564 | 25852.122 | 25176.482 | 24261.582 | 36741.022 |
+| ShuffleBenchmark_Int16 | SumKernelTraits_Args            |       1270.852 |      1142.885 |     23265.595 | 25960.405 | 21744.418 | 23156.078 | 37227.607 |
 | ShuffleBenchmark_Int16 | SumKernel128_AdvSimd            |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int16 | SumKernel128Traits              |                |               |               |           |           |           |           |
-| ShuffleBenchmark_Int16 | SumKernel256_Avx2_Multiply      |                |               |     11134.530 | 16831.498 | 17932.778 | 26018.877 | 44997.356 |
-| ShuffleBenchmark_Int16 | SumKernel256_Avx2_ShiftLane     |                |               |     12312.515 | 16627.347 | 17068.123 | 17603.410 | 30645.802 |
-| ShuffleBenchmark_Int16 | SumKernel256Traits              |                |               |     11231.536 | 16892.749 | 17131.463 | 26437.656 | 44075.603 |
-| ShuffleBenchmark_Int16 | SumKernel256Traits_Args0        |                |               |     30062.185 | 30362.993 | 30363.147 | 30377.195 | 44008.533 |
-| ShuffleBenchmark_Int16 | SumKernel256Traits_Args         |                |               |     30302.632 | 30599.660 | 30229.417 | 30390.346 | 44192.938 |
-| ShuffleBenchmark_Int32 | SumScalar                       |        804.186 |       892.687 |       894.813 |   899.316 |   898.388 |   919.230 |   857.271 |
-| ShuffleBenchmark_Int32 | SumBase                         |        838.046 |       891.260 |       896.862 |   901.891 |   903.653 |   918.395 |   861.736 |
-| ShuffleBenchmark_Int32 | SumTraits                       |        840.081 |       894.016 |     13660.990 | 13707.980 | 13866.088 | 18778.093 | 18729.386 |
-| ShuffleBenchmark_Int32 | SumTraits_Args0                 |        804.082 |       894.619 |     19012.799 | 19140.684 | 19590.409 | 19486.247 | 18876.261 |
-| ShuffleBenchmark_Int32 | SumTraits_Args                  |        756.694 |       887.906 |     18846.835 | 19469.295 | 19367.293 | 19668.969 | 18994.916 |
+| ShuffleBenchmark_Int16 | SumKernel256_Avx2_Multiply      |                |               |      8575.866 | 13784.163 | 13809.947 | 18935.398 | 36602.662 |
+| ShuffleBenchmark_Int16 | SumKernel256_Avx2_ShiftLane     |                |               |     10109.809 | 14360.709 | 13711.196 | 13723.729 | 23133.972 |
+| ShuffleBenchmark_Int16 | SumKernel256Traits              |                |               |      8489.587 | 13381.369 | 13280.373 | 18872.614 | 36266.651 |
+| ShuffleBenchmark_Int16 | SumKernel256Traits_Args0        |                |               |     25043.819 | 24164.491 | 25218.816 | 23099.332 | 36420.461 |
+| ShuffleBenchmark_Int16 | SumKernel256Traits_Args         |                |               |     24582.356 | 25719.170 | 24805.980 | 20517.507 | 36162.413 |
+| ShuffleBenchmark_Int32 | SumScalar                       |        850.057 |       829.782 |       816.013 |   859.672 |   817.223 |   853.140 |   837.720 |
+| ShuffleBenchmark_Int32 | SumBase                         |        829.011 |       832.311 |       845.489 |   855.995 |   838.020 |   864.152 |   826.740 |
+| ShuffleBenchmark_Int32 | SumTraits                       |        821.394 |       844.388 |     10852.534 | 10832.760 | 10943.342 | 12695.692 | 15067.794 |
+| ShuffleBenchmark_Int32 | SumTraits_Args0                 |        864.447 |       818.042 |     12704.591 | 15953.127 | 15574.554 | 14391.785 | 15559.766 |
+| ShuffleBenchmark_Int32 | SumTraits_Args                  |        810.166 |       762.183 |     12531.310 | 14746.991 | 14125.335 | 13524.193 | 15368.528 |
 | ShuffleBenchmark_Int32 | Sum128_Bcl                      |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int32 | Sum128_AdvSimd                  |                |               |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | Sum128_Wasm_CompareGreater      |                |               |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | Sum128_Wasm_EqualsShift         |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int32 | Sum128Traits                    |                |               |               |           |           |           |           |
-| ShuffleBenchmark_Int32 | Sum256_Bcl                      |                |               |               |           |           |   832.481 |   814.286 |
-| ShuffleBenchmark_Int32 | Sum256_Avx2_Add1                |                |               |      8566.445 | 13078.901 | 15822.008 | 16401.682 | 18940.789 |
-| ShuffleBenchmark_Int32 | Sum256Traits                    |                |               |     14630.785 | 18397.923 | 18904.131 | 13267.158 | 19041.985 |
-| ShuffleBenchmark_Int32 | Sum512_Bcl                      |                |               |               |           |           |           |  1135.085 |
-| ShuffleBenchmark_Int32 | Sum512Traits                    |                |               |               |           |           |           | 16967.385 |
-| ShuffleBenchmark_Int32 | SumKernelTraits                 |        836.597 |       891.977 |     18648.987 | 17761.910 | 18062.922 | 19723.568 | 19849.274 |
-| ShuffleBenchmark_Int32 | SumKernelTraits_Args0           |        809.875 |       890.943 |     20659.517 | 18997.604 | 21259.832 | 20600.643 | 19700.994 |
-| ShuffleBenchmark_Int32 | SumKernelTraits_Args            |        762.146 |       889.978 |     20567.294 | 20524.262 | 21030.276 | 19631.276 | 19704.538 |
+| ShuffleBenchmark_Int32 | Sum256_Bcl                      |                |               |               |           |           |   755.314 |   770.558 |
+| ShuffleBenchmark_Int32 | Sum256_Avx2_Add1                |                |               |      7141.994 | 10800.960 | 12024.807 | 11699.668 | 15235.520 |
+| ShuffleBenchmark_Int32 | Sum256Traits                    |                |               |     11595.912 | 13052.644 | 14283.708 | 13979.190 | 15620.350 |
+| ShuffleBenchmark_Int32 | Sum512_Bcl                      |                |               |               |           |           |           |   930.330 |
+| ShuffleBenchmark_Int32 | Sum512Traits                    |                |               |               |           |           |           | 14817.994 |
+| ShuffleBenchmark_Int32 | SumKernelTraits                 |        825.747 |       841.229 |     14515.308 | 14407.190 | 14545.131 | 16276.648 | 15999.993 |
+| ShuffleBenchmark_Int32 | SumKernelTraits_Args0           |        856.015 |       814.055 |     14754.810 | 14880.916 | 17262.390 | 14319.199 | 16261.174 |
+| ShuffleBenchmark_Int32 | SumKernelTraits_Args            |        806.479 |       765.218 |     15073.768 | 14604.621 | 16999.007 | 16367.119 | 16422.220 |
 | ShuffleBenchmark_Int32 | SumKernel128_AdvSimd            |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int32 | SumKernel128Traits              |                |               |               |           |           |           |           |
-| ShuffleBenchmark_Int32 | SumKernel256Traits              |                |               |     18773.567 | 20687.968 | 19301.492 | 20943.039 | 19786.469 |
-| ShuffleBenchmark_Int32 | SumKernel256Traits_Args0        |                |               |     18776.932 | 20682.753 | 21170.547 | 19542.475 | 19850.899 |
-| ShuffleBenchmark_Int32 | SumKernel256Traits_Args         |                |               |     18888.282 | 20784.445 | 19053.240 | 20502.156 | 19724.046 |
-| ShuffleBenchmark_Int64 | SumScalar                       |        426.956 |       492.749 |       493.922 |   518.700 |   518.107 |   412.011 |   489.448 |
-| ShuffleBenchmark_Int64 | SumBase                         |        446.823 |       496.192 |       492.793 |   514.676 |   516.953 |   522.054 |   495.353 |
-| ShuffleBenchmark_Int64 | SumTraits                       |        446.688 |       497.202 |      4233.788 |  5165.905 |  5226.817 |  5371.010 | 10213.164 |
-| ShuffleBenchmark_Int64 | SumTraits_Args0                 |        427.112 |       495.184 |      9470.456 |  9698.777 | 10188.867 | 10071.276 |  9999.683 |
-| ShuffleBenchmark_Int64 | SumTraits_Args                  |        412.717 |       480.780 |      9716.510 | 10095.789 | 10074.866 | 10127.661 | 10231.667 |
+| ShuffleBenchmark_Int32 | SumKernel256Traits              |                |               |     16988.322 | 15526.311 | 10548.803 | 14853.425 | 16343.393 |
+| ShuffleBenchmark_Int32 | SumKernel256Traits_Args0        |                |               |     16610.754 | 17017.951 | 15952.165 | 15817.259 | 15931.136 |
+| ShuffleBenchmark_Int32 | SumKernel256Traits_Args         |                |               |     17216.220 | 11015.375 | 13792.076 | 13552.579 | 15905.211 |
+| ShuffleBenchmark_Int64 | SumScalar                       |        425.474 |       430.216 |       457.179 |   497.203 |   465.105 |   432.348 |   425.921 |
+| ShuffleBenchmark_Int64 | SumBase                         |        468.461 |       428.475 |       425.688 |   496.350 |   430.476 |   501.038 |   427.753 |
+| ShuffleBenchmark_Int64 | SumTraits                       |        474.906 |       431.296 |      3789.327 |  4192.951 |  4280.568 |  4155.819 |  8171.028 |
+| ShuffleBenchmark_Int64 | SumTraits_Args0                 |        423.703 |       461.664 |      6979.885 |  7855.241 |  8501.271 |  7846.303 |  8198.449 |
+| ShuffleBenchmark_Int64 | SumTraits_Args                  |        446.260 |       420.925 |      6704.874 |  8599.441 |  8317.550 |  7312.362 |  8378.340 |
 | ShuffleBenchmark_Int64 | Sum128_Bcl                      |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int64 | Sum128_AdvSimd                  |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int64 | Sum128Traits                    |                |               |               |           |           |           |           |
-| ShuffleBenchmark_Int64 | Sum256_Bcl                      |                |               |               |           |           |   534.824 |   513.590 |
-| ShuffleBenchmark_Int64 | Sum256Traits                    |                |               |      4287.026 |  6629.039 |  6565.947 |  7254.956 | 10124.575 |
-| ShuffleBenchmark_Int64 | Sum512_Bcl                      |                |               |               |           |           |           |   740.357 |
-| ShuffleBenchmark_Int64 | Sum512Traits                    |                |               |               |           |           |           |  8707.517 |
-| ShuffleBenchmark_Int64 | SumKernelTraits                 |        446.620 |       495.113 |      5091.536 |  7083.997 |  7092.205 |  7558.459 | 10649.443 |
-| ShuffleBenchmark_Int64 | SumKernelTraits_Args0           |        424.140 |       487.749 |     10718.333 |  9823.691 | 10786.653 | 10810.434 | 10709.271 |
-| ShuffleBenchmark_Int64 | SumKernelTraits_Args            |        410.103 |       480.447 |      9653.985 | 10801.071 | 10742.495 | 10858.436 | 10808.806 |
+| ShuffleBenchmark_Int64 | Sum256_Bcl                      |                |               |               |           |           |   506.686 |   515.520 |
+| ShuffleBenchmark_Int64 | Sum256Traits                    |                |               |      4025.137 |  5466.388 |  5258.504 |  5355.022 |  8089.992 |
+| ShuffleBenchmark_Int64 | Sum512_Bcl                      |                |               |               |           |           |           |   688.892 |
+| ShuffleBenchmark_Int64 | Sum512Traits                    |                |               |               |           |           |           |  7733.564 |
+| ShuffleBenchmark_Int64 | SumKernelTraits                 |        473.823 |       426.081 |      4854.793 |  5862.440 |  5735.074 |  5938.699 |  8560.856 |
+| ShuffleBenchmark_Int64 | SumKernelTraits_Args0           |        424.508 |       458.248 |      7804.575 |  8108.408 |  9181.086 |  8364.106 |  8701.155 |
+| ShuffleBenchmark_Int64 | SumKernelTraits_Args            |        446.097 |       428.538 |      8386.279 |  9239.331 |  9198.798 |  8344.952 |  8673.715 |
 | ShuffleBenchmark_Int64 | SumKernel128_Sse_DuplicateEven  |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int64 | SumKernel128_AdvSimd            |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int64 | SumKernel128_Arm_Multiply       |                |               |               |           |           |           |           |
 | ShuffleBenchmark_Int64 | SumKernel128Traits              |                |               |               |           |           |           |           |
-| ShuffleBenchmark_Int64 | SumKernel256_Avx2_AlignRight    |                |               |      5726.068 |  6675.896 |  6676.105 |  6666.708 | 10721.387 |
-| ShuffleBenchmark_Int64 | SumKernel256_Avx2_DuplicateEven |                |               |      6049.994 |  7480.263 |  7532.930 |  8587.629 | 10786.676 |
-| ShuffleBenchmark_Int64 | SumKernel256_Avx2_Multiply      |                |               |      2497.863 |  3430.504 |  3701.997 |  3508.487 | 10639.538 |
-| ShuffleBenchmark_Int64 | SumKernel256_Avx2_ShiftLane     |                |               |      5796.478 |  7484.828 |  7592.366 |  8538.166 | 10813.702 |
-| ShuffleBenchmark_Int64 | SumKernel256Traits              |                |               |      6015.722 |  7360.212 |  7487.076 |  8399.513 | 10781.117 |
-| ShuffleBenchmark_Int64 | SumKernel256Traits_Args0        |                |               |     10669.976 |  9833.927 | 10906.295 | 10830.029 | 10842.443 |
-| ShuffleBenchmark_Int64 | SumKernel256Traits_Args         |                |               |     10798.570 |  9915.397 | 10878.685 | 10692.502 | 10779.118 |
-| ShuffleBenchmark_SByte | SumScalar                       |       1508.563 |      1740.591 |      1573.962 |  1758.471 |  1797.883 |  1917.897 |  1605.408 |
-| ShuffleBenchmark_SByte | SumBase                         |       1560.013 |      1725.023 |      1568.324 |  1758.584 |  1798.708 |  1762.422 |  1878.416 |
-| ShuffleBenchmark_SByte | SumTraits                       |       1735.648 |      1727.091 |     21111.471 | 29979.487 | 30462.345 | 37657.383 | 53450.140 |
-| ShuffleBenchmark_SByte | SumTraits_Args0                 |       1570.920 |      1501.520 |     59875.540 | 59436.269 | 60123.303 | 57113.522 | 80050.733 |
-| ShuffleBenchmark_SByte | SumTraits_Args                  |       1603.469 |      1522.525 |     59733.275 | 60414.526 | 59856.021 | 57196.261 | 82026.989 |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_AlignRight    |                |               |      4880.617 |  5470.127 |  5419.855 |  5415.151 |  8791.891 |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_DuplicateEven |                |               |      5276.504 |  6066.870 |  6154.469 |  6241.420 |  8688.759 |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_Multiply      |                |               |      2267.039 |  2848.082 |  2984.934 |  2710.042 |  8892.630 |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_ShiftLane     |                |               |      4821.492 |  5977.394 |  6254.779 |  6266.401 |  8825.284 |
+| ShuffleBenchmark_Int64 | SumKernel256Traits              |                |               |      5471.014 |  6193.223 |  5999.570 |  6335.666 |  8680.147 |
+| ShuffleBenchmark_Int64 | SumKernel256Traits_Args0        |                |               |      8963.776 |  8029.324 |  9198.774 |  8191.638 |  8601.527 |
+| ShuffleBenchmark_Int64 | SumKernel256Traits_Args         |                |               |      7897.715 |  7810.420 |  8772.684 |  8391.317 |  8724.270 |
+| ShuffleBenchmark_SByte | SumScalar                       |       1496.783 |      1403.348 |      1448.660 |  1239.277 |  1468.827 |  1415.139 |  1213.582 |
+| ShuffleBenchmark_SByte | SumBase                         |       1537.986 |      1513.440 |      1306.115 |  1500.220 |  1452.622 |  1474.647 |  1441.306 |
+| ShuffleBenchmark_SByte | SumTraits                       |       1476.771 |      1494.144 |     17086.314 | 24231.464 | 24097.622 | 30243.434 | 60885.250 |
+| ShuffleBenchmark_SByte | SumTraits_Args0                 |       1392.158 |      1331.083 |     45038.802 | 50540.409 | 49090.081 | 46979.783 | 60672.985 |
+| ShuffleBenchmark_SByte | SumTraits_Args                  |       1389.074 |      1295.641 |     46794.997 | 51069.265 | 50078.249 | 46518.750 | 65261.554 |
 | ShuffleBenchmark_SByte | Sum128_Bcl                      |                |               |               |           |           |           |           |
 | ShuffleBenchmark_SByte | Sum128_AdvSimd                  |                |               |               |           |           |           |           |
 | ShuffleBenchmark_SByte | Sum128Traits                    |                |               |               |           |           |           |           |
-| ShuffleBenchmark_SByte | Sum256_Bcl                      |                |               |               |           |           |  1324.799 |  1317.756 |
-| ShuffleBenchmark_SByte | Sum256_Avx2_Add1                |                |               |     20970.513 | 32938.002 | 36314.551 | 41259.317 | 76458.510 |
-| ShuffleBenchmark_SByte | Sum256_Avx2_Add2                |                |               |     21014.637 | 31046.580 | 31279.709 | 39419.532 | 53694.122 |
-| ShuffleBenchmark_SByte | Sum256_Avx2_Cmp2                |                |               |     22898.688 | 35747.013 | 41131.437 | 43644.527 | 76907.231 |
-| ShuffleBenchmark_SByte | Sum256_Avx2_EqualAnd            |                |               |     23895.964 | 34515.098 | 35001.060 | 35655.625 | 77714.067 |
-| ShuffleBenchmark_SByte | Sum256Traits                    |                |               |     22621.901 | 32066.393 | 35733.263 | 44371.961 | 81435.365 |
-| ShuffleBenchmark_SByte | Sum512_Bcl                      |                |               |               |           |           |           |  1322.314 |
-| ShuffleBenchmark_SByte | Sum512Traits                    |                |               |               |           |           |           | 69548.002 |
-| ShuffleBenchmark_SByte | SumKernelTraits                 |       1581.742 |      1740.075 |     33493.746 | 40749.480 | 41676.201 | 50510.992 | 88600.601 |
-| ShuffleBenchmark_SByte | SumKernelTraits_Args0           |       1715.244 |      1765.794 |     59278.089 | 60513.059 | 60979.979 | 57235.870 | 87674.417 |
-| ShuffleBenchmark_SByte | SumKernelTraits_Args            |       1534.947 |      1662.871 |     59726.595 | 60057.090 | 60735.367 | 58128.548 | 87764.502 |
+| ShuffleBenchmark_SByte | Sum256_Bcl                      |                |               |               |           |           |   901.114 |  1022.223 |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Add1                |                |               |     17680.705 | 27259.330 | 26928.091 | 31652.671 | 54966.710 |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Add2                |                |               |     16981.534 | 24595.180 | 25390.338 | 29868.309 | 42493.502 |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Cmp2                |                |               |     19108.512 | 25697.522 | 32141.792 | 32237.731 | 58940.683 |
+| ShuffleBenchmark_SByte | Sum256_Avx2_EqualAnd            |                |               |     20064.881 | 27827.353 | 27032.611 | 26385.226 | 60458.784 |
+| ShuffleBenchmark_SByte | Sum256Traits                    |                |               |     16711.858 | 26366.642 | 28817.941 | 31706.056 | 66988.398 |
+| ShuffleBenchmark_SByte | Sum512_Bcl                      |                |               |               |           |           |           |   989.131 |
+| ShuffleBenchmark_SByte | Sum512Traits                    |                |               |               |           |           |           | 64432.274 |
+| ShuffleBenchmark_SByte | SumKernelTraits                 |       1476.637 |      1242.198 |     27650.933 | 32894.218 | 32711.664 | 39630.939 | 72350.167 |
+| ShuffleBenchmark_SByte | SumKernelTraits_Args0           |       1523.543 |      1440.011 |     44451.891 | 49973.813 | 51540.236 | 48754.502 | 72615.251 |
+| ShuffleBenchmark_SByte | SumKernelTraits_Args            |       1395.106 |      1274.943 |     41001.996 | 50067.099 | 49654.805 | 45904.504 | 71412.964 |
 | ShuffleBenchmark_SByte | SumKernel128_AdvSimd            |                |               |               |           |           |           |           |
 | ShuffleBenchmark_SByte | SumKernel128Traits              |                |               |               |           |           |           |           |
-| ShuffleBenchmark_SByte | SumKernel256Traits              |                |               |     32611.522 | 47050.810 | 47680.664 | 55251.438 | 87684.127 |
-| ShuffleBenchmark_SByte | SumKernel256Traits_Args0        |                |               |     59863.092 | 60001.820 | 61110.314 | 57000.551 | 88950.043 |
-| ShuffleBenchmark_SByte | SumKernel256Traits_Args         |                |               |     59609.252 | 60666.465 | 60284.974 | 57817.631 | 87894.732 |
+| ShuffleBenchmark_SByte | SumKernel256Traits              |                |               |     27602.150 | 38375.073 | 37451.508 | 43518.592 | 71712.144 |
+| ShuffleBenchmark_SByte | SumKernel256Traits_Args0        |                |               |     48745.607 | 49345.013 | 50973.728 | 48093.264 | 71875.070 |
+| ShuffleBenchmark_SByte | SumKernel256Traits_Args         |                |               |     47232.647 | 47781.949 | 50184.740 | 46542.897 | 73291.774 |
 
 ### X86 - Intel Core i5-8250U
 | Type                   | Method                          | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
@@ -276,91 +278,300 @@ Unit of data: Million operations per second. The larger the number, the better t
 | ShuffleBenchmark_SByte | SumKernel256Traits_Args0        |               |           |           |           |
 | ShuffleBenchmark_SByte | SumKernel256Traits_Args         |               |           |           |           |
 
+### Arm - Apple M2
+| Type                   | Method                          |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :--------------------- | :------------------------------ | --------: | --------: | --------: |
+| ShuffleBenchmark_Int16 | SumScalar                       |  1813.611 |  2286.981 |  2267.510 |
+| ShuffleBenchmark_Int16 | SumBase                         |  1813.720 |  2290.775 |  2267.218 |
+| ShuffleBenchmark_Int16 | SumTraits                       | 13593.983 | 13603.414 | 13614.059 |
+| ShuffleBenchmark_Int16 | SumTraits_Args0                 | 13611.708 | 13607.433 | 13611.140 |
+| ShuffleBenchmark_Int16 | SumTraits_Args                  | 13577.658 | 13608.068 | 13613.104 |
+| ShuffleBenchmark_Int16 | Sum128_Bcl                      |           |  1892.287 |  1909.152 |
+| ShuffleBenchmark_Int16 | Sum128_AdvSimd                  | 11448.478 | 13116.280 | 13603.377 |
+| ShuffleBenchmark_Int16 | Sum128Traits                    | 13602.376 | 13606.053 | 13614.115 |
+| ShuffleBenchmark_Int16 | Sum256_Bcl                      |           |           |           |
+| ShuffleBenchmark_Int16 | Sum256Traits                    |           |           |           |
+| ShuffleBenchmark_Int16 | Sum512_Bcl                      |           |           |  1912.983 |
+| ShuffleBenchmark_Int16 | Sum512Traits                    |           |           |  1912.982 |
+| ShuffleBenchmark_Int16 | SumKernelTraits                 | 13604.116 | 13611.317 | 13616.924 |
+| ShuffleBenchmark_Int16 | SumKernelTraits_Args0           | 13610.012 | 13612.060 | 13613.942 |
+| ShuffleBenchmark_Int16 | SumKernelTraits_Args            | 13578.600 | 13609.518 | 13616.825 |
+| ShuffleBenchmark_Int16 | SumKernel128_AdvSimd            | 12085.817 | 13593.857 | 13600.748 |
+| ShuffleBenchmark_Int16 | SumKernel128Traits              | 13604.367 | 13611.349 | 13613.471 |
+| ShuffleBenchmark_Int16 | SumKernel256_Avx2_Multiply      |           |           |           |
+| ShuffleBenchmark_Int16 | SumKernel256_Avx2_ShiftLane     |           |           |           |
+| ShuffleBenchmark_Int16 | SumKernel256Traits              |           |           |           |
+| ShuffleBenchmark_Int16 | SumKernel256Traits_Args0        |           |           |           |
+| ShuffleBenchmark_Int16 | SumKernel256Traits_Args         |           |           |           |
+| ShuffleBenchmark_Int32 | SumScalar                       |  1600.170 |  1943.129 |  1942.939 |
+| ShuffleBenchmark_Int32 | SumBase                         |  1600.118 |  1942.929 |  1700.166 |
+| ShuffleBenchmark_Int32 | SumTraits                       |  6798.483 |  6802.443 |  6805.336 |
+| ShuffleBenchmark_Int32 | SumTraits_Args0                 |  6802.581 |  6802.236 |  6804.942 |
+| ShuffleBenchmark_Int32 | SumTraits_Args                  |  6793.540 |  6802.317 |  6804.719 |
+| ShuffleBenchmark_Int32 | Sum128_Bcl                      |           |  2617.002 |  2619.142 |
+| ShuffleBenchmark_Int32 | Sum128_AdvSimd                  |  5725.075 |  6562.261 |  6802.300 |
+| ShuffleBenchmark_Int32 | Sum128_Wasm_CompareGreater      |           |           |           |
+| ShuffleBenchmark_Int32 | Sum128_Wasm_EqualsShift         |           |           |           |
+| ShuffleBenchmark_Int32 | Sum128Traits                    |  6800.272 |  6803.618 |  6805.516 |
+| ShuffleBenchmark_Int32 | Sum256_Bcl                      |           |           |           |
+| ShuffleBenchmark_Int32 | Sum256_Avx2_Add1                |           |           |           |
+| ShuffleBenchmark_Int32 | Sum256Traits                    |           |           |           |
+| ShuffleBenchmark_Int32 | Sum512_Bcl                      |           |           |  1747.491 |
+| ShuffleBenchmark_Int32 | Sum512Traits                    |           |           |  1748.702 |
+| ShuffleBenchmark_Int32 | SumKernelTraits                 |  6798.492 |  6804.381 |  6803.818 |
+| ShuffleBenchmark_Int32 | SumKernelTraits_Args0           |  6803.152 |  6804.811 |  6805.694 |
+| ShuffleBenchmark_Int32 | SumKernelTraits_Args            |  6795.238 |  6804.500 |  6802.751 |
+| ShuffleBenchmark_Int32 | SumKernel128_AdvSimd            |  6013.588 |  6799.175 |  6799.723 |
+| ShuffleBenchmark_Int32 | SumKernel128Traits              |  6801.578 |  6803.402 |  6803.696 |
+| ShuffleBenchmark_Int32 | SumKernel256Traits              |           |           |           |
+| ShuffleBenchmark_Int32 | SumKernel256Traits_Args0        |           |           |           |
+| ShuffleBenchmark_Int32 | SumKernel256Traits_Args         |           |           |           |
+| ShuffleBenchmark_Int64 | SumScalar                       |  1294.758 |  1551.021 |  1505.013 |
+| ShuffleBenchmark_Int64 | SumBase                         |  1294.541 |  1550.515 |  1509.312 |
+| ShuffleBenchmark_Int64 | SumTraits                       |  3399.181 |  3400.917 |  3402.669 |
+| ShuffleBenchmark_Int64 | SumTraits_Args0                 |  3400.768 |  3401.830 |  3401.864 |
+| ShuffleBenchmark_Int64 | SumTraits_Args                  |  3398.536 |  3401.340 |  3402.187 |
+| ShuffleBenchmark_Int64 | Sum128_Bcl                      |           |  2055.437 |  2059.051 |
+| ShuffleBenchmark_Int64 | Sum128_AdvSimd                  |  2365.370 |  2773.480 |  3400.783 |
+| ShuffleBenchmark_Int64 | Sum128Traits                    |  3400.241 |  3401.851 |  3402.265 |
+| ShuffleBenchmark_Int64 | Sum256_Bcl                      |           |           |           |
+| ShuffleBenchmark_Int64 | Sum256Traits                    |           |           |           |
+| ShuffleBenchmark_Int64 | Sum512_Bcl                      |           |           |  1512.807 |
+| ShuffleBenchmark_Int64 | Sum512Traits                    |           |           |  1510.622 |
+| ShuffleBenchmark_Int64 | SumKernelTraits                 |  3400.653 |  3401.744 |  3400.987 |
+| ShuffleBenchmark_Int64 | SumKernelTraits_Args0           |  3401.209 |  3401.822 |  3401.855 |
+| ShuffleBenchmark_Int64 | SumKernelTraits_Args            |  3398.930 |  3402.198 |  3402.201 |
+| ShuffleBenchmark_Int64 | SumKernel128_Sse_DuplicateEven  |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel128_AdvSimd            |  3022.573 |  3400.468 |  3401.420 |
+| ShuffleBenchmark_Int64 | SumKernel128_Arm_Multiply       |  1553.900 |  2063.375 |   443.217 |
+| ShuffleBenchmark_Int64 | SumKernel128Traits              |  3401.970 |  3401.930 |  3402.144 |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_AlignRight    |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_DuplicateEven |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_Multiply      |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_ShiftLane     |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256Traits              |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256Traits_Args0        |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256Traits_Args         |           |           |           |
+| ShuffleBenchmark_SByte | SumScalar                       |  2266.726 |  2736.182 |  2715.459 |
+| ShuffleBenchmark_SByte | SumBase                         |  2266.739 |  2735.397 |  2716.850 |
+| ShuffleBenchmark_SByte | SumTraits                       | 27175.969 | 27165.670 | 27193.666 |
+| ShuffleBenchmark_SByte | SumTraits_Args0                 | 27183.317 | 27163.344 | 27200.994 |
+| ShuffleBenchmark_SByte | SumTraits_Args                  | 27066.764 | 27153.973 | 27194.756 |
+| ShuffleBenchmark_SByte | Sum128_Bcl                      |           |  1986.725 |  1995.712 |
+| ShuffleBenchmark_SByte | Sum128_AdvSimd                  | 27147.801 | 27144.258 | 27178.830 |
+| ShuffleBenchmark_SByte | Sum128Traits                    | 27202.974 | 27195.784 | 27201.747 |
+| ShuffleBenchmark_SByte | Sum256_Bcl                      |           |           |           |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Add1                |           |           |           |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Add2                |           |           |           |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Cmp2                |           |           |           |
+| ShuffleBenchmark_SByte | Sum256_Avx2_EqualAnd            |           |           |           |
+| ShuffleBenchmark_SByte | Sum256Traits                    |           |           |           |
+| ShuffleBenchmark_SByte | Sum512_Bcl                      |           |           |  1998.195 |
+| ShuffleBenchmark_SByte | Sum512Traits                    |           |           |  1998.720 |
+| ShuffleBenchmark_SByte | SumKernelTraits                 | 27176.436 | 27166.467 | 27199.577 |
+| ShuffleBenchmark_SByte | SumKernelTraits_Args0           | 27181.156 | 27163.831 | 27199.077 |
+| ShuffleBenchmark_SByte | SumKernelTraits_Args            | 27065.350 | 27153.156 | 27202.032 |
+| ShuffleBenchmark_SByte | SumKernel128_AdvSimd            | 27148.573 | 27135.989 | 27183.552 |
+| ShuffleBenchmark_SByte | SumKernel128Traits              | 27197.911 | 27196.443 | 27206.105 |
+| ShuffleBenchmark_SByte | SumKernel256Traits              |           |           |           |
+| ShuffleBenchmark_SByte | SumKernel256Traits_Args0        |           |           |           |
+| ShuffleBenchmark_SByte | SumKernel256Traits_Args         |           |           |           |
+
 ### Arm - AWS Arm t4g.small
-| Type                   | Method                          | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :--------------------- | :------------------------------ | ------------: | --------: | --------: | --------: |
-| ShuffleBenchmark_Int16 | SumScalar                       |       424.999 |   423.218 |   419.101 |   527.300 |
-| ShuffleBenchmark_Int16 | SumBase                         |       425.670 |   422.538 |   422.107 |   527.113 |
-| ShuffleBenchmark_Int16 | SumTraits                       |       425.313 |  4699.731 |  5530.044 |  5869.854 |
-| ShuffleBenchmark_Int16 | SumTraits_Args0                 |       424.768 |  8429.938 |  8257.430 |  9942.485 |
-| ShuffleBenchmark_Int16 | SumTraits_Args                  |       400.596 |  2978.896 |  2867.447 |  9921.169 |
-| ShuffleBenchmark_Int16 | Sum128_Bcl                      |               |           |           |   481.867 |
-| ShuffleBenchmark_Int16 | Sum128_AdvSimd                  |               |  3150.881 |  3102.195 |  3111.658 |
-| ShuffleBenchmark_Int16 | Sum128Traits                    |       238.425 |  4981.104 |  5528.097 |  5878.244 |
-| ShuffleBenchmark_Int16 | Sum256_Bcl                      |               |           |           |           |
-| ShuffleBenchmark_Int16 | Sum256Traits                    |               |           |           |           |
-| ShuffleBenchmark_Int16 | SumKernelTraits                 |       425.055 |  5280.154 |  6489.835 |  7965.363 |
-| ShuffleBenchmark_Int16 | SumKernelTraits_Args0           |       424.753 |  8432.769 |  7773.929 |  9946.938 |
-| ShuffleBenchmark_Int16 | SumKernelTraits_Args            |       400.853 |  2976.102 |  2977.539 |  9918.004 |
-| ShuffleBenchmark_Int16 | SumKernel128_AdvSimd            |               |  2963.866 |  3350.936 |  3971.472 |
-| ShuffleBenchmark_Int16 | SumKernel128Traits              |       238.843 |  6554.537 |  6472.303 |  7967.252 |
-| ShuffleBenchmark_Int16 | SumKernel256_Avx2_Multiply      |               |           |           |           |
-| ShuffleBenchmark_Int16 | SumKernel256_Avx2_ShiftLane     |               |           |           |           |
-| ShuffleBenchmark_Int16 | SumKernel256Traits              |               |           |           |           |
-| ShuffleBenchmark_Int16 | SumKernel256Traits_Args0        |               |           |           |           |
-| ShuffleBenchmark_Int16 | SumKernel256Traits_Args         |               |           |           |           |
-| ShuffleBenchmark_Int32 | SumScalar                       |       287.973 |   280.924 |   281.376 |   316.554 |
-| ShuffleBenchmark_Int32 | SumBase                         |       287.844 |   281.217 |   281.189 |   317.811 |
-| ShuffleBenchmark_Int32 | SumTraits                       |       288.127 |  2450.585 |  2447.558 |  2921.792 |
-| ShuffleBenchmark_Int32 | SumTraits_Args0                 |       287.246 |  4151.578 |  3868.791 |  4864.057 |
-| ShuffleBenchmark_Int32 | SumTraits_Args                  |       268.578 |  1484.278 |  1488.202 |  4826.316 |
-| ShuffleBenchmark_Int32 | Sum128_Bcl                      |               |           |           |   302.889 |
-| ShuffleBenchmark_Int32 | Sum128_AdvSimd                  |               |  1356.297 |  1554.618 |  1591.645 |
-| ShuffleBenchmark_Int32 | Sum128Traits                    |       153.214 |  2622.213 |  2760.609 |  2920.299 |
-| ShuffleBenchmark_Int32 | Sum256_Bcl                      |               |           |           |           |
-| ShuffleBenchmark_Int32 | Sum256Traits                    |               |           |           |           |
-| ShuffleBenchmark_Int32 | SumKernelTraits                 |       287.659 |  2653.535 |  3231.874 |  3916.923 |
-| ShuffleBenchmark_Int32 | SumKernelTraits_Args0           |       286.498 |  3910.887 |  3874.060 |  4840.789 |
-| ShuffleBenchmark_Int32 | SumKernelTraits_Args            |       268.501 |  1483.173 |  1480.430 |  4819.802 |
-| ShuffleBenchmark_Int32 | SumKernel128_AdvSimd            |               |  1442.208 |  1672.496 |  1980.863 |
-| ShuffleBenchmark_Int32 | SumKernel128Traits              |       153.157 |  3259.100 |  3231.342 |  3925.725 |
-| ShuffleBenchmark_Int32 | SumKernel256Traits              |               |           |           |           |
-| ShuffleBenchmark_Int32 | SumKernel256Traits_Args0        |               |           |           |           |
-| ShuffleBenchmark_Int32 | SumKernel256Traits_Args         |               |           |           |           |
-| ShuffleBenchmark_Int64 | SumScalar                       |       379.969 |   440.479 |   443.096 |   552.245 |
-| ShuffleBenchmark_Int64 | SumBase                         |       379.331 |   411.212 |   442.968 |   551.973 |
-| ShuffleBenchmark_Int64 | SumTraits                       |       184.441 |  1012.778 |  1070.236 |  1254.759 |
-| ShuffleBenchmark_Int64 | SumTraits_Args0                 |       378.846 |  1963.813 |  2069.707 |  2463.769 |
-| ShuffleBenchmark_Int64 | SumTraits_Args                  |       335.792 |   717.028 |   742.759 |  2452.291 |
-| ShuffleBenchmark_Int64 | Sum128_Bcl                      |               |           |           |   712.337 |
-| ShuffleBenchmark_Int64 | Sum128_AdvSimd                  |               |   592.424 |   536.670 |   604.608 |
-| ShuffleBenchmark_Int64 | Sum128Traits                    |       207.549 |  1228.061 |  1078.230 |  1266.492 |
-| ShuffleBenchmark_Int64 | Sum256_Bcl                      |               |           |           |           |
-| ShuffleBenchmark_Int64 | Sum256Traits                    |               |           |           |           |
-| ShuffleBenchmark_Int64 | SumKernelTraits                 |       182.389 |  1217.434 |  1408.426 |  1767.667 |
-| ShuffleBenchmark_Int64 | SumKernelTraits_Args0           |       180.539 |  2100.070 |  1952.918 |  2464.893 |
-| ShuffleBenchmark_Int64 | SumKernelTraits_Args            |       335.424 |   741.609 |   743.436 |  2450.730 |
-| ShuffleBenchmark_Int64 | SumKernel128_Sse_DuplicateEven  |               |           |           |           |
-| ShuffleBenchmark_Int64 | SumKernel128_AdvSimd            |               |   931.591 |   892.424 |   914.749 |
-| ShuffleBenchmark_Int64 | SumKernel128_Arm_Multiply       |               |   468.751 |   489.128 |   569.016 |
-| ShuffleBenchmark_Int64 | SumKernel128Traits              |       146.886 |  1457.029 |  1473.008 |  1765.059 |
-| ShuffleBenchmark_Int64 | SumKernel256_Avx2_AlignRight    |               |           |           |           |
-| ShuffleBenchmark_Int64 | SumKernel256_Avx2_DuplicateEven |               |           |           |           |
-| ShuffleBenchmark_Int64 | SumKernel256_Avx2_Multiply      |               |           |           |           |
-| ShuffleBenchmark_Int64 | SumKernel256_Avx2_ShiftLane     |               |           |           |           |
-| ShuffleBenchmark_Int64 | SumKernel256Traits              |               |           |           |           |
-| ShuffleBenchmark_Int64 | SumKernel256Traits_Args0        |               |           |           |           |
-| ShuffleBenchmark_Int64 | SumKernel256Traits_Args         |               |           |           |           |
-| ShuffleBenchmark_SByte | SumScalar                       |       667.455 |   660.836 |   658.330 |   833.764 |
-| ShuffleBenchmark_SByte | SumBase                         |       648.386 |   646.261 |   660.571 |   835.092 |
-| ShuffleBenchmark_SByte | SumTraits                       |       667.668 | 15581.384 | 16720.691 | 19748.119 |
-| ShuffleBenchmark_SByte | SumTraits_Args0                 |       665.086 | 16724.814 | 15729.294 | 19742.430 |
-| ShuffleBenchmark_SByte | SumTraits_Args                  |       626.181 |  5940.901 |  5954.235 | 19683.036 |
-| ShuffleBenchmark_SByte | Sum128_Bcl                      |               |           |           |   649.177 |
-| ShuffleBenchmark_SByte | Sum128_AdvSimd                  |               | 11739.301 | 11725.385 | 13143.611 |
-| ShuffleBenchmark_SByte | Sum128Traits                    |       399.980 | 15752.275 | 16761.213 | 19779.062 |
-| ShuffleBenchmark_SByte | Sum256_Bcl                      |               |           |           |           |
-| ShuffleBenchmark_SByte | Sum256_Avx2_Add1                |               |           |           |           |
-| ShuffleBenchmark_SByte | Sum256_Avx2_Add2                |               |           |           |           |
-| ShuffleBenchmark_SByte | Sum256_Avx2_Cmp2                |               |           |           |           |
-| ShuffleBenchmark_SByte | Sum256_Avx2_EqualAnd            |               |           |           |           |
-| ShuffleBenchmark_SByte | Sum256Traits                    |               |           |           |           |
-| ShuffleBenchmark_SByte | SumKernelTraits                 |       648.453 | 13129.238 | 16691.707 | 19731.858 |
-| ShuffleBenchmark_SByte | SumKernelTraits_Args0           |       665.102 | 15734.005 | 15694.804 | 19702.186 |
-| ShuffleBenchmark_SByte | SumKernelTraits_Args            |       624.959 |  5728.363 |  5940.288 | 19669.480 |
-| ShuffleBenchmark_SByte | SumKernel128_AdvSimd            |               | 11248.646 | 11746.544 | 13134.187 |
-| ShuffleBenchmark_SByte | SumKernel128Traits              |       400.112 | 16757.494 | 16751.903 | 19765.379 |
-| ShuffleBenchmark_SByte | SumKernel256Traits              |               |           |           |           |
-| ShuffleBenchmark_SByte | SumKernel256Traits_Args0        |               |           |           |           |
-| ShuffleBenchmark_SByte | SumKernel256Traits_Args         |               |           |           |           |
+| Type                   | Method                          | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :--------------------- | :------------------------------ | ------------: | --------: | --------: | --------: | --------: |
+| ShuffleBenchmark_Int16 | SumScalar                       |       427.276 |   421.887 |   421.454 |   526.589 |   516.294 |
+| ShuffleBenchmark_Int16 | SumBase                         |       425.871 |   421.454 |   423.412 |   526.191 |   518.273 |
+| ShuffleBenchmark_Int16 | SumTraits                       |       428.281 |  4922.876 |  5555.655 |  5864.193 |  9711.569 |
+| ShuffleBenchmark_Int16 | SumTraits_Args0                 |       428.928 |  7902.420 |  8416.624 |  9925.441 |  9709.555 |
+| ShuffleBenchmark_Int16 | SumTraits_Args                  |       405.537 |  2809.483 |  2798.925 |  9880.804 |  9707.490 |
+| ShuffleBenchmark_Int16 | Sum128_Bcl                      |               |           |           |   482.907 |   468.383 |
+| ShuffleBenchmark_Int16 | Sum128_AdvSimd                  |               |  2730.866 |  3116.533 |  3140.910 |  5334.923 |
+| ShuffleBenchmark_Int16 | Sum128Traits                    |       239.485 |  5262.847 |  5567.725 |  5868.675 |  9827.341 |
+| ShuffleBenchmark_Int16 | Sum256_Bcl                      |               |           |           |           |           |
+| ShuffleBenchmark_Int16 | Sum256Traits                    |               |           |           |           |           |
+| ShuffleBenchmark_Int16 | Sum512_Bcl                      |               |           |           |           |   557.399 |
+| ShuffleBenchmark_Int16 | Sum512Traits                    |               |           |           |           |   557.424 |
+| ShuffleBenchmark_Int16 | SumKernelTraits                 |       427.637 |  5650.913 |  6540.446 |  7957.175 |  9833.813 |
+| ShuffleBenchmark_Int16 | SumKernelTraits_Args0           |       427.578 |  7897.224 |  7891.894 |  9929.863 |  9819.774 |
+| ShuffleBenchmark_Int16 | SumKernelTraits_Args            |       405.223 |  2811.195 |  2797.170 |  9861.330 |  9829.822 |
+| ShuffleBenchmark_Int16 | SumKernel128_AdvSimd            |               |  3477.554 |  3373.104 |  3505.451 |  5352.675 |
+| ShuffleBenchmark_Int16 | SumKernel128Traits              |       239.538 |  6543.087 |  6551.098 |  7950.782 |  9753.632 |
+| ShuffleBenchmark_Int16 | SumKernel256_Avx2_Multiply      |               |           |           |           |           |
+| ShuffleBenchmark_Int16 | SumKernel256_Avx2_ShiftLane     |               |           |           |           |           |
+| ShuffleBenchmark_Int16 | SumKernel256Traits              |               |           |           |           |           |
+| ShuffleBenchmark_Int16 | SumKernel256Traits_Args0        |               |           |           |           |           |
+| ShuffleBenchmark_Int16 | SumKernel256Traits_Args         |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | SumScalar                       |       286.900 |   281.167 |   281.838 |   317.876 |   309.427 |
+| ShuffleBenchmark_Int32 | SumBase                         |       287.569 |   280.676 |   281.450 |   315.976 |   309.741 |
+| ShuffleBenchmark_Int32 | SumTraits                       |       286.596 |  2311.209 |  2472.592 |  2917.343 |  4801.979 |
+| ShuffleBenchmark_Int32 | SumTraits_Args0                 |       288.066 |  4185.430 |  3928.604 |  4934.590 |  4821.784 |
+| ShuffleBenchmark_Int32 | SumTraits_Args                  |       270.249 |  1396.323 |  1401.742 |  4886.669 |  4806.886 |
+| ShuffleBenchmark_Int32 | Sum128_Bcl                      |               |           |           |   304.320 |   301.222 |
+| ShuffleBenchmark_Int32 | Sum128_AdvSimd                  |               |  1561.060 |  1556.727 |  1604.657 |  2676.530 |
+| ShuffleBenchmark_Int32 | Sum128_Wasm_CompareGreater      |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | Sum128_Wasm_EqualsShift         |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | Sum128Traits                    |       156.899 |  2475.662 |  2773.273 |  2925.412 |  4850.125 |
+| ShuffleBenchmark_Int32 | Sum256_Bcl                      |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | Sum256_Avx2_Add1                |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | Sum256Traits                    |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | Sum512_Bcl                      |               |           |           |           |   515.317 |
+| ShuffleBenchmark_Int32 | Sum512Traits                    |               |           |           |           |   515.275 |
+| ShuffleBenchmark_Int32 | SumKernelTraits                 |       287.386 |  2677.394 |  3247.692 |  3953.573 |  4846.437 |
+| ShuffleBenchmark_Int32 | SumKernelTraits_Args0           |       286.724 |  3919.619 |  4182.617 |  4930.469 |  4852.808 |
+| ShuffleBenchmark_Int32 | SumKernelTraits_Args            |       270.724 |  1399.968 |  1395.953 |  4899.359 |  4853.093 |
+| ShuffleBenchmark_Int32 | SumKernel128_AdvSimd            |               |  1607.527 |  1680.474 |  1756.488 |  2673.903 |
+| ShuffleBenchmark_Int32 | SumKernel128Traits              |       157.325 |  3272.674 |  3250.843 |  3956.969 |  4805.883 |
+| ShuffleBenchmark_Int32 | SumKernel256Traits              |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | SumKernel256Traits_Args0        |               |           |           |           |           |
+| ShuffleBenchmark_Int32 | SumKernel256Traits_Args         |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | SumScalar                       |       448.592 |   440.758 |   444.884 |   552.061 |   534.531 |
+| ShuffleBenchmark_Int64 | SumBase                         |       425.377 |   421.331 |   445.929 |   551.659 |   494.525 |
+| ShuffleBenchmark_Int64 | SumTraits                       |       190.913 |  1005.614 |  1064.650 |  1255.025 |  2448.365 |
+| ShuffleBenchmark_Int64 | SumTraits_Args0                 |       426.809 |  2090.887 |  2100.527 |  2479.821 |  2451.574 |
+| ShuffleBenchmark_Int64 | SumTraits_Args                  |       179.534 |   698.013 |   699.200 |  2457.898 |  2451.414 |
+| ShuffleBenchmark_Int64 | Sum128_Bcl                      |               |           |           |   708.356 |   692.663 |
+| ShuffleBenchmark_Int64 | Sum128_AdvSimd                  |               |   503.046 |   550.840 |   604.367 |  1336.768 |
+| ShuffleBenchmark_Int64 | Sum128Traits                    |       234.241 |  1224.675 |  1068.241 |  1259.901 |  2444.056 |
+| ShuffleBenchmark_Int64 | Sum256_Bcl                      |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | Sum256Traits                    |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | Sum512_Bcl                      |               |           |           |           |   543.760 |
+| ShuffleBenchmark_Int64 | Sum512Traits                    |               |           |           |           |   543.555 |
+| ShuffleBenchmark_Int64 | SumKernelTraits                 |       448.065 |  1237.258 |  1412.876 |  1753.457 |  2434.096 |
+| ShuffleBenchmark_Int64 | SumKernelTraits_Args0           |       449.857 |  2101.411 |  1967.152 |  2469.054 |  2443.626 |
+| ShuffleBenchmark_Int64 | SumKernelTraits_Args            |       345.877 |   701.805 |   698.753 |  2456.761 |  2451.680 |
+| ShuffleBenchmark_Int64 | SumKernel128_Sse_DuplicateEven  |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel128_AdvSimd            |               |   931.986 |   894.636 |   915.626 |  1340.858 |
+| ShuffleBenchmark_Int64 | SumKernel128_Arm_Multiply       |               |   461.974 |   491.264 |   525.260 |   425.974 |
+| ShuffleBenchmark_Int64 | SumKernel128Traits              |       234.516 |  1477.127 |  1476.100 |  1758.550 |  2438.271 |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_AlignRight    |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_DuplicateEven |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_Multiply      |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_ShiftLane     |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256Traits              |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256Traits_Args0        |               |           |           |           |           |
+| ShuffleBenchmark_Int64 | SumKernel256Traits_Args         |               |           |           |           |           |
+| ShuffleBenchmark_SByte | SumScalar                       |       665.739 |   664.224 |   658.168 |   834.224 |   803.566 |
+| ShuffleBenchmark_SByte | SumBase                         |       672.364 |   659.589 |   659.055 |   834.209 |   812.422 |
+| ShuffleBenchmark_SByte | SumTraits                       |       680.590 | 13176.730 | 16739.161 | 19723.567 | 19531.685 |
+| ShuffleBenchmark_SByte | SumTraits_Args0                 |       660.595 | 15704.393 | 15724.340 | 19723.852 | 19530.241 |
+| ShuffleBenchmark_SByte | SumTraits_Args                  |       637.568 |  5597.644 |  5602.803 | 19605.289 | 19527.338 |
+| ShuffleBenchmark_SByte | Sum128_Bcl                      |               |           |           |   647.757 |   610.244 |
+| ShuffleBenchmark_SByte | Sum128_AdvSimd                  |               | 11242.569 | 11736.112 | 13105.897 | 16282.896 |
+| ShuffleBenchmark_SByte | Sum128Traits                    |       400.426 | 16767.896 | 16723.557 | 19729.703 | 19544.244 |
+| ShuffleBenchmark_SByte | Sum256_Bcl                      |               |           |           |           |           |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Add1                |               |           |           |           |           |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Add2                |               |           |           |           |           |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Cmp2                |               |           |           |           |           |
+| ShuffleBenchmark_SByte | Sum256_Avx2_EqualAnd            |               |           |           |           |           |
+| ShuffleBenchmark_SByte | Sum256Traits                    |               |           |           |           |           |
+| ShuffleBenchmark_SByte | Sum512_Bcl                      |               |           |           |           |   640.352 |
+| ShuffleBenchmark_SByte | Sum512Traits                    |               |           |           |           |   640.432 |
+| ShuffleBenchmark_SByte | SumKernelTraits                 |       672.784 | 15604.597 | 16732.629 | 19692.571 | 19533.892 |
+| ShuffleBenchmark_SByte | SumKernelTraits_Args0           |       675.236 | 16718.959 | 15715.512 | 19729.144 | 19534.508 |
+| ShuffleBenchmark_SByte | SumKernelTraits_Args            |       642.795 |  5573.999 |  5598.168 | 19588.655 | 19538.006 |
+| ShuffleBenchmark_SByte | SumKernel128_AdvSimd            |               | 11748.196 | 11737.578 | 13131.709 | 16275.599 |
+| ShuffleBenchmark_SByte | SumKernel128Traits              |       400.750 | 15719.108 | 16747.893 | 19744.815 | 19497.899 |
+| ShuffleBenchmark_SByte | SumKernel256Traits              |               |           |           |           |           |
+| ShuffleBenchmark_SByte | SumKernel256Traits_Args0        |               |           |           |           |           |
+| ShuffleBenchmark_SByte | SumKernel256Traits_Args         |               |           |           |           |           |
+
+### Wasm - Wasm on AMD Ryzen 7 7840H
+| Type                   | Method                          | .NET 8.0 |
+| :--------------------- | :------------------------------ | -------: |
+| ShuffleBenchmark_Int16 | SumScalar                       |   19.744 |
+| ShuffleBenchmark_Int16 | SumBase                         |   20.256 |
+| ShuffleBenchmark_Int16 | SumTraits                       |   61.970 |
+| ShuffleBenchmark_Int16 | SumTraits_Args0                 |   69.356 |
+| ShuffleBenchmark_Int16 | SumTraits_Args                  |   70.149 |
+| ShuffleBenchmark_Int16 | Sum128_Bcl                      |  115.599 |
+| ShuffleBenchmark_Int16 | Sum128_AdvSimd                  |          |
+| ShuffleBenchmark_Int16 | Sum128Traits                    |   67.732 |
+| ShuffleBenchmark_Int16 | Sum256_Bcl                      |          |
+| ShuffleBenchmark_Int16 | Sum256Traits                    |          |
+| ShuffleBenchmark_Int16 | Sum512_Bcl                      |   14.532 |
+| ShuffleBenchmark_Int16 | Sum512Traits                    |   13.004 |
+| ShuffleBenchmark_Int16 | SumKernelTraits                 |   80.660 |
+| ShuffleBenchmark_Int16 | SumKernelTraits_Args0           |   94.466 |
+| ShuffleBenchmark_Int16 | SumKernelTraits_Args            |   76.913 |
+| ShuffleBenchmark_Int16 | SumKernel128_AdvSimd            |          |
+| ShuffleBenchmark_Int16 | SumKernel128Traits              |   95.497 |
+| ShuffleBenchmark_Int16 | SumKernel256_Avx2_Multiply      |          |
+| ShuffleBenchmark_Int16 | SumKernel256_Avx2_ShiftLane     |          |
+| ShuffleBenchmark_Int16 | SumKernel256Traits              |          |
+| ShuffleBenchmark_Int16 | SumKernel256Traits_Args0        |          |
+| ShuffleBenchmark_Int16 | SumKernel256Traits_Args         |          |
+| ShuffleBenchmark_Int32 | SumScalar                       |   14.994 |
+| ShuffleBenchmark_Int32 | SumBase                         |   15.204 |
+| ShuffleBenchmark_Int32 | SumTraits                       |   54.525 |
+| ShuffleBenchmark_Int32 | SumTraits_Args0                 |   43.831 |
+| ShuffleBenchmark_Int32 | SumTraits_Args                  |   34.977 |
+| ShuffleBenchmark_Int32 | Sum128_Bcl                      |   69.596 |
+| ShuffleBenchmark_Int32 | Sum128_AdvSimd                  |          |
+| ShuffleBenchmark_Int32 | Sum128_Wasm_CompareGreater      |   32.736 |
+| ShuffleBenchmark_Int32 | Sum128_Wasm_EqualsShift         |   30.780 |
+| ShuffleBenchmark_Int32 | Sum128Traits                    |   66.975 |
+| ShuffleBenchmark_Int32 | Sum256_Bcl                      |          |
+| ShuffleBenchmark_Int32 | Sum256_Avx2_Add1                |          |
+| ShuffleBenchmark_Int32 | Sum256Traits                    |          |
+| ShuffleBenchmark_Int32 | Sum512_Bcl                      |   10.770 |
+| ShuffleBenchmark_Int32 | Sum512Traits                    |    9.895 |
+| ShuffleBenchmark_Int32 | SumKernelTraits                 |   54.959 |
+| ShuffleBenchmark_Int32 | SumKernelTraits_Args0           |   41.181 |
+| ShuffleBenchmark_Int32 | SumKernelTraits_Args            |   35.099 |
+| ShuffleBenchmark_Int32 | SumKernel128_AdvSimd            |          |
+| ShuffleBenchmark_Int32 | SumKernel128Traits              |   67.659 |
+| ShuffleBenchmark_Int32 | SumKernel256Traits              |          |
+| ShuffleBenchmark_Int32 | SumKernel256Traits_Args0        |          |
+| ShuffleBenchmark_Int32 | SumKernel256Traits_Args         |          |
+| ShuffleBenchmark_Int64 | SumScalar                       |    6.100 |
+| ShuffleBenchmark_Int64 | SumBase                         |    6.105 |
+| ShuffleBenchmark_Int64 | SumTraits                       |    6.167 |
+| ShuffleBenchmark_Int64 | SumTraits_Args0                 |    8.013 |
+| ShuffleBenchmark_Int64 | SumTraits_Args                  |    7.827 |
+| ShuffleBenchmark_Int64 | Sum128_Bcl                      |    4.731 |
+| ShuffleBenchmark_Int64 | Sum128_AdvSimd                  |          |
+| ShuffleBenchmark_Int64 | Sum128Traits                    |   12.715 |
+| ShuffleBenchmark_Int64 | Sum256_Bcl                      |          |
+| ShuffleBenchmark_Int64 | Sum256Traits                    |          |
+| ShuffleBenchmark_Int64 | Sum512_Bcl                      |    3.235 |
+| ShuffleBenchmark_Int64 | Sum512Traits                    |    6.421 |
+| ShuffleBenchmark_Int64 | SumKernelTraits                 |    7.582 |
+| ShuffleBenchmark_Int64 | SumKernelTraits_Args0           |    8.713 |
+| ShuffleBenchmark_Int64 | SumKernelTraits_Args            |    8.432 |
+| ShuffleBenchmark_Int64 | SumKernel128_Sse_DuplicateEven  |          |
+| ShuffleBenchmark_Int64 | SumKernel128_AdvSimd            |          |
+| ShuffleBenchmark_Int64 | SumKernel128_Arm_Multiply       |          |
+| ShuffleBenchmark_Int64 | SumKernel128Traits              |   18.353 |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_AlignRight    |          |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_DuplicateEven |          |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_Multiply      |          |
+| ShuffleBenchmark_Int64 | SumKernel256_Avx2_ShiftLane     |          |
+| ShuffleBenchmark_Int64 | SumKernel256Traits              |          |
+| ShuffleBenchmark_Int64 | SumKernel256Traits_Args0        |          |
+| ShuffleBenchmark_Int64 | SumKernel256Traits_Args         |          |
+| ShuffleBenchmark_SByte | SumScalar                       |   25.764 |
+| ShuffleBenchmark_SByte | SumBase                         |   26.280 |
+| ShuffleBenchmark_SByte | SumTraits                       |  262.417 |
+| ShuffleBenchmark_SByte | SumTraits_Args0                 |  198.939 |
+| ShuffleBenchmark_SByte | SumTraits_Args                  |  154.569 |
+| ShuffleBenchmark_SByte | Sum128_Bcl                      |  200.205 |
+| ShuffleBenchmark_SByte | Sum128_AdvSimd                  |          |
+| ShuffleBenchmark_SByte | Sum128Traits                    |  338.108 |
+| ShuffleBenchmark_SByte | Sum256_Bcl                      |          |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Add1                |          |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Add2                |          |
+| ShuffleBenchmark_SByte | Sum256_Avx2_Cmp2                |          |
+| ShuffleBenchmark_SByte | Sum256_Avx2_EqualAnd            |          |
+| ShuffleBenchmark_SByte | Sum256Traits                    |          |
+| ShuffleBenchmark_SByte | Sum512_Bcl                      |   18.759 |
+| ShuffleBenchmark_SByte | Sum512Traits                    |   17.766 |
+| ShuffleBenchmark_SByte | SumKernelTraits                 |  255.913 |
+| ShuffleBenchmark_SByte | SumKernelTraits_Args0           |  184.754 |
+| ShuffleBenchmark_SByte | SumKernelTraits_Args            |  155.117 |
+| ShuffleBenchmark_SByte | SumKernel128_AdvSimd            |          |
+| ShuffleBenchmark_SByte | SumKernel128Traits              |  325.587 |
+| ShuffleBenchmark_SByte | SumKernel256Traits              |          |
+| ShuffleBenchmark_SByte | SumKernel256Traits_Args0        |          |
+| ShuffleBenchmark_SByte | SumKernel256Traits_Args         |          |
 
