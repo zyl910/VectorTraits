@@ -17,6 +17,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
     /// <summary>
     /// <see cref="Vector{T}"/> traits 128 - AdvSimd 64bit .
     /// </summary>
+    [Obsolete("The next version will remove such as VectorTraits128AdvSimdB64 classes.  It will be replaced by VectorTraits128AdvSimd.")]
     public sealed partial class VectorTraits128AdvSimdB64 : VectorTraits128AdvSimdB64Abstract {
         private static readonly VectorTraits128AdvSimdB64 _instance = new VectorTraits128AdvSimdB64(); // Default instance.
 

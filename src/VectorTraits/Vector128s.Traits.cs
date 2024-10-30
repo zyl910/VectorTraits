@@ -64,6 +64,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>Best traits instance dynamic value (最佳特征实例动态值). </summary>
+        [Obsolete("The next version will remove.  It will be replaced by Instance.")]
         public static dynamic InstanceDynamic {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return _instanceDynamic; }

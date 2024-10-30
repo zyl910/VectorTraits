@@ -18,6 +18,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
     /// <summary>
     /// <see cref="Vector128{T}"/> traits - Avx2 .
     /// </summary>
+    [Obsolete("The next version will remove such as WVectorTraits128Avx2 classes.  It will be replaced by WVectorTraits128Sse.")]
     public sealed partial class WVectorTraits128Avx2 : WVectorTraits128Avx2Abstract {
         private static readonly WVectorTraits128Avx2 _instance = new WVectorTraits128Avx2(); // Default instance.
 
