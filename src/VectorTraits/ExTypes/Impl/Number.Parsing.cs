@@ -54,7 +54,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
 
             ref byte p = ref number.DigitsPtr;
 
-            Debug.Assert(!UnsafeUtil.IsNullRef(ref p));
+            Debug.Assert(!Unsafe.IsNullRef(ref p));
             TInteger n = IntegerFormatInfo<TInteger>.Zero;
 
             while (--i >= 0) {

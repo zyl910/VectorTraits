@@ -136,7 +136,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG2(Vector128{byte}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleG2_Basic(Vector128<byte> source, ShuffleControlG2 control) {
-                UnsafeUtil.SkipInit(out Vector128<byte> rt);
+                Unsafe.SkipInit(out Vector128<byte> rt);
                 ref byte q = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref source);
                 int ctl = (byte)control;
@@ -157,7 +157,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleG2_Basic(Vector128<ushort> source, ShuffleControlG2 control) {
-                UnsafeUtil.SkipInit(out Vector128<ushort> rt);
+                Unsafe.SkipInit(out Vector128<ushort> rt);
                 ref ushort q = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref source);
                 int ctl = (byte)control;
@@ -178,7 +178,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleG2_Basic(Vector128<uint> source, ShuffleControlG2 control) {
-                UnsafeUtil.SkipInit(out Vector128<uint> rt);
+                Unsafe.SkipInit(out Vector128<uint> rt);
                 ref uint q = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref source);
                 int ctl = (byte)control;
@@ -199,7 +199,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleG2_Basic(Vector128<ulong> source, ShuffleControlG2 control) {
-                UnsafeUtil.SkipInit(out Vector128<ulong> rt);
+                Unsafe.SkipInit(out Vector128<ulong> rt);
                 ref ulong q = ref Unsafe.As<Vector128<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector128<ulong>, ulong>(ref source);
                 int ctl = (byte)control;
@@ -357,7 +357,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleG4(Vector128{byte}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleG4_Basic(Vector128<byte> source, ShuffleControlG4 control) {
-                UnsafeUtil.SkipInit(out Vector128<byte> rt);
+                Unsafe.SkipInit(out Vector128<byte> rt);
                 ref byte q = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref source);
                 int ctl = (byte)control;
@@ -378,7 +378,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleG4_Basic(Vector128<ushort> source, ShuffleControlG4 control) {
-                UnsafeUtil.SkipInit(out Vector128<ushort> rt);
+                Unsafe.SkipInit(out Vector128<ushort> rt);
                 ref ushort q = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref source);
                 int ctl = (byte)control;
@@ -399,7 +399,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleG4_Basic(Vector128<uint> source, ShuffleControlG4 control) {
-                UnsafeUtil.SkipInit(out Vector128<uint> rt);
+                Unsafe.SkipInit(out Vector128<uint> rt);
                 ref uint q = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref source);
                 int ctl = (byte)control;
@@ -567,7 +567,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleG4X2_Basic(Vector128<ulong> source0, Vector128<ulong> source1, ShuffleControlG4 control, out Vector128<ulong> result1) {
                 //(Vector128<ulong> Result0, Vector128<ulong> Result1) rt = default;
-                UnsafeUtil.SkipInit(out (Vector128<ulong> Result0, Vector128<ulong> Result1) rt);
+                Unsafe.SkipInit(out (Vector128<ulong> Result0, Vector128<ulong> Result1) rt);
                 ValueTuple<Vector128<ulong>, Vector128<ulong>> src = (source0, source1);
                 ref ulong q = ref Unsafe.As<ValueTuple<Vector128<ulong>, Vector128<ulong>>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<ValueTuple<Vector128<ulong>, Vector128<ulong>>, ulong>(ref src);
@@ -747,7 +747,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YShuffleInsert(Vector128{byte}, Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YShuffleInsert_Basic(Vector128<byte> back, Vector128<byte> vector, Vector128<byte> indices) {
-                UnsafeUtil.SkipInit(out Vector128<byte> rt);
+                Unsafe.SkipInit(out Vector128<byte> rt);
                 byte cnt = (byte)Vector128<byte>.Count;
                 ref byte q = ref Unsafe.As<Vector128<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector128<byte>, byte>(ref vector);
@@ -768,7 +768,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YShuffleInsert_Basic(Vector128<ushort> back, Vector128<ushort> vector, Vector128<ushort> indices) {
-                UnsafeUtil.SkipInit(out Vector128<ushort> rt);
+                Unsafe.SkipInit(out Vector128<ushort> rt);
                 ushort cnt = (ushort)Vector128<ushort>.Count;
                 ref ushort q = ref Unsafe.As<Vector128<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector128<ushort>, ushort>(ref vector);
@@ -789,7 +789,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YShuffleInsert_Basic(Vector128<uint> back, Vector128<uint> vector, Vector128<uint> indices) {
-                UnsafeUtil.SkipInit(out Vector128<uint> rt);
+                Unsafe.SkipInit(out Vector128<uint> rt);
                 uint cnt = (uint)Vector128<uint>.Count;
                 ref uint q = ref Unsafe.As<Vector128<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector128<uint>, uint>(ref vector);
@@ -810,7 +810,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YShuffleInsert_Basic(Vector128<ulong> back, Vector128<ulong> vector, Vector128<ulong> indices) {
-                UnsafeUtil.SkipInit(out Vector128<ulong> rt);
+                Unsafe.SkipInit(out Vector128<ulong> rt);
                 ulong cnt = (ulong)Vector128<ulong>.Count;
                 ref ulong q = ref Unsafe.As<Vector128<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector128<ulong>, ulong>(ref vector);
@@ -5774,7 +5774,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YSign_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
@@ -5787,7 +5787,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YSign_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
@@ -5799,7 +5799,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YSign_Basic(Vector128<sbyte> value) {
-                UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
+                Unsafe.SkipInit(out Vector128<sbyte> rt);
                 ref FixedArray16<sbyte> pvalue = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref value);
                 ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
                 p.I0 = (sbyte)MathINumber.Sign(pvalue.I0);
@@ -5824,7 +5824,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YSign_Basic(Vector128<short> value) {
-                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                Unsafe.SkipInit(out Vector128<short> rt);
                 ref FixedArray8<short> pvalue = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref value);
                 ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
                 p.I0 = (short)MathINumber.Sign(pvalue.I0);
@@ -5841,7 +5841,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YSign_Basic(Vector128<int> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<int> pvalue = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
@@ -5854,7 +5854,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YSign(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YSign_Basic(Vector128<long> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<long> pvalue = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
@@ -5965,7 +5965,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YSignFloat_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<float> rt);
+                Unsafe.SkipInit(out Vector128<float> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<float> p = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref rt);
                 p.I0 = MathINumber.SignFloat(pvalue.I0);
@@ -5978,7 +5978,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YSignFloat(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YSignFloat_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<double> rt);
+                Unsafe.SkipInit(out Vector128<double> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<double> p = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref rt);
                 p.I0 = MathINumber.SignFloat(pvalue.I0);

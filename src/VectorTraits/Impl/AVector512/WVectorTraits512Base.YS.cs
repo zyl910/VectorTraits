@@ -139,7 +139,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG2(Vector512{byte}, ShuffleControlG2)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YShuffleG2_Basic(Vector512<byte> source, ShuffleControlG2 control) {
-                UnsafeUtil.SkipInit(out Vector512<byte> rt);
+                Unsafe.SkipInit(out Vector512<byte> rt);
                 ref byte q = ref Unsafe.As<Vector512<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector512<byte>, byte>(ref source);
                 int ctl = (byte)control;
@@ -160,7 +160,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YShuffleG2_Basic(Vector512<ushort> source, ShuffleControlG2 control) {
-                UnsafeUtil.SkipInit(out Vector512<ushort> rt);
+                Unsafe.SkipInit(out Vector512<ushort> rt);
                 ref ushort q = ref Unsafe.As<Vector512<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector512<ushort>, ushort>(ref source);
                 int ctl = (byte)control;
@@ -181,7 +181,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YShuffleG2_Basic(Vector512<uint> source, ShuffleControlG2 control) {
-                UnsafeUtil.SkipInit(out Vector512<uint> rt);
+                Unsafe.SkipInit(out Vector512<uint> rt);
                 ref uint q = ref Unsafe.As<Vector512<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector512<uint>, uint>(ref source);
                 int ctl = (byte)control;
@@ -202,7 +202,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YShuffleG2_Basic(Vector512<ulong> source, ShuffleControlG2 control) {
-                UnsafeUtil.SkipInit(out Vector512<ulong> rt);
+                Unsafe.SkipInit(out Vector512<ulong> rt);
                 ref ulong q = ref Unsafe.As<Vector512<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector512<ulong>, ulong>(ref source);
                 int ctl = (byte)control;
@@ -393,7 +393,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleG4(Vector512{byte}, ShuffleControlG4)"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YShuffleG4_Basic(Vector512<byte> source, ShuffleControlG4 control) {
-                UnsafeUtil.SkipInit(out Vector512<byte> rt);
+                Unsafe.SkipInit(out Vector512<byte> rt);
                 ref byte q = ref Unsafe.As<Vector512<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector512<byte>, byte>(ref source);
                 int ctl = (byte)control;
@@ -414,7 +414,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YShuffleG4_Basic(Vector512<ushort> source, ShuffleControlG4 control) {
-                UnsafeUtil.SkipInit(out Vector512<ushort> rt);
+                Unsafe.SkipInit(out Vector512<ushort> rt);
                 ref ushort q = ref Unsafe.As<Vector512<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector512<ushort>, ushort>(ref source);
                 int ctl = (byte)control;
@@ -435,7 +435,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YShuffleG4_Basic(Vector512<uint> source, ShuffleControlG4 control) {
-                UnsafeUtil.SkipInit(out Vector512<uint> rt);
+                Unsafe.SkipInit(out Vector512<uint> rt);
                 ref uint q = ref Unsafe.As<Vector512<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector512<uint>, uint>(ref source);
                 int ctl = (byte)control;
@@ -456,7 +456,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YShuffleG4_Basic(Vector512<ulong> source, ShuffleControlG4 control) {
-                UnsafeUtil.SkipInit(out Vector512<ulong> rt);
+                Unsafe.SkipInit(out Vector512<ulong> rt);
                 ref ulong q = ref Unsafe.As<Vector512<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector512<ulong>, ulong>(ref source);
                 int ctl = (byte)control;
@@ -794,7 +794,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YShuffleInsert(Vector512{byte}, Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YShuffleInsert_Basic(Vector512<byte> back, Vector512<byte> vector, Vector512<byte> indices) {
-                UnsafeUtil.SkipInit(out Vector512<byte> rt);
+                Unsafe.SkipInit(out Vector512<byte> rt);
                 byte cnt = (byte)Vector512<byte>.Count;
                 ref byte q = ref Unsafe.As<Vector512<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector512<byte>, byte>(ref vector);
@@ -815,7 +815,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> YShuffleInsert_Basic(Vector512<ushort> back, Vector512<ushort> vector, Vector512<ushort> indices) {
-                UnsafeUtil.SkipInit(out Vector512<ushort> rt);
+                Unsafe.SkipInit(out Vector512<ushort> rt);
                 ushort cnt = (ushort)Vector512<ushort>.Count;
                 ref ushort q = ref Unsafe.As<Vector512<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector512<ushort>, ushort>(ref vector);
@@ -836,7 +836,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> YShuffleInsert_Basic(Vector512<uint> back, Vector512<uint> vector, Vector512<uint> indices) {
-                UnsafeUtil.SkipInit(out Vector512<uint> rt);
+                Unsafe.SkipInit(out Vector512<uint> rt);
                 uint cnt = (uint)Vector512<uint>.Count;
                 ref uint q = ref Unsafe.As<Vector512<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector512<uint>, uint>(ref vector);
@@ -857,7 +857,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> YShuffleInsert_Basic(Vector512<ulong> back, Vector512<ulong> vector, Vector512<ulong> indices) {
-                UnsafeUtil.SkipInit(out Vector512<ulong> rt);
+                Unsafe.SkipInit(out Vector512<ulong> rt);
                 ulong cnt = (ulong)Vector512<ulong>.Count;
                 ref ulong q = ref Unsafe.As<Vector512<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector512<ulong>, ulong>(ref vector);
@@ -5848,7 +5848,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YSign_Basic(Vector512<float> value) {
-                UnsafeUtil.SkipInit(out Vector512<int> rt);
+                Unsafe.SkipInit(out Vector512<int> rt);
                 ref FixedArray16<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref value);
                 ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
@@ -5873,7 +5873,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YSign_Basic(Vector512<double> value) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                Unsafe.SkipInit(out Vector512<long> rt);
                 ref FixedArray8<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref value);
                 ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
@@ -5891,7 +5891,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YSign_Basic(Vector512<sbyte> value) {
-                UnsafeUtil.SkipInit(out Vector512<sbyte> rt);
+                Unsafe.SkipInit(out Vector512<sbyte> rt);
                 ref FixedArray64<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref value);
                 ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref rt);
                 p.I0 = (sbyte)MathINumber.Sign(pvalue.I0);
@@ -5964,7 +5964,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YSign_Basic(Vector512<short> value) {
-                UnsafeUtil.SkipInit(out Vector512<short> rt);
+                Unsafe.SkipInit(out Vector512<short> rt);
                 ref FixedArray32<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref value);
                 ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
                 p.I0 = (short)MathINumber.Sign(pvalue.I0);
@@ -6005,7 +6005,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YSign_Basic(Vector512<int> value) {
-                UnsafeUtil.SkipInit(out Vector512<int> rt);
+                Unsafe.SkipInit(out Vector512<int> rt);
                 ref FixedArray16<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref value);
                 ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
@@ -6030,7 +6030,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YSign(Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YSign_Basic(Vector512<long> value) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                Unsafe.SkipInit(out Vector512<long> rt);
                 ref FixedArray8<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref value);
                 ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 p.I0 = MathINumber.Sign(pvalue.I0);
@@ -6147,7 +6147,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YSignFloat(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YSignFloat_Basic(Vector512<float> value) {
-                UnsafeUtil.SkipInit(out Vector512<float> rt);
+                Unsafe.SkipInit(out Vector512<float> rt);
                 ref FixedArray16<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref value);
                 ref FixedArray16<float> p = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref rt);
                 p.I0 = MathINumber.SignFloat(pvalue.I0);
@@ -6172,7 +6172,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YSignFloat(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YSignFloat_Basic(Vector512<double> value) {
-                UnsafeUtil.SkipInit(out Vector512<double> rt);
+                Unsafe.SkipInit(out Vector512<double> rt);
                 ref FixedArray8<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref value);
                 ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
                 p.I0 = MathINumber.SignFloat(pvalue.I0);

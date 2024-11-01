@@ -223,7 +223,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsEvenInteger_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
@@ -236,7 +236,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsEvenInteger_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
@@ -248,7 +248,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsEvenInteger_Basic(Vector128<sbyte> value) {
-                UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
+                Unsafe.SkipInit(out Vector128<sbyte> rt);
                 ref FixedArray16<sbyte> pvalue = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref value);
                 ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
                 p.I0 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
@@ -279,7 +279,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsEvenInteger_Basic(Vector128<short> value) {
-                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                Unsafe.SkipInit(out Vector128<short> rt);
                 ref FixedArray8<short> pvalue = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref value);
                 ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
                 p.I0 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
@@ -303,7 +303,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsEvenInteger_Basic(Vector128<int> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<int> pvalue = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
@@ -323,7 +323,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsEvenInteger(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsEvenInteger_Basic(Vector128<long> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<long> pvalue = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsEvenInteger(pvalue.I0));
@@ -460,7 +460,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsFinite(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsFinite_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I0));
@@ -473,7 +473,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsFinite(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsFinite_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsFinite(pvalue.I0));
@@ -539,7 +539,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinity(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsInfinity_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsInfinity(pvalue.I0));
@@ -552,7 +552,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinity(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsInfinity_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsInfinity(pvalue.I0));
@@ -620,7 +620,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsInfinityOrNaN_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsInfinityOrNaN(pvalue.I0));
@@ -633,7 +633,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsInfinityOrNaN(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsInfinityOrNaN_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsInfinityOrNaN(pvalue.I0));
@@ -699,7 +699,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsInteger(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsInteger_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I0));
@@ -712,7 +712,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsInteger(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsInteger_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsInteger(pvalue.I0));
@@ -779,7 +779,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNaN_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I0));
@@ -792,7 +792,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNaN(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNaN_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNaN(pvalue.I0));
@@ -899,7 +899,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegative_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNegative(pvalue.I0));
@@ -912,7 +912,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegative_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNegative(pvalue.I0));
@@ -924,7 +924,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsNegative_Basic(Vector128<sbyte> value) {
-                UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
+                Unsafe.SkipInit(out Vector128<sbyte> rt);
                 ref FixedArray16<sbyte> pvalue = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref value);
                 ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
                 p.I0 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsNegative(pvalue.I0));
@@ -949,7 +949,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsNegative_Basic(Vector128<short> value) {
-                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                Unsafe.SkipInit(out Vector128<short> rt);
                 ref FixedArray8<short> pvalue = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref value);
                 ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
                 p.I0 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsNegative(pvalue.I0));
@@ -966,7 +966,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegative_Basic(Vector128<int> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<int> pvalue = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNegative(pvalue.I0));
@@ -979,7 +979,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegative(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegative_Basic(Vector128<long> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<long> pvalue = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNegative(pvalue.I0));
@@ -1069,7 +1069,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegativeInfinity_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNegativeInfinity(pvalue.I0));
@@ -1082,7 +1082,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeInfinity(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegativeInfinity_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNegativeInfinity(pvalue.I0));
@@ -1146,7 +1146,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNegativeZero_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNegativeZero(pvalue.I0));
@@ -1159,7 +1159,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNegativeZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNegativeZero_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNegativeZero(pvalue.I0));
@@ -1222,7 +1222,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNormal(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNormal_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNormal(pvalue.I0));
@@ -1235,7 +1235,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNormal(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNormal_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNormal(pvalue.I0));
@@ -1379,7 +1379,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{float}, Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<float> YIsNotEquals_Basic(Vector128<float> left, Vector128<float> right) {
-                UnsafeUtil.SkipInit(out Vector128<float> rt);
+                Unsafe.SkipInit(out Vector128<float> rt);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<float>, FixedArray4<int>>(ref rt);
                 ref FixedArray4<float> pleft = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref left);
                 ref FixedArray4<float> pright = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref right);
@@ -1393,7 +1393,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{double}, Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<double> YIsNotEquals_Basic(Vector128<double> left, Vector128<double> right) {
-                UnsafeUtil.SkipInit(out Vector128<double> rt);
+                Unsafe.SkipInit(out Vector128<double> rt);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<double>, FixedArray2<long>>(ref rt);
                 ref FixedArray2<double> pleft = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref left);
                 ref FixedArray2<double> pright = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref right);
@@ -1406,7 +1406,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsNotEquals_Basic(Vector128<sbyte> left, Vector128<sbyte> right) {
-                UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
+                Unsafe.SkipInit(out Vector128<sbyte> rt);
                 ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
                 ref FixedArray16<sbyte> pleft = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref left);
                 ref FixedArray16<sbyte> pright = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref right);
@@ -1432,7 +1432,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{byte}, Vector128{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<byte> YIsNotEquals_Basic(Vector128<byte> left, Vector128<byte> right) {
-                UnsafeUtil.SkipInit(out Vector128<byte> rt);
+                Unsafe.SkipInit(out Vector128<byte> rt);
                 ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<byte>, FixedArray16<sbyte>>(ref rt);
                 ref FixedArray16<byte> pleft = ref Unsafe.As<Vector128<byte>, FixedArray16<byte>>(ref left);
                 ref FixedArray16<byte> pright = ref Unsafe.As<Vector128<byte>, FixedArray16<byte>>(ref right);
@@ -1458,7 +1458,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{short}, Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsNotEquals_Basic(Vector128<short> left, Vector128<short> right) {
-                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                Unsafe.SkipInit(out Vector128<short> rt);
                 ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
                 ref FixedArray8<short> pleft = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref left);
                 ref FixedArray8<short> pright = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref right);
@@ -1477,7 +1477,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ushort> YIsNotEquals_Basic(Vector128<ushort> left, Vector128<ushort> right) {
-                UnsafeUtil.SkipInit(out Vector128<ushort> rt);
+                Unsafe.SkipInit(out Vector128<ushort> rt);
                 ref FixedArray8<short> p = ref Unsafe.As<Vector128<ushort>, FixedArray8<short>>(ref rt);
                 ref FixedArray8<ushort> pleft = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref left);
                 ref FixedArray8<ushort> pright = ref Unsafe.As<Vector128<ushort>, FixedArray8<ushort>>(ref right);
@@ -1495,7 +1495,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{int}, Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNotEquals_Basic(Vector128<int> left, Vector128<int> right) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 ref FixedArray4<int> pleft = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref left);
                 ref FixedArray4<int> pright = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref right);
@@ -1510,7 +1510,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<uint> YIsNotEquals_Basic(Vector128<uint> left, Vector128<uint> right) {
-                UnsafeUtil.SkipInit(out Vector128<uint> rt);
+                Unsafe.SkipInit(out Vector128<uint> rt);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<uint>, FixedArray4<int>>(ref rt);
                 ref FixedArray4<uint> pleft = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref left);
                 ref FixedArray4<uint> pright = ref Unsafe.As<Vector128<uint>, FixedArray4<uint>>(ref right);
@@ -1524,7 +1524,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotEquals(Vector128{long}, Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNotEquals_Basic(Vector128<long> left, Vector128<long> right) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 ref FixedArray2<long> pleft = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref left);
                 ref FixedArray2<long> pright = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref right);
@@ -1537,7 +1537,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<ulong> YIsNotEquals_Basic(Vector128<ulong> left, Vector128<ulong> right) {
-                UnsafeUtil.SkipInit(out Vector128<ulong> rt);
+                Unsafe.SkipInit(out Vector128<ulong> rt);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<ulong>, FixedArray2<long>>(ref rt);
                 ref FixedArray2<ulong> pleft = ref Unsafe.As<Vector128<ulong>, FixedArray2<ulong>>(ref left);
                 ref FixedArray2<ulong> pright = ref Unsafe.As<Vector128<ulong>, FixedArray2<ulong>>(ref right);
@@ -1649,7 +1649,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsNotNaN_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNotNaN(pvalue.I0));
@@ -1662,7 +1662,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsNotNaN(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsNotNaN_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsNotNaN(pvalue.I0));
@@ -1812,7 +1812,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsOddInteger_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
@@ -1825,7 +1825,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsOddInteger_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
@@ -1837,7 +1837,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsOddInteger_Basic(Vector128<sbyte> value) {
-                UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
+                Unsafe.SkipInit(out Vector128<sbyte> rt);
                 ref FixedArray16<sbyte> pvalue = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref value);
                 ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
                 p.I0 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
@@ -1868,7 +1868,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsOddInteger_Basic(Vector128<short> value) {
-                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                Unsafe.SkipInit(out Vector128<short> rt);
                 ref FixedArray8<short> pvalue = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref value);
                 ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
                 p.I0 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
@@ -1892,7 +1892,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsOddInteger_Basic(Vector128<int> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<int> pvalue = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
@@ -1912,7 +1912,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsOddInteger(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsOddInteger_Basic(Vector128<long> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<long> pvalue = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsOddInteger(pvalue.I0));
@@ -2083,7 +2083,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsPositive_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsPositive(pvalue.I0));
@@ -2096,7 +2096,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsPositive_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsPositive(pvalue.I0));
@@ -2108,7 +2108,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsPositive_Basic(Vector128<sbyte> value) {
-                UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
+                Unsafe.SkipInit(out Vector128<sbyte> rt);
                 ref FixedArray16<sbyte> pvalue = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref value);
                 ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
                 p.I0 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsPositive(pvalue.I0));
@@ -2133,7 +2133,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsPositive_Basic(Vector128<short> value) {
-                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                Unsafe.SkipInit(out Vector128<short> rt);
                 ref FixedArray8<short> pvalue = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref value);
                 ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
                 p.I0 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsPositive(pvalue.I0));
@@ -2150,7 +2150,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsPositive_Basic(Vector128<int> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<int> pvalue = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsPositive(pvalue.I0));
@@ -2163,7 +2163,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsPositive(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsPositive_Basic(Vector128<long> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<long> pvalue = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsPositive(pvalue.I0));
@@ -2251,7 +2251,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsPositiveInfinity_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsPositiveInfinity(pvalue.I0));
@@ -2264,7 +2264,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsPositiveInfinity(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsPositiveInfinity_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsPositiveInfinity(pvalue.I0));
@@ -2326,7 +2326,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsSubnormal_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsSubnormal(pvalue.I0));
@@ -2339,7 +2339,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsSubnormal(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsSubnormal_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsSubnormal(pvalue.I0));
@@ -2489,7 +2489,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsZero_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsZero(pvalue.I0));
@@ -2502,7 +2502,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsZero_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsZero(pvalue.I0));
@@ -2514,7 +2514,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<sbyte> YIsZero_Basic(Vector128<sbyte> value) {
-                UnsafeUtil.SkipInit(out Vector128<sbyte> rt);
+                Unsafe.SkipInit(out Vector128<sbyte> rt);
                 ref FixedArray16<sbyte> pvalue = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref value);
                 ref FixedArray16<sbyte> p = ref Unsafe.As<Vector128<sbyte>, FixedArray16<sbyte>>(ref rt);
                 p.I0 = (sbyte)BitMathCore.ToInt32Mask(MathINumberBase.IsZero(pvalue.I0));
@@ -2545,7 +2545,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<short> YIsZero_Basic(Vector128<short> value) {
-                UnsafeUtil.SkipInit(out Vector128<short> rt);
+                Unsafe.SkipInit(out Vector128<short> rt);
                 ref FixedArray8<short> pvalue = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref value);
                 ref FixedArray8<short> p = ref Unsafe.As<Vector128<short>, FixedArray8<short>>(ref rt);
                 p.I0 = (short)BitMathCore.ToInt32Mask(MathINumberBase.IsZero(pvalue.I0));
@@ -2569,7 +2569,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsZero_Basic(Vector128<int> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<int> pvalue = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsZero(pvalue.I0));
@@ -2589,7 +2589,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsZero(Vector128{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsZero_Basic(Vector128<long> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<long> pvalue = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsZero(pvalue.I0));
@@ -2708,7 +2708,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal(Vector128{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<int> YIsZeroOrSubnormal_Basic(Vector128<float> value) {
-                UnsafeUtil.SkipInit(out Vector128<int> rt);
+                Unsafe.SkipInit(out Vector128<int> rt);
                 ref FixedArray4<float> pvalue = ref Unsafe.As<Vector128<float>, FixedArray4<float>>(ref value);
                 ref FixedArray4<int> p = ref Unsafe.As<Vector128<int>, FixedArray4<int>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsZeroOrSubnormal(pvalue.I0));
@@ -2721,7 +2721,7 @@ namespace Zyl.VectorTraits.Impl.AVector128 {
             /// <inheritdoc cref="IWVectorTraits128.YIsZeroOrSubnormal(Vector128{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector128<long> YIsZeroOrSubnormal_Basic(Vector128<double> value) {
-                UnsafeUtil.SkipInit(out Vector128<long> rt);
+                Unsafe.SkipInit(out Vector128<long> rt);
                 ref FixedArray2<double> pvalue = ref Unsafe.As<Vector128<double>, FixedArray2<double>>(ref value);
                 ref FixedArray2<long> p = ref Unsafe.As<Vector128<long>, FixedArray2<long>>(ref rt);
                 p.I0 = BitMathCore.ToInt32Mask(MathINumberBase.IsZeroOrSubnormal(pvalue.I0));

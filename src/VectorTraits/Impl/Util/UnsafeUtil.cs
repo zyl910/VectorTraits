@@ -89,7 +89,11 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// <typeparam name="T">The elemental type of the managed pointer (托管指针的元素类型).</typeparam>
         /// <param name="source">The managed pointer to check (指向检查的托管指针).</param>
         /// <returns><c>true</c> if <paramref name="source"/> is a null reference; otherwise, <c>false</c>.</returns>
+        /// <remarks>
+        /// Obsolete: Please change to use the `Unsafe.IsNullRef` method.
+        /// </remarks>
         /// <seealso cref="Unsafe.IsNullRef{T}(ref readonly T)"/>
+        [Obsolete("Please change to use the `Unsafe.IsNullRef` method.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullRef<T>(ref T source) {
             return Unsafe.IsNullRef(ref source);
@@ -100,7 +104,11 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// </summary>
         /// <typeparam name="T">The elemental type of the managed pointer (托管指针的元素类型).</typeparam>
         /// <returns>A reference to a value of type <typeparamref name="T"/> that is a null reference (指向 <typeparamref name="T"/> 类型的值的 null 托管指针).</returns>
+        /// <remarks>
+        /// Obsolete: Please change to use the `Unsafe.NullRef` method.
+        /// </remarks>
         /// <seealso cref="Unsafe.NullRef{T}"/>
+        [Obsolete("Please change to use the `Unsafe.NullRef` method.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ref T NullRef<T>() {
             return ref Unsafe.NullRef<T>();
@@ -111,7 +119,11 @@ namespace Zyl.VectorTraits.Impl.Util {
         /// </summary>
         /// <typeparam name="T">The type of the reference (引用的类型).</typeparam>
         /// <param name="value">The reference whose initialization should be skipped (应跳过其初始化的引用).</param>
+        /// <remarks>
+        /// Obsolete: Please change to use the `Unsafe.SkipInit` method.
+        /// </remarks>
         /// <seealso cref="Unsafe.SkipInit{T}(out T)"/>
+        [Obsolete("Please change to use the `Unsafe.SkipInit` method.")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SkipInit<T>(out T value) {
             Unsafe.SkipInit(out value);

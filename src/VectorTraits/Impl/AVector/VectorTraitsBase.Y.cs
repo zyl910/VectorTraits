@@ -43,7 +43,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YBitToByte_Basic(ulong value) {
-                UnsafeUtil.SkipInit(out Vector<byte> rt);
+                Unsafe.SkipInit(out Vector<byte> rt);
                 ref sbyte p = ref Unsafe.As<Vector<byte>, sbyte>(ref rt);
                 for (int i = 0; i < Vector<byte>.Count; ++i) {
                     p = (sbyte)-(long)((value >> i) & 1); // 1 for all bits: (sbyte)-1
@@ -83,7 +83,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             public static Vector<byte> YBitToByte_WidenScalar(ulong value) {
                 Vector<byte> bitPosMask = Vectors<byte>.MaskBitPosSerialRotate;
                 // Widen 8bit to 64bit with duplicate
-                UnsafeUtil.SkipInit(out Vector<ulong> f);
+                Unsafe.SkipInit(out Vector<ulong> f);
                 ulong m = value;
                 ref ulong p = ref Unsafe.As<Vector<ulong>, ulong>(ref f);
                 for (int i = 0; i < Vector<ulong>.Count; ++i) {
@@ -121,7 +121,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<short> YBitToInt16_Basic(ulong value) {
-                UnsafeUtil.SkipInit(out Vector<short> rt);
+                Unsafe.SkipInit(out Vector<short> rt);
                 ref short p = ref Unsafe.As<Vector<short>, short>(ref rt);
                 for (int i = 0; i < Vector<short>.Count; ++i) {
                     p = (short)-(long)((value >> i) & 1); // 1 for all bits: (short)-1
@@ -171,7 +171,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<int> YBitToInt32_Basic(ulong value) {
-                UnsafeUtil.SkipInit(out Vector<int> rt);
+                Unsafe.SkipInit(out Vector<int> rt);
                 ref int p = ref Unsafe.As<Vector<int>, int>(ref rt);
                 for (int i = 0; i < Vector<int>.Count; ++i) {
                     p = (int)-(long)((value >> i) & 1); // 1 for all bits: (int)-1
@@ -216,7 +216,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<long> YBitToInt64_Basic(ulong value) {
-                UnsafeUtil.SkipInit(out Vector<long> rt);
+                Unsafe.SkipInit(out Vector<long> rt);
                 ref long p = ref Unsafe.As<Vector<long>, long>(ref rt);
                 for (int i = 0; i < Vector<long>.Count; ++i) {
                     p = -(long)((value >> i) & 1); // 1 for all bits: (long)-1

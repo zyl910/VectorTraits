@@ -48,7 +48,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> YBitToByte_Basic(ulong value) {
-                UnsafeUtil.SkipInit(out Vector512<byte> rt);
+                Unsafe.SkipInit(out Vector512<byte> rt);
                 ref sbyte p = ref Unsafe.As<Vector512<byte>, sbyte>(ref rt);
                 for (int i = 0; i < Vector512<byte>.Count; ++i) {
                     p = (sbyte)-(uint)((value >> i) & 1); // 1 for all bits: (sbyte)-1
@@ -111,7 +111,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YBitToInt16_Basic(ulong value) {
-                UnsafeUtil.SkipInit(out Vector512<short> rt);
+                Unsafe.SkipInit(out Vector512<short> rt);
                 ref short p = ref Unsafe.As<Vector512<short>, short>(ref rt);
                 for (int i = 0; i < Vector512<short>.Count; ++i) {
                     p = (short)-(((uint)value >> i) & 1); // 1 for all bits: (short)-1
@@ -164,7 +164,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YBitToInt32_Basic(ulong value) {
-                UnsafeUtil.SkipInit(out Vector512<int> rt);
+                Unsafe.SkipInit(out Vector512<int> rt);
                 ref int p = ref Unsafe.As<Vector512<int>, int>(ref rt);
                 for (int i = 0; i < Vector512<int>.Count; ++i) {
                     p = (int)-(((uint)value >> i) & 1); // 1 for all bits: (int)-1
@@ -217,7 +217,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YBitToInt64_Basic(ulong value) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                Unsafe.SkipInit(out Vector512<long> rt);
                 ref long p = ref Unsafe.As<Vector512<long>, long>(ref rt);
                 for (int i = 0; i < Vector512<long>.Count; ++i) {
                     p = (long)-(((uint)value >> i) & 1); // 1 for all bits: (long)-1
@@ -392,7 +392,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YCopySign_Basic(Vector512<float> value, Vector512<float> sign) {
-                UnsafeUtil.SkipInit(out Vector512<float> rt);
+                Unsafe.SkipInit(out Vector512<float> rt);
                 ref FixedArray16<float> pvalue = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref value);
                 ref FixedArray16<float> psign = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref sign);
                 ref FixedArray16<float> p = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref rt);
@@ -418,7 +418,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YCopySign_Basic(Vector512<double> value, Vector512<double> sign) {
-                UnsafeUtil.SkipInit(out Vector512<double> rt);
+                Unsafe.SkipInit(out Vector512<double> rt);
                 ref FixedArray8<double> pvalue = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref value);
                 ref FixedArray8<double> psign = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref sign);
                 ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
@@ -437,7 +437,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> YCopySign_Basic(Vector512<sbyte> value, Vector512<sbyte> sign) {
-                UnsafeUtil.SkipInit(out Vector512<sbyte> rt);
+                Unsafe.SkipInit(out Vector512<sbyte> rt);
                 ref FixedArray64<sbyte> pvalue = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref value);
                 ref FixedArray64<sbyte> psign = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref sign);
                 ref FixedArray64<sbyte> p = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref rt);
@@ -511,7 +511,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{short}, Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> YCopySign_Basic(Vector512<short> value, Vector512<short> sign) {
-                UnsafeUtil.SkipInit(out Vector512<short> rt);
+                Unsafe.SkipInit(out Vector512<short> rt);
                 ref FixedArray32<short> pvalue = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref value);
                 ref FixedArray32<short> psign = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref sign);
                 ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
@@ -553,7 +553,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{int}, Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> YCopySign_Basic(Vector512<int> value, Vector512<int> sign) {
-                UnsafeUtil.SkipInit(out Vector512<int> rt);
+                Unsafe.SkipInit(out Vector512<int> rt);
                 ref FixedArray16<int> pvalue = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref value);
                 ref FixedArray16<int> psign = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref sign);
                 ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
@@ -579,7 +579,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YCopySign(Vector512{long}, Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> YCopySign_Basic(Vector512<long> value, Vector512<long> sign) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                Unsafe.SkipInit(out Vector512<long> rt);
                 ref FixedArray8<long> pvalue = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref value);
                 ref FixedArray8<long> psign = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref sign);
                 ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
@@ -683,7 +683,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YMaxNumber(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YMaxNumber_Basic(Vector512<float> left, Vector512<float> right) {
-                UnsafeUtil.SkipInit(out Vector512<float> rt);
+                Unsafe.SkipInit(out Vector512<float> rt);
                 ref FixedArray16<float> pleft = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref left);
                 ref FixedArray16<float> pright = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref right);
                 ref FixedArray16<float> p = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref rt);
@@ -709,7 +709,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YMaxNumber(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YMaxNumber_Basic(Vector512<double> left, Vector512<double> right) {
-                UnsafeUtil.SkipInit(out Vector512<double> rt);
+                Unsafe.SkipInit(out Vector512<double> rt);
                 ref FixedArray8<double> pleft = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref left);
                 ref FixedArray8<double> pright = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref right);
                 ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
@@ -781,7 +781,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YMinNumber(Vector512{float}, Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> YMinNumber_Basic(Vector512<float> left, Vector512<float> right) {
-                UnsafeUtil.SkipInit(out Vector512<float> rt);
+                Unsafe.SkipInit(out Vector512<float> rt);
                 ref FixedArray16<float> pleft = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref left);
                 ref FixedArray16<float> pright = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref right);
                 ref FixedArray16<float> p = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref rt);
@@ -807,7 +807,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YMinNumber(Vector512{double}, Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> YMinNumber_Basic(Vector512<double> left, Vector512<double> right) {
-                UnsafeUtil.SkipInit(out Vector512<double> rt);
+                Unsafe.SkipInit(out Vector512<double> rt);
                 ref FixedArray8<double> pleft = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref left);
                 ref FixedArray8<double> pright = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref right);
                 ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
@@ -1008,7 +1008,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.YOrNot{T}(Vector512{T}, Vector512{T})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<T> YOrNot_Basic<T>(Vector512<T> left, Vector512<T> right) where T : struct {
-                UnsafeUtil.SkipInit(out Vector512<T> rt);
+                Unsafe.SkipInit(out Vector512<T> rt);
                 ref FixedArray8<ulong> p = ref Unsafe.As<Vector512<T>, FixedArray8<ulong>>(ref rt);
                 ref FixedArray8<ulong> pleft = ref Unsafe.As<Vector512<T>, FixedArray8<ulong>>(ref left);
                 ref FixedArray8<ulong> pright = ref Unsafe.As<Vector512<T>, FixedArray8<ulong>>(ref right);

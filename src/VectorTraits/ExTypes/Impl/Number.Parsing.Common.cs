@@ -96,11 +96,11 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     if (((styles & NumberStyles.AllowLeadingSign) != 0) && (state & StateSign) == 0) {
                         //  && ((next = MatchChars(p, strEnd, info.PositiveSignTChar<TChar>())) != null || ((next = MatchNegativeSignChars(p, strEnd, info)) != null && (number.IsNegative = true))
                         next = ref MatchChars(ref p, ref strEnd, info.PositiveSignTChar<TChar>());
-                        if (UnsafeUtil.IsNullRef(ref next)) {
+                        if (Unsafe.IsNullRef(ref next)) {
                             next = ref MatchNegativeSignChars(ref p, ref strEnd, info);
                             number.IsNegative = true;
                         }
-                        if (!UnsafeUtil.IsNullRef(ref next)) {
+                        if (!Unsafe.IsNullRef(ref next)) {
                             state |= StateSign;
                             p = ref Unsafe.Subtract(ref next, 1);
                             positiveSignDone = true;
@@ -114,7 +114,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                             if (!currSymbol.IsEmpty) {
                                 //  && (next = MatchChars(p, strEnd, currSymbol)) != null
                                 next = ref MatchChars(ref p, ref strEnd, currSymbol);
-                                if (!UnsafeUtil.IsNullRef(ref next)) {
+                                if (!Unsafe.IsNullRef(ref next)) {
                                     state |= StateCurrency;
                                     currSymbol = ReadOnlySpan<TChar>.Empty;
                                     // We already found the currency symbol. There should not be more currency symbols. Set
@@ -184,10 +184,10 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     if (((styles & NumberStyles.AllowDecimalPoint) != 0) && ((state & StateDecimal) == 0)) {
                         //  && ((next = MatchChars(p, strEnd, decSep)) != null || (parsingCurrency && (state & StateCurrency) == 0 && (next = MatchChars(p, strEnd, info.NumberDecimalSeparatorTChar<TChar>())) != null))
                         next = ref MatchChars(ref p, ref strEnd, decSep);
-                        if (UnsafeUtil.IsNullRef(ref next) && (parsingCurrency && (state & StateCurrency) == 0)) {
+                        if (Unsafe.IsNullRef(ref next) && (parsingCurrency && (state & StateCurrency) == 0)) {
                             next = ref MatchChars(ref p, ref strEnd, info.NumberDecimalSeparatorTChar<TChar>());
                         }
-                        if (!UnsafeUtil.IsNullRef(ref next)) {
+                        if (!Unsafe.IsNullRef(ref next)) {
                             state |= StateDecimal;
                             p = ref Unsafe.Subtract(ref next, 1);
                             decSepDone = true;
@@ -202,10 +202,10 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         if (((styles & NumberStyles.AllowThousands) != 0) && ((state & StateDigits) != 0) && ((state & StateDecimal) == 0)) {
                             //  && ((next = MatchChars(p, strEnd, groupSep)) != null || (parsingCurrency && (state & StateCurrency) == 0 && (next = MatchChars(p, strEnd, info.NumberGroupSeparatorTChar<TChar>())) != null))
                             next = ref MatchChars(ref p, ref strEnd, groupSep);
-                            if (UnsafeUtil.IsNullRef(ref next) && (parsingCurrency && (state & StateCurrency) == 0)) {
+                            if (Unsafe.IsNullRef(ref next) && (parsingCurrency && (state & StateCurrency) == 0)) {
                                 next = ref MatchChars(ref p, ref strEnd, info.NumberGroupSeparatorTChar<TChar>());
                             }
-                            if (!UnsafeUtil.IsNullRef(ref next)) {
+                            if (!Unsafe.IsNullRef(ref next)) {
                                 p = ref Unsafe.Subtract(ref next, 1);
                                 groupSepDone = true;
                             }
@@ -235,12 +235,12 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                     p = ref Unsafe.Add(ref p, 1);
                     ch = Unsafe.IsAddressLessThan(ref p, ref strEnd) ? CastToUInt32(p) : '\0';
                     next = ref MatchChars(ref p, ref strEnd, info.PositiveSignTChar<TChar>());
-                    if (!UnsafeUtil.IsNullRef(ref next)) {
+                    if (!Unsafe.IsNullRef(ref next)) {
                         p = ref next;
                         ch = Unsafe.IsAddressLessThan(ref p, ref strEnd) ? CastToUInt32(p) : '\0';
                     } else {
                         next = ref MatchNegativeSignChars(ref p, ref strEnd, info);
-                        if (!UnsafeUtil.IsNullRef(ref next)) {
+                        if (!Unsafe.IsNullRef(ref next)) {
                             p = ref next;
                             ch = Unsafe.IsAddressLessThan(ref p, ref strEnd) ? CastToUInt32(p) : '\0';
                             negExp = true;
@@ -309,11 +309,11 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                         if ((styles & NumberStyles.AllowTrailingSign) != 0 && ((state & StateSign) == 0)) {
                             //  && ((next = MatchChars(p, strEnd, info.PositiveSignTChar<TChar>())) != null || (((next = MatchNegativeSignChars(p, strEnd, info)) != null) && (number.IsNegative = true)))
                             next = ref MatchChars(ref p, ref strEnd, info.PositiveSignTChar<TChar>());
-                            if (UnsafeUtil.IsNullRef(ref next)) {
+                            if (Unsafe.IsNullRef(ref next)) {
                                 next = ref MatchNegativeSignChars(ref p, ref strEnd, info);
                                 number.IsNegative = true;
                             }
-                            if (!UnsafeUtil.IsNullRef(ref next)) {
+                            if (!Unsafe.IsNullRef(ref next)) {
                                 state |= StateSign;
                                 p = ref Unsafe.Subtract(ref next, 1);
                                 positiveSignDone = true;
@@ -326,7 +326,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                                 if (!currSymbol.IsEmpty) {
                                     //  && (next = MatchChars(p, strEnd, currSymbol)) != null
                                     next = ref MatchChars(ref p, ref strEnd, currSymbol);
-                                    if (!UnsafeUtil.IsNullRef(ref next)) {
+                                    if (!Unsafe.IsNullRef(ref next)) {
                                         currSymbol = ReadOnlySpan<TChar>.Empty;
                                         p = ref Unsafe.Subtract(ref next, 1);
                                         currSymbolDone = true;
@@ -413,7 +413,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
             ref TChar ret = ref MatchChars(ref p, ref pEnd, info.NegativeSignTChar<TChar>());
 
             //  && info.AllowHyphenDuringParsing()
-            if (UnsafeUtil.IsNullRef(ref ret) && Unsafe.IsAddressLessThan(ref p, ref pEnd) && (CastToUInt32<TChar>(p) == '-')) {
+            if (Unsafe.IsNullRef(ref ret) && Unsafe.IsAddressLessThan(ref p, ref pEnd) && (CastToUInt32<TChar>(p) == '-')) {
                 ret = ref Unsafe.Add(ref p, 1);
             }
 
@@ -423,8 +423,8 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
         private static ref TChar MatchChars<TChar>(ref TChar p, ref TChar pEnd, ReadOnlySpan<TChar> value)
             where TChar : unmanaged, IEquatable<TChar> {
             //Debug.Assert((p != null) && (pEnd != null) && (p <= pEnd));
-            Debug.Assert(UnsafeUtil.IsNullRef(ref p));
-            Debug.Assert(UnsafeUtil.IsNullRef(ref pEnd));
+            Debug.Assert(Unsafe.IsNullRef(ref p));
+            Debug.Assert(Unsafe.IsNullRef(ref pEnd));
             Debug.Assert(UnsafeUtil.IsAddressLessThaOrEqual(ref p, ref pEnd));
 
             if (true) {
@@ -453,7 +453,7 @@ namespace Zyl.VectorTraits.ExTypes.Impl {
                 }
             }
 
-            return ref UnsafeUtil.NullRef<TChar>();
+            return ref Unsafe.NullRef<TChar>();
         }
     }
 

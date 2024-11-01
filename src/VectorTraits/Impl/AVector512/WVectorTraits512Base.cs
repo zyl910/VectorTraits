@@ -215,7 +215,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConvertToDouble(Vector512{long})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> ConvertToDouble_Basic(Vector512<long> value) {
-                UnsafeUtil.SkipInit(out Vector512<double> rt);
+                Unsafe.SkipInit(out Vector512<double> rt);
                 ref double prt = ref Unsafe.As<Vector512<double>, double>(ref rt);
                 ref long p = ref Unsafe.As<Vector512<long>, long>(ref value);
                 prt = (Double)p;
@@ -233,7 +233,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> ConvertToDouble_Basic(Vector512<ulong> value) {
-                UnsafeUtil.SkipInit(out Vector512<double> rt);
+                Unsafe.SkipInit(out Vector512<double> rt);
                 ref double prt = ref Unsafe.As<Vector512<double>, double>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector512<ulong>, ulong>(ref value);
                 prt = (Double)p;
@@ -336,7 +336,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConvertToInt32(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> ConvertToInt32_Basic(Vector512<float> value) {
-                UnsafeUtil.SkipInit(out Vector512<int> rt);
+                Unsafe.SkipInit(out Vector512<int> rt);
                 ref int prt = ref Unsafe.As<Vector512<int>, int>(ref rt);
                 ref float p = ref Unsafe.As<Vector512<float>, float>(ref value);
                 prt = (Int32)p;
@@ -385,7 +385,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConvertToInt64(Vector512{double})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> ConvertToInt64_Basic(Vector512<double> value) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                Unsafe.SkipInit(out Vector512<long> rt);
                 ref long prt = ref Unsafe.As<Vector512<long>, long>(ref rt);
                 ref double p = ref Unsafe.As<Vector512<double>, double>(ref value);
                 prt = (Int64)p;
@@ -479,7 +479,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.ConvertToSingle(Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> ConvertToSingle_Basic(Vector512<int> value) {
-                UnsafeUtil.SkipInit(out Vector512<float> rt);
+                Unsafe.SkipInit(out Vector512<float> rt);
                 ref float prt = ref Unsafe.As<Vector512<float>, float>(ref rt);
                 ref int p = ref Unsafe.As<Vector512<int>, int>(ref value);
                 prt = (Single)p;
@@ -505,7 +505,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> ConvertToSingle_Basic(Vector512<uint> value) {
-                UnsafeUtil.SkipInit(out Vector512<float> rt);
+                Unsafe.SkipInit(out Vector512<float> rt);
                 ref float prt = ref Unsafe.As<Vector512<float>, float>(ref rt);
                 ref uint p = ref Unsafe.As<Vector512<uint>, uint>(ref value);
                 prt = (Single)p;
@@ -550,7 +550,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> ConvertToUInt32_Basic(Vector512<float> value) {
-                UnsafeUtil.SkipInit(out Vector512<uint> rt);
+                Unsafe.SkipInit(out Vector512<uint> rt);
                 ref uint prt = ref Unsafe.As<Vector512<uint>, uint>(ref rt);
                 ref float p = ref Unsafe.As<Vector512<float>, float>(ref value);
                 prt = (UInt32)p;
@@ -595,7 +595,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> ConvertToUInt64_Basic(Vector512<double> value) {
-                UnsafeUtil.SkipInit(out Vector512<ulong> rt);
+                Unsafe.SkipInit(out Vector512<ulong> rt);
                 ref ulong prt = ref Unsafe.As<Vector512<ulong>, ulong>(ref rt);
                 ref double p = ref Unsafe.As<Vector512<double>, double>(ref value);
                 prt = (UInt64)p;
@@ -1162,7 +1162,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<float> Narrow_Basic(Vector512<double> lower, Vector512<double> upper) {
                 nint cnt = Vector512<double>.Count;
-                UnsafeUtil.SkipInit(out Vector512<float> rt);
+                Unsafe.SkipInit(out Vector512<float> rt);
                 ref float p = ref Unsafe.As<Vector512<float>, float>(ref rt);
                 ref double plower = ref Unsafe.As<Vector512<double>, double>(ref lower);
                 ref double pupper = ref Unsafe.As<Vector512<double>, double>(ref upper);
@@ -1191,7 +1191,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<sbyte> Narrow_Basic(Vector512<short> lower, Vector512<short> upper) {
                 nint cnt = Vector512<short>.Count;
-                UnsafeUtil.SkipInit(out Vector512<sbyte> rt);
+                Unsafe.SkipInit(out Vector512<sbyte> rt);
                 ref sbyte p = ref Unsafe.As<Vector512<sbyte>, sbyte>(ref rt);
                 ref short plower = ref Unsafe.As<Vector512<short>, short>(ref lower);
                 ref short pupper = ref Unsafe.As<Vector512<short>, short>(ref upper);
@@ -1268,7 +1268,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Narrow_Basic(Vector512<ushort> lower, Vector512<ushort> upper) {
                 nint cnt = Vector512<ushort>.Count;
-                UnsafeUtil.SkipInit(out Vector512<byte> rt);
+                Unsafe.SkipInit(out Vector512<byte> rt);
                 ref byte p = ref Unsafe.As<Vector512<byte>, byte>(ref rt);
                 ref ushort plower = ref Unsafe.As<Vector512<ushort>, ushort>(ref lower);
                 ref ushort pupper = ref Unsafe.As<Vector512<ushort>, ushort>(ref upper);
@@ -1344,7 +1344,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> Narrow_Basic(Vector512<int> lower, Vector512<int> upper) {
                 nint cnt = Vector512<int>.Count;
-                UnsafeUtil.SkipInit(out Vector512<short> rt);
+                Unsafe.SkipInit(out Vector512<short> rt);
                 ref short p = ref Unsafe.As<Vector512<short>, short>(ref rt);
                 ref int plower = ref Unsafe.As<Vector512<int>, int>(ref lower);
                 ref int pupper = ref Unsafe.As<Vector512<int>, int>(ref upper);
@@ -1389,7 +1389,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Narrow_Basic(Vector512<uint> lower, Vector512<uint> upper) {
                 nint cnt = Vector512<uint>.Count;
-                UnsafeUtil.SkipInit(out Vector512<ushort> rt);
+                Unsafe.SkipInit(out Vector512<ushort> rt);
                 ref ushort p = ref Unsafe.As<Vector512<ushort>, ushort>(ref rt);
                 ref uint plower = ref Unsafe.As<Vector512<uint>, uint>(ref lower);
                 ref uint pupper = ref Unsafe.As<Vector512<uint>, uint>(ref upper);
@@ -1433,7 +1433,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> Narrow_Basic(Vector512<long> lower, Vector512<long> upper) {
                 nint cnt = Vector512<long>.Count;
-                UnsafeUtil.SkipInit(out Vector512<int> rt);
+                Unsafe.SkipInit(out Vector512<int> rt);
                 ref int p = ref Unsafe.As<Vector512<int>, int>(ref rt);
                 ref long plower = ref Unsafe.As<Vector512<long>, long>(ref lower);
                 ref long pupper = ref Unsafe.As<Vector512<long>, long>(ref upper);
@@ -1462,7 +1462,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Narrow_Basic(Vector512<ulong> lower, Vector512<ulong> upper) {
                 nint cnt = Vector512<ulong>.Count;
-                UnsafeUtil.SkipInit(out Vector512<uint> rt);
+                Unsafe.SkipInit(out Vector512<uint> rt);
                 ref uint p = ref Unsafe.As<Vector512<uint>, uint>(ref rt);
                 ref ulong plower = ref Unsafe.As<Vector512<ulong>, ulong>(ref lower);
                 ref ulong pupper = ref Unsafe.As<Vector512<ulong>, ulong>(ref upper);
@@ -3405,7 +3405,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.Shuffle(Vector512{byte}, Vector512{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<byte> Shuffle_Basic(Vector512<byte> vector, Vector512<byte> indices) {
-                UnsafeUtil.SkipInit(out Vector512<byte> rt);
+                Unsafe.SkipInit(out Vector512<byte> rt);
                 byte cnt = (byte)Vector512<byte>.Count;
                 ref byte q = ref Unsafe.As<Vector512<byte>, byte>(ref rt);
                 ref byte p = ref Unsafe.As<Vector512<byte>, byte>(ref vector);
@@ -3431,7 +3431,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> Shuffle_Basic(Vector512<ushort> vector, Vector512<ushort> indices) {
-                UnsafeUtil.SkipInit(out Vector512<ushort> rt);
+                Unsafe.SkipInit(out Vector512<ushort> rt);
                 ushort cnt = (ushort)Vector512<ushort>.Count;
                 ref ushort q = ref Unsafe.As<Vector512<ushort>, ushort>(ref rt);
                 ref ushort p = ref Unsafe.As<Vector512<ushort>, ushort>(ref vector);
@@ -3457,7 +3457,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> Shuffle_Basic(Vector512<uint> vector, Vector512<uint> indices) {
-                UnsafeUtil.SkipInit(out Vector512<uint> rt);
+                Unsafe.SkipInit(out Vector512<uint> rt);
                 uint cnt = (uint)Vector512<uint>.Count;
                 ref uint q = ref Unsafe.As<Vector512<uint>, uint>(ref rt);
                 ref uint p = ref Unsafe.As<Vector512<uint>, uint>(ref vector);
@@ -3483,7 +3483,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> Shuffle_Basic(Vector512<ulong> vector, Vector512<ulong> indices) {
-                UnsafeUtil.SkipInit(out Vector512<ulong> rt);
+                Unsafe.SkipInit(out Vector512<ulong> rt);
                 ulong cnt = (ulong)Vector512<ulong>.Count;
                 ref ulong q = ref Unsafe.As<Vector512<ulong>, ulong>(ref rt);
                 ref ulong p = ref Unsafe.As<Vector512<ulong>, ulong>(ref vector);
@@ -4323,8 +4323,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Basic(Vector512<float> source, out Vector512<double> lower, out Vector512<double> upper) {
                 nint cnt = Vector512<double>.Count;
-                UnsafeUtil.SkipInit(out lower);
-                UnsafeUtil.SkipInit(out upper);
+                Unsafe.SkipInit(out lower);
+                Unsafe.SkipInit(out upper);
                 ref float p = ref Unsafe.As<Vector512<float>, float>(ref source);
                 ref double plower = ref Unsafe.As<Vector512<double>, double>(ref lower);
                 ref double pupper = ref Unsafe.As<Vector512<double>, double>(ref upper);
@@ -4352,8 +4352,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Basic(Vector512<sbyte> source, out Vector512<short> lower, out Vector512<short> upper) {
                 nint cnt = Vector512<short>.Count;
-                UnsafeUtil.SkipInit(out lower);
-                UnsafeUtil.SkipInit(out upper);
+                Unsafe.SkipInit(out lower);
+                Unsafe.SkipInit(out upper);
                 ref sbyte p = ref Unsafe.As<Vector512<sbyte>, sbyte>(ref source);
                 ref short plower = ref Unsafe.As<Vector512<short>, short>(ref lower);
                 ref short pupper = ref Unsafe.As<Vector512<short>, short>(ref upper);
@@ -4429,8 +4429,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Basic(Vector512<byte> source, out Vector512<ushort> lower, out Vector512<ushort> upper) {
                 nint cnt = Vector512<ushort>.Count;
-                UnsafeUtil.SkipInit(out lower);
-                UnsafeUtil.SkipInit(out upper);
+                Unsafe.SkipInit(out lower);
+                Unsafe.SkipInit(out upper);
                 ref byte p = ref Unsafe.As<Vector512<byte>, byte>(ref source);
                 ref ushort plower = ref Unsafe.As<Vector512<ushort>, ushort>(ref lower);
                 ref ushort pupper = ref Unsafe.As<Vector512<ushort>, ushort>(ref upper);
@@ -4505,8 +4505,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Basic(Vector512<short> source, out Vector512<int> lower, out Vector512<int> upper) {
                 nint cnt = Vector512<int>.Count;
-                UnsafeUtil.SkipInit(out lower);
-                UnsafeUtil.SkipInit(out upper);
+                Unsafe.SkipInit(out lower);
+                Unsafe.SkipInit(out upper);
                 ref short p = ref Unsafe.As<Vector512<short>, short>(ref source);
                 ref int plower = ref Unsafe.As<Vector512<int>, int>(ref lower);
                 ref int pupper = ref Unsafe.As<Vector512<int>, int>(ref upper);
@@ -4550,8 +4550,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Basic(Vector512<ushort> source, out Vector512<uint> lower, out Vector512<uint> upper) {
                 nint cnt = Vector512<uint>.Count;
-                UnsafeUtil.SkipInit(out lower);
-                UnsafeUtil.SkipInit(out upper);
+                Unsafe.SkipInit(out lower);
+                Unsafe.SkipInit(out upper);
                 ref ushort p = ref Unsafe.As<Vector512<ushort>, ushort>(ref source);
                 ref uint plower = ref Unsafe.As<Vector512<uint>, uint>(ref lower);
                 ref uint pupper = ref Unsafe.As<Vector512<uint>, uint>(ref upper);
@@ -4594,8 +4594,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Basic(Vector512<int> source, out Vector512<long> lower, out Vector512<long> upper) {
                 nint cnt = Vector512<long>.Count;
-                UnsafeUtil.SkipInit(out lower);
-                UnsafeUtil.SkipInit(out upper);
+                Unsafe.SkipInit(out lower);
+                Unsafe.SkipInit(out upper);
                 ref int p = ref Unsafe.As<Vector512<int>, int>(ref source);
                 ref long plower = ref Unsafe.As<Vector512<long>, long>(ref lower);
                 ref long pupper = ref Unsafe.As<Vector512<long>, long>(ref upper);
@@ -4623,8 +4623,8 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static void Widen_Basic(Vector512<uint> source, out Vector512<ulong> lower, out Vector512<ulong> upper) {
                 nint cnt = Vector512<ulong>.Count;
-                UnsafeUtil.SkipInit(out lower);
-                UnsafeUtil.SkipInit(out upper);
+                Unsafe.SkipInit(out lower);
+                Unsafe.SkipInit(out upper);
                 ref uint p = ref Unsafe.As<Vector512<uint>, uint>(ref source);
                 ref ulong plower = ref Unsafe.As<Vector512<ulong>, ulong>(ref lower);
                 ref ulong pupper = ref Unsafe.As<Vector512<ulong>, ulong>(ref upper);
@@ -4738,7 +4738,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> WidenLower_Basic(Vector512<float> source) {
-                UnsafeUtil.SkipInit(out Vector512<double> rt);
+                Unsafe.SkipInit(out Vector512<double> rt);
                 ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
                 ref FixedArray16<float> psource = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref source);
                 p.I0 = psource.I0;
@@ -4756,7 +4756,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> WidenLower_Basic(Vector512<sbyte> source) {
-                UnsafeUtil.SkipInit(out Vector512<short> rt);
+                Unsafe.SkipInit(out Vector512<short> rt);
                 ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
                 ref FixedArray64<sbyte> psource = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref source);
                 p.I0 = psource.I0;
@@ -4798,7 +4798,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> WidenLower_Basic(Vector512<byte> source) {
-                UnsafeUtil.SkipInit(out Vector512<ushort> rt);
+                Unsafe.SkipInit(out Vector512<ushort> rt);
                 ref FixedArray32<ushort> p = ref Unsafe.As<Vector512<ushort>, FixedArray32<ushort>>(ref rt);
                 ref FixedArray64<byte> psource = ref Unsafe.As<Vector512<byte>, FixedArray64<byte>>(ref source);
                 p.I0 = psource.I0;
@@ -4839,7 +4839,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> WidenLower_Basic(Vector512<short> source) {
-                UnsafeUtil.SkipInit(out Vector512<int> rt);
+                Unsafe.SkipInit(out Vector512<int> rt);
                 ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
                 ref FixedArray32<short> psource = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref source);
                 p.I0 = psource.I0;
@@ -4865,7 +4865,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> WidenLower_Basic(Vector512<ushort> source) {
-                UnsafeUtil.SkipInit(out Vector512<uint> rt);
+                Unsafe.SkipInit(out Vector512<uint> rt);
                 ref FixedArray16<uint> p = ref Unsafe.As<Vector512<uint>, FixedArray16<uint>>(ref rt);
                 ref FixedArray32<ushort> psource = ref Unsafe.As<Vector512<ushort>, FixedArray32<ushort>>(ref source);
                 p.I0 = psource.I0;
@@ -4890,7 +4890,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.WidenLower(Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> WidenLower_Basic(Vector512<int> source) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                Unsafe.SkipInit(out Vector512<long> rt);
                 ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 ref FixedArray16<int> psource = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref source);
                 p.I0 = psource.I0;
@@ -4908,7 +4908,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> WidenLower_Basic(Vector512<uint> source) {
-                UnsafeUtil.SkipInit(out Vector512<ulong> rt);
+                Unsafe.SkipInit(out Vector512<ulong> rt);
                 ref FixedArray8<ulong> p = ref Unsafe.As<Vector512<ulong>, FixedArray8<ulong>>(ref rt);
                 ref FixedArray16<uint> psource = ref Unsafe.As<Vector512<uint>, FixedArray16<uint>>(ref source);
                 p.I0 = psource.I0;
@@ -5013,7 +5013,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{float})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<double> WidenUpper_Basic(Vector512<float> source) {
-                UnsafeUtil.SkipInit(out Vector512<double> rt);
+                Unsafe.SkipInit(out Vector512<double> rt);
                 ref FixedArray8<double> p = ref Unsafe.As<Vector512<double>, FixedArray8<double>>(ref rt);
                 ref FixedArray16<float> psource = ref Unsafe.As<Vector512<float>, FixedArray16<float>>(ref Unsafe.AddByteOffset(ref source, Vector512<byte>.Count / 2));
                 p.I0 = psource.I0;
@@ -5031,7 +5031,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<short> WidenUpper_Basic(Vector512<sbyte> source) {
-                UnsafeUtil.SkipInit(out Vector512<short> rt);
+                Unsafe.SkipInit(out Vector512<short> rt);
                 ref FixedArray32<short> p = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref rt);
                 ref FixedArray64<sbyte> psource = ref Unsafe.As<Vector512<sbyte>, FixedArray64<sbyte>>(ref Unsafe.AddByteOffset(ref source, Vector512<byte>.Count / 2));
                 p.I0 = psource.I0;
@@ -5073,7 +5073,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ushort> WidenUpper_Basic(Vector512<byte> source) {
-                UnsafeUtil.SkipInit(out Vector512<ushort> rt);
+                Unsafe.SkipInit(out Vector512<ushort> rt);
                 ref FixedArray32<ushort> p = ref Unsafe.As<Vector512<ushort>, FixedArray32<ushort>>(ref rt);
                 ref FixedArray64<byte> psource = ref Unsafe.As<Vector512<byte>, FixedArray64<byte>>(ref Unsafe.AddByteOffset(ref source, Vector512<byte>.Count / 2));
                 p.I0 = psource.I0;
@@ -5114,7 +5114,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{short})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<int> WidenUpper_Basic(Vector512<short> source) {
-                UnsafeUtil.SkipInit(out Vector512<int> rt);
+                Unsafe.SkipInit(out Vector512<int> rt);
                 ref FixedArray16<int> p = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref rt);
                 ref FixedArray32<short> psource = ref Unsafe.As<Vector512<short>, FixedArray32<short>>(ref Unsafe.AddByteOffset(ref source, Vector512<byte>.Count / 2));
                 p.I0 = psource.I0;
@@ -5140,7 +5140,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<uint> WidenUpper_Basic(Vector512<ushort> source) {
-                UnsafeUtil.SkipInit(out Vector512<uint> rt);
+                Unsafe.SkipInit(out Vector512<uint> rt);
                 ref FixedArray16<uint> p = ref Unsafe.As<Vector512<uint>, FixedArray16<uint>>(ref rt);
                 ref FixedArray32<ushort> psource = ref Unsafe.As<Vector512<ushort>, FixedArray32<ushort>>(ref Unsafe.AddByteOffset(ref source, Vector512<byte>.Count / 2));
                 p.I0 = psource.I0;
@@ -5165,7 +5165,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             /// <inheritdoc cref="IWVectorTraits512.WidenUpper(Vector512{int})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<long> WidenUpper_Basic(Vector512<int> source) {
-                UnsafeUtil.SkipInit(out Vector512<long> rt);
+                Unsafe.SkipInit(out Vector512<long> rt);
                 ref FixedArray8<long> p = ref Unsafe.As<Vector512<long>, FixedArray8<long>>(ref rt);
                 ref FixedArray16<int> psource = ref Unsafe.As<Vector512<int>, FixedArray16<int>>(ref Unsafe.AddByteOffset(ref source, Vector512<byte>.Count / 2));
                 p.I0 = psource.I0;
@@ -5183,7 +5183,7 @@ namespace Zyl.VectorTraits.Impl.AVector512 {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector512<ulong> WidenUpper_Basic(Vector512<uint> source) {
-                UnsafeUtil.SkipInit(out Vector512<ulong> rt);
+                Unsafe.SkipInit(out Vector512<ulong> rt);
                 ref FixedArray8<ulong> p = ref Unsafe.As<Vector512<ulong>, FixedArray8<ulong>>(ref rt);
                 ref FixedArray16<uint> psource = ref Unsafe.As<Vector512<uint>, FixedArray16<uint>>(ref Unsafe.AddByteOffset(ref source, Vector512<byte>.Count / 2));
                 p.I0 = psource.I0;

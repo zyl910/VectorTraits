@@ -694,8 +694,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup2Transpose(Vector{byte}, Vector{byte}, out Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup2Transpose_Basic(Vector<byte> data0, Vector<byte> data1, out Vector<byte> result1) {
-                UnsafeUtil.SkipInit(out Vector<byte> rt0);
-                UnsafeUtil.SkipInit(out Vector<byte> rt1);
+                Unsafe.SkipInit(out Vector<byte> rt0);
+                Unsafe.SkipInit(out Vector<byte> rt1);
                 ref byte px = ref Unsafe.As<Vector<byte>, byte>(ref data0);
                 ref byte py = ref Unsafe.As<Vector<byte>, byte>(ref data1);
                 ref byte q0 = ref Unsafe.As<Vector<byte>, byte>(ref rt0);
@@ -726,8 +726,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YGroup2Transpose_Basic(Vector<ushort> data0, Vector<ushort> data1, out Vector<ushort> result1) {
-                UnsafeUtil.SkipInit(out Vector<ushort> rt0);
-                UnsafeUtil.SkipInit(out Vector<ushort> rt1);
+                Unsafe.SkipInit(out Vector<ushort> rt0);
+                Unsafe.SkipInit(out Vector<ushort> rt1);
                 ref ushort px = ref Unsafe.As<Vector<ushort>, ushort>(ref data0);
                 ref ushort py = ref Unsafe.As<Vector<ushort>, ushort>(ref data1);
                 ref ushort q0 = ref Unsafe.As<Vector<ushort>, ushort>(ref rt0);
@@ -758,8 +758,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YGroup2Transpose_Basic(Vector<uint> data0, Vector<uint> data1, out Vector<uint> result1) {
-                UnsafeUtil.SkipInit(out Vector<uint> rt0);
-                UnsafeUtil.SkipInit(out Vector<uint> rt1);
+                Unsafe.SkipInit(out Vector<uint> rt0);
+                Unsafe.SkipInit(out Vector<uint> rt1);
                 ref uint px = ref Unsafe.As<Vector<uint>, uint>(ref data0);
                 ref uint py = ref Unsafe.As<Vector<uint>, uint>(ref data1);
                 ref uint q0 = ref Unsafe.As<Vector<uint>, uint>(ref rt0);
@@ -790,8 +790,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YGroup2Transpose_Basic(Vector<ulong> data0, Vector<ulong> data1, out Vector<ulong> result1) {
-                UnsafeUtil.SkipInit(out Vector<ulong> rt0);
-                UnsafeUtil.SkipInit(out Vector<ulong> rt1);
+                Unsafe.SkipInit(out Vector<ulong> rt0);
+                Unsafe.SkipInit(out Vector<ulong> rt1);
                 ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref data0);
                 ref ulong py = ref Unsafe.As<Vector<ulong>, ulong>(ref data1);
                 ref ulong q0 = ref Unsafe.As<Vector<ulong>, ulong>(ref rt0);
@@ -1201,7 +1201,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup2TransposeEven(Vector{byte}, Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup2TransposeEven_Basic(Vector<byte> data0, Vector<byte> data1) {
-                UnsafeUtil.SkipInit(out Vector<byte> rt0);
+                Unsafe.SkipInit(out Vector<byte> rt0);
                 ref byte px = ref Unsafe.As<Vector<byte>, byte>(ref data0);
                 ref byte py = ref Unsafe.As<Vector<byte>, byte>(ref data1);
                 ref byte q0 = ref Unsafe.As<Vector<byte>, byte>(ref rt0);
@@ -1225,7 +1225,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YGroup2TransposeEven_Basic(Vector<ushort> data0, Vector<ushort> data1) {
-                UnsafeUtil.SkipInit(out Vector<ushort> rt0);
+                Unsafe.SkipInit(out Vector<ushort> rt0);
                 ref ushort px = ref Unsafe.As<Vector<ushort>, ushort>(ref data0);
                 ref ushort py = ref Unsafe.As<Vector<ushort>, ushort>(ref data1);
                 ref ushort q0 = ref Unsafe.As<Vector<ushort>, ushort>(ref rt0);
@@ -1249,7 +1249,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YGroup2TransposeEven_Basic(Vector<uint> data0, Vector<uint> data1) {
-                UnsafeUtil.SkipInit(out Vector<uint> rt0);
+                Unsafe.SkipInit(out Vector<uint> rt0);
                 ref uint px = ref Unsafe.As<Vector<uint>, uint>(ref data0);
                 ref uint py = ref Unsafe.As<Vector<uint>, uint>(ref data1);
                 ref uint q0 = ref Unsafe.As<Vector<uint>, uint>(ref rt0);
@@ -1273,7 +1273,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YGroup2TransposeEven_Basic(Vector<ulong> data0, Vector<ulong> data1) {
-                UnsafeUtil.SkipInit(out Vector<ulong> rt0);
+                Unsafe.SkipInit(out Vector<ulong> rt0);
                 ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref data0);
                 ref ulong py = ref Unsafe.As<Vector<ulong>, ulong>(ref data1);
                 ref ulong q0 = ref Unsafe.As<Vector<ulong>, ulong>(ref rt0);
@@ -1483,7 +1483,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup2TransposeOdd(Vector{byte}, Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup2TransposeOdd_Basic(Vector<byte> data0, Vector<byte> data1) {
-                UnsafeUtil.SkipInit(out Vector<byte> rt1);
+                Unsafe.SkipInit(out Vector<byte> rt1);
                 ref byte px = ref Unsafe.As<Vector<byte>, byte>(ref data0);
                 ref byte py = ref Unsafe.As<Vector<byte>, byte>(ref data1);
                 ref byte q1 = ref Unsafe.As<Vector<byte>, byte>(ref rt1);
@@ -1507,7 +1507,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YGroup2TransposeOdd_Basic(Vector<ushort> data0, Vector<ushort> data1) {
-                UnsafeUtil.SkipInit(out Vector<ushort> rt1);
+                Unsafe.SkipInit(out Vector<ushort> rt1);
                 ref ushort px = ref Unsafe.As<Vector<ushort>, ushort>(ref data0);
                 ref ushort py = ref Unsafe.As<Vector<ushort>, ushort>(ref data1);
                 ref ushort q1 = ref Unsafe.As<Vector<ushort>, ushort>(ref rt1);
@@ -1531,7 +1531,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YGroup2TransposeOdd_Basic(Vector<uint> data0, Vector<uint> data1) {
-                UnsafeUtil.SkipInit(out Vector<uint> rt1);
+                Unsafe.SkipInit(out Vector<uint> rt1);
                 ref uint px = ref Unsafe.As<Vector<uint>, uint>(ref data0);
                 ref uint py = ref Unsafe.As<Vector<uint>, uint>(ref data1);
                 ref uint q1 = ref Unsafe.As<Vector<uint>, uint>(ref rt1);
@@ -1555,7 +1555,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YGroup2TransposeOdd_Basic(Vector<ulong> data0, Vector<ulong> data1) {
-                UnsafeUtil.SkipInit(out Vector<ulong> rt1);
+                Unsafe.SkipInit(out Vector<ulong> rt1);
                 ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref data0);
                 ref ulong py = ref Unsafe.As<Vector<ulong>, ulong>(ref data1);
                 ref ulong q1 = ref Unsafe.As<Vector<ulong>, ulong>(ref rt1);
@@ -1821,8 +1821,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup2Unzip(Vector{byte}, Vector{byte}, out Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup2Unzip_Basic(Vector<byte> data0, Vector<byte> data1, out Vector<byte> y) {
-                UnsafeUtil.SkipInit(out Vector<byte> x1);
-                UnsafeUtil.SkipInit(out Vector<byte> y1);
+                Unsafe.SkipInit(out Vector<byte> x1);
+                Unsafe.SkipInit(out Vector<byte> y1);
                 Span<Vector<byte>> src = [data0, data1];
                 ref byte px = ref Unsafe.As<Vector<byte>, byte>(ref x1);
                 ref byte py = ref Unsafe.As<Vector<byte>, byte>(ref y1);
@@ -1849,8 +1849,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YGroup2Unzip_Basic(Vector<ushort> data0, Vector<ushort> data1, out Vector<ushort> y) {
-                UnsafeUtil.SkipInit(out Vector<ushort> x1);
-                UnsafeUtil.SkipInit(out Vector<ushort> y1);
+                Unsafe.SkipInit(out Vector<ushort> x1);
+                Unsafe.SkipInit(out Vector<ushort> y1);
                 Span<Vector<ushort>> src = [data0, data1];
                 ref ushort px = ref Unsafe.As<Vector<ushort>, ushort>(ref x1);
                 ref ushort py = ref Unsafe.As<Vector<ushort>, ushort>(ref y1);
@@ -1877,8 +1877,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YGroup2Unzip_Basic(Vector<uint> data0, Vector<uint> data1, out Vector<uint> y) {
-                UnsafeUtil.SkipInit(out Vector<uint> x1);
-                UnsafeUtil.SkipInit(out Vector<uint> y1);
+                Unsafe.SkipInit(out Vector<uint> x1);
+                Unsafe.SkipInit(out Vector<uint> y1);
                 Span<Vector<uint>> src = [data0, data1];
                 ref uint px = ref Unsafe.As<Vector<uint>, uint>(ref x1);
                 ref uint py = ref Unsafe.As<Vector<uint>, uint>(ref y1);
@@ -1905,8 +1905,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YGroup2Unzip_Basic(Vector<ulong> data0, Vector<ulong> data1, out Vector<ulong> y) {
-                UnsafeUtil.SkipInit(out Vector<ulong> x1);
-                UnsafeUtil.SkipInit(out Vector<ulong> y1);
+                Unsafe.SkipInit(out Vector<ulong> x1);
+                Unsafe.SkipInit(out Vector<ulong> y1);
                 Span<Vector<ulong>> src = [data0, data1];
                 ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref x1);
                 ref ulong py = ref Unsafe.As<Vector<ulong>, ulong>(ref y1);
@@ -1933,8 +1933,8 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ExUInt128> YGroup2Unzip_Basic(Vector<ExUInt128> data0, Vector<ExUInt128> data1, out Vector<ExUInt128> y) {
-                UnsafeUtil.SkipInit(out Vector<ExUInt128> x1);
-                UnsafeUtil.SkipInit(out Vector<ExUInt128> y1);
+                Unsafe.SkipInit(out Vector<ExUInt128> x1);
+                Unsafe.SkipInit(out Vector<ExUInt128> y1);
                 Span<Vector<ExUInt128>> src = [data0, data1];
                 ref ExUInt128 px = ref Unsafe.As<Vector<ExUInt128>, ExUInt128>(ref x1);
                 ref ExUInt128 py = ref Unsafe.As<Vector<ExUInt128>, ExUInt128>(ref y1);
@@ -2401,7 +2401,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup2UnzipEven(Vector{byte}, Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup2UnzipEven_Basic(Vector<byte> data0, Vector<byte> data1) {
-                UnsafeUtil.SkipInit(out Vector<byte> x1);
+                Unsafe.SkipInit(out Vector<byte> x1);
                 Span<Vector<byte>> src = [data0, data1];
                 ref byte px = ref Unsafe.As<Vector<byte>, byte>(ref x1);
                 Span<byte> p = MemoryMarshal.Cast<Vector<byte>, byte>(src);
@@ -2423,7 +2423,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YGroup2UnzipEven_Basic(Vector<ushort> data0, Vector<ushort> data1) {
-                UnsafeUtil.SkipInit(out Vector<ushort> x1);
+                Unsafe.SkipInit(out Vector<ushort> x1);
                 Span<Vector<ushort>> src = [data0, data1];
                 ref ushort px = ref Unsafe.As<Vector<ushort>, ushort>(ref x1);
                 Span<ushort> p = MemoryMarshal.Cast<Vector<ushort>, ushort>(src);
@@ -2445,7 +2445,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YGroup2UnzipEven_Basic(Vector<uint> data0, Vector<uint> data1) {
-                UnsafeUtil.SkipInit(out Vector<uint> x1);
+                Unsafe.SkipInit(out Vector<uint> x1);
                 Span<Vector<uint>> src = [data0, data1];
                 ref uint px = ref Unsafe.As<Vector<uint>, uint>(ref x1);
                 Span<uint> p = MemoryMarshal.Cast<Vector<uint>, uint>(src);
@@ -2470,7 +2470,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
 #if NETSTANDARD1_3_OR_GREATER || NETCOREAPP1_0_OR_GREATER || NET40_OR_GREATER
                 //Console.WriteLine(VectorTextUtil.Format("VectorTraitsBase.YGroup2UnzipEven_Basic-0({0}, {1})", data0, data1));
 #endif
-                UnsafeUtil.SkipInit(out Vector<ulong> x1);
+                Unsafe.SkipInit(out Vector<ulong> x1);
                 Span<Vector<ulong>> src = [data0, data1];
                 ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref x1);
                 Span<ulong> p = MemoryMarshal.Cast<Vector<ulong>, ulong>(src);
@@ -2726,7 +2726,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup2UnzipOdd(Vector{byte}, Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup2UnzipOdd_Basic(Vector<byte> data0, Vector<byte> data1) {
-                UnsafeUtil.SkipInit(out Vector<byte> y1);
+                Unsafe.SkipInit(out Vector<byte> y1);
                 Span<Vector<byte>> src = [data0, data1];
                 ref byte py = ref Unsafe.As<Vector<byte>, byte>(ref y1);
                 Span<byte> p = MemoryMarshal.Cast<Vector<byte>, byte>(src);
@@ -2748,7 +2748,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YGroup2UnzipOdd_Basic(Vector<ushort> data0, Vector<ushort> data1) {
-                UnsafeUtil.SkipInit(out Vector<ushort> y1);
+                Unsafe.SkipInit(out Vector<ushort> y1);
                 Span<Vector<ushort>> src = [data0, data1];
                 ref ushort py = ref Unsafe.As<Vector<ushort>, ushort>(ref y1);
                 Span<ushort> p = MemoryMarshal.Cast<Vector<ushort>, ushort>(src);
@@ -2770,7 +2770,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YGroup2UnzipOdd_Basic(Vector<uint> data0, Vector<uint> data1) {
-                UnsafeUtil.SkipInit(out Vector<uint> y1);
+                Unsafe.SkipInit(out Vector<uint> y1);
                 Span<Vector<uint>> src = [data0, data1];
                 ref uint py = ref Unsafe.As<Vector<uint>, uint>(ref y1);
                 Span<uint> p = MemoryMarshal.Cast<Vector<uint>, uint>(src);
@@ -2792,7 +2792,7 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YGroup2UnzipOdd_Basic(Vector<ulong> data0, Vector<ulong> data1) {
-                UnsafeUtil.SkipInit(out Vector<ulong> y1);
+                Unsafe.SkipInit(out Vector<ulong> y1);
                 Span<Vector<ulong>> src = [data0, data1];
                 ref ulong py = ref Unsafe.As<Vector<ulong>, ulong>(ref y1);
                 Span<ulong> p = MemoryMarshal.Cast<Vector<ulong>, ulong>(src);
@@ -4461,9 +4461,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup3Unzip(Vector{byte}, Vector{byte}, Vector{byte}, out Vector{byte}, out Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup3Unzip_Basic(Vector<byte> data0, Vector<byte> data1, Vector<byte> data2, out Vector<byte> y, out Vector<byte> z) {
-                UnsafeUtil.SkipInit(out Vector<byte> x1);
-                UnsafeUtil.SkipInit(out Vector<byte> y1);
-                UnsafeUtil.SkipInit(out Vector<byte> z1);
+                Unsafe.SkipInit(out Vector<byte> x1);
+                Unsafe.SkipInit(out Vector<byte> y1);
+                Unsafe.SkipInit(out Vector<byte> z1);
                 Span<Vector<byte>> src = [data0, data1, data2];
                 ref byte px = ref Unsafe.As<Vector<byte>, byte>(ref x1);
                 ref byte py = ref Unsafe.As<Vector<byte>, byte>(ref y1);
@@ -4494,9 +4494,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YGroup3Unzip_Basic(Vector<ushort> data0, Vector<ushort> data1, Vector<ushort> data2, out Vector<ushort> y, out Vector<ushort> z) {
-                UnsafeUtil.SkipInit(out Vector<ushort> x1);
-                UnsafeUtil.SkipInit(out Vector<ushort> y1);
-                UnsafeUtil.SkipInit(out Vector<ushort> z1);
+                Unsafe.SkipInit(out Vector<ushort> x1);
+                Unsafe.SkipInit(out Vector<ushort> y1);
+                Unsafe.SkipInit(out Vector<ushort> z1);
                 Span<Vector<ushort>> src = [data0, data1, data2];
                 ref ushort px = ref Unsafe.As<Vector<ushort>, ushort>(ref x1);
                 ref ushort py = ref Unsafe.As<Vector<ushort>, ushort>(ref y1);
@@ -4527,9 +4527,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YGroup3Unzip_Basic(Vector<uint> data0, Vector<uint> data1, Vector<uint> data2, out Vector<uint> y, out Vector<uint> z) {
-                UnsafeUtil.SkipInit(out Vector<uint> x1);
-                UnsafeUtil.SkipInit(out Vector<uint> y1);
-                UnsafeUtil.SkipInit(out Vector<uint> z1);
+                Unsafe.SkipInit(out Vector<uint> x1);
+                Unsafe.SkipInit(out Vector<uint> y1);
+                Unsafe.SkipInit(out Vector<uint> z1);
                 Span<Vector<uint>> src = [data0, data1, data2];
                 ref uint px = ref Unsafe.As<Vector<uint>, uint>(ref x1);
                 ref uint py = ref Unsafe.As<Vector<uint>, uint>(ref y1);
@@ -4560,9 +4560,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YGroup3Unzip_Basic(Vector<ulong> data0, Vector<ulong> data1, Vector<ulong> data2, out Vector<ulong> y, out Vector<ulong> z) {
-                UnsafeUtil.SkipInit(out Vector<ulong> x1);
-                UnsafeUtil.SkipInit(out Vector<ulong> y1);
-                UnsafeUtil.SkipInit(out Vector<ulong> z1);
+                Unsafe.SkipInit(out Vector<ulong> x1);
+                Unsafe.SkipInit(out Vector<ulong> y1);
+                Unsafe.SkipInit(out Vector<ulong> z1);
                 Span<Vector<ulong>> src = [data0, data1, data2];
                 ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref x1);
                 ref ulong py = ref Unsafe.As<Vector<ulong>, ulong>(ref y1);
@@ -4595,9 +4595,9 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ExUInt128> YGroup3Unzip_Basic(Vector<ExUInt128> data0, Vector<ExUInt128> data1, Vector<ExUInt128> data2, out Vector<ExUInt128> y, out Vector<ExUInt128> z) {
-                UnsafeUtil.SkipInit(out Vector<ExUInt128> x1);
-                UnsafeUtil.SkipInit(out Vector<ExUInt128> y1);
-                UnsafeUtil.SkipInit(out Vector<ExUInt128> z1);
+                Unsafe.SkipInit(out Vector<ExUInt128> x1);
+                Unsafe.SkipInit(out Vector<ExUInt128> y1);
+                Unsafe.SkipInit(out Vector<ExUInt128> z1);
                 Span<Vector<ExUInt128>> src = [data0, data1, data2];
                 ref ExUInt128 px = ref Unsafe.As<Vector<ExUInt128>, ExUInt128>(ref x1);
                 ref ExUInt128 py = ref Unsafe.As<Vector<ExUInt128>, ExUInt128>(ref y1);
@@ -6380,10 +6380,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
             /// <inheritdoc cref="IVectorTraits.YGroup4Unzip(Vector{byte}, Vector{byte}, Vector{byte}, Vector{byte}, out Vector{byte}, out Vector{byte}, out Vector{byte})"/>
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<byte> YGroup4Unzip_Basic(Vector<byte> data0, Vector<byte> data1, Vector<byte> data2, Vector<byte> data3, out Vector<byte> y, out Vector<byte> z, out Vector<byte> w) {
-                UnsafeUtil.SkipInit(out Vector<byte> x1);
-                UnsafeUtil.SkipInit(out Vector<byte> y1);
-                UnsafeUtil.SkipInit(out Vector<byte> z1);
-                UnsafeUtil.SkipInit(out Vector<byte> w1);
+                Unsafe.SkipInit(out Vector<byte> x1);
+                Unsafe.SkipInit(out Vector<byte> y1);
+                Unsafe.SkipInit(out Vector<byte> z1);
+                Unsafe.SkipInit(out Vector<byte> w1);
                 Span<Vector<byte>> src = [data0, data1, data2, data3];
                 ref byte px = ref Unsafe.As<Vector<byte>, byte>(ref x1);
                 ref byte py = ref Unsafe.As<Vector<byte>, byte>(ref y1);
@@ -6418,10 +6418,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ushort> YGroup4Unzip_Basic(Vector<ushort> data0, Vector<ushort> data1, Vector<ushort> data2, Vector<ushort> data3, out Vector<ushort> y, out Vector<ushort> z, out Vector<ushort> w) {
-                UnsafeUtil.SkipInit(out Vector<ushort> x1);
-                UnsafeUtil.SkipInit(out Vector<ushort> y1);
-                UnsafeUtil.SkipInit(out Vector<ushort> z1);
-                UnsafeUtil.SkipInit(out Vector<ushort> w1);
+                Unsafe.SkipInit(out Vector<ushort> x1);
+                Unsafe.SkipInit(out Vector<ushort> y1);
+                Unsafe.SkipInit(out Vector<ushort> z1);
+                Unsafe.SkipInit(out Vector<ushort> w1);
                 Span<Vector<ushort>> src = [data0, data1, data2, data3];
                 ref ushort px = ref Unsafe.As<Vector<ushort>, ushort>(ref x1);
                 ref ushort py = ref Unsafe.As<Vector<ushort>, ushort>(ref y1);
@@ -6456,10 +6456,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<uint> YGroup4Unzip_Basic(Vector<uint> data0, Vector<uint> data1, Vector<uint> data2, Vector<uint> data3, out Vector<uint> y, out Vector<uint> z, out Vector<uint> w) {
-                UnsafeUtil.SkipInit(out Vector<uint> x1);
-                UnsafeUtil.SkipInit(out Vector<uint> y1);
-                UnsafeUtil.SkipInit(out Vector<uint> z1);
-                UnsafeUtil.SkipInit(out Vector<uint> w1);
+                Unsafe.SkipInit(out Vector<uint> x1);
+                Unsafe.SkipInit(out Vector<uint> y1);
+                Unsafe.SkipInit(out Vector<uint> z1);
+                Unsafe.SkipInit(out Vector<uint> w1);
                 Span<Vector<uint>> src = [data0, data1, data2, data3];
                 ref uint px = ref Unsafe.As<Vector<uint>, uint>(ref x1);
                 ref uint py = ref Unsafe.As<Vector<uint>, uint>(ref y1);
@@ -6494,10 +6494,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ulong> YGroup4Unzip_Basic(Vector<ulong> data0, Vector<ulong> data1, Vector<ulong> data2, Vector<ulong> data3, out Vector<ulong> y, out Vector<ulong> z, out Vector<ulong> w) {
-                UnsafeUtil.SkipInit(out Vector<ulong> x1);
-                UnsafeUtil.SkipInit(out Vector<ulong> y1);
-                UnsafeUtil.SkipInit(out Vector<ulong> z1);
-                UnsafeUtil.SkipInit(out Vector<ulong> w1);
+                Unsafe.SkipInit(out Vector<ulong> x1);
+                Unsafe.SkipInit(out Vector<ulong> y1);
+                Unsafe.SkipInit(out Vector<ulong> z1);
+                Unsafe.SkipInit(out Vector<ulong> w1);
                 Span<Vector<ulong>> src = [data0, data1, data2, data3];
                 ref ulong px = ref Unsafe.As<Vector<ulong>, ulong>(ref x1);
                 ref ulong py = ref Unsafe.As<Vector<ulong>, ulong>(ref y1);
@@ -6532,10 +6532,10 @@ namespace Zyl.VectorTraits.Impl.AVector {
             [CLSCompliant(false)]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static Vector<ExUInt128> YGroup4Unzip_Basic(Vector<ExUInt128> data0, Vector<ExUInt128> data1, Vector<ExUInt128> data2, Vector<ExUInt128> data3, out Vector<ExUInt128> y, out Vector<ExUInt128> z, out Vector<ExUInt128> w) {
-                UnsafeUtil.SkipInit(out Vector<ExUInt128> x1);
-                UnsafeUtil.SkipInit(out Vector<ExUInt128> y1);
-                UnsafeUtil.SkipInit(out Vector<ExUInt128> z1);
-                UnsafeUtil.SkipInit(out Vector<ExUInt128> w1);
+                Unsafe.SkipInit(out Vector<ExUInt128> x1);
+                Unsafe.SkipInit(out Vector<ExUInt128> y1);
+                Unsafe.SkipInit(out Vector<ExUInt128> z1);
+                Unsafe.SkipInit(out Vector<ExUInt128> w1);
                 Span<Vector<ExUInt128>> src = [data0, data1, data2, data3];
                 ref ExUInt128 px = ref Unsafe.As<Vector<ExUInt128>, ExUInt128>(ref x1);
                 ref ExUInt128 py = ref Unsafe.As<Vector<ExUInt128>, ExUInt128>(ref y1);
