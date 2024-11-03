@@ -68,7 +68,6 @@ namespace Zyl.VectorTraits.Sample {
             // ExTypes.
             ShowExTypes();
             ShowYGroup2Zip();
-            ShowYGroup4Zip();
 
             // Show cpu info.
             ShowCpuInfo();
@@ -152,26 +151,6 @@ namespace Zyl.VectorTraits.Sample {
             // ExAsExInt128:   <36893488147419103232, 110680464442257309700>, <55340232221128654849, 129127208515966861317>    # (00000000000000020000000000000000 00000000000000060000000000000004), (00000000000000030000000000000001 00000000000000070000000000000005)
             // YGroup2Zip  :   <36893488147419103232, 55340232221128654849>, <110680464442257309700, 129127208515966861317>    # (00000000000000020000000000000000 00000000000000030000000000000001), (00000000000000060000000000000004 00000000000000070000000000000005)
             // ExAsInt64   :   <0, 2, 1, 3>, <4, 6, 5, 7>      # (0000000000000000 0000000000000002 0000000000000001 0000000000000003), (0000000000000004 0000000000000006 0000000000000005 0000000000000007)
-        }
-
-        /// <summary>
-        /// Show YGroup4Zip.
-        /// </summary>
-        private static void ShowYGroup4Zip() {
-            writer.WriteLine("[YGroup4Zip]");
-#if NETCOREAPP3_0_OR_GREATER
-            // Int64
-            var a0 = Vector256s.CreateByDoubleLoop<long>(0, 1);
-            var a1 = Vector256s.CreateByDoubleLoop<long>(4, 1);
-            var a2 = Vector256s.CreateByDoubleLoop<long>(8, 1);
-            var a3 = Vector256s.CreateByDoubleLoop<long>(12, 1);
-            var s0 = Zyl.VectorTraits.Impl.AVector256.WVectorTraits256Base.Instance.YGroup4Unzip(a0, a1, a2, a3, out var s1, out var s2, out var s3);
-            var t0 = Zyl.VectorTraits.Impl.AVector256.WVectorTraits256Avx2.Instance.YGroup4Unzip(a0, a1, a2, a3, out var t1, out var t2, out var t3);
-            VectorTextUtil.WriteLine(writer, "Before    :\t{0}, {1}, {2}, {3}", a0, a1, a2, a3);
-            VectorTextUtil.WriteLine(writer, "Unzip-Base:\t{0}, {1}, {2}, {3}", s0, s1, s2, s3);
-            VectorTextUtil.WriteLine(writer, "Unzip-Avx2:\t{0}, {1}, {2}, {3}", t0, t1, t2, t3);
-#endif // NETCOREAPP3_0_OR_GREATER
-            writer.WriteLine();
         }
 
         /// <summary>
