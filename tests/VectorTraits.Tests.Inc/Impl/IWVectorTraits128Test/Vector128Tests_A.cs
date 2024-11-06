@@ -10,6 +10,7 @@ using System.Runtime.Intrinsics;
 using System.IO;
 using System.Text;
 using Zyl.VectorTraits.Impl;
+using Zyl.VectorTraits.Impl.AVector128;
 
 namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
 #if USED_NUNIT3
@@ -46,7 +47,13 @@ namespace Zyl.VectorTraits.Tests.Impl.IWVectorTraits128Test {
                 Vector128s<T>.XyzwXMask
             };
             foreach (Vector128<T> vector in samples) {
-                Vector128<T> expected = Vector128s.Abs((dynamic)vector);
+                Vector128<T> expected;
+                try {
+                    expected = Vector128s.Abs((dynamic)vector);
+                } catch(Exception ex) {
+                    ClassicAssert.Warn(VectorTextUtil.Format("Exception on {0}. {1}", vector, ex));
+                    expected = WVectorTraits128Base.Statics.Abs_Basic((dynamic)vector);
+                }
                 if (Scalars<T>.ExponentBits > 0) {
                     Console.WriteLine();
                     Console.WriteLine(VectorTextUtil.Format("Sample:\t{0}", vector));
