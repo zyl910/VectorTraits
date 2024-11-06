@@ -14,8 +14,9 @@ using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits.Sample {
     class Program {
-        private static readonly TextWriter writer = Console.Out;
         static void Main(string[] args) {
+            TextWriter writer = Console.Out;
+
             writer.WriteLine("VectorTraits.Sample");
             writer.WriteLine();
             VectorTraitsGlobal.Init(); // Initialization (初始化).
@@ -66,17 +67,20 @@ namespace Zyl.VectorTraits.Sample {
             writer.WriteLine();
 
             // ExTypes.
-            ShowExTypes();
-            ShowYGroup2Zip();
+            ShowExTypes(writer);
+            ShowYGroup2Zip(writer);
+
+            // Unzip.
+            ShowYGroup3Unzip(writer);
 
             // Show cpu info.
-            ShowCpuInfo();
+            ShowCpuInfo(writer);
         }
 
         /// <summary>
         /// Show ExTypes.
         /// </summary>
-        private static void ShowExTypes() {
+        private static void ShowExTypes(TextWriter writer) {
             writer.WriteLine("[ExTypes]");
             // -- Create (创建) --
             //Vector<ExInt128> temp = new Vector<ExInt128>((ExInt128)0x102); // System.NotSupportedException: Specified type is not supported
@@ -122,7 +126,7 @@ namespace Zyl.VectorTraits.Sample {
         /// <summary>
         /// Show YGroup2Zip.
         /// </summary>
-        private static void ShowYGroup2Zip() {
+        private static void ShowYGroup2Zip(TextWriter writer) {
             writer.WriteLine("[YGroup2Zip]");
 #if NETCOREAPP3_0_OR_GREATER
             // Int64
@@ -154,9 +158,32 @@ namespace Zyl.VectorTraits.Sample {
         }
 
         /// <summary>
+        /// Show YGroup3Unzip.
+        /// </summary>
+        private static void ShowYGroup3Unzip(TextWriter writer) {
+            writer.WriteLine("[YGroup3Unzip]");
+            // Byte
+            int cnt = Vector<byte>.Count;
+            var a0 = Vectors.CreateByDoubleLoop<byte>(0, 1);
+            var a1 = Vectors.CreateByDoubleLoop<byte>(cnt * 1, 1);
+            var a2 = Vectors.CreateByDoubleLoop<byte>(cnt * 2, 1);
+            var s0 = Vectors.YGroup3Unzip(a0, a1, a2, out var s1, out var s2);
+            var t0 = Vectors.YGroup3Zip(s0, s1, s2, out var t1, out var t2);
+            VectorTextUtil.WriteLine(writer, "Before      :\t{0}, {1}, {2}", a0, a1, a2);
+            VectorTextUtil.WriteLine(writer, "YGroup3Unzip:\t{0}, {1}, {2}", s0, s1, s2);
+            VectorTextUtil.WriteLine(writer, "YGroup3Zip  :\t{0}, {1}, {2}", t0, t1, t2);
+            writer.WriteLine();
+            // Output of 256-bit vectors on X86 architecture:
+            // [YGroup3Unzip]
+            // Before      :   <0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31>, <32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63>, <64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95>      # (00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F), (20 21 22 23 24 25 26 27 28 29 2A 2B 2C 2D 2E 2F 30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3F), (40 41 42 43 44 45 46 47 48 49 4A 4B 4C 4D 4E 4F 50 51 52 53 54 55 56 57 58 59 5A 5B 5C 5D 5E 5F)
+            // YGroup3Unzip:   <0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63, 66, 69, 72, 75, 78, 81, 84, 87, 90, 93>, <1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, 55, 58, 61, 64, 67, 70, 73, 76, 79, 82, 85, 88, 91, 94>, <2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65, 68, 71, 74, 77, 80, 83, 86, 89, 92, 95>      # (00 03 06 09 0C 0F 12 15 18 1B 1E 21 24 27 2A 2D 30 33 36 39 3C 3F 42 45 48 4B 4E 51 54 57 5A 5D), (01 04 07 0A 0D 10 13 16 19 1C 1F 22 25 28 2B 2E 31 34 37 3A 3D 40 43 46 49 4C 4F 52 55 58 5B 5E), (02 05 08 0B 0E 11 14 17 1A 1D 20 23 26 29 2C 2F 32 35 38 3B 3E 41 44 47 4A 4D 50 53 56 59 5C 5F)
+            // YGroup3Zip  :   <0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31>, <32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63>, <64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95>      # (00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F), (20 21 22 23 24 25 26 27 28 29 2A 2B 2C 2D 2E 2F 30 31 32 33 34 35 36 37 38 39 3A 3B 3C 3D 3E 3F), (40 41 42 43 44 45 46 47 48 49 4A 4B 4C 4D 4E 4F 50 51 52 53 54 55 56 57 58 59 5A 5B 5C 5D 5E 5F)
+        }
+
+        /// <summary>
         /// Show CpuInfo.
         /// </summary>
-        private static void ShowCpuInfo() {
+        private static void ShowCpuInfo(TextWriter writer) {
             writer.WriteLine("[CpuInfo]");
             writer.WriteLine("CpuModelName: {0}", VectorEnvironment.CpuModelName);
             writer.WriteLine("CpuFlags: {0}", VectorEnvironment.CpuFlags);
