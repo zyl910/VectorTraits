@@ -157,9 +157,9 @@ List (列表):
   Mnemonic: `x[i] =: element_ref(3*i, data0, data1, data2)`, `y[i] =: element_ref(3*i+1, data0, data1, data2)`, `z[i] =: element_ref(3*i+2, data0, data1, data2)`.
 - `YGroup3UnzipX2[/_Bit128]`: De-Interleave 3-element groups into 3 vectors and process 2x data (将3-元素组解交织为3个向量, 且处理2倍数据).
   Mnemonic: `(x, y, z) = YGroup3Unzip(data0, data1, data2)`, `(xB, yB, zB) = YGroup3Unzip(data3, data4, data5)`.
-- `YGroup3Zip[/_Bit128]`: Interleave 3 vectors into 3-element groups. It converts the 3-element groups SoA to AoS. It can also interleave R,G,B planar data into packed RGB pixel data (将3-元素组解交织为3个向量. 它能将3元素组的 结构体数组 转为 数组结构体. 它还能将 R,G,B 平面数据, 交织为 已打包的RGB像素数据).
+- `YGroup3Zip[/_Bit128]`: Interleave 3 vectors into 3-element groups. It converts the 3-element groups SoA to AoS. It can also interleave R,G,B planar data into packed RGB pixel data (将3个向量交织为3-元素组. 它能将3元素组的 结构体数组 转为 数组结构体. 它还能将 R,G,B 平面数据, 交织为 已打包的RGB像素数据).
   Mnemonic: `element_ref(i, data0, data1, data2) := (0==(i%3))?( x[i2] ):( (1==(i%3))?( y[i2] ):( z[i2] ) )`, `i2 := i/3`.
-- `YGroup3ZipX2[/_Bit128]`: Interleave 3 vectors into 3-element groups and process 2x data (将3-元素组解交织为3个向量, 且处理2倍数据).
+- `YGroup3ZipX2[/_Bit128]`: Interleave 3 vectors into 3-element groups and process 2x data (将3个向量交织为3-元素组, 且处理2倍数据).
   Mnemonic: `(data0, data1, data2) = YGroup3Zip(x, y, z)`, `(data3, data4, data5) = YGroup3Zip(xB, yB, zB)`.
 - `YGroup4ToGroup3`: Convert a 4-element group, to a 3-element group. It also converts packed RGBA pixel data to packed RGB pixel data (将4-元素组, 转为3-元素组. 它还能将 已打包的RGBA像素数据, 转换为 已打包的RGB像素数据).
   Mnemonic: View for group: `(result0, result1, result2) = YGroup3Zip(YGroup4Unzip(data0, data1, data2, data3)))`. View for element: `element_ref(i, result0, result1, result2) := element_ref((i/3)*4+(i%3), data0, data1, data2, data3)`.
@@ -301,7 +301,12 @@ List (列表):
 
 
 ## Base methods for vectors  (向量的基本方法)
-Its supports ExType,and the element type can also be (它们支持扩展类型, 元素类型还可以为): ExInt128, ExUInt128, Int128, UInt128.
+
+(Experimental) Experimentally added the ExType(Extended type) mechanism to enable vector types to support 128-bit integers(ExInt128/ExUInt128). If the method name contains “Ex”, it supports the ExType mechanism (实验性的增加了 ExType(扩展类型) 机制, 使向量类型能支持128位整数(ExInt128/ExUInt128). 若方法名里含有"Ex"，则表示它支持 ExType 机制).
+When the method supports ExType, the element type can also be (当方法支持ExType时, 元素类型还可以为): ExInt128, ExUInt128, Int128, UInt128.
+
+Warnings: However, it is found that some functions do not work properly under some .NET versions. Therefore, it is recommended to prioritize using functions with the suffix "_Bit128" instead of ExType (但发现某些.NET版本下，个别函数的工作不正常. 故建议优先使用“_Bit128”后缀的函数, 而不是 ExType).
+
 
 ### Static methods (静态方法)
 Types: Vectors, Vector128s, Vector256s, Vector512s .
@@ -400,6 +405,6 @@ List of generic methods (泛型方法的列表):
 
 Endnote (尾注):
 - ①: It also works for Vector (它也适用于Vector).
-- ②: (它仅适用于固定大小的向量).
-- ③: (它仅适用于特定大小的向量).
-- ④: (它支持不同元素类型的重载, 用 T 代表重载的类型).
+- ②: It only works for vectors of fixed size (它仅适用于固定大小的向量类型).
+- ③: It only works with specific vector types (它仅适用于个别向量类型).
+- ④: It supports overload of different element types, with T representing the overloaded type (它支持不同元素类型的重载, 用 T 代表重载的类型).
