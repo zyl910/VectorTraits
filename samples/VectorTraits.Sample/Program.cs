@@ -137,7 +137,7 @@ namespace Zyl.VectorTraits.Sample {
             VectorTextUtil.WriteLine(writer, "Before      :\t{0}, {1}", a0, a1);
             VectorTextUtil.WriteLine(writer, "YGroup2Zip  :\t{0}, {1}", s0, s1);
             VectorTextUtil.WriteLine(writer, "YGroup2Unzip:\t{0}, {1}", t0, t1);
-            // Int128
+            // Int128 - ExType
             var b0 = a0.ExAsExInt128();
             var b1 = a1.ExAsExInt128();
             var c0 = Vector256s.YGroup2Zip(b0, b1, out var c1);
@@ -146,6 +146,9 @@ namespace Zyl.VectorTraits.Sample {
             VectorTextUtil.WriteLine(writer, "ExAsExInt128:\t{0}, {1}", b0, b1);
             VectorTextUtil.WriteLine(writer, "YGroup2Zip  :\t{0}, {1}", c0, c1);
             VectorTextUtil.WriteLine(writer, "ExAsInt64   :\t{0}, {1}", d0, d1);
+            // Int128 - _Bit128
+            var e0 = Vector256s.YGroup2Zip_Bit128(a0, a1, out var e1);
+            VectorTextUtil.WriteLine(writer, "_Bit128     :\t{0}, {1}", e0, e1);
 #endif // NETCOREAPP3_0_OR_GREATER
             writer.WriteLine();
             // Output of 256-bit vectors on X86 architecture:
@@ -155,6 +158,7 @@ namespace Zyl.VectorTraits.Sample {
             // ExAsExInt128:   <36893488147419103232, 110680464442257309700>, <55340232221128654849, 129127208515966861317>    # (00000000000000020000000000000000 00000000000000060000000000000004), (00000000000000030000000000000001 00000000000000070000000000000005)
             // YGroup2Zip  :   <36893488147419103232, 55340232221128654849>, <110680464442257309700, 129127208515966861317>    # (00000000000000020000000000000000 00000000000000030000000000000001), (00000000000000060000000000000004 00000000000000070000000000000005)
             // ExAsInt64   :   <0, 2, 1, 3>, <4, 6, 5, 7>      # (0000000000000000 0000000000000002 0000000000000001 0000000000000003), (0000000000000004 0000000000000006 0000000000000005 0000000000000007)
+            // _Bit128     :   <0, 2, 1, 3>, <4, 6, 5, 7>      # (0000000000000000 0000000000000002 0000000000000001 0000000000000003), (0000000000000004 0000000000000006 0000000000000005 0000000000000007)
         }
 
         /// <summary>
