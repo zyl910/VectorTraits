@@ -44,7 +44,7 @@
   <Choose>
     <When Condition=" '$(VersionPrefix)' == '' ">
       <PropertyGroup>
-        <VersionPrefix>2.0.0</VersionPrefix>
+        <VersionPrefix>3.0.0</VersionPrefix>
       </PropertyGroup>
     </When>
   </Choose>
@@ -74,8 +74,8 @@ This library provides many important arithmetic methods(e.g. Shift, Shuffle, Nar
 Commonly Used Types:
 - `Vectors`: For vector types, common tool functions are provided, e.g. Create(T/T[]/Span/ReadOnlySpan), CreatePadding, CreateRotate, CreateByFunc, CreateByDouble ... It also provides traits methods for vectors, e.g. ShiftLeft、ShiftRightArithmetic、ShiftRightLogical、Shuffle ...
 - `Vectors&lt;T&gt;`: For vector types, constants are provided for various element types. e.g. Serial, SerialDesc, XyzwWMask, MantissaMask, MaxValue, MinValue, NormOne, FixedOne, E, Pi, Tau, VMaxByte, VReciprocalMaxSByte ...
-- `Vector64s/Vector128s/Vector256s`: Common tool functions and traits methods are provided for vectors of fixed bit width (Vector64/Vector128/Vector256).
-- `Vector64s&lt;T&gt;/Vector128s&lt;T&gt;/Vector256s&lt;T&gt;`: Provides constants of various element types for vectors of fixed bit width.
+- `Vector64s/Vector128s/Vector256s/Vector512s`: Common tool functions and traits methods are provided for vectors of fixed bit width (Vector64/Vector128/Vector256/Vector512).
+- `Vector64s&lt;T&gt;/Vector128s&lt;T&gt;/Vector256s&lt;T&gt;/Vector512s&lt;T&gt;`: Provides constants of various element types for vectors of fixed bit width.
 - `Scalars`: For scalar types, various tool functions are provided. e.g. GetByDouble, GetFixedByDouble, GetByBits, GetBitsMask ...
 - `Scalars&lt;T&gt;`: For scalar types, a number of constants are provided. e.g. ExponentBits, MantissaBits, MantissaMask, MaxValue, MinValue, NormOne, FixedOne, E, Pi, Tau, VMaxByte, VReciprocalMaxSByte ...
 - `VectorTextUtil`: Provides some textual instrumental functions for vectors. e.g. GetHex, Format, WriteLine ...
@@ -85,9 +85,12 @@ Traits methods:
 - Support for `.NET 5.0` new vector methods: Ceiling, Floor .
 - Support for `.NET 6.0` new vector methods: Sum .
 - Support for `.NET 7.0` new vector methods: ExtractMostSignificantBits, Shuffle, ShiftLeft, ShiftRightArithmetic, ShiftRightLogical .
+- Support for `.NET 8.0` new vector methods: WidenLower, WidenUpper.
 - Provides the vector methods of narrow saturate: YNarrowSaturate, YNarrowSaturateUnsigned .
 - Provides the vector methods of round: YRoundToEven, YRoundToZero .
 - Provides the vector methods of shuffle: YShuffleInsert, YShuffleKernel, YShuffleG2, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG2/ShuffleControlG4 enum.
+- Provides vector methods for de-interleave: YGroup2Unzip, YGroup2UnzipEven, YGroup2UnzipOdd, YGroup3Unzip, YGroup3UnzipX2, YGroup4Unzip, YGroup6Unzip_Bit128.
+- Provides vector methods for interleave: YGroup2Zip, YGroup2ZipHigh, YGroup2ZipLow, YGroup3Zip, YGroup3ZipX2, YGroup4Unzip, YGroup6Zip_Bit128.
 - ...
 </Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
