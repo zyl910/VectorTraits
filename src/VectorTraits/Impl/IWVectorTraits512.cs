@@ -2176,7 +2176,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description>Same <see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">vqvtbl1q_u8</see></description>
+        ///        <description>Same <see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">vqtbl1q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>

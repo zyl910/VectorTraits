@@ -3521,7 +3521,7 @@ namespace Zyl.VectorTraits.Impl {
         ///        /<see cref="Avx512Vbmi.VL.PermuteVar32x8(Vector256{byte}, Vector256{byte})">_mm256_permutevar32x8_epi8</see>(Avx512Vbmi)</description>
         ///        <description>Combine by <see cref="Avx512BW.VL.PermuteVar16x16(Vector256{ushort}, Vector256{ushort})">_mm256_permutevar16x16_epi16</see>(Avx512BW)</description>
         ///        <description>Combine by <see cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})">_mm256_permutevar8x32_epi32</see>(Avx2)</description>
-        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">_mm256_permute4x64_pd</see>(Avx512F)</description>
+        ///        <description>Combine by <see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">_mm256_permutexvar_epi64</see>(Avx512F)</description>
         ///    </item>
         /// </list>
         /// </remarks>
@@ -3910,7 +3910,7 @@ namespace Zyl.VectorTraits.Impl {
         ///    </listheader>
         ///    <item>
         ///        <term>Arm</term>
-        ///        <description>Same <see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">vqvtbl1q_u8</see></description>
+        ///        <description>Same <see cref="AdvSimd.Arm64.VectorTableLookup(Vector128{byte}, Vector128{byte})">vqtbl1q_u8</see></description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
         ///        <description>(None)</description>
@@ -3928,7 +3928,7 @@ namespace Zyl.VectorTraits.Impl {
         ///        , combine by <see cref="Avx2.Shuffle(Vector256{byte}, Vector256{byte})">_mm256_shuffle_epi8</see>(Avx2)</description>
         ///        <description><see cref="Avx512BW.VL.PermuteVar16x16(Vector256{ushort}, Vector256{ushort})">_mm256_permutevar16x16_epi16</see>(Avx512BW)</description>
         ///        <description><see cref="Avx2.PermuteVar8x32(Vector256{uint}, Vector256{uint})">_mm256_permutevar8x32_epi32</see>(Avx2)</description>
-        ///        <description><see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">_mm256_permute4x64_pd</see>(Avx512F)</description>
+        ///        <description><see cref="Avx512F.VL.PermuteVar4x64(Vector256{ulong}, Vector256{ulong})">_mm256_permutexvar_epi64</see>(Avx512F)</description>
         ///    </item>
         /// </list>
         /// </remarks>

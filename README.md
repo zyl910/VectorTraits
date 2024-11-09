@@ -10,8 +10,8 @@ This library provides many important arithmetic methods(e.g. Shift, Shuffle, Nar
 Commonly Used Types:
 - `Vectors`: For vector types, common tool functions are provided, e.g. Create(T/T[]/Span/ReadOnlySpan), CreatePadding, CreateRotate, CreateByFunc, CreateByDouble ... It also provides traits methods for vectors, e.g. ShiftLeft、ShiftRightArithmetic、ShiftRightLogical、Shuffle ...
 - `Vectors<T>`: For vector types, constants are provided for various element types. e.g. Serial, SerialDesc, XyzwWMask, MantissaMask, MaxValue, MinValue, NormOne, FixedOne, E, Pi, Tau, VMaxByte, VReciprocalMaxSByte ...
-- `Vector64s/Vector128s/Vector256s`: Common tool functions and traits methods are provided for vectors of fixed bit width (Vector64/Vector128/Vector256).
-- `Vector64s<T>/Vector128s<T>/Vector256s<T>`: Provides constants of various element types for vectors of fixed bit width.
+- `Vector64s/Vector128s/Vector256s/Vector512s`: Common tool functions and traits methods are provided for vectors of fixed bit width (Vector64/Vector128/Vector256/Vector512).
+- `Vector64s<T>/Vector128s<T>/Vector256s<T>/Vector512s<T>`: Provides constants of various element types for vectors of fixed bit width.
 - `Scalars`: For scalar types, various tool functions are provided. e.g. GetByDouble, GetFixedByDouble, GetByBits, GetBitsMask ...
 - `Scalars<T>`: For scalar types, a number of constants are provided. e.g. ExponentBits, MantissaBits, MantissaMask, MaxValue, MinValue, NormOne, FixedOne, E, Pi, Tau, VMaxByte, VReciprocalMaxSByte ...
 - `VectorTextUtil`: Provides some textual instrumental functions for vectors. e.g. GetHex, Format, WriteLine ...
@@ -21,18 +21,24 @@ Traits methods:
 - Support for `.NET 5.0` new vector methods: Ceiling, Floor .
 - Support for `.NET 6.0` new vector methods: Sum .
 - Support for `.NET 7.0` new vector methods: ExtractMostSignificantBits, Shuffle, ShiftLeft, ShiftRightArithmetic, ShiftRightLogical .
+- Support for `.NET 8.0` new vector methods: WidenLower, WidenUpper.
 - Provides the vector methods of narrow saturate: YNarrowSaturate, YNarrowSaturateUnsigned .
 - Provides the vector methods of round: YRoundToEven, YRoundToZero .
 - Provides the vector methods of shuffle: YShuffleInsert, YShuffleKernel, YShuffleG2, YShuffleG4, YShuffleG4X2 . Also provides ShuffleControlG2/ShuffleControlG4 enum.
+- Provides vector methods for de-interleave: YGroup2Unzip, YGroup2UnzipEven, YGroup2UnzipOdd, YGroup3Unzip, YGroup3UnzipX2, YGroup4Unzip, YGroup6Unzip_Bit128.
+- Provides vector methods for interleave: YGroup2Zip, YGroup2ZipHigh, YGroup2ZipLow, YGroup3Zip, YGroup3ZipX2, YGroup4Unzip, YGroup6Zip_Bit128.
 - ...
 - Full list: [TraitsMethodList](TraitsMethodList.md)
 
 Supported instruction set:
-- x86
-  - 128-bit vector: Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2 .
-  - 256-bit vector: Avx, Avx2 .
-- Arm
-  - 128-bit vector: AdvSimd .
+- x86 (Need .NET Core 3.0+)
+  - 128-bit vector: Sse, Sse2, Sse3, Ssse3, Sse41, Sse42. And 128-bit instructions from Avx family.
+  - 256-bit vector: Avx, Avx2. And 256-bit instructions from Avx512VL.
+  - 512-bit vector: Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi.
+- Arm (Need .NET 5.0+)
+  - 128-bit vector: AdvSimd.
+- Wasm (Need .NET 8.0+)
+  - 128-bit vector: PackedSimd.
 
 ## Purpose
 The SIMD instruction set is known to accelerate multimedia processing (graphics, images, audio, video, ...) , artificial intelligence, scientific computing, etc.
@@ -145,37 +151,41 @@ namespace Zyl.VectorTraits.Sample {
 ```
 
 ### 3) Example results
-#### `.NET7.0` on X86
+#### `.NET8.0` on X86
 Program: `VectorTraits.Sample`
 
 ```
 VectorTraits.Sample
 
 IsRelease:	True
-Environment.ProcessorCount:	8
+Environment.ProcessorCount:	16
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Microsoft Windows NT 10.0.19045.0
-Environment.Version:	7.0.13
+Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
+Environment.Version:	8.0.8
 Stopwatch.Frequency:	10000000
-RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\7.0.13\
-RuntimeInformation.FrameworkDescription:	.NET 7.0.13
+RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.8\
+RuntimeInformation.FrameworkDescription:	.NET 8.0.8
 RuntimeInformation.OSArchitecture:	X64
-RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045
-RuntimeInformation.RuntimeIdentifier:	win10-x64
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631
+RuntimeInformation.RuntimeIdentifier:	win-x64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/7.0.13/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
-GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-VectorTraitsGlobal.InitCheckSum:	7960959	# 0x0079797F
-VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
-VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
-Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2
-Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
-Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	True
+Vector512.IsHardwareAccelerated:	True
+Vector<T>.Assembly.CodeBase:	file:///C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.8/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844161	# 0x8177F7FF
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
+VectorEnvironment.SupportedInstructionSets:	Aes, Avx, Avx2, Avx512BW, Avx512CD, Avx512DQ, Avx512F, Avx512Vbmi, Avx512VL, Bmi1, Bmi2, Fma, Lzcnt, Pclmulqdq, Popcnt, Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, X86Base
+Vector128s.Instance:	WVectorTraits128Avx2	// Sse, Sse2, Sse3, Ssse3, Sse41, Sse42, Avx, Avx2, Avx512VL
+Vector256s.Instance:	WVectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
+Vector512s.Instance:	WVectorTraits512Avx512	// Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi, Avx, Avx2, Sse, Sse2
+Vectors.Instance:	VectorTraits256Avx2	// Avx, Avx2, Sse, Sse2, Avx512VL
 Vectors.BaseInstance:	VectorTraits256Base
 
 src:    <0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7>        # (0000 0001 0002 0003 0004 0005 0006 0007 0000 0001 0002 0003 0004 0005 0006 0007)
@@ -192,10 +202,10 @@ ShiftLeft_AcceleratedTypes:     SByte, Byte, Int16, UInt16, Int32, UInt32, Int64
 Shuffle_AcceleratedTypes:       SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double        # (00007FE0)
 ```
 
-Note: The text before `Vectors.Instance` is the environment information output by `TraitsOutput.OutputEnvironment`. OutputEnvironment`. The text starting from `src` is the main code of the example.
+Note: The text before `Vectors.BaseInstance` is the environment information output by `TraitsOutput.OutputEnvironment`. OutputEnvironment`. The text starting from `src` is the main code of the example.
 Since the CPU supports the X86 Avx2 instruction set, `Vector<byte>.Count` is 32(256bit), and `Vectors.Instance` is `VectorTraits256Avx2`.
 
-#### `.NET7.0` on Arm
+#### `.NET8.0` on Arm
 Program: `VectorTraits.Sample`
 
 ```
@@ -204,26 +214,29 @@ VectorTraits.Sample
 IsRelease:	True
 Environment.ProcessorCount:	2
 Environment.Is64BitProcess:	True
-Environment.OSVersion:	Unix 6.2.0.1013
-Environment.Version:	7.0.8
+Environment.OSVersion:	Unix 6.8.0.1015
+Environment.Version:	8.0.7
 Stopwatch.Frequency:	1000000000
-RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/
-RuntimeInformation.FrameworkDescription:	.NET 7.0.8
+RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/8.0.7/
+RuntimeInformation.FrameworkDescription:	.NET 8.0.7
 RuntimeInformation.OSArchitecture:	Arm64
-RuntimeInformation.OSDescription:	Linux 6.2.0-1013-aws #13~22.04.1-Ubuntu SMP Fri Sep  8 20:05:18 UTC 2023
-RuntimeInformation.RuntimeIdentifier:	ubuntu.22.04-arm64
+RuntimeInformation.OSDescription:	Ubuntu 22.04.2 LTS
+RuntimeInformation.RuntimeIdentifier:	linux-arm64
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	16	# 128bit
 Vector<float>.Count:	4	# 128bit
-Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/7.0.8/System.Private.CoreLib.dll
-GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 7.0
-GetTargetFrameworkDisplayName(TraitsOutput):	.NET 7.0
-VectorTraitsGlobal.InitCheckSum:	7960961	# 0x00797981
+Vector128.IsHardwareAccelerated:	True
+Vector256.IsHardwareAccelerated:	False
+Vector512.IsHardwareAccelerated:	False
+Vector<T>.Assembly.CodeBase:	file:///home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/8.0.7/System.Private.CoreLib.dll
+GetTargetFrameworkDisplayName(VectorTextUtil):	.NET 8.0
+GetTargetFrameworkDisplayName(TraitsOutput):	.NET 8.0
+VectorTraitsGlobal.InitCheckSum:	-2122844159	# 0x8177F801
 VectorEnvironment.CpuModelName:	Neoverse-N1
 VectorEnvironment.CpuFlags:	fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp ssbs
-VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Sha1, Sha256
+VectorEnvironment.SupportedInstructionSets:	AdvSimd, Aes, ArmBase, Crc32, Dp, Rdm, Sha1, Sha256
 Vector128s.Instance:	WVectorTraits128AdvSimdB64	// AdvSimd
 Vectors.Instance:	VectorTraits128AdvSimdB64	// AdvSimd
 Vectors.BaseInstance:	VectorTraits128Base
@@ -252,25 +265,25 @@ Program: `VectorTraits.Sample.NetFw`.
 VectorTraits.Sample
 
 IsRelease:	True
-Environment.ProcessorCount:	8
+Environment.ProcessorCount:	16
 Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 6.2.9200.0
 Environment.Version:	4.0.30319.42000
 Stopwatch.Frequency:	10000000
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Windows\Microsoft.NET\Framework64\v4.0.30319\
-RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9195.0
+RuntimeInformation.FrameworkDescription:	.NET Framework 4.8.9277.0
 RuntimeInformation.OSArchitecture:	X64
-RuntimeInformation.OSDescription:	Microsoft Windows 10.0.19045 
+RuntimeInformation.OSDescription:	Microsoft Windows 10.0.22631 
 IntPtr.Size:	8
 BitConverter.IsLittleEndian:	True
 Vector.IsHardwareAccelerated:	True
 Vector<byte>.Count:	32	# 256bit
 Vector<float>.Count:	8	# 256bit
-Vector<T>.Assembly.CodeBase:	file:///E:/910Soft/MyCode/VectorTraits_test/RunBenchmarks_All/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
+Vector<T>.Assembly.CodeBase:	file:///E:/zylSelf/Code/cs/base/VectorTraits/tests/VectorTraits.Benchmarks.NetFw/bin/Release/System.Numerics.Vectors.DLL
 GetTargetFrameworkDisplayName(VectorTextUtil):	.NET Standard 1.1
 GetTargetFrameworkDisplayName(TraitsOutput):	.NET Framework 4.5
 VectorTraitsGlobal.InitCheckSum:	-25396097	# 0xFE7C7C7F
-VectorEnvironment.CpuModelName:	Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz
+VectorEnvironment.CpuModelName:	AMD Ryzen 7 7840H w/ Radeon 780M Graphics
 VectorEnvironment.SupportedInstructionSets:	
 Vectors.Instance:	VectorTraits256Base	// 
 Vectors.BaseInstance:	VectorTraits256Base
@@ -286,6 +299,7 @@ Equals to Shuffle_Core: True
 ShiftLeft_AcceleratedTypes:     SByte, Byte, Int16, UInt16, Int32, UInt32       # (000007E0)
 Shuffle_AcceleratedTypes:       None    # (00000000)
 ```
+
 ShiftLeft/Shuffle of Vectors works fine.
 Since the CPU supports the X86 Avx2 instruction set, `Vector<byte>.Count` is 32 (256bit). Vectors.Instance` is `VectorTraits256Base`. It's not `VectorTraits256Avx2` because the intrinsic function wasn't supported until `.NET Core 3.0`.
 The value of ShiftLeft_AcceleratedTypes contains types such as "Int16", which means that ShiftLeft is hardware-accelerated when using these types. The library makes clever use of vector algorithms to try to achieve hardware acceleration even without intrinsic functions.
@@ -297,37 +311,37 @@ Unit of data: Million operations per second. The larger the number, the better t
 ShiftLeft: Shifts each element of a vector left by the specified amount.
 It is a new vector method in `.NET 7.0`.
 
-#### ShiftLeft - x86 - lntel Core i5-8250U
-| Type  | Method                 | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :---- | :--------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |
-| Byte  | SumSLLScalar           |        853.802 |       817.528 |      1104.993 |  1118.381 |  1374.255 |  1480.225 |
-| Byte  | SumSLLNetBcl           |                |               |               |           |           |  1128.290 |
-| Byte  | SumSLLNetBcl_Const     |                |               |               |           |           |  1137.564 |
-| Byte  | SumSLLTraits           |       8296.682 |      8114.085 |     21811.573 | 19960.732 | 21044.192 | 23074.627 |
-| Byte  | SumSLLTraits_Core      |      33328.333 |     35503.285 |     41644.146 | 35703.816 | 36615.138 | 32872.874 |
-| Byte  | SumSLLConstTraits      |      10849.899 |     10168.754 |     25029.290 | 29761.737 | 33785.502 | 32862.094 |
-| Byte  | SumSLLConstTraits_Core |      36537.668 |     31837.586 |     39307.523 | 35698.909 | 35679.744 | 33994.997 |
-| Int16 | SumSLLScalar           |        823.668 |       806.395 |      1176.133 |  1183.966 |  1379.498 |  1486.900 |
-| Int16 | SumSLLNetBcl           |                |               |               |           |           | 18445.571 |
-| Int16 | SumSLLNetBcl_Const     |                |               |               |           |           | 19054.243 |
-| Int16 | SumSLLTraits           |       5076.036 |      5047.453 |     16986.361 | 16653.329 | 16496.182 | 16114.543 |
-| Int16 | SumSLLTraits_Core      |      20318.984 |     18959.033 |     20182.655 | 17683.717 | 18500.302 | 18439.182 |
-| Int16 | SumSLLConstTraits      |       5899.256 |      5693.084 |     16944.673 | 19378.434 | 21059.682 | 19572.551 |
-| Int16 | SumSLLConstTraits_Core |      20172.952 |     19339.311 |     18407.673 | 19850.711 | 21232.279 | 18136.492 |
-| Int32 | SumSLLScalar           |        803.506 |       820.639 |      1307.614 |  1328.703 |  2199.685 |  1587.071 |
-| Int32 | SumSLLNetBcl           |                |               |               |           |           |  9469.894 |
-| Int32 | SumSLLNetBcl_Const     |                |               |               |           |           | 10657.900 |
-| Int32 | SumSLLTraits           |       2571.456 |      2678.866 |      8246.402 |  7799.748 |  8221.382 |  9594.126 |
-| Int32 | SumSLLTraits_Core      |       8574.361 |      8465.712 |     10320.833 | 10408.381 | 10626.910 | 10035.217 |
-| Int32 | SumSLLConstTraits      |       1493.590 |      2922.103 |      8155.046 |  9293.148 | 10579.400 | 10185.431 |
-| Int32 | SumSLLConstTraits_Core |       8467.974 |      8554.920 |      9784.699 | 10384.732 |  9790.898 | 10329.112 |
-| Int64 | SumSLLScalar           |        797.703 |       816.504 |      1295.009 |  1305.611 |  2043.527 |  1535.809 |
-| Int64 | SumSLLNetBcl           |                |               |               |           |           |  4143.077 |
-| Int64 | SumSLLNetBcl_Const     |                |               |               |           |           |  4903.130 |
-| Int64 | SumSLLTraits           |        426.950 |       458.517 |      3867.136 |  3941.999 |  3964.762 |  3713.754 |
-| Int64 | SumSLLTraits_Core      |        441.378 |       463.537 |      4802.911 |  4813.018 |  4776.182 |  4653.104 |
-| Int64 | SumSLLConstTraits      |        490.135 |       536.949 |      3929.109 |  4018.072 |  4725.293 |  4712.366 |
-| Int64 | SumSLLConstTraits_Core |        491.263 |       531.946 |      4930.099 |  4737.462 |  4782.430 |  4371.649 |
+#### ShiftLeft - X86 - AMD Ryzen 7 7840H
+| Type  | Method                 | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :---- | :--------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: | --------: |
+| Byte  | SumSLLScalar           |       1062.046 |      1025.936 |      1287.865 |  1265.446 |  1445.575 |  1416.712 |  1693.330 |
+| Byte  | SumSLLNetBcl           |                |               |               |           |           |  1344.738 |  1109.752 |
+| Byte  | SumSLLNetBcl_Const     |                |               |               |           |           |  1281.901 |  1164.382 |
+| Byte  | SumSLLTraits           |      11312.499 |     10715.920 |     28897.868 | 28611.234 | 28219.205 | 34068.741 | 57456.802 |
+| Byte  | SumSLLTraits_Core      |      55791.675 |     52165.732 |     53563.421 | 68653.359 | 59916.622 | 67868.291 | 74889.177 |
+| Byte  | SumSLLConstTraits      |      13408.916 |     12604.412 |     38925.388 | 57842.081 | 57095.294 | 62012.692 | 62729.225 |
+| Byte  | SumSLLConstTraits_Core |      56843.523 |     55673.528 |     53642.484 | 62674.397 | 65797.708 | 50869.840 | 73873.979 |
+| Int16 | SumSLLScalar           |       1081.716 |       999.767 |      1261.475 |  1198.111 |  1218.767 |  1365.754 |  1547.294 |
+| Int16 | SumSLLNetBcl           |                |               |               |           |           | 32011.646 | 34816.284 |
+| Int16 | SumSLLNetBcl_Const     |                |               |               |           |           | 39975.924 | 37368.541 |
+| Int16 | SumSLLTraits           |       6752.349 |      6185.968 |     25221.856 | 26382.708 | 27125.955 | 32617.944 | 36448.716 |
+| Int16 | SumSLLTraits_Core      |      34727.283 |     31457.238 |     31800.310 | 32231.553 | 35687.996 | 37750.305 | 30731.745 |
+| Int16 | SumSLLConstTraits      |       6037.367 |      6498.819 |     27783.526 | 37605.559 | 40699.914 | 39598.663 | 36242.630 |
+| Int16 | SumSLLConstTraits_Core |      37678.435 |     34784.616 |     32625.543 | 33694.338 | 40019.325 | 39380.404 | 36914.775 |
+| Int32 | SumSLLScalar           |       1369.140 |      1315.852 |      1514.690 |  1521.516 |  2284.670 |  2484.407 |  2409.358 |
+| Int32 | SumSLLNetBcl           |                |               |               |           |           | 17373.567 | 15954.004 |
+| Int32 | SumSLLNetBcl_Const     |                |               |               |           |           | 17967.080 | 15983.409 |
+| Int32 | SumSLLTraits           |       3762.374 |      3511.433 |     13343.304 | 12906.293 | 12661.423 | 17279.760 | 15886.410 |
+| Int32 | SumSLLTraits_Core      |      17324.275 |     15468.381 |     14587.937 | 17407.823 | 17886.651 | 18052.162 | 14126.571 |
+| Int32 | SumSLLConstTraits      |       3910.600 |      3724.412 |     12646.545 | 15290.340 | 17745.992 | 17829.078 | 15991.615 |
+| Int32 | SumSLLConstTraits_Core |      16235.154 |     14216.598 |     15282.565 | 16088.400 | 17940.330 | 15961.166 | 16378.506 |
+| Int64 | SumSLLScalar           |       1394.719 |      1281.156 |      1517.938 |  1441.160 |  2270.521 |  2508.577 |  2421.558 |
+| Int64 | SumSLLNetBcl           |                |               |               |           |           |  7528.184 |  8530.835 |
+| Int64 | SumSLLNetBcl_Const     |                |               |               |           |           |  8743.504 |  8471.981 |
+| Int64 | SumSLLTraits           |        483.430 |       494.335 |      6677.544 |  6570.711 |  6635.070 |  6891.705 |  7469.236 |
+| Int64 | SumSLLTraits_Core      |        479.761 |       488.827 |      7758.515 |  8525.784 |  8596.290 |  8267.855 |  7879.060 |
+| Int64 | SumSLLConstTraits      |        509.585 |       525.195 |      7036.223 |  6787.101 |  8246.601 |  8254.880 |  8526.022 |
+| Int64 | SumSLLConstTraits_Core |        512.652 |       528.381 |      8229.954 |  8747.125 |  8711.523 |  8871.948 |  8647.339 |
 
 Description.
 - SumSLLScalar: Use scalar algorithm.
@@ -339,7 +353,7 @@ Description.
 - SumSLLConstTraits_Core: Use this library's `ConstCore` suffixed methods (`Vectors.ShiftLeft_Args`, `Vectors.ShiftLeft_ConstCore`) with constant arguments.
 
 BCL's method (`Vector.ShiftLeft`) runs on X86 platform, only Int16/Int32/Int64 are hardware accelerated, while Byte is not hardware accelerated.   This is probably because the Avx2 instruction set only has 16-64 bit left shift instructions, and does not provide other types of instructions, so the BCL is converted to a software algorithm.
-For these types of numbers, this library will replace them with efficient algorithms realized by combinations of other instructions.   For example, for Byte type, SumSLLConstTraits_Core in `.  NET 7.0` has the value of `32872.874`, which is `32872.874/1480.225≈22.2080` times the performance of scalar algorithm, and `32872.874/1137` times the performance of BCL method.   32872.874/1137.564≈28.8976` times.
+For these types of numbers, this library will replace them with efficient algorithms realized by combinations of other instructions.   For example, for Byte type, SumSLLConstTraits_Core in `.  NET 7.0` has the value of `73873.979`, which is `73873.979/1693.330≈43.6264` times the performance of scalar algorithm, and `73873.979/1164.382≈63.4448` times the performance of BCL method.   32872.874/1137.564≈28.8976` times.
 Because X86 intrinsic functions have only been available since `.NET Core 3.0`. Therefore, for Int64 types, hardware acceleration is not available until after `.NET Core 3.0`.
 
 For ShiftLeft, when `shiftAmount` is a constant, the performance is generally better than when it is a variable. This is true for both BCL and this library methods.
@@ -349,36 +363,36 @@ Sometimes the performance fluctuates due to "CPU Turbo Boost", "other processes 
 ![Vectors.ShiftLeft_Core_use_inline.png](images/Vectors.ShiftLeft_Core_use_inline.png)
 
 #### ShiftLeft - Arm - AWS Arm t4g.small
-| Type  | Method                 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :---- | :--------------------- | ------------: | --------: | --------: | --------: |
-| Byte  | SumSLLScalar           |       610.192 |   610.563 |   653.197 |   891.088 |
-| Byte  | SumSLLNetBcl           |               |           |           | 19580.464 |
-| Byte  | SumSLLNetBcl_Const     |               |           |           | 19599.073 |
-| Byte  | SumSLLTraits           |      5668.036 | 13252.891 | 13253.575 | 13241.598 |
-| Byte  | SumSLLTraits_Core      |     14341.895 | 15888.315 | 15887.520 | 19595.005 |
-| Byte  | SumSLLConstTraits      |      9946.663 | 13243.304 | 15895.672 | 19466.408 |
-| Byte  | SumSLLConstTraits_Core |     13201.657 | 15896.748 | 15894.093 | 19447.318 |
-| Int16 | SumSLLScalar           |       606.942 |   607.226 |   607.742 |   765.154 |
-| Int16 | SumSLLNetBcl           |               |           |           |  9332.186 |
-| Int16 | SumSLLNetBcl_Const     |               |           |           |  9240.256 |
-| Int16 | SumSLLTraits           |      4231.310 |  6553.072 |  6603.431 |  9351.061 |
-| Int16 | SumSLLTraits_Core      |      7881.834 |  7897.878 |  8449.502 |  9356.142 |
-| Int16 | SumSLLConstTraits      |      6577.829 |  6620.078 |  8444.304 |  9359.246 |
-| Int16 | SumSLLConstTraits_Core |      8383.107 |  7923.119 |  8443.802 |  9317.663 |
-| Int32 | SumSLLScalar           |       749.491 |   746.414 |   747.273 |  1403.533 |
-| Int32 | SumSLLNetBcl           |               |           |           |  4537.804 |
-| Int32 | SumSLLNetBcl_Const     |               |           |           |  4533.257 |
-| Int32 | SumSLLTraits           |      3233.214 |  3531.441 |  3530.389 |  4545.497 |
-| Int32 | SumSLLTraits_Core      |      3901.975 |  4140.171 |  4142.377 |  4505.555 |
-| Int32 | SumSLLConstTraits      |      3510.471 |  3865.285 |  4134.108 |  4568.054 |
-| Int32 | SumSLLConstTraits_Core |      3905.829 |  3895.898 |  3896.719 |  4547.294 |
-| Int64 | SumSLLScalar           |       743.187 |   742.685 |   743.760 |  1372.299 |
-| Int64 | SumSLLNetBcl           |               |           |           |  2473.172 |
-| Int64 | SumSLLNetBcl_Const     |               |           |           |  2468.456 |
-| Int64 | SumSLLTraits           |       482.056 |  1637.232 |  1640.547 |  1981.831 |
-| Int64 | SumSLLTraits_Core      |       488.072 |  1970.152 |  2088.793 |  2468.202 |
-| Int64 | SumSLLConstTraits      |       467.942 |  1958.432 |  2099.095 |  2460.619 |
-| Int64 | SumSLLConstTraits_Core |       470.112 |  1971.898 |  2097.693 |  2465.419 |
+| Type  | Method                 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :---- | :--------------------- | ------------: | --------: | --------: | --------: | --------: |
+| Byte  | SumSLLScalar           |       606.721 |   607.751 |   674.256 |   890.878 |  1238.814 |
+| Byte  | SumSLLNetBcl           |               |           |           | 19585.982 | 19831.927 |
+| Byte  | SumSLLNetBcl_Const     |               |           |           | 19564.840 | 19840.232 |
+| Byte  | SumSLLTraits           |      5541.532 | 13075.259 | 13190.705 | 13209.927 | 19844.497 |
+| Byte  | SumSLLTraits_Core      |     14048.511 | 16947.485 | 15828.571 | 19589.430 | 19841.525 |
+| Byte  | SumSLLConstTraits      |      9734.870 | 15699.315 | 15853.772 | 19511.952 | 19811.385 |
+| Byte  | SumSLLConstTraits_Core |     13007.028 | 16817.247 | 15838.060 | 19422.222 | 19839.627 |
+| Int16 | SumSLLScalar           |       606.135 |   603.800 |   605.734 |   820.880 |  1031.035 |
+| Int16 | SumSLLNetBcl           |               |           |           |  9943.220 |  9803.495 |
+| Int16 | SumSLLNetBcl_Const     |               |           |           |  9937.639 |  9837.136 |
+| Int16 | SumSLLTraits           |      4215.369 |  6547.514 |  6558.299 |  9923.088 |  9839.256 |
+| Int16 | SumSLLTraits_Core      |      7918.688 |  8431.934 |  7892.235 |  9939.469 |  9839.496 |
+| Int16 | SumSLLConstTraits      |      6568.606 |  7829.860 |  7887.842 |  9925.988 |  9839.534 |
+| Int16 | SumSLLConstTraits_Core |      8494.550 |  8416.796 |  7902.444 |  9914.384 |  9823.608 |
+| Int32 | SumSLLScalar           |       747.656 |   746.013 |   749.108 |  1406.122 |  1410.137 |
+| Int32 | SumSLLNetBcl           |               |           |           |  4926.651 |  4826.909 |
+| Int32 | SumSLLNetBcl_Const     |               |           |           |  4917.732 |  4840.232 |
+| Int32 | SumSLLTraits           |      3293.943 |  3269.129 |  3278.303 |  4925.488 |  4836.941 |
+| Int32 | SumSLLTraits_Core      |      4210.811 |  3930.619 |  3927.408 |  4923.867 |  4844.083 |
+| Int32 | SumSLLConstTraits      |      3275.986 |  3249.809 |  3923.176 |  4926.463 |  4846.238 |
+| Int32 | SumSLLConstTraits_Core |      4205.245 |  4199.155 |  4156.634 |  4925.448 |  4844.679 |
+| Int64 | SumSLLScalar           |       739.137 |   729.158 |   741.673 |  1372.480 |  1296.655 |
+| Int64 | SumSLLNetBcl           |               |           |           |  2477.025 |  2264.032 |
+| Int64 | SumSLLNetBcl_Const     |               |           |           |  2473.102 |  2251.272 |
+| Int64 | SumSLLTraits           |       486.734 |  1638.835 |  1636.233 |  1985.596 |  2285.512 |
+| Int64 | SumSLLTraits_Core      |       489.554 |  2075.273 |  1967.902 |  2474.105 |  2289.521 |
+| Int64 | SumSLLConstTraits      |       467.393 |  1930.821 |  1968.798 |  2471.124 |  2308.745 |
+| Int64 | SumSLLConstTraits_Core |       466.293 |  2074.656 |  1968.834 |  2476.602 |  2281.018 |
 
 Description.
 - SumSLLScalar: Use scalar algorithm.
@@ -398,37 +412,38 @@ Because Arm's intrinsic functions have only been available since `.NET 5.0`. The
 ShiftRightArithmetic: Shifts (signed) each element of a vector right by the specified amount.
 It is a new vector method in `.NET 7.0`.
 
-#### ShiftRightArithmetic - x86 - lntel Core i5-8250U
-| Type  | Method                 | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :---- | :--------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |
-| Int16 | SumSRAScalar           |        823.804 |       827.734 |      1180.933 |  1182.307 |  1341.171 |  1592.939 |
-| Int16 | SumSRANetBcl           |                |               |               |           |           | 18480.038 |
-| Int16 | SumSRANetBcl_Const     |                |               |               |           |           | 21052.686 |
-| Int16 | SumSRATraits           |       1557.132 |      1559.674 |     17325.184 | 17699.944 | 16372.799 | 17193.661 |
-| Int16 | SumSRATraits_Core      |       1653.816 |      1653.714 |     18414.632 | 19664.147 | 17938.068 | 18476.248 |
-| Int16 | SumSRAConstTraits      |       1672.258 |      1675.044 |     17658.703 | 20409.889 | 20233.738 | 20835.294 |
-| Int16 | SumSRAConstTraits_Core |       1714.582 |      1667.090 |     20076.043 | 20212.774 | 20994.717 | 21053.837 |
-| Int32 | SumSRAScalar           |        825.056 |       829.789 |      1275.799 |  1342.349 |  1621.295 |  1620.315 |
-| Int32 | SumSRANetBcl           |                |               |               |           |           | 10132.774 |
-| Int32 | SumSRANetBcl_Const     |                |               |               |           |           | 11033.258 |
-| Int32 | SumSRATraits           |        764.013 |       759.588 |      8195.470 |  8298.404 |  8314.921 |  9937.082 |
-| Int32 | SumSRATraits_Core      |        826.612 |       825.854 |     10576.367 | 10449.535 |  9783.716 | 11108.074 |
-| Int32 | SumSRAConstTraits      |        837.650 |       834.126 |      8484.959 |  9238.089 |  9979.236 | 10053.944 |
-| Int32 | SumSRAConstTraits_Core |        856.397 |       859.426 |     10201.125 | 10314.334 | 11009.384 | 10772.948 |
-| Int64 | SumSRAScalar           |        815.238 |       811.645 |      1300.052 |  1280.982 |  1322.441 |  1602.916 |
-| Int64 | SumSRANetBcl           |                |               |               |           |           |   578.499 |
-| Int64 | SumSRANetBcl_Const     |                |               |               |           |           |   553.963 |
-| Int64 | SumSRATraits           |        447.196 |       441.690 |      3032.903 |  2830.935 |  2988.130 |  2922.851 |
-| Int64 | SumSRATraits_Core      |        459.781 |       458.269 |      3639.092 |  3352.255 |  3336.974 |  3488.018 |
-| Int64 | SumSRAConstTraits      |        491.449 |       491.420 |      3074.926 |  2820.864 |  3365.642 |  3397.660 |
-| Int64 | SumSRAConstTraits_Core |        496.174 |       491.022 |      3660.380 |  3365.210 |  3398.657 |  3237.150 |
-| SByte | SumSRAScalar           |        827.231 |       823.643 |      1101.518 |  1105.244 |  1348.340 |  1619.984 |
-| SByte | SumSRANetBcl           |                |               |               |           |           |  1161.428 |
-| SByte | SumSRANetBcl_Const     |                |               |               |           |           |  1156.552 |
-| SByte | SumSRATraits           |       3108.569 |      3100.703 |     17944.555 | 17103.399 | 17926.975 | 20115.939 |
-| SByte | SumSRATraits_Core      |       3298.491 |      3288.742 |     30742.095 | 30212.469 | 29604.498 | 33040.654 |
-| SByte | SumSRAConstTraits      |       3320.813 |      3327.910 |     18297.669 | 25989.446 | 28437.425 | 31118.235 |
-| SByte | SumSRAConstTraits_Core |       3423.868 |      3427.681 |     29454.032 | 27559.316 | 30075.338 | 30565.076 |
+#### ShiftRightArithmetic - X86 - AMD Ryzen 7 7840H
+| Type  | Method                 | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :---- | :--------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: | --------: |
+| Int16 | SumSRAScalar           |       1085.176 |      1043.731 |      1227.822 |  1215.729 |  1209.230 |  1310.645 |  1397.378 |
+| Int16 | SumSRANetBcl           |                |               |               |           |           | 31888.645 | 35102.079 |
+| Int16 | SumSRANetBcl_Const     |                |               |               |           |           | 39751.018 | 36630.458 |
+| Int16 | SumSRATraits           |       1829.405 |      1861.938 |     25643.096 | 26584.675 | 26634.093 | 31578.602 | 37184.123 |
+| Int16 | SumSRATraits_Core      |       1837.663 |      1874.262 |     33248.481 | 36967.972 | 36890.508 | 37648.798 | 37673.670 |
+| Int16 | SumSRAConstTraits      |       1836.653 |      1880.351 |     28724.613 | 36985.528 | 39429.041 | 32925.588 | 37356.009 |
+| Int16 | SumSRAConstTraits_Core |       1830.444 |      1879.354 |     33935.625 | 37498.165 | 38127.794 | 33120.549 | 35752.947 |
+| Int32 | SumSRAScalar           |       1362.876 |      1321.507 |      1508.831 |  1508.378 |  2226.648 |  2555.622 |  2327.611 |
+| Int32 | SumSRANetBcl           |                |               |               |           |           | 16806.958 | 15967.982 |
+| Int32 | SumSRANetBcl_Const     |                |               |               |           |           | 18365.861 | 16092.208 |
+| Int32 | SumSRATraits           |        883.925 |       895.137 |     12901.507 | 12508.762 | 11931.480 | 17609.103 | 16282.512 |
+| Int32 | SumSRATraits_Core      |        919.507 |       931.419 |     15956.786 | 15252.829 | 17412.025 | 18296.493 | 16230.128 |
+| Int32 | SumSRAConstTraits      |        911.750 |       942.523 |     13450.043 | 17314.816 | 14198.095 | 16799.445 | 16393.351 |
+| Int32 | SumSRAConstTraits_Core |        917.228 |       938.789 |     15344.136 | 15470.629 | 17084.816 | 18274.411 | 16054.229 |
+| Int32 | SumSRAFastTraits       |        915.754 |       946.521 |     13266.168 | 15337.171 | 14562.129 | 17003.224 | 16124.004 |
+| Int64 | SumSRAScalar           |       1393.540 |      1331.963 |      1532.719 |  1544.306 |  1513.245 |  1801.859 |  2560.284 |
+| Int64 | SumSRANetBcl           |                |               |               |           |           |   524.702 |  8652.579 |
+| Int64 | SumSRANetBcl_Const     |                |               |               |           |           |   557.152 |  8870.207 |
+| Int64 | SumSRATraits           |        482.604 |       490.804 |      4949.328 |  4970.328 |  4932.277 |  4902.239 |  7541.726 |
+| Int64 | SumSRATraits_Core      |        509.432 |       521.769 |      5941.547 |  6050.322 |  6104.433 |  6043.337 |  8537.297 |
+| Int64 | SumSRAConstTraits      |        510.778 |       529.298 |      5526.893 |  5360.460 |  5834.075 |  6217.509 |  7562.071 |
+| Int64 | SumSRAConstTraits_Core |        509.597 |       531.344 |      5899.752 |  5978.398 |  6049.756 |  6171.211 |  7720.979 |
+| SByte | SumSRAScalar           |        997.067 |       974.147 |      1278.049 |  1350.082 |  1227.788 |  1328.380 |  1387.993 |
+| SByte | SumSRANetBcl           |                |               |               |           |           |  1135.177 |  1113.944 |
+| SByte | SumSRANetBcl_Const     |                |               |               |           |           |  1165.780 |  1061.118 |
+| SByte | SumSRATraits           |       3635.592 |      3696.780 |     24686.302 | 22906.323 | 22437.129 | 24879.962 | 44225.353 |
+| SByte | SumSRATraits_Core      |       3652.670 |      3743.427 |     41915.608 | 45147.925 | 45375.300 | 46792.941 | 45642.076 |
+| SByte | SumSRAConstTraits      |       3651.109 |      3753.761 |     29819.076 | 42019.515 | 43095.169 | 44048.300 | 47091.982 |
+| SByte | SumSRAConstTraits_Core |       3662.694 |      3753.270 |     39588.701 | 46397.665 | 47507.648 | 43046.477 | 46878.753 |
 
 Description.
 - SumSRAScalar: Use scalar algorithm.
@@ -439,40 +454,40 @@ Description.
 - SumSRAConstTraits: Use this library's `Const` suffixed method (`Vectors.ShiftRight_Const`) with constants arguments.
 - SumSRAConstTraits_Core: Use this library's `ConstCore` suffixed methods (`Vectors.ShiftRight_Args`, `Vectors.ShiftRight_ConstCore`) with constant arguments.
 
-The BCL method (`Vector.ShiftRightArithmetic`) runs on X86 platforms with hardware acceleration only for Int16/Int32, but not for SByte/Int64. This is probably because the Avx2 instruction set only has 16-32 bit arithmetic right shift instructions.
+The BCL method (`Vector.ShiftRightArithmetic`) runs on X86 platforms with hardware acceleration only for Int16/Int32, but not for SByte/Int64. This is probably because the Avx2 instruction set only has 16-32 bit arithmetic right shift instructions. The Avx512 instruction set has added a 64 bit arithmetic right shift instruction.
 For these types of numbers, this library replaces them with efficient algorithms that are implemented by a combination of other instructions. As of `.NET Core 3.0`, hardware acceleration is available.
 
 #### ShiftRightArithmetic - Arm - AWS Arm t4g.small
-| Type  | Method                 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :---- | :--------------------- | ------------: | --------: | --------: | --------: |
-| Int16 | SumSRAScalar           |       587.279 |   541.166 |   607.230 |   822.580 |
-| Int16 | SumSRANetBcl           |               |           |           |  9941.333 |
-| Int16 | SumSRANetBcl_Const     |               |           |           |  9938.477 |
-| Int16 | SumSRATraits           |      1559.138 |  4950.480 |  5645.497 |  9938.217 |
-| Int16 | SumSRATraits_Core      |      1823.509 |  8388.956 |  7904.366 |  9938.584 |
-| Int16 | SumSRAConstTraits      |      1808.965 |  6589.881 |  7892.407 |  9871.343 |
-| Int16 | SumSRAConstTraits_Core |      1810.527 |  8392.943 |  7896.220 |  9925.543 |
-| Int32 | SumSRAScalar           |       712.668 |   746.666 |   747.055 |  1188.551 |
-| Int32 | SumSRANetBcl           |               |           |           |  4861.897 |
-| Int32 | SumSRANetBcl_Const     |               |           |           |  4859.816 |
-| Int32 | SumSRATraits           |       779.787 |  2944.169 |  2945.026 |  4868.865 |
-| Int32 | SumSRATraits_Core      |       914.346 |  4125.748 |  4135.353 |  4862.075 |
-| Int32 | SumSRAConstTraits      |       884.914 |  3266.272 |  3892.016 |  4841.364 |
-| Int32 | SumSRAConstTraits_Core |       920.389 |  4134.164 |  3893.088 |  4844.364 |
-| Int64 | SumSRAScalar           |       717.640 |   742.361 |   742.337 |  1189.925 |
-| Int64 | SumSRANetBcl           |               |           |           |  2468.196 |
-| Int64 | SumSRANetBcl_Const     |               |           |           |  2471.434 |
-| Int64 | SumSRATraits           |       451.956 |  1235.429 |  1233.818 |  1420.116 |
-| Int64 | SumSRATraits_Core      |       435.180 |  1972.734 |  1966.992 |  2465.932 |
-| Int64 | SumSRAConstTraits      |       437.799 |  1962.084 |  1966.946 |  2470.825 |
-| Int64 | SumSRAConstTraits_Core |       436.419 |  2099.303 |  2097.296 |  2469.149 |
-| SByte | SumSRAScalar           |       577.766 |   610.669 |   672.786 |   925.515 |
-| SByte | SumSRANetBcl           |               |           |           | 19792.701 |
-| SByte | SumSRANetBcl_Const     |               |           |           | 19792.641 |
-| SByte | SumSRATraits           |      2991.228 | 11281.229 | 11275.758 | 11356.994 |
-| SByte | SumSRATraits_Core      |      3529.326 | 16818.297 | 16827.844 | 19798.924 |
-| SByte | SumSRAConstTraits      |      3476.138 | 15680.873 | 16829.920 | 19774.470 |
-| SByte | SumSRAConstTraits_Core |      3577.927 | 16813.202 | 15762.243 | 19759.552 |
+| Type  | Method                 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :---- | :--------------------- | ------------: | --------: | --------: | --------: | --------: |
+| Int16 | SumSRAScalar           |       604.429 |   602.027 |   606.297 |   818.740 |   830.302 |
+| Int16 | SumSRANetBcl           |               |           |           |  9941.412 |  9837.372 |
+| Int16 | SumSRANetBcl_Const     |               |           |           |  9931.397 |  9838.530 |
+| Int16 | SumSRATraits           |      1713.818 |  5611.316 |  4949.502 |  9932.269 |  9837.893 |
+| Int16 | SumSRATraits_Core      |      1928.197 |  7881.850 |  8435.043 |  9930.918 |  9707.757 |
+| Int16 | SumSRAConstTraits      |      1936.057 |  7776.346 |  8432.064 |  9926.348 |  9834.469 |
+| Int16 | SumSRAConstTraits_Core |      1895.291 |  7825.036 |  8426.085 |  9923.414 |  9834.395 |
+| Int32 | SumSRAScalar           |       745.287 |   749.467 |   747.486 |  1181.651 |  1244.019 |
+| Int32 | SumSRANetBcl           |               |           |           |  4929.438 |  4848.848 |
+| Int32 | SumSRANetBcl_Const     |               |           |           |  4937.824 |  4854.964 |
+| Int32 | SumSRATraits           |       859.173 |  2815.113 |  2819.116 |  4937.562 |  4813.108 |
+| Int32 | SumSRATraits_Core      |       945.694 |  3917.314 |  3916.943 |  4933.939 |  4787.843 |
+| Int32 | SumSRAConstTraits      |       967.576 |  3904.750 |  4188.713 |  4901.680 |  4849.051 |
+| Int32 | SumSRAConstTraits_Core |       947.955 |  3906.471 |  4192.951 |  4908.354 |  4853.184 |
+| Int64 | SumSRAScalar           |       738.902 |   734.754 |   741.343 |  1185.217 |  1243.954 |
+| Int64 | SumSRANetBcl           |               |           |           |  2474.620 |  2433.159 |
+| Int64 | SumSRANetBcl_Const     |               |           |           |  2478.519 |  2438.677 |
+| Int64 | SumSRATraits           |       467.838 |  1233.506 |  1233.401 |  1418.970 |  2424.896 |
+| Int64 | SumSRATraits_Core      |       468.470 |  1952.967 |  1971.453 |  2478.229 |  2424.819 |
+| Int64 | SumSRAConstTraits      |       467.182 |  1939.969 |  1970.321 |  2474.340 |  2413.790 |
+| Int64 | SumSRAConstTraits_Core |       468.634 |  2095.352 |  2102.958 |  2474.473 |  2432.455 |
+| SByte | SumSRAScalar           |       608.671 |   609.771 |   652.251 |   889.935 |   830.400 |
+| SByte | SumSRANetBcl           |               |           |           | 19779.972 | 19615.987 |
+| SByte | SumSRANetBcl_Const     |               |           |           | 19803.799 | 19613.758 |
+| SByte | SumSRATraits           |      3482.537 | 11212.340 |  9894.245 | 11352.199 | 19512.654 |
+| SByte | SumSRATraits_Core      |      3857.464 | 16756.195 | 15733.712 | 19816.163 | 19419.454 |
+| SByte | SumSRAConstTraits      |      3905.027 | 15518.199 | 15732.344 | 19791.972 | 19617.529 |
+| SByte | SumSRAConstTraits_Core |      3796.018 | 16708.142 | 16787.090 | 19791.891 | 19619.300 |
 
 Description.
 - SumSRAScalar: Use scalar algorithm.
@@ -492,45 +507,50 @@ It is a new vector method in `.NET 7.0`. Since `.NET 7.0`, the Shuffle method ha
 
 Shuffle allows an index to exceed the valid range, and then sets the corresponding element to 0. This feature slows down performance a bit, so this library also provides the YShuffleKernel method (Only shuffle). If you want to make sure that the index is always within the valid range, it is faster to use YShuffleKernel.
 
-#### Shuffle - x86 - lntel Core i5-8250U
-| Type  | Method                | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :---- | :-------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |
-| Int16 | SumScalar             |       1009.132 |      1007.748 |       992.299 |  1004.370 |  1034.912 |   989.043 |
-| Int16 | Sum256_Bcl            |                |               |               |           |           |   775.841 |
-| Int16 | SumTraits             |       1012.626 |      1008.900 |      6025.629 |  8058.075 |  8017.278 |  9060.106 |
-| Int16 | SumTraits_Args0       |       1008.925 |       988.646 |     14845.370 | 14590.246 | 14413.193 | 14209.436 |
-| Int16 | SumTraits_Args        |       1008.981 |       991.790 |     14644.219 | 14527.035 | 14198.718 | 14024.591 |
-| Int16 | SumKernelTraits       |       1011.528 |      1009.289 |      7566.266 |  9381.227 |  9585.573 | 10330.592 |
-| Int16 | SumKernelTraits_Args0 |       1006.331 |       989.488 |     15045.753 | 14575.460 | 14464.147 | 14484.413 |
-| Int16 | SumKernelTraits_Args  |       1017.264 |       990.161 |     14900.553 | 13672.167 | 14556.627 | 14280.139 |
-| Int32 | SumScalar             |        723.019 |       725.013 |       704.809 |   708.372 |   735.378 |   747.651 |
-| Int32 | Sum256_Bcl            |                |               |               |           |           |   611.393 |
-| Int32 | SumTraits             |        716.509 |       724.369 |      5216.757 |  5813.206 |  7139.337 |  9250.625 |
-| Int32 | SumTraits_Args0       |        716.520 |       703.636 |      9278.507 |  9221.310 |  9159.683 |  9728.639 |
-| Int32 | SumTraits_Args        |        722.854 |       709.654 |      9010.834 |  9164.854 |  8992.356 |  9828.623 |
-| Int32 | SumKernelTraits       |        722.441 |       725.218 |      9554.766 |  7064.711 |  6932.192 |  9996.960 |
-| Int32 | SumKernelTraits_Args0 |        724.689 |       706.345 |     11017.874 | 11092.301 | 11134.924 | 11279.116 |
-| Int32 | SumKernelTraits_Args  |        727.981 |       701.155 |     11030.886 | 10970.116 | 10510.208 | 11324.558 |
-| Int64 | SumScalar             |        459.881 |       457.952 |       188.562 |   477.806 |   459.242 |   462.021 |
-| Int64 | Sum256_Bcl            |                |               |               |           |           |   515.863 |
-| Int64 | SumTraits             |        459.302 |       459.876 |      2143.129 |  2518.325 |  2433.449 |  3524.309 |
-| Int64 | SumTraits_Args0       |        465.064 |       441.576 |      4508.754 |  4449.098 |  4406.994 |  4484.512 |
-| Int64 | SumTraits_Args        |        459.786 |       408.545 |      4466.028 |  4214.808 |  4293.438 |  4270.565 |
-| Int64 | SumKernelTraits       |        460.058 |       458.858 |      2702.105 |  3195.810 |  1714.735 |  4046.124 |
-| Int64 | SumKernelTraits_Args0 |        464.705 |       438.224 |      4820.767 |  4705.843 |  4042.262 |  4882.344 |
-| Int64 | SumKernelTraits_Args  |        463.218 |       411.905 |      4884.277 |  5433.558 |  4140.529 |  4788.233 |
-| SByte | SumScalar             |       1263.210 |      1262.732 |       844.749 |  1013.924 |  1077.513 |  1261.932 |
-| SByte | Sum256_Bcl            |                |               |               |           |           |   930.329 |
-| SByte | SumTraits             |       1264.393 |      1264.667 |     13239.408 | 17766.242 | 16140.964 | 24537.440 |
-| SByte | SumTraits_Args0       |       1262.368 |      1242.503 |     31793.487 | 31423.344 | 31314.488 | 34322.789 |
-| SByte | SumTraits_Args        |       1221.542 |      1248.121 |     31118.400 | 31615.120 | 31980.794 | 33156.240 |
-| SByte | SumKernelTraits       |       1260.097 |      1266.056 |     19996.806 | 23032.250 | 23853.314 | 29612.169 |
-| SByte | SumKernelTraits_Args0 |       1260.461 |      1245.530 |     31084.955 | 30974.022 | 31913.287 | 33643.052 |
-| SByte | SumKernelTraits_Args  |       1260.272 |      1249.316 |     30827.152 | 30734.831 | 32311.418 | 32977.071 |
+#### Shuffle - X86 - AMD Ryzen 7 7840H
+| Type  | Method                | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :---- | :-------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: | --------: |
+| Int16 | SumScalar             |       1236.944 |      1263.908 |      1214.484 |  1278.657 |  1195.188 |  1408.179 |  1235.365 |
+| Int16 | Sum256_Bcl            |                |               |               |           |           |  1074.656 |   938.447 |
+| Int16 | Sum512_Bcl            |                |               |               |           |           |           |   918.911 |
+| Int16 | SumTraits             |       1221.046 |      1255.341 |      8067.493 | 10943.134 | 10421.696 | 14194.280 | 32579.746 |
+| Int16 | SumTraits_Args0       |       1278.650 |      1211.361 |     22661.648 | 25363.988 | 24123.555 | 26722.243 | 34671.910 |
+| Int16 | SumTraits_Args        |       1255.109 |      1154.801 |     22911.649 | 26138.766 | 24804.170 | 26585.684 | 33172.777 |
+| Int16 | SumKernelTraits       |       1269.733 |      1192.079 |      8698.117 | 12377.326 | 11972.407 | 17610.477 | 35632.301 |
+| Int16 | SumKernelTraits_Args0 |       1297.765 |      1199.697 |     23028.564 | 25852.122 | 25176.482 | 24261.582 | 36741.022 |
+| Int16 | SumKernelTraits_Args  |       1270.852 |      1142.885 |     23265.595 | 25960.405 | 21744.418 | 23156.078 | 37227.607 |
+| Int32 | SumScalar             |        850.057 |       829.782 |       816.013 |   859.672 |   817.223 |   853.140 |   837.720 |
+| Int32 | Sum256_Bcl            |                |               |               |           |           |   755.314 |   770.558 |
+| Int32 | Sum512_Bcl            |                |               |               |           |           |           |   930.330 |
+| Int32 | SumTraits             |        821.394 |       844.388 |     10852.534 | 10832.760 | 10943.342 | 12695.692 | 15067.794 |
+| Int32 | SumTraits_Args0       |        864.447 |       818.042 |     12704.591 | 15953.127 | 15574.554 | 14391.785 | 15559.766 |
+| Int32 | SumTraits_Args        |        810.166 |       762.183 |     12531.310 | 14746.991 | 14125.335 | 13524.193 | 15368.528 |
+| Int32 | SumKernelTraits       |        825.747 |       841.229 |     14515.308 | 14407.190 | 14545.131 | 16276.648 | 15999.993 |
+| Int32 | SumKernelTraits_Args0 |        856.015 |       814.055 |     14754.810 | 14880.916 | 17262.390 | 14319.199 | 16261.174 |
+| Int32 | SumKernelTraits_Args  |        806.479 |       765.218 |     15073.768 | 14604.621 | 16999.007 | 16367.119 | 16422.220 |
+| Int64 | SumScalar             |        425.474 |       430.216 |       457.179 |   497.203 |   465.105 |   432.348 |   425.921 |
+| Int64 | Sum256_Bcl            |                |               |               |           |           |   506.686 |   515.520 |
+| Int64 | Sum512_Bcl            |                |               |               |           |           |           |   688.892 |
+| Int64 | SumTraits             |        474.906 |       431.296 |      3789.327 |  4192.951 |  4280.568 |  4155.819 |  8171.028 |
+| Int64 | SumTraits_Args0       |        423.703 |       461.664 |      6979.885 |  7855.241 |  8501.271 |  7846.303 |  8198.449 |
+| Int64 | SumTraits_Args        |        446.260 |       420.925 |      6704.874 |  8599.441 |  8317.550 |  7312.362 |  8378.340 |
+| Int64 | SumKernelTraits       |        473.823 |       426.081 |      4854.793 |  5862.440 |  5735.074 |  5938.699 |  8560.856 |
+| Int64 | SumKernelTraits_Args0 |        424.508 |       458.248 |      7804.575 |  8108.408 |  9181.086 |  8364.106 |  8701.155 |
+| Int64 | SumKernelTraits_Args  |        446.097 |       428.538 |      8386.279 |  9239.331 |  9198.798 |  8344.952 |  8673.715 |
+| SByte | SumScalar             |       1496.783 |      1403.348 |      1448.660 |  1239.277 |  1468.827 |  1415.139 |  1213.582 |
+| SByte | Sum256_Bcl            |                |               |               |           |           |   901.114 |  1022.223 |
+| SByte | Sum512_Bcl            |                |               |               |           |           |           |   989.131 |
+| SByte | SumTraits             |       1476.771 |      1494.144 |     17086.314 | 24231.464 | 24097.622 | 30243.434 | 60885.250 |
+| SByte | SumTraits_Args0       |       1392.158 |      1331.083 |     45038.802 | 50540.409 | 49090.081 | 46979.783 | 60672.985 |
+| SByte | SumTraits_Args        |       1389.074 |      1295.641 |     46794.997 | 51069.265 | 50078.249 | 46518.750 | 65261.554 |
+| SByte | SumKernelTraits       |       1476.637 |      1242.198 |     27650.933 | 32894.218 | 32711.664 | 39630.939 | 72350.167 |
+| SByte | SumKernelTraits_Args0 |       1523.543 |      1440.011 |     44451.891 | 49973.813 | 51540.236 | 48754.502 | 72615.251 |
+| SByte | SumKernelTraits_Args  |       1395.106 |      1274.943 |     41001.996 | 50067.099 | 49654.805 | 45904.504 | 71412.964 |
 
 Description.
 - SumScalar: Use the scalar algorithm.
-- Sum256_Bcl: Use BCL methods (`Vector256.Shuffle`).
+- Sum256_Bcl: Use BCL's 256-bit vector methods (`Vector256.Shuffle`).
+- Sum512_Bcl: Use BCL's 512-bit vector methods (`Vector512.Shuffle`).
 - SumTraits: Use the normal methods of this library (`Vectors.Shuffle`).
 - SumTraits_Args0: Use this library's `Core` suffixed methods (`Vectors.Shuffle_Args`, `Vectors.Shuffle_Core`), without ValueTuple, use the "out" keyword to Returns multiple values.
 - SumTraits_Args: Use this library's `Core` suffixed methods (`Vectors.Shuffle_Args`, `Vectors.Shuffle_Core`), using ValueTuple.
@@ -545,41 +565,40 @@ YShuffleKernel can be used instead of Shuffle if you can ensure that the index i
 For `Args` suffixed methods, in addition to returning multiple values with the "out" keyword, ValueTuple can be used to receive multiple values, simplifying the code. However, be aware that ValueTuple can sometimes slow down performance.
 
 #### Shuffle - Arm - AWS Arm t4g.small
-| Type  | Method                | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :---- | :-------------------- | ------------: | --------: | --------: | --------: |
-| Int16 | SumScalar             |       424.835 |   422.286 |   423.070 |   526.071 |
-| Int16 | Sum128_Bcl            |               |           |           |   482.320 |
-| Int16 | SumTraits             |       423.942 |  4925.034 |  4938.077 |  5853.245 |
-| Int16 | SumTraits_Args0       |       423.872 |  8381.395 |  7862.055 |  9821.786 |
-| Int16 | SumTraits_Args        |       400.767 |  2982.755 |  2976.138 |  9769.321 |
-| Int16 | Sum128_AdvSimd        |               |  3169.036 |  3115.859 |  3239.207 |
-| Int16 | SumKernelTraits       |       424.317 |  5644.808 |  6565.519 |  7904.834 |
-| Int16 | SumKernelTraits_Args0 |       423.899 |  7881.823 |  7847.868 |  9835.768 |
-| Int16 | SumKernelTraits_Args  |       399.772 |  2982.013 |  2868.286 |  9778.383 |
-| Int32 | SumScalar             |       288.211 |   281.081 |   276.668 |   317.268 |
-| Int32 | Sum128_Bcl            |               |           |           |   303.702 |
-| Int32 | SumTraits             |       287.942 |  2447.812 |  2561.501 |  2912.918 |
-| Int32 | SumTraits_Args0       |       286.646 |  4103.084 |  4110.550 |  4796.704 |
-| Int32 | SumTraits_Args        |       268.613 |  1487.180 |  1483.994 |  4775.891 |
-| Int32 | SumKernelTraits       |       287.900 |  2805.355 |  3237.345 |  3909.519 |
-| Int32 | SumKernelTraits_Args0 |       286.556 |  4112.689 |  4128.402 |  4825.180 |
-| Int32 | SumKernelTraits_Args  |       268.858 |  1487.021 |  1430.400 |  4755.708 |
-| Int64 | SumScalar             |       378.628 |   188.199 |   447.044 |   552.523 |
-| Int64 | Sum128_Bcl            |               |           |           |   712.025 |
-| Int64 | SumTraits             |       379.643 |  1015.811 |  1089.628 |  1242.552 |
-| Int64 | SumTraits_Args0       |       380.133 |  2091.948 |  1967.766 |  2465.800 |
-| Int64 | SumTraits_Args        |       326.603 |   743.033 |   744.908 |  2452.967 |
-| Int64 | SumKernelTraits       |       379.696 |  1221.923 |  1480.182 |  1756.478 |
-| Int64 | SumKernelTraits_Args0 |       379.788 |  2096.124 |  2095.536 |  2464.674 |
-| Int64 | SumKernelTraits_Args  |       170.957 |   715.532 |   717.549 |  2457.398 |
-| SByte | SumScalar             |       668.450 |   650.673 |   659.984 |   833.921 |
-| SByte | Sum128_Bcl            |               |           |           |   648.985 |
-| SByte | SumTraits             |       667.527 | 13135.356 | 16713.009 | 19730.059 |
-| SByte | SumTraits_Args0       |       664.988 | 15734.264 | 15708.758 | 19741.441 |
-| SByte | SumTraits_Args        |       625.410 |  5723.523 |  5948.766 | 19692.665 |
-| SByte | SumKernelTraits       |       667.280 | 15584.505 | 15643.225 | 19741.523 |
-| SByte | SumKernelTraits_Args0 |       664.914 | 16731.942 | 16685.534 | 19726.599 |
-| SByte | SumKernelTraits_Args  |       625.761 |  5723.910 |  5950.549 | 19685.073 |
+| Type  | Method                | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :---- | :-------------------- | ------------: | --------: | --------: | --------: | --------: |
+| Int16 | SumScalar             |       427.276 |   421.887 |   421.454 |   526.589 |   516.294 |
+| Int16 | Sum128_Bcl            |               |           |           |   482.907 |   468.383 |
+| Int16 | SumTraits             |       428.281 |  4922.876 |  5555.655 |  5864.193 |  9711.569 |
+| Int16 | SumTraits_Args0       |       428.928 |  7902.420 |  8416.624 |  9925.441 |  9709.555 |
+| Int16 | SumTraits_Args        |       405.537 |  2809.483 |  2798.925 |  9880.804 |  9707.490 |
+| Int16 | SumKernelTraits       |       427.637 |  5650.913 |  6540.446 |  7957.175 |  9833.813 |
+| Int16 | SumKernelTraits_Args0 |       427.578 |  7897.224 |  7891.894 |  9929.863 |  9819.774 |
+| Int16 | SumKernelTraits_Args  |       405.223 |  2811.195 |  2797.170 |  9861.330 |  9829.822 |
+| Int32 | SumScalar             |       286.900 |   281.167 |   281.838 |   317.876 |   309.427 |
+| Int32 | Sum128_Bcl            |               |           |           |   304.320 |   301.222 |
+| Int32 | SumTraits             |       286.596 |  2311.209 |  2472.592 |  2917.343 |  4801.979 |
+| Int32 | SumTraits_Args0       |       288.066 |  4185.430 |  3928.604 |  4934.590 |  4821.784 |
+| Int32 | SumTraits_Args        |       270.249 |  1396.323 |  1401.742 |  4886.669 |  4806.886 |
+| Int32 | SumKernelTraits       |       287.386 |  2677.394 |  3247.692 |  3953.573 |  4846.437 |
+| Int32 | SumKernelTraits_Args0 |       286.724 |  3919.619 |  4182.617 |  4930.469 |  4852.808 |
+| Int32 | SumKernelTraits_Args  |       270.724 |  1399.968 |  1395.953 |  4899.359 |  4853.093 |
+| Int64 | SumScalar             |       448.592 |   440.758 |   444.884 |   552.061 |   534.531 |
+| Int64 | Sum128_Bcl            |               |           |           |   708.356 |   692.663 |
+| Int64 | SumTraits             |       190.913 |  1005.614 |  1064.650 |  1255.025 |  2448.365 |
+| Int64 | SumTraits_Args0       |       426.809 |  2090.887 |  2100.527 |  2479.821 |  2451.574 |
+| Int64 | SumTraits_Args        |       179.534 |   698.013 |   699.200 |  2457.898 |  2451.414 |
+| Int64 | SumKernelTraits       |       448.065 |  1237.258 |  1412.876 |  1753.457 |  2434.096 |
+| Int64 | SumKernelTraits_Args0 |       449.857 |  2101.411 |  1967.152 |  2469.054 |  2443.626 |
+| Int64 | SumKernelTraits_Args  |       345.877 |   701.805 |   698.753 |  2456.761 |  2451.680 |
+| SByte | SumScalar             |       665.739 |   664.224 |   658.168 |   834.224 |   803.566 |
+| SByte | Sum128_Bcl            |               |           |           |   647.757 |   610.244 |
+| SByte | SumTraits             |       680.590 | 13176.730 | 16739.161 | 19723.567 | 19531.685 |
+| SByte | SumTraits_Args0       |       660.595 | 15704.393 | 15724.340 | 19723.852 | 19530.241 |
+| SByte | SumTraits_Args        |       637.568 |  5597.644 |  5602.803 | 19605.289 | 19527.338 |
+| SByte | SumKernelTraits       |       672.784 | 15604.597 | 16732.629 | 19692.571 | 19533.892 |
+| SByte | SumKernelTraits_Args0 |       675.236 | 16718.959 | 15715.512 | 19729.144 | 19534.508 |
+| SByte | SumKernelTraits_Args  |       642.795 |  5573.999 |  5598.168 | 19588.655 | 19538.006 |
 
 Description.
 - SumScalar: Use the scalar algorithm.
@@ -598,33 +617,33 @@ Note that prior to `.NET 7.0`, SumTraits_Args sometimes had a large performance 
 ### YNarrowSaturate
 YNarrowSaturate: Saturate narrows two Vector instances into one Vector .
 
-#### YNarrowSaturate - x86 - lntel Core i5-8250U
-| Type   | Method                | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :----- | :-------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: |
-| Int16  | SumNarrow_If          |        209.442 |       209.620 |       210.928 |   199.480 |   211.138 |   215.694 |
-| Int16  | SumNarrow_MinMax      |        202.714 |       215.451 |       212.224 |   214.893 |   175.099 |   219.752 |
-| Int16  | SumNarrowVectorBase   |      13095.098 |     13774.472 |     13161.165 | 13013.472 | 13168.239 | 15964.293 |
-| Int16  | SumNarrowVectorTraits |      13024.364 |     13662.396 |     28118.834 | 25049.004 | 28198.282 | 27819.176 |
-| Int32  | SumNarrow_If          |        210.834 |       212.404 |       213.735 |   214.810 |   208.985 |   222.597 |
-| Int32  | SumNarrow_MinMax      |        212.099 |       211.786 |       210.670 |   205.029 |   210.333 |   208.573 |
-| Int32  | SumNarrowVectorBase   |       6933.036 |      6441.062 |      6584.000 |  7382.254 |  6728.319 |  7703.530 |
-| Int32  | SumNarrowVectorTraits |       6856.456 |      6398.525 |     12533.505 | 14263.835 | 12888.771 | 13992.887 |
-| Int64  | SumNarrow_If          |        195.128 |       186.841 |       195.864 |   199.460 |   193.475 |   204.264 |
-| Int64  | SumNarrow_MinMax      |        189.209 |       178.971 |       196.065 |   191.231 |   191.600 |   203.201 |
-| Int64  | SumNarrowVectorBase   |       1959.806 |      1878.724 |      2000.976 |  2118.858 |  1976.264 |  2658.885 |
-| Int64  | SumNarrowVectorTraits |       1956.908 |      1872.465 |      2587.636 |  2763.282 |  2689.931 |  2418.496 |
-| UInt16 | SumNarrow_If          |       1066.840 |       902.516 |      1078.540 |   974.749 |  1067.768 |  1083.124 |
-| UInt16 | SumNarrow_MinMax      |       1066.895 |       903.120 |       901.484 |   959.577 |   900.228 |   823.878 |
-| UInt16 | SumNarrowVectorBase   |      16884.658 |     17052.914 |     15147.602 | 17094.243 | 17200.043 | 19717.119 |
-| UInt16 | SumNarrowVectorTraits |      16862.587 |     16975.925 |     21142.034 | 26121.170 | 26440.908 | 24575.123 |
-| UInt32 | SumNarrow_If          |       1116.417 |       961.764 |       856.272 |   901.272 |   872.811 |  1111.046 |
-| UInt32 | SumNarrow_MinMax      |       1115.502 |       902.014 |       900.357 |   877.358 |   839.361 |   854.364 |
-| UInt32 | SumNarrowVectorBase   |       7824.674 |      7015.984 |      8617.594 |  8176.926 |  8059.923 |  8801.283 |
-| UInt32 | SumNarrowVectorTraits |       7879.556 |      7024.438 |     12181.180 | 10713.260 | 11063.765 | 11314.953 |
-| UInt64 | SumNarrow_If          |        997.327 |       847.431 |       871.820 |   875.547 |   858.060 |  1109.023 |
-| UInt64 | SumNarrow_MinMax      |        865.420 |      1083.437 |      1107.671 |  1095.561 |   886.387 |   735.609 |
-| UInt64 | SumNarrowVectorBase   |       2015.328 |      1971.981 |      1833.610 |  2446.346 |  2636.137 |  3336.732 |
-| UInt64 | SumNarrowVectorTraits |       2020.405 |      1979.078 |      2918.828 |  3258.796 |  3341.184 |  3108.173 |
+#### YNarrowSaturate - X86 - AMD Ryzen 7 7840H
+| Type   | Method                | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :----- | :-------------------- | -------------: | ------------: | ------------: | --------: | --------: | --------: | --------: |
+| Int16  | SumNarrow_If          |        208.976 |       197.924 |       195.466 |   200.430 |   197.261 |   205.623 |   221.224 |
+| Int16  | SumNarrow_MinMax      |        200.034 |       201.184 |       197.505 |   208.715 |   199.736 |   222.635 |   208.102 |
+| Int16  | SumNarrowVectorBase   |      21160.119 |     19565.035 |     19063.346 | 19960.925 | 19532.398 | 19258.689 | 24197.090 |
+| Int16  | SumNarrowVectorTraits |      20477.038 |     18251.731 |     44050.630 | 45196.128 | 43674.654 | 44677.389 | 47325.429 |
+| Int32  | SumNarrow_If          |        211.070 |       218.235 |       225.479 |   211.761 |   207.353 |   223.740 |   232.860 |
+| Int32  | SumNarrow_MinMax      |        221.396 |       206.735 |       214.815 |   214.341 |   211.238 |   210.944 |   223.415 |
+| Int32  | SumNarrowVectorBase   |       9753.258 |      9549.313 |      9743.042 |  9519.188 |  9577.993 | 10513.071 | 12059.829 |
+| Int32  | SumNarrowVectorTraits |       9117.869 |      9253.891 |     20503.088 | 20225.447 | 19198.947 | 19012.815 | 19398.087 |
+| Int64  | SumNarrow_If          |        207.654 |       206.920 |       215.020 |   207.405 |   207.239 |   220.198 |   227.592 |
+| Int64  | SumNarrow_MinMax      |        205.724 |       201.036 |       203.815 |   200.292 |   213.422 |   213.819 |   231.741 |
+| Int64  | SumNarrowVectorBase   |       2951.264 |      2720.663 |      2835.882 |  2949.423 |  2915.473 |  4372.612 |  5917.536 |
+| Int64  | SumNarrowVectorTraits |       2941.336 |      2696.543 |      4690.391 |  4875.851 |  4917.149 |  3808.744 |  9411.507 |
+| UInt16 | SumNarrow_If          |       1263.960 |      1205.876 |      1247.409 |  1184.537 |  1124.520 |  1175.733 |  1387.128 |
+| UInt16 | SumNarrow_MinMax      |       1363.298 |      1283.027 |      1336.103 |  1178.860 |  1344.978 |   761.908 |  1487.848 |
+| UInt16 | SumNarrowVectorBase   |      25617.831 |     25358.182 |     25019.795 | 25056.656 | 26527.170 | 25337.769 | 30941.796 |
+| UInt16 | SumNarrowVectorTraits |      24795.433 |     24950.279 |     33163.801 | 41303.846 | 40678.067 | 29966.481 | 45560.104 |
+| UInt32 | SumNarrow_If          |       1446.297 |      1396.148 |      1364.953 |  1339.805 |  1382.470 |  1240.158 |  1507.078 |
+| UInt32 | SumNarrow_MinMax      |       1461.884 |      1346.542 |      1363.853 |  1376.390 |  1373.016 |   960.104 |  1383.498 |
+| UInt32 | SumNarrowVectorBase   |      12509.780 |     11160.711 |     11971.259 | 11511.978 | 11080.158 | 11897.237 | 15997.508 |
+| UInt32 | SumNarrowVectorTraits |      12962.030 |     11581.014 |     14895.009 | 16343.372 | 17051.602 | 14727.107 | 19760.603 |
+| UInt64 | SumNarrow_If          |       1003.570 |      1326.642 |       913.881 |   912.071 |   878.848 |  1312.352 |  1874.180 |
+| UInt64 | SumNarrow_MinMax      |       1455.402 |      1404.391 |      1392.157 |   891.629 |   902.245 |   937.792 |   895.795 |
+| UInt64 | SumNarrowVectorBase   |       3340.377 |      3102.954 |      3033.044 |  3449.113 |  3649.422 |  5104.550 |  7693.314 |
+| UInt64 | SumNarrowVectorTraits |       3306.018 |      3050.492 |      4497.385 |  5401.914 |  5969.621 |  4527.588 |  9530.757 |
 
 Description.
 - SumNarrow_If: Use scalar algorithm based on if statements.
@@ -636,32 +655,32 @@ For 16-32 bit integers, SumNarrowVectorTraits are much better than SumNarrowVect
 For 64-bit integers (Int64/UInt64), X86 does not provide an equivalent instruction. However, the SumNarrowVectorTraits version of the code uses a better intrinsic function algorithm, so it still outperforms SumNarrowVectorBase in many cases.
 
 #### YNarrowSaturate - Arm - AWS Arm t4g.small
-| Type   | Method                | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |
-| :----- | :-------------------- | ------------: | --------: | --------: | --------: |
-| Int16  | SumNarrow_If          |       154.717 |   163.350 |   157.517 |   181.894 |
-| Int16  | SumNarrow_MinMax      |       160.654 |   161.130 |   108.656 |   184.712 |
-| Int16  | SumNarrowVectorBase   |      6124.516 |  5210.880 |  6055.721 |  7165.511 |
-| Int16  | SumNarrowVectorTraits |      6125.113 | 13574.329 | 13433.471 | 15507.867 |
-| Int32  | SumNarrow_If          |       163.905 |   165.250 |   160.416 |   190.897 |
-| Int32  | SumNarrow_MinMax      |       155.399 |   155.059 |   159.092 |   195.986 |
-| Int32  | SumNarrowVectorBase   |      2701.810 |  3219.290 |  2766.267 |  3025.432 |
-| Int32  | SumNarrowVectorTraits |      2703.709 |  6306.022 |  6210.719 |  8003.142 |
-| Int64  | SumNarrow_If          |       161.985 |   162.089 |   160.805 |   205.371 |
-| Int64  | SumNarrow_MinMax      |       154.244 |   153.980 |   165.349 |   197.005 |
-| Int64  | SumNarrowVectorBase   |       716.880 |  1189.192 |  1156.627 |  1229.301 |
-| Int64  | SumNarrowVectorTraits |       716.661 |  3282.455 |  3283.969 |  3921.550 |
-| UInt16 | SumNarrow_If          |       525.100 |   530.550 |   525.952 |   608.947 |
-| UInt16 | SumNarrow_MinMax      |       528.430 |   527.506 |   539.088 |   609.259 |
-| UInt16 | SumNarrowVectorBase   |      7945.777 |  8739.615 |  7945.913 |  8916.311 |
-| UInt16 | SumNarrowVectorTraits |      7943.115 | 14158.586 | 14166.207 | 13814.007 |
-| UInt32 | SumNarrow_If          |       544.871 |   540.266 |   538.649 |   621.107 |
-| UInt32 | SumNarrow_MinMax      |       541.719 |   536.718 |   535.769 |   621.414 |
-| UInt32 | SumNarrowVectorBase   |      4001.590 |  4022.504 |  3954.723 |  4379.473 |
-| UInt32 | SumNarrowVectorTraits |      4018.815 |  6824.637 |  6400.947 |  6722.416 |
-| UInt64 | SumNarrow_If          |       620.408 |   620.900 |   622.076 |   828.917 |
-| UInt64 | SumNarrow_MinMax      |       620.012 |   619.806 |   622.201 |   828.565 |
-| UInt64 | SumNarrowVectorBase   |      1291.051 |  1863.543 |  1869.904 |  1816.732 |
-| UInt64 | SumNarrowVectorTraits |      1293.997 |  3233.726 |  3491.369 |  3501.256 |
+| Type   | Method                | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :----- | :-------------------- | ------------: | --------: | --------: | --------: | --------: |
+| Int16  | SumNarrow_If          |       157.270 |   154.692 |   157.383 |   181.610 |   193.265 |
+| Int16  | SumNarrow_MinMax      |       160.909 |   165.733 |   108.425 |   184.240 |   189.973 |
+| Int16  | SumNarrowVectorBase   |      6100.275 |  6193.938 |  6308.118 |  7201.735 |  8261.974 |
+| Int16  | SumNarrowVectorTraits |      6102.238 | 13460.358 | 13445.824 | 15514.261 | 13674.647 |
+| Int32  | SumNarrow_If          |       163.854 |   165.352 |   165.160 |   190.240 |   213.807 |
+| Int32  | SumNarrow_MinMax      |       154.976 |   162.019 |   161.884 |   195.349 |   194.881 |
+| Int32  | SumNarrowVectorBase   |      3047.923 |  3268.933 |  3253.378 |  3532.128 |  4034.752 |
+| Int32  | SumNarrowVectorTraits |      3125.498 |  6121.553 |  6162.533 |  7914.641 |  6782.358 |
+| Int64  | SumNarrow_If          |       161.788 |   160.690 |   161.656 |   203.670 |   190.163 |
+| Int64  | SumNarrow_MinMax      |       160.836 |   157.655 |   164.693 |   194.496 |   201.793 |
+| Int64  | SumNarrowVectorBase   |       728.629 |  1157.104 |  1139.372 |  1231.877 |  1326.584 |
+| Int64  | SumNarrowVectorTraits |       727.603 |  3114.720 |  3307.205 |  4088.677 |  3409.341 |
+| UInt16 | SumNarrow_If          |       527.761 |   515.076 |   531.818 |   608.056 |   832.441 |
+| UInt16 | SumNarrow_MinMax      |       573.087 |   525.410 |   576.628 |   608.744 |   893.594 |
+| UInt16 | SumNarrowVectorBase   |      8361.120 |  8439.577 |  7945.486 |  8853.731 | 11829.808 |
+| UInt16 | SumNarrowVectorTraits |      8307.680 | 13106.613 | 14179.297 | 13964.213 | 16532.648 |
+| UInt32 | SumNarrow_If          |       537.550 |   534.718 |   539.467 |   620.874 |   989.646 |
+| UInt32 | SumNarrow_MinMax      |       539.997 |   537.029 |   545.333 |   620.923 |   827.472 |
+| UInt32 | SumNarrowVectorBase   |      4099.703 |  4021.154 |  3963.463 |  4356.804 |  5896.924 |
+| UInt32 | SumNarrowVectorTraits |      4024.310 |  6340.994 |  6977.151 |  6619.009 |  7993.300 |
+| UInt64 | SumNarrow_If          |       619.788 |   621.120 |   620.256 |   827.649 |   995.113 |
+| UInt64 | SumNarrow_MinMax      |       619.494 |   620.151 |   620.119 |   818.259 |   994.695 |
+| UInt64 | SumNarrowVectorBase   |      1229.723 |  1821.232 |  1848.632 |  1805.499 |  2169.309 |
+| UInt64 | SumNarrowVectorTraits |      1228.911 |  3489.303 |  3526.548 |  3480.212 |  4100.727 |
 
 Description.
 - SumNarrow_If: Use scalar algorithm based on if statements.
@@ -670,6 +689,66 @@ Description.
 - SumNarrowVectorTraits: Use this library's traits method (`Vectors.YNarrowSaturate`). It is implemented as an intrinsic function, allowing for better hardware acceleration.
 
 Since `.NET 5.0`, the Arm intrinsic function is provided. Therefore, starting from `NET 5.0`, SumNarrowVectorTraits are much more powerful than SumNarrowVectorBase.
+
+### YGroup3Unzip
+YGroup3Unzip: De-Interleave 3-element groups into 3 vectors. It converts the 3-element groups AoS to SoA. It can also deinterleave packed RGB pixel data into R,G,B planar data.
+
+YGroup3UnzipX2: De-Interleave 3-element groups into 3 vectors and process 2x data.
+
+#### YGroup3Unzip - X86 - AMD Ryzen 7 7840H
+| Type  | Method        | .NET Framework | .NET Core 2.1 | .NET Core 3.1 |  .NET 5.0 |  .NET 6.0 |  .NET 7.0 |  .NET 8.0 |
+| :---- | :------------ | -------------: | ------------: | ------------: | --------: | --------: | --------: | --------: |
+| Byte  | SumBase_Basic |        255.172 |       496.713 |       501.725 |   499.601 |   566.925 |   505.052 |   670.702 |
+| Byte  | SumBase       |       1140.616 |      1053.352 |      1089.103 |  1138.235 |  1111.114 |  1478.675 |  1463.708 |
+| Byte  | SumTraits     |       1121.904 |      1086.799 |      7468.216 | 11280.246 | 11541.671 | 12438.171 | 21865.365 |
+| Byte  | SumX2Base     |       2169.025 |      2088.353 |      2171.143 |  2111.332 |  2179.099 |  2812.575 |  2973.122 |
+| Byte  | SumX2Traits   |       2229.977 |      2160.516 |     10419.951 | 10989.673 | 10985.330 | 11472.251 | 22393.695 |
+| Int16 | SumBase_Basic |        213.465 |       389.617 |       439.760 |   352.833 |   453.870 |   404.842 |   533.252 |
+| Int16 | SumBase       |        738.972 |       723.809 |       686.669 |   739.079 |   728.061 |  1015.709 |  1008.942 |
+| Int16 | SumTraits     |        759.109 |       691.273 |      3767.055 |  5383.595 |  5638.094 |  6270.971 | 10452.168 |
+| Int16 | SumX2Base     |       1327.217 |      1262.400 |      1260.547 |  1312.866 |  1288.727 |  1723.543 |  1761.102 |
+| Int16 | SumX2Traits   |       1320.545 |      1227.530 |      6120.175 |  6190.444 |  6208.993 |  5798.718 | 10909.299 |
+| Int32 | SumBase_Basic |        186.128 |       276.261 |       295.992 |   219.993 |   323.416 |   280.863 |   391.511 |
+| Int32 | SumBase       |        184.001 |       273.403 |       306.846 |   224.431 |   320.332 |   551.148 |   555.068 |
+| Int32 | SumTraits     |        189.108 |       277.059 |      6262.687 |  6454.641 |  6392.289 |  6488.127 |  6951.683 |
+| Int32 | SumX2Base     |        155.218 |       257.316 |       284.894 |   247.659 |   318.492 |  1072.598 |  1093.091 |
+| Int32 | SumX2Traits   |        160.252 |       253.319 |      5049.720 |  6341.390 |  6285.681 |  6215.097 |  7422.183 |
+| Int64 | SumBase_Basic |        136.976 |       170.057 |       187.362 |   131.130 |   193.633 |   175.953 |   240.232 |
+| Int64 | SumBase       |        135.652 |       170.323 |       187.933 |   125.485 |   192.634 |   168.300 |   238.422 |
+| Int64 | SumTraits     |        135.704 |       167.900 |      4095.410 |  3868.199 |  4015.411 |  4061.920 |  4385.505 |
+| Int64 | SumX2Base     |        108.319 |       151.252 |       178.444 |   137.145 |   182.990 |   155.501 |   243.663 |
+| Int64 | SumX2Traits   |        109.441 |       151.243 |      2684.613 |  3883.237 |  3978.648 |  3893.358 |  4785.675 |
+
+Description.
+- SumBase_Basic: Use scalar algorithm.
+- SumNarrowVectorBase: Use this library's base method (`VectorTraitsBase.Statics.YGroup3Unzip`). It is implemented by combining vector methods using BCL, and can take advantage of hardware acceleration.
+- SumNarrowVectorTraits: Use this library's traits method (`Vectors.YGroup3Unzip`). It is implemented as an intrinsic function, allowing for better hardware acceleration.
+- SumX2Base: Use `VectorTraitsBase.Statics.YGroup3UnzipX2`. For 8~16 bit integers, YGroup3UnzipX2 is generally faster than YGroup3Unzip, more so under earlier versions of .NET.
+- SumX2Traits: Use `Vectors.YGroup3UnzipX2`.
+
+#### YGroup3Unzip - Arm - AWS Arm t4g.small
+| Type  | Method        | .NET Core 3.1 | .NET 6.0 | .NET 7.0 | .NET 8.0 |
+| :---- | :------------ | ------------: | -------: | -------: | -------: |
+| Byte  | SumBase_Basic |       263.957 |  265.524 |  327.819 |  381.159 |
+| Byte  | SumBase       |       380.369 |  406.259 |  430.545 |  443.813 |
+| Byte  | SumTraits     |       378.710 | 4381.575 | 4113.304 | 6510.157 |
+| Byte  | SumX2Base     |       702.851 |  728.691 |  740.690 |  767.491 |
+| Byte  | SumX2Traits   |       700.539 | 4412.785 | 4273.763 | 5294.112 |
+| Int16 | SumBase_Basic |       188.885 |  189.823 |  222.856 |  279.398 |
+| Int16 | SumBase       |       213.360 |  228.410 |  235.157 |  242.377 |
+| Int16 | SumTraits     |       213.356 | 1926.559 | 2134.925 | 3037.124 |
+| Int16 | SumX2Base     |       419.434 |  448.638 |  466.043 |  475.565 |
+| Int16 | SumX2Traits   |       419.442 | 2413.794 | 2650.031 | 2638.161 |
+| Int32 | SumBase_Basic |       138.088 |  143.089 |  154.241 |  196.818 |
+| Int32 | SumBase       |       141.071 |  143.390 |  186.784 |  198.177 |
+| Int32 | SumTraits     |       144.696 | 1033.899 | 1069.974 | 1494.205 |
+| Int32 | SumX2Base     |       121.726 |  138.986 |  275.479 |  310.983 |
+| Int32 | SumX2Traits   |       119.468 | 1598.185 | 1547.795 | 1618.239 |
+| Int64 | SumBase_Basic |       109.766 |  100.523 |   84.039 |  189.270 |
+| Int64 | SumBase       |       109.531 |  102.084 |   81.358 |  185.056 |
+| Int64 | SumTraits     |       107.335 | 1153.333 | 1176.315 | 1191.362 |
+| Int64 | SumX2Base     |        97.857 |   96.111 |   79.729 |  203.008 |
+| Int64 | SumX2Traits   |        98.162 | 1216.716 | 1155.302 | 1374.619 |
 
 ### More results
 See: [BenchmarkResults](articles/BenchmarkResults/AVector/README.md)
