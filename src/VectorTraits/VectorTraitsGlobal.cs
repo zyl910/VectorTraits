@@ -28,7 +28,7 @@ namespace Zyl.VectorTraits {
         /// Do initialize (进行初始化).
         /// </summary>
         public static void Init() {
-            if (!m_Inited) return;
+            if (m_Inited) return;
             m_Inited = true;
             // Initialize on static constructor.
             // done.
