@@ -760,6 +760,10 @@ YGroup3UnzipX2: 将3-元素组解交织为3个向量, 且处理2倍数据.
 - DocFX: 运行 `docfx_serve.bat`. 随后浏览  http://localhost:8080/ .
 - Doxygen: 运行 Doxywizard, 点击菜单栏的 File->Open. 选择 `Doxyfile` 文件，并点击“OK”. 点击“Run”Tab, 点击“Run doxygen”按钮. 它会在“doc_gen”文件夹生成文档.
 
+### 更多样例
+
+- `VectorTraits.Sample.Benchmarks`(简单样例的基准测试): https://github.com/zyl910/VectorTraits.Sample.Benchmarks
+
 ## 变更日志
 
 完整列表: [ChangeLog](ChangeLog.md)
