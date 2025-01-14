@@ -5,6 +5,7 @@
     <TargetFramework>net8.0</TargetFramework>
       <Nullable>enable</Nullable>
       <RootNamespace>Zyl.VectorTraits.Sample</RootNamespace>
+      <PublishAot Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</PublishAot>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,8 @@
-# VectorTraits (向量特征)
+# VectorTraits
+
 [English](README.md) | Chinese(中文)
 
-VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
+VectorTraits 是一个增强SIMD向量运算的跨平台类库.
 
 [![NuGet](https://buildstats.info/nuget/VectorTraits)](https://www.nuget.org/packages/VectorTraits)
 
@@ -16,6 +17,16 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 - `Scalars<T>`: 为标量类型, 提供了许多常数. e.g. ExponentBits, MantissaBits, MantissaMask, MaxValue, MinValue, NormOne, FixedOne, E, Pi, Tau, VMaxByte, VReciprocalMaxSByte ...
 - `VectorTextUtil`: 提供了一些向量的文本性工具函数. e.g. GetHex, Format, WriteLine ...
 
+支持的指令集:
+- x86 (需要 .NET Core 3.0+)
+  - 128位向量: Sse, Sse2, Sse3, Ssse3, Sse41, Sse42. And 128-bit instructions from Avx family.
+  - 256位向量: Avx, Avx2. And 256-bit instructions from Avx512VL.
+  - 512位向量: Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi.
+- Arm (需要 .NET 5.0+)
+  - 128位向量: AdvSimd.
+- Wasm (需要 .NET 8.0+)
+  - 128位向量: PackedSimd.
+
 特征方法:
 - 支持 `.NET Standard 2.1` 新增的向量方法: ConvertToDouble, ConvertToInt32, ConvertToInt64, ConvertToSingle, ConvertToUInt32, ConvertToUInt64, Narrow, Widen .
 - 支持 `.NET 5.0` 新增的向量方法: Ceiling, Floor .
@@ -29,16 +40,6 @@ VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
 - 提供交织的向量方法: YGroup2Zip, YGroup2ZipHigh, YGroup2ZipLow, YGroup3Zip, YGroup3ZipX2, YGroup4Unzip, YGroup6Zip_Bit128.
 - ...
 - 完整列表: [TraitsMethodList](TraitsMethodList.md)
-
-支持的指令集:
-- x86 (需要 .NET Core 3.0+)
-  - 128位向量: Sse, Sse2, Sse3, Ssse3, Sse41, Sse42. And 128-bit instructions from Avx family.
-  - 256位向量: Avx, Avx2. And 256-bit instructions from Avx512VL.
-  - 512位向量: Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi.
-- Arm (需要 .NET 5.0+)
-  - 128位向量: AdvSimd.
-- Wasm (需要 .NET 8.0+)
-  - 128位向量: PackedSimd.
 
 ## 用途
 总所周知，使用SIMD指令集，能够加速 多媒体处理（图形、图像、音频、视频...）、人工智能、科学计算 等。

@@ -11,6 +11,8 @@ using System.Text;
 using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
+#nullable enable
+
     /// <summary>
     /// VectorTraits output info.
     /// </summary>
@@ -97,7 +99,13 @@ namespace Zyl.VectorTraits {
             //writer.WriteLine(string.Format("Vector4.Assembly:\t{0}", assembly));
             //writer.WriteLine(string.Format("Vector4.Assembly.CodeBase:\t{0}", assembly.CodeBase));
             assembly = typeof(Vector<float>).GetTypeInfo().Assembly;
-            writer.WriteLine(string.Format("Vector<T>.Assembly.CodeBase:\t{0}", assembly.CodeBase));
+            string? codeBase;
+            try {
+                codeBase = assembly.CodeBase;
+            } catch (Exception ex) {
+                codeBase = ex.Message;
+            }
+            writer.WriteLine(string.Format("Vector<T>.Assembly.CodeBase:\t{0}", codeBase));
             //assembly = typeof(Vector128<float>).GetTypeInfo().Assembly;
             //writer.WriteLine(string.Format("Vector128<T>.Assembly.CodeBase:\t{0}", assembly.CodeBase));
 #if (NET35 || NET20)
@@ -189,7 +197,11 @@ namespace Zyl.VectorTraits {
                 }while(used <= timeout);
                 if (!isAvailable) return null;
             }
+#pragma warning disable CA1416
             return Console.ReadKey(intercept);
+#pragma warning restore CA1416
         }
     }
+
+#nullable restore
 }

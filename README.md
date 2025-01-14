@@ -1,7 +1,8 @@
 # VectorTraits
+
 English | [Chinese(中文)](README_Chinese.md)
 
-VectorTraits: SIMD Vector type traits methods (SIMD向量类型的特征方法).
+VectorTraits is a cross-platform library that enhances SIMD vector operations.
 
 [![NuGet](https://buildstats.info/nuget/VectorTraits)](https://www.nuget.org/packages/VectorTraits)
 
@@ -16,6 +17,16 @@ Commonly Used Types:
 - `Scalars<T>`: For scalar types, a number of constants are provided. e.g. ExponentBits, MantissaBits, MantissaMask, MaxValue, MinValue, NormOne, FixedOne, E, Pi, Tau, VMaxByte, VReciprocalMaxSByte ...
 - `VectorTextUtil`: Provides some textual instrumental functions for vectors. e.g. GetHex, Format, WriteLine ...
 
+Supported instruction set:
+- x86 (Need .NET Core 3.0+)
+  - 128-bit vector: Sse, Sse2, Sse3, Ssse3, Sse41, Sse42. And 128-bit instructions from Avx family.
+  - 256-bit vector: Avx, Avx2. And 256-bit instructions from Avx512VL.
+  - 512-bit vector: Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi.
+- Arm (Need .NET 5.0+)
+  - 128-bit vector: AdvSimd.
+- Wasm (Need .NET 8.0+)
+  - 128-bit vector: PackedSimd.
+
 Traits methods:
 - Support for `.NET Standard 2.1` new vector methods: ConvertToDouble, ConvertToInt32, ConvertToInt64, ConvertToSingle, ConvertToUInt32, ConvertToUInt64, Narrow, Widen .
 - Support for `.NET 5.0` new vector methods: Ceiling, Floor .
@@ -29,16 +40,6 @@ Traits methods:
 - Provides vector methods for interleave: YGroup2Zip, YGroup2ZipHigh, YGroup2ZipLow, YGroup3Zip, YGroup3ZipX2, YGroup4Unzip, YGroup6Zip_Bit128.
 - ...
 - Full list: [TraitsMethodList](TraitsMethodList.md)
-
-Supported instruction set:
-- x86 (Need .NET Core 3.0+)
-  - 128-bit vector: Sse, Sse2, Sse3, Ssse3, Sse41, Sse42. And 128-bit instructions from Avx family.
-  - 256-bit vector: Avx, Avx2. And 256-bit instructions from Avx512VL.
-  - 512-bit vector: Avx512BW, Avx512DQ, Avx512F, Avx512Vbmi.
-- Arm (Need .NET 5.0+)
-  - 128-bit vector: AdvSimd.
-- Wasm (Need .NET 8.0+)
-  - 128-bit vector: PackedSimd.
 
 ## Purpose
 The SIMD instruction set is known to accelerate multimedia processing (graphics, images, audio, video, ...) , artificial intelligence, scientific computing, etc.
