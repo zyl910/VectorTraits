@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Numerics;
 using System.Reflection;
@@ -273,7 +274,15 @@ namespace Zyl.VectorTraits {
         }
 
         /// <inheritdoc cref="Format(string?, object?, IFormatProvider?)"/>
+#if NET5_0_OR_GREATER
+        [RequiresUnreferencedCode("Use 'Format_Reflection' instead")]
+#endif // NET5_0_OR_GREATER
         public string Format_Dynamic(string? format, object arg, IFormatProvider formatProvider) {
+#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER
+            //if (!RuntimeFeature.IsDynamicCodeSupported) {
+            //    throw new NotSupportedException("Not supported DynamicCode at Format_Dynamic!");
+            //}
+#endif
             return CallFormat(format, arg as dynamic, formatProvider);
         }
 
@@ -299,7 +308,12 @@ namespace Zyl.VectorTraits {
                         methodInfo = null;
                     }
                     if (null == methodInfo && null != found.SourceMethodInfo) {
+#pragma warning disable IL2060 // Call to 'System.Reflection.MethodInfo.MakeGenericMethod' can not be statically analyzed. It's not possible to guarantee the availability of requirements of the generic method.
+#pragma warning disable IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
+                        // Fixed the exception of MakeGenericMethod in ExVectorFormatter.Format_Reflection method on AOT - GetHashByAllCallFormat
                         methodInfo = found.SourceMethodInfo.MakeGenericMethod(typeMethodArguments);
+#pragma warning restore IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
+#pragma warning restore IL2060 // Call to 'System.Reflection.MethodInfo.MakeGenericMethod' can not be statically analyzed. It's not possible to guarantee the availability of requirements of the generic method.
                         found.Buffer.Add(typeMethodArgument, methodInfo);
                     }
                     if (null != methodInfo) {
