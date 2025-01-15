@@ -1,4 +1,12 @@
-﻿using System;
+﻿#define Use_Format_Reflection // Fix AoT.
+#if NET5_0_OR_GREATER
+#define BCL_TYPE_HALF
+#endif // NET5_0_OR_GREATER
+#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Numerics;
@@ -8,6 +16,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 #endif
 using System.Text;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits {
     /// <summary>
@@ -255,7 +264,7 @@ namespace Zyl.VectorTraits {
             if (arg == null) return string.Empty;
             IFormatProvider provider = NextProvider ?? CultureInfo.CurrentCulture;
             string rt;
-#if NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_0_OR_GREATER
+#if Use_Format_Reflection && (NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_0_OR_GREATER)
             rt = Format_Reflection(format, arg, provider);
 #else
             rt = Format_Dynamic(format, arg, provider);
@@ -268,7 +277,7 @@ namespace Zyl.VectorTraits {
             return CallFormat(format, arg as dynamic, formatProvider);
         }
 
-#if NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_0_OR_GREATER
+#if Use_Format_Reflection && (NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_0_OR_GREATER)
 
         /// <inheritdoc cref="Format(string?, object?, IFormatProvider?)"/>
         public string Format_Reflection(string? format, object arg, IFormatProvider formatProvider) {
@@ -321,6 +330,34 @@ namespace Zyl.VectorTraits {
 
         private static readonly List<MethodInfoBuffer> _methodInfoBufferList = new List<MethodInfoBuffer>();
 
+        /// <summary>
+        /// Get the hash of the return value of all CallFormat methods. It is used to fill metadata for AOT (取得所有CallFormat方法的返回值的hash. 它用于AOT时填充元数据).
+        /// </summary>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        /// <param name="format"></param>
+        /// <param name="formatProvider"></param>
+        /// <returns></returns>
+        public static int GetHashByAllCallFormat<T>(string? format = null, IFormatProvider? formatProvider = null) where T : struct {
+            int rt = 0;
+            if (null == format) format = "{0}";
+            if (null== formatProvider) formatProvider = CultureInfo.CurrentCulture;
+            int byteSize = Unsafe.SizeOf<T>();
+            try {
+                if (byteSize <= Vector<byte>.Count) rt ^= CallFormat(format, Vectors<T>.Zero, formatProvider).GetHashCode();
+#if NETCOREAPP3_0_OR_GREATER
+                if (byteSize <= Vector64<byte>.Count) rt ^= CallFormat(format, Vector64s<T>.Zero, formatProvider).GetHashCode();
+                if (byteSize <= Vector128<byte>.Count) rt ^= CallFormat(format, Vector128s<T>.Zero, formatProvider).GetHashCode();
+                if (byteSize <= Vector256<byte>.Count) rt ^= CallFormat(format, Vector256s<T>.Zero, formatProvider).GetHashCode();
+#endif
+#if NET8_0_OR_GREATER
+                if (byteSize <= Vector512<byte>.Count) rt ^= CallFormat(format, Vector512s<T>.Zero, formatProvider).GetHashCode();
+#endif
+            } catch (Exception ex) {
+                Console.WriteLine(string.Format("Not support `{0}` type! {1}", typeof(T).Name , ex.ToString()));
+            }
+            return rt;
+        }
+
         static ExVectorFormatter() {
             const BindingFlags flags = BindingFlags.Static | BindingFlags.NonPublic;
             Type selfType = typeof(ExVectorFormatter);
@@ -335,6 +372,31 @@ namespace Zyl.VectorTraits {
 #if NET8_0_OR_GREATER
             _methodInfoBufferList.Add(new MethodInfoBuffer(typeof(Vector512<>), selfType.GetMethod(nameof(CallFormat_Vector512), flags)));
 #endif
+            // Fill metadata for AOT.
+            int hash = 0;
+            hash ^= GetHashByAllCallFormat<float>();
+            hash ^= GetHashByAllCallFormat<double>();
+            hash ^= GetHashByAllCallFormat<sbyte>();
+            hash ^= GetHashByAllCallFormat<byte>();
+            hash ^= GetHashByAllCallFormat<short>();
+            hash ^= GetHashByAllCallFormat<ushort>();
+            hash ^= GetHashByAllCallFormat<int>();
+            hash ^= GetHashByAllCallFormat<uint>();
+            hash ^= GetHashByAllCallFormat<long>();
+            hash ^= GetHashByAllCallFormat<ulong>();
+            hash ^= GetHashByAllCallFormat<ExInt128>();
+            hash ^= GetHashByAllCallFormat<ExUInt128>();
+#if BCL_TYPE_INT128
+            hash ^= GetHashByAllCallFormat<Int128>();
+            hash ^= GetHashByAllCallFormat<UInt128>();
+#endif // BCL_TYPE_INT128
+#if NET7_0_OR_GREATER
+            hash ^= GetHashByAllCallFormat<nint>();
+            hash ^= GetHashByAllCallFormat<nuint>();
+#endif // NET7_0_OR_GREATER
+#if BCL_TYPE_HALF
+            //hash ^= GetHashByAllCallFormat<Half>(); // TODO: Need vector type supported Half.
+#endif // BCL_TYPE_HALF
         }
 
 #endif

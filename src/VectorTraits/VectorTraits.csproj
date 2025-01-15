@@ -57,6 +57,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>$(DefineConstants);SOFTWARE_OPTIMIZATION;HARDWARE_OPTIMIZATION;BCL_OVERRIDE_BASE_FIXED;BCL_OVERRIDE_BASE_VAR;BCL_VER_OVERRIDE_STATIC;EX_APPLY_GENERIC0;USE_VECTOR_CREATE_BY_ARRAY;REDUCE_MEMORY_USAGE</DefineConstants>
 
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Title>VectorTraits</Title>
     <AssemblyTitle>$(Title)</AssemblyTitle>
