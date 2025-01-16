@@ -31,7 +31,7 @@ namespace Zyl.VectorTraits {
         };
 
         // Statics types (静态类型集).
-        private static readonly Type[] _staticsTypes = {
+        private static readonly WrappedType[] _staticsTypes = {
             typeof(WVectorTraits256Base.Statics),
             typeof(WVectorTraits256Avx2.Statics)
         };
@@ -69,7 +69,7 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>Statics types (静态类型集). </summary>
-        public static IReadOnlyList<Type> StaticsTypes {
+        public static IReadOnlyList<WrappedType> StaticsTypes {
             get { return _staticsTypes; }
         }
 

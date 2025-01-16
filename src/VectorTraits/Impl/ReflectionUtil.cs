@@ -4,14 +4,27 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Zyl.VectorTraits.Impl.Attributes;
 using Zyl.VectorTraits.Impl.AVector;
 using Zyl.VectorTraits.Impl.AVector256;
 
 namespace Zyl.VectorTraits.Impl {
+#if NET5_0_OR_GREATER
+    using RequiresUnreferencedCode_TypesAttribute = RequiresUnreferencedCodeAttribute;
+#else
+    using RequiresUnreferencedCode_TypesAttribute = FakeRequiresUnreferencedCodeAttribute;
+#endif // NET5_0_OR_GREATER
+
     /// <summary>
     /// Reflection util (反射工具).
     /// </summary>
     public static class ReflectionUtil {
+        // /// <summary>
+        // /// IncompatibleWithTrimmingMessage - The types parameter of Gets SupportedMethodListcallbacks is incompatible with trimming. Please use this method when it is not AOT, such as JIT (GetSupportedMethodListCallback 的types参数，是剪裁不兼容的. 请在非AOT时使用本方法，如JIT时).
+        // /// </summary>
+        // public const string TypesIncompatibleWithTrimmingMessage = "The types parameter of Gets SupportedMethodListcallbacks is incompatible with trimming. Please use this method when it is not AOT, such as JIT (GetSupportedMethodListCallback 的types参数，是剪裁不兼容的. 请在非AOT时使用本方法，如JIT时).";
+
+
         // GetIsSupported - ParameterTypes
         private static readonly Type[] GetIsSupported_ParameterTypes = {
             typeof(bool)
@@ -109,30 +122,31 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="types">Source type list (源类型列表).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method count (返回方法数量)</returns>
+        // [RequiresUnreferencedCode_Types(TypesIncompatibleWithTrimmingMessage)]
         public static int GetSupportedMethodListCallback<
 #if NET5_0_OR_GREATER
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] 
 #endif // NET5_0_OR_GREATER
                 T>(Action<T> callback, Predicate<Type>? checkType,
 #if NET5_0_OR_GREATER
-                //[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] // warning IL2098: Parameter 'types' of method 'Zyl.VectorTraits.Impl.ReflectionUtil.GetSupportedMethodListCallback<T>(Action<T>, Predicate<Type>, IEnumerable<Type>, params String[])' has 'DynamicallyAccessedMembersAttribute', but that attribute can only be applied to parameters of type 'System.Type' or 'System.String'.
+                //[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] // warning IL2098: Parameter 'types' of method 'Zyl.VectorTraits.Impl.ReflectionUtil.GetSupportedMethodListCallback<T>(Action<T>, Predicate<Type>, IEnumerable<WrappedType>, params String[])' has 'DynamicallyAccessedMembersAttribute', but that attribute can only be applied to parameters of type 'System.Type' or 'System.String'.
 #endif // NET5_0_OR_GREATER
-                IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+                IEnumerable<WrappedType> types, params string[] methodNames) where T : Delegate {
             int rt = 0;
             if (null == checkType) checkType = TypeInvokeGetIsSupported;
             Type tType = typeof(T);
             MethodInfo? tMethod = GetMethod(tType, "Invoke");
             if (null == tMethod) return rt;
             Type[] parameterTypes = GetParameterTypes(tMethod);
-            foreach (Type tp in types) {
+            foreach (WrappedType tp in types) {
                 if (null == tp) continue;
                 // check.
-                bool isSupported = checkType(tp);
+                bool isSupported = checkType(tp.Type);
                 if (!isSupported) continue;
                 // get.
                 foreach (string methodName in methodNames) {
                     if (string.IsNullOrEmpty(methodName)) continue;
-                    MethodInfo? method = tp.GetRuntimeMethod(methodName, parameterTypes);
+                    MethodInfo? method = tp.Type.GetRuntimeMethod(methodName, parameterTypes);
                     if (null == method) continue;
                     T obj = (T)method.CreateDelegate(tType);
                     callback(obj);
@@ -164,7 +178,7 @@ namespace Zyl.VectorTraits.Impl {
 #if NET5_0_OR_GREATER
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] 
 #endif // NET5_0_OR_GREATER
-                T>(Action<T> callback, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+                T>(Action<T> callback, IEnumerable<WrappedType> types, params string[] methodNames) where T : Delegate {
             int rt = GetSupportedMethodListCallback(callback, TypeInvokeGetIsSupported, types, methodNames);
             return rt;
         }
@@ -181,7 +195,7 @@ namespace Zyl.VectorTraits.Impl {
 #if NET5_0_OR_GREATER
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] 
 #endif // NET5_0_OR_GREATER
-                T>(ICollection<T> output, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+                T>(ICollection<T> output, IEnumerable<WrappedType> types, params string[] methodNames) where T : Delegate {
             int rt = GetSupportedMethodListCallback(delegate (T x) {
                 output.Add(x);
             }, types, methodNames);
@@ -199,7 +213,7 @@ namespace Zyl.VectorTraits.Impl {
 #if NET5_0_OR_GREATER
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
 #endif // NET5_0_OR_GREATER
-                T>(IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+                T>(IEnumerable<WrappedType> types, params string[] methodNames) where T : Delegate {
             List<T> rt = new List<T>();
             int cnt = GetSupportedMethodListFill(rt, types, methodNames);
             if (cnt > 0) {
