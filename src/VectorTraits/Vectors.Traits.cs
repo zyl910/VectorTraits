@@ -121,7 +121,11 @@ namespace Zyl.VectorTraits {
         /// <param name="callback">Output callback (输出的回调).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method count (返回方法数量)</returns>
-        public static int GetSupportedMethodListCallback<T>(Action<T> callback, params string[] methodNames) where T : Delegate {
+        public static int GetSupportedMethodListCallback<
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+#endif // NET5_0_OR_GREATER
+                T>(Action<T> callback, params string[] methodNames) where T : Delegate {
             return ReflectionUtil.GetSupportedMethodListCallback(callback, _staticsTypes, methodNames);
         }
 
@@ -132,7 +136,11 @@ namespace Zyl.VectorTraits {
         /// <param name="output">Output target (输出目标).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method count (返回方法数量)</returns>
-        public static int GetSupportedMethodListFill<T>(ICollection<T> output, params string[] methodNames) where T : Delegate {
+        public static int GetSupportedMethodListFill<
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+#endif // NET5_0_OR_GREATER
+                T>(ICollection<T> output, params string[] methodNames) where T : Delegate {
             return ReflectionUtil.GetSupportedMethodListFill(output, _staticsTypes, methodNames);
         }
 
@@ -142,7 +150,11 @@ namespace Zyl.VectorTraits {
         /// <typeparam name="T">Delegate type (委托类型).</typeparam>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method list (返回方法列表)</returns>
-        public static List<T> GetSupportedMethodList<T>(params string[] methodNames) where T : Delegate {
+        public static List<T> GetSupportedMethodList<
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+#endif // NET5_0_OR_GREATER
+                T>(params string[] methodNames) where T : Delegate {
             return ReflectionUtil.GetSupportedMethodList<T>(_staticsTypes, methodNames);
         }
 

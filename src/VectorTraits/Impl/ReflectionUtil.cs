@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -52,7 +53,11 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="atype">The type (当前类型).</param>
         /// <param name="name">The string containing the name of the public method to get (包含要获取的公共方法的名称的字符串).</param>
         /// <returns>An object that represents the public method with the specified name, if found; otherwise, null (表示具有指定名称的公共方法的对象（如果找到的话）；否则为 null).</returns>
-        public static MethodInfo? GetMethod(Type atype, string name) {
+        public static MethodInfo? GetMethod(
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type atype, string name) {
 #if NET20_OR_GREATER || NETSTANDARD2_0_OR_GREATER || NETCOREAPP2_0_OR_GREATER
             return atype.GetMethod(name);
 #else
@@ -84,7 +89,11 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="atype">Target type (目标类型.).</param>
         /// <returns>Returns the value of <see cref="IBaseTraits.GetIsSupported"/> method (返回 GetIsSupported 方法的值).</returns>
-        public static bool TypeInvokeGetIsSupported(Type atype) {
+        public static bool TypeInvokeGetIsSupported(
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type atype) {
             MethodInfo? getIsSupportedMethod = atype.GetRuntimeMethod("GetIsSupported", GetIsSupported_ParameterTypes);
             if (null == getIsSupportedMethod) return false;
             bool isSupported = (bool)getIsSupportedMethod.Invoke(null, GetIsSupported_ParameterValues)!;
@@ -100,7 +109,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="types">Source type list (源类型列表).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method count (返回方法数量)</returns>
-        public static int GetSupportedMethodListCallback<T>(Action<T> callback, Predicate<Type>? checkType, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+        public static int GetSupportedMethodListCallback<
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                T>(Action<T> callback, Predicate<Type>? checkType,
+#if NET5_0_OR_GREATER
+                //[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] // warning IL2098: Parameter 'types' of method 'Zyl.VectorTraits.Impl.ReflectionUtil.GetSupportedMethodListCallback<T>(Action<T>, Predicate<Type>, IEnumerable<Type>, params String[])' has 'DynamicallyAccessedMembersAttribute', but that attribute can only be applied to parameters of type 'System.Type' or 'System.String'.
+#endif // NET5_0_OR_GREATER
+                IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
             int rt = 0;
             if (null == checkType) checkType = TypeInvokeGetIsSupported;
             Type tType = typeof(T);
@@ -125,6 +142,16 @@ namespace Zyl.VectorTraits.Impl {
             return rt;
         }
 
+        // MethodInfo? method = GetRuntimeMethodByName(tp.FullName, methodName, parameterTypes); // warning IL2072: 'typeName' argument does not satisfy 'DynamicallyAccessedMemberTypes.PublicMethods' in call to 'Zyl.VectorTraits.Impl.ReflectionUtil.GetRuntimeMethodByName(String, String, Type[])'. The return value of method 'System.Type.FullName.get' does not have matching annotations. The source value must declare at least the same requirements as those declared on the target location it is assigned to.
+        //        private static MethodInfo? GetRuntimeMethodByName(
+        //#if NET5_0_OR_GREATER
+        //                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] 
+        //#endif // NET5_0_OR_GREATER
+        //                string typeName, string name, Type[] parameters) {
+        //            Type? tp = Type.GetType(typeName);
+        //            return tp?.GetRuntimeMethod(name, parameters);
+        //        }
+
         /// <summary>
         /// Get supported method list and output <paramref name="callback"/> (取得支持的方法列表并输出到  <paramref name="callback"/> ).
         /// </summary>
@@ -133,7 +160,11 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="types">Source type list (源类型列表).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method count (返回方法数量)</returns>
-        public static int GetSupportedMethodListCallback<T>(Action<T> callback, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+        public static int GetSupportedMethodListCallback<
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                T>(Action<T> callback, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
             int rt = GetSupportedMethodListCallback(callback, TypeInvokeGetIsSupported, types, methodNames);
             return rt;
         }
@@ -146,7 +177,11 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="types">Source type list (源类型列表).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method count (返回方法数量)</returns>
-        public static int GetSupportedMethodListFill<T>(ICollection<T> output, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+        public static int GetSupportedMethodListFill<
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                T>(ICollection<T> output, IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
             int rt = GetSupportedMethodListCallback(delegate (T x) {
                 output.Add(x);
             }, types, methodNames);
@@ -160,7 +195,11 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="types">Source type list (源类型列表).</param>
         /// <param name="methodNames">Method name list (方法名列表).</param>
         /// <returns>Returns method list (返回方法列表)</returns>
-        public static List<T> GetSupportedMethodList<T>(IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
+        public static List<T> GetSupportedMethodList<
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+#endif // NET5_0_OR_GREATER
+                T>(IEnumerable<Type> types, params string[] methodNames) where T : Delegate {
             List<T> rt = new List<T>();
             int cnt = GetSupportedMethodListFill(rt, types, methodNames);
             if (cnt > 0) {
@@ -173,7 +212,11 @@ namespace Zyl.VectorTraits.Impl {
         /// </summary>
         /// <param name="aType">The type (类型).</param>
         /// <returns>Returns methods group (返回方法组).</returns>
-        public static SortedDictionary<string, List<MethodInfo>> GetMethodGroup(Type aType) {
+        public static SortedDictionary<string, List<MethodInfo>> GetMethodGroup(
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type aType) {
             var methods = aType.GetRuntimeMethods();
             var groupBy = methods.GroupBy(o => o.Name)
                 .ToDictionary(g => g.Key, g => g.ToList());
@@ -290,7 +333,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="onMissed">The callback function for finding a missed method (找到未命中方法时的回调函数). Prototype: <c>bool isIgnore = onMissed(MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata)</c>. If it is null, <see cref="OnMissed_Default"/> will be used.</param>
         /// <param name="userdata">The userdata.</param>
         /// <returns>Returns the number of missed methods. Specifically, the number of times when <paramref name="onMissed"/> returns false (返回未命中方法的个数。具体来说，是 <paramref name="onMissed"/> 返回false的次数).</returns>
-        public static int CheckBindMethodsOn(Func<MethodInfo, MethodInfo, bool> funcEquals, Type staticType, Type objectType, IDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
+        public static int CheckBindMethodsOn(Func<MethodInfo, MethodInfo, bool> funcEquals,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type staticType,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type objectType, IDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
             int rt = 0;
             if (null == onMissed) onMissed = OnMissed_Default;
             var staticDictionaryBy = staticType.GetRuntimeMethods()
@@ -343,7 +394,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="onMissed">The callback function for finding a missed method (找到未命中方法时的回调函数). Prototype: <c>bool isIgnore = onMissed(MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata)</c>. If it is null, <see cref="OnMissed_Default"/> will be used.</param>
         /// <param name="userdata">The userdata.</param>
         /// <returns>Returns the number of missed methods. Specifically, the number of times when <paramref name="onMissed"/> returns false (返回未命中方法的个数。具体来说，是 <paramref name="onMissed"/> 返回false的次数).</returns>
-        public static int CheckBindMethods(Type staticType, Type objectType, IDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
+        public static int CheckBindMethods(
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type staticType,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type objectType, IDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
             int rt = CheckBindMethodsOn(EqualsParametersType, staticType, objectType, interfaceMethodsDictionary, onMissed, userdata);
             return rt;
         }
@@ -357,7 +416,19 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="onMissed">The callback function for finding a missed method (找到未命中方法时的回调函数). Prototype: <c>bool isIgnore = onMissed(MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata)</c>. If it is null, <see cref="OnMissed_Default"/> will be used.</param>
         /// <param name="userdata">The userdata.</param>
         /// <returns>Returns the number of missed methods. Specifically, the number of times when <paramref name="onMissed"/> returns false (返回未命中方法的个数。具体来说，是 <paramref name="onMissed"/> 返回false的次数).</returns>
-        public static int CheckBindMethods(Type staticType, Type objectType, Type? interfaceType, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
+        public static int CheckBindMethods(
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type staticType,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type objectType,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type? interfaceType, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
             SortedDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary = null;
             if (null != interfaceType) {
                 interfaceMethodsDictionary = GetMethodGroup(interfaceType);
@@ -375,7 +446,15 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="onMissed">The callback function for finding a missed method (找到未命中方法时的回调函数). Prototype: <c>bool isIgnore = onMissed(MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata)</c>. If it is null, <see cref="OnMissed_Default"/> will be used.</param>
         /// <param name="userdata">The userdata.</param>
         /// <returns>Returns the number of missed methods. Specifically, the number of times when <paramref name="onMissed"/> returns false (返回未命中方法的个数。具体来说，是 <paramref name="onMissed"/> 返回false的次数).</returns>
-        public static int CheckBindMethodsAnyVector(Type staticType, Type objectType, IDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
+        public static int CheckBindMethodsAnyVector(
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type staticType,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type objectType, IDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
             int rt = CheckBindMethodsOn(EqualsParametersTypeAnyVector, staticType, objectType, interfaceMethodsDictionary, onMissed, userdata);
             return rt;
         }
@@ -389,7 +468,19 @@ namespace Zyl.VectorTraits.Impl {
         /// <param name="onMissed">The callback function for finding a missed method (找到未命中方法时的回调函数). Prototype: <c>bool isIgnore = onMissed(MethodInfo methodStatic, MethodInfo? methodInterface, object? userdata)</c>. If it is null, <see cref="OnMissed_Default"/> will be used.</param>
         /// <param name="userdata">The userdata.</param>
         /// <returns>Returns the number of missed methods. Specifically, the number of times when <paramref name="onMissed"/> returns false (返回未命中方法的个数。具体来说，是 <paramref name="onMissed"/> 返回false的次数).</returns>
-        public static int CheckBindMethodsAnyVector(Type staticType, Type objectType, Type? interfaceType, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
+        public static int CheckBindMethodsAnyVector(
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type staticType,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type objectType,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods | DynamicallyAccessedMemberTypes.NonPublicMethods)] 
+#endif // NET5_0_OR_GREATER
+                Type? interfaceType, Func<MethodInfo, MethodInfo?, object?, bool>? onMissed = null, object? userdata = null) {
             SortedDictionary<string, List<MethodInfo>>? interfaceMethodsDictionary = null;
             if (null != interfaceType) {
                 interfaceMethodsDictionary = GetMethodGroup(interfaceType);
