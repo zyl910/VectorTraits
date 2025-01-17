@@ -1,7 +1,12 @@
-﻿using System;
+﻿#if NET7_0_OR_GREATER
+#define BCL_TYPE_INT128
+#endif // NET7_0_OR_GREATER
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Numerics;
@@ -13,6 +18,7 @@ using System.Runtime.Intrinsics;
 #endif
 using System.Text;
 using Zyl.VectorTraits.Extensions;
+using Zyl.VectorTraits.ExTypes;
 
 namespace Zyl.VectorTraits {
     /// <summary>
@@ -68,6 +74,83 @@ namespace Zyl.VectorTraits {
 
 
         // == Hex ==
+
+        /// <summary>
+        /// Gets a hexadecimal string by object and outputs it to <see cref="Action"/> (根据对象取得十六进制字符串, 并输出到 <see cref="Action"/> ).
+        /// </summary>
+        /// <param name="action">Output action (输出动作).</param>
+        /// <param name="src">Source value (源值).</param>
+        /// <param name="separator">(Ignore) The separator (分隔符).</param>
+        /// <param name="noFixEndian">(Ignore) No fix endian (不修正端序).</param>
+        /// <returns>Returns the length of the output string (返回输出字符串的长度).</returns>
+        internal static int GetHexToByObject(Action<string> action, object? src, string? separator = null, bool noFixEndian = false) {
+            int rt = 0;
+            if (null == src) return rt;
+#if NETCOREAPP3_0_OR_GREATER
+            if (!RuntimeFeature.IsDynamicCodeSupported) {
+                return GetHexToByObject_Switch(action, src, separator, noFixEndian);
+            }
+#endif // NETCOREAPP3_0_OR_GREATER
+            rt = GetHexToByObject_Dynamic(action, src, separator, noFixEndian);
+            return rt;
+        }
+
+        /// <inheritdoc cref="GetHexToByObject"/>
+#if NET7_0_OR_GREATER
+        //[RequiresDynamicCode("Use 'GetHexToByObject_Switch' instead")]
+#endif // NET7_0_OR_GREATER
+        private static int GetHexToByObject_Dynamic(Action<string> action, object src, string? separator = null, bool noFixEndian = false) {
+            return GetHexTo(action, src as dynamic, separator, noFixEndian);
+        }
+
+        /// <inheritdoc cref="GetHexToByObject"/>
+        private static int GetHexToByObject_Switch(Action<string> action, object src, string? separator = null, bool noFixEndian = false) {
+            int rt;
+            rt = GetHexToByObject_SwitchType<float>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<double>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<sbyte>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<byte>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<short>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<ushort>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<int>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<uint>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<long>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<ulong>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<ExInt128>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<ExUInt128>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+#if BCL_TYPE_INT128
+            rt = GetHexToByObject_SwitchType<Int128>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<UInt128>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+#endif // BCL_TYPE_INT128
+#if NET7_0_OR_GREATER
+            rt = GetHexToByObject_SwitchType<nint>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+            rt = GetHexToByObject_SwitchType<nuint>(action, src, separator, noFixEndian); if (0 != rt) return rt;
+#endif // NET7_0_OR_GREATER
+            // Base object.
+            string hex = GetHexByBaseObject(src, separator, noFixEndian);
+            if (!string.IsNullOrEmpty(hex)) {
+                action(hex);
+                rt += hex.Length;
+            }
+            return rt;
+        }
+
+        /// <inheritdoc cref="GetHexToByObject"/>
+        /// <typeparam name="T">The vector element type (向量中的元素的类型).</typeparam>
+        private static int GetHexToByObject_SwitchType<T>(Action<string> action, object src, string? separator = null, bool noFixEndian = false) where T : struct {
+            int rt = 0;
+            Type objType = src.GetType();
+            if (typeof(Vector<T>).Equals(objType)) rt = GetHexTo(action, (Vector<T>)src, separator, noFixEndian);
+#if NETCOREAPP3_0_OR_GREATER
+            else if (typeof(Vector64<T>).Equals(objType)) rt = GetHexTo(action, (Vector64<T>)src, separator, noFixEndian);
+            else if (typeof(Vector128<T>).Equals(objType)) rt = GetHexTo(action, (Vector128<T>)src, separator, noFixEndian);
+            else if (typeof(Vector256<T>).Equals(objType)) rt = GetHexTo(action, (Vector256<T>)src, separator, noFixEndian);
+#endif
+#if NET8_0_OR_GREATER
+            else if (typeof(Vector512<T>).Equals(objType)) rt = GetHexTo(action, (Vector512<T>)src, separator, noFixEndian);
+#endif
+            return rt;
+        }
 
         /// <summary>
         /// Gets a hexadecimal string and outputs it to <see cref="Action"/> (取得十六进制字符串, 并输出到 <see cref="Action"/> ).
@@ -355,14 +438,13 @@ namespace Zyl.VectorTraits {
 #endif // NET8_0_OR_GREATER
 
         /// <summary>
-        /// Get hexadecimal string (取得十六进制字符串).
+        /// Get hexadecimal string by base object (从基本对象取得十六进制字符串).
         /// </summary>
-        /// <typeparam name="T">The type of the <paramref name="src"/> value (源值的类型).</typeparam>
         /// <param name="src">Source value (源值).</param>
         /// <param name="separator">(Ignore) The separator (分隔符).</param>
         /// <param name="noFixEndian">(Ignore) No fix endian (不修正端序).</param>
         /// <returns>Returns hexadecimal string (返回十六进制字符串).</returns>
-        public static string GetHex<T>(T? src, string? separator = null, bool noFixEndian = false) {
+        public static string GetHexByBaseObject(object? src, string? separator = null, bool noFixEndian = false) {
             string rt = string.Empty;
             if (null == src) return rt;
             if (null == separator) { } // Ignore warning disable 0168
@@ -380,6 +462,18 @@ namespace Zyl.VectorTraits {
                 rt = formattable.ToString(format, null);
             }
             return rt;
+        }
+
+        /// <summary>
+        /// Get hexadecimal string (取得十六进制字符串).
+        /// </summary>
+        /// <typeparam name="T">The type of the <paramref name="src"/> value (源值的类型).</typeparam>
+        /// <param name="src">Source value (源值).</param>
+        /// <param name="separator">(Ignore) The separator (分隔符).</param>
+        /// <param name="noFixEndian">(Ignore) No fix endian (不修正端序).</param>
+        /// <returns>Returns hexadecimal string (返回十六进制字符串).</returns>
+        public static string GetHex<T>(T? src, string? separator = null, bool noFixEndian = false) {
+            return GetHexByBaseObject(src, separator, noFixEndian);
         }
 
         /// <summary>
@@ -516,7 +610,7 @@ namespace Zyl.VectorTraits {
                                 // process str.
                                 action(str);
                             };
-                            int n = GetHexTo(actionHex, src as dynamic, " ", false);
+                            int n = GetHexToByObject(actionHex, src, " ", false);
                             rt += n;
                             if (n > 0) {
                                 // end.
