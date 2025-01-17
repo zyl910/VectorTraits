@@ -289,6 +289,10 @@ namespace Zyl.VectorTraits {
 #if Use_Format_Reflection && (NETCOREAPP1_0_OR_GREATER || NETSTANDARD2_0_OR_GREATER)
 
         /// <inheritdoc cref="Format(string?, object?, IFormatProvider?)"/>
+#if NET5_0_OR_GREATER
+        [UnconditionalSuppressMessage("AOT", "IL2060:Call to 'MakeGenericMethod' can not be statically analyzed. It's not possible to guarantee the availability of requirements of the generic method.", Justification = "Fixed the exception of MakeGenericMethod. Before se GetHashByAllCallFormat")]
+        [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "Fixed the exception of MakeGenericMethod. Before se GetHashByAllCallFormat")]
+#endif // NET5_0_OR_GREATER
         public string Format_Reflection(string? format, object arg, IFormatProvider formatProvider) {
             Type argType = arg.GetType();
             MethodInfoBuffer? found = null;

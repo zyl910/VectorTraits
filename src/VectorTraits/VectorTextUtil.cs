@@ -96,9 +96,9 @@ namespace Zyl.VectorTraits {
         }
 
         /// <inheritdoc cref="GetHexToByObject"/>
-#if NET7_0_OR_GREATER
-        //[RequiresDynamicCode("Use 'GetHexToByObject_Switch' instead")]
-#endif // NET7_0_OR_GREATER
+#if NET5_0_OR_GREATER
+        [UnconditionalSuppressMessage("AOT", "IL2026:Members attributed with RequiresUnreferencedCode may break when trimming", Justification = "Use 'GetHexToByObject_Switch' instead")]
+#endif // NET5_0_OR_GREATER
         private static int GetHexToByObject_Dynamic(Action<string> action, object src, string? separator = null, bool noFixEndian = false) {
             return GetHexTo(action, src as dynamic, separator, noFixEndian);
         }
