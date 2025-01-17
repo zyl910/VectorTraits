@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Numerics;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
@@ -64,6 +65,10 @@ namespace Zyl.VectorTraits {
             writer.WriteLine(indent + string.Format("Environment.OSVersion:\t{0}", Environment.OSVersion)); // Same RuntimeInformation.OSDescription. .Net framework does not recognize Windows 10 .
             writer.WriteLine(indent + string.Format("Environment.Version:\t{0}", Environment.Version));
             writer.WriteLine(indent + string.Format("Stopwatch.Frequency:\t{0}", Stopwatch.Frequency));
+#if NETCOREAPP3_0_OR_GREATER
+            writer.WriteLine(indent + string.Format("RuntimeFeature.IsDynamicCodeCompiled:\t{0}", RuntimeFeature.IsDynamicCodeCompiled));
+            writer.WriteLine(indent + string.Format("RuntimeFeature.IsDynamicCodeSupported:\t{0}", RuntimeFeature.IsDynamicCodeSupported));
+#endif // NETCOREAPP3_0_OR_GREATER
             //writer.WriteLine(indent + string.Format("RuntimeEnvironment.GetSystemVersion:\t{0}", System.Runtime.InteropServices.RuntimeEnvironment.GetSystemVersion())); // Same Environment.Version
             writer.WriteLine(indent + string.Format("RuntimeEnvironment.GetRuntimeDirectory:\t{0}", System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory()));
 #if (NET47 || NET462 || NET461 || NET46 || NET452 || NET451 || NET45 || NET40 || NET35 || NET20) || (NETSTANDARD1_0)
