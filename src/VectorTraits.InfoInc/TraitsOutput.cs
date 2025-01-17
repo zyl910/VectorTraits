@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Numerics;
 using System.Reflection;
@@ -101,7 +102,7 @@ namespace Zyl.VectorTraits {
             assembly = typeof(Vector<float>).GetTypeInfo().Assembly;
             string? codeBase;
             try {
-                codeBase = assembly.CodeBase;
+                codeBase = GetCodeBase(assembly);
             } catch (Exception ex) {
                 codeBase = ex.Message;
             }
@@ -140,6 +141,20 @@ namespace Zyl.VectorTraits {
 #endif // NET8_0_OR_GREATER
             writer.WriteLine(indent + string.Format("Vectors.Instance:\t{0}\t// {1}", Vectors.Instance.GetType().Name, Vectors.Instance.UsedInstructionSets));
             //writer.WriteLine();
+        }
+
+        /// <summary>
+        /// Get CodeBase.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        /// <returns>Returns CodeBase.</returns>
+#if NET5_0_OR_GREATER
+        [UnconditionalSuppressMessage("SingleFile", "IL3002:Avoid calling members marked with 'RequiresAssemblyFilesAttribute' when publishing as a single-file", Justification = "Try catch")]
+#endif // NET5_0_OR_GREATER
+        private static string? GetCodeBase(Assembly assembly) {
+#pragma warning disable SYSLIB0012 // Type or member is obsolete
+            return assembly.CodeBase;
+#pragma warning restore SYSLIB0012 // Type or member is obsolete
         }
 
         /// <summary>

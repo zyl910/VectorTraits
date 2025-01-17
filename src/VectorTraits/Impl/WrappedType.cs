@@ -9,6 +9,11 @@ namespace Zyl.VectorTraits.Impl {
     /// </summary>
     public class WrappedType {
         /// <summary>
+        /// A void.
+        /// </summary>
+        public static WrappedType AVoid { get; } = new WrappedType(typeof(void));
+
+        /// <summary>
         /// Type data.
         /// </summary>
 #if NET5_0_OR_GREATER
