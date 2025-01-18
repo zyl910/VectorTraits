@@ -4,6 +4,7 @@ using BenchmarkDotNet.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 #if NETCOREAPP3_0_OR_GREATER
@@ -729,6 +730,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
+        [Obsolete]
+#if NET5_0_OR_GREATER
+        [RequiresUnreferencedCode("Just for test")]
+#endif // NET5_0_OR_GREATER
         public void SumSRLTraitsArgDynamic() {
             dstTMy = 0;
             for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
@@ -777,6 +782,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
+        [Obsolete]
+#if NET5_0_OR_GREATER
+        [RequiresUnreferencedCode("Just for test")]
+#endif // NET5_0_OR_GREATER
         public void SumSRLTraitsOverload() {
             dstTMy = 0;
             for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
@@ -1336,6 +1345,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
+        [Obsolete]
+#if NET5_0_OR_GREATER
+        [RequiresUnreferencedCode("Just for test")]
+#endif // NET5_0_OR_GREATER
         public void SumSRLFastTraitsArgDynamic() {
             dstTMy = 0;
             for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
@@ -1392,6 +1405,10 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         }
 
         [Benchmark]
+        [Obsolete]
+#if NET5_0_OR_GREATER
+        [RequiresUnreferencedCode("Just for test")]
+#endif // NET5_0_OR_GREATER
         public void SumSRLFastTraitsOverload() {
             dstTMy = 0;
             for (int shiftAmount = ShiftAmountMin; shiftAmount <= ShiftAmountMax; ++shiftAmount) {
