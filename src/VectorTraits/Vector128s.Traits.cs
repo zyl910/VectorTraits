@@ -46,6 +46,16 @@ namespace Zyl.VectorTraits {
             WVectorTraits128PackedSimd.Instance
         };
 
+        // Instance types (实例类型集).
+        private static readonly WrappedType[] _instanceTypes = {
+            typeof(WVectorTraits128Base),
+            typeof(WVectorTraits128Sse),
+            typeof(WVectorTraits128Avx2),
+            typeof(WVectorTraits128AdvSimd),
+            typeof(WVectorTraits128AdvSimdB64),
+            typeof(WVectorTraits128PackedSimd)
+        };
+
         // Statics types (静态类型集).
         private static readonly WrappedType[] _staticsTypes = {
             typeof(WVectorTraits128Base.Statics),

@@ -55,6 +55,21 @@ namespace Zyl.VectorTraits {
             VectorTraits512Avx512.Instance
         };
 
+        // Instance types (实例类型集).
+        private static readonly WrappedType[] _instanceTypes = {
+            typeof(VectorTraitsBase),
+            typeof(VectorTraits128Base),
+            typeof(VectorTraits128AdvSimd),
+            typeof(VectorTraits128AdvSimdB64),
+            typeof(VectorTraits128PackedSimd),
+            typeof(VectorTraits128Avx2),
+            typeof(VectorTraits128Sse),
+            typeof(VectorTraits256Base),
+            typeof(VectorTraits256Avx2),
+            typeof(VectorTraits512Base),
+            typeof(VectorTraits512Avx512)
+        };
+
         // Statics types (静态类型集).
         private static readonly WrappedType[] _staticsTypes = {
             typeof(VectorTraitsBase.Statics),

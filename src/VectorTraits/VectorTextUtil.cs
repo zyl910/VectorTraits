@@ -19,6 +19,7 @@ using System.Runtime.Intrinsics;
 using System.Text;
 using Zyl.VectorTraits.Extensions;
 using Zyl.VectorTraits.ExTypes;
+using Zyl.VectorTraits.Impl;
 
 namespace Zyl.VectorTraits {
     /// <summary>
@@ -779,13 +780,17 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
-        /// Output the list of properties of the object (将对象的属性列表进行输出). With these parameters: <paramref name="indent"/> .
+        /// Outputs a list of properties of an object using a target type. (使用目标类型将对象的属性列表进行输出). With these parameters: <paramref name="indent"/> .
         /// </summary>
         /// <param name="indent">The indent.</param>
         /// <param name="textWriter">Output <see cref="TextWriter"/>.</param>
         /// <param name="instance">Object instance.</param>
-        public static void OutputProperties(string? indent, TextWriter textWriter, object instance) {
-            Type aType = instance.GetType();
+        /// <param name="aType">Target type (目标类型).</param>
+        public static void OutputPropertiesAt(string? indent, TextWriter textWriter, object instance,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicProperties)] 
+#endif // NET5_0_OR_GREATER
+                Type aType) {
             var properties = aType.GetRuntimeProperties().OrderBy(x => x.Name);
             foreach (PropertyInfo p in properties) {
                 if (!p.CanRead) continue;
@@ -806,10 +811,41 @@ namespace Zyl.VectorTraits {
         }
 
         /// <summary>
+        /// Output the list of properties of the object (将对象的属性列表进行输出). With these parameters: <paramref name="indent"/> .
+        /// </summary>
+        /// <param name="indent">The indent.</param>
+        /// <param name="textWriter">Output <see cref="TextWriter"/>.</param>
+        /// <param name="instance">Object instance.</param>
+        /// <remarks>
+        /// <para>When running in AOT mode, if the output is empty, you can use the following 2 ways to fix it (当AOT方式运行时，若输出内容为空，可使用下面2种办法来修正):</para>
+        /// <para>- Use <see cref="OutputPropertiesAt"/> instead (使用 <see cref="OutputPropertiesAt"/> 来代替).</para>
+        /// <para>- Use <see cref="WrappedTypePool.Register"/> to register the target type first. Then call this method (先使用 <see cref="WrappedTypePool.Register"/> 对目标类型注册. 再来调用本方法).</para>
+        /// </remarks>
+#if NET5_0_OR_GREATER
+        [UnconditionalSuppressMessage("AOT", "IL2072:'aType' argument does not satisfy 'DynamicallyAccessedMemberTypes.PublicProperties', 'DynamicallyAccessedMemberTypes.NonPublicProperties'.", Justification = "Use 'OutputPropertiesAt' instead")]
+#endif // NET5_0_OR_GREATER
+        public static void OutputProperties(string? indent, TextWriter textWriter, object instance) {
+            Type aType = instance.GetType();
+            WrappedType? wType = WrappedTypePool.Shared.Find(aType);
+            //Debugger.Break();
+            if (null!= wType) {
+                OutputPropertiesAt(indent, textWriter, instance, wType.Type);
+            } else {
+                // Trim analysis warning IL2072: OutputProperties: 'aType' argument does not satisfy 'DynamicallyAccessedMemberTypes.PublicProperties', 'DynamicallyAccessedMemberTypes.NonPublicProperties' in call to 'OutputPropertiesAt'. The return value of method 'System.Object.GetType()' does not have matching annotations. The source value must declare at least the same requirements as those declared on the target location it is assigned to.
+                OutputPropertiesAt(indent, textWriter, instance, aType);
+            }
+        }
+
+        /// <summary>
         /// Output the list of properties of the object (将对象的属性列表进行输出).
         /// </summary>
         /// <param name="textWriter">Output <see cref="TextWriter"/>.</param>
         /// <param name="instance">Object instance.</param>
+        /// <remarks>
+        /// <para>When running in AOT mode, if the output is empty, you can use the following 2 ways to fix it (当AOT方式运行时，若输出内容为空，可使用下面2种办法来修正):</para>
+        /// <para>- Use <see cref="OutputPropertiesAt"/> instead (使用 <see cref="OutputPropertiesAt"/> 来代替).</para>
+        /// <para>- Use <see cref="WrappedTypePool.Register"/> to register the target type first. Then call this method (先使用 <see cref="WrappedTypePool.Register"/> 对目标类型注册. 再来调用本方法).</para>
+        /// </remarks>
         public static void OutputProperties(TextWriter textWriter, object instance) {
             OutputProperties(null, textWriter, instance);
         }

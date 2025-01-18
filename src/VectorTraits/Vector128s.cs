@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 #if NETCOREAPP3_0_OR_GREATER
 using System.Runtime.Intrinsics;
 #endif
+using Zyl.VectorTraits.Impl;
 using Zyl.VectorTraits.Impl.Util;
 using Zyl.VectorTraits.ExTypes;
 
@@ -48,6 +49,8 @@ namespace Zyl.VectorTraits {
         /// Static constructor.
         /// </summary>
         static Vector128s() {
+            WrappedTypePool.Shared.RegisterAll(_instanceTypes);
+            WrappedTypePool.Shared.RegisterAll(StaticsTypes);
             unchecked {
                 ExInt128 bitpos;
                 ExInt128 bits;

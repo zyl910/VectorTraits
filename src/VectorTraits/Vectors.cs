@@ -50,6 +50,8 @@ namespace Zyl.VectorTraits {
         /// Static constructor.
         /// </summary>
         static Vectors() {
+            WrappedTypePool.Shared.RegisterAll(_instanceTypes);
+            WrappedTypePool.Shared.RegisterAll(StaticsTypes);
             unchecked {
                 ExInt128 bitpos;
                 ExInt128 bits;
