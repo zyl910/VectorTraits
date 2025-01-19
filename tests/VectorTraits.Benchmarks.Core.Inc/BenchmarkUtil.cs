@@ -2,16 +2,22 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Zyl.VectorTraits.Impl;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Zyl.VectorTraits.Benchmarks {
+#nullable enable
+
     /// <summary>
     /// Benchmark util.
     /// </summary>
@@ -203,7 +209,11 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
         /// <param name="typ">The type.</param>
         /// <returns>Return true if exist benchmark method.</returns>
-        public static bool ExistBenchmarkMethod(Type typ) {
+        public static bool ExistBenchmarkMethod(
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+#endif // NET5_0_OR_GREATER
+                Type typ) {
             foreach (MethodInfo mi in typ.GetMethods()) {
                 bool isAdd = CheckMethodInfoOnBenchmark(mi);
                 if (isAdd) {
@@ -264,7 +274,11 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
         /// <typeparam name="T">The benchmark class.</typeparam>
         /// <param name="src">Source object.</param>
-        public static void CheckAllBenchmark<T>(T src, Action<MethodInfo, Exception?>? onafter = null) where T : AbstractBenchmark {
+        public static void CheckAllBenchmark<
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+#endif // NET5_0_OR_GREATER
+                T>(T src, Action<MethodInfo, Exception?>? onafter = null) where T : AbstractBenchmark {
             if (null == onafter) onafter = CheckAllBenchmark_Default;
             bool oldCheckMode = src.CheckMode;
             src.CheckMode = true;
@@ -299,7 +313,11 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="indent">The indent.</param>
         /// <param name="typ">The type.</param>
         /// <param name="obj">The object.</param>
-        public static void RunBenchmarkObject(IBenchmarkWriter writer, Type typ, AbstractBenchmark? obj) {
+        public static void RunBenchmarkObject(IBenchmarkWriter writer,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+#endif // NET5_0_OR_GREATER
+                Type typ, AbstractBenchmark? obj) {
             if (null == obj) return;
             ILoopCountGetter? loopCountGetter = obj as ILoopCountGetter;
             List<MethodInfo> lst = new List<MethodInfo>();
@@ -347,7 +365,11 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="percentageCurrent">Percentage of current.</param>
         /// <param name="percentageWeight">Percentage weight.</param>
         /// <returns>Returns async task.</returns>
-        public static async Task RunBenchmarkObjectAsync(IBenchmarkWriter writer, Type typ, AbstractBenchmark? obj, Func<double, string, Task>? onBefore = null, double percentageCurrent=0.0, double percentageWeight=1.0) {
+        public static async Task RunBenchmarkObjectAsync(IBenchmarkWriter writer,
+#if NET5_0_OR_GREATER
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+#endif // NET5_0_OR_GREATER
+                Type typ, AbstractBenchmark? obj, Func<double, string, Task>? onBefore = null, double percentageCurrent=0.0, double percentageWeight=1.0) {
             if (null == obj) return;
             ILoopCountGetter? loopCountGetter = obj as ILoopCountGetter;
             List<MethodInfo> lst = new List<MethodInfo>();
@@ -404,39 +426,105 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
         /// <summary>
+        /// Fill Benchmark Types to list (将基准测试类型填充到列表).
+        /// </summary>
+        /// <typeparam name="TList">Type of list (列表的类型).</typeparam>
+        /// <param name="list">Destination list (目标列表).</param>
+        /// <param name="assembly">The assembly. When running in AOT mode, the list will be retrieved from WrappedTypePool instead (程序集. 当AOT方式运行时，会自动改为从 WrappedTypePool 获取列表).</param>
+        /// <returns>Return the number of items added (返回已添加的项数).</returns>
+#if NET5_0_OR_GREATER
+        [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "Use 'FillBenchmarkTypes_Pool' instead")]
+#endif // NET5_0_OR_GREATER
+        private static int FillBenchmarkTypes<TList>(TList list, Assembly assembly) where TList: ICollection<WrappedType> {
+            return FillBenchmarkTypes_Pool(list, assembly); // In order to make the results of JIT and AOT consistent, it is always used (为了使JIT与AOT的运行结果一致, 故总是使用它).
+#if NETCOREAPP3_0_OR_GREATER
+            //if (!RuntimeFeature.IsDynamicCodeSupported) {
+            //    return FillBenchmarkTypes_Pool(list, assembly);
+            //}
+#endif // NETCOREAPP3_0_OR_GREATER
+            //return FillBenchmarkTypes_Reflection(list, assembly);
+        }
+
+        /// <inheritdoc cref="FillBenchmarkTypes"/>
+        private static int FillBenchmarkTypes_Pool<TList>(TList list, Assembly assembly) where TList : ICollection<WrappedType> {
+            int rt = 0;
+            Type baseType = typeof(AbstractBenchmark);
+            foreach(KeyValuePair<Type, WrappedType> p in WrappedTypePool.Shared.List) {
+                var typ = p.Key;
+                if (typ.ContainsGenericParameters) continue;
+                if (typ.IsAbstract) continue;
+                if (!typ.IsSubclassOf(baseType)) continue;
+                if (!assembly.Equals(typ.Assembly)) continue;
+                if (!ExistBenchmarkMethod(p.Value.Type)) continue;
+                list.Add(typ);
+                ++rt;
+            }
+            return rt;
+        }
+
+        /// <inheritdoc cref="FillBenchmarkTypes"/>
+#if NET5_0_OR_GREATER
+        [RequiresUnreferencedCode("Calls System.Reflection.Assembly.GetTypes()")]
+#endif // NET5_0_OR_GREATER
+        private static int FillBenchmarkTypes_Reflection<TList>(TList list, Assembly assembly) where TList : ICollection<WrappedType> {
+            int rt = 0;
+            Type baseType = typeof(AbstractBenchmark);
+            foreach (Type typ in assembly.GetTypes()) {
+                if (typ.ContainsGenericParameters) continue;
+                if (typ.IsAbstract) continue;
+                if (!typ.IsSubclassOf(baseType)) continue;
+                if (!ExistBenchmarkMethod(typ)) continue;
+                list.Add(typ);
+                ++rt;
+            }
+            return rt;
+        }
+
+        /// <summary>
         /// Comparison on <see cref="Type"/>.
         /// </summary>
         /// <param name="x">The x.</param>
         /// <param name="y">The y.</param>
         /// <returns>Return compare result.</returns>
-        private static int ComparisonOnType(Type x, Type y) {
+        private static int ComparisonOnType(Type? x, Type? y) {
             int rt = string.CompareOrdinal(x?.Name, y?.Name);
             if (0 == rt) rt = string.CompareOrdinal(x?.FullName, y?.FullName);
             return rt;
         }
 
         /// <summary>
+        /// Comparison on <see cref="Type"/>.
+        /// </summary>
+        /// <param name="x">The x.</param>
+        /// <param name="y">The y.</param>
+        /// <returns>Return compare result.</returns>
+        private static int ComparisonOnType(WrappedType? x, WrappedType? y) {
+            if (x==y) return 0;
+            return ComparisonOnType(x?.Type, y?.Type);
+        }
+
+        private static List<WrappedType> GetBenchmarkTypesAndSort(Assembly assembly) {
+            List<WrappedType> lst = new List<WrappedType>();
+            FillBenchmarkTypes(lst, assembly);
+            // Sort.
+            lst.Sort(ComparisonOnType);
+            return lst;
+        }
+
+        /// <summary>
         /// Run benchmark.
         /// </summary>
         /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
-        /// <param name="assembly">The assembly.</param>
+        /// <param name="assembly">The assembly. When running in AOT mode, the list will be retrieved from WrappedTypePool instead (程序集. 当AOT方式运行时，会自动改为从 WrappedTypePool 获取列表).</param>
         /// <param name="onBefore">The action on before call item. Prototype: <c>void onBefore(double percentage, string title)</c>.</param>
         public static void RunBenchmark(IBenchmarkWriter writer, Assembly assembly, Action<double, string>? onBefore = null) {
-            Type baseType = typeof(AbstractBenchmark);
-            List<Type> lst = new List<Type>();
-            foreach (Type typ in assembly.GetTypes()) {
-                if (typ.ContainsGenericParameters) continue;
-                if (typ.IsAbstract) continue;
-                if (!typ.IsSubclassOf(baseType)) continue;
-                if (!ExistBenchmarkMethod(typ)) continue;
-                lst.Add(typ);
-            }
+            List<WrappedType>  lst = GetBenchmarkTypesAndSort(assembly);
             if (lst.Count <= 0) return;
             double total = lst.Count;
-            // Sort and run.
-            lst.Sort(ComparisonOnType);
+            // Run.
             int i = 0;
-            foreach (Type typ in lst) {
+            foreach (WrappedType p in lst) {
+                Type typ = p.Type;
                 try {
                     double percentage = 100.0 * i / total;
                     string title = typ.Name;
@@ -454,25 +542,17 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// Run benchmark - Async.
         /// </summary>
         /// <param name="writer">Output <see cref="IBenchmarkWriter"/>.</param>
-        /// <param name="assembly">The assembly.</param>
+        /// <param name="assembly">The assembly. When running in AOT mode, the list will be retrieved from WrappedTypePool instead (程序集. 当AOT方式运行时，会自动改为从 WrappedTypePool 获取列表).</param>
         /// <param name="onBefore">The action on before call item. Prototype: <c>Task onBefore(double percentage, string title)</c>.</param>
         public static async Task RunBenchmarkAsync(IBenchmarkWriter writer, Assembly assembly, Func<double, string, Task>? onBefore = null) {
-            Type baseType = typeof(AbstractBenchmark);
-            List<Type> lst = new List<Type>();
-            foreach (Type typ in assembly.GetTypes()) {
-                if (typ.ContainsGenericParameters) continue;
-                if (typ.IsAbstract) continue;
-                if (!typ.IsSubclassOf(baseType)) continue;
-                if (!ExistBenchmarkMethod(typ)) continue;
-                lst.Add(typ);
-            }
+            List<WrappedType> lst = GetBenchmarkTypesAndSort(assembly);
             if (lst.Count <= 0) return;
             double total = lst.Count;
             double percentageWeight = 100.0 * 1 / total;
-            // Sort and run.
-            lst.Sort(ComparisonOnType);
+            // Run.
             int i = 0;
-            foreach (Type typ in lst) {
+            foreach (WrappedType p in lst) {
+                Type typ = p.Type;
                 try {
                     double percentage = 100.0 * i / total;
                     string title = typ.Name;
@@ -489,4 +569,6 @@ namespace Zyl.VectorTraits.Benchmarks {
         }
 
     }
+
+#nullable restore
 }

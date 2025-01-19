@@ -29,6 +29,7 @@
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);REDUCE_MEMORY_USAGE;DRY_JOB0;BENCHMARKS_OFF;BENCHMARKS_128;BENCHMARKS_256;BENCHMARKS_512;BENCHMARKS_ALGORITHM;BENCHMARKS_128ALGORITHM;BENCHMARKS_256ALGORITHM;BENCHMARKS_512ALGORITHM;BENCHMARKS_RAW;BENCHMARKS_TARGET_FAST;BENCHMARKS_TRAITS_USAGES</DefineConstants>
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
     <PublishAot Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</PublishAot>
     <Company>zyl910</Company>
     <Authors>zyl910</Authors>

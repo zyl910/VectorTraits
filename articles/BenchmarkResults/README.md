@@ -127,3 +127,20 @@ docfx_serve_mac.sh
 chmod u+x docfx_serve_mac.sh
 ./docfx_serve_mac.sh
 ```
+
+### Publish (发布)
+
+```
+dotnet publish -r win-x64 -c Release
+dotnet publish -r win-x64 -c Release /p:IlcInstructionSet=native
+```
+
+```
+dotnet publish -r win-x64 -c Release -f net8.0
+dotnet publish -r win-x64 -c Release -f net8.0 /p:IlcInstructionSet=native
+```
+
+```
+dotnet publish -r win-x64 -c Release -f net9.0
+dotnet publish -r win-x64 -c Release -f net9.0 /p:IlcInstructionSet=native
+```

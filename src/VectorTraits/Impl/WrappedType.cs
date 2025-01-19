@@ -62,8 +62,8 @@ namespace Zyl.VectorTraits.Impl {
 
         /// <inheritdoc/>
         public static bool operator ==(WrappedType? left, WrappedType? right) {
-            if (left == right) return true;
-            if (left == null) return false;
+            if (ReferenceEquals(left, right)) return true;
+            if (left is null) return false;
             return left.Type.Equals(right?.Type);
         }
 
