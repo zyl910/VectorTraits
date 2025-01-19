@@ -5,8 +5,13 @@ using System.Text;
 
 namespace Zyl.VectorTraits.Impl {
     /// <summary>
-    /// <see cref="WrappedType"/> Pool (WrappedType 池).
+    /// <see cref="WrappedType"/> Pool. It is used to solve the problem of reflection at AOT (WrappedType 池. 它用于解决反射在AOT时的问题).
     /// </summary>
+    /// <remarks>
+    /// <para>Step 1, register the type using methods such as <see cref="Register"/> (第1步, 使用 Register 等方法来注册类型).</para>
+    /// <para>Step 2, use <see cref="TryGet"/> or <see cref="Find"/> method to get the WrappedType according to the Type (第2步, 使用 TryGet或Find方法, 根据 Type 获取 WrappedType).</para>
+    /// </remarks>
+    /// <seealso cref="WrappedType"/>
     public class WrappedTypePool {
         /// <summary>
         /// Gets a shared instance (获取共享实例).
