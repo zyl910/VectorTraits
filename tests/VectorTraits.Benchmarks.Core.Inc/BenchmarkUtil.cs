@@ -195,7 +195,9 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// <param name="dst">Destination list</param>
         /// <param name="src">Source object.</param>
         public static void FillMethodInfoOfBenchmark<T>(ICollection<MethodInfo> dst, T src) where T : class {
-            foreach (MethodInfo mi in src.GetType().GetMethods()) {
+            WrappedType? srcType = WrappedTypePool.Shared.Find(src.GetType());
+            if (null == srcType) return;
+            foreach (MethodInfo mi in srcType.Type.GetMethods()) {
                 bool isAdd = CheckMethodInfoOnBenchmark(mi);
                 // ok.
                 if (isAdd) {
@@ -450,13 +452,13 @@ namespace Zyl.VectorTraits.Benchmarks {
             int rt = 0;
             Type baseType = typeof(AbstractBenchmark);
             foreach(KeyValuePair<Type, WrappedType> p in WrappedTypePool.Shared.List) {
-                var typ = p.Key;
+                var typ = p.Value.Type;
                 if (typ.ContainsGenericParameters) continue;
                 if (typ.IsAbstract) continue;
                 if (!typ.IsSubclassOf(baseType)) continue;
                 if (!assembly.Equals(typ.Assembly)) continue;
                 if (!ExistBenchmarkMethod(p.Value.Type)) continue;
-                list.Add(typ);
+                list.Add(p.Value);
                 ++rt;
             }
             return rt;

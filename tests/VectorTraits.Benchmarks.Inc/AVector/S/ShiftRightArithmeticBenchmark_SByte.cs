@@ -589,6 +589,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Obsolete]
 #if NET5_0_OR_GREATER
         [RequiresUnreferencedCode("Just for test")]
+        [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "Allow exceptions during test")]
 #endif // NET5_0_OR_GREATER
         public void SumSRATraitsArgDynamic() {
             dstTMy = 0;
@@ -641,6 +642,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Obsolete]
 #if NET5_0_OR_GREATER
         [RequiresUnreferencedCode("Just for test")]
+        [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "Allow exceptions during test")]
 #endif // NET5_0_OR_GREATER
         public void SumSRATraitsOverload() {
             dstTMy = 0;
@@ -1027,6 +1029,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Obsolete]
 #if NET5_0_OR_GREATER
         [RequiresUnreferencedCode("Just for test")]
+        [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "Allow exceptions during test")]
 #endif // NET5_0_OR_GREATER
         public void SumSRAFastTraitsArgDynamic() {
             dstTMy = 0;
@@ -1079,6 +1082,7 @@ namespace Zyl.VectorTraits.Benchmarks.AVector.S {
         [Obsolete]
 #if NET5_0_OR_GREATER
         [RequiresUnreferencedCode("Just for test")]
+        [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "Allow exceptions during test")]
 #endif // NET5_0_OR_GREATER
         public void SumSRAFastTraitsOverload() {
             dstTMy = 0;

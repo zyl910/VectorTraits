@@ -71,6 +71,7 @@ namespace Zyl.VectorTraits.Benchmarks {
         /// </summary>
 #if NET5_0_OR_GREATER
         [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "They are test")]
+        [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "Allow exceptions during test")]
 #endif // NET5_0_OR_GREATER
         private static void RegisterBenchmark() {
             if (_inited) return;
