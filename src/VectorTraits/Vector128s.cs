@@ -319,7 +319,7 @@ namespace Zyl.VectorTraits {
             Vector128<T> temp = default;
             int idxEnd = index + length;
             int idx = index;
-            if (null == values || values.Length <= 0) return temp;
+            if (values.IsEmpty) return temp;
             if (index < 0 || idxEnd > values.Length) {
                 throw new IndexOutOfRangeException(string.Format("Index({0}) was outside the bounds{1} of the array!", index, values.Length));
             }
@@ -378,7 +378,7 @@ namespace Zyl.VectorTraits {
         public static Vector128<T> CreateRotate<T>(ReadOnlySpan<T> values, int index, int length) where T : struct {
             int idxEnd = index + length;
             int idx = index;
-            if (null == values || values.Length <= 0) return Vector128<T>.Zero;
+            if (values.IsEmpty) return Vector128<T>.Zero;
             if (index < 0 || idxEnd > values.Length) {
                 throw new IndexOutOfRangeException(string.Format("Index({0}) was outside the bounds{1} of the array!", index, values.Length));
             }
