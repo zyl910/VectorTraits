@@ -2,6 +2,7 @@
 
 ## Conditional compilation symbols(条件编译符号)
 ### Global (全局)
+
 - UNSAFE: 是否使用 unsafe 关键字。
 - UNSAFE_USE_TRAITS: 是否使用 unsafe 版的 VectorTraits 。
 - SOFTWARE_OPTIMIZATION: Software algorithm optimization（软件算法优化）, 会利用其它向量函数组合实现. 如 ShiftLeft_Multiply、ShiftRightArithmetic_Var64 .
