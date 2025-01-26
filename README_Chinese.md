@@ -166,6 +166,8 @@ Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
 Environment.Version:	8.0.8
 Stopwatch.Frequency:	10000000
+RuntimeFeature.IsDynamicCodeCompiled:	False
+RuntimeFeature.IsDynamicCodeSupported:	False
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.8\
 RuntimeInformation.FrameworkDescription:	.NET 8.0.8
 RuntimeInformation.OSArchitecture:	X64
@@ -220,6 +222,8 @@ Environment.Is64BitProcess:	True
 Environment.OSVersion:	Unix 6.8.0.1015
 Environment.Version:	8.0.7
 Stopwatch.Frequency:	1000000000
+RuntimeFeature.IsDynamicCodeCompiled:	False
+RuntimeFeature.IsDynamicCodeSupported:	False
 RuntimeEnvironment.GetRuntimeDirectory:	/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App/8.0.7/
 RuntimeInformation.FrameworkDescription:	.NET 8.0.7
 RuntimeInformation.OSArchitecture:	Arm64
