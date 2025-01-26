@@ -6,6 +6,8 @@ VectorTraits is a cross-platform library that enhances SIMD vector operations.
 
 [![NuGet](https://buildstats.info/nuget/VectorTraits)](https://www.nuget.org/packages/VectorTraits)
 
+- NuGet: https://www.nuget.org/packages/VectorTraits
+
 This library provides many important arithmetic methods(e.g. Shift, Shuffle, NarrowSaturate) and constants for vector types, making it easier for you to write cross-platform SIMD code. It takes full advantage of the X86 and Arm architectures' intrinsic functions to achieve hardware acceleration and can enjoy inline compilation optimization.
 
 Commonly Used Types:
@@ -164,6 +166,8 @@ Environment.Is64BitProcess:	True
 Environment.OSVersion:	Microsoft Windows NT 10.0.22631.0
 Environment.Version:	8.0.8
 Stopwatch.Frequency:	10000000
+RuntimeFeature.IsDynamicCodeCompiled:	False
+RuntimeFeature.IsDynamicCodeSupported:	True
 RuntimeEnvironment.GetRuntimeDirectory:	C:\Program Files\dotnet\shared\Microsoft.NETCore.App\8.0.8\
 RuntimeInformation.FrameworkDescription:	.NET 8.0.8
 RuntimeInformation.OSArchitecture:	X64

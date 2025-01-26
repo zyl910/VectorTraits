@@ -7,3 +7,8 @@
 - [Api Documentation](../api/index.md)
 
 - [Benchmark results](BenchmarkResults/README.md)
+
+See also
+
+- NuGet: https://www.nuget.org/packages/VectorTraits
+- Source code: https://github.com/zyl910/VectorTraits

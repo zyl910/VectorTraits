@@ -1,11 +1,27 @@
 # ChangeLog (变更日志)
 
+#### [2025-01-26] v3.1
+
+Summary (摘要):
+
+- Support .NET 9.0; Support for Native AOT (支持 .NET 9.0; 支持 原生AOT)
+
+Detail (明细):
+
+- Add TargetFrameworks `net9.0` (增加目标框架 `net9.0`): VectorTraits.dll.
+- Support for Native AOT (支持 原生AOT).
+- The TraitsOutput class adds the output of this information (TraitsOutput类增加这些信息的输出): IsDynamicCodeCompiled, IsDynamicCodeSupported.
+- Add WrappedType, WrappedTypePool classes. They are used to solve the problem of reflection in Native AOT. (增加 WrappedType, WrappedTypePool 类. 它们用于解决反射在原生AOT时的问题).
+- To support Native AOT, modify all Type collections of ReflectionUtil and other classes to WrappedType collections (为了支持原生AOT, 将ReflectionUtil等类的所有Type集合, 修改为 WrappedType 集合).
+
 #### [2024-11-09] v3.0
 
 Summary (摘要):
+
 - Supports Vector512 type and X86 architecture's Avx512 family instruction sets; Supports Wasm(WebAssembly) architecture, supports PackedSimd instruction set; also provides innovative vector methods such as multi vector shuffle (YShuffleX2、YShuffleX3), interleave (Group2Zip, Group2Unzip) (支持Vector512类型及 X86架构的Avx512系列指令集; 支持 Wasm架构及PackedSimd指令集; 还提供了 多向量换位（YShuffleX2、YShuffleX3）、交织(Group2Zip, Group2Unzip) 等原创的向量方法).
 
 Detail (明细):
+
 - Supports Vector512 type and X86 architecture's Avx512 family instruction sets (支持Vector512类型及 X86架构的Avx512系列指令集).
 - Improved algorithms for 128/256 bit vectors using the Avx512 family instruction sets (使用Avx512系列指令集, 改进了128/256位向量的算法).
 - Supports Wasm(WebAssembly) architecture, supports PackedSimd instruction set (支持 Wasm(WebAssembly)架构及PackedSimd指令集).

@@ -6,6 +6,8 @@ VectorTraits 是一个增强SIMD向量运算的跨平台类库.
 
 [![NuGet](https://buildstats.info/nuget/VectorTraits)](https://www.nuget.org/packages/VectorTraits)
 
+- NuGet: https://www.nuget.org/packages/VectorTraits
+
 本库为向量类型提供了许多重要的算术方法(如 Shift, Shuffle, NarrowSaturate)及常数, 使您能更方便的编写跨平台的SIMD运算代码。它充分利用了 X86、Arm架构的内在函数实现硬件加速，且能够享受内联编译优化。
 
 常用类型：

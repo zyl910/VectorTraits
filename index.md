@@ -5,3 +5,8 @@
 - [Traits method list](TraitsMethodList.md)
 - [ChangeLog](ChangeLog.md)
 - [Api Documentation](api/index.md)
+
+See also
+
+- NuGet: https://www.nuget.org/packages/VectorTraits
+- Source code: https://github.com/zyl910/VectorTraits

@@ -130,17 +130,33 @@ chmod u+x docfx_serve_mac.sh
 
 ### Publish (发布)
 
-```
-dotnet publish -r win-x64 -c Release
-dotnet publish -r win-x64 -c Release /p:IlcInstructionSet=native
-```
+Command:
+
+win-x64
 
 ```
-dotnet publish -r win-x64 -c Release -f net8.0
-dotnet publish -r win-x64 -c Release -f net8.0 /p:IlcInstructionSet=native
+dotnet publish -c Release -r win-x64
+dotnet publish -c Release -r win-x64 /p:OptimizationPreference=Speed
+dotnet publish -c Release -r win-x64 /p:OptimizationPreference=Speed /p:IlcInstructionSet=native
+dotnet publish -c Release -r win-x64 -f net8.0 /p:OptimizationPreference=Speed /p:IlcInstructionSet=native
+dotnet publish -c Release -r win-x64 -f net9.0 /p:OptimizationPreference=Speed /p:IlcInstructionSet=native
 ```
 
+osx-arm64
+
 ```
-dotnet publish -r win-x64 -c Release -f net9.0
-dotnet publish -r win-x64 -c Release -f net9.0 /p:IlcInstructionSet=native
+dotnet publish -c Release -r osx-arm64 -f net8.0 /p:OptimizationPreference=Speed /p:IlcInstructionSet=native
+dotnet publish -c Release -r osx-arm64 -f net9.0 /p:OptimizationPreference=Speed /p:IlcInstructionSet=native
+```
+
+Config the library (配置库):
+
+```
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
+```
+
+Config the executable program (配置可执行程序):
+
+```
+    <PublishAot Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</PublishAot>
 ```
